@@ -1,0 +1,312 @@
+{
+  "name": "Frostpunk New Industry",
+  "version": "3.7.0",
+  "format": "nind-copy-insert-v1",
+  "game": "Frostpunk",
+  "supported_build": "Windows Steam 1.6.2, exact original archive hashes required",
+  "archives": {
+    "common": {
+      "original_files": {
+        ".dat": "1520208a249c625a9f8ee3e44641b884c8ba1359e155f13741b6febd4b1eed7d",
+        ".idx": "d56ca58a5241d7e1bef85f713fb22bcf64a256daebf739a4f38fbff1176cef4d"
+      },
+      "entries": [
+        {
+          "name": "configs/frostpunktechnologiesconfig.bin",
+          "hash": 2123461390,
+          "original_sha256": "d520933e09f4b7b75dcb34f0ddfc2917c9e669ea46d70caa94aef14999bbb66e",
+          "new_sha256": "e74ab6a99febabf3f3c096c4b651e37870aebd97b9221061dbaf2b87cbeb995e",
+          "size": 248824,
+          "patch": "common-7e91730e.nid",
+          "patch_sha256": "6d2068fe43eba8b36512f975ccd36d975eeaec2a83e1dee2da9dddccf7f5dd5d"
+        },
+        {
+          "name": "configs/frostpunkblueprintsconfig.bin",
+          "hash": 3813235179,
+          "original_sha256": "e675b3c40009fb57bb1492ab95fb9ee97b21c95818b887090bd401b288a46440",
+          "new_sha256": "c0627a5a1ee667cfe22af3ca144b59ebcadfa18c34a99d6ac626929e45a105a8",
+          "size": 37924,
+          "patch": "common-e34959eb.nid",
+          "patch_sha256": "52d86ffef46d43b192f858077d5ea778cc3166f70ab0d3d8ae81afb3202f6042"
+        },
+        {
+          "name": "configs/frostpunkeconomyconfig.bin",
+          "hash": 3815224036,
+          "original_sha256": "5f9ffcc6aba3bcb150ab2632f6a70791c0efa53063eec76076c11cf826af3dd1",
+          "new_sha256": "817c189300dc9cae98c56f5a1cbc4be353641d42fd1fc16090287dbebfe3e8e8",
+          "size": 6208,
+          "patch": "common-e367b2e4.nid",
+          "patch_sha256": "d5d2895f5c027f6a3d0eee0c6695cbf9edb5e22fe44ea20c971d8a496e453501"
+        },
+        {
+          "name": "configs/frostpunkmodifiersconfig.bin",
+          "hash": 3195343433,
+          "original_sha256": "e31d65111d67841e1e752080ad1d91b7e603338eaa7380a5a8302b27472b3351",
+          "new_sha256": "4732f5ee8ea2bc7edb4c0f67a2a5466fa9aa9619a36fcc42e6bc3108ff7de4ec",
+          "size": 321468,
+          "patch": "common-be751249.nid",
+          "patch_sha256": "a076ae2d2a5d404bc5aa43b8eff0e345b77fb8e89e62da11851c015db511b5b5"
+        },
+        {
+          "name": "configs/frostpunkscenariosconfig.bin",
+          "hash": 3837298644,
+          "original_sha256": "e1dacd463e9523133ccccb26f2898b39403975039076afcaa7839c8f241ca511",
+          "new_sha256": "aaf378f8cb994394c2381d41ef181e181b330c450994a64eca5022445c0839e3",
+          "size": 173783,
+          "patch": "common-e4b887d4.nid",
+          "patch_sha256": "99e13c0fdd52b9e68ce3837bd1cb406f12064b1a4bda375d74cf7ac8c48b9453"
+        }
+      ]
+    },
+    "templates": {
+      "original_files": {
+        ".dat": "2c4fbeba7fc6596bff34021ac650e45f68e75154c8b0831a85dc4e98f1efb7ee",
+        ".idx": "3532632fac11b786708f3c8642214c5dc0bd34bfcee117f83e1ac91f22f017b3"
+      },
+      "entries": [
+        {
+          "name": "gameentities/buildings/resourceprocessing/prefabfactory.binarytemplate",
+          "hash": 3404312145,
+          "original_sha256": "4169da8b011d47bddb02e2c3b3ae5aa8b1a3b55585961be27e1552a42e5bc83d",
+          "new_sha256": "80b99f0c4b076677a3fbbc52754322bd7dafba3031be2f2da14d4c39cdf08451",
+          "size": 9767,
+          "patch": "templates-cae9ae51.nid",
+          "patch_sha256": "e47d885c8c40b3cbfe117ed851c70ef08027ff18cfd4cf9bfe42564bb328820a"
+        },
+        {
+          "name": "gameentities/buildings/resourceprocessing/foodprocessing.binarytemplate",
+          "hash": 2665172276,
+          "original_sha256": "8b5f9c603e1d2920aefe05daf3949ecd3fbbd63cc017f29ee85966f0a9415e6b",
+          "new_sha256": "f9e1b35c2b45c6fcf1e4908e4f04f316156f9221f5dee383061223327807d10c",
+          "size": 9365,
+          "patch": "templates-9edb4d34.nid",
+          "patch_sha256": "6b9a2e467199d69622be2695715967d3d985e6d6a1c6cec322b01f1d564e34a7"
+        },
+        {
+          "name": "gameentities/buildings/resourceprocessing/charcoalkiln.binarytemplate",
+          "hash": 3097586352,
+          "original_sha256": "e336cb7fa2454d89410450147fd5405268b17e84e2a309628c01a9d94d51d688",
+          "new_sha256": "9442a5bec80ead018e2b9a93a60bdb5ae37251a07d2e235cfca55d3f78fe7528",
+          "size": 7555,
+          "patch": "templates-b8a16ab0.nid",
+          "patch_sha256": "81b93165a8d9069e1cea1f65d757e50a2f73f8aaedd604f5533ae73b942de180"
+        },
+        {
+          "name": "gameentities/buildings/resourceextraction/foodplantation.binarytemplate",
+          "hash": 1419645381,
+          "original_sha256": "563e82aed99209b399dc8f22e4338525fbcd086a4de03a5a8bbded6079659e48",
+          "new_sha256": "05c37c41c008386b16b0a67310d059b38a00b7b4c5f9ef51378c467a01eac415",
+          "size": 7215,
+          "patch": "templates-549e11c5.nid",
+          "patch_sha256": "66bdad2c977dd20c4336a00dda8702950e61b2817d600b001e279a789a909bf2"
+        },
+        {
+          "name": "gameentities/buildings/resourceextraction/foodplantation_steam.binarytemplate",
+          "hash": 3140106148,
+          "original_sha256": "a4182b6dc27dfe3aa8d3ce792eaee6c7a91695f3a10716bfa85dd9ee5563f891",
+          "new_sha256": "ddb66bc101e20c05f8637a3843b43dd2515df7ede5667400067bcd3426466cae",
+          "size": 9066,
+          "patch": "templates-bb2a37a4.nid",
+          "patch_sha256": "d8d9a0e88a84a699029ae0a53845436a8e524c0b05c6b2b17a0c819526395bd4"
+        },
+        {
+          "name": "gameentities/buildings/builders/dock_fishing.binarytemplate",
+          "hash": 2406635222,
+          "original_sha256": "710bc45b8780a01dfa3bd42ebd5b3130a3949f5c5749782f599f6bed67d932e9",
+          "new_sha256": "aad0e7a32a52a7c0848a074fee5efb3672c055af3cec701d6ef04d222b787319",
+          "size": 5812,
+          "patch": "templates-8f7256d6.nid",
+          "patch_sha256": "ea0483328f1f9b6d207e74eef2523036f44afe4d9162ccd2ee348ab9f3261967"
+        },
+        {
+          "name": "gameentities/buildings/builders/docks/dockfishingproper_lvl1.binarytemplate",
+          "hash": 2650176614,
+          "original_sha256": "1cdce07c41b2154542f208903ae6f92bf9e6bb676fc36163a1133f1fc9adae72",
+          "new_sha256": "7fd524b7bee2e8d89517018e60564908a381d4829a1b82e1b49340ac93fb6ca1",
+          "size": 3751,
+          "patch": "templates-9df67c66.nid",
+          "patch_sha256": "721b811f83e7c3a93c9f87f8deed62276e240ddd19aae05735ecd2a765cd6895"
+        },
+        {
+          "name": "gameentities/buildings/builders/dock_fishingv2.binarytemplate",
+          "hash": 4066106561,
+          "original_sha256": "b506ced06773e68c85612e59e47735ef63d87f47830c78d562c5fe80b9ef65eb",
+          "new_sha256": "f6255093e2c6b8133828fb6070976dcd56fa1cf7c81970b4af1d8c55a9085aba",
+          "size": 5804,
+          "patch": "templates-f25bdcc1.nid",
+          "patch_sha256": "9a7deb9c39dd606a17b21904b17602d1c8efec2722e4e326ba6574f114b87f83"
+        },
+        {
+          "name": "gameentities/buildings/builders/docks/dockfishingproper_lvl2.binarytemplate",
+          "hash": 2934163445,
+          "original_sha256": "0ea90482c76b63acca609e5b59e0766688e79a6bb3820e958d4941ef29fd867b",
+          "new_sha256": "48943fae988bbc72e56e85487376a8f11a51ca35b6541226b48983629c3c1f4c",
+          "size": 3751,
+          "patch": "templates-aee3c7f5.nid",
+          "patch_sha256": "e5d01bcdd0847f066b1cf3e34cd64002dc03adde76e2a468f07515d5a6c7ba83"
+        },
+        {
+          "name": "gameentities/buildings/builders/constructionsite/scaffoldingsmanufacture.binarytemplate",
+          "hash": 1602671666,
+          "original_sha256": "b0885aeb7d2b035df53bd34461313ea74e0c792e4d3452d5917baddb3707b669",
+          "new_sha256": "a52f96f94ac4652aeebfe80e833ff27f1e1c68df324b6a08a19ec452d73782cd",
+          "size": 15003,
+          "patch": "templates-5f86d432.nid",
+          "patch_sha256": "2ca3a3ecbde57972745f0abd513ae22dfd8c610b72d95407232b59ab8e3d7222"
+        },
+        {
+          "name": "gameentities/buildings/builders/constructionsite/pipefoundry.binarytemplate",
+          "hash": 2086030639,
+          "original_sha256": "598ef9e9162a285f3c10118661bf575785fb11df344319b487d46a3de0a2d1e4",
+          "new_sha256": "050638a336d80195ac127c246375ced1233e8428a7fa1c6e2995e9df32121202",
+          "size": 14048,
+          "patch": "templates-7c564d2f.nid",
+          "patch_sha256": "5e67244826983214582006e7c6eaac49e873111165bb504cbbd70872b24214e8"
+        },
+        {
+          "name": "gameentities/buildings/builders/constructionsite/metalplateforge.binarytemplate",
+          "hash": 3251794596,
+          "original_sha256": "061a3b9f8b2009d6ac1615bbd828249fe331b0b847bdcc6cbf40cb52e3969215",
+          "new_sha256": "f10e6b5af5d8530da34d528dfe0221ffbded16406b5dfeac9c7274a3284cef10",
+          "size": 15312,
+          "patch": "templates-c1d272a4.nid",
+          "patch_sha256": "ea5ee632bc1e286441a0eef7429385f52240686782b6d7c7ba26840e292135c5"
+        },
+        {
+          "name": "gameentities/buildings/reconquest/vault.binarytemplate",
+          "hash": 2828697334,
+          "original_sha256": "991647a33ad20def45b85a61ef4e9bdd669e143c8923edbb29ee6fa5d79ea839",
+          "new_sha256": "d98c705e6ee5b4c1bba227d96b18fe3c4f6ede6c8c10e9f87d4ba5eea32e28ad",
+          "size": 6131,
+          "patch": "templates-a89a7ef6.nid",
+          "patch_sha256": "c7a66ac43a96c77be8555777615312743717a30724bfa57c3d66018dd3dc8787"
+        }
+      ]
+    },
+    "localizations": {
+      "original_files": {
+        ".dat": "3dcd68d791a5cba6dc66b7af672ac216ed0fed35425065a6fdfc0bd02e7aa15c",
+        ".idx": "86497124ae941b393a18815b08e3399b3d6cd2816cf85758801fabe4199fe823"
+      },
+      "entries": [
+        {
+          "name": "brazilian.lang",
+          "hash": 2624505945,
+          "original_sha256": "75894ebb3baf776004eb13cf391ed90fccedbb77afc097b6fc32f2a258dcde99",
+          "new_sha256": "cafb03866245003482a9d1d1c815c2d1d489987291fe3f07362113ea767eca18",
+          "size": 5271770,
+          "patch": "localizations-9c6ec859.nid",
+          "patch_sha256": "96c546b3f9a412ae62a62ed13f44e96bb51f93f0f20609cce22576855019ecdd"
+        },
+        {
+          "name": "chinese.lang",
+          "hash": 4242838552,
+          "original_sha256": "3b8274d62e46d9c98ab4fbb2816d686db66339abb08e5ca7e9c94fed42e98953",
+          "new_sha256": "3b480b95f15dfbd3d444c8c4f602ccd3bdad9251327f22fd87ce18a8c624876b",
+          "size": 3625334,
+          "patch": "localizations-fce49418.nid",
+          "patch_sha256": "1fd811c90ad718ec14c4461148d04995783a26601152ca14476dc474019301f3"
+        },
+        {
+          "name": "english.lang",
+          "hash": 2014871732,
+          "original_sha256": "7dfe5ac8dc242edc793074471cced64af9ce080c6c3265524102ac320419c085",
+          "new_sha256": "fe204f2f881daaba6bc0895e2db8b9b6c62556a645737766bf750a0b08e92c8d",
+          "size": 5244376,
+          "patch": "localizations-781880b4.nid",
+          "patch_sha256": "63e80eca44b6f0bc001da605f7d4995c7055634cfe111736dc1fb67ffbe603da"
+        },
+        {
+          "name": "farsi.lang",
+          "hash": 2847863096,
+          "original_sha256": "ee3d3bdd6839c555201d1fe0021a34b65063c2367ab9c4ac9f308d705319b707",
+          "new_sha256": "7e0397b5452ddad9e058151c2387cb40612c43202f770c9e33fcf05d3d6758ab",
+          "size": 2214216,
+          "patch": "localizations-a9bef138.nid",
+          "patch_sha256": "7f986b0c98464c80944f1ab6a18d6786166dc12dfe43e9c20d48efea542371c4"
+        },
+        {
+          "name": "french.lang",
+          "hash": 4172357012,
+          "original_sha256": "de882a8450d11a41de491a2f3452ce8b3d5155ca9711a57665fb3f75857d7cce",
+          "new_sha256": "a6fad93792429650a8cd61e93979dd419c35a9618cc0362aeb4fc1bdcd3525df",
+          "size": 5681274,
+          "patch": "localizations-f8b11d94.nid",
+          "patch_sha256": "c1e9b947a03bb892fcc795a690ec54be1f7c72d0dfa7fa878ae39727475787ce"
+        },
+        {
+          "name": "german.lang",
+          "hash": 845718737,
+          "original_sha256": "ed4b3ba0210b0af2a90d7f084c8f5fa3c2f0dec36386f80943247a3ff8d05d0c",
+          "new_sha256": "505d982713b1323eefcd6dcd9def9783e50d2829836f1b778c4580b09b0de515",
+          "size": 5695795,
+          "patch": "localizations-3268a4d1.nid",
+          "patch_sha256": "1e5b5649869720c05773f915128f93df7df89233ba083a2cd5bfcf5d4ba3e19f"
+        },
+        {
+          "name": "italian.lang",
+          "hash": 3498510465,
+          "original_sha256": "282c9511b63cbd0622dccb0fae8ad3786946d2f57898f6ccc10f03e6eb919e15",
+          "new_sha256": "f686ca2a301be10e67337f5167d31705bcd9385e9c1b23f7136d60b228be16c7",
+          "size": 5591379,
+          "patch": "localizations-d0870881.nid",
+          "patch_sha256": "6c1807b22c9b5eb74a5e61cf6247b05054ecd39fb1992ccc305cdc471e4fba67"
+        },
+        {
+          "name": "japanese.lang",
+          "hash": 2862372073,
+          "original_sha256": "eb37d529a7b737d64b3b3f9bbf27949ff4ac8e8169277b0cb1b6ebb42cb353b3",
+          "new_sha256": "944180dc228c2607058928c46f0a40553c99b5f9e00c360f6ddb862ebf8b8d6a",
+          "size": 3851410,
+          "patch": "localizations-aa9c54e9.nid",
+          "patch_sha256": "d79b76536991e815056987c54fb86baae36f9aebe6e11a75f54e4c2c4f552555"
+        },
+        {
+          "name": "korean.lang",
+          "hash": 1017381045,
+          "original_sha256": "34f74cf93d72670dee7a902480d0ec8d092015a9c9e721ed09661aab8afe5886",
+          "new_sha256": "2b199a3cfb0ccf2498d1351620e8a9c527b6d0424f1a1ea538aa87ec4672738f",
+          "size": 3986508,
+          "patch": "localizations-3ca400b5.nid",
+          "patch_sha256": "03178dcd6b367b2109b4b1ff6c03c84fe7427d88780c6f8b2e88bfc5d26c2666"
+        },
+        {
+          "name": "polish.lang",
+          "hash": 2106691904,
+          "original_sha256": "d81c043f26607325b9be6dc0fe2b39cbf1e8b2abaa5ea3ee60c0593137a50aac",
+          "new_sha256": "a2990286e32d72de68fd29e4e2a9cb10bd5ee975c9918c1bb027cbbc95b56d68",
+          "size": 5385262,
+          "patch": "localizations-7d919140.nid",
+          "patch_sha256": "eaafb2094561acdf3e5bb8f5cbf623996718bda0efb462864107696949549574"
+        },
+        {
+          "name": "russian.lang",
+          "hash": 4062391267,
+          "original_sha256": "a43cb3d7433ff316fee5b8ca9b644656f5cced65d34bf46cef35ae288f8b3ee1",
+          "new_sha256": "b4de1f22e5870f7e779b5078293f0259a60eff879075afa17dd1d10d9dfde93e",
+          "size": 5148397,
+          "patch": "localizations-f2232be3.nid",
+          "patch_sha256": "ffc4e20204fd7675d5e822e5761fb3fdc3c50991c67560a50944f692a188532f"
+        },
+        {
+          "name": "spanish.lang",
+          "hash": 2480292458,
+          "original_sha256": "3f00933c14fd20c39c52661edc86241e5d15d0d41584dbe4da829652431986f6",
+          "new_sha256": "45301fadbeb82373dfa45fb33a083d2eb72c95a697b5590fb5d45154bd211adc",
+          "size": 5630371,
+          "patch": "localizations-93d6426a.nid",
+          "patch_sha256": "00a1dacbf6b985372956320bc0562bed179e9519fb36acbdf6720dc18b39d3a1"
+        },
+        {
+          "name": "turkish.lang",
+          "hash": 3896553063,
+          "original_sha256": "350a71b6e3970aad9ee4a10631043511f2e2056847ceb1b669f53b6f579927af",
+          "new_sha256": "2ab08711bef003cd947af5a5a82c7ff1ee7ec2300e899ae506ddb2e1c709ca9a",
+          "size": 4973310,
+          "patch": "localizations-e840ae67.nid",
+          "patch_sha256": "819a1333aab42ae28c98d36b172c446a929cb0c4723b8587b30d20a3ac107c41"
+        }
+      ]
+    }
+  }
+}
