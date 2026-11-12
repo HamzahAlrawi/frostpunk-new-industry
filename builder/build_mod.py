@@ -4,7 +4,7 @@ import struct, uuid, json, re, gzip, hashlib, sys, os
 sys.path.insert(0,str(Path(__file__).resolve().parent/'tools'))
 import archive
 from archive import entries, read
-from opening_progression import EDGE_OPENING, OPENING_STOCK, RESEARCH_SPEED, research_curve, starting_supplies
+from opening_progression import EDGE_OPENING, OPENING_STOCK, RESEARCH_SPEED, PERK_RESEARCH_DURATION, research_curve, starting_supplies
 from resourceful_upgrades import EDGE_RESOURCEFUL
 from gameplay_upgrades import EDGE_GAMEPLAY, OUTPOST_TECH
 INSTALL_PATH = archive.GAME
@@ -183,6 +183,9 @@ new_modifiers, choice_recipes, choice_targets, choice_ids = add_choices(
 recipes.extend(choice_recipes)
 for path,additions in choice_targets.items():
     station_targets.setdefault(path,[]).extend(additions)
+for spec in specs:
+    spec['unscaled_hours']=spec['hours']
+    spec['hours']*=PERK_RESEARCH_DURATION
 
 old_category_count=struct.unpack_from('<I',TC,0)[0]
 tech_count_pos=techinfo[0]['start']-4
@@ -204,7 +207,7 @@ retired = {
     'AutumnKitchenKits','AutumnHarbourKits','AutumnCanvasPatterns',
 }
 retired.update(REMOVED_TEAMS)
-edge_ids = {spec['id'] for spec in specs if spec['id'].startswith('Edge')}
+edge_ids = {spec['id'] for spec in specs if spec['id'].startswith('Edge') and 'scenarios' not in spec}
 assert len(edge_ids)==16 and (EDGE_SHARED | EDGE_COMPATIBLE | EDGE_ADDITIONS) <= {spec['id'] for spec in specs}
 supported_sets = ['TechHaven','Winterhome','Default','Default_Endless_Builders','Default_Endless','Refugees','Builders','Reconquest']
 scenario_additions = {}
@@ -341,6 +344,11 @@ patches={
  'templates':{factory_path:factory,cookhouse_path:cookhouse},'localizations':{}}
 patches['common'][scenarios_path]=starting_supplies((SRC/'common'/scenarios_path).read_bytes(),RES)
 for path, additions in station_targets.items():
+    if path==factory_path:
+        # The Factory queue above collects every Factory recipe, including the
+        # specialised replacements emitted by the shared station writer.
+        assert set(additions)<=set(factory_recipes)
+        continue
     template=patches['templates'].get(path)
     if template is None:
         template=(SRC/'templates'/path).read_bytes()
@@ -349,7 +357,7 @@ for p in (SRC/'localizations').glob('*.lang'):
     patches['localizations'][p.name]=update_lang(p.read_bytes())
 
 from archive import NAMES
-manifest={'name':'Frostpunk: New Industry','version':VERSION,'game_path':str(INSTALL_PATH),'technology_sets':supported_sets,'scenario_additions':scenario_additions,'retired_technologies':sorted(retired),'removed_team_perks':sorted(REMOVED_TEAMS),'redesigned_technologies':sorted(redesigned),'playstyle_research':choice_ids,'research_tabs':research_tabs,'archives':{},'technologies':specs,'recipes':[x[2] for x in recipes],'field_operations':[],'suspended_field_operations':suspended_actions,'opening_stock_bonus':OPENING_STOCK,'base_research_multiplier':RESEARCH_SPEED,'sources':['https://github.com/Mystik738/frostract']}
+manifest={'name':'Frostpunk: New Industry','version':VERSION,'game_path':str(INSTALL_PATH),'technology_sets':supported_sets,'scenario_additions':scenario_additions,'retired_technologies':sorted(retired),'removed_team_perks':sorted(REMOVED_TEAMS),'redesigned_technologies':sorted(redesigned),'playstyle_research':choice_ids,'research_tabs':research_tabs,'archives':{},'technologies':specs,'recipes':[x[2] for x in recipes],'field_operations':[],'suspended_field_operations':suspended_actions,'opening_stock_bonus':OPENING_STOCK,'base_research_multiplier':RESEARCH_SPEED,'perk_research_duration_multiplier':PERK_RESEARCH_DURATION,'sources':['https://github.com/Mystik738/frostract']}
 for base,files in patches.items():
     records=entries(base);byname={NAMES.get(e[1]):e for e in records};items=[]
     with (GAME/(base+'.dat')).open('rb') as src:

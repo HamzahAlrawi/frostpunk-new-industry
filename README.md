@@ -2,15 +2,15 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.9.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.10.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.9.0/Frostpunk-New-Industry-3.9.0-Windows.zip) · [Research catalog](docs/research.md) · [Changes in 3.9](docs/releases/3.9.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.10.0/Frostpunk-New-Industry-3.10.0-Windows.zip) · [Research catalog](docs/research.md) · [Changes in 3.10](docs/releases/3.10.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
 
 - **Renewable Steam Cores.** Research Factory fabrication and its improved production recipes.
-- **231 active research definitions across supported modes.** Engineering, Industry, City Life, and Logistics join the native tabs. Scenario research lists select the upgrades that fit each mode. Added research is checked for duplicate effect packages, icon collisions, and crossing or obstructed prerequisite lines.
-- **An easier opening.** Research before Drawing Boards, additional starting supplies, and 25% faster base research.
+- **256 active research definitions across supported modes.** Engineering, Industry, City Life, and Logistics join the native tabs. Scenario research lists select the upgrades that fit each mode. Added research is checked for duplicate effect packages, icon collisions, and crossing or obstructed prerequisite lines.
+- **Faster progression.** All mod-added perks have half their authored base research duration. Workshop base research output is 25% higher than version 3.9, or 56.25% above vanilla, with normal multiple-Workshop scaling. Research before Drawing Boards and additional starting supplies ease the opening.
 - **Stronger workplaces.** The permanent workplace-efficiency research bonuses grant at least 75% per upgrade where applicable.
 - **Alternate production.** Fuelled Stockpots, coal-heated and fermentation Hothouses, retort and rapid-coking kiln batches, baited fishing, dockside ration production, alternate generator-component recipes, and Warehouse salvage.
 - **New city strategies.** Safer Radical Treatment, cold protection, wider heat zones, faster construction, linked production-chain improvements, and large storm reserves. Added team-capacity perks have been removed; vanilla team research remains.
@@ -18,6 +18,7 @@ A progression overhaul for the original **Frostpunk**, built around renewable St
 - **Core-saving building research.** Modular Hothouses, extraction machinery, and the restored Last Autumn Reloading Station discount.
 - **Specialist city development.** Core-free Infirmaries, limb-sparing Radical Treatment, human and automaton industrial specialisations, compact or large reserve warehouses, and optional overdrive/fuel trade-offs.
 - **Core-powered production chains.** Consume renewable cores in Kilns for bulk coal or in Hothouses for burst food production. Alternate fuel, cooking and fishing recipes offer different material and throughput trade-offs. Selectors are checked to stay within four simultaneous options.
+- **Reclamation and component reuse.** Make cores in batches of three, reclaim cores into steel, recover wood and steel together at the Army Warehouse, and reuse generator components across The Last Autumn's three fabrication stations. Specialist heating research offers coal-free medical and industrial Heaters, or compact grids that trade heat radius for fuel savings.
 
 Research is included for A New Home, The Arks, The Refugees, The Fall of Winterhome, The Last Autumn, On The Edge, and applicable Endless modes. DLC features require the corresponding DLC. New-game supply bonuses apply when starting a new city.
 
@@ -49,7 +50,7 @@ Uninstall the previous version before installing an update. If an archive operat
 
 ## Testing status
 
-- The copy/insert patches reconstruct the same entries as the local 3.9.0 build.
+- The copy/insert patches reconstruct the same entries as the local 3.10.0 build.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
 - Research tests cover scenario membership, earlier unlocks, unique effect packages, icon/prerequisite-line geometry, and recipe-selector limits. The local binary validator also checks actual serialized recipe prices, outputs, requirements, attachments and effect vectors, and preserves native technology and modifier records.
 - The mod's configuration and startup checks passed. Earlier builds completed full campaigns. The newest gameplay effects still need broader campaign testing, so this release is marked **beta**.

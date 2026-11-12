@@ -25,31 +25,39 @@ def native_production_recipes(blueprints):
 
 def encode_station_recipe(native, key, title, source, building, paths, output, amount,
                           inputs, hours, research, resources, guid, localize, costs,
-                          requirement, *, exclusions=(), negate=None):
+                          requirement, *, exclusions=(), negate=None, byproducts=None, resource_icon=None):
     """Use the source station's native product flags and typed recipe tail."""
     sample = native[source]
-    atlas = string("UI\\Elements\\Resources_Icos.dds")
-    if atlas not in sample:
-        atlas = string("UI\\Elements\\Resources_Icons2.dds")
+    source_atlas=re.search(rb'\x01UI\\[^\0]+\.dds\0',sample,re.I)
+    assert source_atlas is not None
+    atlas=source_atlas.group()
     icon_at = sample.index(atlas) + len(atlas)
-    product = string("FrostpunkResourceProduct")
-    resource_product = product in sample
-    if not resource_product:
-        product = string("FrostpunkFoodRationProduct")
-    product_at = sample.index(product) + len(product)
-    assert sample[icon_at + 16:icon_at + 22] in (b"\1\0\1\0\0\0", b"\1\1\1\0\0\0", b"\0\1\1\0\0\0")
-    assert sample[product_at:product_at + 4] == uint(1)
-    input_at = product_at + (28 if resource_product else 16)
+    assert sample[icon_at + 16:icon_at + 18] in (b'\1\0',b'\1\1',b'\0\1')
+    source_products,=struct.unpack_from('<I',sample,icon_at+18)
+    assert 1<=source_products<=2
+    position=icon_at+22
+    for _ in range(source_products):
+        if sample.startswith(string('FrostpunkResourceProduct'),position):
+            position+=len(string('FrostpunkResourceProduct'))
+            assert struct.unpack_from('<I',sample,position)[0]>=1
+            position+=24
+        else:
+            assert sample.startswith(string('FrostpunkFoodRationProduct'),position)
+            position+=len(string('FrostpunkFoodRationProduct'))+12
+    assert sample[position:position+4]==bytes(4)
+    input_at=position+4
     count, = struct.unpack_from("<I", sample, input_at)
     tail = sample[input_at + 4 + count * 20 + 4:]
     if source.startswith("[Reconquest]Vault_"):
         assert tail.startswith(uint(2) + bytes(6) + b"\1@")
         tail = uint(2) + bytes(7)
-    assert tail in (uint(2) + bytes(7), uint(2) + uint(1) + b"\0\1\0")
+    assert tail in (uint(2) + bytes(7), uint(2) + uint(1) + b"\0\1\0", uint(2) + uint(1) + bytes(3))
     recipe_id = guid("recipe/" + key)
     items = ", ".join(f"{quantity} {name.lower()}" for name, quantity in inputs.items())
     output_name = {"Wooden Materials": "structural profiles", "Steam Tools": "steam exchangers", "Steel Plates": "steel composites"}.get(output, output.lower())
-    description = f"Optional {building} recipe. Spend {items} to produce {amount} {output_name} in {hours:g} working hours at full efficiency. Select this recipe in the building panel."
+    byproducts=byproducts or {}
+    extra_outputs=''.join(f' and {quantity} {name.lower()}' for name,quantity in byproducts.items())
+    description = f"Optional {building} recipe. Spend {items} to produce {amount} {output_name}{extra_outputs} in {hours:g} working hours at full efficiency. Select this recipe in the building panel."
     conditions = [requirement(research)]
     if exclusions:
         assert negate is not None
@@ -60,15 +68,24 @@ def encode_station_recipe(native, key, title, source, building, paths, output, a
     output_data = string("FrostpunkResourceProduct") + uint(1) + resources[output] + uint(amount)
     display_atlas = string("UI\\Elements\\Resources_Icos.dds")
     if output == "Food Rations":
+        assert not byproducts
         display_atlas = string("UI\\Elements\\Resources_Icons2.dds")
         coordinates = struct.pack("<4i", 0, 1, 4, 4)
         output_data = string("FrostpunkFoodRationProduct") + uint(1) + uint(amount) + uint(3)
-    data += display_atlas + coordinates + sample[icon_at + 16:icon_at + 17] + b"\1" + uint(1)
+    if resource_icon is not None:
+        assert len(resource_icon)==2 and output!='Food Rations'
+        coordinates=struct.pack('<4i',*resource_icon,4,4)
+    for name,quantity in byproducts.items():
+        assert name!='Food Rations' and quantity>0
+        output_data+=string('FrostpunkResourceProduct')+uint(1)+resources[name]+uint(quantity)
+    data += display_atlas + coordinates + sample[icon_at + 16:icon_at + 17] + b"\1" + uint(1+len(byproducts))
     data += output_data + uint(0) + costs(inputs) + struct.pack("<f", hours) + tail
     info = dict(id=key, title=title, output=output, amount=amount, inputs=inputs, hours=hours,
                 building=building, source_blueprint=source, unlock=research.hex(), targets=paths)
     if exclusions:
         info['excludes'] = [value.hex() for value in exclusions]
+    if byproducts:
+        info['byproducts']=byproducts
     return recipe_id, data, info
 
 
@@ -76,7 +93,7 @@ def attach_recipes(template, recipes):
     offset = template.index(PRODUCTION) + len(PRODUCTION) + 16
     count, = struct.unpack_from("<I", template, offset)
     end = offset + 4 + count * 16
-    assert 1 <= count <= 9 and template[end + 17:end + 27] == b"\1Frostpunk"
+    assert 1 <= count <= 32 and template[end + 17:end + 27] == b"\1Frostpunk"
     assert len(recipes) == len(set(recipes))
     assert not any(recipe in template[offset + 4:end] for recipe in recipes)
     return template[:offset] + uint(count + len(recipes)) + template[offset + 4:end] + b"".join(recipes) + template[end:]

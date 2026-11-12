@@ -13,3 +13,10 @@ caused a construction crash.
 Prefer binary/configuration checks and a bounded startup smoke test over lengthy
 manual play. Report the actual validation performed and retain the beta label
 until the changed gameplay has had sufficient campaign testing.
+
+The owner requests half-duration research for all mod-added perks and increased
+Workshop base research output. Author durations at their original scale; the
+builder applies `PERK_RESEARCH_DURATION = 0.5` once after defining all research.
+Preserve the base Workshop curve multiplier of 1.5625 (25% above version 3.9)
+unless the owner requests another balance change. Keep production-cycle times
+separate from research durations.

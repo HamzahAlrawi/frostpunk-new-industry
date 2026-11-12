@@ -10,7 +10,10 @@ OPENING_PROFILES = {
     "Custom_Endless", "Custom_Endless_Serenity",
 }
 EDGE_OPENING = {"StarterGatheringTeams", "StarterTimberTools", "StarterWardStoves"}
-RESEARCH_SPEED = 1.25
+# 25% higher base Workshop research output than 3.9, preserving the native
+# one-to-four-Workshop diminishing-return curve and both workforce roles.
+RESEARCH_SPEED = 1.25 * 1.25
+PERK_RESEARCH_DURATION = 0.5
 
 
 def starting_supplies(data, resources):

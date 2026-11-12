@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.9.0",
+  "version": "3.10.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -114,6 +114,7 @@
       "28c035b4b53980559718f4c68900b985",
       "5eaa31cc2ac9e55c9f6b1368963cd67b",
       "0d563c62cec2a751a50c42ce56930830",
+      "1fd71ca384435e5690f225e08d7e7ffe",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "3a88a83542a3c55daca5d7d85e796153",
@@ -136,6 +137,11 @@
       "d36c9f18792b9d569aab4a1186c75fe1",
       "dadab41318ed545b9be41a48a0e7eb42",
       "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
+      "38651597fe3e3353b41ecce9d56e5dcc",
+      "62e2459b76ac5954bb35bd64df214540",
+      "1ee131c9b555c253a8ebc6b536a769a3",
+      "62b8cd610bed9a5eab02eb5cef592b34",
+      "1530d4e15782115e991dc121f12ff557",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
@@ -145,8 +151,12 @@
       "d147116f8fc5b455a07498160bb49a31",
       "5a5719aeace9e95a8b342ac70e6808ff",
       "8e66d185bb156455bd42eaa03de3744e",
+      "97a21de141ce8d57990e46313f9cd971",
       "be10e7791f2e465784bb93c921e507b5",
-      "e729fc4991a54758983b6bf65aea78d2"
+      "e729fc4991a54758983b6bf65aea78d2",
+      "668b0b6ba7c7c55cb50a8df83423b638",
+      "b2b06eeba432645fa29f6f9bd58684f4",
+      "00a0363a2568ae5b9ea3d841ad23e0b9"
     ],
     "Winterhome": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -257,6 +267,7 @@
       "28c035b4b53980559718f4c68900b985",
       "5eaa31cc2ac9e55c9f6b1368963cd67b",
       "0d563c62cec2a751a50c42ce56930830",
+      "1fd71ca384435e5690f225e08d7e7ffe",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "ae6d30ec553b7554893b6d3c55941735",
@@ -281,6 +292,11 @@
       "d36c9f18792b9d569aab4a1186c75fe1",
       "dadab41318ed545b9be41a48a0e7eb42",
       "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
+      "38651597fe3e3353b41ecce9d56e5dcc",
+      "62e2459b76ac5954bb35bd64df214540",
+      "1ee131c9b555c253a8ebc6b536a769a3",
+      "62b8cd610bed9a5eab02eb5cef592b34",
+      "1530d4e15782115e991dc121f12ff557",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
@@ -290,8 +306,12 @@
       "d147116f8fc5b455a07498160bb49a31",
       "5a5719aeace9e95a8b342ac70e6808ff",
       "8e66d185bb156455bd42eaa03de3744e",
+      "97a21de141ce8d57990e46313f9cd971",
       "be10e7791f2e465784bb93c921e507b5",
-      "e729fc4991a54758983b6bf65aea78d2"
+      "e729fc4991a54758983b6bf65aea78d2",
+      "668b0b6ba7c7c55cb50a8df83423b638",
+      "b2b06eeba432645fa29f6f9bd58684f4",
+      "00a0363a2568ae5b9ea3d841ad23e0b9"
     ],
     "Default": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -402,6 +422,7 @@
       "28c035b4b53980559718f4c68900b985",
       "5eaa31cc2ac9e55c9f6b1368963cd67b",
       "0d563c62cec2a751a50c42ce56930830",
+      "1fd71ca384435e5690f225e08d7e7ffe",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "ae6d30ec553b7554893b6d3c55941735",
@@ -426,6 +447,11 @@
       "d36c9f18792b9d569aab4a1186c75fe1",
       "dadab41318ed545b9be41a48a0e7eb42",
       "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
+      "38651597fe3e3353b41ecce9d56e5dcc",
+      "62e2459b76ac5954bb35bd64df214540",
+      "1ee131c9b555c253a8ebc6b536a769a3",
+      "62b8cd610bed9a5eab02eb5cef592b34",
+      "1530d4e15782115e991dc121f12ff557",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
@@ -435,8 +461,12 @@
       "d147116f8fc5b455a07498160bb49a31",
       "5a5719aeace9e95a8b342ac70e6808ff",
       "8e66d185bb156455bd42eaa03de3744e",
+      "97a21de141ce8d57990e46313f9cd971",
       "be10e7791f2e465784bb93c921e507b5",
-      "e729fc4991a54758983b6bf65aea78d2"
+      "e729fc4991a54758983b6bf65aea78d2",
+      "668b0b6ba7c7c55cb50a8df83423b638",
+      "b2b06eeba432645fa29f6f9bd58684f4",
+      "00a0363a2568ae5b9ea3d841ad23e0b9"
     ],
     "Default_Endless_Builders": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -545,6 +575,7 @@
       "28c035b4b53980559718f4c68900b985",
       "5eaa31cc2ac9e55c9f6b1368963cd67b",
       "0d563c62cec2a751a50c42ce56930830",
+      "1fd71ca384435e5690f225e08d7e7ffe",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "ae6d30ec553b7554893b6d3c55941735",
@@ -569,6 +600,11 @@
       "dadab41318ed545b9be41a48a0e7eb42",
       "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
       "6027b5f5733794578881d2a9c9983dc0",
+      "38651597fe3e3353b41ecce9d56e5dcc",
+      "62e2459b76ac5954bb35bd64df214540",
+      "1ee131c9b555c253a8ebc6b536a769a3",
+      "62b8cd610bed9a5eab02eb5cef592b34",
+      "1530d4e15782115e991dc121f12ff557",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
@@ -578,8 +614,13 @@
       "d147116f8fc5b455a07498160bb49a31",
       "5a5719aeace9e95a8b342ac70e6808ff",
       "8e66d185bb156455bd42eaa03de3744e",
+      "97a21de141ce8d57990e46313f9cd971",
+      "b8d8d010f782275ea56e9364e4d6d01a",
       "be10e7791f2e465784bb93c921e507b5",
-      "e729fc4991a54758983b6bf65aea78d2"
+      "e729fc4991a54758983b6bf65aea78d2",
+      "668b0b6ba7c7c55cb50a8df83423b638",
+      "b2b06eeba432645fa29f6f9bd58684f4",
+      "00a0363a2568ae5b9ea3d841ad23e0b9"
     ],
     "Default_Endless": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -688,6 +729,7 @@
       "28c035b4b53980559718f4c68900b985",
       "5eaa31cc2ac9e55c9f6b1368963cd67b",
       "0d563c62cec2a751a50c42ce56930830",
+      "1fd71ca384435e5690f225e08d7e7ffe",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "ae6d30ec553b7554893b6d3c55941735",
@@ -711,6 +753,11 @@
       "d36c9f18792b9d569aab4a1186c75fe1",
       "dadab41318ed545b9be41a48a0e7eb42",
       "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
+      "38651597fe3e3353b41ecce9d56e5dcc",
+      "62e2459b76ac5954bb35bd64df214540",
+      "1ee131c9b555c253a8ebc6b536a769a3",
+      "62b8cd610bed9a5eab02eb5cef592b34",
+      "1530d4e15782115e991dc121f12ff557",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
@@ -720,8 +767,13 @@
       "d147116f8fc5b455a07498160bb49a31",
       "5a5719aeace9e95a8b342ac70e6808ff",
       "8e66d185bb156455bd42eaa03de3744e",
+      "97a21de141ce8d57990e46313f9cd971",
+      "b8d8d010f782275ea56e9364e4d6d01a",
       "be10e7791f2e465784bb93c921e507b5",
-      "e729fc4991a54758983b6bf65aea78d2"
+      "e729fc4991a54758983b6bf65aea78d2",
+      "668b0b6ba7c7c55cb50a8df83423b638",
+      "b2b06eeba432645fa29f6f9bd58684f4",
+      "00a0363a2568ae5b9ea3d841ad23e0b9"
     ],
     "Refugees": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -832,6 +884,7 @@
       "28c035b4b53980559718f4c68900b985",
       "5eaa31cc2ac9e55c9f6b1368963cd67b",
       "0d563c62cec2a751a50c42ce56930830",
+      "1fd71ca384435e5690f225e08d7e7ffe",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "ae6d30ec553b7554893b6d3c55941735",
@@ -856,6 +909,11 @@
       "d36c9f18792b9d569aab4a1186c75fe1",
       "dadab41318ed545b9be41a48a0e7eb42",
       "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
+      "38651597fe3e3353b41ecce9d56e5dcc",
+      "62e2459b76ac5954bb35bd64df214540",
+      "1ee131c9b555c253a8ebc6b536a769a3",
+      "62b8cd610bed9a5eab02eb5cef592b34",
+      "1530d4e15782115e991dc121f12ff557",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
@@ -865,8 +923,12 @@
       "d147116f8fc5b455a07498160bb49a31",
       "5a5719aeace9e95a8b342ac70e6808ff",
       "8e66d185bb156455bd42eaa03de3744e",
+      "97a21de141ce8d57990e46313f9cd971",
       "be10e7791f2e465784bb93c921e507b5",
-      "e729fc4991a54758983b6bf65aea78d2"
+      "e729fc4991a54758983b6bf65aea78d2",
+      "668b0b6ba7c7c55cb50a8df83423b638",
+      "b2b06eeba432645fa29f6f9bd58684f4",
+      "00a0363a2568ae5b9ea3d841ad23e0b9"
     ],
     "Builders": [
       "2602139ab6918353a2d55f06696ca742",
@@ -922,6 +984,8 @@
       "aa1e98e149726a52a28eeb126bcea1ca",
       "52c872a3b256f250a0d0a5d0c512a824",
       "06673497548dd4539670c8681c5135a0",
+      "bf9e3804bca3005bbfc2aa5e090fcdb6",
+      "fcea1d8a02c5695aafec6c5458ea5616",
       "5d23cddd8c089f5ea1e9cf088917b3cb",
       "8c2cdbda8200505d8c3048eac2098006",
       "7e2967717b45aa598f4fd70a3ee583a3",
@@ -938,9 +1002,19 @@
       "61ef73f36ae1a55c9c60f95de82d3e14",
       "a0374f5ebcb7d452bcce7d8f07a1b7f9",
       "7a6027a749a06556956a89afdd83f0ab",
+      "14a4b5c02e012158873fac08bc1ab3ae",
+      "040f730be2a0855fa0ee01dfd9bfd2cd",
+      "151ab55902018458a16a582d658e4bf3",
+      "0e6368394d921158b5220ed29d2187ac",
+      "7f2260a692c533538eaf2ccf0a89b941",
+      "d990241f7d3f7456aecc1e2359ed5194",
       "56433270efdd0a51a59dce4e4527ed8f",
       "b29f8dcd782808538ce3e2c542284280",
-      "51a8efa85a0da1559417d01a1b315076"
+      "51a8efa85a0da1559417d01a1b315076",
+      "442e18b3b932235bbb37618f6dba7e58",
+      "7d18f76da3f6b75d9b7b444e4bbdfd72",
+      "02669941bc3b685f846eac0a143a52dc",
+      "e863e24afb71e85aa9d16fb7ac24c5e7"
     ],
     "Reconquest": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -1016,6 +1090,7 @@
       "28c035b4b53980559718f4c68900b985",
       "5eaa31cc2ac9e55c9f6b1368963cd67b",
       "0d563c62cec2a751a50c42ce56930830",
+      "1fd71ca384435e5690f225e08d7e7ffe",
       "de32113ab414de57bdd32f47254f5ff1",
       "3a88a83542a3c55daca5d7d85e796153",
       "e7fd91c7cbb0b256b16e445ed4b47713",
@@ -1029,13 +1104,21 @@
       "d36c9f18792b9d569aab4a1186c75fe1",
       "dadab41318ed545b9be41a48a0e7eb42",
       "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
+      "38651597fe3e3353b41ecce9d56e5dcc",
+      "1ee131c9b555c253a8ebc6b536a769a3",
+      "62b8cd610bed9a5eab02eb5cef592b34",
+      "b851827558fc245a8d47dc18fdbc4e2b",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
       "2d8667988854a15f93f2235aebd8c410",
       "7d48eb3f6c6fb8518f3cfbeedbed9aab",
       "5a5719aeace9e95a8b342ac70e6808ff",
-      "be10e7791f2e465784bb93c921e507b5"
+      "d655443851364c52826619b23406c433",
+      "be10e7791f2e465784bb93c921e507b5",
+      "668b0b6ba7c7c55cb50a8df83423b638",
+      "b2b06eeba432645fa29f6f9bd58684f4",
+      "00a0363a2568ae5b9ea3d841ad23e0b9"
     ]
   },
   "technologies": [
@@ -1049,7 +1132,7 @@
         "674ec59d62a6189d824c924030314da9",
         "7f2b6ceb4c5ce9a3f64a718986a73b7d"
       ],
-      "hours": 18,
+      "hours": 9.0,
       "cost": {
         "Wood": 90,
         "Steel": 100
@@ -1059,6 +1142,7 @@
       "effects": [],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 18,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1081,7 +1165,7 @@
         "96557513559e5c9fc44d4409e3849779",
         "810d520980b7385ba43c20fedabb12cf"
       ],
-      "hours": 27,
+      "hours": 13.5,
       "cost": {
         "Wood": 155,
         "Steel": 175
@@ -1091,6 +1175,7 @@
       "effects": [],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 27,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1113,7 +1198,7 @@
         "6e2924ed908f5d8dac4365de9c73710d",
         "de32113ab414de57bdd32f47254f5ff1"
       ],
-      "hours": 36,
+      "hours": 18.0,
       "cost": {
         "Wood": 220,
         "Steel": 250
@@ -1123,6 +1208,7 @@
       "effects": [],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 36,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1142,7 +1228,7 @@
       "column": 14,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 20,
         "Steel": 8
@@ -1157,6 +1243,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "prerequisite_names": [],
@@ -1176,7 +1263,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "92da3881367fc48b0a4addd41c8c979c"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 8
@@ -1191,6 +1278,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1213,7 +1301,7 @@
         "674ec59d62a6189d824c924030314da9",
         "01b0f431db519bb62a471a0bb0a0fcef"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 65,
         "Steel": 35
@@ -1229,6 +1317,7 @@
       "global_effects": [],
       "extra_effects": [],
       "previous_tier": 5,
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1251,7 +1340,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "92da3881367fc48b0a4addd41c8c979c"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 26,
         "Steel": 10
@@ -1267,6 +1356,7 @@
       "global_effects": [],
       "extra_effects": [],
       "previous_tier": 4,
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1289,7 +1379,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "b121ebaef29df3a9a947055634e60b5b"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 28,
         "Steel": 10
@@ -1309,6 +1399,7 @@
       "global_effects": [],
       "extra_effects": [],
       "previous_tier": 3,
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1331,7 +1422,7 @@
         "6e2924ed908f5d8dac4365de9c73710d",
         "f97ca14e26270c96734166e07f595044"
       ],
-      "hours": 16,
+      "hours": 8.0,
       "cost": {
         "Wood": 95,
         "Steel": 55
@@ -1354,6 +1445,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 16,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1370,13 +1462,13 @@
       "id": "ThumperOutput2",
       "title": "Balanced Coal Production Lines",
       "tier": 4,
-      "column": 20,
+      "column": 17,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
         "f6541e4cae09b9b5ec475287fe4c81d6"
       ],
-      "hours": 20,
+      "hours": 10.0,
       "cost": {
         "Wood": 105,
         "Steel": 70
@@ -1399,6 +1491,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 20,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1421,7 +1514,7 @@
         "96557513559e5c9fc44d4409e3849779",
         "837ac94d78dfc7b3014f712001bd4cb7"
       ],
-      "hours": 20,
+      "hours": 10.0,
       "cost": {
         "Wood": 105,
         "Steel": 70
@@ -1444,6 +1537,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 20,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1460,13 +1554,13 @@
       "id": "SteelOutput",
       "title": "High-Pressure Steel Refining",
       "tier": 4,
-      "column": 17,
+      "column": 11,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
         "7159e69c056a85879c42ae9ebf1656e9"
       ],
-      "hours": 20,
+      "hours": 10.0,
       "cost": {
         "Wood": 105,
         "Steel": 70
@@ -1489,6 +1583,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 20,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1508,7 +1603,7 @@
       "column": 20,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 20,
         "Steel": 8
@@ -1523,6 +1618,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "prerequisite_names": [],
@@ -1542,7 +1638,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "a33b85c6803ac3bef7436e5bcdc441ad"
       ],
-      "hours": 12,
+      "hours": 6.0,
       "cost": {
         "Wood": 55,
         "Steel": 30
@@ -1557,6 +1653,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 12,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "prerequisite_names": [
@@ -1579,7 +1676,7 @@
         "674ec59d62a6189d824c924030314da9",
         "837ac94d78dfc7b3014f712001bd4cb7"
       ],
-      "hours": 16,
+      "hours": 8.0,
       "cost": {
         "Wood": 75,
         "Steel": 45
@@ -1602,6 +1699,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 16,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1618,13 +1716,13 @@
       "id": "IndustrialHeat",
       "title": "Hot Rolling Halls",
       "tier": 4,
-      "column": 17,
+      "column": 20,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
         "7159e69c056a85879c42ae9ebf1656e9"
       ],
-      "hours": 20,
+      "hours": 10.0,
       "cost": {
         "Wood": 105,
         "Steel": 70
@@ -1647,6 +1745,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 20,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "prerequisite_names": [
@@ -1663,13 +1762,13 @@
       "id": "CoalMineHeat",
       "title": "Pressurised Mine Cabins",
       "tier": 3,
-      "column": 8,
+      "column": 11,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "232aacb9286f79a363426c814351e423"
       ],
-      "hours": 16,
+      "hours": 8.0,
       "cost": {
         "Wood": 75,
         "Steel": 45
@@ -1692,6 +1791,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 16,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1708,13 +1808,13 @@
       "id": "MedicalHeat3",
       "title": "Healthcare Insulation III",
       "tier": 3,
-      "column": 5,
+      "column": 8,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "c04999d329a3b29ea54c291030bca5de"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 65,
         "Steel": 35
@@ -1742,6 +1842,7 @@
       "global_effects": [],
       "extra_effects": [],
       "previous_tier": 5,
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "City Life",
       "prerequisite_names": [
@@ -1764,7 +1865,7 @@
         "6e2924ed908f5d8dac4365de9c73710d",
         "d5ab453790c351a7c94c93cfac01f58b"
       ],
-      "hours": 24,
+      "hours": 12.0,
       "cost": {
         "Wood": 140,
         "Steel": 100
@@ -1779,6 +1880,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 24,
       "scenario_scope": "cold",
       "prerequisite_names": [
         "Automatic Prototyping",
@@ -1794,13 +1896,13 @@
       "id": "CookhouseHeat2",
       "title": "Steam-Jacketed Kitchens",
       "tier": 4,
-      "column": 8,
+      "column": 11,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
         "512c0c1c3fa9939ea843dbf6d9439d3a"
       ],
-      "hours": 20,
+      "hours": 10.0,
       "cost": {
         "Wood": 105,
         "Steel": 70
@@ -1815,6 +1917,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 20,
       "scenario_scope": "cold",
       "tab": "City Life",
       "prerequisite_names": [
@@ -1831,13 +1934,13 @@
       "id": "HothouseHeat3",
       "title": "Hothouse Insulation III",
       "tier": 3,
-      "column": 11,
+      "column": 8,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "41167370cf5371bf9d4f76a163c47af1"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 65,
         "Steel": 35
@@ -1857,6 +1960,7 @@
       "global_effects": [],
       "extra_effects": [],
       "previous_tier": 5,
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -1879,7 +1983,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "167685c98d6abeaee6459ac1ca3cb253"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 35,
         "Steel": 15
@@ -1894,6 +1998,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "City Life",
       "prerequisite_names": [
@@ -1913,7 +2018,7 @@
       "column": 8,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 12,
         "Steel": 4
@@ -1928,6 +2033,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "City Life",
       "prerequisite_names": [],
@@ -1947,7 +2053,7 @@
         "674ec59d62a6189d824c924030314da9",
         "6afafac429500daec3418c38d51a4138"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 65,
         "Steel": 35
@@ -1963,6 +2069,7 @@
       "global_effects": [],
       "extra_effects": [],
       "previous_tier": 5,
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "City Life",
       "prerequisite_names": [
@@ -1985,7 +2092,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "41167370cf5371bf9d4f76a163c47af1"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 8
@@ -2004,6 +2111,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "City Life",
       "prerequisite_names": [
@@ -2026,7 +2134,7 @@
         "674ec59d62a6189d824c924030314da9",
         "6c9ed93cd0195d518a8f31236f63af83"
       ],
-      "hours": 12,
+      "hours": 6.0,
       "cost": {
         "Wood": 70,
         "Steel": 40
@@ -2046,6 +2154,7 @@
       "global_effects": [],
       "extra_effects": [],
       "previous_tier": 5,
+      "unscaled_hours": 12,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "prerequisite_names": [
@@ -2067,7 +2176,7 @@
       "requires": [
         "2c878e5178d190bd164c0b4729d51bbc"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 20,
         "Steel": 8
@@ -2082,6 +2191,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "City Life",
       "prerequisite_names": [
@@ -2103,7 +2213,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "f12f731c8ba8965b9f9118fc68c80245"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 28,
         "Steel": 12
@@ -2123,6 +2233,7 @@
       "global_effects": [],
       "extra_effects": [],
       "previous_tier": 3,
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "prerequisite_names": [
@@ -2145,7 +2256,7 @@
         "674ec59d62a6189d824c924030314da9",
         "7afd0d38e660f490b9492024c2756da4"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 55,
         "Steel": 30
@@ -2161,6 +2272,7 @@
       "global_effects": [],
       "extra_effects": [],
       "previous_tier": 5,
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "City Life",
       "prerequisite_names": [
@@ -2177,13 +2289,13 @@
       "id": "MedicalHeat4",
       "title": "Sealed Healthcare Districts",
       "tier": 5,
-      "column": 5,
+      "column": 8,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
         "da7bf0c36302d35bb6e5b7dde5615d1b"
       ],
-      "hours": 24,
+      "hours": 12.0,
       "cost": {
         "Wood": 140,
         "Steel": 100
@@ -2218,6 +2330,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 24,
       "scenario_scope": "cold",
       "tab": "City Life",
       "prerequisite_names": [
@@ -2240,7 +2353,7 @@
         "6e2924ed908f5d8dac4365de9c73710d",
         "0b16be9ca6261e5398e161f109ec20e5"
       ],
-      "hours": 24,
+      "hours": 12.0,
       "cost": {
         "Wood": 140,
         "Steel": 100
@@ -2259,6 +2372,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 24,
       "scenario_scope": "cold",
       "tab": "Industry",
       "prerequisite_names": [
@@ -2275,13 +2389,13 @@
       "id": "HubReturnLines",
       "title": "Steam Hub Return Lines",
       "tier": 5,
-      "column": 11,
+      "column": 14,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
         "41b19bbbe4fd6981c84d21231a34cca1"
       ],
-      "hours": 18,
+      "hours": 9.0,
       "cost": {
         "Wood": 100,
         "Steel": 65
@@ -2296,6 +2410,7 @@
       ],
       "global_effects": [],
       "extra_effects": [],
+      "unscaled_hours": 18,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "prerequisite_names": [
@@ -2318,7 +2433,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "613f7a027acc7994a94a1ef6e0ddc229"
       ],
-      "hours": 16,
+      "hours": 8.0,
       "cost": {
         "Wood": 90,
         "Steel": 55
@@ -2345,6 +2460,7 @@
         "Drafting Machines",
         "Bunkhouse"
       ],
+      "unscaled_hours": 16,
       "scenario_scope": "cold",
       "icon": [
         5,
@@ -2363,7 +2479,7 @@
         "bca1445c87bf7f5a8bfc9e0e9218f97b",
         "2a644c9a14b42682904f57bc2f153432"
       ],
-      "hours": 20,
+      "hours": 10.0,
       "cost": {
         "Wood": 140,
         "Steel": 95
@@ -2383,6 +2499,7 @@
         "Storm Shutters",
         "House"
       ],
+      "unscaled_hours": 20,
       "scenario_scope": "cold",
       "icon": [
         5,
@@ -2400,7 +2517,7 @@
         "96557513559e5c9fc44d4409e3849779",
         "dfce5741d59c185ca6c7b691fb496e37"
       ],
-      "hours": 26,
+      "hours": 13.0,
       "cost": {
         "Wood": 210,
         "Steel": 145
@@ -2423,6 +2540,7 @@
         "Difference Engine",
         "Cavity Walls"
       ],
+      "unscaled_hours": 26,
       "scenario_scope": "cold",
       "icon": [
         5,
@@ -2441,7 +2559,7 @@
         "6ab9415e905fa355bf872c4bcdbf6daf",
         "d5ab453790c351a7c94c93cfac01f58b"
       ],
-      "hours": 34,
+      "hours": 17.0,
       "cost": {
         "Wood": 280,
         "Steel": 230
@@ -2461,6 +2579,7 @@
         "Thermal Vestibules",
         "House Insulation"
       ],
+      "unscaled_hours": 34,
       "scenario_scope": "cold",
       "icon": [
         5,
@@ -2472,13 +2591,13 @@
       "id": "CivicLagging",
       "title": "Civic Storm Shelters",
       "tier": 4,
-      "column": 11,
+      "column": 17,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
         "c04999d329a3b29ea54c291030bca5de"
       ],
-      "hours": 16,
+      "hours": 8.0,
       "cost": {
         "Wood": 115,
         "Steel": 80
@@ -2549,6 +2668,7 @@
         "Difference Engine",
         "Healthcare Insulation"
       ],
+      "unscaled_hours": 16,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -2566,7 +2686,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 14,
+      "hours": 7.0,
       "cost": {
         "Wood": 85,
         "Steel": 60
@@ -3028,6 +3148,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 14,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -3046,7 +3167,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "95327a7d0e3600b3a84234cfe9f8da49"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 45,
         "Steel": 25
@@ -3069,6 +3190,7 @@
         "Drafting Machines",
         "Resource Depot Upgrade"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -3088,7 +3210,7 @@
         "281cde6aacaede54992b7e38730cc50f",
         "85bf30a4a61e0396cb4574f4ade00b0e"
       ],
-      "hours": 13,
+      "hours": 6.5,
       "cost": {
         "Wood": 80,
         "Steel": 45
@@ -3112,6 +3234,7 @@
         "Industrial Stockyard Racks",
         "Large Resource Depot"
       ],
+      "unscaled_hours": 13,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -3124,13 +3247,13 @@
       "id": "DeepCoalBins",
       "title": "Deep Coal Bins",
       "tier": 4,
-      "column": 2,
+      "column": 5,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
         "e7fd91c7cbb0b256b16e445ed4b47713"
       ],
-      "hours": 14,
+      "hours": 7.0,
       "cost": {
         "Wood": 90,
         "Steel": 55
@@ -3153,6 +3276,7 @@
         "Difference Engine",
         "Modular Warehousing"
       ],
+      "unscaled_hours": 14,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -3165,13 +3289,13 @@
       "id": "ProvisionCells",
       "title": "Provision Cells",
       "tier": 5,
-      "column": 8,
+      "column": 5,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
         "e7fd91c7cbb0b256b16e445ed4b47713"
       ],
-      "hours": 16,
+      "hours": 8.0,
       "cost": {
         "Wood": 105,
         "Steel": 65
@@ -3194,6 +3318,7 @@
         "Automatic Prototyping",
         "Modular Warehousing"
       ],
+      "unscaled_hours": 16,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -3206,13 +3331,13 @@
       "id": "GeneratorReheat",
       "title": "Generator Reheat Economiser",
       "tier": 4,
-      "column": 8,
+      "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
         "07f20fe6b97ac3b68e4063e06909da43"
       ],
-      "hours": 17,
+      "hours": 8.5,
       "cost": {
         "Wood": 125,
         "Steel": 90
@@ -3233,6 +3358,7 @@
         "Difference Engine",
         "Generator Efficiency Upgrade II"
       ],
+      "unscaled_hours": 17,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -3245,13 +3371,13 @@
       "id": "GeneratorSeal",
       "title": "Generator Pressure Seals",
       "tier": 5,
-      "column": 8,
+      "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
         "e24e4d44be26bd5d81df746fe417f4b1"
       ],
-      "hours": 20,
+      "hours": 10.0,
       "cost": {
         "Wood": 150,
         "Steel": 105
@@ -3272,6 +3398,7 @@
         "Automatic Prototyping",
         "Generator Reheat Economiser"
       ],
+      "unscaled_hours": 20,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -3284,13 +3411,13 @@
       "id": "GovernorSafeties",
       "title": "Independent Safety Governors",
       "tier": 5,
-      "column": 5,
+      "column": 8,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
         "0941ce684cced29141435b03a0979561"
       ],
-      "hours": 34,
+      "hours": 17.0,
       "cost": {
         "Wood": 235,
         "Steel": 235
@@ -3306,6 +3433,7 @@
         "Automatic Prototyping",
         "Generator Safety Bypass"
       ],
+      "unscaled_hours": 34,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -3318,13 +3446,13 @@
       "id": "ScoutBearings",
       "title": "Cold-Weather Sled Bearings",
       "tier": 2,
-      "column": 14,
+      "column": 8,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "ad5f05baa7a10d98f24202494038c7d4"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 40,
         "Steel": 22
@@ -3352,6 +3480,7 @@
         "Lighter Scout Sleds"
       ],
       "previous_tier": 3,
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -3364,13 +3493,13 @@
       "id": "ScoutOverhaul",
       "title": "Frostland Sled Overhaul",
       "tier": 3,
-      "column": 14,
+      "column": 8,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "a71a895fbf26d25fa31dbb3c0205405a"
       ],
-      "hours": 12,
+      "hours": 6.0,
       "cost": {
         "Wood": 65,
         "Steel": 40
@@ -3400,6 +3529,7 @@
         "Cold-Weather Sled Bearings"
       ],
       "previous_tier": 5,
+      "unscaled_hours": 12,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -3418,7 +3548,7 @@
         "96557513559e5c9fc44d4409e3849779",
         "8f373d0885f33b909343f14fefe22984"
       ],
-      "hours": 24,
+      "hours": 12.0,
       "cost": {
         "Wood": 155,
         "Steel": 125
@@ -3437,6 +3567,7 @@
         "Difference Engine",
         "Additional Scouts"
       ],
+      "unscaled_hours": 24,
       "scenario_scope": "cold",
       "icon": [
         3,
@@ -3448,13 +3579,13 @@
       "id": "ConvoyBearings",
       "title": "Outpost Convoy Bearings",
       "tier": 2,
-      "column": 11,
+      "column": 14,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "7a72b250dcf86ca1bc400c3e3171bf13"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 40,
         "Steel": 22
@@ -3484,6 +3615,7 @@
         "Outpost Depot"
       ],
       "previous_tier": 4,
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -3496,13 +3628,13 @@
       "id": "ConvoyRelays",
       "title": "Frostland Relay Stations",
       "tier": 3,
-      "column": 11,
+      "column": 14,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "4eb6f203a1b92353bc6fe5c42b43c5b7"
       ],
-      "hours": 12,
+      "hours": 6.0,
       "cost": {
         "Wood": 65,
         "Steel": 40
@@ -3532,6 +3664,7 @@
         "Outpost Convoy Bearings"
       ],
       "previous_tier": 5,
+      "unscaled_hours": 12,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -3550,7 +3683,7 @@
         "674ec59d62a6189d824c924030314da9",
         "a62c620126767f9d454e321d9391b52d"
       ],
-      "hours": 12,
+      "hours": 6.0,
       "cost": {
         "Wood": 75,
         "Steel": 40
@@ -3597,6 +3730,7 @@
         "Mechanical Calculators",
         "Sawmill Upgrade"
       ],
+      "unscaled_hours": 12,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -3615,7 +3749,7 @@
         "96557513559e5c9fc44d4409e3849779",
         "cd25261b89aac651a82f3ffbd774a932"
       ],
-      "hours": 15,
+      "hours": 7.5,
       "cost": {
         "Wood": 100,
         "Steel": 65
@@ -3654,6 +3788,7 @@
         "Difference Engine",
         "Industrial Tool Libraries"
       ],
+      "unscaled_hours": 15,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -3666,12 +3801,12 @@
       "id": "WorkshopBench",
       "title": "Collaborative Design Bureau",
       "tier": 2,
-      "column": 8,
+      "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "ef520220d07ff699554142aa88c6647c"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 45,
         "Steel": 25
@@ -3689,6 +3824,7 @@
       "prerequisite_names": [
         "Drafting Machines"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -3701,13 +3837,13 @@
       "id": "WorkshopSteam",
       "title": "Automated Design Chambers",
       "tier": 3,
-      "column": 8,
+      "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "53ffb712bb43d25f902dc25414670b75"
       ],
-      "hours": 11,
+      "hours": 5.5,
       "cost": {
         "Wood": 65,
         "Steel": 35
@@ -3726,6 +3862,7 @@
         "Mechanical Calculators",
         "Collaborative Design Bureau"
       ],
+      "unscaled_hours": 11,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -3744,7 +3881,7 @@
         "674ec59d62a6189d824c924030314da9",
         "f6541e4cae09b9b5ec475287fe4c81d6"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 60,
         "Steel": 35
@@ -3771,6 +3908,7 @@
         "Mechanical Calculators",
         "Steam Coal Thumper"
       ],
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -3789,7 +3927,7 @@
         "6e2924ed908f5d8dac4365de9c73710d",
         "02f45bae14aa125da6343293a926069d"
       ],
-      "hours": 32,
+      "hours": 16.0,
       "cost": {
         "Wood": 260,
         "Steel": 230
@@ -3840,6 +3978,7 @@
         "Automatic Prototyping",
         "Pneumatic Mine Lifts"
       ],
+      "unscaled_hours": 32,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -3858,7 +3997,7 @@
         "674ec59d62a6189d824c924030314da9",
         "67cd79fac0960d59944708691c7eb9ce"
       ],
-      "hours": 22,
+      "hours": 11.0,
       "cost": {
         "Wood": 185,
         "Steel": 135
@@ -4323,6 +4462,7 @@
         "Mechanical Calculators",
         "Citywide Thermal Envelope"
       ],
+      "unscaled_hours": 22,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -4335,13 +4475,13 @@
       "id": "CitywideLagging3",
       "title": "Citywide Thermal Envelope III",
       "tier": 5,
-      "column": 11,
+      "column": 8,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
         "3428cac94c6cf25bb8af6846d1829c61"
       ],
-      "hours": 34,
+      "hours": 17.0,
       "cost": {
         "Wood": 320,
         "Steel": 240
@@ -4806,6 +4946,7 @@
         "Automatic Prototyping",
         "Citywide Thermal Envelope II"
       ],
+      "unscaled_hours": 34,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -4821,7 +4962,7 @@
       "column": 5,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 15,
         "Steel": 5
@@ -4837,6 +4978,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -4854,7 +4996,7 @@
       "requires": [
         "ba5d963535616957a1506c24e2511727"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 10
@@ -4872,6 +5014,7 @@
       "prerequisite_names": [
         "Workshop Drafting Stations"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -4890,7 +5033,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "ff9ee5f7e8953f588194ed8c7f08f11a"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 40,
         "Steel": 20
@@ -4909,6 +5052,7 @@
         "Drawing Boards",
         "Workshop Reference Library"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -4921,10 +5065,10 @@
       "id": "TentWindbreaks",
       "title": "Canvas Windbreaks",
       "tier": 0,
-      "column": 17,
+      "column": 20,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 18
       },
@@ -4939,6 +5083,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -4954,7 +5099,7 @@
       "column": 17,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 5
@@ -4974,6 +5119,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -4991,7 +5137,7 @@
       "requires": [
         "b2a6e82ee3c091bde745fdafe81388a6"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 5
@@ -5017,6 +5163,7 @@
       "prerequisite_names": [
         "Beacon"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -5034,7 +5181,7 @@
       "requires": [
         "495670d96217a786b446b9f0e44af23f"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 8
@@ -5056,6 +5203,7 @@
       "prerequisite_names": [
         "Coal Thumper"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -5071,7 +5219,7 @@
       "column": 5,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 18,
         "Steel": 6
@@ -5091,6 +5239,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -5108,7 +5257,7 @@
       "requires": [
         "b121ebaef29df3a9a947055634e60b5b"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 6
@@ -5130,6 +5279,7 @@
       "prerequisite_names": [
         "Sawmill"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -5148,7 +5298,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "613f7a027acc7994a94a1ef6e0ddc229"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 8
@@ -5167,6 +5317,7 @@
         "Drawing Boards",
         "Bunkhouse"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -5184,7 +5335,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 32,
         "Steel": 15
@@ -5202,6 +5353,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -5220,7 +5372,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "7159e69c056a85879c42ae9ebf1656e9"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 28,
         "Steel": 12
@@ -5247,6 +5399,7 @@
         "Drawing Boards",
         "Steelworks"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -5265,7 +5418,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "cacc1dca6f50085593c44cd27e3b24e8"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 10
@@ -5288,6 +5441,7 @@
         "Drawing Boards",
         "Depot Shelving"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -5306,7 +5460,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "232aacb9286f79a363426c814351e423"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 26,
         "Steel": 12
@@ -5333,6 +5487,7 @@
         "Drawing Boards",
         "Coal Mining"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -5351,7 +5506,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "837ac94d78dfc7b3014f712001bd4cb7"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 18
@@ -5378,6 +5533,7 @@
         "Drafting Machines",
         "Wall Drill"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -5396,7 +5552,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "6a330b7d72d2e0a06a454943cf2980a1"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 40,
         "Steel": 20
@@ -5415,6 +5571,7 @@
         "Drafting Machines",
         "Steam Hub"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -5433,7 +5590,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "6afafac429500daec3418c38d51a4138"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 16
@@ -5452,6 +5609,7 @@
         "Drafting Machines",
         "Infirmary"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -5470,7 +5628,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "7afd0d38e660f490b9492024c2756da4"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 18
@@ -5489,6 +5647,7 @@
         "Drafting Machines",
         "Flying Hunters"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -5507,7 +5666,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "7a72b250dcf86ca1bc400c3e3171bf13"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 40,
         "Steel": 18
@@ -5536,6 +5695,7 @@
         "Drafting Machines",
         "Outpost Depot"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -5553,7 +5713,7 @@
       "requires": [
         "b121ebaef29df3a9a947055634e60b5b"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 25,
         "Steel": 8
@@ -5576,6 +5736,7 @@
         "Sawmill"
       ],
       "previous_tier": 3,
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -5594,7 +5755,7 @@
         "674ec59d62a6189d824c924030314da9",
         "f6541e4cae09b9b5ec475287fe4c81d6"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 40,
         "Steel": 20
@@ -5617,6 +5778,7 @@
         "Mechanical Calculators",
         "Steam Coal Thumper"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -5629,13 +5791,13 @@
       "id": "CoalReserveBins",
       "title": "District Coal Bunkers",
       "tier": 3,
-      "column": 8,
+      "column": 11,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "2597de5fe326db53860c300848d0d203"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 45,
         "Steel": 20
@@ -5658,6 +5820,7 @@
         "Mechanical Calculators",
         "Coal Storage Compactors"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -5670,12 +5833,12 @@
       "id": "AutumnDockSignals",
       "title": "Dock Signal Flags",
       "tier": 0,
-      "column": 5,
+      "column": 2,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "dbe5380cc055a68b1c42b5c31936cbb2"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 5
@@ -5701,6 +5864,7 @@
       "prerequisite_names": [
         "Docks"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -5716,7 +5880,7 @@
       "column": 5,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 15,
         "Steel": 5
@@ -5732,6 +5896,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -5749,7 +5914,7 @@
       "requires": [
         "ef037155d862869b364d3dafbce59fb5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 20,
         "Steel": 8
@@ -5771,6 +5936,7 @@
       "prerequisite_names": [
         "Sawmill"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -5783,13 +5949,13 @@
       "id": "AutumnReloadingGantries",
       "title": "Reloading Gantries",
       "tier": 1,
-      "column": 5,
-      "category": "32aaf6510801af5483917abb868d44f5",
+      "column": 14,
+      "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
         "df3ff6c0c17833ab944033181791b0b9"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 26,
         "Steel": 12
@@ -5816,8 +5982,9 @@
         "Drawing Boards",
         "Reloading Station"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
-      "tab": "Logistics",
+      "tab": "Engineering",
       "icon": [
         10,
         6
@@ -5834,7 +6001,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "3891aa45e631a59cd747a28ab8a71f76"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 10
@@ -5857,6 +6024,7 @@
         "Drawing Boards",
         "Resource Depot Upgrade"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -5869,14 +6037,14 @@
       "id": "AutumnDockRosters",
       "title": "All-Weather Dock Rosters",
       "tier": 2,
-      "column": 8,
+      "column": 5,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "2602139ab6918353a2d55f06696ca742",
         "de32d7239c7442bca048a81171a96e77"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 34,
         "Steel": 15
@@ -5904,6 +6072,7 @@
         "Dock Signal Flags",
         "Upgraded Docks"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -5923,7 +6092,7 @@
         "fc26c4945c5b255b9c73bcdcc28ab043",
         "1b8a74168643a99dd54a6ec3359fb1ab"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 40,
         "Steel": 20
@@ -5951,6 +6120,7 @@
         "Reloading Gantries",
         "Steam Reloading Station"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -5969,7 +6139,7 @@
         "674ec59d62a6189d824c924030314da9",
         "d355ef1e3c6fa7508d7e458d9f3aac37"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 35,
         "Steel": 15
@@ -5992,6 +6162,7 @@
         "Mechanical Calculators",
         "Port Warehouse Shelving"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -6009,7 +6180,7 @@
       "requires": [
         "a6b9b6d1c692ce849f4ecb8532b1023b"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 5
@@ -6027,6 +6198,7 @@
       "prerequisite_names": [
         "Foragers Quarters"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -6042,7 +6214,7 @@
       "column": 2,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 12,
         "Steel": 4
@@ -6058,6 +6230,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -6076,7 +6249,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "bdbb9bd5eeb42699324cae61d8716e50"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 24,
         "Steel": 10
@@ -6103,6 +6276,7 @@
         "Drawing Boards",
         "Fishing Harbour"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -6122,7 +6296,7 @@
         "620773d430a336559a43c79ea6f81971",
         "a15e1f4e111c728fb34ceb71a822e2e9"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 34,
         "Steel": 15
@@ -6146,6 +6320,7 @@
         "Harbour-to-Kitchen Crews",
         "Finer mesh"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -6158,13 +6333,13 @@
       "id": "AutumnRapidRounds",
       "title": "Infirmary Rapid Rounds",
       "tier": 3,
-      "column": 8,
+      "column": 11,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "480c4a5e54f8ef9bad47c25b433e74c8"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 16
@@ -6183,6 +6358,7 @@
         "Mechanical Calculators",
         "Infirmary"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -6198,7 +6374,7 @@
       "column": 8,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 18
       },
@@ -6213,6 +6389,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -6228,7 +6405,7 @@
       "column": 20,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 16,
         "Steel": 5
@@ -6244,6 +6421,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -6259,7 +6437,7 @@
       "column": 5,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 15,
         "Steel": 5
@@ -6275,6 +6453,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -6292,7 +6471,7 @@
       "requires": [
         "41496ae974532e5eb8c238a40046aaad"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 10
@@ -6310,6 +6489,7 @@
       "prerequisite_names": [
         "Workshop Drafting Stations"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -6325,7 +6505,7 @@
       "column": 14,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 5
@@ -6345,6 +6525,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -6363,7 +6544,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "695491bf0cf14a53bf15c31a78cde4d1"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 40,
         "Steel": 20
@@ -6382,6 +6563,7 @@
         "Drawing Boards",
         "Workshop Reference Library"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -6400,7 +6582,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "6bad71451e2d5b539573dc03603cb981"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 28,
         "Steel": 10
@@ -6423,6 +6605,7 @@
         "Drafting Machines",
         "Site Shelter Liners"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -6435,12 +6618,12 @@
       "id": "AutumnProfileJigs",
       "title": "Structural Profile Jigs",
       "tier": 0,
-      "column": 8,
+      "column": 11,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "9246552c1e634fb6364ee7650f707e48"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 18,
         "Steel": 8
@@ -6458,6 +6641,7 @@
       "prerequisite_names": [
         "Profiles Manufacture"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -6470,13 +6654,13 @@
       "id": "AutumnExchangerTemplates",
       "title": "Steam Exchanger Templates",
       "tier": 1,
-      "column": 5,
+      "column": 11,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
         "4978b24f201eaba6134343128ea07d81"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 26,
         "Steel": 12
@@ -6495,6 +6679,7 @@
         "Drawing Boards",
         "Machine Shop"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -6507,13 +6692,13 @@
       "id": "AutumnCompositeJigs",
       "title": "Steel Composite Jigs",
       "tier": 2,
-      "column": 11,
+      "column": 14,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "9f9b9d2104b09c86c94a60999bf8a8ef"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 30,
         "Steel": 15
@@ -6532,6 +6717,7 @@
         "Drafting Machines",
         "Foundry"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -6544,12 +6730,12 @@
       "id": "AutumnFabricationSafety",
       "title": "Protected Fabrication Halls",
       "tier": 2,
-      "column": 5,
+      "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "ef520220d07ff699554142aa88c6647c"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 20
@@ -6575,6 +6761,7 @@
       "prerequisite_names": [
         "Drafting Machines"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -6592,7 +6779,7 @@
       "requires": [
         "b987f24be7287055ba4ec6667ba99fb8"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 16,
         "Steel": 6
@@ -6610,6 +6797,7 @@
       "prerequisite_names": [
         "Structural Profile Jigs"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -6625,7 +6813,7 @@
       "column": 10,
       "category": "40546df3d421bf903d466d9850b96c47",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 18,
         "Steel": 5
@@ -6638,6 +6826,7 @@
       ],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "icon": [
         3,
@@ -6655,7 +6844,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "188daaf8c28bdbb7e042d8d9fbaf4850"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 15,
         "Steel": 5
@@ -6671,6 +6860,7 @@
         "Drawing Boards",
         "Ventilation Plant"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "icon": [
         9,
@@ -6687,7 +6877,7 @@
       "requires": [
         "dbe5380cc055a68b1c42b5c31936cbb2"
       ],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 14
       },
@@ -6701,6 +6891,7 @@
       "prerequisite_names": [
         "Docks"
       ],
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
       "icon": [
         10,
@@ -6717,7 +6908,7 @@
       "requires": [
         "95367651e11fc95eaf0ccd3b3964c952"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 18,
         "Steel": 6
@@ -6739,6 +6930,7 @@
       "prerequisite_names": [
         "Sawmill Log Racks"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -6751,10 +6943,10 @@
       "id": "AutumnDepotPallets",
       "title": "Depot Pallet Racks",
       "tier": 0,
-      "column": 2,
+      "column": 5,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 15,
         "Steel": 5
@@ -6774,6 +6966,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -6791,7 +6984,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 24,
         "Steel": 10
@@ -6806,6 +6999,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -6823,7 +7017,7 @@
       "requires": [
         "94421b9fc714ef52bd277aac4941d235"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 10
@@ -6841,6 +7035,7 @@
       "prerequisite_names": [
         "Forager Trail Kits"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "icon": [
         2,
@@ -6855,7 +7050,7 @@
       "column": 16,
       "category": "e38b8613cf4527a636465dc055ad4590",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 12
       },
@@ -6867,6 +7062,7 @@
       ],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
       "icon": [
         4,
@@ -6881,7 +7077,7 @@
       "column": 10,
       "category": "e38b8613cf4527a636465dc055ad4590",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 15,
         "Steel": 4
@@ -6894,6 +7090,7 @@
       ],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "icon": [
         4,
@@ -6911,7 +7108,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "2e31329c6bb34b5a84808eb100276653"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 22,
         "Steel": 8
@@ -6934,6 +7131,7 @@
         "Drawing Boards",
         "Field Dressings"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -6951,7 +7149,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 7
@@ -6973,6 +7171,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -6988,7 +7187,7 @@
       "column": 16,
       "category": "caff9f2e906b55b31846d04b90384c99",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 12
       },
@@ -7000,6 +7199,7 @@
       ],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
       "icon": [
         5,
@@ -7011,12 +7211,12 @@
       "id": "AutumnWindproofWorksites",
       "title": "Windproof Worksites",
       "tier": 1,
-      "column": 14,
+      "column": 17,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 26,
         "Steel": 10
@@ -7066,6 +7266,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -7078,10 +7279,10 @@
       "id": "AutumnFabricationShifts",
       "title": "Fabrication Shift Boards",
       "tier": 0,
-      "column": 2,
+      "column": 8,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 8
@@ -7105,6 +7306,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -7123,7 +7325,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "94421b9fc714ef52bd277aac4941d235"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 10
@@ -7142,6 +7344,7 @@
         "Drawing Boards",
         "Forager Trail Kits"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -7154,12 +7357,12 @@
       "id": "AutumnPortClearing",
       "title": "Dockside Collection Routes",
       "tier": 0,
-      "column": 11,
+      "column": 14,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "2602139ab6918353a2d55f06696ca742"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 22,
         "Steel": 8
@@ -7189,6 +7392,7 @@
       "prerequisite_names": [
         "Dock Signal Flags"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -7206,7 +7410,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 28,
         "Steel": 12
@@ -7232,6 +7436,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -7247,7 +7452,7 @@
       "column": 5,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 15,
         "Steel": 5
@@ -7263,6 +7468,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -7275,10 +7481,10 @@
       "id": "AutumnSeasonalFishing",
       "title": "Seasonal Catch Planning",
       "tier": 0,
-      "column": 14,
+      "column": 20,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 8
@@ -7298,6 +7504,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -7315,7 +7522,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 8
@@ -7337,6 +7544,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -7352,7 +7560,7 @@
       "column": 8,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 18,
         "Steel": 5
@@ -7368,6 +7576,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -7383,7 +7592,7 @@
       "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 5
@@ -7399,6 +7608,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -7416,7 +7626,7 @@
       "requires": [
         "b8b5bc8c800341ac504267b5ca72d133"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 22,
         "Steel": 6
@@ -7434,6 +7644,7 @@
       "prerequisite_names": [
         "Braziers"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -7449,7 +7660,7 @@
       "column": 2,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 15,
         "Steel": 4
@@ -7465,6 +7676,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -7482,7 +7694,7 @@
       "requires": [
         "b121ebaef29df3a9a947055634e60b5b"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 5
@@ -7504,6 +7716,7 @@
       "prerequisite_names": [
         "Sawmill"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -7519,7 +7732,7 @@
       "column": 5,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 15,
         "Steel": 5
@@ -7539,6 +7752,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -7556,7 +7770,7 @@
       "requires": [
         "b2a6e82ee3c091bde745fdafe81388a6"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 10
@@ -7574,6 +7788,7 @@
       "prerequisite_names": [
         "Beacon"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "icon": [
         3,
@@ -7590,7 +7805,7 @@
       "requires": [
         "b121ebaef29df3a9a947055634e60b5b"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 8
@@ -7612,6 +7827,7 @@
       "prerequisite_names": [
         "Sawmill"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -7630,7 +7846,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "0fb375410fbef1a0434add42c94720d1"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 32,
         "Steel": 14
@@ -7649,6 +7865,7 @@
         "Drawing Boards",
         "Handcarts"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -7667,7 +7884,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "4e84f5afcf69235bb9c78d3eadc6fb71"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 28,
         "Steel": 12
@@ -7686,6 +7903,7 @@
         "Drawing Boards",
         "Brazier Draught Grates"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -7704,7 +7922,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "167685c98d6abeaee6459ac1ca3cb253"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 22,
         "Steel": 8
@@ -7727,6 +7945,7 @@
         "Drawing Boards",
         "Medical Post Upgrade"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -7745,7 +7964,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "a33b85c6803ac3bef7436e5bcdc441ad"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 22,
         "Steel": 10
@@ -7764,6 +7983,7 @@
         "Drawing Boards",
         "Charcoal Kiln"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -7782,7 +8002,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "232aacb9286f79a363426c814351e423"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 26,
         "Steel": 12
@@ -7809,6 +8029,7 @@
         "Drawing Boards",
         "Coal Mining"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -7826,7 +8047,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 8
@@ -7848,6 +8069,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -7863,7 +8085,7 @@
       "column": 17,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 15,
         "Steel": 4
@@ -7879,6 +8101,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -7894,7 +8117,7 @@
       "column": 11,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 18,
         "Steel": 6
@@ -7914,6 +8137,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -7931,7 +8155,7 @@
       "requires": [
         "b121ebaef29df3a9a947055634e60b5b"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 18,
         "Steel": 6
@@ -7953,6 +8177,7 @@
       "prerequisite_names": [
         "Sawmill"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -7970,7 +8195,7 @@
       "requires": [
         "b2a6e82ee3c091bde745fdafe81388a6"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 28,
         "Steel": 12
@@ -7988,6 +8213,7 @@
       "prerequisite_names": [
         "Beacon"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "icon": [
         3,
@@ -8005,7 +8231,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "a33b85c6803ac3bef7436e5bcdc441ad"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 23,
         "Steel": 10
@@ -8024,6 +8250,7 @@
         "Drawing Boards",
         "Charcoal Kiln"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -8042,7 +8269,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "6a330b7d72d2e0a06a454943cf2980a1"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 27,
         "Steel": 12
@@ -8061,6 +8288,7 @@
         "Drawing Boards",
         "Steam Hub"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -8079,7 +8307,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "41167370cf5371bf9d4f76a163c47af1"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 28,
         "Steel": 12
@@ -8102,6 +8330,7 @@
         "Drawing Boards",
         "Hothouse"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -8120,7 +8349,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "167685c98d6abeaee6459ac1ca3cb253"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 24,
         "Steel": 10
@@ -8143,6 +8372,7 @@
         "Drawing Boards",
         "Medical Post Upgrade"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -8161,7 +8391,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "7f2b6ceb4c5ce9a3f64a718986a73b7d"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 48,
         "Steel": 30
@@ -8177,6 +8407,7 @@
         "Drafting Machines",
         "Factory"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -8195,7 +8426,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "0099523816050a8fb342a0a1322f35a3"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 54,
         "Steel": 35
@@ -8211,6 +8442,7 @@
         "Drafting Machines",
         "Overdrive Couplings"
       ],
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -8229,7 +8461,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "6afafac429500daec3418c38d51a4138"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 18
@@ -8252,6 +8484,7 @@
         "Drafting Machines",
         "Infirmary"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -8270,7 +8503,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "7159e69c056a85879c42ae9ebf1656e9"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 45,
         "Steel": 24
@@ -8297,6 +8530,7 @@
         "Drafting Machines",
         "Steelworks"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -8315,7 +8549,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "f2d279479cdfa25881672954e6df6c40"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 46,
         "Steel": 24
@@ -8342,6 +8576,7 @@
         "Drafting Machines",
         "Warm-Water Irrigation"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -8360,7 +8595,7 @@
         "674ec59d62a6189d824c924030314da9",
         "7f2b6ceb4c5ce9a3f64a718986a73b7d"
       ],
-      "hours": 11,
+      "hours": 5.5,
       "cost": {
         "Wood": 62,
         "Steel": 38
@@ -8379,6 +8614,7 @@
         "Mechanical Calculators",
         "Factory"
       ],
+      "unscaled_hours": 11,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -8397,7 +8633,7 @@
         "674ec59d62a6189d824c924030314da9",
         "87e370cf5f5f8e549843bec38991366b"
       ],
-      "hours": 12,
+      "hours": 6.0,
       "cost": {
         "Wood": 68,
         "Steel": 45
@@ -8413,6 +8649,7 @@
         "Mechanical Calculators",
         "Overdrive Pressure Valves"
       ],
+      "unscaled_hours": 12,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -8431,7 +8668,7 @@
         "674ec59d62a6189d824c924030314da9",
         "a33b85c6803ac3bef7436e5bcdc441ad"
       ],
-      "hours": 11,
+      "hours": 5.5,
       "cost": {
         "Wood": 66,
         "Steel": 36
@@ -8462,6 +8699,7 @@
         "Mechanical Calculators",
         "Charcoal Kiln"
       ],
+      "unscaled_hours": 11,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -8474,13 +8712,13 @@
       "id": "MasteryMedicalAutomata",
       "title": "Medical Automaton Gauges",
       "tier": 4,
-      "column": 11,
+      "column": 14,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
         "e436603a94862fb1ea4804b9b7dafa85"
       ],
-      "hours": 14,
+      "hours": 7.0,
       "cost": {
         "Wood": 85,
         "Steel": 55
@@ -8503,6 +8741,7 @@
         "Difference Engine",
         "Medical Automatons"
       ],
+      "unscaled_hours": 14,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -8521,7 +8760,7 @@
         "6e2924ed908f5d8dac4365de9c73710d",
         "02f45bae14aa125da6343293a926069d"
       ],
-      "hours": 20,
+      "hours": 10.0,
       "cost": {
         "Wood": 160,
         "Steel": 115
@@ -8580,6 +8819,7 @@
         "Automatic Prototyping",
         "Pneumatic Mine Lifts"
       ],
+      "unscaled_hours": 20,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -8597,7 +8837,7 @@
       "requires": [
         "2c878e5178d190bd164c0b4729d51bbc"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 18,
         "Steel": 5
@@ -8615,6 +8855,7 @@
       "prerequisite_names": [
         "Hunters' Gear"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -8632,7 +8873,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 9
@@ -8650,6 +8891,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -8667,7 +8909,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 10
@@ -8693,6 +8935,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -8711,7 +8954,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "f6541e4cae09b9b5ec475287fe4c81d6"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 41,
         "Steel": 22
@@ -8734,6 +8977,7 @@
         "Drafting Machines",
         "Steam Coal Thumper"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -8752,7 +8996,7 @@
         "674ec59d62a6189d824c924030314da9",
         "9189e7cc736a4a54bb173bca4af91839"
       ],
-      "hours": 12,
+      "hours": 6.0,
       "cost": {
         "Wood": 62,
         "Steel": 42
@@ -8768,6 +9012,7 @@
         "Mechanical Calculators",
         "Automaton Calibration"
       ],
+      "unscaled_hours": 12,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -8786,7 +9031,7 @@
         "674ec59d62a6189d824c924030314da9",
         "6afafac429500daec3418c38d51a4138"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 49,
         "Steel": 28
@@ -8809,6 +9054,7 @@
         "Mechanical Calculators",
         "Infirmary"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -8827,7 +9073,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "bdbb9bd5eeb42699324cae61d8716e50"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 10
@@ -8854,6 +9100,7 @@
         "Drawing Boards",
         "Fishing Harbour"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -8866,13 +9113,13 @@
       "id": "AutumnKilnShifts",
       "title": "Charcoal Kiln Stoking Crews",
       "tier": 2,
-      "column": 14,
+      "column": 20,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "8d3f515475fa939de34c09824a1139cd"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 36,
         "Steel": 16
@@ -8891,6 +9138,7 @@
         "Drafting Machines",
         "Charcoal Kiln"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -8903,13 +9151,13 @@
       "id": "AutumnExchangerRigs",
       "title": "Heavy Fabrication Rigs",
       "tier": 2,
-      "column": 5,
+      "column": 11,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "68cb8705e6acee5697feb4460fe4f8e7"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 38,
         "Steel": 20
@@ -8932,6 +9180,7 @@
         "Drafting Machines",
         "Steam Exchanger Templates"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -8950,7 +9199,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "aa2bf0293dd6ebb2eb4aa42d4ee7fab7"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 45,
         "Steel": 22
@@ -8969,6 +9218,7 @@
         "Drafting Machines",
         "More Foragers"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "autumn",
       "icon": [
         2,
@@ -8986,7 +9236,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "1732771bce4d165493f8c142446f8077"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 36,
         "Steel": 18
@@ -9009,6 +9259,7 @@
         "Drafting Machines",
         "Medical Relief Rotas"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -9021,12 +9272,12 @@
       "id": "AutumnPortConsolidation",
       "title": "Consolidated Port Handling",
       "tier": 3,
-      "column": 5,
+      "column": 8,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "674ec59d62a6189d824c924030314da9"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 50,
         "Steel": 25
@@ -9064,6 +9315,7 @@
       "prerequisite_names": [
         "Mechanical Calculators"
       ],
+      "unscaled_hours": 10,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -9076,13 +9328,13 @@
       "id": "HouseVestibules",
       "title": "House Draughtproof Vestibules",
       "tier": 3,
-      "column": 2,
+      "column": 5,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "2a644c9a14b42682904f57bc2f153432"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 60,
         "Steel": 40
@@ -9101,6 +9353,7 @@
         "Mechanical Calculators",
         "House"
       ],
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -9113,13 +9366,13 @@
       "id": "HouseInsulatedFloors",
       "title": "District Underfloor Heating",
       "tier": 4,
-      "column": 2,
+      "column": 5,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
         "0a3152aa33fbe45aa408495bc6ae44f9"
       ],
-      "hours": 14,
+      "hours": 7.0,
       "cost": {
         "Wood": 95,
         "Steel": 70
@@ -9142,6 +9395,7 @@
         "Difference Engine",
         "House Draughtproof Vestibules"
       ],
+      "unscaled_hours": 14,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -9154,13 +9408,13 @@
       "id": "AutomatonSawmillServos",
       "title": "Automaton Timber Servos",
       "tier": 2,
-      "column": 11,
+      "column": 8,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "7f2b6ceb4c5ce9a3f64a718986a73b7d"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 20
@@ -9183,6 +9437,7 @@
         "Drafting Machines",
         "Factory"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -9201,7 +9456,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "7f2b6ceb4c5ce9a3f64a718986a73b7d"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 44,
         "Steel": 24
@@ -9228,6 +9483,7 @@
         "Drafting Machines",
         "Factory"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -9240,13 +9496,13 @@
       "id": "AutomatonWallDrillServos",
       "title": "Automaton Drill Actuators",
       "tier": 3,
-      "column": 11,
+      "column": 14,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "7f2b6ceb4c5ce9a3f64a718986a73b7d"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 54,
         "Steel": 30
@@ -9273,6 +9529,7 @@
         "Mechanical Calculators",
         "Factory"
       ],
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -9288,7 +9545,7 @@
       "column": 8,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 16,
         "Steel": 5
@@ -9308,6 +9565,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -9326,7 +9584,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "495670d96217a786b446b9f0e44af23f"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 24,
         "Steel": 10
@@ -9353,6 +9611,7 @@
         "Drawing Boards",
         "Coal Thumper"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -9365,13 +9624,13 @@
       "id": "CoalStorageCompactors",
       "title": "Coal Storage Compactors",
       "tier": 2,
-      "column": 8,
+      "column": 11,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "95327a7d0e3600b3a84234cfe9f8da49"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 20
@@ -9394,6 +9653,7 @@
         "Drafting Machines",
         "Resource Depot Upgrade"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -9411,7 +9671,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 26,
         "Steel": 10
@@ -9433,6 +9693,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -9445,13 +9706,13 @@
       "id": "AutumnMachineGuards",
       "title": "Machine Shop Safety Screens",
       "tier": 1,
-      "column": 11,
+      "column": 5,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
         "4978b24f201eaba6134343128ea07d81"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 27,
         "Steel": 12
@@ -9474,6 +9735,7 @@
         "Drawing Boards",
         "Machine Shop"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -9486,13 +9748,13 @@
       "id": "AutumnCoalCompactors",
       "title": "Port Coal Compactors",
       "tier": 2,
-      "column": 8,
+      "column": 5,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "3891aa45e631a59cd747a28ab8a71f76"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 35,
         "Steel": 17
@@ -9515,6 +9777,7 @@
         "Drafting Machines",
         "Resource Depot Upgrade"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -9527,12 +9790,12 @@
       "id": "AutumnFuelWorkwear",
       "title": "Fuel Crew Workwear",
       "tier": 1,
-      "column": 5,
+      "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 22,
         "Steel": 8
@@ -9554,6 +9817,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -9572,7 +9836,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "7159e69c056a85879c42ae9ebf1656e9"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 27,
         "Steel": 14
@@ -9599,6 +9863,7 @@
         "Drawing Boards",
         "Steelworks"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -9616,7 +9881,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 24,
         "Steel": 10
@@ -9638,6 +9903,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -9656,7 +9922,7 @@
         "674ec59d62a6189d824c924030314da9",
         "7159e69c056a85879c42ae9ebf1656e9"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 58,
         "Steel": 36
@@ -9683,6 +9949,7 @@
         "Mechanical Calculators",
         "Steelworks"
       ],
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -9701,7 +9968,7 @@
         "96557513559e5c9fc44d4409e3849779",
         "d46469d44e750054bb696aa8496352e8"
       ],
-      "hours": 14,
+      "hours": 7.0,
       "cost": {
         "Wood": 88,
         "Steel": 65
@@ -9736,6 +10003,7 @@
         "Difference Engine",
         "Steelworks Shift Teams"
       ],
+      "unscaled_hours": 14,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -9751,7 +10019,7 @@
       "column": 14,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 12
       },
@@ -9766,6 +10034,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -9781,7 +10050,7 @@
       "column": 17,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 16,
         "Steel": 4
@@ -9801,6 +10070,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -9816,7 +10086,7 @@
       "column": 8,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 16,
         "Steel": 6
@@ -9840,6 +10110,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -9855,7 +10126,7 @@
       "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 16,
         "Steel": 6
@@ -9871,6 +10142,7 @@
         ]
       ],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -9886,7 +10158,7 @@
       "column": 5,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 14,
         "Steel": 5
@@ -9902,6 +10174,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -9917,7 +10190,7 @@
       "column": 20,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 12
       },
@@ -9932,6 +10205,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -9944,10 +10218,10 @@
       "id": "StarterWardStoves",
       "title": "Insulated Sick Wards",
       "tier": 0,
-      "column": 14,
-      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "column": 17,
+      "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 14,
         "Steel": 4
@@ -9971,8 +10245,9 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
-      "tab": "City Life",
+      "tab": "Logistics",
       "icon": [
         5,
         9
@@ -9983,10 +10258,10 @@
       "id": "AutumnStarterGathering",
       "title": "Salvage Sorting Stations",
       "tier": 0,
-      "column": 11,
+      "column": 14,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 12
       },
@@ -10001,6 +10276,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -10013,10 +10289,10 @@
       "id": "AutumnStarterTimber",
       "title": "Gang Saw Blades",
       "tier": 0,
-      "column": 14,
+      "column": 17,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 16,
         "Steel": 4
@@ -10036,6 +10312,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -10048,10 +10325,10 @@
       "id": "AutumnStarterFishing",
       "title": "Harbour Tidal Charts",
       "tier": 0,
-      "column": 20,
-      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "column": 11,
+      "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 16,
         "Steel": 4
@@ -10071,8 +10348,9 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
-      "tab": "City Life",
+      "tab": "Logistics",
       "icon": [
         10,
         8
@@ -10086,7 +10364,7 @@
       "column": 17,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 14,
         "Steel": 4
@@ -10110,6 +10388,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -10127,7 +10406,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 24,
         "Steel": 10
@@ -10145,6 +10424,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -10157,12 +10437,12 @@
       "id": "AutumnGatheringReach",
       "title": "Gathering Sled Networks",
       "tier": 1,
-      "column": 14,
+      "column": 17,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 24,
         "Steel": 10
@@ -10180,6 +10460,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -10198,7 +10479,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "41167370cf5371bf9d4f76a163c47af1"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 50,
         "Steel": 30
@@ -10214,6 +10495,7 @@
         "Drafting Machines",
         "Hothouse"
       ],
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -10232,7 +10514,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "232aacb9286f79a363426c814351e423"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 45,
         "Steel": 30
@@ -10249,6 +10531,7 @@
         "Coal Mining"
       ],
       "previous_tier": 3,
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -10267,7 +10550,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "df3ff6c0c17833ab944033181791b0b9"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 20
@@ -10294,6 +10577,7 @@
         "Drafting Machines",
         "Reloading Station"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -10312,7 +10596,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "167685c98d6abeaee6459ac1ca3cb253"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 32,
         "Steel": 12
@@ -10331,6 +10615,7 @@
         "Drawing Boards",
         "Medical Post Upgrade"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -10348,7 +10633,7 @@
       "requires": [
         "ef520220d07ff699554142aa88c6647c"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 55,
         "Steel": 30
@@ -10363,6 +10648,7 @@
       "prerequisite_names": [
         "Drafting Machines"
       ],
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -10380,7 +10666,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 32,
         "Steel": 14
@@ -10395,6 +10681,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -10407,13 +10694,13 @@
       "id": "SteamTrunklines",
       "title": "District Steam Trunklines",
       "tier": 3,
-      "column": 14,
+      "column": 8,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "6a330b7d72d2e0a06a454943cf2980a1"
       ],
-      "hours": 12,
+      "hours": 6.0,
       "cost": {
         "Wood": 80,
         "Steel": 50
@@ -10429,6 +10716,7 @@
         "Mechanical Calculators",
         "Steam Hub"
       ],
+      "unscaled_hours": 12,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -10447,7 +10735,7 @@
         "674ec59d62a6189d824c924030314da9",
         "b8b5bc8c800341ac504267b5ca72d133"
       ],
-      "hours": 11,
+      "hours": 5.5,
       "cost": {
         "Wood": 70,
         "Steel": 40
@@ -10463,6 +10751,7 @@
         "Mechanical Calculators",
         "Braziers"
       ],
+      "unscaled_hours": 11,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -10481,7 +10770,7 @@
         "674ec59d62a6189d824c924030314da9",
         "7a72b250dcf86ca1bc400c3e3171bf13"
       ],
-      "hours": 12,
+      "hours": 6.0,
       "cost": {
         "Wood": 70,
         "Steel": 45
@@ -10504,6 +10793,7 @@
         "Mechanical Calculators",
         "Outpost Depot"
       ],
+      "unscaled_hours": 12,
       "scenario_scope": "cold",
       "icon": [
         0,
@@ -10521,7 +10811,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "c7133e7cc69958b2414fa947f92b15e2"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 32,
         "Steel": 12
@@ -10540,6 +10830,7 @@
         "Drafting Machines",
         "Medical Post Upgrade"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -10552,12 +10843,12 @@
       "id": "AutumnStormDutyClothing",
       "title": "Storm Duty Clothing",
       "tier": 2,
-      "column": 11,
+      "column": 17,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "ef520220d07ff699554142aa88c6647c"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 45,
         "Steel": 25
@@ -10572,6 +10863,7 @@
       "prerequisite_names": [
         "Drafting Machines"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -10589,7 +10881,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 32,
         "Steel": 14
@@ -10604,6 +10896,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -10616,13 +10909,13 @@
       "id": "AutumnSteamTrunklines",
       "title": "Brazier District Networks",
       "tier": 3,
-      "column": 2,
+      "column": 8,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "f85c6c73c5b53e9a534a6bfc354b3c7b"
       ],
-      "hours": 11,
+      "hours": 5.5,
       "cost": {
         "Wood": 70,
         "Steel": 40
@@ -10638,6 +10931,7 @@
         "Mechanical Calculators",
         "Braziers"
       ],
+      "unscaled_hours": 11,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -10656,7 +10950,7 @@
         "674ec59d62a6189d824c924030314da9",
         "6405a72e9a4cee5db0d22f4a7786f96b"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 65,
         "Steel": 35
@@ -10675,6 +10969,7 @@
         "Mechanical Calculators",
         "Extra Forager Crew"
       ],
+      "unscaled_hours": 10,
       "scenario_scope": "autumn",
       "icon": [
         2,
@@ -10692,7 +10987,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "7f2b6ceb4c5ce9a3f64a718986a73b7d"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 34,
         "Steel": 18
@@ -10706,6 +11001,7 @@
         "Drafting Machines",
         "Factory"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -10724,7 +11020,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "6ddda58c085d395c89fd755fbba51ebc"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 40,
         "Steel": 25
@@ -10739,6 +11035,7 @@
         "Scrap Recovery Contracts"
       ],
       "previous_tier": 3,
+      "unscaled_hours": 7,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -10756,7 +11053,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 24,
         "Steel": 10
@@ -10769,6 +11066,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -10787,7 +11085,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "a33b85c6803ac3bef7436e5bcdc441ad"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 24,
         "Steel": 10
@@ -10801,6 +11099,7 @@
         "Drawing Boards",
         "Charcoal Kiln"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -10819,7 +11118,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "41167370cf5371bf9d4f76a163c47af1"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 10
@@ -10833,6 +11132,7 @@
         "Drawing Boards",
         "Hothouse"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -10845,13 +11145,13 @@
       "id": "AutumnRetortCharcoal",
       "title": "Retort Kiln Batches",
       "tier": 2,
-      "column": 20,
-      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "column": 14,
+      "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "8d3f515475fa939de34c09824a1139cd"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 24,
         "Steel": 10
@@ -10865,8 +11165,9 @@
         "Drafting Machines",
         "Charcoal Kiln"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
-      "tab": "City Life",
+      "tab": "Engineering",
       "icon": [
         8,
         4
@@ -10883,7 +11184,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "bdbb9bd5eeb42699324cae61d8716e50"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 22,
         "Steel": 8
@@ -10897,6 +11198,7 @@
         "Drawing Boards",
         "Fishing Harbour"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -10909,12 +11211,12 @@
       "id": "AutumnSteamCuredProfiles",
       "title": "Steam-Cured Profiles",
       "tier": 0,
-      "column": 17,
+      "column": 2,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "9246552c1e634fb6364ee7650f707e48"
       ],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 8
@@ -10927,6 +11229,7 @@
       "prerequisite_names": [
         "Profiles Manufacture"
       ],
+      "unscaled_hours": 5,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -10939,13 +11242,13 @@
       "id": "AutumnFuelTemperedExchangers",
       "title": "Fuel-Tempered Exchangers",
       "tier": 1,
-      "column": 11,
+      "column": 5,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
         "4978b24f201eaba6134343128ea07d81"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 25,
         "Steel": 12
@@ -10959,6 +11262,7 @@
         "Drawing Boards",
         "Machine Shop"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -10971,13 +11275,13 @@
       "id": "AutumnCharcoalAlloy",
       "title": "Charcoal-Alloy Composites",
       "tier": 2,
-      "column": 14,
+      "column": 17,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "9f9b9d2104b09c86c94a60999bf8a8ef"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 30,
         "Steel": 16
@@ -10991,6 +11295,7 @@
         "Drafting Machines",
         "Foundry"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -11006,7 +11311,7 @@
       "column": 5,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 20,
         "Steel": 6
@@ -11017,6 +11322,7 @@
       "global_effects": [],
       "extra_effects": [],
       "prerequisite_names": [],
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -11035,7 +11341,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "a33b85c6803ac3bef7436e5bcdc441ad"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 20
@@ -11049,6 +11355,7 @@
         "Drafting Machines",
         "Charcoal Kiln"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -11061,13 +11368,13 @@
       "id": "AutumnRapidCoking",
       "title": "Rapid Coking Beds",
       "tier": 2,
-      "column": 17,
+      "column": 20,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "8d3f515475fa939de34c09824a1139cd"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 20
@@ -11081,6 +11388,7 @@
         "Drafting Machines",
         "Charcoal Kiln"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -11099,7 +11407,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "41167370cf5371bf9d4f76a163c47af1"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 36,
         "Steel": 18
@@ -11113,6 +11421,7 @@
         "Drafting Machines",
         "Hothouse"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -11125,13 +11434,13 @@
       "id": "AutumnDocksideSmokehouses",
       "title": "Dockside Smokehouses",
       "tier": 1,
-      "column": 11,
+      "column": 8,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
         "bdbb9bd5eeb42699324cae61d8716e50"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 28,
         "Steel": 12
@@ -11145,6 +11454,7 @@
         "Drawing Boards",
         "Fishing Harbour"
       ],
+      "unscaled_hours": 7,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -11163,7 +11473,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "7d48eb3f6c6fb8518f3cfbeedbed9aab"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 28,
         "Steel": 12
@@ -11177,6 +11487,7 @@
         "Drawing Boards",
         "Workshop Test Rigs"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "icon": [
         0,
@@ -11194,7 +11505,7 @@
         "ae4ab761365f5bbefd4822639a66ddf5",
         "56433270efdd0a51a59dce4e4527ed8f"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 28,
         "Steel": 12
@@ -11208,6 +11519,7 @@
         "Drawing Boards",
         "Workshop Test Rigs"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "icon": [
         0,
@@ -11225,7 +11537,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "3ca25eae0136aca94d4105b4edec56a1"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 43,
         "Steel": 25
@@ -11239,6 +11551,7 @@
         "Drafting Machines",
         "Steam Steelworks"
       ],
+      "unscaled_hours": 8,
       "scenario_scope": "cold",
       "icon": [
         8,
@@ -11255,7 +11568,7 @@
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 28,
         "Steel": 10
@@ -11268,6 +11581,7 @@
       "prerequisite_names": [
         "Drawing Boards"
       ],
+      "unscaled_hours": 6,
       "scenario_scope": "cold",
       "icon": [
         5,
@@ -11285,7 +11599,7 @@
         "674ec59d62a6189d824c924030314da9",
         "121989871d364ea25044652012e5a420"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 54,
         "Steel": 30
@@ -11299,6 +11613,7 @@
         "Mechanical Calculators",
         "Repair Station"
       ],
+      "unscaled_hours": 9,
       "scenario_scope": "cold",
       "icon": [
         8,
@@ -11310,10 +11625,10 @@
       "id": "SlowSimmeredBroth",
       "title": "Slow-Simmered Broth",
       "tier": 0,
-      "column": 11,
+      "column": 14,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 16,
         "Steel": 5
@@ -11336,6 +11651,7 @@
       "preferred_tab": 2,
       "mechanic": "ration-fuel-trade",
       "added_in": "3.9.0",
+      "unscaled_hours": 4,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -11348,10 +11664,10 @@
       "id": "AutumnSlowSimmeredBroth",
       "title": "Slow-Simmered Broth",
       "tier": 0,
-      "column": 17,
+      "column": 11,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
-      "hours": 4,
+      "hours": 2.0,
       "cost": {
         "Wood": 16,
         "Steel": 5
@@ -11368,6 +11684,7 @@
       "preferred_tab": 2,
       "mechanic": "ration-fuel-trade",
       "added_in": "3.9.0",
+      "unscaled_hours": 4,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -11383,7 +11700,7 @@
       "column": 8,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
-      "hours": 5,
+      "hours": 2.5,
       "cost": {
         "Wood": 24,
         "Steel": 10
@@ -11412,6 +11729,7 @@
       "preferred_tab": 0,
       "mechanic": "overdrive-fuel-trade",
       "added_in": "3.9.0",
+      "unscaled_hours": 5,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -11430,7 +11748,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "3a3192eb88075255b674e623cf114b2e"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 48,
         "Steel": 24
@@ -11461,6 +11779,7 @@
       "preferred_tab": 2,
       "mechanic": "radical-treatment-amputation-prevention",
       "added_in": "3.9.0",
+      "unscaled_hours": 9,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -11479,7 +11798,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "b2b37ea0b494de5bb4311255bf5b40bb"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 48,
         "Steel": 24
@@ -11504,6 +11823,7 @@
       "preferred_tab": 2,
       "mechanic": "radical-treatment-amputation-prevention",
       "added_in": "3.9.0",
+      "unscaled_hours": 9,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -11516,13 +11836,13 @@
       "id": "FieldInfirmaries",
       "title": "Core-Free Field Infirmaries",
       "tier": 3,
-      "column": 8,
+      "column": 2,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "6afafac429500daec3418c38d51a4138"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 58,
         "Steel": 32
@@ -11550,6 +11870,7 @@
       "preferred_tab": 2,
       "mechanic": "core-free-infirmaries",
       "added_in": "3.9.0",
+      "unscaled_hours": 10,
       "scenario_scope": "cold",
       "tab": "City Life",
       "icon": [
@@ -11568,7 +11889,7 @@
         "674ec59d62a6189d824c924030314da9",
         "480c4a5e54f8ef9bad47c25b433e74c8"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 58,
         "Steel": 32
@@ -11590,6 +11911,7 @@
       "preferred_tab": 2,
       "mechanic": "core-free-infirmaries",
       "added_in": "3.9.0",
+      "unscaled_hours": 10,
       "scenario_scope": "autumn",
       "tab": "City Life",
       "icon": [
@@ -11602,13 +11924,13 @@
       "id": "CondensateHeaters",
       "title": "Condensate-Recovery Heaters",
       "tier": 4,
-      "column": 14,
+      "column": 5,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
         "cc82bf3b14fb9580334f3c51cbbf5233"
       ],
-      "hours": 12,
+      "hours": 6.0,
       "cost": {
         "Wood": 70,
         "Steel": 45
@@ -11647,6 +11969,7 @@
       "preferred_tab": 0,
       "mechanic": "conditional-heater-fuel-saving",
       "added_in": "3.9.0",
+      "unscaled_hours": 12,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -11665,7 +11988,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "8c5bbe0aa595308f44456a6acfc42a6a"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 38,
         "Steel": 20
@@ -11698,6 +12021,7 @@
       "preferred_tab": 0,
       "mechanic": "conditional-heater-fuel-saving",
       "added_in": "3.9.0",
+      "unscaled_hours": 8,
       "scenario_scope": "autumn",
       "tab": "Engineering",
       "icon": [
@@ -11716,7 +12040,7 @@
         "96557513559e5c9fc44d4409e3849779",
         "91c59eec9b651d5ab4f02f7336fe2f24"
       ],
-      "hours": 13,
+      "hours": 6.5,
       "cost": {
         "Wood": 80,
         "Steel": 50
@@ -11742,6 +12066,7 @@
       "preferred_tab": 3,
       "mechanic": "wood-saving-retort-replacement",
       "added_in": "3.9.0",
+      "unscaled_hours": 13,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -11754,13 +12079,13 @@
       "id": "AutumnClosedCycleRetorts",
       "title": "Closed-Cycle Pyrolysis",
       "tier": 3,
-      "column": 2,
+      "column": 11,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
         "b11f4f166e83b25d8aa544fc5ddee754"
       ],
-      "hours": 9,
+      "hours": 4.5,
       "cost": {
         "Wood": 48,
         "Steel": 25
@@ -11780,6 +12105,7 @@
       "preferred_tab": 1,
       "mechanic": "wood-saving-retort-replacement",
       "added_in": "3.9.0",
+      "unscaled_hours": 9,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -11799,7 +12125,7 @@
         "b374ee7c39eed958b0fa9662ebaa4ae2",
         "dadab41318ed545b9be41a48a0e7eb42"
       ],
-      "hours": 20,
+      "hours": 10.0,
       "cost": {
         "Wood": 140,
         "Steel": 115
@@ -11826,6 +12152,7 @@
       "preferred_tab": 1,
       "mechanic": "steam-core-to-fuel-chain",
       "added_in": "3.9.0",
+      "unscaled_hours": 20,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -11845,7 +12172,7 @@
         "b374ee7c39eed958b0fa9662ebaa4ae2",
         "0453622e31cfd551ae2da3d73a4992bf"
       ],
-      "hours": 18,
+      "hours": 9.0,
       "cost": {
         "Wood": 125,
         "Steel": 95
@@ -11871,6 +12198,7 @@
       "preferred_tab": 1,
       "mechanic": "steam-core-to-food-chain",
       "added_in": "3.9.0",
+      "unscaled_hours": 18,
       "scenario_scope": "cold",
       "tab": "Industry",
       "icon": [
@@ -11888,7 +12216,7 @@
       "requires": [
         "96557513559e5c9fc44d4409e3849779"
       ],
-      "hours": 13,
+      "hours": 6.5,
       "cost": {
         "Wood": 85,
         "Steel": 55
@@ -11918,6 +12246,7 @@
       "preferred_tab": 3,
       "mechanic": "small-depot-specialisation",
       "added_in": "3.9.0",
+      "unscaled_hours": 13,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -11930,12 +12259,12 @@
       "id": "AutumnDistributedCaches",
       "title": "Neighbourhood Cache Networks",
       "tier": 1,
-      "column": 8,
+      "column": 5,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
       ],
-      "hours": 6,
+      "hours": 3.0,
       "cost": {
         "Wood": 28,
         "Steel": 12
@@ -11959,6 +12288,7 @@
       "preferred_tab": 3,
       "mechanic": "small-depot-specialisation",
       "added_in": "3.9.0",
+      "unscaled_hours": 6,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -11971,13 +12301,13 @@
       "id": "PolarProvisionVaults",
       "title": "Polar Provision Vaults",
       "tier": 5,
-      "column": 5,
+      "column": 2,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
         "e7fd91c7cbb0b256b16e445ed4b47713"
       ],
-      "hours": 20,
+      "hours": 10.0,
       "cost": {
         "Wood": 150,
         "Steel": 120
@@ -12008,6 +12338,7 @@
       "preferred_tab": 3,
       "mechanic": "large-depot-storm-reserves",
       "added_in": "3.9.0",
+      "unscaled_hours": 20,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -12020,13 +12351,13 @@
       "id": "WinterArtisanGuilds",
       "title": "Winter Artisan Guilds",
       "tier": 4,
-      "column": 5,
+      "column": 14,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
         "53ffb712bb43d25f902dc25414670b75"
       ],
-      "hours": 18,
+      "hours": 9.0,
       "cost": {
         "Wood": 130,
         "Steel": 95
@@ -12125,6 +12456,7 @@
       "preferred_tab": 0,
       "mechanic": "human-industry-specialisation",
       "added_in": "3.9.0",
+      "unscaled_hours": 18,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -12144,7 +12476,7 @@
         "4a4e2a51ff78025a8a897f21b2ddf40e",
         "de32113ab414de57bdd32f47254f5ff1"
       ],
-      "hours": 24,
+      "hours": 12.0,
       "cost": {
         "Wood": 170,
         "Steel": 140
@@ -12243,6 +12575,7 @@
       "preferred_tab": 0,
       "mechanic": "automaton-specialisation",
       "added_in": "3.9.0",
+      "unscaled_hours": 24,
       "scenario_scope": "cold",
       "tab": "Engineering",
       "icon": [
@@ -12261,7 +12594,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "53ffb712bb43d25f902dc25414670b75"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 38,
         "Steel": 18
@@ -12326,6 +12659,7 @@
       "preferred_tab": 3,
       "mechanic": "generator-assembly-specialisation",
       "added_in": "3.9.0",
+      "unscaled_hours": 7,
       "scenario_scope": "cold",
       "tab": "Logistics",
       "icon": [
@@ -12338,13 +12672,13 @@
       "id": "AutumnAssemblyPlatforms",
       "title": "Riveted Assembly Platforms",
       "tier": 1,
-      "column": 8,
+      "column": 14,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
         "bef5aa169a1e305383dd02c96164b4ab"
       ],
-      "hours": 7,
+      "hours": 3.5,
       "cost": {
         "Wood": 38,
         "Steel": 18
@@ -12409,6 +12743,7 @@
       "preferred_tab": 1,
       "mechanic": "generator-assembly-specialisation",
       "added_in": "3.9.0",
+      "unscaled_hours": 7,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -12427,7 +12762,7 @@
         "ef520220d07ff699554142aa88c6647c",
         "b11b8ed42a73e35195ed6cf2b7fbfb0e"
       ],
-      "hours": 8,
+      "hours": 4.0,
       "cost": {
         "Wood": 40,
         "Steel": 22
@@ -12447,6 +12782,7 @@
       "preferred_tab": 3,
       "mechanic": "fishing-bait-throughput-trade",
       "added_in": "3.9.0",
+      "unscaled_hours": 8,
       "scenario_scope": "autumn",
       "tab": "Logistics",
       "icon": [
@@ -12459,13 +12795,13 @@
       "id": "AutumnArtisanGuilds",
       "title": "Port Craft Apprenticeships",
       "tier": 2,
-      "column": 2,
+      "column": 8,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "7e8116d933685a589dd082b728b69f03"
       ],
-      "hours": 10,
+      "hours": 5.0,
       "cost": {
         "Wood": 52,
         "Steel": 28
@@ -12522,6 +12858,7 @@
       "preferred_tab": 1,
       "mechanic": "port-supply-chain-specialisation",
       "added_in": "3.9.0",
+      "unscaled_hours": 10,
       "scenario_scope": "autumn",
       "tab": "Industry",
       "icon": [
@@ -12529,6 +12866,1214 @@
         2
       ],
       "effect_fingerprint": "ae85dd0234e4aa1fc37629f87c3b1d01da86a2b5e7b99c5943786fe3287ad9ea"
+    },
+    {
+      "id": "PreventiveMedicine",
+      "title": "Preventive Field Medicine",
+      "tier": 0,
+      "column": 11,
+      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "requires": [],
+      "hours": 2.0,
+      "cost": {
+        "Wood": 18,
+        "Steel": 6
+      },
+      "description": "Citizens have a 25% lower chance of illness caused by cold. Medical Posts also gain 75% healing efficiency for human staff and automatons. Available before Drawing Boards, helping prevent and treat the opening wave of sickness.\n\nRequires: No prior research.",
+      "guid": "1fd71ca384435e5690f225e08d7e7ffe",
+      "effects": [
+        [
+          "f6a831d9683c3d9b904cd09ded358f8a",
+          "3f4ee744ba23c156ba634ddb8f9de65f"
+        ]
+      ],
+      "global_effects": [
+        "5db38c9adbeb6a59a37e6f3ae92e0e3c"
+      ],
+      "extra_effects": [],
+      "prerequisite_names": [],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "opening-prevention-and-treatment",
+      "added_in": "3.10.0",
+      "unscaled_hours": 4,
+      "scenario_scope": "cold",
+      "tab": "City Life",
+      "icon": [
+        4,
+        9
+      ],
+      "effect_fingerprint": "6fda177ec6dfc4593f2ef5220cd0b007f5e45acdace067ed910845b5b3db5e8c"
+    },
+    {
+      "id": "AutumnPreventiveMedicine",
+      "title": "Preventive Field Medicine",
+      "tier": 0,
+      "column": 17,
+      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "requires": [],
+      "hours": 2.0,
+      "cost": {
+        "Wood": 18,
+        "Steel": 6
+      },
+      "description": "Citizens have a 25% lower chance of illness caused by cold. Medical Posts also gain 75% healing efficiency for human staff and automatons. Available before Drawing Boards, helping prevent and treat the opening wave of sickness.\n\nRequires: No prior research.",
+      "guid": "bf9e3804bca3005bbfc2aa5e090fcdb6",
+      "effects": [
+        [
+          "f6a831d9683c3d9b904cd09ded358f8a",
+          "e851eeb5ba28315b996c6177dfee18e7"
+        ]
+      ],
+      "global_effects": [
+        "74923ce172dc6e5faa217dcffec43b26"
+      ],
+      "extra_effects": [],
+      "prerequisite_names": [],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "opening-prevention-and-treatment",
+      "added_in": "3.10.0",
+      "unscaled_hours": 4,
+      "scenario_scope": "autumn",
+      "tab": "City Life",
+      "icon": [
+        4,
+        9
+      ],
+      "effect_fingerprint": "6fda177ec6dfc4593f2ef5220cd0b007f5e45acdace067ed910845b5b3db5e8c"
+    },
+    {
+      "id": "ClosedLoopMetallurgy",
+      "title": "Closed-Loop Metallurgy",
+      "tier": 5,
+      "column": 11,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "6e2924ed908f5d8dac4365de9c73710d",
+        "a8c9b9c81a3bb552a1b11e47311d7526",
+        "b374ee7c39eed958b0fa9662ebaa4ae2"
+      ],
+      "hours": 11.0,
+      "cost": {
+        "Wood": 145,
+        "Steel": 110
+      },
+      "description": "Upgrades the Factory salvage queue: 1 Steam Core and 30 coal become 120 steel in 8 working hours. The core is consumed. Links renewable core production to steel reclamation, offering an alternative to expanding Steelworks. Replaces Deep Scrap Recovery.\n\nRequires: Automatic Prototyping, Deep Scrap Recovery, Serial Core Production.",
+      "guid": "668b0b6ba7c7c55cb50a8df83423b638",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Automatic Prototyping",
+        "Deep Scrap Recovery",
+        "Serial Core Production"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "core-to-steel-reclamation",
+      "added_in": "3.10.0",
+      "unscaled_hours": 22,
+      "scenario_scope": "cold",
+      "tab": "Logistics",
+      "icon": [
+        8,
+        0
+      ],
+      "effect_fingerprint": "unlock:668b0b6ba7c7c55cb50a8df83423b638"
+    },
+    {
+      "id": "MassCoreFabrication",
+      "title": "Core Fabrication Cells",
+      "tier": 5,
+      "column": 17,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "6e2924ed908f5d8dac4365de9c73710d",
+        "b374ee7c39eed958b0fa9662ebaa4ae2"
+      ],
+      "hours": 13.0,
+      "cost": {
+        "Wood": 180,
+        "Steel": 150
+      },
+      "description": "Upgrades the Factory core queue to a batch of 3 Steam Cores for 90 steel, 50 wood and 100 coal in 10 working hours. Costs per core fall to 30 steel, about 16.7 wood and 33.3 coal. Replaces Serial Core Production in the selector.\n\nRequires: Automatic Prototyping, Serial Core Production.",
+      "guid": "b2b06eeba432645fa29f6f9bd58684f4",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Automatic Prototyping",
+        "Serial Core Production"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "multi-core-factory-batches",
+      "added_in": "3.10.0",
+      "unscaled_hours": 26,
+      "scenario_scope": "cold",
+      "tab": "Engineering",
+      "icon": [
+        0,
+        2
+      ],
+      "effect_fingerprint": "unlock:b2b06eeba432645fa29f6f9bd58684f4"
+    },
+    {
+      "id": "PressureKitchens",
+      "title": "Steel-Assisted Pressure Kitchens",
+      "tier": 4,
+      "column": 17,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779",
+        "a17c72f5cc9f9858b401695b2a8c948d"
+      ],
+      "hours": 6.0,
+      "cost": {
+        "Wood": 65,
+        "Steel": 35
+      },
+      "description": "Unlocks a Cookhouse recipe: 2 raw food, 4 coal and 1 steel become 10 standard rations in 30 working minutes. Steel maintains the pressure vessels. Conserves raw food by spending industrial materials. Replaces Fuelled Stockpots; ordinary ration recipes and Slow-Simmered Broth remain available.\n\nRequires: Difference Engine, Fuelled Stockpots.",
+      "guid": "38651597fe3e3353b41ecce9d56e5dcc",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Difference Engine",
+        "Fuelled Stockpots"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "steel-assisted-ration-production",
+      "added_in": "3.10.0",
+      "unscaled_hours": 12,
+      "scenario_scope": "cold",
+      "tab": "Logistics",
+      "icon": [
+        5,
+        9
+      ],
+      "effect_fingerprint": "unlock:38651597fe3e3353b41ecce9d56e5dcc"
+    },
+    {
+      "id": "AutumnPressureKitchens",
+      "title": "Steel-Assisted Pressure Kitchens",
+      "tier": 2,
+      "column": 14,
+      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "requires": [
+        "ef520220d07ff699554142aa88c6647c",
+        "04001777c5f39951aa2fdafceaa54fe6"
+      ],
+      "hours": 3.5,
+      "cost": {
+        "Wood": 32,
+        "Steel": 16
+      },
+      "description": "Unlocks a Cookhouse recipe: 2 raw food, 4 coal and 1 steel become 10 standard rations in 30 working minutes. Steel maintains the pressure vessels. Conserves raw food by spending industrial materials.\n\nRequires: Drafting Machines, Slow-Simmered Broth.",
+      "guid": "14a4b5c02e012158873fac08bc1ab3ae",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drafting Machines",
+        "Slow-Simmered Broth"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "steel-assisted-ration-production",
+      "added_in": "3.10.0",
+      "unscaled_hours": 7,
+      "scenario_scope": "autumn",
+      "tab": "City Life",
+      "icon": [
+        5,
+        9
+      ],
+      "effect_fingerprint": "unlock:14a4b5c02e012158873fac08bc1ab3ae"
+    },
+    {
+      "id": "TimberSubstrateBeds",
+      "title": "Timber-Substrate Growing Beds",
+      "tier": 4,
+      "column": 20,
+      "category": "57cf6cec363fd85ba792f38f8df3d9dd",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779",
+        "8f3bdf5fd7cc6658acc74b988cba7f45"
+      ],
+      "hours": 6.5,
+      "cost": {
+        "Wood": 75,
+        "Steel": 40
+      },
+      "description": "Upgrades Coal-Heated Seedbeds with a wood-fed growing recipe: 4 wood and 1 coal produce 8 raw food in 2 working hours. Industrial Hothouses spend 8 wood and 2 coal for 16 raw food. Conserves coal and needs no ration starter, but grows more slowly than the previous heated recipe. Replaces Coal-Heated Seedbeds in each selector.\n\nRequires: Difference Engine, Coal-Heated Seedbeds.",
+      "guid": "62e2459b76ac5954bb35bd64df214540",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Difference Engine",
+        "Coal-Heated Seedbeds"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees"
+      ],
+      "preferred_tab": 1,
+      "mechanic": "wood-for-growing-fuel-trade",
+      "added_in": "3.10.0",
+      "unscaled_hours": 13,
+      "scenario_scope": "cold",
+      "tab": "Industry",
+      "icon": [
+        4,
+        8
+      ],
+      "effect_fingerprint": "unlock:62e2459b76ac5954bb35bd64df214540"
+    },
+    {
+      "id": "ReclamationStockyards",
+      "title": "Reclamation Stockyards",
+      "tier": 5,
+      "column": 20,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "6e2924ed908f5d8dac4365de9c73710d",
+        "668b0b6ba7c7c55cb50a8df83423b638",
+        "e7fd91c7cbb0b256b16e445ed4b47713"
+      ],
+      "hours": 11.0,
+      "cost": {
+        "Wood": 150,
+        "Steel": 120
+      },
+      "description": "Large Resource Depots gain 400% capacity for wood and steel. Factories gain 100% workplace efficiency for both work roles. Gives the core-and-steel reclamation industry room to store its inputs and output; small depots and food storage are unaffected.\n\nRequires: Automatic Prototyping, Closed-Loop Metallurgy, Modular Warehousing.",
+      "guid": "00a0363a2568ae5b9ea3d841ad23e0b9",
+      "effects": [
+        [
+          "d17fb879d88864a9444ee0283802c4cd",
+          "f3cf9f5d563a585ca5cba03d428d5324"
+        ],
+        [
+          "20e819887723898b4b46612b11d272f6",
+          "a7c5436c815937519a9bc74d064eea33"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Automatic Prototyping",
+        "Closed-Loop Metallurgy",
+        "Modular Warehousing"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "factory-and-bulk-material-districts",
+      "added_in": "3.10.0",
+      "unscaled_hours": 22,
+      "scenario_scope": "cold",
+      "tab": "Engineering",
+      "icon": [
+        3,
+        6
+      ],
+      "effect_fingerprint": "b077e3a6cb84146ef02e7fabc6ef78ca37839a677ab4d3ccb20eef4574b76f03"
+    },
+    {
+      "id": "ProtectedHealthcareHeaters",
+      "title": "Protected Healthcare Heating",
+      "tier": 4,
+      "column": 2,
+      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779",
+        "5eaa31cc2ac9e55c9f6b1368963cd67b",
+        "28c035b4b53980559718f4c68900b985"
+      ],
+      "hours": 7.0,
+      "cost": {
+        "Wood": 80,
+        "Steel": 45
+      },
+      "description": "Heaters in Medical Posts and Infirmaries use no coal. They retain their normal heat output and must still be unlocked and switched on. Supports dispersed medical care without adding a heating-fuel burden.\n\nRequires: Difference Engine, Condensate-Recovery Heaters, Core-Free Field Infirmaries.",
+      "guid": "1ee131c9b555c253a8ebc6b536a769a3",
+      "effects": [
+        [
+          "f6a831d9683c3d9b904cd09ded358f8a",
+          "87a19eed6db44d5d8887bfd3828017de"
+        ],
+        [
+          "98c676299c50c1841a4568ff11d61bde",
+          "87a19eed6db44d5d8887bfd3828017de"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Difference Engine",
+        "Condensate-Recovery Heaters",
+        "Core-Free Field Infirmaries"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "coal-free-clinic-heaters",
+      "added_in": "3.10.0",
+      "unscaled_hours": 14,
+      "scenario_scope": "cold",
+      "tab": "City Life",
+      "icon": [
+        7,
+        7
+      ],
+      "effect_fingerprint": "b63f448ba27e2eddc7c15dee94463c827c2a809174591bb80111cdc604886ade"
+    },
+    {
+      "id": "AutumnHealthcareHeaters",
+      "title": "Protected Healthcare Heating",
+      "tier": 3,
+      "column": 5,
+      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "requires": [
+        "674ec59d62a6189d824c924030314da9",
+        "52c872a3b256f250a0d0a5d0c512a824",
+        "aa1e98e149726a52a28eeb126bcea1ca"
+      ],
+      "hours": 4.5,
+      "cost": {
+        "Wood": 45,
+        "Steel": 24
+      },
+      "description": "Heaters in Medical Posts and Infirmaries use no coal. They retain their normal heat output and must still be unlocked and switched on. Supports dispersed medical care without adding a heating-fuel burden.\n\nRequires: Mechanical Calculators, Condensate-Recovery Heaters, Core-Free Field Infirmaries.",
+      "guid": "040f730be2a0855fa0ee01dfd9bfd2cd",
+      "effects": [
+        [
+          "f6a831d9683c3d9b904cd09ded358f8a",
+          "b6f14cdfa0998d50b009b26b84d9cc9b"
+        ],
+        [
+          "98c676299c50c1841a4568ff11d61bde",
+          "b6f14cdfa0998d50b009b26b84d9cc9b"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Mechanical Calculators",
+        "Condensate-Recovery Heaters",
+        "Core-Free Field Infirmaries"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "coal-free-clinic-heaters",
+      "added_in": "3.10.0",
+      "unscaled_hours": 9,
+      "scenario_scope": "autumn",
+      "tab": "City Life",
+      "icon": [
+        7,
+        7
+      ],
+      "effect_fingerprint": "b63f448ba27e2eddc7c15dee94463c827c2a809174591bb80111cdc604886ade"
+    },
+    {
+      "id": "AutumnCoreFreeFabrication",
+      "title": "Core-Free Fabrication Halls",
+      "tier": 2,
+      "column": 17,
+      "category": "57cf6cec363fd85ba792f38f8df3d9dd",
+      "requires": [
+        "ef520220d07ff699554142aa88c6647c",
+        "9f9b9d2104b09c86c94a60999bf8a8ef"
+      ],
+      "hours": 4.5,
+      "cost": {
+        "Wood": 45,
+        "Steel": 25
+      },
+      "description": "Machine Shops and Foundries cost one fewer Steam Core to construct, removing their core requirement. Wood and steel costs are unchanged. Expand component production without waiting for more imported cores.\n\nRequires: Drafting Machines, Foundry.",
+      "guid": "fcea1d8a02c5695aafec6c5458ea5616",
+      "effects": [],
+      "global_effects": [
+        "8571f2b88fd12657bce87727a82ffc76"
+      ],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drafting Machines",
+        "Foundry"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 1,
+      "mechanic": "core-free-component-factories",
+      "added_in": "3.10.0",
+      "unscaled_hours": 9,
+      "scenario_scope": "autumn",
+      "tab": "Industry",
+      "icon": [
+        10,
+        2
+      ],
+      "effect_fingerprint": "2cbd0f3aabe417c03ff13d6778039da94927722700b05be73b1e1280b18fcb05"
+    },
+    {
+      "id": "IndustrialHeatRecovery",
+      "title": "Industrial Heat Recuperators",
+      "tier": 5,
+      "column": 5,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "6e2924ed908f5d8dac4365de9c73710d",
+        "5eaa31cc2ac9e55c9f6b1368963cd67b",
+        "77f348879a5c5f5d958f901f3517f707"
+      ],
+      "hours": 9.0,
+      "cost": {
+        "Wood": 120,
+        "Steel": 85
+      },
+      "description": "Heaters in Factories and Workshops use no coal. Normal Heater unlocks, switches and power levels still apply. Production ingredients are unchanged; this improves workplace heating.\n\nRequires: Automatic Prototyping, Condensate-Recovery Heaters, Modular Factory Lines.",
+      "guid": "62b8cd610bed9a5eab02eb5cef592b34",
+      "effects": [
+        [
+          "20e819887723898b4b46612b11d272f6",
+          "faeaf97772fd0959ad35d7e71ba50dcc"
+        ],
+        [
+          "ef89bf3e0a1a40bfa149355bdc4e83b5",
+          "faeaf97772fd0959ad35d7e71ba50dcc"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Automatic Prototyping",
+        "Condensate-Recovery Heaters",
+        "Modular Factory Lines"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "coal-free-industrial-heaters",
+      "added_in": "3.10.0",
+      "unscaled_hours": 18,
+      "scenario_scope": "cold",
+      "tab": "Engineering",
+      "icon": [
+        7,
+        7
+      ],
+      "effect_fingerprint": "b2257f6df392c1f839c96245292fb44baf65a259e2ba19b9e27ecddb1acba914"
+    },
+    {
+      "id": "AutumnIndustrialHeaters",
+      "title": "Industrial Heat Recuperators",
+      "tier": 3,
+      "column": 2,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "674ec59d62a6189d824c924030314da9",
+        "52c872a3b256f250a0d0a5d0c512a824",
+        "fcea1d8a02c5695aafec6c5458ea5616"
+      ],
+      "hours": 5.0,
+      "cost": {
+        "Wood": 52,
+        "Steel": 28
+      },
+      "description": "Heaters in Profiles Manufactures, Machine Shops, Foundries and Workshops use no coal. Normal Heater unlocks, switches and power levels still apply. Production ingredients are unchanged; this improves workplace heating.\n\nRequires: Mechanical Calculators, Condensate-Recovery Heaters, Core-Free Fabrication Halls.",
+      "guid": "151ab55902018458a16a582d658e4bf3",
+      "effects": [
+        [
+          "935df85f1c35deb4284be03f97921b98",
+          "e83787392a1cae5c806ec20fbcbf17ff"
+        ],
+        [
+          "810a05bcf49060b79942c3f1997ca349",
+          "e83787392a1cae5c806ec20fbcbf17ff"
+        ],
+        [
+          "cbb9755fae0edbb55c4b851327a00cb0",
+          "e83787392a1cae5c806ec20fbcbf17ff"
+        ],
+        [
+          "ef89bf3e0a1a40bfa149355bdc4e83b5",
+          "e83787392a1cae5c806ec20fbcbf17ff"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Mechanical Calculators",
+        "Condensate-Recovery Heaters",
+        "Core-Free Fabrication Halls"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "coal-free-industrial-heaters",
+      "added_in": "3.10.0",
+      "unscaled_hours": 10,
+      "scenario_scope": "autumn",
+      "tab": "Engineering",
+      "icon": [
+        7,
+        7
+      ],
+      "effect_fingerprint": "8647f684be9cf83d38964458d6871bc2d4909fa7cf3eb317cb9d1045eb07e212"
+    },
+    {
+      "id": "CompactHeatingGrid",
+      "title": "Compact Heating Grids",
+      "tier": 4,
+      "column": 8,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779",
+        "6a897029cbed655ea6de5c83c117dac7"
+      ],
+      "hours": 8.0,
+      "cost": {
+        "Wood": 95,
+        "Steel": 60
+      },
+      "description": "The Generator uses 25% less coal and Steam Hubs use 40% less coal. Trade-off: all heat-zone radii shrink by 20%. Heater power is unaffected. Optional permanent specialisation for compact districts rather than wide heat coverage.\n\nRequires: Difference Engine, District Steam Trunklines.",
+      "guid": "1530d4e15782115e991dc121f12ff557",
+      "effects": [
+        [
+          "d3aee53d931e86bd204dab5ab7d320d1",
+          "9d3b0166ad833759a7286a09fe8743a2"
+        ]
+      ],
+      "global_effects": [
+        "7910e25ede289058871b1605d65e9474"
+      ],
+      "extra_effects": [
+        [
+          "f530dec315bad98b8d4026f8514a1fb7",
+          "6c4b3ca375544e5193d55b5d09626880"
+        ]
+      ],
+      "prerequisite_names": [
+        "Difference Engine",
+        "District Steam Trunklines"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "heat-coverage-for-fuel-trade",
+      "added_in": "3.10.0",
+      "unscaled_hours": 16,
+      "scenario_scope": "cold",
+      "tab": "Engineering",
+      "icon": [
+        1,
+        6
+      ],
+      "effect_fingerprint": "7f99c476ab29f0e486938b31a507519a3b5f42f6a8075dfbd88377bfcf86f1a5"
+    },
+    {
+      "id": "EdgeCompactHeatingGrid",
+      "title": "Compact Heating Grids",
+      "tier": 4,
+      "column": 2,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779",
+        "e7ca56a0b7a7d8519641cda90254909a"
+      ],
+      "hours": 8.0,
+      "cost": {
+        "Wood": 95,
+        "Steel": 60
+      },
+      "description": "Braziers use 40% less coal. Trade-off: all heat-zone radii shrink by 20%. Heater power is unaffected. Optional permanent specialisation for compact districts rather than wide heat coverage.\n\nRequires: Difference Engine, Brazier District Networks.",
+      "guid": "b851827558fc245a8d47dc18fdbc4e2b",
+      "effects": [
+        [
+          "7e8d2eef528353ac7a436beaa483d4e5",
+          "c757120701583e5a8ab23e57e22056f9"
+        ]
+      ],
+      "global_effects": [
+        "86536102dd1d295880e2287d2c3d7cbc"
+      ],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Difference Engine",
+        "Brazier District Networks"
+      ],
+      "scenarios": [
+        "Reconquest"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "heat-coverage-for-fuel-trade",
+      "added_in": "3.10.0",
+      "unscaled_hours": 16,
+      "scenario_scope": "cold",
+      "tab": "Engineering",
+      "icon": [
+        1,
+        6
+      ],
+      "effect_fingerprint": "8bfa2cd73d6cc35b8edd32ca83194babe91507ac9862931b6181f4fd1d5bb728"
+    },
+    {
+      "id": "AutumnCompactHeat",
+      "title": "Compact Heating Grids",
+      "tier": 3,
+      "column": 5,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "674ec59d62a6189d824c924030314da9",
+        "a7216a1d686e7e568ba4b6da829ffabb"
+      ],
+      "hours": 4.5,
+      "cost": {
+        "Wood": 48,
+        "Steel": 25
+      },
+      "description": "Braziers use 40% less coal. Trade-off: all heat-zone radii shrink by 20%. Heater power is unaffected. Optional permanent specialisation for compact districts rather than wide heat coverage.\n\nRequires: Mechanical Calculators, Brazier District Networks.",
+      "guid": "0e6368394d921158b5220ed29d2187ac",
+      "effects": [
+        [
+          "7e8d2eef528353ac7a436beaa483d4e5",
+          "0be146e5b27f9b52847c411052396387"
+        ]
+      ],
+      "global_effects": [
+        "bcc49272375b7451bbdfa59f007de3c1"
+      ],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Mechanical Calculators",
+        "Brazier District Networks"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "heat-coverage-for-fuel-trade",
+      "added_in": "3.10.0",
+      "unscaled_hours": 9,
+      "scenario_scope": "autumn",
+      "tab": "Engineering",
+      "icon": [
+        1,
+        6
+      ],
+      "effect_fingerprint": "8bfa2cd73d6cc35b8edd32ca83194babe91507ac9862931b6181f4fd1d5bb728"
+    },
+    {
+      "id": "RecuperatingAccumulators",
+      "title": "Recuperating Accumulators",
+      "tier": 4,
+      "column": 20,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779",
+        "9642027e2c8b2b5bb017932e4f0a37dd",
+        "2e3d4b4635109259a0bc8b48a7d024e2"
+      ],
+      "hours": 9.0,
+      "cost": {
+        "Wood": 110,
+        "Steel": 75
+      },
+      "description": "Generator stress recovers 100% faster and the Generator uses 15% less coal. Develops Pressure-Buffer Boiler Drums into a system for recovering between overdrive periods; the earlier research and other fuel modifiers remain active.\n\nRequires: Difference Engine, Pressure-Buffer Boiler Drums, Stress Recovery Governors.",
+      "guid": "97a21de141ce8d57990e46313f9cd971",
+      "effects": [],
+      "global_effects": [
+        "f62fc9c7fe9f8a5d86050ff99b620277"
+      ],
+      "extra_effects": [
+        [
+          "f530dec315bad98b8d4026f8514a1fb7",
+          "b739a7950021c55aa26e0c49847cf12b"
+        ]
+      ],
+      "prerequisite_names": [
+        "Difference Engine",
+        "Pressure-Buffer Boiler Drums",
+        "Stress Recovery Governors"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "overdrive-recovery-and-fuel-reclamation",
+      "added_in": "3.10.0",
+      "unscaled_hours": 18,
+      "scenario_scope": "cold",
+      "tab": "Logistics",
+      "icon": [
+        1,
+        6
+      ],
+      "effect_fingerprint": "624b131c2cfd82279ebe1ec28880b2868f84d25bd391e321d9557a98d60efcc7"
+    },
+    {
+      "id": "EndlessRelayWorkshops",
+      "title": "Frostland Relay Workshops",
+      "tier": 4,
+      "column": 8,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779",
+        "ca626084797c61518dd0a7cb328e3e99",
+        "77f348879a5c5f5d958f901f3517f707"
+      ],
+      "hours": 7.0,
+      "cost": {
+        "Wood": 85,
+        "Steel": 55
+      },
+      "description": "Scouts travel 150% faster and Factories gain 75% workplace efficiency for both work roles. Supports repeated Frostland exploration and processing recovered resources after Endless storms. Adds no expedition teams.\n\nRequires: Difference Engine, Frostland Sled Overhaul, Modular Factory Lines.",
+      "guid": "b8d8d010f782275ea56e9364e4d6d01a",
+      "effects": [
+        [
+          "36bf93e839cf56b8a84522dfa1fdb6fc",
+          "2a2bed440731f4588d24bef09da447e1"
+        ],
+        [
+          "814adcea3b089fb96e4ecb4b63cf42c1",
+          "2a2bed440731f4588d24bef09da447e1"
+        ],
+        [
+          "7315a06ba024b3815748da9764f122b6",
+          "2a2bed440731f4588d24bef09da447e1"
+        ],
+        [
+          "20e819887723898b4b46612b11d272f6",
+          "f87101b12707c05380969478b6482e03"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Difference Engine",
+        "Frostland Sled Overhaul",
+        "Modular Factory Lines"
+      ],
+      "scenarios": [
+        "Default_Endless",
+        "Default_Endless_Builders"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "endless-exploration-and-reclamation",
+      "added_in": "3.10.0",
+      "unscaled_hours": 14,
+      "scenario_scope": "cold",
+      "tab": "Logistics",
+      "icon": [
+        2,
+        10
+      ],
+      "effect_fingerprint": "20554a48a8cbe88214757b2b9984b12a064d81274f631014dc2ae076966daa49"
+    },
+    {
+      "id": "EdgeRecoveryLots",
+      "title": "Warehouse Recovery Lots",
+      "tier": 4,
+      "column": 8,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779",
+        "02eb698f6167e458aaa4574d0600ba0b",
+        "de32113ab414de57bdd32f47254f5ff1"
+      ],
+      "hours": 7.0,
+      "cost": {
+        "Wood": 80,
+        "Steel": 60
+      },
+      "description": "Upgrades Warehouse Cutting Torches: 1 Steam Core and 20 coal produce 100 steel and 40 wood together in 6 working hours. The core is consumed. Adds a wood-recovery route to the core economy while preserving the Warehouse selector size.\n\nRequires: Difference Engine, Warehouse Cutting Torches, Steam Core Assembly.",
+      "guid": "d655443851364c52826619b23406c433",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Difference Engine",
+        "Warehouse Cutting Torches",
+        "Steam Core Assembly"
+      ],
+      "scenarios": [
+        "Reconquest"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "warehouse-mixed-material-recovery",
+      "added_in": "3.10.0",
+      "unscaled_hours": 14,
+      "scenario_scope": "cold",
+      "tab": "Logistics",
+      "icon": [
+        8,
+        0
+      ],
+      "effect_fingerprint": "unlock:d655443851364c52826619b23406c433"
+    },
+    {
+      "id": "AutumnReusableFormwork",
+      "title": "Reusable Formwork Systems",
+      "tier": 2,
+      "column": 2,
+      "category": "57cf6cec363fd85ba792f38f8df3d9dd",
+      "requires": [
+        "ef520220d07ff699554142aa88c6647c",
+        "40aea3af3627d95393ab6c5b1701b1a5",
+        "775d391081b34f5ca5571b74a79ca902"
+      ],
+      "hours": 4.0,
+      "cost": {
+        "Wood": 38,
+        "Steel": 20
+      },
+      "description": "Unlocks an optional Profiles Manufacture recipe: 1 steam exchanger and 18 wood produce 3 structural profiles in 2 working hours. Uses Machine Shop output to conserve timber and accelerate profile production.\n\nRequires: Drafting Machines, Steam-Cured Profiles, Fuel-Tempered Exchangers.",
+      "guid": "7f2260a692c533538eaf2ccf0a89b941",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drafting Machines",
+        "Steam-Cured Profiles",
+        "Fuel-Tempered Exchangers"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 1,
+      "mechanic": "exchanger-fed-profile-production",
+      "added_in": "3.10.0",
+      "unscaled_hours": 8,
+      "scenario_scope": "autumn",
+      "tab": "Industry",
+      "icon": [
+        3,
+        6
+      ],
+      "effect_fingerprint": "unlock:7f2260a692c533538eaf2ccf0a89b941"
+    },
+    {
+      "id": "AutumnRefractoryCasting",
+      "title": "Sacrificial Mould Casting",
+      "tier": 3,
+      "column": 2,
+      "category": "57cf6cec363fd85ba792f38f8df3d9dd",
+      "requires": [
+        "674ec59d62a6189d824c924030314da9",
+        "5e181646ada7f15385f454c3cbccb000",
+        "7f2260a692c533538eaf2ccf0a89b941"
+      ],
+      "hours": 4.5,
+      "cost": {
+        "Wood": 48,
+        "Steel": 28
+      },
+      "description": "Unlocks an optional Foundry recipe: 1 structural profile, 10 steel and 45 coal produce 2 steel composites in 3 working hours. Consumes a profile as mould material to save steel and fuel.\n\nRequires: Mechanical Calculators, Charcoal-Alloy Composites, Reusable Formwork Systems.",
+      "guid": "442e18b3b932235bbb37618f6dba7e58",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Mechanical Calculators",
+        "Charcoal-Alloy Composites",
+        "Reusable Formwork Systems"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 1,
+      "mechanic": "profile-fed-composite-production",
+      "added_in": "3.10.0",
+      "unscaled_hours": 9,
+      "scenario_scope": "autumn",
+      "tab": "Industry",
+      "icon": [
+        9,
+        10
+      ],
+      "effect_fingerprint": "unlock:442e18b3b932235bbb37618f6dba7e58"
+    },
+    {
+      "id": "AutumnCompositeDies",
+      "title": "Composite Exchanger Dies",
+      "tier": 3,
+      "column": 8,
+      "category": "57cf6cec363fd85ba792f38f8df3d9dd",
+      "requires": [
+        "674ec59d62a6189d824c924030314da9",
+        "775d391081b34f5ca5571b74a79ca902",
+        "442e18b3b932235bbb37618f6dba7e58"
+      ],
+      "hours": 4.5,
+      "cost": {
+        "Wood": 48,
+        "Steel": 28
+      },
+      "description": "Unlocks an optional Machine Shop recipe: 1 steel composite, 12 steel and 20 coal produce 3 steam exchangers in 3 working hours. Converts Foundry output into faster, steel-efficient exchanger production, completing a component-reuse chain.\n\nRequires: Mechanical Calculators, Fuel-Tempered Exchangers, Sacrificial Mould Casting.",
+      "guid": "e863e24afb71e85aa9d16fb7ac24c5e7",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Mechanical Calculators",
+        "Fuel-Tempered Exchangers",
+        "Sacrificial Mould Casting"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 1,
+      "mechanic": "composite-fed-exchanger-production",
+      "added_in": "3.10.0",
+      "unscaled_hours": 9,
+      "scenario_scope": "autumn",
+      "tab": "Industry",
+      "icon": [
+        10,
+        2
+      ],
+      "effect_fingerprint": "unlock:e863e24afb71e85aa9d16fb7ac24c5e7"
+    },
+    {
+      "id": "AutumnColdCurrentLures",
+      "title": "Cold-Current Wooden Lures",
+      "tier": 2,
+      "column": 8,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "ef520220d07ff699554142aa88c6647c",
+        "b11b8ed42a73e35195ed6cf2b7fbfb0e"
+      ],
+      "hours": 4.0,
+      "cost": {
+        "Wood": 36,
+        "Steel": 18
+      },
+      "description": "Upgrades Baited Nets with a bait-free recipe: 2 wood and 2 coal produce 8 raw food in 1 working hour, or 12 at an Advanced Fishing Harbour. Conserves food rations by spending wood and fuel. Replaces Baited Nets; Far-Water Trawling and Dockside Smokehouses remain available.\n\nRequires: Drafting Machines, Baited Deep-Water Nets.",
+      "guid": "d990241f7d3f7456aecc1e2359ed5194",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drafting Machines",
+        "Baited Deep-Water Nets"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "bait-free-fishing-trade",
+      "added_in": "3.10.0",
+      "unscaled_hours": 8,
+      "scenario_scope": "autumn",
+      "tab": "Logistics",
+      "icon": [
+        4,
+        4
+      ],
+      "effect_fingerprint": "unlock:d990241f7d3f7456aecc1e2359ed5194"
+    },
+    {
+      "id": "AutumnForagerMealRoutes",
+      "title": "Forager Meal Routes",
+      "tier": 1,
+      "column": 11,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "ae4ab761365f5bbefd4822639a66ddf5",
+        "d1a1c70875e07856a2375b786567a685"
+      ],
+      "hours": 3.5,
+      "cost": {
+        "Wood": 30,
+        "Steel": 14
+      },
+      "description": "Foragers travel 100% faster and Cookhouses gain 75% workplace efficiency. Moves crews between food sites sooner while increasing the capacity to process their deliveries. Adds no forager teams.\n\nRequires: Drawing Boards, Forager Relay Markers.",
+      "guid": "7d18f76da3f6b75d9b7b444e4bbdfd72",
+      "effects": [
+        [
+          "8438411349a7fca5df4de2d3d0eafa6e",
+          "fb26987460d3bf579134f2407c9255d9"
+        ],
+        [
+          "59b3ef3d8505aea51a45828da82a1c3d",
+          "8dbf4c3417bd405f8d4b5295fb0ed00e"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drawing Boards",
+        "Forager Relay Markers"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "forager-and-kitchen-throughput",
+      "added_in": "3.10.0",
+      "unscaled_hours": 7,
+      "scenario_scope": "autumn",
+      "tab": "Logistics",
+      "icon": [
+        2,
+        10
+      ],
+      "effect_fingerprint": "1f649aa7417da576dd133692c1b75c0b3a8518f21112bb8d98ec543f1d8dcfbb"
+    },
+    {
+      "id": "AutumnSafetyInfirmary",
+      "title": "Industrial Safety Dispensaries",
+      "tier": 2,
+      "column": 5,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "ef520220d07ff699554142aa88c6647c",
+        "1732771bce4d165493f8c142446f8077",
+        "4d7efaac7fb7665b9fec95ed0043eec3"
+      ],
+      "hours": 4.0,
+      "cost": {
+        "Wood": 42,
+        "Steel": 22
+      },
+      "description": "Profiles Manufactures, Machine Shops, Foundries and Reloading Stations gain +1 safety. Medical Posts and Infirmaries gain 100% healing efficiency. Combines accident-risk management with stronger treatment capacity; it does not prevent every accident.\n\nRequires: Drafting Machines, Medical Relief Rotas, Machine Shop Safety Screens.",
+      "guid": "02669941bc3b685f846eac0a143a52dc",
+      "effects": [
+        [
+          "935df85f1c35deb4284be03f97921b98",
+          "6b6d8f6d124a3851a1f4296abd740c19"
+        ],
+        [
+          "810a05bcf49060b79942c3f1997ca349",
+          "6b6d8f6d124a3851a1f4296abd740c19"
+        ],
+        [
+          "cbb9755fae0edbb55c4b851327a00cb0",
+          "6b6d8f6d124a3851a1f4296abd740c19"
+        ],
+        [
+          "e5d9d386eb295a8a2742418f32b65164",
+          "6b6d8f6d124a3851a1f4296abd740c19"
+        ],
+        [
+          "d585ae735bc4e0b4964c878dbc1b6680",
+          "6b6d8f6d124a3851a1f4296abd740c19"
+        ],
+        [
+          "e022a538f6ef66ad9d4e00c59d53db08",
+          "6b6d8f6d124a3851a1f4296abd740c19"
+        ],
+        [
+          "f6a831d9683c3d9b904cd09ded358f8a",
+          "2efed991f280305ca7228d83ec270fe0"
+        ],
+        [
+          "98c676299c50c1841a4568ff11d61bde",
+          "2efed991f280305ca7228d83ec270fe0"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drafting Machines",
+        "Medical Relief Rotas",
+        "Machine Shop Safety Screens"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "worksite-safety-and-treatment",
+      "added_in": "3.10.0",
+      "unscaled_hours": 8,
+      "scenario_scope": "autumn",
+      "tab": "Engineering",
+      "icon": [
+        4,
+        9
+      ],
+      "effect_fingerprint": "cbb6557e19881176dad7973915b119748d7a62847c803bb002056262097509f6"
     }
   ],
   "recipes": [
@@ -12590,7 +14135,9 @@
         "resourceprocessing/prefabfactory"
       ],
       "unlock": "b374ee7c39eed958b0fa9662ebaa4ae2",
-      "excludes": [],
+      "excludes": [
+        "b2b06eeba432645fa29f6f9bd58684f4"
+      ],
       "native_prosthetics_requirements": false
     },
     {
@@ -12628,7 +14175,9 @@
         "resourceprocessing/prefabfactory"
       ],
       "unlock": "a8c9b9c81a3bb552a1b11e47311d7526",
-      "excludes": [],
+      "excludes": [
+        "668b0b6ba7c7c55cb50a8df83423b638"
+      ],
       "native_prosthetics_requirements": false
     },
     {
@@ -12645,6 +14194,9 @@
       "unlock": "a17c72f5cc9f9858b401695b2a8c948d",
       "targets": [
         "resourceprocessing/foodprocessing"
+      ],
+      "excludes": [
+        "38651597fe3e3353b41ecce9d56e5dcc"
       ]
     },
     {
@@ -12681,6 +14233,9 @@
       "unlock": "8f3bdf5fd7cc6658acc74b988cba7f45",
       "targets": [
         "resourceextraction/foodplantation"
+      ],
+      "excludes": [
+        "62e2459b76ac5954bb35bd64df214540"
       ]
     },
     {
@@ -12697,6 +14252,9 @@
       "unlock": "8f3bdf5fd7cc6658acc74b988cba7f45",
       "targets": [
         "resourceextraction/foodplantation_steam"
+      ],
+      "excludes": [
+        "62e2459b76ac5954bb35bd64df214540"
       ]
     },
     {
@@ -12735,6 +14293,9 @@
       "targets": [
         "builders/dock_fishing",
         "builders/docks/dockfishingproper_lvl1"
+      ],
+      "excludes": [
+        "d990241f7d3f7456aecc1e2359ed5194"
       ]
     },
     {
@@ -12753,6 +14314,9 @@
       "targets": [
         "builders/dock_fishingv2",
         "builders/docks/dockfishingproper_lvl2"
+      ],
+      "excludes": [
+        "d990241f7d3f7456aecc1e2359ed5194"
       ]
     },
     {
@@ -12821,6 +14385,9 @@
       "unlock": "02eb698f6167e458aaa4574d0600ba0b",
       "targets": [
         "reconquest/vault"
+      ],
+      "excludes": [
+        "d655443851364c52826619b23406c433"
       ]
     },
     {
@@ -13081,6 +14648,220 @@
         "builders/dock_fishingv2",
         "builders/docks/dockfishingproper_lvl2"
       ]
+    },
+    {
+      "id": "ClosedLoopMetallurgy",
+      "title": "Closed-Loop Metallurgy",
+      "output": "Steel",
+      "amount": 120,
+      "inputs": {
+        "Steam Cores": 1,
+        "Coal": 30
+      },
+      "hours": 8,
+      "building": "Factory",
+      "source_blueprint": "Augmentation_parts",
+      "unlock": "668b0b6ba7c7c55cb50a8df83423b638",
+      "targets": [
+        "resourceprocessing/prefabfactory"
+      ]
+    },
+    {
+      "id": "MassCoreFabrication",
+      "title": "Core Fabrication Cells",
+      "output": "Steam Cores",
+      "amount": 3,
+      "inputs": {
+        "Steel": 90,
+        "Wood": 50,
+        "Coal": 100
+      },
+      "hours": 10,
+      "building": "Factory",
+      "source_blueprint": "Augmentation_parts",
+      "unlock": "b2b06eeba432645fa29f6f9bd58684f4",
+      "targets": [
+        "resourceprocessing/prefabfactory"
+      ]
+    },
+    {
+      "id": "PressureKitchens",
+      "title": "Steel-Assisted Pressure Kitchens",
+      "output": "Food Rations",
+      "amount": 10,
+      "inputs": {
+        "Raw Food": 2,
+        "Coal": 4,
+        "Steel": 1
+      },
+      "hours": 0.5,
+      "building": "Cookhouse",
+      "source_blueprint": "Canteen_FoodRations_standard",
+      "unlock": "38651597fe3e3353b41ecce9d56e5dcc",
+      "targets": [
+        "resourceprocessing/foodprocessing"
+      ]
+    },
+    {
+      "id": "AutumnPressureKitchens",
+      "title": "Steel-Assisted Pressure Kitchens",
+      "output": "Food Rations",
+      "amount": 10,
+      "inputs": {
+        "Raw Food": 2,
+        "Coal": 4,
+        "Steel": 1
+      },
+      "hours": 0.5,
+      "building": "Cookhouse",
+      "source_blueprint": "Canteen_FoodRations_standard",
+      "unlock": "14a4b5c02e012158873fac08bc1ab3ae",
+      "targets": [
+        "resourceprocessing/foodprocessing"
+      ]
+    },
+    {
+      "id": "TimberSubstrateBeds",
+      "title": "Timber-Substrate Growing Beds",
+      "output": "Raw Food",
+      "amount": 8,
+      "inputs": {
+        "Wood": 4,
+        "Coal": 1
+      },
+      "hours": 2,
+      "building": "Hothouse",
+      "source_blueprint": "Plantation_Food",
+      "unlock": "62e2459b76ac5954bb35bd64df214540",
+      "targets": [
+        "resourceextraction/foodplantation"
+      ]
+    },
+    {
+      "id": "IndustrialTimberSubstrateBeds",
+      "title": "Timber-Substrate Growing Beds",
+      "output": "Raw Food",
+      "amount": 16,
+      "inputs": {
+        "Wood": 8,
+        "Coal": 2
+      },
+      "hours": 2,
+      "building": "Industrial Hothouse",
+      "source_blueprint": "SteamPlantation_Food",
+      "unlock": "62e2459b76ac5954bb35bd64df214540",
+      "targets": [
+        "resourceextraction/foodplantation_steam"
+      ]
+    },
+    {
+      "id": "EdgeRecoveryLots",
+      "title": "Warehouse Recovery Lots",
+      "output": "Steel",
+      "amount": 100,
+      "inputs": {
+        "Steam Cores": 1,
+        "Coal": 20
+      },
+      "hours": 6,
+      "building": "Army Warehouse",
+      "source_blueprint": "[Reconquest]Vault_Multitasking",
+      "unlock": "d655443851364c52826619b23406c433",
+      "targets": [
+        "reconquest/vault"
+      ],
+      "byproducts": {
+        "Wood": 40
+      }
+    },
+    {
+      "id": "AutumnReusableFormwork",
+      "title": "Reusable Formwork Systems",
+      "output": "Wooden Materials",
+      "amount": 3,
+      "inputs": {
+        "Steam Tools": 1,
+        "Wood": 18
+      },
+      "hours": 2,
+      "building": "Profiles Manufacture",
+      "source_blueprint": "[Builders] Manufacture Scaffoldings",
+      "unlock": "7f2260a692c533538eaf2ccf0a89b941",
+      "targets": [
+        "builders/constructionsite/scaffoldingsmanufacture"
+      ]
+    },
+    {
+      "id": "AutumnRefractoryCasting",
+      "title": "Sacrificial Mould Casting",
+      "output": "Steel Plates",
+      "amount": 2,
+      "inputs": {
+        "Wooden Materials": 1,
+        "Steel": 10,
+        "Coal": 45
+      },
+      "hours": 3,
+      "building": "Foundry",
+      "source_blueprint": "[Builders] ManufactureSteelPlate",
+      "unlock": "442e18b3b932235bbb37618f6dba7e58",
+      "targets": [
+        "builders/constructionsite/metalplateforge"
+      ]
+    },
+    {
+      "id": "AutumnCompositeDies",
+      "title": "Composite Exchanger Dies",
+      "output": "Steam Tools",
+      "amount": 3,
+      "inputs": {
+        "Steel Plates": 1,
+        "Steel": 12,
+        "Coal": 20
+      },
+      "hours": 3,
+      "building": "Machine Shop",
+      "source_blueprint": "[Builders] Factory Pipe",
+      "unlock": "e863e24afb71e85aa9d16fb7ac24c5e7",
+      "targets": [
+        "builders/constructionsite/pipefoundry"
+      ]
+    },
+    {
+      "id": "ColdCurrentLures",
+      "title": "Cold-Current Wooden Lures",
+      "output": "Raw Food",
+      "amount": 8,
+      "inputs": {
+        "Wood": 2,
+        "Coal": 2
+      },
+      "hours": 1,
+      "building": "Fishing Harbour",
+      "source_blueprint": "[Builders]FishingHarbor1",
+      "unlock": "d990241f7d3f7456aecc1e2359ed5194",
+      "targets": [
+        "builders/dock_fishing",
+        "builders/docks/dockfishingproper_lvl1"
+      ]
+    },
+    {
+      "id": "AdvancedColdCurrentLures",
+      "title": "Cold-Current Wooden Lures",
+      "output": "Raw Food",
+      "amount": 12,
+      "inputs": {
+        "Wood": 2,
+        "Coal": 2
+      },
+      "hours": 1,
+      "building": "Fishing Harbour",
+      "source_blueprint": "[Builders]FishingHarbor2",
+      "unlock": "d990241f7d3f7456aecc1e2359ed5194",
+      "targets": [
+        "builders/dock_fishingv2",
+        "builders/docks/dockfishingproper_lvl2"
+      ]
     }
   ],
   "retired_technologies": [
@@ -13109,7 +14890,7 @@
     "Coal": 50,
     "Raw Food": 30
   },
-  "base_research_multiplier": 1.25,
+  "base_research_multiplier": 1.5625,
   "removed_team_perks": [
     "AutumnExtraForagers",
     "AutumnForagerRosters",
@@ -13233,9 +15014,35 @@
     "BuilderAssemblyPlatforms",
     "AutumnAssemblyPlatforms",
     "AutumnFarWaterTrawlers",
-    "AutumnArtisanGuilds"
+    "AutumnArtisanGuilds",
+    "PreventiveMedicine",
+    "AutumnPreventiveMedicine",
+    "ClosedLoopMetallurgy",
+    "MassCoreFabrication",
+    "PressureKitchens",
+    "AutumnPressureKitchens",
+    "TimberSubstrateBeds",
+    "ReclamationStockyards",
+    "ProtectedHealthcareHeaters",
+    "AutumnHealthcareHeaters",
+    "AutumnCoreFreeFabrication",
+    "IndustrialHeatRecovery",
+    "AutumnIndustrialHeaters",
+    "CompactHeatingGrid",
+    "EdgeCompactHeatingGrid",
+    "AutumnCompactHeat",
+    "RecuperatingAccumulators",
+    "EndlessRelayWorkshops",
+    "EdgeRecoveryLots",
+    "AutumnReusableFormwork",
+    "AutumnRefractoryCasting",
+    "AutumnCompositeDies",
+    "AutumnColdCurrentLures",
+    "AutumnForagerMealRoutes",
+    "AutumnSafetyInfirmary"
   ],
-  "active_research_definitions": 231,
+  "perk_research_duration_multiplier": 0.5,
+  "active_research_definitions": 256,
   "suspended_technologies": [
     "FieldResearchSprints",
     "AutumnFieldResearchSprints",

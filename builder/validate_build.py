@@ -47,16 +47,20 @@ def validate_recipes(manifest,payload):
             assert data[position]==1;position=data.index(0,position+1)+1
         assert data[position:position+2]==bytes(2);position+=2
         assert data[position]==1;position=data.index(0,position+1)+1+16
-        assert data[position:position+6] in (b'\1\1\1\0\0\0',b'\0\1\1\0\0\0');position+=6
-        food=recipe['output']=='Food Rations'
-        product=text('FrostpunkFoodRationProduct' if food else 'FrostpunkResourceProduct')
-        assert data[position:position+len(product)]==product;position+=len(product)
-        assert struct.unpack_from('<I',data,position)[0]==1;position+=4
-        if not food:
-            assert data[position:position+16]==resources[recipe['output']];position+=16
-        assert struct.unpack_from('<I',data,position)[0]==recipe['amount'];position+=4
-        if food:
-            assert struct.unpack_from('<I',data,position)[0]==3;position+=4
+        assert data[position:position+2] in (b'\1\1',b'\0\1')
+        product_count,=struct.unpack_from('<I',data,position+2);position+=6
+        outputs={recipe['output']:recipe['amount']}|recipe.get('byproducts',{})
+        assert product_count==len(outputs)
+        for output,amount in outputs.items():
+            food=output=='Food Rations'
+            product=text('FrostpunkFoodRationProduct' if food else 'FrostpunkResourceProduct')
+            assert data[position:position+len(product)]==product;position+=len(product)
+            assert struct.unpack_from('<I',data,position)[0]==1;position+=4
+            if not food:
+                assert data[position:position+16]==resources[output];position+=16
+            assert struct.unpack_from('<I',data,position)[0]==amount;position+=4
+            if food:
+                assert struct.unpack_from('<I',data,position)[0]==3;position+=4
         assert data[position:position+4]==bytes(4);position+=4
         n,=struct.unpack_from('<I',data,position);position+=4
         actual={data[p:p+16]:struct.unpack_from('<I',data,p+16)[0] for p in range(position,position+n*20,20)}
@@ -97,6 +101,24 @@ def validate_choice_effects(manifest,records):
             b=normalized(records[g][2]);p=place_scalar_offset(b,72)
             assert struct.unpack_from('<fIIff',b,p)==(1,0,2,human,robot)
             assert struct.unpack_from('<i',b,place_scalar_offset(b,96))[0]==heat
+    heater=original['ccae6fbb0e236596b44ca8189e01248f'][2]
+    p=heater.index(coal)+16
+    free=heater[:p]+struct.pack('<2f',0,0)+heater[p+8:]
+    for key,names in [('ProtectedHealthcareHeaters',('Medical Post','Ambulatorium')),
+                      ('AutumnHealthcareHeaters',('Medical Post','Ambulatorium')),
+                      ('IndustrialHeatRecovery',('Factory','Engineers Lab')),
+                      ('AutumnIndustrialHeaters',('[Builders]ScaffoldingManufacture','[Builders]PipeFoundry','[Builders]SteelPlateForge','Engineers Lab'))]:
+        assert {target for target,_ in by_id[key]['effects']}=={buildings[n].hex() for n in names}
+        assert all(records[g][2]==free for _,g in by_id[key]['effects']), 'Free heaters changed native activation predicates'
+    for key in ('CompactHeatingGrid','EdgeCompactHeatingGrid','AutumnCompactHeat'):
+        bodies=[records[g][2] for g in by_id[key]['global_effects']]
+        assert any(len(b)==186 and abs(struct.unpack_from('<f',b,69)[0]-0.8)<1e-6 for b in bodies)
+    for tech in manifest['technologies']:
+        if tech.get('added_in') not in ('3.9.0','3.10.0'):continue
+        for _,g in tech['effects']:
+            kind,_,raw=records[g];b=normalized(raw)
+            if kind=='Place' and len(b)==238:
+                assert struct.unpack_from('<i',b,177)[0]==0,('Restored an extra-team perk',tech['id'])
     print('Verified heater condition preservation, surgery scope and separate human/automaton work roles.')
 
 
@@ -186,6 +208,10 @@ def main():
                 parent=next(t for t in info if t['guid']==g)
                 if 'TierUnlock' not in parent['name']:
                     assert parent['layout'][3]//2<=tech['tier'],('Later native prerequisite',tech['id'],parent['name'])
+        assert tech['hours']==tech['unscaled_hours']*0.5,(tech['id'],'research duration is not halved')
+    count,*curve=struct.unpack_from('<I8f',tc,end)
+    assert count==4 and curve[::2]==[1,2,3,4]
+    assert all(abs(rate-expected)<1e-6 for rate,expected in zip(curve[1::2],(1.5625,2.03125,2.34375,2.5))), 'Base Workshop output curve differs from the requested boost'
     for scenario,additions in manifest['scenario_additions'].items():
         def members(data):
             marker=b'\1\1'+scenario.encode()+b'\0';p=data.index(marker)+len(marker)+16
@@ -207,7 +233,7 @@ def main():
     assert not any('abilitiesconfig' in name or 'buildingsconfig' in name for name in payload)
     validate_recipes(manifest,payload)
     validate_choice_effects(manifest,mods)
-    print(f"Verified {len(starts)} technology records, {len(mods)} modifiers, {len(manifest['scenario_additions'])} scenario graphs, native-record preservation and team neutralization.")
+    print(f"Verified {len(starts)} technology records, {len(mods)} modifiers, {len(manifest['scenario_additions'])} scenario graphs, halved perk durations, boosted Workshop curve, native-record preservation and team neutralization.")
 
 
 if __name__=='__main__':

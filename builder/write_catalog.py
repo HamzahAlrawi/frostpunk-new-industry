@@ -15,7 +15,7 @@ def main():
     active={g for ids in membership.values() for g in ids}
     lines=['# Research catalog','',
            f"Version {catalog['version']}: {len(active)} active research definitions across the supported modes. Legacy and retired entries are omitted.",'',
-           'Tier 0 is available before Drawing Boards. Listed hours are base research hours; city research modifiers and Workshop scaling still apply. Prerequisites in another tab remain mandatory and are listed by name in the tooltip.','',
+           'Tier 0 is available before Drawing Boards. Listed hours already include the 50% reduction to all mod-added research durations. Workshop base research output is also 25% higher than version 3.9, with the normal multiple-Workshop scaling preserved. Prerequisites in another tab remain mandatory and are listed by name in the tooltip.','',
            'Research is arranged in Engineering, Industry, City Life, and Logistics alongside the native tabs. A 1920-pixel-wide or larger display is recommended for the expanded tab bar.','']
     for title,category in catalog['research_tabs']:
         lines += ['## '+title,'','| Upgrade | Tier | Research cost | Base hours | Effect and prerequisites | Modes |',

@@ -27,7 +27,8 @@ class PlaystyleTests(unittest.TestCase):
 
     def test_new_research_is_limited_to_appropriate_modes(self):
         keys=self.catalog['playstyle_research']
-        self.assertEqual(len(keys),22)
+        self.assertEqual(sum(self.techs[key]['added_in']=='3.9.0' for key in keys),22)
+        self.assertEqual(sum(self.techs[key]['added_in']=='3.10.0' for key in keys),25)
         for key in keys:
             t=self.techs[key]
             actual={mode for mode,ids in self.catalog['scenario_additions'].items() if t['guid'] in ids}
@@ -44,7 +45,8 @@ class PlaystyleTests(unittest.TestCase):
         # exclusive native extraction upgrades. Metadata is also checked against
         # emitted requirement bytes by the independent owned-build validator.
         native_max={'Factory':2,'Cookhouse':2,'Charcoal Kiln':1,'Hothouse':1,
-                    'Industrial Hothouse':1,'Fishing Harbour':1,'Army Warehouse':3}
+                    'Industrial Hothouse':1,'Fishing Harbour':1,'Army Warehouse':3,
+                    'Profiles Manufacture':1,'Machine Shop':1,'Foundry':1}
         for mode,ids in self.catalog['scenario_additions'].items():
             for building,base in native_max.items():
                 recipes=[r for r in self.recipes.values() if r['building']==building and r['unlock'] in ids]
@@ -79,6 +81,34 @@ class PlaystyleTests(unittest.TestCase):
             self.assertIn(self.techs['Cores3']['guid'],self.ancestors(recipe['unlock']))
         self.assertEqual(self.recipes['CoreChargedRetorts']['building'],'Charcoal Kiln')
         self.assertNotEqual(self.recipes['ArtificialSpring']['building'],'Factory')
+
+    def test_all_added_research_is_half_duration_with_higher_workshop_output(self):
+        self.assertEqual(self.catalog['perk_research_duration_multiplier'],0.5)
+        self.assertEqual(self.catalog['base_research_multiplier']/1.25,1.25)
+        for tech in self.techs.values():
+            self.assertEqual(tech['hours'],tech['unscaled_hours']*0.5,tech['id'])
+            self.assertGreater(tech['hours'],0)
+
+    def test_new_recipe_upgrades_replace_predecessors(self):
+        for previous,next_key in [('Cores3','MassCoreFabrication'),('DeepScrapRecovery','ClosedLoopMetallurgy'),
+                                  ('FuelledStockpots','PressureKitchens'),('WarehouseSalvage','EdgeRecoveryLots'),
+                                  ('CoalHeatedSeedbeds','TimberSubstrateBeds'),('IndustrialCoalSeedbeds','TimberSubstrateBeds'),
+                                  ('BaitedNets','AutumnColdCurrentLures'),('AdvancedBaitedNets','AutumnColdCurrentLures')]:
+            self.assertIn(self.techs[next_key]['guid'],self.recipes[previous]['excludes'])
+        mixed=self.recipes['EdgeRecoveryLots']
+        self.assertEqual(mixed['inputs']['Steam Cores'],1)
+        self.assertEqual(mixed['byproducts'],{'Wood':40})
+        self.assertEqual(mixed['amount'],100)
+
+    def test_autumn_component_reuse_links_existing_stations(self):
+        profiles=self.recipes['AutumnReusableFormwork']
+        composites=self.recipes['AutumnRefractoryCasting']
+        exchangers=self.recipes['AutumnCompositeDies']
+        self.assertIn(exchangers['output'],profiles['inputs'])
+        self.assertIn(profiles['output'],composites['inputs'])
+        self.assertIn(composites['output'],exchangers['inputs'])
+        self.assertEqual({r['building'] for r in (profiles,composites,exchangers)},
+                         {'Profiles Manufacture','Machine Shop','Foundry'})
 
 
 if __name__=='__main__':

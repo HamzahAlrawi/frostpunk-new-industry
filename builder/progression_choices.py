@@ -11,7 +11,7 @@ COLD = ('TechHaven','Winterhome','Default','Default_Endless_Builders','Default_E
 GENERATOR = tuple(name for name in COLD if name != 'Reconquest')
 GROWING = GENERATOR
 AUTUMN = ('Builders',)
-VERSION = '3.9.0'
+VERSION = '3.10.0'
 
 
 def add_choices(technology, specs, techinfo, data, buildings, blueprints, resources,
@@ -87,7 +87,7 @@ def add_choices(technology, specs, techinfo, data, buildings, blueprints, resour
         return [effect(key,kind,body)]
 
     def add(key,title,description,tier,wood,steel,hours,parents,scenarios,tab,
-            *,sites=(),globals_=(),extras=(),icon=(0,2),mechanic):
+            *,sites=(),globals_=(),extras=(),icon=(0,2),mechanic,introduced_in='3.9.0'):
         parents=[bytes.fromhex(existing[p]['guid'] if p in existing else native[p]['guid']) for p in parents]
         rest=uint(2)+uint(len(globals_))+b''.join(bytes.fromhex(g) for g in globals_)
         for values in (sites,extras):
@@ -97,13 +97,13 @@ def add_choices(technology, specs, techinfo, data, buildings, blueprints, resour
         research=technology(key,title,description,tier,2,parents,{'Wood':wood,'Steel':steel},hours,
                             icon,category,rest=rest,prerequisite_names=[])
         spec=specs[-1]
-        spec.update(scenarios=list(scenarios),preferred_tab=tab,mechanic=mechanic,added_in=VERSION)
+        spec.update(scenarios=list(scenarios),preferred_tab=tab,mechanic=mechanic,added_in=introduced_in)
         existing[key]=spec;additions.append(key)
         return research
 
-    def recipe(key,title,source,building,paths,output,amount,inputs,hours,research):
+    def recipe(key,title,source,building,paths,output,amount,inputs,hours,research,**options):
         record=encode_station_recipe(source_recipes,key,title,source,building,paths,output,amount,
-                                     inputs,hours,research,resources,guid,localize,costs,requirement)
+                                     inputs,hours,research,resources,guid,localize,costs,requirement,**options)
         recipes.append(record)
         for path in paths:
             targets.setdefault('gameentities/buildings/'+path+'.binarytemplate',[]).append(record[0])
@@ -113,11 +113,13 @@ def add_choices(technology, specs, techinfo, data, buildings, blueprints, resour
             if info['id']!=old_key:continue
             prefix=b'\1'+string('NI '+old_key)+recipe_id
             assert raw.startswith(prefix)
-            position=len(prefix);assert raw[position:position+4]==uint(1)
-            end=position+4+len(requirement(bytes.fromhex(info['unlock'])))
-            assert raw[position+4:end]==requirement(bytes.fromhex(info['unlock']))
-            raw=raw[:position]+uint(2)+raw[position+4:end]+negate(new_research)+raw[end:]
-            info=dict(info,excludes=[new_research.hex()])
+            position=len(prefix);count,=struct.unpack_from('<I',raw,position)
+            conditions=[requirement(bytes.fromhex(info['unlock']))]+[negate(bytes.fromhex(g)) for g in info.get('excludes',[])]
+            assert count==len(conditions)
+            end=position+4+sum(map(len,conditions))
+            assert raw[position+4:end]==b''.join(conditions)
+            raw=raw[:position]+uint(count+1)+raw[position+4:end]+negate(new_research)+raw[end:]
+            info=dict(info,excludes=info.get('excludes',[])+[new_research.hex()])
             previous_recipes[i]=(recipe_id,raw,info)
             return
         raise AssertionError(('Missing predecessor recipe',old_key))
@@ -247,4 +249,9 @@ def add_choices(technology, specs, techinfo, data, buildings, blueprints, resour
         2,52,28,10,['AutumnFabricationShifts'],AUTUMN,1,
         sites=place('AutumnArtisanGuilds',fabrication,[(84,'f',2.5),(96,'i',1)]),icon=(10,2),mechanic='port-supply-chain-specialisation')
     assert len(additions)==22
+    from resilience_expansion import add_resilience
+    add_resilience(add=add,place=place,reserve=reserve,recipe=recipe,supersede=supersede,
+                   clone=from_technology,effect=effect,records=records,places=places,
+                   resources=resources,existing=existing)
+    assert len(additions)==47
     return pack_modifiers(records),recipes,targets,additions
