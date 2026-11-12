@@ -2,18 +2,19 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.7.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.8.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.7.0/Frostpunk-New-Industry-3.7.0-Windows.zip) · [Research catalog](docs/research.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.8.0/Frostpunk-New-Industry-3.8.0-Windows.zip) · [Research catalog](docs/research.md) · [Changes in 3.8](docs/releases/3.8.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
 
 - **Renewable Steam Cores.** Research Factory fabrication and its improved production recipes.
-- **216 active research definitions across supported modes.** Expanded native tabs and City Mastery cover heating, medicine, housing, automation, extraction, scouting, and storage. Scenario research lists select the upgrades that fit each mode.
+- **209 active research definitions across supported modes.** Engineering, Industry, City Life, and Logistics join the native tabs. Scenario research lists select the upgrades that fit each mode. Added research is checked for duplicate effect packages, icon collisions, and crossing or obstructed prerequisite lines.
 - **An easier opening.** Research before Drawing Boards, additional starting supplies, and 25% faster base research.
 - **Stronger workplaces.** The permanent workplace-efficiency research bonuses grant at least 75% per upgrade where applicable.
 - **Alternate production.** Fuelled Stockpots, coal-heated and fermentation Hothouses, retort and rapid-coking kiln batches, baited fishing, dockside ration production, alternate generator-component recipes, and Warehouse salvage.
-- **New city strategies.** Larger Outpost and forager networks, safer Radical Treatment, cold protection, wider heat zones, and faster construction.
+- **New city strategies.** Safer Radical Treatment, cold protection, wider heat zones, faster construction, linked production-chain improvements, and large storm reserves. Added team-capacity perks have been removed; vanilla team research remains.
+- **Better timing.** Opening-game tools arrive earlier and cost less; late research supports sustained production, civic services in storms, and stronger generator stress management. A 1920-pixel-wide or larger display is recommended for the expanded tab bar.
 - **Core-saving building research.** Modular Hothouses, extraction machinery, and the restored Last Autumn Reloading Station discount.
 
 Research is included for A New Home, The Arks, The Refugees, The Fall of Winterhome, The Last Autumn, On The Edge, and applicable Endless modes. DLC features require the corresponding DLC. New-game supply bonuses apply when starting a new city.
@@ -46,8 +47,9 @@ Uninstall the previous version before installing an update. If an archive operat
 
 ## Testing status
 
-- The copy/insert patches reconstruct the same entries as the local 3.7.0 build.
+- The copy/insert patches reconstruct the same entries as the local 3.8.0 build.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
+- Research tests cover scenario membership, earlier unlocks, unique effect packages, and icon/prerequisite-line geometry. The local binary validator also checks actual serialized effect vectors and preserves all native technology and modifier records.
 - The mod's configuration and startup checks passed. Earlier builds completed full campaigns. The newest gameplay effects still need broader campaign testing, so this release is marked **beta**.
 
 When reporting a problem, include the mod version, scenario, game version, and the installer error or crash description. Installer logs are saved locally in the backup folder's parent directory.
@@ -61,7 +63,9 @@ Use Python 3.11 or newer for the builder. From this repository's root, run the f
 ```powershell
 python builder/prepare_sources.py --game "C:\Program Files (x86)\Steam\steamapps\common\Frostpunk"
 python builder/build_mod.py
+python builder/validate_build.py
 python builder/package_mod.py --originals "C:\Program Files (x86)\Steam\steamapps\common\Frostpunk"
+python builder/write_catalog.py
 python -m unittest discover -s tests -v
 ```
 
@@ -74,6 +78,13 @@ python -m PyInstaller --onefile --uac-admin --name Frostpunk-New-Industry --add-
 ```
 
 The executable is written to `dist/`. The GitHub workflow runs installer tests on Windows using synthetic fixtures.
+
+For a bounded local startup check, close Frostpunk and run
+`powershell -ExecutionPolicy Bypass -File builder/startup_check.ps1 -Game "D:\SteamLibrary\steamapps\common\Frostpunk"`.
+It launches and closes only its own test process, captures a fresh log, requires
+the six main game configurations to finish loading, and rejects serialization
+or decompression errors. Logs and a JSON result are written under
+`build/startup-check/`. It does not load a save or test campaign balance.
 
 ## License and credits
 

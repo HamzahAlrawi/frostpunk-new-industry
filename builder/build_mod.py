@@ -32,7 +32,6 @@ for name in ['Coal','Wood','Steel','Wooden Materials','Steel Plates','Steam Tool
     RES[name]=economy[p:p+16]
 TC=(SRC/'common/configs/frostpunktechnologiesconfig.bin').read_bytes()
 techinfo=json.loads((Path(__file__).resolve().parent/'cache/tech.json').read_text())
-research_columns=json.loads((Path(__file__).resolve().parent/'research_columns.json').read_text())
 TECH={t['name']:bytes.fromhex(t['guid']) for t in techinfo}
 TIERS={n:TECH[name] for n,name in [(1,'01_TierUnlock 1'),(2,'02_TierUnlock2'),(3,'03_TierUnlock3'),(4,'04_TierUnlock4'),(5,'05_TierUnlock5')]}
 CAT=gid('industry-category')
@@ -51,25 +50,23 @@ def technology(key,title,description,stage,col,prereqs,cost,hours,icon=(4,8),cat
                rest=None, effects=(), global_effects=(), extra_effects=(), prerequisite_names=None):
     g=gid('tech/'+key)
     allreq=([TIERS[stage]] if stage else [])+prereqs
-    occupied = [t['layout'][2] for t in techinfo
-                if t['category'] == category.hex() and t['layout'][3] == stage * 2]
-    occupied += [t['column'] for t in specs
-                 if t['category'] == category.hex() and t['tier'] == stage]
-    planned_column = research_columns.get(category.hex(), {}).get(key)
-    choices = ([planned_column] if planned_column is not None
-               else sorted(range(2, 21, 2), key=lambda x: (abs(x-col), x)))
-    col = next((x for x in choices if all(abs(x-y) >= 2 for y in occupied)), None)
-    assert col is not None, (key, stage)
+    # Final scenario-aware placement happens after all definitions and research
+    # sets are known. A provisional stock-tab layout must not limit that planner.
     prefix=b'\1FrostpunkTechnologyEntry\0'+string('NI '+key)+g+b'\1'
     entry=prefix+u32(len(allreq))+b''.join(req(v) for v in allreq)+u32(0)
     entry+=loc('Tech/'+key+'/Name',title)+loc('Tech/'+key+'/Description',description)+loc('Tech/'+key+'/Short',description)
     entry+=struct.pack('<4i',*icon,col,stage*2)+category+costs(cost)+f32(hours)+(TECH_REST if rest is None else rest)
     newtechs.append(entry)
     specs.append(dict(id=key,title=title,tier=stage,column=col,category=category.hex(),requires=[r.hex() for r in allreq],hours=hours,cost=cost,description=description,guid=g.hex(),effects=[(p.hex(),e.hex()) for p,e in effects]))
+    effect_data = TECH_REST if rest is None else rest
+    position = 4
+    for field, width in [('global_effects',16),('effects',32),('extra_effects',32)]:
+        count = struct.unpack_from('<I',effect_data,position)[0];position+=4
+        values = [effect_data[i:i+width] for i in range(position,position+count*width,width)]
+        specs[-1][field] = [v.hex() if width == 16 else (v[:16].hex(),v[16:].hex()) for v in values]
+        position += count*width
     if prerequisite_names is not None:
         specs[-1]['prerequisite_names'] = prerequisite_names
-        specs[-1]['global_effects'] = [effect.hex() for effect in global_effects]
-        specs[-1]['extra_effects'] = [(p.hex(),e.hex()) for p,e in extra_effects]
     return g
 
 BP=(SRC/'common/configs/frostpunkblueprintsconfig.bin').read_bytes()
@@ -170,16 +167,17 @@ suspended_ids = {action['id'] for action in suspended_actions}
 new_modifiers=(u32(struct.unpack_from('<I',new_modifiers)[0]+len(timed_modifiers))
                +b''.join(timed_modifiers)+new_modifiers[4:])
 
-assert {(tab,key,col) for tab,columns in research_columns.items() for key,col in columns.items()} <= {
-    (tech['category'],tech['id'],tech['column']) for tech in specs
-}
+from research_curation import REMOVED_TEAMS, curate, rebuild_entries, modifiers, effect_signature
+from research_layout import arrange
+from city_mastery import building_ids
+new_modifiers, redesigned = curate(specs,new_modifiers,gid,
+    building_ids((SRC/'common/configs/frostpunkbuildingsconfig.bin').read_bytes()),techinfo)
 
 old_category_count=struct.unpack_from('<I',TC,0)[0]
 tech_count_pos=techinfo[0]['start']-4
 last=techinfo[-1];last_cost_end=last['tail']+36+last['costcount']*20
 tech_end=last_cost_end+4+41
 assert TC[tech_end:tech_end+4]==u32(4)
-category=b'\1'+string('City Mastery')+MASTERY+loc('CityMastery/Tab','City Mastery')+u32(0)
 sets=research_curve(TC[tech_end:])
 from last_autumn import AUTUMN_TABS
 from on_the_edge import EDGE_SHARED
@@ -187,22 +185,32 @@ from mastery_expansion import EDGE_COMPATIBLE
 from industry_housing import EDGE_ADDITIONS
 trade_ids={"ScrapRecovery","DeepScrapRecovery","FuelledStockpots"}
 autumn_categories = {category.hex() for category in AUTUMN_TABS.values()}
+for spec in specs:
+    spec['scenario_scope']='autumn' if spec['category'] in autumn_categories else 'cold'
 retired = {
     'StormShutters','CavityWalls','ThermalVestibules','DeepHouseLagging','HouseHeat2',
     'AutumnFabricationKits','AutumnVentilationKits','AutumnDockTimber',
     'AutumnKitchenKits','AutumnHarbourKits','AutumnCanvasPatterns',
 }
+retired.update(REMOVED_TEAMS)
 edge_ids = {spec['id'] for spec in specs if spec['id'].startswith('Edge')}
 assert len(edge_ids)==16 and (EDGE_SHARED | EDGE_COMPATIBLE | EDGE_ADDITIONS) <= {spec['id'] for spec in specs}
 supported_sets = ['TechHaven','Winterhome','Default','Default_Endless_Builders','Default_Endless','Refugees','Builders','Reconquest']
 scenario_additions = {}
+research_order=[];pending=list(specs);ordered=set()
+mod_ids={t['guid'] for t in specs}
+while pending:
+    ready=[t for t in pending if all(g not in mod_ids or g in ordered for g in t['requires'])]
+    assert ready, ('Cyclic research prerequisites',[t['id'] for t in pending])
+    research_order.extend(ready);ordered.update(t['guid'] for t in ready)
+    pending=[t for t in pending if t not in ready]
 for name in supported_sets:
     marker=b'\1\1'+name.encode()+b'\0';p=sets.index(marker)+len(marker)+16
     n=struct.unpack_from('<I',sets,p)[0];end=p+4+n*16
     assert n<200
     members = {sets[i:i+16] for i in range(p+4,end,16)}
     additions = []
-    for spec in specs:
+    for spec in research_order:
         # Keep retired and suspended definitions registered for saves.
         if spec['id'] in retired or spec['id'] in suspended_ids:
             continue
@@ -224,7 +232,33 @@ for name in supported_sets:
         members.add(item)
     scenario_additions[name] = [item.hex() for item in additions]
     sets=sets[:p]+u32(n+len(additions))+sets[p+4:end]+b''.join(additions)+sets[end:]
-newTC=u32(old_category_count+1)+TC[4:tech_count_pos]+category+u32(len(techinfo)+len(newtechs))+TC[tech_count_pos+4:tech_end]+b''.join(newtechs)+sets
+research_tabs = arrange(specs,scenario_additions,gid)
+categories = b''.join(b'\1'+string(title)+bytes.fromhex(g)+loc('Tabs/'+g,title)+u32(0)
+                      for title,g in research_tabs)
+# Resolve native prerequisite names from the owned English table instead of
+# displaying internal IDs such as F 6_Healthcare Buildings - warmer.
+language=(SRC/'localizations/english.lang').read_bytes();position=8;native_texts={}
+for _ in range(struct.unpack_from('<I',language,4)[0]):
+    size=struct.unpack_from('<H',language,position)[0];position+=2
+    key=language[position:position+size];position+=size
+    size=struct.unpack_from('<H',language,position)[0];position+=2
+    native_texts[key]=language[position:position+size*2].decode('utf-16-le');position+=size*2
+assert position==len(language)
+for row in techinfo:
+    token=re.search(rb'\x01@([^\0]+)\0',TC[row['start']:row['tail']])
+    assert token
+    row['title']=native_texts[token[1]]
+rebuild_entries(specs,newtechs,techinfo,loc,req,costs)
+effect_records=modifiers(new_modifiers)
+for tech in specs:
+    tech['effect_fingerprint']=effect_signature(tech,effect_records)
+for name,ids in scenario_additions.items():
+    active=[t for t in specs if t['guid'] in ids]
+    fingerprints=[t['effect_fingerprint'] for t in active]
+    duplicate_groups=[[t['id'] for t in active if t['effect_fingerprint']==f]
+                      for f in set(fingerprints) if fingerprints.count(f)>1]
+    assert not duplicate_groups, (name,'duplicate research effects',duplicate_groups)
+newTC=u32(old_category_count+len(research_tabs))+TC[4:tech_count_pos]+categories+u32(len(techinfo)+len(newtechs))+TC[tech_count_pos+4:tech_end]+b''.join(newtechs)+sets
 
 # Increase actual kiln batch yields on its three existing production recipes.
 for name, before, after in [('CharcoalKiln_Coal',21,28),('CharcoalKiln_Coal2',28,35),('CharcoalKiln_Coal3',28,42)]:
@@ -299,7 +333,7 @@ for p in (SRC/'localizations').glob('*.lang'):
     patches['localizations'][p.name]=update_lang(p.read_bytes())
 
 from archive import NAMES
-manifest={'name':'Frostpunk: New Industry','version':'3.7.0','game_path':str(INSTALL_PATH),'technology_sets':supported_sets,'scenario_additions':scenario_additions,'retired_technologies':sorted(retired),'archives':{},'technologies':specs,'recipes':[x[2] for x in recipes],'field_operations':[],'suspended_field_operations':suspended_actions,'opening_stock_bonus':OPENING_STOCK,'base_research_multiplier':RESEARCH_SPEED,'sources':['https://github.com/Mystik738/frostract']}
+manifest={'name':'Frostpunk: New Industry','version':'3.8.0','game_path':str(INSTALL_PATH),'technology_sets':supported_sets,'scenario_additions':scenario_additions,'retired_technologies':sorted(retired),'removed_team_perks':sorted(REMOVED_TEAMS),'redesigned_technologies':sorted(redesigned),'research_tabs':research_tabs,'archives':{},'technologies':specs,'recipes':[x[2] for x in recipes],'field_operations':[],'suspended_field_operations':suspended_actions,'opening_stock_bonus':OPENING_STOCK,'base_research_multiplier':RESEARCH_SPEED,'sources':['https://github.com/Mystik738/frostract']}
 for base,files in patches.items():
     records=entries(base);byname={NAMES.get(e[1]):e for e in records};items=[]
     with (GAME/(base+'.dat')).open('rb') as src:
