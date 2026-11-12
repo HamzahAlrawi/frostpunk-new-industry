@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -109,6 +109,11 @@
       "8f3bdf5fd7cc6658acc74b988cba7f45",
       "dc58519a1d15a05bbd9496c36e645182",
       "0453622e31cfd551ae2da3d73a4992bf",
+      "c089717e3c4cc0519bb09cbc241f5fca",
+      "9642027e2c8b2b5bb017932e4f0a37dd",
+      "28c035b4b53980559718f4c68900b985",
+      "5eaa31cc2ac9e55c9f6b1368963cd67b",
+      "0d563c62cec2a751a50c42ce56930830",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "3a88a83542a3c55daca5d7d85e796153",
@@ -128,13 +133,20 @@
       "e6d85b00d84b40558cc3feaf0c0d8d3e",
       "d5543ea4ec8e4b57817100a5d526e11f",
       "a8c9b9c81a3bb552a1b11e47311d7526",
+      "d36c9f18792b9d569aab4a1186c75fe1",
+      "dadab41318ed545b9be41a48a0e7eb42",
+      "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
       "b1cb15a3cb688752ac4ca4de60587a1f",
       "2d8667988854a15f93f2235aebd8c410",
       "7d48eb3f6c6fb8518f3cfbeedbed9aab",
-      "d147116f8fc5b455a07498160bb49a31"
+      "d147116f8fc5b455a07498160bb49a31",
+      "5a5719aeace9e95a8b342ac70e6808ff",
+      "8e66d185bb156455bd42eaa03de3744e",
+      "be10e7791f2e465784bb93c921e507b5",
+      "e729fc4991a54758983b6bf65aea78d2"
     ],
     "Winterhome": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -240,6 +252,11 @@
       "8f3bdf5fd7cc6658acc74b988cba7f45",
       "dc58519a1d15a05bbd9496c36e645182",
       "0453622e31cfd551ae2da3d73a4992bf",
+      "c089717e3c4cc0519bb09cbc241f5fca",
+      "9642027e2c8b2b5bb017932e4f0a37dd",
+      "28c035b4b53980559718f4c68900b985",
+      "5eaa31cc2ac9e55c9f6b1368963cd67b",
+      "0d563c62cec2a751a50c42ce56930830",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "ae6d30ec553b7554893b6d3c55941735",
@@ -261,13 +278,20 @@
       "e6d85b00d84b40558cc3feaf0c0d8d3e",
       "d5543ea4ec8e4b57817100a5d526e11f",
       "a8c9b9c81a3bb552a1b11e47311d7526",
+      "d36c9f18792b9d569aab4a1186c75fe1",
+      "dadab41318ed545b9be41a48a0e7eb42",
+      "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
       "b1cb15a3cb688752ac4ca4de60587a1f",
       "2d8667988854a15f93f2235aebd8c410",
       "7d48eb3f6c6fb8518f3cfbeedbed9aab",
-      "d147116f8fc5b455a07498160bb49a31"
+      "d147116f8fc5b455a07498160bb49a31",
+      "5a5719aeace9e95a8b342ac70e6808ff",
+      "8e66d185bb156455bd42eaa03de3744e",
+      "be10e7791f2e465784bb93c921e507b5",
+      "e729fc4991a54758983b6bf65aea78d2"
     ],
     "Default": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -373,6 +397,11 @@
       "8f3bdf5fd7cc6658acc74b988cba7f45",
       "dc58519a1d15a05bbd9496c36e645182",
       "0453622e31cfd551ae2da3d73a4992bf",
+      "c089717e3c4cc0519bb09cbc241f5fca",
+      "9642027e2c8b2b5bb017932e4f0a37dd",
+      "28c035b4b53980559718f4c68900b985",
+      "5eaa31cc2ac9e55c9f6b1368963cd67b",
+      "0d563c62cec2a751a50c42ce56930830",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "ae6d30ec553b7554893b6d3c55941735",
@@ -394,13 +423,20 @@
       "e6d85b00d84b40558cc3feaf0c0d8d3e",
       "d5543ea4ec8e4b57817100a5d526e11f",
       "a8c9b9c81a3bb552a1b11e47311d7526",
+      "d36c9f18792b9d569aab4a1186c75fe1",
+      "dadab41318ed545b9be41a48a0e7eb42",
+      "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
       "b1cb15a3cb688752ac4ca4de60587a1f",
       "2d8667988854a15f93f2235aebd8c410",
       "7d48eb3f6c6fb8518f3cfbeedbed9aab",
-      "d147116f8fc5b455a07498160bb49a31"
+      "d147116f8fc5b455a07498160bb49a31",
+      "5a5719aeace9e95a8b342ac70e6808ff",
+      "8e66d185bb156455bd42eaa03de3744e",
+      "be10e7791f2e465784bb93c921e507b5",
+      "e729fc4991a54758983b6bf65aea78d2"
     ],
     "Default_Endless_Builders": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -504,6 +540,11 @@
       "8f3bdf5fd7cc6658acc74b988cba7f45",
       "dc58519a1d15a05bbd9496c36e645182",
       "0453622e31cfd551ae2da3d73a4992bf",
+      "c089717e3c4cc0519bb09cbc241f5fca",
+      "9642027e2c8b2b5bb017932e4f0a37dd",
+      "28c035b4b53980559718f4c68900b985",
+      "5eaa31cc2ac9e55c9f6b1368963cd67b",
+      "0d563c62cec2a751a50c42ce56930830",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "ae6d30ec553b7554893b6d3c55941735",
@@ -524,13 +565,21 @@
       "e6d85b00d84b40558cc3feaf0c0d8d3e",
       "d5543ea4ec8e4b57817100a5d526e11f",
       "a8c9b9c81a3bb552a1b11e47311d7526",
+      "d36c9f18792b9d569aab4a1186c75fe1",
+      "dadab41318ed545b9be41a48a0e7eb42",
+      "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
+      "6027b5f5733794578881d2a9c9983dc0",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
       "b1cb15a3cb688752ac4ca4de60587a1f",
       "2d8667988854a15f93f2235aebd8c410",
       "7d48eb3f6c6fb8518f3cfbeedbed9aab",
-      "d147116f8fc5b455a07498160bb49a31"
+      "d147116f8fc5b455a07498160bb49a31",
+      "5a5719aeace9e95a8b342ac70e6808ff",
+      "8e66d185bb156455bd42eaa03de3744e",
+      "be10e7791f2e465784bb93c921e507b5",
+      "e729fc4991a54758983b6bf65aea78d2"
     ],
     "Default_Endless": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -634,6 +683,11 @@
       "8f3bdf5fd7cc6658acc74b988cba7f45",
       "dc58519a1d15a05bbd9496c36e645182",
       "0453622e31cfd551ae2da3d73a4992bf",
+      "c089717e3c4cc0519bb09cbc241f5fca",
+      "9642027e2c8b2b5bb017932e4f0a37dd",
+      "28c035b4b53980559718f4c68900b985",
+      "5eaa31cc2ac9e55c9f6b1368963cd67b",
+      "0d563c62cec2a751a50c42ce56930830",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "ae6d30ec553b7554893b6d3c55941735",
@@ -654,13 +708,20 @@
       "e6d85b00d84b40558cc3feaf0c0d8d3e",
       "d5543ea4ec8e4b57817100a5d526e11f",
       "a8c9b9c81a3bb552a1b11e47311d7526",
+      "d36c9f18792b9d569aab4a1186c75fe1",
+      "dadab41318ed545b9be41a48a0e7eb42",
+      "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
       "b1cb15a3cb688752ac4ca4de60587a1f",
       "2d8667988854a15f93f2235aebd8c410",
       "7d48eb3f6c6fb8518f3cfbeedbed9aab",
-      "d147116f8fc5b455a07498160bb49a31"
+      "d147116f8fc5b455a07498160bb49a31",
+      "5a5719aeace9e95a8b342ac70e6808ff",
+      "8e66d185bb156455bd42eaa03de3744e",
+      "be10e7791f2e465784bb93c921e507b5",
+      "e729fc4991a54758983b6bf65aea78d2"
     ],
     "Refugees": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -766,6 +827,11 @@
       "8f3bdf5fd7cc6658acc74b988cba7f45",
       "dc58519a1d15a05bbd9496c36e645182",
       "0453622e31cfd551ae2da3d73a4992bf",
+      "c089717e3c4cc0519bb09cbc241f5fca",
+      "9642027e2c8b2b5bb017932e4f0a37dd",
+      "28c035b4b53980559718f4c68900b985",
+      "5eaa31cc2ac9e55c9f6b1368963cd67b",
+      "0d563c62cec2a751a50c42ce56930830",
       "de32113ab414de57bdd32f47254f5ff1",
       "38bfb6f45dacc25195dbbb5ef19120dd",
       "ae6d30ec553b7554893b6d3c55941735",
@@ -787,13 +853,20 @@
       "e6d85b00d84b40558cc3feaf0c0d8d3e",
       "d5543ea4ec8e4b57817100a5d526e11f",
       "a8c9b9c81a3bb552a1b11e47311d7526",
+      "d36c9f18792b9d569aab4a1186c75fe1",
+      "dadab41318ed545b9be41a48a0e7eb42",
+      "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
       "b1cb15a3cb688752ac4ca4de60587a1f",
       "2d8667988854a15f93f2235aebd8c410",
       "7d48eb3f6c6fb8518f3cfbeedbed9aab",
-      "d147116f8fc5b455a07498160bb49a31"
+      "d147116f8fc5b455a07498160bb49a31",
+      "5a5719aeace9e95a8b342ac70e6808ff",
+      "8e66d185bb156455bd42eaa03de3744e",
+      "be10e7791f2e465784bb93c921e507b5",
+      "e729fc4991a54758983b6bf65aea78d2"
     ],
     "Builders": [
       "2602139ab6918353a2d55f06696ca742",
@@ -845,6 +918,10 @@
       "5e181646ada7f15385f454c3cbccb000",
       "aeb17d0c9ecc4d5580e5027f5a58c5a4",
       "560a8771353bc653a755a9dae91a9f1d",
+      "04001777c5f39951aa2fdafceaa54fe6",
+      "aa1e98e149726a52a28eeb126bcea1ca",
+      "52c872a3b256f250a0d0a5d0c512a824",
+      "06673497548dd4539670c8681c5135a0",
       "5d23cddd8c089f5ea1e9cf088917b3cb",
       "8c2cdbda8200505d8c3048eac2098006",
       "7e2967717b45aa598f4fd70a3ee583a3",
@@ -857,8 +934,13 @@
       "d1a1c70875e07856a2375b786567a685",
       "728b3401cd432b5f9b15324f4f8abc40",
       "8e3943555bd408578386fa1a58ba7cf2",
+      "033e08265d36bf52ad96eb61c28d08d8",
+      "61ef73f36ae1a55c9c60f95de82d3e14",
+      "a0374f5ebcb7d452bcce7d8f07a1b7f9",
+      "7a6027a749a06556956a89afdd83f0ab",
       "56433270efdd0a51a59dce4e4527ed8f",
-      "b29f8dcd782808538ce3e2c542284280"
+      "b29f8dcd782808538ce3e2c542284280",
+      "51a8efa85a0da1559417d01a1b315076"
     ],
     "Reconquest": [
       "810d520980b7385ba43c20fedabb12cf",
@@ -930,6 +1012,10 @@
       "91c59eec9b651d5ab4f02f7336fe2f24",
       "02eb698f6167e458aaa4574d0600ba0b",
       "dc58519a1d15a05bbd9496c36e645182",
+      "c089717e3c4cc0519bb09cbc241f5fca",
+      "28c035b4b53980559718f4c68900b985",
+      "5eaa31cc2ac9e55c9f6b1368963cd67b",
+      "0d563c62cec2a751a50c42ce56930830",
       "de32113ab414de57bdd32f47254f5ff1",
       "3a88a83542a3c55daca5d7d85e796153",
       "e7fd91c7cbb0b256b16e445ed4b47713",
@@ -940,11 +1026,16 @@
       "efc10e16ae57055aa32da3ec513287c5",
       "e6d85b00d84b40558cc3feaf0c0d8d3e",
       "a8c9b9c81a3bb552a1b11e47311d7526",
+      "d36c9f18792b9d569aab4a1186c75fe1",
+      "dadab41318ed545b9be41a48a0e7eb42",
+      "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
       "b374ee7c39eed958b0fa9662ebaa4ae2",
       "aa7ab2687d081251933d9c263391b799",
       "e117daf03ee6a45f821ca11d2d569da5",
       "2d8667988854a15f93f2235aebd8c410",
-      "7d48eb3f6c6fb8518f3cfbeedbed9aab"
+      "7d48eb3f6c6fb8518f3cfbeedbed9aab",
+      "5a5719aeace9e95a8b342ac70e6808ff",
+      "be10e7791f2e465784bb93c921e507b5"
     ]
   },
   "technologies": [
@@ -952,7 +1043,7 @@
       "id": "Cores1",
       "title": "Steam Core Fabrication",
       "tier": 3,
-      "column": 2,
+      "column": 5,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
@@ -984,7 +1075,7 @@
       "id": "Cores2",
       "title": "Steam Core Assembly",
       "tier": 4,
-      "column": 2,
+      "column": 5,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
@@ -1016,7 +1107,7 @@
       "id": "Cores3",
       "title": "Serial Core Production",
       "tier": 5,
-      "column": 2,
+      "column": 5,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
@@ -1234,7 +1325,7 @@
       "id": "CoalMineOutput3",
       "title": "Deep-Seam Extraction Systems",
       "tier": 5,
-      "column": 14,
+      "column": 20,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
@@ -1324,7 +1415,7 @@
       "id": "DrillOutput",
       "title": "Deep-Wall Pressure Drilling",
       "tier": 4,
-      "column": 14,
+      "column": 8,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
@@ -1527,7 +1618,7 @@
       "id": "IndustrialHeat",
       "title": "Hot Rolling Halls",
       "tier": 4,
-      "column": 8,
+      "column": 17,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
@@ -1572,7 +1663,7 @@
       "id": "CoalMineHeat",
       "title": "Pressurised Mine Cabins",
       "tier": 3,
-      "column": 5,
+      "column": 8,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
@@ -1782,7 +1873,7 @@
       "id": "MedicalEfficiency2",
       "title": "Medical Post Triage",
       "tier": 2,
-      "column": 17,
+      "column": 20,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -1850,7 +1941,7 @@
       "id": "WardProtocols",
       "title": "Infirmary Recovery Suites",
       "tier": 3,
-      "column": 17,
+      "column": 20,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
@@ -2048,7 +2139,7 @@
       "id": "FlightRigs",
       "title": "Heavy-Lift Hunting Rigs",
       "tier": 3,
-      "column": 8,
+      "column": 11,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
@@ -2184,7 +2275,7 @@
       "id": "HubReturnLines",
       "title": "Steam Hub Return Lines",
       "tier": 5,
-      "column": 8,
+      "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
@@ -2381,7 +2472,7 @@
       "id": "CivicLagging",
       "title": "Civic Storm Shelters",
       "tier": 4,
-      "column": 5,
+      "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
@@ -2990,7 +3081,7 @@
       "id": "ModularWarehouses",
       "title": "Modular Warehousing",
       "tier": 3,
-      "column": 5,
+      "column": 2,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
@@ -3033,7 +3124,7 @@
       "id": "DeepCoalBins",
       "title": "Deep Coal Bins",
       "tier": 4,
-      "column": 5,
+      "column": 2,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
@@ -3115,7 +3206,7 @@
       "id": "GeneratorReheat",
       "title": "Generator Reheat Economiser",
       "tier": 4,
-      "column": 2,
+      "column": 8,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
@@ -3154,7 +3245,7 @@
       "id": "GeneratorSeal",
       "title": "Generator Pressure Seals",
       "tier": 5,
-      "column": 2,
+      "column": 8,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
@@ -3518,7 +3609,7 @@
       "id": "MineLifts",
       "title": "Pneumatic Mine Lifts",
       "tier": 4,
-      "column": 5,
+      "column": 14,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
@@ -3692,7 +3783,7 @@
       "id": "IndustrialStorm",
       "title": "Stormproof Industrial Districts",
       "tier": 5,
-      "column": 5,
+      "column": 14,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
@@ -3761,7 +3852,7 @@
       "id": "CitywideLagging2",
       "title": "Citywide Thermal Envelope II",
       "tier": 3,
-      "column": 2,
+      "column": 5,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
@@ -4244,7 +4335,7 @@
       "id": "CitywideLagging3",
       "title": "Citywide Thermal Envelope III",
       "tier": 5,
-      "column": 2,
+      "column": 11,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
@@ -4830,8 +4921,8 @@
       "id": "TentWindbreaks",
       "title": "Canvas Windbreaks",
       "tier": 0,
-      "column": 14,
-      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "column": 17,
+      "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [],
       "hours": 5,
       "cost": {
@@ -4849,7 +4940,7 @@
       "extra_effects": [],
       "prerequisite_names": [],
       "scenario_scope": "cold",
-      "tab": "City Life",
+      "tab": "Logistics",
       "icon": [
         5,
         9
@@ -5051,7 +5142,7 @@
       "id": "BunkhouseDraughtLocks",
       "title": "Bunkhouse Draught Locks",
       "tier": 1,
-      "column": 5,
+      "column": 8,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
@@ -5336,7 +5427,7 @@
       "id": "InfirmaryRounds",
       "title": "Infirmary Rapid Rounds",
       "tier": 2,
-      "column": 11,
+      "column": 14,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -5373,7 +5464,7 @@
       "id": "HangarCargoSlings",
       "title": "Hangar Cargo Slings",
       "tier": 2,
-      "column": 5,
+      "column": 2,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -5410,7 +5501,7 @@
       "id": "OutpostDispatch",
       "title": "Outpost Dispatch Sleds",
       "tier": 2,
-      "column": 17,
+      "column": 5,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -5579,7 +5670,7 @@
       "id": "AutumnDockSignals",
       "title": "Dock Signal Flags",
       "tier": 0,
-      "column": 8,
+      "column": 5,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "dbe5380cc055a68b1c42b5c31936cbb2"
@@ -5913,7 +6004,7 @@
       "id": "AutumnForagerSleds",
       "title": "Forager Trail Kits",
       "tier": 0,
-      "column": 5,
+      "column": 8,
       "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "a6b9b6d1c692ce849f4ecb8532b1023b"
@@ -6067,7 +6158,7 @@
       "id": "AutumnRapidRounds",
       "title": "Infirmary Rapid Rounds",
       "tier": 3,
-      "column": 5,
+      "column": 8,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
@@ -6134,7 +6225,7 @@
       "id": "AutumnWorkshopSeals",
       "title": "Workshop Draught Seals",
       "tier": 0,
-      "column": 17,
+      "column": 20,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
       "hours": 5,
@@ -6379,7 +6470,7 @@
       "id": "AutumnExchangerTemplates",
       "title": "Steam Exchanger Templates",
       "tier": 1,
-      "column": 2,
+      "column": 5,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
@@ -6416,7 +6507,7 @@
       "id": "AutumnCompositeJigs",
       "title": "Steel Composite Jigs",
       "tier": 2,
-      "column": 8,
+      "column": 11,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -6453,7 +6544,7 @@
       "id": "AutumnFabricationSafety",
       "title": "Protected Fabrication Halls",
       "tier": 2,
-      "column": 2,
+      "column": 5,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "ef520220d07ff699554142aa88c6647c"
@@ -7607,7 +7698,7 @@
       "id": "EdgeClinicRotas",
       "title": "Clinic Relief Rotas",
       "tier": 1,
-      "column": 2,
+      "column": 5,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
@@ -7982,7 +8073,7 @@
       "id": "MasteryIrrigation",
       "title": "Warm-Water Irrigation",
       "tier": 1,
-      "column": 2,
+      "column": 5,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
@@ -8132,7 +8223,7 @@
       "id": "MasteryClinicSteam",
       "title": "Clinic Steam Lines",
       "tier": 2,
-      "column": 14,
+      "column": 17,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -8218,7 +8309,7 @@
       "id": "MasteryProvisionLines",
       "title": "Provision Processing Lines",
       "tier": 2,
-      "column": 2,
+      "column": 5,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -8334,7 +8425,7 @@
       "id": "MasteryFuelDistrict",
       "title": "District Fuel Processing",
       "tier": 3,
-      "column": 14,
+      "column": 17,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
@@ -8424,7 +8515,7 @@
       "id": "MasteryWorksNetwork",
       "title": "Municipal Works Network",
       "tier": 5,
-      "column": 8,
+      "column": 17,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "6e2924ed908f5d8dac4365de9c73710d",
@@ -8689,7 +8780,7 @@
       "id": "InfirmaryRecoveryWards",
       "title": "Infirmary Recovery Wards",
       "tier": 3,
-      "column": 11,
+      "column": 14,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
@@ -8775,7 +8866,7 @@
       "id": "AutumnKilnShifts",
       "title": "Charcoal Kiln Stoking Crews",
       "tier": 2,
-      "column": 11,
+      "column": 14,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -8812,7 +8903,7 @@
       "id": "AutumnExchangerRigs",
       "title": "Heavy Fabrication Rigs",
       "tier": 2,
-      "column": 2,
+      "column": 5,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -8930,7 +9021,7 @@
       "id": "AutumnPortConsolidation",
       "title": "Consolidated Port Handling",
       "tier": 3,
-      "column": 2,
+      "column": 5,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "674ec59d62a6189d824c924030314da9"
@@ -9395,7 +9486,7 @@
       "id": "AutumnCoalCompactors",
       "title": "Port Coal Compactors",
       "tier": 2,
-      "column": 5,
+      "column": 8,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -9559,7 +9650,7 @@
       "id": "SteelworksShiftTeams",
       "title": "Steelworks Shift Teams",
       "tier": 3,
-      "column": 8,
+      "column": 2,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "674ec59d62a6189d824c924030314da9",
@@ -9604,7 +9695,7 @@
       "id": "SteelworksContinuousCasting",
       "title": "Continuous Casting",
       "tier": 4,
-      "column": 8,
+      "column": 2,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "96557513559e5c9fc44d4409e3849779",
@@ -9722,7 +9813,7 @@
       "id": "StarterSteelTooling",
       "title": "Steelworks Charge Bins",
       "tier": 0,
-      "column": 5,
+      "column": 8,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
       "hours": 4,
@@ -9761,7 +9852,7 @@
       "id": "StarterGeneratorGrates",
       "title": "Generator Draft Grates",
       "tier": 0,
-      "column": 8,
+      "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
       "hours": 4,
@@ -9792,8 +9883,8 @@
       "id": "StarterHubValves",
       "title": "Steam Hub Flow Valves",
       "tier": 0,
-      "column": 11,
-      "category": "262412b4cb6b7157a39b458552b93752",
+      "column": 5,
+      "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [],
       "hours": 4,
       "cost": {
@@ -9812,7 +9903,7 @@
       "extra_effects": [],
       "prerequisite_names": [],
       "scenario_scope": "cold",
-      "tab": "Engineering",
+      "tab": "Industry",
       "icon": [
         0,
         6
@@ -9853,7 +9944,7 @@
       "id": "StarterWardStoves",
       "title": "Insulated Sick Wards",
       "tier": 0,
-      "column": 11,
+      "column": 14,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
       "hours": 4,
@@ -9957,7 +10048,7 @@
       "id": "AutumnStarterFishing",
       "title": "Harbour Tidal Charts",
       "tier": 0,
-      "column": 17,
+      "column": 20,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [],
       "hours": 4,
@@ -9992,8 +10083,8 @@
       "id": "AutumnStarterSafety",
       "title": "Fabrication Safety Walkways",
       "tier": 0,
-      "column": 20,
-      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "column": 17,
+      "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [],
       "hours": 4,
       "cost": {
@@ -10020,7 +10111,7 @@
       "extra_effects": [],
       "prerequisite_names": [],
       "scenario_scope": "autumn",
-      "tab": "City Life",
+      "tab": "Engineering",
       "icon": [
         10,
         1
@@ -10066,7 +10157,7 @@
       "id": "AutumnGatheringReach",
       "title": "Gathering Sled Networks",
       "tier": 1,
-      "column": 8,
+      "column": 14,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5"
@@ -10101,7 +10192,7 @@
       "id": "HothouseCoreMounts",
       "title": "Modular Hothouse Core Mounts",
       "tier": 2,
-      "column": 8,
+      "column": 11,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -10215,7 +10306,7 @@
       "id": "ConservativeSurgery",
       "title": "Conservative Surgical Protocols",
       "tier": 1,
-      "column": 8,
+      "column": 2,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
@@ -10424,7 +10515,7 @@
       "id": "AutumnConservativeSurgery",
       "title": "Conservative Surgical Protocols",
       "tier": 2,
-      "column": 11,
+      "column": 8,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -10461,7 +10552,7 @@
       "id": "AutumnStormDutyClothing",
       "title": "Storm Duty Clothing",
       "tier": 2,
-      "column": 5,
+      "column": 11,
       "category": "262412b4cb6b7157a39b458552b93752",
       "requires": [
         "ef520220d07ff699554142aa88c6647c"
@@ -10754,7 +10845,7 @@
       "id": "AutumnRetortCharcoal",
       "title": "Retort Kiln Batches",
       "tier": 2,
-      "column": 17,
+      "column": 20,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -10848,7 +10939,7 @@
       "id": "AutumnFuelTemperedExchangers",
       "title": "Fuel-Tempered Exchangers",
       "tier": 1,
-      "column": 5,
+      "column": 11,
       "category": "57cf6cec363fd85ba792f38f8df3d9dd",
       "requires": [
         "ae4ab761365f5bbefd4822639a66ddf5",
@@ -10880,7 +10971,7 @@
       "id": "AutumnCharcoalAlloy",
       "title": "Charcoal-Alloy Composites",
       "tier": 2,
-      "column": 8,
+      "column": 14,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -10938,8 +11029,8 @@
       "id": "RapidCoking",
       "title": "Rapid Coking Beds",
       "tier": 2,
-      "column": 20,
-      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "column": 17,
+      "category": "32aaf6510801af5483917abb868d44f5",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
         "a33b85c6803ac3bef7436e5bcdc441ad"
@@ -10959,7 +11050,7 @@
         "Charcoal Kiln"
       ],
       "scenario_scope": "cold",
-      "tab": "City Life",
+      "tab": "Logistics",
       "icon": [
         8,
         3
@@ -10970,7 +11061,7 @@
       "id": "AutumnRapidCoking",
       "title": "Rapid Coking Beds",
       "tier": 2,
-      "column": 14,
+      "column": 17,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -11002,7 +11093,7 @@
       "id": "FermentationBeds",
       "title": "Fermentation Beds",
       "tier": 2,
-      "column": 5,
+      "column": 8,
       "category": "d2c081a930cd3a59970f8793c2e39352",
       "requires": [
         "ef520220d07ff699554142aa88c6647c",
@@ -11214,6 +11305,1230 @@
         7
       ],
       "effect_fingerprint": "unlock:5b912f32c00efa50a3882d00ca52fbb1"
+    },
+    {
+      "id": "SlowSimmeredBroth",
+      "title": "Slow-Simmered Broth",
+      "tier": 0,
+      "column": 11,
+      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "requires": [],
+      "hours": 4,
+      "cost": {
+        "Wood": 16,
+        "Steel": 5
+      },
+      "description": "Unlocks an optional Cookhouse recipe: 2 raw food and 6 coal become 8 standard rations in 30 working minutes. Conserves raw food but uses more coal and kitchen time than Fuelled Stockpots. Choose the recipe in the Cookhouse.\n\nRequires: No prior research.",
+      "guid": "c089717e3c4cc0519bb09cbc241f5fca",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "ration-fuel-trade",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "City Life",
+      "icon": [
+        5,
+        9
+      ],
+      "effect_fingerprint": "unlock:c089717e3c4cc0519bb09cbc241f5fca"
+    },
+    {
+      "id": "AutumnSlowSimmeredBroth",
+      "title": "Slow-Simmered Broth",
+      "tier": 0,
+      "column": 17,
+      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "requires": [],
+      "hours": 4,
+      "cost": {
+        "Wood": 16,
+        "Steel": 5
+      },
+      "description": "Unlocks an optional Cookhouse recipe: 2 raw food and 6 coal become 8 standard rations in 30 working minutes. Conserves raw food at the cost of coal and Cookhouse throughput. Choose the recipe in the Cookhouse.\n\nRequires: No prior research.",
+      "guid": "04001777c5f39951aa2fdafceaa54fe6",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "ration-fuel-trade",
+      "added_in": "3.9.0",
+      "scenario_scope": "autumn",
+      "tab": "City Life",
+      "icon": [
+        5,
+        9
+      ],
+      "effect_fingerprint": "unlock:04001777c5f39951aa2fdafceaa54fe6"
+    },
+    {
+      "id": "BoilerBufferDrums",
+      "title": "Pressure-Buffer Boiler Drums",
+      "tier": 0,
+      "column": 8,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [],
+      "hours": 5,
+      "cost": {
+        "Wood": 24,
+        "Steel": 10
+      },
+      "description": "Generator stress builds 50% more slowly. Trade-off: the Generator burns 20% more coal at every power and range setting, including when overdrive is off. Optional permanent specialisation for longer overdrive use.\n\nRequires: No prior research.",
+      "guid": "9642027e2c8b2b5bb017932e4f0a37dd",
+      "effects": [],
+      "global_effects": [
+        "0be3f613c0cd8d58ab9043cfed9bcbfb"
+      ],
+      "extra_effects": [
+        [
+          "f530dec315bad98b8d4026f8514a1fb7",
+          "637806c484f96a598147d5226e1d794d"
+        ]
+      ],
+      "prerequisite_names": [],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "overdrive-fuel-trade",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "Engineering",
+      "icon": [
+        1,
+        6
+      ],
+      "effect_fingerprint": "a054769ccfaf4a5853a82ce2bcbc85e4e526f5abfb6f386bc8abf9d2f3d8bac0"
+    },
+    {
+      "id": "LimbSparingSurgery",
+      "title": "Limb-Sparing Surgery",
+      "tier": 2,
+      "column": 2,
+      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "requires": [
+        "ef520220d07ff699554142aa88c6647c",
+        "3a3192eb88075255b674e623cf114b2e"
+      ],
+      "hours": 9,
+      "cost": {
+        "Wood": 48,
+        "Steel": 24
+      },
+      "description": "Medical Posts no longer cause amputations through Radical Treatment. The Radical Treatment law must be active; this does not prevent injuries, illness or deaths from other causes. An alternative to making every clinic an Infirmary.\n\nRequires: Drafting Machines, Conservative Surgical Protocols.",
+      "guid": "d36c9f18792b9d569aab4a1186c75fe1",
+      "effects": [
+        [
+          "f6a831d9683c3d9b904cd09ded358f8a",
+          "d3d3b43d76ca7957aa5947ee526374d1"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drafting Machines",
+        "Conservative Surgical Protocols"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "radical-treatment-amputation-prevention",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "City Life",
+      "icon": [
+        4,
+        9
+      ],
+      "effect_fingerprint": "212f7aafbbed20f781c49bd1817103cc014f1dacd0447bc3efd9a98a2b2e54b7"
+    },
+    {
+      "id": "AutumnLimbSparingSurgery",
+      "title": "Limb-Sparing Surgery",
+      "tier": 2,
+      "column": 11,
+      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "requires": [
+        "ef520220d07ff699554142aa88c6647c",
+        "b2b37ea0b494de5bb4311255bf5b40bb"
+      ],
+      "hours": 9,
+      "cost": {
+        "Wood": 48,
+        "Steel": 24
+      },
+      "description": "Medical Posts no longer cause amputations through Radical Treatment. The Radical Treatment law must be active; this does not prevent injuries, illness or deaths from other causes. An alternative to making every clinic an Infirmary.\n\nRequires: Drafting Machines, Conservative Surgical Protocols.",
+      "guid": "033e08265d36bf52ad96eb61c28d08d8",
+      "effects": [
+        [
+          "f6a831d9683c3d9b904cd09ded358f8a",
+          "1b0d14ef5bcaf553acd68f7c9cd8be43"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drafting Machines",
+        "Conservative Surgical Protocols"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "radical-treatment-amputation-prevention",
+      "added_in": "3.9.0",
+      "scenario_scope": "autumn",
+      "tab": "City Life",
+      "icon": [
+        4,
+        9
+      ],
+      "effect_fingerprint": "212f7aafbbed20f781c49bd1817103cc014f1dacd0447bc3efd9a98a2b2e54b7"
+    },
+    {
+      "id": "FieldInfirmaries",
+      "title": "Core-Free Field Infirmaries",
+      "tier": 3,
+      "column": 8,
+      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "requires": [
+        "674ec59d62a6189d824c924030314da9",
+        "6afafac429500daec3418c38d51a4138"
+      ],
+      "hours": 10,
+      "cost": {
+        "Wood": 58,
+        "Steel": 32
+      },
+      "description": "Infirmaries cost one fewer Steam Core to construct, removing their core requirement. Wood and steel costs stay the same. Expand advanced medical care without diverting cores from food production or industry.\n\nRequires: Mechanical Calculators, Infirmary.",
+      "guid": "28c035b4b53980559718f4c68900b985",
+      "effects": [],
+      "global_effects": [
+        "554953fe7ab8e3509a3d8df747033671"
+      ],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Mechanical Calculators",
+        "Infirmary"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "core-free-infirmaries",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "City Life",
+      "icon": [
+        4,
+        9
+      ],
+      "effect_fingerprint": "f562e5e273139f392948b664c1fbebb854c3dcf3a44a196924bc64396253565f"
+    },
+    {
+      "id": "AutumnFieldInfirmaries",
+      "title": "Core-Free Field Infirmaries",
+      "tier": 3,
+      "column": 2,
+      "category": "d2c081a930cd3a59970f8793c2e39352",
+      "requires": [
+        "674ec59d62a6189d824c924030314da9",
+        "480c4a5e54f8ef9bad47c25b433e74c8"
+      ],
+      "hours": 10,
+      "cost": {
+        "Wood": 58,
+        "Steel": 32
+      },
+      "description": "Infirmaries cost one fewer Steam Core to construct, removing their core requirement. Wood and steel costs stay the same. Expand advanced medical care without diverting cores from food production or industry.\n\nRequires: Mechanical Calculators, Infirmary.",
+      "guid": "aa1e98e149726a52a28eeb126bcea1ca",
+      "effects": [],
+      "global_effects": [
+        "04c4b9d65bb99d50a28d2f3512111fa0"
+      ],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Mechanical Calculators",
+        "Infirmary"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 2,
+      "mechanic": "core-free-infirmaries",
+      "added_in": "3.9.0",
+      "scenario_scope": "autumn",
+      "tab": "City Life",
+      "icon": [
+        4,
+        9
+      ],
+      "effect_fingerprint": "f562e5e273139f392948b664c1fbebb854c3dcf3a44a196924bc64396253565f"
+    },
+    {
+      "id": "CondensateHeaters",
+      "title": "Condensate-Recovery Heaters",
+      "tier": 4,
+      "column": 14,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779",
+        "cc82bf3b14fb9580334f3c51cbbf5233"
+      ],
+      "hours": 12,
+      "cost": {
+        "Wood": 70,
+        "Steel": 45
+      },
+      "description": "Active Heaters use 50% less coal while retaining their full heat output. Works alongside the native Heater Efficiency Upgrade, reducing the cost of dispersed, high-power workplace heating.\n\nRequires: Difference Engine, Heater Efficiency Upgrade.",
+      "guid": "5eaa31cc2ac9e55c9f6b1368963cd67b",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [
+        [
+          "ff609656897b3a9eac480fcbf07f0b5c",
+          "85d33f921cd2ec508402b07737e241b1"
+        ],
+        [
+          "af557ce6eac3f5ac16457c04a585eb7d",
+          "85d33f921cd2ec508402b07737e241b1"
+        ],
+        [
+          "92c055620b51e1bdff49b7cc682762a7",
+          "85d33f921cd2ec508402b07737e241b1"
+        ]
+      ],
+      "prerequisite_names": [
+        "Difference Engine",
+        "Heater Efficiency Upgrade"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "conditional-heater-fuel-saving",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "Engineering",
+      "icon": [
+        7,
+        7
+      ],
+      "effect_fingerprint": "c87be285c1cd8726bead6fb0816fe10e905c2bc1750b9e37b0d35c2b818bd075"
+    },
+    {
+      "id": "AutumnCondensateHeaters",
+      "title": "Condensate-Recovery Heaters",
+      "tier": 2,
+      "column": 2,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "ef520220d07ff699554142aa88c6647c",
+        "8c5bbe0aa595308f44456a6acfc42a6a"
+      ],
+      "hours": 8,
+      "cost": {
+        "Wood": 38,
+        "Steel": 20
+      },
+      "description": "Active Heaters use 50% less coal while retaining their full heat output. Works alongside the native Heater Efficiency Upgrade, reducing the cost of dispersed, high-power workplace heating.\n\nRequires: Drafting Machines, Heaters.",
+      "guid": "52c872a3b256f250a0d0a5d0c512a824",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [
+        [
+          "ff609656897b3a9eac480fcbf07f0b5c",
+          "daa22867ebf7d85ca25b69908149bf16"
+        ],
+        [
+          "af557ce6eac3f5ac16457c04a585eb7d",
+          "daa22867ebf7d85ca25b69908149bf16"
+        ],
+        [
+          "92c055620b51e1bdff49b7cc682762a7",
+          "daa22867ebf7d85ca25b69908149bf16"
+        ]
+      ],
+      "prerequisite_names": [
+        "Drafting Machines",
+        "Heaters"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "conditional-heater-fuel-saving",
+      "added_in": "3.9.0",
+      "scenario_scope": "autumn",
+      "tab": "Engineering",
+      "icon": [
+        7,
+        7
+      ],
+      "effect_fingerprint": "c87be285c1cd8726bead6fb0816fe10e905c2bc1750b9e37b0d35c2b818bd075"
+    },
+    {
+      "id": "ClosedCycleRetorts",
+      "title": "Closed-Cycle Pyrolysis",
+      "tier": 4,
+      "column": 11,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779",
+        "91c59eec9b651d5ab4f02f7336fe2f24"
+      ],
+      "hours": 13,
+      "cost": {
+        "Wood": 80,
+        "Steel": 50
+      },
+      "description": "Upgrades the Retort Kiln recipe: 4 wood and 8 coal produce 96 coal in 2 working hours. Net gain: 88 coal. Sacrifices throughput to conserve wood; Rapid Coking remains available for fast production. Replaces Retort Kiln Batches in the recipe selector.\n\nRequires: Difference Engine, Retort Kiln Batches.",
+      "guid": "dadab41318ed545b9be41a48a0e7eb42",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Difference Engine",
+        "Retort Kiln Batches"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "wood-saving-retort-replacement",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "Logistics",
+      "icon": [
+        8,
+        4
+      ],
+      "effect_fingerprint": "unlock:dadab41318ed545b9be41a48a0e7eb42"
+    },
+    {
+      "id": "AutumnClosedCycleRetorts",
+      "title": "Closed-Cycle Pyrolysis",
+      "tier": 3,
+      "column": 2,
+      "category": "57cf6cec363fd85ba792f38f8df3d9dd",
+      "requires": [
+        "674ec59d62a6189d824c924030314da9",
+        "b11f4f166e83b25d8aa544fc5ddee754"
+      ],
+      "hours": 9,
+      "cost": {
+        "Wood": 48,
+        "Steel": 25
+      },
+      "description": "Upgrades the Retort Kiln recipe: 4 wood and 8 coal produce 96 coal in 2 working hours. Net gain: 88 coal. Sacrifices throughput to conserve wood; Rapid Coking remains available for fast production. Replaces Retort Kiln Batches in the recipe selector.\n\nRequires: Mechanical Calculators, Retort Kiln Batches.",
+      "guid": "61ef73f36ae1a55c9c60f95de82d3e14",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Mechanical Calculators",
+        "Retort Kiln Batches"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 1,
+      "mechanic": "wood-saving-retort-replacement",
+      "added_in": "3.9.0",
+      "scenario_scope": "autumn",
+      "tab": "Industry",
+      "icon": [
+        8,
+        4
+      ],
+      "effect_fingerprint": "unlock:61ef73f36ae1a55c9c60f95de82d3e14"
+    },
+    {
+      "id": "CoreChargedRetorts",
+      "title": "Core-Charged Furnace Batches",
+      "tier": 5,
+      "column": 8,
+      "category": "57cf6cec363fd85ba792f38f8df3d9dd",
+      "requires": [
+        "6e2924ed908f5d8dac4365de9c73710d",
+        "b374ee7c39eed958b0fa9662ebaa4ae2",
+        "dadab41318ed545b9be41a48a0e7eb42"
+      ],
+      "hours": 20,
+      "cost": {
+        "Wood": 140,
+        "Steel": 115
+      },
+      "description": "Unlocks an optional Charcoal Kiln recipe: 20 wood and 1 Steam Core produce 1200 coal in 4 working hours. The core is consumed in every batch. Turns renewable core manufacturing into a high-throughput fuel supply; ordinary kiln recipes remain available.\n\nRequires: Automatic Prototyping, Serial Core Production, Closed-Cycle Pyrolysis.",
+      "guid": "be10e7791f2e465784bb93c921e507b5",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Automatic Prototyping",
+        "Serial Core Production",
+        "Closed-Cycle Pyrolysis"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 1,
+      "mechanic": "steam-core-to-fuel-chain",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "Industry",
+      "icon": [
+        8,
+        4
+      ],
+      "effect_fingerprint": "unlock:be10e7791f2e465784bb93c921e507b5"
+    },
+    {
+      "id": "ArtificialSpring",
+      "title": "Artificial Spring Cultivation",
+      "tier": 5,
+      "column": 2,
+      "category": "57cf6cec363fd85ba792f38f8df3d9dd",
+      "requires": [
+        "6e2924ed908f5d8dac4365de9c73710d",
+        "b374ee7c39eed958b0fa9662ebaa4ae2",
+        "0453622e31cfd551ae2da3d73a4992bf"
+      ],
+      "hours": 18,
+      "cost": {
+        "Wood": 125,
+        "Steel": 95
+      },
+      "description": "Unlocks Hothouse burst-growing recipes. A Hothouse spends 1 Steam Core and 24 coal for 100 raw food in 6 working hours; an Industrial Hothouse produces 180. Consumes the core each batch. Build food reserves before storms; this does not bypass weather shutdowns.\n\nRequires: Automatic Prototyping, Serial Core Production, Fermentation Beds.",
+      "guid": "e729fc4991a54758983b6bf65aea78d2",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Automatic Prototyping",
+        "Serial Core Production",
+        "Fermentation Beds"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees"
+      ],
+      "preferred_tab": 1,
+      "mechanic": "steam-core-to-food-chain",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "Industry",
+      "icon": [
+        4,
+        8
+      ],
+      "effect_fingerprint": "unlock:e729fc4991a54758983b6bf65aea78d2"
+    },
+    {
+      "id": "DistributedCaches",
+      "title": "Neighbourhood Cache Networks",
+      "tier": 4,
+      "column": 14,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779"
+      ],
+      "hours": 13,
+      "cost": {
+        "Wood": 85,
+        "Steel": 55
+      },
+      "description": "Small Resource Depots gain 300% capacity for coal, wood, steel, raw food and food rations. Large Resource Depots are unaffected. Gives compact, distributed depots a distinct role instead of forcing every stockyard to use large warehouses.\n\nRequires: Difference Engine.",
+      "guid": "0d563c62cec2a751a50c42ce56930830",
+      "effects": [
+        [
+          "5fed86e519e68f92f140c0bd1de72a7c",
+          "4b6bfd88cccdef5a9e14b77fa466a2c7"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Difference Engine"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "small-depot-specialisation",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "Logistics",
+      "icon": [
+        3,
+        6
+      ],
+      "effect_fingerprint": "295d0629f305858af90c1e087fc7ffcec735aadf62b57e7bb3d4e4cc70080cfa"
+    },
+    {
+      "id": "AutumnDistributedCaches",
+      "title": "Neighbourhood Cache Networks",
+      "tier": 1,
+      "column": 8,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "ae4ab761365f5bbefd4822639a66ddf5"
+      ],
+      "hours": 6,
+      "cost": {
+        "Wood": 28,
+        "Steel": 12
+      },
+      "description": "Small Resource Depots gain 200% capacity for coal, wood, steel, raw food and food rations. Large Resource Depots are unaffected. Gives compact, distributed depots a distinct role instead of forcing every stockyard to use large warehouses.\n\nRequires: Drawing Boards.",
+      "guid": "06673497548dd4539670c8681c5135a0",
+      "effects": [
+        [
+          "5fed86e519e68f92f140c0bd1de72a7c",
+          "e29f132a29c20d5488d5054ad804579a"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drawing Boards"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "small-depot-specialisation",
+      "added_in": "3.9.0",
+      "scenario_scope": "autumn",
+      "tab": "Logistics",
+      "icon": [
+        3,
+        6
+      ],
+      "effect_fingerprint": "36c27e7a94b454e0c7928a30250a3085365105c2945b3e3cdf64d96c11594493"
+    },
+    {
+      "id": "PolarProvisionVaults",
+      "title": "Polar Provision Vaults",
+      "tier": 5,
+      "column": 5,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "6e2924ed908f5d8dac4365de9c73710d",
+        "e7fd91c7cbb0b256b16e445ed4b47713"
+      ],
+      "hours": 20,
+      "cost": {
+        "Wood": 150,
+        "Steel": 120
+      },
+      "description": "Large Resource Depots gain 500% capacity for raw food and food rations, and 300% capacity for coal. Other resources and small depots are unaffected. Specialise large warehouses as food and heating reserves for prolonged supply interruptions.\n\nRequires: Automatic Prototyping, Modular Warehousing.",
+      "guid": "5a5719aeace9e95a8b342ac70e6808ff",
+      "effects": [
+        [
+          "d17fb879d88864a9444ee0283802c4cd",
+          "ebd13af54d9733538c570319b10c9a6f"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Automatic Prototyping",
+        "Modular Warehousing"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "large-depot-storm-reserves",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "Logistics",
+      "icon": [
+        3,
+        6
+      ],
+      "effect_fingerprint": "78f4752cb03cc3132146b36c8b1bc72e23a8b0648e4e9c9162bd5b206c8ec510"
+    },
+    {
+      "id": "WinterArtisanGuilds",
+      "title": "Winter Artisan Guilds",
+      "tier": 4,
+      "column": 5,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "96557513559e5c9fc44d4409e3849779",
+        "53ffb712bb43d25f902dc25414670b75"
+      ],
+      "hours": 18,
+      "cost": {
+        "Wood": 130,
+        "Steel": 95
+      },
+      "description": "Human crews gain 150% workplace efficiency at Gathering Posts, resource-extraction buildings, Kilns, Factories and Workshops, plus the Army Warehouse where present. Those workplaces also gain +2 insulation. Automaton efficiency is unchanged; supports a sheltered, human-staffed industrial city.\n\nRequires: Difference Engine, Collaborative Design Bureau.",
+      "guid": "c1b991db6fbf7b5e8bb2e0afdb1f7a62",
+      "effects": [
+        [
+          "b3ddd6b2ab8342a76949f39f8efb0c07",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "86c6b20dcd79b083a048d4461ff99971",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "fad2f1d169d320b4b5481ccae7d014f7",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "a2d3c14ee1070c8f9e4d81dcc8dc161d",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "e9206f847f7b51a5404fe88109f9838d",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "42e71b620a0fd9a0ad422b42bbcf2893",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "7f5d92438ed6d18e994473ff2014dc3d",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "7226772eb77bc49f9c4c520f3df2c7dc",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "06cdc0a0e6d288a8d2435294d142c9b5",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "a18dbc3c1439ba9c04447717e2610bfd",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "44b57d5b4469cca01141048637022110",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "b632fa1cb69bc086874602c5f4b57a44",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "145e292916c2d6826b4c1b7cd624f1ce",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "c4a1ac4584d524a749436429f81880a3",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "56095fe021668d807d45337b109a71d8",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "20e819887723898b4b46612b11d272f6",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "ef89bf3e0a1a40bfa149355bdc4e83b5",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ],
+        [
+          "8ba3f0878462afaac64fb87803841b4e",
+          "aa99640a2a1dfb5cb3e1f7face5aabb8"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Difference Engine",
+        "Collaborative Design Bureau"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "human-industry-specialisation",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "Engineering",
+      "icon": [
+        8,
+        0
+      ],
+      "effect_fingerprint": "27f1f009d25beb756283162994b4df6119d8c03164a292d7151cba5da86a5770"
+    },
+    {
+      "id": "AutonomousMaintenance",
+      "title": "Autonomous Maintenance Network",
+      "tier": 5,
+      "column": 2,
+      "category": "262412b4cb6b7157a39b458552b93752",
+      "requires": [
+        "6e2924ed908f5d8dac4365de9c73710d",
+        "4a4e2a51ff78025a8a897f21b2ddf40e",
+        "de32113ab414de57bdd32f47254f5ff1"
+      ],
+      "hours": 24,
+      "cost": {
+        "Wood": 170,
+        "Steel": 140
+      },
+      "description": "Automatons gain 150% workplace efficiency at Gathering Posts, resource-extraction buildings, Kilns, Factories and Workshops, plus the Army Warehouse where present. Human efficiency is unchanged. Normal automaton workplace permissions still apply; supports a city supplied by round-the-clock machine labour.\n\nRequires: Automatic Prototyping, Clockwork Synchronisers, Steam Core Assembly.",
+      "guid": "8e66d185bb156455bd42eaa03de3744e",
+      "effects": [
+        [
+          "b3ddd6b2ab8342a76949f39f8efb0c07",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "86c6b20dcd79b083a048d4461ff99971",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "fad2f1d169d320b4b5481ccae7d014f7",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "a2d3c14ee1070c8f9e4d81dcc8dc161d",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "e9206f847f7b51a5404fe88109f9838d",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "42e71b620a0fd9a0ad422b42bbcf2893",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "7f5d92438ed6d18e994473ff2014dc3d",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "7226772eb77bc49f9c4c520f3df2c7dc",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "06cdc0a0e6d288a8d2435294d142c9b5",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "a18dbc3c1439ba9c04447717e2610bfd",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "44b57d5b4469cca01141048637022110",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "b632fa1cb69bc086874602c5f4b57a44",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "145e292916c2d6826b4c1b7cd624f1ce",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "c4a1ac4584d524a749436429f81880a3",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "56095fe021668d807d45337b109a71d8",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "20e819887723898b4b46612b11d272f6",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "ef89bf3e0a1a40bfa149355bdc4e83b5",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ],
+        [
+          "8ba3f0878462afaac64fb87803841b4e",
+          "36443e9b22b4a15692d35c3d1f4d8bd8"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Automatic Prototyping",
+        "Clockwork Synchronisers",
+        "Steam Core Assembly"
+      ],
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees"
+      ],
+      "preferred_tab": 0,
+      "mechanic": "automaton-specialisation",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "Engineering",
+      "icon": [
+        2,
+        5
+      ],
+      "effect_fingerprint": "aa6a722d7f1df7dd02242c9e01098bfaa1af6c84f82ec8533d83e0ba50690c56"
+    },
+    {
+      "id": "BuilderAssemblyPlatforms",
+      "title": "Riveted Assembly Platforms",
+      "tier": 2,
+      "column": 5,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "ef520220d07ff699554142aa88c6647c",
+        "53ffb712bb43d25f902dc25414670b75"
+      ],
+      "hours": 7,
+      "cost": {
+        "Wood": 38,
+        "Steel": 18
+      },
+      "description": "Generator construction workplaces gain 100% workplace efficiency. Applies to staffed Generator construction phases in Endless Builders; finished Generators and ordinary Workshops are unaffected.\n\nRequires: Drafting Machines, Collaborative Design Bureau.",
+      "guid": "6027b5f5733794578881d2a9c9983dc0",
+      "effects": [
+        [
+          "d5e2e84d6af6df856444230d95d7eab8",
+          "6bd0fede596c5e58901cac6e64df8a24"
+        ],
+        [
+          "190fe02635d0bbba4e4dee3e0a5fe227",
+          "6bd0fede596c5e58901cac6e64df8a24"
+        ],
+        [
+          "1d0f17b5e1b5848f7642896b83d1d8a3",
+          "6bd0fede596c5e58901cac6e64df8a24"
+        ],
+        [
+          "f21ac9ebcc5230826a4d639f806d1bc5",
+          "6bd0fede596c5e58901cac6e64df8a24"
+        ],
+        [
+          "288002c53f4dce8eb74c5b85985bc54e",
+          "6bd0fede596c5e58901cac6e64df8a24"
+        ],
+        [
+          "a8876e2569228abae3459dc16c06041b",
+          "6bd0fede596c5e58901cac6e64df8a24"
+        ],
+        [
+          "a706b3bc0b855888714b94a6febd834b",
+          "6bd0fede596c5e58901cac6e64df8a24"
+        ],
+        [
+          "58b49d9ae145a390da4645b5e201841c",
+          "6bd0fede596c5e58901cac6e64df8a24"
+        ],
+        [
+          "56a83b556caaeba6d34655e52d93ac12",
+          "6bd0fede596c5e58901cac6e64df8a24"
+        ],
+        [
+          "a6933c0e8ee0f3bcfc4ba71acd443aad",
+          "6bd0fede596c5e58901cac6e64df8a24"
+        ],
+        [
+          "68daa512ce25cc9d68405f9caaa1aa95",
+          "6bd0fede596c5e58901cac6e64df8a24"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drafting Machines",
+        "Collaborative Design Bureau"
+      ],
+      "scenarios": [
+        "Default_Endless_Builders"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "generator-assembly-specialisation",
+      "added_in": "3.9.0",
+      "scenario_scope": "cold",
+      "tab": "Logistics",
+      "icon": [
+        3,
+        6
+      ],
+      "effect_fingerprint": "711c150c3f39e8c01afafb0a4b36fa6b50c03961b4e1975ffe96d5830ce32db7"
+    },
+    {
+      "id": "AutumnAssemblyPlatforms",
+      "title": "Riveted Assembly Platforms",
+      "tier": 1,
+      "column": 8,
+      "category": "57cf6cec363fd85ba792f38f8df3d9dd",
+      "requires": [
+        "ae4ab761365f5bbefd4822639a66ddf5",
+        "bef5aa169a1e305383dd02c96164b4ab"
+      ],
+      "hours": 7,
+      "cost": {
+        "Wood": 38,
+        "Steel": 18
+      },
+      "description": "Generator construction workplaces gain 100% workplace efficiency. They also gain +1 workplace safety, helping maintain assembly speed without accepting the full accident risk.\n\nRequires: Drawing Boards, Profile Shop Guardrails.",
+      "guid": "51a8efa85a0da1559417d01a1b315076",
+      "effects": [
+        [
+          "d5e2e84d6af6df856444230d95d7eab8",
+          "9d3480c26e2771589e034bd1e02364b0"
+        ],
+        [
+          "190fe02635d0bbba4e4dee3e0a5fe227",
+          "9d3480c26e2771589e034bd1e02364b0"
+        ],
+        [
+          "1d0f17b5e1b5848f7642896b83d1d8a3",
+          "9d3480c26e2771589e034bd1e02364b0"
+        ],
+        [
+          "f21ac9ebcc5230826a4d639f806d1bc5",
+          "9d3480c26e2771589e034bd1e02364b0"
+        ],
+        [
+          "288002c53f4dce8eb74c5b85985bc54e",
+          "9d3480c26e2771589e034bd1e02364b0"
+        ],
+        [
+          "a8876e2569228abae3459dc16c06041b",
+          "9d3480c26e2771589e034bd1e02364b0"
+        ],
+        [
+          "a706b3bc0b855888714b94a6febd834b",
+          "9d3480c26e2771589e034bd1e02364b0"
+        ],
+        [
+          "58b49d9ae145a390da4645b5e201841c",
+          "9d3480c26e2771589e034bd1e02364b0"
+        ],
+        [
+          "56a83b556caaeba6d34655e52d93ac12",
+          "9d3480c26e2771589e034bd1e02364b0"
+        ],
+        [
+          "a6933c0e8ee0f3bcfc4ba71acd443aad",
+          "9d3480c26e2771589e034bd1e02364b0"
+        ],
+        [
+          "68daa512ce25cc9d68405f9caaa1aa95",
+          "9d3480c26e2771589e034bd1e02364b0"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drawing Boards",
+        "Profile Shop Guardrails"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 1,
+      "mechanic": "generator-assembly-specialisation",
+      "added_in": "3.9.0",
+      "scenario_scope": "autumn",
+      "tab": "Industry",
+      "icon": [
+        3,
+        6
+      ],
+      "effect_fingerprint": "d4240195dc0d81bb0eb65ef01d96923ba455a21a752efc660a70d73628b3a120"
+    },
+    {
+      "id": "AutumnFarWaterTrawlers",
+      "title": "Far-Water Trawling",
+      "tier": 2,
+      "column": 14,
+      "category": "32aaf6510801af5483917abb868d44f5",
+      "requires": [
+        "ef520220d07ff699554142aa88c6647c",
+        "b11b8ed42a73e35195ed6cf2b7fbfb0e"
+      ],
+      "hours": 8,
+      "cost": {
+        "Wood": 40,
+        "Steel": 22
+      },
+      "description": "Unlocks optional Fishing Harbour recipes: 1 ration, 1 wood and 4 coal produce 12 raw food, or 18 at an Advanced Harbour, in 2.5 working hours. Uses less bait per catch than Baited Nets, but more fuel and crew time. A supply-efficiency option rather than the fastest catch.\n\nRequires: Drafting Machines, Baited Deep-Water Nets.",
+      "guid": "a0374f5ebcb7d452bcce7d8f07a1b7f9",
+      "effects": [],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drafting Machines",
+        "Baited Deep-Water Nets"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 3,
+      "mechanic": "fishing-bait-throughput-trade",
+      "added_in": "3.9.0",
+      "scenario_scope": "autumn",
+      "tab": "Logistics",
+      "icon": [
+        4,
+        4
+      ],
+      "effect_fingerprint": "unlock:a0374f5ebcb7d452bcce7d8f07a1b7f9"
+    },
+    {
+      "id": "AutumnArtisanGuilds",
+      "title": "Port Craft Apprenticeships",
+      "tier": 2,
+      "column": 2,
+      "category": "57cf6cec363fd85ba792f38f8df3d9dd",
+      "requires": [
+        "ef520220d07ff699554142aa88c6647c",
+        "7e8116d933685a589dd082b728b69f03"
+      ],
+      "hours": 10,
+      "cost": {
+        "Wood": 52,
+        "Steel": 28
+      },
+      "description": "Human crews gain 150% workplace efficiency at Profiles Manufactures, Machine Shops, Foundries, Docks and Reloading Stations. These workplaces also gain +1 insulation, strengthening the whole delivery-to-assembly supply chain before the freeze.\n\nRequires: Drafting Machines, Fabrication Shift Boards.",
+      "guid": "7a6027a749a06556956a89afdd83f0ab",
+      "effects": [
+        [
+          "935df85f1c35deb4284be03f97921b98",
+          "a0dccee2c6e9d957b39f1e332ef9d848"
+        ],
+        [
+          "810a05bcf49060b79942c3f1997ca349",
+          "a0dccee2c6e9d957b39f1e332ef9d848"
+        ],
+        [
+          "cbb9755fae0edbb55c4b851327a00cb0",
+          "a0dccee2c6e9d957b39f1e332ef9d848"
+        ],
+        [
+          "e36a9e9894d3b3b2874de6bf29752742",
+          "a0dccee2c6e9d957b39f1e332ef9d848"
+        ],
+        [
+          "08e31ad1ce7604bdba4f22966d6d9bec",
+          "a0dccee2c6e9d957b39f1e332ef9d848"
+        ],
+        [
+          "0435ebc146ab6387504353ff92d3c12d",
+          "a0dccee2c6e9d957b39f1e332ef9d848"
+        ],
+        [
+          "e5d9d386eb295a8a2742418f32b65164",
+          "a0dccee2c6e9d957b39f1e332ef9d848"
+        ],
+        [
+          "d585ae735bc4e0b4964c878dbc1b6680",
+          "a0dccee2c6e9d957b39f1e332ef9d848"
+        ],
+        [
+          "e022a538f6ef66ad9d4e00c59d53db08",
+          "a0dccee2c6e9d957b39f1e332ef9d848"
+        ]
+      ],
+      "global_effects": [],
+      "extra_effects": [],
+      "prerequisite_names": [
+        "Drafting Machines",
+        "Fabrication Shift Boards"
+      ],
+      "scenarios": [
+        "Builders"
+      ],
+      "preferred_tab": 1,
+      "mechanic": "port-supply-chain-specialisation",
+      "added_in": "3.9.0",
+      "scenario_scope": "autumn",
+      "tab": "Industry",
+      "icon": [
+        10,
+        2
+      ],
+      "effect_fingerprint": "ae85dd0234e4aa1fc37629f87c3b1d01da86a2b5e7b99c5943786fe3287ad9ea"
     }
   ],
   "recipes": [
@@ -11228,6 +12543,14 @@
         "Coal": 60
       },
       "hours": 24,
+      "building": "Factory",
+      "targets": [
+        "resourceprocessing/prefabfactory"
+      ],
+      "unlock": "810d520980b7385ba43c20fedabb12cf",
+      "excludes": [
+        "de32113ab414de57bdd32f47254f5ff1"
+      ],
       "native_prosthetics_requirements": false
     },
     {
@@ -11241,6 +12564,14 @@
         "Coal": 50
       },
       "hours": 16,
+      "building": "Factory",
+      "targets": [
+        "resourceprocessing/prefabfactory"
+      ],
+      "unlock": "de32113ab414de57bdd32f47254f5ff1",
+      "excludes": [
+        "b374ee7c39eed958b0fa9662ebaa4ae2"
+      ],
       "native_prosthetics_requirements": false
     },
     {
@@ -11254,6 +12585,12 @@
         "Coal": 40
       },
       "hours": 10,
+      "building": "Factory",
+      "targets": [
+        "resourceprocessing/prefabfactory"
+      ],
+      "unlock": "b374ee7c39eed958b0fa9662ebaa4ae2",
+      "excludes": [],
       "native_prosthetics_requirements": false
     },
     {
@@ -11266,6 +12603,14 @@
         "Coal": 30
       },
       "hours": 5,
+      "building": "Factory",
+      "targets": [
+        "resourceprocessing/prefabfactory"
+      ],
+      "unlock": "6ddda58c085d395c89fd755fbba51ebc",
+      "excludes": [
+        "a8c9b9c81a3bb552a1b11e47311d7526"
+      ],
       "native_prosthetics_requirements": false
     },
     {
@@ -11278,6 +12623,12 @@
         "Coal": 26
       },
       "hours": 5,
+      "building": "Factory",
+      "targets": [
+        "resourceprocessing/prefabfactory"
+      ],
+      "unlock": "a8c9b9c81a3bb552a1b11e47311d7526",
+      "excludes": [],
       "native_prosthetics_requirements": false
     },
     {
@@ -11290,7 +12641,11 @@
         "Coal": 1
       },
       "hours": 0.15,
-      "building": "Cookhouse"
+      "building": "Cookhouse",
+      "unlock": "a17c72f5cc9f9858b401695b2a8c948d",
+      "targets": [
+        "resourceprocessing/foodprocessing"
+      ]
     },
     {
       "id": "RetortCharcoal",
@@ -11307,6 +12662,9 @@
       "unlock": "91c59eec9b651d5ab4f02f7336fe2f24",
       "targets": [
         "resourceprocessing/charcoalkiln"
+      ],
+      "excludes": [
+        "dadab41318ed545b9be41a48a0e7eb42"
       ]
     },
     {
@@ -11356,6 +12714,9 @@
       "unlock": "b11f4f166e83b25d8aa544fc5ddee754",
       "targets": [
         "resourceprocessing/charcoalkiln"
+      ],
+      "excludes": [
+        "61ef73f36ae1a55c9c60f95de82d3e14"
       ]
     },
     {
@@ -11563,6 +12924,163 @@
         "builders/dock_fishingv2",
         "builders/docks/dockfishingproper_lvl2"
       ]
+    },
+    {
+      "id": "SlowSimmeredBroth",
+      "title": "Slow-Simmered Broth",
+      "output": "Food Rations",
+      "amount": 8,
+      "inputs": {
+        "Raw Food": 2,
+        "Coal": 6
+      },
+      "hours": 0.5,
+      "building": "Cookhouse",
+      "source_blueprint": "Canteen_FoodRations_standard",
+      "unlock": "c089717e3c4cc0519bb09cbc241f5fca",
+      "targets": [
+        "resourceprocessing/foodprocessing"
+      ]
+    },
+    {
+      "id": "AutumnSlowSimmeredBroth",
+      "title": "Slow-Simmered Broth",
+      "output": "Food Rations",
+      "amount": 8,
+      "inputs": {
+        "Raw Food": 2,
+        "Coal": 6
+      },
+      "hours": 0.5,
+      "building": "Cookhouse",
+      "source_blueprint": "Canteen_FoodRations_standard",
+      "unlock": "04001777c5f39951aa2fdafceaa54fe6",
+      "targets": [
+        "resourceprocessing/foodprocessing"
+      ]
+    },
+    {
+      "id": "ClosedCycleRetorts",
+      "title": "Closed-Cycle Pyrolysis",
+      "output": "Coal",
+      "amount": 96,
+      "inputs": {
+        "Wood": 4,
+        "Coal": 8
+      },
+      "hours": 2,
+      "building": "Charcoal Kiln",
+      "source_blueprint": "CharcoalKiln_Coal",
+      "unlock": "dadab41318ed545b9be41a48a0e7eb42",
+      "targets": [
+        "resourceprocessing/charcoalkiln"
+      ]
+    },
+    {
+      "id": "AutumnClosedCycleRetorts",
+      "title": "Closed-Cycle Pyrolysis",
+      "output": "Coal",
+      "amount": 96,
+      "inputs": {
+        "Wood": 4,
+        "Coal": 8
+      },
+      "hours": 2,
+      "building": "Charcoal Kiln",
+      "source_blueprint": "CharcoalKiln_Coal",
+      "unlock": "61ef73f36ae1a55c9c60f95de82d3e14",
+      "targets": [
+        "resourceprocessing/charcoalkiln"
+      ]
+    },
+    {
+      "id": "CoreChargedRetorts",
+      "title": "Core-Charged Furnace Batches",
+      "output": "Coal",
+      "amount": 1200,
+      "inputs": {
+        "Wood": 20,
+        "Steam Cores": 1
+      },
+      "hours": 4,
+      "building": "Charcoal Kiln",
+      "source_blueprint": "CharcoalKiln_Coal",
+      "unlock": "be10e7791f2e465784bb93c921e507b5",
+      "targets": [
+        "resourceprocessing/charcoalkiln"
+      ]
+    },
+    {
+      "id": "ArtificialSpring",
+      "title": "Artificial Spring Cultivation",
+      "output": "Raw Food",
+      "amount": 100,
+      "inputs": {
+        "Steam Cores": 1,
+        "Coal": 24
+      },
+      "hours": 6,
+      "building": "Hothouse",
+      "source_blueprint": "Plantation_Food",
+      "unlock": "e729fc4991a54758983b6bf65aea78d2",
+      "targets": [
+        "resourceextraction/foodplantation"
+      ]
+    },
+    {
+      "id": "IndustrialArtificialSpring",
+      "title": "Artificial Spring Cultivation",
+      "output": "Raw Food",
+      "amount": 180,
+      "inputs": {
+        "Steam Cores": 1,
+        "Coal": 24
+      },
+      "hours": 6,
+      "building": "Industrial Hothouse",
+      "source_blueprint": "SteamPlantation_Food",
+      "unlock": "e729fc4991a54758983b6bf65aea78d2",
+      "targets": [
+        "resourceextraction/foodplantation_steam"
+      ]
+    },
+    {
+      "id": "FarWaterTrawlers",
+      "title": "Far-Water Trawling",
+      "output": "Raw Food",
+      "amount": 12,
+      "inputs": {
+        "Food Rations": 1,
+        "Wood": 1,
+        "Coal": 4
+      },
+      "hours": 2.5,
+      "building": "Fishing Harbour",
+      "source_blueprint": "[Builders]FishingHarbor1",
+      "unlock": "a0374f5ebcb7d452bcce7d8f07a1b7f9",
+      "targets": [
+        "builders/dock_fishing",
+        "builders/docks/dockfishingproper_lvl1"
+      ]
+    },
+    {
+      "id": "AdvancedFarWaterTrawlers",
+      "title": "Far-Water Trawling",
+      "output": "Raw Food",
+      "amount": 18,
+      "inputs": {
+        "Food Rations": 1,
+        "Wood": 1,
+        "Coal": 4
+      },
+      "hours": 2.5,
+      "building": "Fishing Harbour",
+      "source_blueprint": "[Builders]FishingHarbor2",
+      "unlock": "a0374f5ebcb7d452bcce7d8f07a1b7f9",
+      "targets": [
+        "builders/dock_fishingv2",
+        "builders/docks/dockfishingproper_lvl2"
+      ]
     }
   ],
   "retired_technologies": [
@@ -11693,7 +13211,31 @@
       "32aaf6510801af5483917abb868d44f5"
     ]
   ],
-  "active_research_definitions": 209,
+  "playstyle_research": [
+    "SlowSimmeredBroth",
+    "AutumnSlowSimmeredBroth",
+    "BoilerBufferDrums",
+    "LimbSparingSurgery",
+    "AutumnLimbSparingSurgery",
+    "FieldInfirmaries",
+    "AutumnFieldInfirmaries",
+    "CondensateHeaters",
+    "AutumnCondensateHeaters",
+    "ClosedCycleRetorts",
+    "AutumnClosedCycleRetorts",
+    "CoreChargedRetorts",
+    "ArtificialSpring",
+    "DistributedCaches",
+    "AutumnDistributedCaches",
+    "PolarProvisionVaults",
+    "WinterArtisanGuilds",
+    "AutonomousMaintenance",
+    "BuilderAssemblyPlatforms",
+    "AutumnAssemblyPlatforms",
+    "AutumnFarWaterTrawlers",
+    "AutumnArtisanGuilds"
+  ],
+  "active_research_definitions": 231,
   "suspended_technologies": [
     "FieldResearchSprints",
     "AutumnFieldResearchSprints",

@@ -47,7 +47,7 @@ def main():
     active = {guid for values in source["scenario_additions"].values() for guid in values}
     catalog = {key: source[key] for key in ("name", "version", "technology_sets", "scenario_additions", "technologies", "recipes",
                                            "retired_technologies", "opening_stock_bonus", "base_research_multiplier",
-                                           "removed_team_perks", "redesigned_technologies", "research_tabs")}
+                                           "removed_team_perks", "redesigned_technologies", "research_tabs", "playstyle_research")}
     catalog["active_research_definitions"] = len(active)
     catalog["suspended_technologies"] = [entry["id"] for entry in source["suspended_field_operations"]]
     (output / "catalog.json").write_text(json.dumps(catalog, indent=2) + "\n", encoding="utf-8")

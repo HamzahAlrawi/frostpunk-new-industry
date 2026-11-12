@@ -17,6 +17,61 @@ def string(value):
     return b"\1" + value.encode() + b"\0"
 
 
+def native_production_recipes(blueprints):
+    entries = list(re.finditer(rb"\x01\x01([ -~]+)\x00(.{16})", blueprints, re.S))
+    return {entry.group(1).decode(): blueprints[entry.end():entries[i + 1].start()]
+            for i, entry in enumerate(entries[:-1])}
+
+
+def encode_station_recipe(native, key, title, source, building, paths, output, amount,
+                          inputs, hours, research, resources, guid, localize, costs,
+                          requirement, *, exclusions=(), negate=None):
+    """Use the source station's native product flags and typed recipe tail."""
+    sample = native[source]
+    atlas = string("UI\\Elements\\Resources_Icos.dds")
+    if atlas not in sample:
+        atlas = string("UI\\Elements\\Resources_Icons2.dds")
+    icon_at = sample.index(atlas) + len(atlas)
+    product = string("FrostpunkResourceProduct")
+    resource_product = product in sample
+    if not resource_product:
+        product = string("FrostpunkFoodRationProduct")
+    product_at = sample.index(product) + len(product)
+    assert sample[icon_at + 16:icon_at + 22] in (b"\1\0\1\0\0\0", b"\1\1\1\0\0\0", b"\0\1\1\0\0\0")
+    assert sample[product_at:product_at + 4] == uint(1)
+    input_at = product_at + (28 if resource_product else 16)
+    count, = struct.unpack_from("<I", sample, input_at)
+    tail = sample[input_at + 4 + count * 20 + 4:]
+    if source.startswith("[Reconquest]Vault_"):
+        assert tail.startswith(uint(2) + bytes(6) + b"\1@")
+        tail = uint(2) + bytes(7)
+    assert tail in (uint(2) + bytes(7), uint(2) + uint(1) + b"\0\1\0")
+    recipe_id = guid("recipe/" + key)
+    items = ", ".join(f"{quantity} {name.lower()}" for name, quantity in inputs.items())
+    output_name = {"Wooden Materials": "structural profiles", "Steam Tools": "steam exchangers", "Steel Plates": "steel composites"}.get(output, output.lower())
+    description = f"Optional {building} recipe. Spend {items} to produce {amount} {output_name} in {hours:g} working hours at full efficiency. Select this recipe in the building panel."
+    conditions = [requirement(research)]
+    if exclusions:
+        assert negate is not None
+        conditions += [negate(value) for value in exclusions]
+    data = b"\1" + string("NI " + key) + recipe_id + uint(len(conditions)) + b"".join(conditions)
+    data += localize("Recipe/" + key + "/Name", title) + localize("Recipe/" + key + "/Description", description) + bytes(2)
+    coordinates = sample[icon_at:icon_at + 16]
+    output_data = string("FrostpunkResourceProduct") + uint(1) + resources[output] + uint(amount)
+    display_atlas = string("UI\\Elements\\Resources_Icos.dds")
+    if output == "Food Rations":
+        display_atlas = string("UI\\Elements\\Resources_Icons2.dds")
+        coordinates = struct.pack("<4i", 0, 1, 4, 4)
+        output_data = string("FrostpunkFoodRationProduct") + uint(1) + uint(amount) + uint(3)
+    data += display_atlas + coordinates + sample[icon_at + 16:icon_at + 17] + b"\1" + uint(1)
+    data += output_data + uint(0) + costs(inputs) + struct.pack("<f", hours) + tail
+    info = dict(id=key, title=title, output=output, amount=amount, inputs=inputs, hours=hours,
+                building=building, source_blueprint=source, unlock=research.hex(), targets=paths)
+    if exclusions:
+        info['excludes'] = [value.hex() for value in exclusions]
+    return recipe_id, data, info
+
+
 def attach_recipes(template, recipes):
     offset = template.index(PRODUCTION) + len(PRODUCTION) + 16
     count, = struct.unpack_from("<I", template, offset)
@@ -28,13 +83,9 @@ def attach_recipes(template, recipes):
 
 
 def build_station_recipes(technology, blueprints, vanilla, resources, guid, localize, costs, requirement, tabs):
-    entries = list(re.finditer(rb"\x01\x01([ -~]+)\x00(.{16})", blueprints, re.S))
-    native = {entry.group(1).decode(): blueprints[entry.end():entries[i + 1].start()]
-              for i, entry in enumerate(entries[:-1])}
+    native = native_production_recipes(blueprints)
     recipes = []
     targets = {}
-    atlas = string("UI\\Elements\\Resources_Icos.dds")
-    product = string("FrostpunkResourceProduct")
     tier_names = {0: [], 1: ["Drawing Boards (I)"], 2: ["Drafting Machines (II)"]}
 
     def unlock(key, title, description, tier, column, tab, materials, hours, parents, icon):
@@ -44,37 +95,10 @@ def build_station_recipes(technology, blueprints, vanilla, resources, guid, loca
                           prerequisite_names=prerequisites)
 
     def recipe(key, title, source, building, paths, output, amount, inputs, hours, research):
-        sample = native[source]
-        icon_at = sample.index(atlas) + len(atlas)
-        product_at = sample.index(product) + len(product)
-        assert sample[icon_at + 16:icon_at + 22] in (b"\1\0\1\0\0\0", b"\1\1\1\0\0\0", b"\0\1\1\0\0\0")
-        assert sample[product_at:product_at + 4] == uint(1)
-        count, = struct.unpack_from("<I", sample, product_at + 28)
-        tail = sample[product_at + 32 + count * 20 + 4:]
-        # The Warehouse's custom detail text describes its original fixed output.
-        # Use the ordinary native resource details for its new conversion.
-        if source.startswith("[Reconquest]Vault_"):
-            assert tail.startswith(uint(2) + bytes(6) + b"\1@")
-            tail = uint(2) + bytes(7)
-        assert tail in (uint(2) + bytes(7), uint(2) + uint(1) + b"\0\1\0")
-        recipe_id = guid("recipe/" + key)
-        items = ", ".join(f"{quantity} {name.lower()}" for name, quantity in inputs.items())
-        output_name = {"Wooden Materials": "structural profiles", "Steam Tools": "steam exchangers", "Steel Plates": "steel composites"}.get(output, output.lower())
-        description = f"Optional {building} recipe. Spend {items} to produce {amount} {output_name} in {hours:g} working hours at full efficiency. Select this recipe in the building panel."
-        data = b"\1" + string("NI " + key) + recipe_id + uint(1) + requirement(research)
-        data += localize("Recipe/" + key + "/Name", title) + localize("Recipe/" + key + "/Description", description) + bytes(2)
-        display_atlas = atlas
-        coordinates = sample[icon_at:icon_at + 16]
-        output_data = product + uint(1) + resources[output] + uint(amount)
-        if output == "Food Rations":
-            display_atlas = string("UI\\Elements\\Resources_Icons2.dds")
-            coordinates = struct.pack("<4i", 0, 1, 4, 4)
-            output_data = string("FrostpunkFoodRationProduct") + uint(1) + uint(amount) + uint(3)
-        data += display_atlas + coordinates + sample[icon_at + 16:icon_at + 17] + b"\1" + uint(1)
-        data += output_data + uint(0) + costs(inputs) + struct.pack("<f", hours) + tail
-        info = dict(id=key, title=title, output=output, amount=amount, inputs=inputs, hours=hours,
-                    building=building, source_blueprint=source, unlock=research.hex(), targets=paths)
-        recipes.append((recipe_id, data, info))
+        record = encode_station_recipe(native,key,title,source,building,paths,output,amount,inputs,
+                                       hours,research,resources,guid,localize,costs,requirement)
+        recipe_id = record[0]
+        recipes.append(record)
         for path in paths:
             targets.setdefault("gameentities/buildings/" + path + ".binarytemplate", []).append(recipe_id)
 

@@ -8,13 +8,96 @@ import json
 from pathlib import Path
 import re
 import struct
+import uuid
 
 from research_curation import effect_signature, modifiers, normalized, place_scalar_offset, REMOVED_TEAMS
 from research_layout import geometry_errors
+from city_mastery import building_ids
+from station_recipes import PRODUCTION
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'builder/cache/extracted/common/configs'
+
+
+def validate_recipes(manifest,payload):
+    """Check actual blueprint requirements, resource prices, durations and queues."""
+    data=payload['configs/frostpunkblueprintsconfig.bin']
+    economy=(SOURCE/'frostpunkeconomyconfig.bin').read_bytes();resources={}
+    for name in ('Coal','Wood','Steel','Wooden Materials','Steel Plates','Steam Tools','Steam Cores','Raw Food','Food Rations','Augmentation parts'):
+        p=economy.index(b'\1\1'+name.encode()+b'\0')+len(name)+3
+        resources[name]=economy[p:p+16]
+    def text(value):return b'\1'+value.encode()+b'\0'
+    def gid(value):return uuid.uuid5(uuid.NAMESPACE_URL,'frostpunk-new-industry-v1/'+value).bytes_le
+    for recipe in manifest['recipes']:
+        recipe_guid=gid('recipe/'+recipe['id'])
+        prefix=b'\1'+text('NI '+recipe['id'])+recipe_guid
+        start=data.index(prefix);position=start+len(prefix)
+        count,=struct.unpack_from('<I',data,position);position+=4;positive=[];negative=[]
+        technology=text('FrostpunkTechnologyRequirement')+bytes(17)
+        composite=text('FrostpunkCompositeRequirement')+bytes(17)+struct.pack('<2I',2,1)
+        for _ in range(count):
+            negated=data[position:position+len(composite)]==composite
+            if negated:position+=len(composite)
+            assert data[position:position+len(technology)]==technology,(recipe['id'],'unexpected requirement type')
+            position+=len(technology)
+            (negative if negated else positive).append(data[position:position+16].hex());position+=16
+        assert positive==[recipe['unlock']] and negative==recipe.get('excludes',[]),(recipe['id'],'requirements differ from metadata')
+        for _ in range(2):
+            assert data[position]==1;position=data.index(0,position+1)+1
+        assert data[position:position+2]==bytes(2);position+=2
+        assert data[position]==1;position=data.index(0,position+1)+1+16
+        assert data[position:position+6] in (b'\1\1\1\0\0\0',b'\0\1\1\0\0\0');position+=6
+        food=recipe['output']=='Food Rations'
+        product=text('FrostpunkFoodRationProduct' if food else 'FrostpunkResourceProduct')
+        assert data[position:position+len(product)]==product;position+=len(product)
+        assert struct.unpack_from('<I',data,position)[0]==1;position+=4
+        if not food:
+            assert data[position:position+16]==resources[recipe['output']];position+=16
+        assert struct.unpack_from('<I',data,position)[0]==recipe['amount'];position+=4
+        if food:
+            assert struct.unpack_from('<I',data,position)[0]==3;position+=4
+        assert data[position:position+4]==bytes(4);position+=4
+        n,=struct.unpack_from('<I',data,position);position+=4
+        actual={data[p:p+16]:struct.unpack_from('<I',data,p+16)[0] for p in range(position,position+n*20,20)}
+        assert actual=={resources[k]:v for k,v in recipe['inputs'].items()},(recipe['id'],'input costs differ')
+        position+=n*20
+        assert abs(struct.unpack_from('<f',data,position)[0]-recipe['hours'])<1e-6;position+=4
+        assert data[position:position+11] in (struct.pack('<I',2)+bytes(7),struct.pack('<2I',2,1)+bytes(3),struct.pack('<2I',2,1)+b'\0\1\0')
+        for target in recipe['targets']:
+            path='gameentities/buildings/'+target+'.binarytemplate'
+            template=payload[path]
+            p=template.index(PRODUCTION)+len(PRODUCTION)+16;n,=struct.unpack_from('<I',template,p)
+            ids=[template[i:i+16] for i in range(p+4,p+4+n*16,16)]
+            assert ids.count(recipe_guid)==1,(recipe['id'],'missing or duplicated in production panel',path)
+            original=(ROOT/'builder/cache/extracted/templates'/path).read_bytes()
+            q=original.index(PRODUCTION)+len(PRODUCTION)+16;old,=struct.unpack_from('<I',original,q)
+            assert {original[i:i+16] for i in range(q+4,q+4+old*16,16)}<=set(ids),'Lost a native production recipe'
+    print(f"Verified {len(manifest['recipes'])} serialized recipes, replacement requirements and all production-component attachments.")
+
+
+def validate_choice_effects(manifest,records):
+    by_id={t['id']:t for t in manifest['technologies']}
+    buildings=building_ids((SOURCE/'frostpunkbuildingsconfig.bin').read_bytes())
+    original=modifiers((SOURCE/'frostpunkmodifiersconfig.bin').read_bytes())
+    coal=bytes.fromhex('0bcf0b94b94337859c44bcdf67f9bee1')
+    for key in ('CondensateHeaters','AutumnCondensateHeaters'):
+        expected=original['ccae6fbb0e236596b44ca8189e01248f'][2]
+        p=expected.index(coal)+16
+        assert expected[p:p+8]==struct.pack('<2f',-1,1)
+        expected=expected[:p]+struct.pack('<2f',0,0.5)+expected[p+8:]
+        for _,g in by_id[key]['extra_effects']:
+            assert records[g][2]==expected,'Heater predicates or unrelated fields changed'
+    for key in ('LimbSparingSurgery','AutumnLimbSparingSurgery'):
+        assert {p for p,_ in by_id[key]['effects']}=={buildings['Medical Post'].hex()}
+        for _,g in by_id[key]['effects']:
+            assert struct.unpack_from('<f',normalized(records[g][2]),173)[0]==0
+    for key,human,robot,heat in [('WinterArtisanGuilds',2.5,1,2),('AutonomousMaintenance',1,2.5,0)]:
+        for _,g in by_id[key]['effects']:
+            b=normalized(records[g][2]);p=place_scalar_offset(b,72)
+            assert struct.unpack_from('<fIIff',b,p)==(1,0,2,human,robot)
+            assert struct.unpack_from('<i',b,place_scalar_offset(b,96))[0]==heat
+    print('Verified heater condition preservation, surgery scope and separate human/automaton work roles.')
 
 
 def parse_entry(data):
@@ -122,6 +205,8 @@ def main():
     # The ability-construction hotfix must stay intact. No ability or building
     # configuration entry may accidentally be added to this patch distribution.
     assert not any('abilitiesconfig' in name or 'buildingsconfig' in name for name in payload)
+    validate_recipes(manifest,payload)
+    validate_choice_effects(manifest,mods)
     print(f"Verified {len(starts)} technology records, {len(mods)} modifiers, {len(manifest['scenario_additions'])} scenario graphs, native-record preservation and team neutralization.")
 
 

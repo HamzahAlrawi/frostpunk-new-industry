@@ -130,6 +130,15 @@ def _solve(nodes, masks):
             candidates[g] = [x for x in LANES if valid(g, x)]
             if not candidates[g]:
                 return False
+        # A long vertical prerequisite can leave six lanes for seven nodes in
+        # the intervening tier. Individual domains are nonempty in that case,
+        # but the row cannot fit. Reject it before exploring permutations of
+        # unrelated branches; diagonal paths through lane gaps remain possible.
+        for bit in range(max(masks.values(),default=0).bit_length()):
+            for tier in {by[h]['tier'] for h in remaining}:
+                row=[h for h in remaining if by[h]['tier']==tier and masks[h] & (1<<bit)]
+                if row and len(set().union(*(set(candidates[h]) for h in row)))<len(row):
+                    return False
         g = min(remaining, key=lambda h: (0 if degree[h] else 1, len(candidates[h]), -sum(n in placed for n in neighbors[h]), -degree[h], by[h]["id"]))
         nearby = [placed[n] for n in neighbors[g] if n in placed]
         order = sorted(candidates[g], key=lambda x: (sum(abs(x - n) for n in nearby), x))
@@ -149,7 +158,7 @@ def arrange(specs, scenario_additions, guid):
     active = {g for ids in scenario_additions.values() for g in ids}
     nodes = [t for t in specs if t["guid"] in active]
     masks = {t["guid"]: sum(1 << i for i, ids in enumerate(scenario_additions.values()) if t["guid"] in ids) for t in nodes}
-    assigned = {t["guid"]: preferred_tab(t["id"]) for t in nodes}
+    assigned = {t["guid"]: t.get('preferred_tab',preferred_tab(t["id"])) for t in nodes}
 
     def capacity_ok(assignment):
         for ids in scenario_additions.values():
@@ -168,7 +177,8 @@ def arrange(specs, scenario_additions, guid):
         if not crowded:
             break
         cat, tier, ids = crowded[0]
-        options = [t for t in nodes if t["guid"] in ids and assigned[t["guid"]] == cat and t["tier"] == tier]
+        options = [t for t in nodes if t["guid"] in ids and assigned[t["guid"]] == cat and t["tier"] == tier
+                   and 'Workshop' not in t['id']]
         moved = False
         for tech in sorted(options, key=lambda t: t["id"], reverse=True):
             g = tech["guid"]

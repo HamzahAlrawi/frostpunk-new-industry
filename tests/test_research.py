@@ -5,7 +5,7 @@ from pathlib import Path
 import unittest
 
 from builder.research_curation import REMOVED_TEAMS, place_scalar_offset
-from builder.research_layout import geometry_errors, LANES
+from builder.research_layout import geometry_errors, LANES, _solve
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -86,6 +86,15 @@ class ResearchTests(unittest.TestCase):
         struct.pack_into('<i',expanded,96,2)
         with self.assertRaises(AssertionError):
             place_scalar_offset(expanded,96)
+
+    def test_dense_intermediate_tier_keeps_a_clear_prerequisite_path(self):
+        nodes=[dict(id='parent',guid='p',tier=1,requires=[]),
+               dict(id='child',guid='c',tier=3,requires=['p'])]
+        nodes += [dict(id='middle'+str(i),guid=str(i),tier=2,requires=[]) for i in range(7)]
+        positions=_solve(nodes,{t['guid']:1 for t in nodes})
+        self.assertIsNotNone(positions)
+        for tech in nodes:tech['column']=positions[tech['guid']]
+        self.assertEqual(geometry_errors(nodes),[])
 
 
 if __name__ == '__main__':

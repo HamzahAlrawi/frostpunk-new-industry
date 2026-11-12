@@ -89,6 +89,8 @@ def recipe(key,title,output,amount,inputs,hours,unlock,next_unlock=None, native_
     data+=string('UI\\Elements\\Resources_Icos.dds')+struct.pack('<4i',*icon,4,4)+BP_FLAGS
     data+=b'\1FrostpunkResourceProduct\0'+u32(1)+RES[output]+u32(amount)+u32(0)+costs(inputs)+f32(hours)+BP_REST
     recipes.append((g,data,dict(id=key,title=title,output=output,amount=amount,inputs=inputs,hours=hours,
+                                building='Factory',targets=['resourceprocessing/prefabfactory'],
+                                unlock=unlock.hex(),excludes=[next_unlock.hex()] if next_unlock else [],
                                 native_prosthetics_requirements=bool(extra_count))))
 
 # Keep only one current core recipe in the stock Factory panel.
@@ -151,7 +153,8 @@ stockpot_data+=loc('Recipe/FuelledStockpots/Description','Cook 6 standard ration
 stockpot_data+=b'\0\0'+food_icon+struct.pack('<4i',0,1,4,4)+standard_flags
 stockpot_data+=food_product+u32(1)+u32(6)+u32(3)+u32(0)+costs(stockpot_inputs)+f32(0.15)+u32(2)+bytes(7)
 recipes.append((stockpot_recipe,stockpot_data,dict(id="FuelledStockpots",title="Fuelled Stockpots",
-    output="Food Rations",amount=6,inputs=stockpot_inputs,hours=0.15,building="Cookhouse")))
+    output="Food Rations",amount=6,inputs=stockpot_inputs,hours=0.15,building="Cookhouse",
+    unlock=stockpots.hex(),targets=['resourceprocessing/foodprocessing'])))
 
 from station_recipes import EDGE_RECIPES, attach_recipes, build_station_recipes
 station_recipes, station_targets = build_station_recipes(
@@ -172,6 +175,14 @@ from research_layout import arrange
 from city_mastery import building_ids
 new_modifiers, redesigned = curate(specs,new_modifiers,gid,
     building_ids((SRC/'common/configs/frostpunkbuildingsconfig.bin').read_bytes()),techinfo)
+from progression_choices import add_choices, VERSION
+new_modifiers, choice_recipes, choice_targets, choice_ids = add_choices(
+    technology,specs,techinfo,new_modifiers,
+    (SRC/'common/configs/frostpunkbuildingsconfig.bin').read_bytes(),BP,RES,
+    gid,loc,costs,req,neg,{'exploration':EXPLORATION},recipes)
+recipes.extend(choice_recipes)
+for path,additions in choice_targets.items():
+    station_targets.setdefault(path,[]).extend(additions)
 
 old_category_count=struct.unpack_from('<I',TC,0)[0]
 tech_count_pos=techinfo[0]['start']-4
@@ -214,10 +225,12 @@ for name in supported_sets:
         # Keep retired and suspended definitions registered for saves.
         if spec['id'] in retired or spec['id'] in suspended_ids:
             continue
+        if 'scenarios' in spec and name not in spec['scenarios']:
+            continue
         if (name == 'Builders') != (spec['category'] in autumn_categories):
             continue
         if name == 'Reconquest':
-            if spec['id'] not in EDGE_SHARED | EDGE_COMPATIBLE | EDGE_ADDITIONS | EDGE_OPENING | EDGE_RESOURCEFUL | EDGE_GAMEPLAY | EDGE_RECIPES | edge_ids | trade_ids:
+            if 'scenarios' not in spec and spec['id'] not in EDGE_SHARED | EDGE_COMPATIBLE | EDGE_ADDITIONS | EDGE_OPENING | EDGE_RESOURCEFUL | EDGE_GAMEPLAY | EDGE_RECIPES | edge_ids | trade_ids:
                 continue
         elif spec['id'] in edge_ids:
             continue
@@ -328,12 +341,15 @@ patches={
  'templates':{factory_path:factory,cookhouse_path:cookhouse},'localizations':{}}
 patches['common'][scenarios_path]=starting_supplies((SRC/'common'/scenarios_path).read_bytes(),RES)
 for path, additions in station_targets.items():
-    patches['templates'][path]=attach_recipes((SRC/'templates'/path).read_bytes(),additions)
+    template=patches['templates'].get(path)
+    if template is None:
+        template=(SRC/'templates'/path).read_bytes()
+    patches['templates'][path]=attach_recipes(template,additions)
 for p in (SRC/'localizations').glob('*.lang'):
     patches['localizations'][p.name]=update_lang(p.read_bytes())
 
 from archive import NAMES
-manifest={'name':'Frostpunk: New Industry','version':'3.8.0','game_path':str(INSTALL_PATH),'technology_sets':supported_sets,'scenario_additions':scenario_additions,'retired_technologies':sorted(retired),'removed_team_perks':sorted(REMOVED_TEAMS),'redesigned_technologies':sorted(redesigned),'research_tabs':research_tabs,'archives':{},'technologies':specs,'recipes':[x[2] for x in recipes],'field_operations':[],'suspended_field_operations':suspended_actions,'opening_stock_bonus':OPENING_STOCK,'base_research_multiplier':RESEARCH_SPEED,'sources':['https://github.com/Mystik738/frostract']}
+manifest={'name':'Frostpunk: New Industry','version':VERSION,'game_path':str(INSTALL_PATH),'technology_sets':supported_sets,'scenario_additions':scenario_additions,'retired_technologies':sorted(retired),'removed_team_perks':sorted(REMOVED_TEAMS),'redesigned_technologies':sorted(redesigned),'playstyle_research':choice_ids,'research_tabs':research_tabs,'archives':{},'technologies':specs,'recipes':[x[2] for x in recipes],'field_operations':[],'suspended_field_operations':suspended_actions,'opening_stock_bonus':OPENING_STOCK,'base_research_multiplier':RESEARCH_SPEED,'sources':['https://github.com/Mystik738/frostract']}
 for base,files in patches.items():
     records=entries(base);byname={NAMES.get(e[1]):e for e in records};items=[]
     with (GAME/(base+'.dat')).open('rb') as src:
