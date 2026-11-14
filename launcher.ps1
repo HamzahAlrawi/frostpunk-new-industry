@@ -1,8 +1,9 @@
-param([ValidateSet('install','uninstall','status')][string]$Action = 'install')
+param([ValidateSet('install','uninstall','status','config','apply')][string]$Action = 'install')
 $ErrorActionPreference = 'Stop'
 try {
     $binary = Join-Path $PSScriptRoot 'Frostpunk-New-Industry.exe'
     $arguments = @($Action, '--pause')
+    if ($Action -eq 'config') { $arguments += '--edit' }
     if (!(Test-Path -LiteralPath $binary)) {
         $python = Get-Command py -ErrorAction SilentlyContinue
         if ($python) {
@@ -19,6 +20,13 @@ try {
     if ($Action -ne 'status' -and !$principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
         $quoted = @($arguments | ForEach-Object { '"' + $_.Replace('"', '\"') + '"' })
         $child = Start-Process -FilePath $binary -ArgumentList $quoted -Verb RunAs -Wait -PassThru
+        exit $child.ExitCode
+    }
+    if ([IO.Path]::GetExtension($binary) -eq '.exe' -and (Split-Path -Leaf $binary) -eq 'Frostpunk-New-Industry.exe') {
+        # Explicitly wait for the elevated frozen application, including when
+        # launched from an already-elevated PowerShell session.
+        $quoted = @($arguments | ForEach-Object { '"' + $_.Replace('"', '\"') + '"' })
+        $child = Start-Process -FilePath $binary -ArgumentList $quoted -Wait -PassThru
         exit $child.ExitCode
     }
     & $binary @arguments

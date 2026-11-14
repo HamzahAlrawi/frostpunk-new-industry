@@ -20,3 +20,9 @@ builder applies `PERK_RESEARCH_DURATION = 0.5` once after defining all research.
 Preserve the base Workshop curve multiplier of 1.5625 (25% above version 3.9)
 unless the owner requests another balance change. Keep production-cycle times
 separate from research durations.
+
+Difficulty presets and settings live in `configuration.py`. Preserve a user's
+persistent config across updates; apply the owner's easiest preset for this
+local installation. Public defaults remain standard. Validate all 17 starting
+profiles and native difficulty vectors with `builder/validate_configuration.py`.
+Configurable research defaults remain 0.5 / 1.5625; user overrides are explicit.

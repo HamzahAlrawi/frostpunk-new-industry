@@ -26,6 +26,7 @@ def main():
     patches.mkdir(parents=True, exist_ok=True)
     manifest = {"name": "Frostpunk New Industry", "version": source["version"], "format": "nind-copy-insert-v1",
                 "game": "Frostpunk", "supported_build": "Windows Steam 1.6.2, exact original archive hashes required", "archives": {}}
+    manifest["configuration"] = source["configuration"]
     for group, settings in source["archives"].items():
         entries = {entry[1]: entry for entry in archive.entries(group)}
         exported = []

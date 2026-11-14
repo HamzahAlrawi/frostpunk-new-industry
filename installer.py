@@ -15,6 +15,7 @@ import tempfile
 import zlib
 
 from patch_format import apply_patch
+from configuration import DEFAULT, PRESETS, configure_entry, fingerprint, resolve
 
 
 ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
@@ -93,7 +94,7 @@ def exclusive_lock(folder):
 
 
 class Installer:
-    def __init__(self, game, state, manifest, package=ROOT):
+    def __init__(self, game, state, manifest, package=ROOT, document=None):
         self.game = Path(game).resolve()
         self.state = Path(state).resolve()
         self.manifest = manifest
@@ -101,6 +102,8 @@ class Installer:
         self.backup = self.state / "backup"
         self.receipt = self.state / "installed.json"
         self.journal = self.state / "operation.json"
+        self.config_path = self.state / "config.json"
+        self.document = document
         self.originals = {base + extension: digest for base, archive in manifest["archives"].items()
                           for extension, digest in archive["original_files"].items()}
         if set(self.originals) != set(ARCHIVES):
@@ -116,7 +119,18 @@ class Installer:
     def installed(self):
         return json.loads(self.receipt.read_text(encoding="utf-8")) if self.receipt.exists() else None
 
-    def stage(self, source, destination):
+    def configuration(self):
+        if "configuration" not in self.manifest:
+            return None
+        path = self.config_path if self.config_path.exists() else self.package / "mod/config.json"
+        document = self.document if self.document is not None else json.loads(path.read_text(encoding="utf-8-sig"))
+        settings = resolve(document)
+        return {"document": document, "effective": settings, "sha256": fingerprint(settings)}
+
+    def stage(self, source, destination, configuration=None):
+        configuration = self.configuration() if configuration is None else configuration
+        if configuration:
+            logging.info("Staging preset %s configuration %s", configuration["effective"]["preset"], configuration["sha256"])
         self.verify(source, self.originals)
         destination = Path(destination)
         destination.mkdir(parents=True, exist_ok=True)
@@ -145,6 +159,10 @@ class Installer:
                     revised = apply_patch(original, payload.read_bytes())
                     if len(revised) != patch["size"] or hashlib.sha256(revised).hexdigest() != patch["new_sha256"]:
                         raise ValueError(f"Reconstructed entry failed verification: {patch['name']}")
+                    if configuration:
+                        revised = configure_entry(patch["name"], original, revised, self.manifest["configuration"],
+                                                  configuration["effective"])
+                    logging.info("Staged %s bytes=%s sha256=%s", patch["name"], len(revised), hashlib.sha256(revised).hexdigest())
                     compressed = gzip.compress(revised, compresslevel=9, mtime=0)[:-8]
                     ENTRY.pack_into(index, position, identifier, len(compressed), len(revised), writer.tell(), 1)
                     writer.write(compressed)
@@ -185,6 +203,8 @@ class Installer:
             if digest not in (plan["before"][name], plan["target"][name]):
                 raise RuntimeError(f"{name} changed outside the interrupted installer. Restore using Steam's file verification.")
         if current == plan["target"] and plan["action"] == "install":
+            if "configuration" in plan["receipt"]:
+                write_json(self.config_path, plan["receipt"]["configuration"]["document"])
             write_json(self.receipt, plan["receipt"])
         else:
             self.verify(self.backup, self.originals)
@@ -199,12 +219,17 @@ class Installer:
     def install(self):
         if game_running():
             raise RuntimeError("Save your game and close Frostpunk before installing")
+        configuration = self.configuration()  # Validate before backup, staging, or archive writes.
         receipt = self.installed()
         if receipt:
             self.verify(self.game, receipt["files"])
             if receipt["version"] == self.manifest["version"]:
-                print("This version of New Industry is already installed and verified.")
-                return
+                if receipt.get("configuration", {}).get("sha256") == (configuration or {}).get("sha256"):
+                    if configuration:
+                        write_json(self.config_path, configuration["document"])
+                    print("This version and configuration are already installed and verified.")
+                    return
+                return self.apply()
             raise RuntimeError("Uninstall the previous New Industry version before installing this update")
         self.verify(self.game, self.originals)
         self.backup.mkdir(parents=True, exist_ok=True)
@@ -216,11 +241,15 @@ class Installer:
                 raise ValueError(f"Original backup failed verification: {name}")
         with tempfile.TemporaryDirectory(prefix="staging-", dir=self.state) as temporary:
             print("Building and verifying the modded archives...")
-            expected = self.stage(self.backup, temporary)
+            expected = self.stage(self.backup, temporary, configuration)
             receipt = {"game": str(self.game), "version": self.manifest["version"], "files": expected}
+            if configuration:
+                receipt["configuration"] = configuration
             write_json(self.journal, {"action": "install", "before": self.originals, "target": expected, "receipt": receipt})
             self.replace(temporary, expected, self.backup)
             try:
+                if configuration:
+                    write_json(self.config_path, configuration["document"])
                 write_json(self.receipt, receipt)
             except BaseException:
                 self.replace(self.backup, self.originals, temporary)
@@ -228,6 +257,58 @@ class Installer:
             self.journal.unlink()
         print(f"Installed New Industry {self.manifest['version']}. Start Frostpunk normally through Steam.")
         print(f"Original archive backups: {self.backup}")
+        self.print_configuration(receipt)
+
+    def apply(self):
+        if game_running():
+            raise RuntimeError("Save your game and close Frostpunk before applying configuration")
+        configuration = self.configuration()
+        receipt = self.installed()
+        if not receipt or receipt["version"] != self.manifest["version"]:
+            raise RuntimeError("Install this release before applying its configuration")
+        if configuration is None:
+            raise RuntimeError("This release has no configurable settings")
+        self.verify(self.game, receipt["files"])
+        self.verify(self.backup, self.originals)
+        with tempfile.TemporaryDirectory(prefix="configure-", dir=self.state) as temporary:
+            folder = Path(temporary)
+            staged, rollback = folder / "staged", folder / "rollback"
+            expected = self.stage(self.backup, staged, configuration)
+            rollback.mkdir()
+            for name in ARCHIVES:
+                shutil.copyfile(self.game / name, rollback / name)
+            updated = {"game": str(self.game), "version": self.manifest["version"],
+                       "files": expected, "configuration": configuration}
+            write_json(self.journal, {"action": "install", "before": receipt["files"],
+                                      "target": expected, "receipt": updated})
+            self.replace(staged, expected, rollback)
+            try:
+                write_json(self.config_path, configuration["document"])
+                write_json(self.receipt, updated)
+            except BaseException:
+                self.replace(rollback, receipt["files"], staged)
+                raise
+            self.journal.unlink()
+        print("Applied and verified the configuration. Start Frostpunk normally through Steam.")
+        self.print_configuration(updated)
+
+    def print_configuration(self, receipt):
+        if "configuration" in receipt:
+            settings = receipt["configuration"]["effective"]
+            print(f"Installed preset: {settings['preset']}; native difficulty: {settings['native_difficulty']}")
+            print(f"Configuration: {self.config_path}")
+
+    def config(self, edit=False):
+        if not self.config_path.exists() or self.document is not None:
+            configuration = self.configuration()
+            if configuration is None:
+                raise RuntimeError("This release has no configurable settings")
+            write_json(self.config_path, configuration["document"])
+        print(f"Edit {self.config_path}, then close Frostpunk and run Apply configuration.cmd.")
+        if edit:
+            if os.name != "nt":
+                raise RuntimeError("Automatic configuration editing requires Windows; edit the printed path instead")
+            subprocess.Popen(["notepad.exe", str(self.config_path)])
 
     def uninstall(self):
         if game_running():
@@ -256,14 +337,25 @@ class Installer:
         receipt = self.installed()
         self.verify(self.game, receipt["files"] if receipt else self.originals)
         print(f"New Industry {receipt['version']} is installed and verified." if receipt else "Original Frostpunk archives are installed and verified.")
+        if receipt:
+            self.print_configuration(receipt)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", nargs="?", default="install", choices=("install", "uninstall", "status"))
+    parser.add_argument("action", nargs="?", default="install", choices=("install", "uninstall", "status", "apply", "config"))
     parser.add_argument("--game", type=Path, help="Frostpunk folder, if Steam discovery does not find it")
     parser.add_argument("--pause", action="store_true", help="Keep the console open after completion")
+    parser.add_argument("--config", type=Path, help="Import a JSON configuration and retain it for later updates")
+    parser.add_argument("--preset", choices=tuple(PRESETS), help="Select a preset, resetting individual overrides")
+    parser.add_argument("--edit", action="store_true", help="Open the saved configuration in Notepad (config action)")
     args = parser.parse_args()
+    if args.config and args.preset:
+        parser.error("Choose --config or --preset")
+    if (args.config or args.preset) and args.action not in ("install", "apply", "config"):
+        parser.error("Configuration options require install, apply, or config")
+    if args.edit and args.action != "config":
+        parser.error("--edit requires the config action")
     result = 0
     try:
         game = args.game.expanduser().resolve() if args.game else find_game()
@@ -274,9 +366,14 @@ def main():
             manifest = json.loads((ROOT / "mod/manifest.json").read_text(encoding="utf-8"))
             print(f"Frostpunk New Industry {manifest['version']}\nGame folder: {game}")
             logging.info("%s %s %s", args.action, manifest["version"], game)
-            installer = Installer(game, state, manifest)
+            document = (json.loads(args.config.read_text(encoding="utf-8-sig")) if args.config else
+                        DEFAULT | {"preset": args.preset} if args.preset else None)
+            installer = Installer(game, state, manifest, document=document)
             installer.recover()
-            getattr(installer, args.action)()
+            if args.action == "config":
+                installer.config(edit=args.edit)
+            else:
+                getattr(installer, args.action)()
             logging.info("Completed %s", args.action)
     except Exception as error:
         logging.exception("Installer failed")

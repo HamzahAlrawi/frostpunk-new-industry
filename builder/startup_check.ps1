@@ -34,7 +34,7 @@ foreach ($line in [IO.File]::ReadLines($captured)) {
     if ($line -match 'Configuration file (Frostpunk\w+Config) loaded') { $null = $loaded.Add($Matches[1]) }
     if ($line.Contains('Class factory cannot create') -or $line.Contains('SERIALIZATIONFLAG_VERSIONTOLERANT') -or $line.Contains('inflate() failed')) { $errorsFound++ }
 }
-$required = @('FrostpunkScenariosConfig', 'FrostpunkTechnologiesConfig', 'FrostpunkBlueprintsConfig', 'FrostpunkModifiersConfig', 'FrostpunkAbilitiesConfig', 'FrostpunkGraphicsConfig')
+$required = @('FrostpunkScenariosConfig', 'FrostpunkDifficultyConfig', 'FrostpunkTechnologiesConfig', 'FrostpunkBlueprintsConfig', 'FrostpunkModifiersConfig', 'FrostpunkAbilitiesConfig', 'FrostpunkGraphicsConfig')
 $missing = @($required | Where-Object { -not $loaded.Contains($_) })
 $passed = (-not $exitedEarly) -and $errorsFound -eq 0 -and $missing.Count -eq 0
 @{
@@ -44,4 +44,4 @@ $passed = (-not $exitedEarly) -and $errorsFound -eq 0 -and $missing.Count -eq 0
     missing_required_configs = $missing; log_bytes = $log.Length
 } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $diagnosticFolder 'startup.json')
 if (-not $passed) { throw "Startup check failed: $errorsFound serialization/inflate errors; missing configs: $($missing -join ', '). See $diagnosticFolder" }
-Write-Output "Startup check passed: all six required configs loaded, zero serialization/inflate errors. Logs: $diagnosticFolder"
+Write-Output "Startup check passed: all seven required configs loaded, zero serialization/inflate errors. Logs: $diagnosticFolder"

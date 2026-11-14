@@ -1,14 +1,15 @@
 """Research available before Drawing Boards and supplies for new cities."""
 import struct
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from configuration import DEFAULT, resolve, starting_supplies as configured_supplies
 
 from last_autumn import AUTUMN_TABS
 
 
-OPENING_STOCK = {"Wood": 40, "Steel": 25, "Coal": 50, "Raw Food": 30}
-OPENING_PROFILES = {
-    "Default", "TechHaven", "Refugees", "Winterhome", "Builders", "Reconquest",
-    "Custom_Endless", "Custom_Endless_Serenity",
-}
+OPENING_STOCK = resolve(DEFAULT)["starting_resources_bonus"]
 EDGE_OPENING = {"StarterGatheringTeams", "StarterTimberTools", "StarterWardStoves"}
 # 25% higher base Workshop research output than 3.9, preserving the native
 # one-to-four-Workshop diminishing-return curve and both workforce roles.
@@ -17,37 +18,7 @@ PERK_RESEARCH_DURATION = 0.5
 
 
 def starting_supplies(data, resources):
-    amounts = {resources[name]: extra for name, extra in OPENING_STOCK.items()}
-    changes = {}
-    revised = bytearray(data)
-    # Only the top-level starting-resource profiles. Other vectors include
-    # scout rewards, test presets and starting supplies in custom maps.
-    pos = data.index(b"\1\1Default\0" + bytes.fromhex("abffde98fc17e8921d495b49e5928974"))
-    count, = struct.unpack_from("<I", data, pos - 4)
-    assert count == 17
-    for _ in range(count):
-        assert data[pos:pos + 2] == b"\1\1"
-        end = data.index(0, pos + 2)
-        name = data[pos + 2:end].decode("ascii")
-        pos = end + 17  # Name terminator and profile GUID.
-        count, = struct.unpack_from("<I", data, pos)
-        pos += 4
-        if name in OPENING_PROFILES:
-            changes[name] = set()
-            for entry in range(pos, pos + count * 20, 20):
-                resource = data[entry:entry + 16]
-                if resource in amounts:
-                    value, = struct.unpack_from("<I", data, entry + 16)
-                    struct.pack_into("<I", revised, entry + 16, value + amounts[resource])
-                    changes[name].add(resource)
-        pos += count * 20
-        for _ in range(2):  # Optional display name and description.
-            assert data[pos] in (0, 1)
-            pos = data.index(0, pos + 1) + 1 if data[pos] else pos + 1
-    assert changes.keys() == OPENING_PROFILES
-    for name, changed in changes.items():
-        assert changed == amounts.keys() - ({resources["Coal"]} if name == "Builders" else set()), name
-    return bytes(revised)
+    return configured_supplies(data, {name: resources[name].hex() for name in OPENING_STOCK}, OPENING_STOCK)
 
 
 def research_curve(data):

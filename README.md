@@ -2,15 +2,16 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.10.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.11.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.10.0/Frostpunk-New-Industry-3.10.0-Windows.zip) · [Research catalog](docs/research.md) · [Changes in 3.10](docs/releases/3.10.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.11.0/Frostpunk-New-Industry-3.11.0-Windows.zip) · [Research catalog](docs/research.md) · [Configuration](docs/configuration.md) · [Changes in 3.11](docs/releases/3.11.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
 
 - **Renewable Steam Cores.** Research Factory fabrication and its improved production recipes.
 - **256 active research definitions across supported modes.** Engineering, Industry, City Life, and Logistics join the native tabs. Scenario research lists select the upgrades that fit each mode. Added research is checked for duplicate effect packages, icon collisions, and crossing or obstructed prerequisite lines.
 - **Faster progression.** All mod-added perks have half their authored base research duration. Workshop base research output is 25% higher than version 3.9, or 56.25% above vanilla, with normal multiple-Workshop scaling. Research before Drawing Boards and additional starting supplies ease the opening.
+- **Configurable difficulty and bigger starting stockpiles.** Five presets and per-resource/category overrides cover all native starting profiles. Edit the persistent JSON, then apply it while the game is closed. Research pacing is configurable too; public defaults retain the current boosts.
 - **Stronger workplaces.** The permanent workplace-efficiency research bonuses grant at least 75% per upgrade where applicable.
 - **Alternate production.** Fuelled Stockpots, coal-heated and fermentation Hothouses, retort and rapid-coking kiln batches, baited fishing, dockside ration production, alternate generator-component recipes, and Warehouse salvage.
 - **New city strategies.** Safer Radical Treatment, cold protection, wider heat zones, faster construction, linked production-chain improvements, and large storm reserves. Added team-capacity perks have been removed; vanilla team research remains.
@@ -48,9 +49,15 @@ Backups and installer logs live under `%LOCALAPPDATA%\FrostpunkNewIndustry\`, in
 
 Uninstall the previous version before installing an update. If an archive operation is interrupted, the next installer run checks its operation journal and recovers the known files.
 
+To change difficulty, double-click **Edit configuration.cmd**, save your JSON,
+then close Frostpunk and run **Apply configuration.cmd**. Settings persist across
+updates. A public first install uses `standard`; `easiest` selects native Easy
+effects and the largest supply bonus. Start a new city for new opening supplies
+and difficulty. See [all settings and presets](docs/configuration.md).
+
 ## Testing status
 
-- The copy/insert patches reconstruct the same entries as the local 3.10.0 build.
+- The default copy/insert patches reconstruct the local 3.11.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
 - Research tests cover scenario membership, earlier unlocks, unique effect packages, icon/prerequisite-line geometry, and recipe-selector limits. The local binary validator also checks actual serialized recipe prices, outputs, requirements, attachments and effect vectors, and preserves native technology and modifier records.
 - The mod's configuration and startup checks passed. Earlier builds completed full campaigns. The newest gameplay effects still need broader campaign testing, so this release is marked **beta**.
@@ -67,6 +74,7 @@ Use Python 3.11 or newer for the builder. From this repository's root, run the f
 python builder/prepare_sources.py --game "C:\Program Files (x86)\Steam\steamapps\common\Frostpunk"
 python builder/build_mod.py
 python builder/validate_build.py
+python builder/validate_configuration.py
 python builder/package_mod.py --originals "C:\Program Files (x86)\Steam\steamapps\common\Frostpunk"
 python builder/write_catalog.py
 python -m unittest discover -s tests -v
@@ -74,7 +82,7 @@ python -m unittest discover -s tests -v
 
 Extracted inputs stay in the ignored `builder/cache/` directory. Intermediate native payloads stay in the ignored `build/` directory. Public patches and the research catalog are written to `mod/`.
 
-For a full archive round-trip test, run `python builder/check_distribution.py --originals "D:\Frostpunk-original-backup"`. It installs into an isolated copy under `build/distribution-qa/`, verifies every patched entry, and restores the exact originals. The supplied archive folder is read-only input.
+For a full archive round-trip test, run `python builder/check_distribution.py --originals "D:\Frostpunk-original-backup" --preset easiest`. It installs into an isolated copy under `build/distribution-qa/`, verifies every configured entry, and restores exact originals. Omit `--preset` to test standard settings. The supplied archive folder is read-only input.
 
 To build the standalone Windows installer, create a virtual environment and install `requirements-build.txt`, then run the following.
 
@@ -87,7 +95,7 @@ The executable is written to `dist/`. The GitHub workflow runs installer tests o
 For a bounded local startup check, close Frostpunk and run
 `powershell -ExecutionPolicy Bypass -File builder/startup_check.ps1 -Game "D:\SteamLibrary\steamapps\common\Frostpunk"`.
 It launches and closes only its own test process, captures a fresh log, requires
-the six main game configurations to finish loading, and rejects serialization
+the seven required game configurations (including difficulty) to finish loading, and rejects serialization
 or decompression errors. Logs and a JSON result are written under
 `build/startup-check/`. It does not load a save or test campaign balance.
 

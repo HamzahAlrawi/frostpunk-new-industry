@@ -13,6 +13,8 @@ from unittest.mock import patch
 from builder.make_delta import make_delta
 from installer import ARCHIVES, ENTRY, Installer, exclusive_lock, sha, write_json
 from patch_format import apply_patch
+from configuration import DEFAULT, DIFFICULTY
+from test_configuration import difficulty_fixture
 
 
 class InstallerTests(unittest.TestCase):
@@ -66,6 +68,101 @@ class InstallerTests(unittest.TestCase):
         self.installer.uninstall()
         self.assert_originals()
         self.assertFalse(self.installer.receipt.exists())
+
+    def enable_configuration(self):
+        original = difficulty_fixture()
+        stored = gzip.compress(original, mtime=0)[:-8]
+        (self.game / "common.dat").write_bytes(stored)
+        (self.game / "common.idx").write_bytes(b"\0\2\1" + struct.pack("<Q", 1) + ENTRY.pack(0, len(stored), len(original), 0, 1))
+        delta, _ = make_delta(original, original)
+        (self.package / "mod/patches/common.nid").write_bytes(delta)
+        self.manifest["archives"]["common"] = {
+            "original_files": {extension: sha(self.game / ("common" + extension)) for extension in (".dat", ".idx")},
+            "entries": [{"name": DIFFICULTY, "hash": 0, "patch": "common.nid", "patch_sha256": hashlib.sha256(delta).hexdigest(),
+                         "original_sha256": hashlib.sha256(original).hexdigest(), "new_sha256": hashlib.sha256(original).hexdigest(), "size": len(original)}],
+        }
+        self.manifest["configuration"] = {"schema_version": 1}
+        write_json(self.package / "mod/config.json", DEFAULT)
+        self.installer = Installer(self.game, self.state, self.manifest, self.package)
+        self.originals = {name: (self.game / name).read_bytes() for name in ARCHIVES}
+
+    def test_configuration_applies_and_persists_without_double_patching(self):
+        self.enable_configuration()
+        self.installer.document = DEFAULT | {"preset": "easiest"}
+        self.installer.install()
+        easiest = self.installer.installed()
+        self.assertEqual(easiest["configuration"]["effective"]["preset"], "easiest")
+        self.installer.apply()
+        self.assertEqual(self.installer.installed()["files"], easiest["files"])
+        self.installer.document = DEFAULT
+        self.installer.apply()
+        self.assertNotEqual(self.installer.installed()["files"], easiest["files"])
+        self.installer.document = DEFAULT | {"preset": "easiest"}
+        self.installer.install()  # Same-version install routes changed settings through apply.
+        self.assertEqual(self.installer.installed()["files"], easiest["files"])
+        self.installer.uninstall()
+        self.assert_originals()
+        replacement = Installer(self.game, self.state, self.manifest, self.package)
+        replacement.install()
+        self.assertEqual(replacement.installed()["configuration"]["effective"]["preset"], "easiest")
+        replacement.uninstall()
+
+    def test_invalid_configuration_preserves_archives_and_allows_uninstall(self):
+        self.enable_configuration()
+        self.installer.install()
+        files = {name: sha(self.game / name) for name in ARCHIVES}
+        self.installer.config_path.write_text('{"preset":"oops"}')
+        with self.assertRaises(ValueError):
+            self.installer.apply()
+        self.assertEqual({name: sha(self.game / name) for name in ARCHIVES}, files)
+        self.installer.status()  # Neither status nor restoration requires a valid config.
+        self.installer.uninstall()
+        self.assert_originals()
+
+    def test_failed_configuration_copy_restores_previous_install(self):
+        self.enable_configuration()
+        self.installer.install()
+        previous = self.installer.installed()
+        self.installer.document = DEFAULT | {"preset": "easiest"}
+        original_replace = Path.replace
+
+        def fail(path, target):
+            if Path(target) == self.game / "common.idx":
+                raise OSError("simulated configuration copy failure")
+            return original_replace(path, target)
+
+        with patch.object(Path, "replace", fail), self.assertRaises(OSError):
+            self.installer.apply()
+        self.installer.verify(self.game, previous["files"])
+        self.assertEqual(self.installer.installed(), previous)
+        self.installer.recover()
+        self.assert_originals()
+
+    def test_game_running_prevents_configuration_application(self):
+        self.enable_configuration()
+        self.installer.install()
+        with patch("installer.game_running", return_value=True), self.assertRaises(RuntimeError):
+            self.installer.apply()
+
+    def test_completed_configuration_journal_recovers_settings_and_receipt(self):
+        self.enable_configuration()
+        self.installer.install()
+        previous = self.installer.installed()
+        self.installer.document = DEFAULT | {"preset": "easiest"}
+        configuration = self.installer.configuration()
+        staged = self.root / "configured"
+        files = self.installer.stage(self.installer.backup, staged, configuration)
+        receipt = previous | {"files": files, "configuration": configuration}
+        write_json(self.installer.journal, {"action": "install", "before": previous["files"], "target": files, "receipt": receipt})
+        for name in ARCHIVES:
+            shutil.copyfile(staged / name, self.game / name)
+        self.installer.config_path.write_text("interrupted metadata write")
+        self.installer.recover()
+        self.assertEqual(self.installer.installed(), receipt)
+        self.assertEqual(json.loads(self.installer.config_path.read_text()), configuration["document"])
+        self.installer.verify(self.game, files)
+        self.installer.uninstall()
+        self.assert_originals()
 
     def test_modified_game_is_rejected(self):
         (self.game / "common.dat").write_bytes(b"another mod")

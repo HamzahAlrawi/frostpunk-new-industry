@@ -1,6 +1,6 @@
 # Research catalog
 
-Version 3.10.0: 256 active research definitions across the supported modes. Legacy and retired entries are omitted.
+Version 3.11.0: 256 active research definitions across the supported modes. Legacy and retired entries are omitted.
 
 Tier 0 is available before Drawing Boards. Listed hours already include the 50% reduction to all mod-added research durations. Workshop base research output is also 25% higher than version 3.9, with the normal multiple-Workshop scaling preserved. Prerequisites in another tab remain mandatory and are listed by name in the tooltip.
 

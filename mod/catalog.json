@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -14885,10 +14885,12 @@
     "ThermalVestibules"
   ],
   "opening_stock_bonus": {
-    "Wood": 40,
-    "Steel": 25,
-    "Coal": 50,
-    "Raw Food": 30
+    "Wood": 100,
+    "Steel": 75,
+    "Coal": 200,
+    "Raw Food": 80,
+    "Food Rations": 50,
+    "Steam Cores": 2
   },
   "base_research_multiplier": 1.5625,
   "removed_team_perks": [

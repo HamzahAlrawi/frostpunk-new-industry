@@ -11,7 +11,7 @@ COLD = ('TechHaven','Winterhome','Default','Default_Endless_Builders','Default_E
 GENERATOR = tuple(name for name in COLD if name != 'Reconquest')
 GROWING = GENERATOR
 AUTUMN = ('Builders',)
-VERSION = '3.10.0'
+VERSION = '3.11.0'
 
 
 def add_choices(technology, specs, techinfo, data, buildings, blueprints, resources,

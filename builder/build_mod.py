@@ -339,10 +339,14 @@ def update_lang(b):
     return u32(len(payload))+payload
 
 scenarios_path='configs/frostpunkscenariosconfig.bin'
+difficulty_path='configs/frostpunkdifficultyconfig.bin'
 patches={
  'common':{'configs/frostpunktechnologiesconfig.bin':newTC,'configs/frostpunkblueprintsconfig.bin':newBP,'configs/frostpunkeconomyconfig.bin':newEC,mods_path:new_modifiers},
  'templates':{factory_path:factory,cookhouse_path:cookhouse},'localizations':{}}
 patches['common'][scenarios_path]=starting_supplies((SRC/'common'/scenarios_path).read_bytes(),RES)
+# The public menu preset is an identity patch. Installation can replace only its
+# native difficulty effect vectors without changing scenario assets or scripts.
+patches['common'][difficulty_path]=(SRC/'common'/difficulty_path).read_bytes()
 for path, additions in station_targets.items():
     if path==factory_path:
         # The Factory queue above collects every Factory recipe, including the
@@ -358,12 +362,24 @@ for p in (SRC/'localizations').glob('*.lang'):
 
 from archive import NAMES
 manifest={'name':'Frostpunk: New Industry','version':VERSION,'game_path':str(INSTALL_PATH),'technology_sets':supported_sets,'scenario_additions':scenario_additions,'retired_technologies':sorted(retired),'removed_team_perks':sorted(REMOVED_TEAMS),'redesigned_technologies':sorted(redesigned),'playstyle_research':choice_ids,'research_tabs':research_tabs,'archives':{},'technologies':specs,'recipes':[x[2] for x in recipes],'field_operations':[],'suspended_field_operations':suspended_actions,'opening_stock_bonus':OPENING_STOCK,'base_research_multiplier':RESEARCH_SPEED,'perk_research_duration_multiplier':PERK_RESEARCH_DURATION,'sources':['https://github.com/Mystik738/frostract']}
+duration_offsets=[]
+for spec,entry in zip(specs,newtechs):
+    pos=entry.index(b'\1@Mods/NewIndustry/')
+    for _ in range(3):
+        assert entry[pos]==1
+        pos=entry.index(0,pos+1)+1
+    count=struct.unpack_from('<I',entry,pos+32)[0]
+    duration=pos+36+count*20
+    assert struct.unpack_from('<f',entry,duration)[0]==spec['hours']
+    duration_offsets.append([newTC.index(entry)+duration,spec['unscaled_hours']])
+manifest['configuration']={'schema_version':1,'resource_ids':{name:RES[name].hex() for name in OPENING_STOCK},
+                           'research_durations':duration_offsets,'workshop_curve_offset':len(newTC)-len(sets)}
 for base,files in patches.items():
     records=entries(base);byname={NAMES.get(e[1]):e for e in records};items=[]
     with (GAME/(base+'.dat')).open('rb') as src:
         for name,newdata in files.items():
             e=byname[name];original=read(src,e)
-            assert original!=newdata
+            assert original!=newdata or name==difficulty_path
             payload=f'{base}-{e[1]:08x}.bin.gz';(PAY/payload).write_bytes(gzip.compress(newdata,compresslevel=9,mtime=0))
             items.append({'name':name,'hash':e[1],'payload':payload,'original_sha256':hashlib.sha256(original).hexdigest(),'new_sha256':hashlib.sha256(newdata).hexdigest(),'size':len(newdata)})
     manifest['archives'][base]={'entries':items,'original_files':{ext:hashlib.file_digest((GAME/(base+ext)).open('rb'),'sha256').hexdigest() for ext in ['.dat','.idx']}}
