@@ -32,13 +32,21 @@ class PlaystyleTests(unittest.TestCase):
         for key in keys:
             t=self.techs[key]
             actual={mode for mode,ids in self.catalog['scenario_additions'].items() if t['guid'] in ids}
-            self.assertEqual(actual,set(t['scenarios']),key)
+            if key in self.catalog.get('consolidated_technologies',{}):
+                self.assertFalse(actual)
+                target=self.techs[self.catalog['consolidated_technologies'][key]]
+                target_modes={mode for mode,ids in self.catalog['scenario_additions'].items() if target['guid'] in ids}
+                self.assertTrue(set(t['scenarios'])<=target_modes,key)
+                for field in ('effects','extra_effects','global_effects'):
+                    self.assertTrue(all(effect in target[field] for effect in t[field]),(key,field))
+            else:self.assertEqual(actual,set(t['scenarios']),key)
         self.assertEqual(self.techs['BuilderAssemblyPlatforms']['scenarios'],['Default_Endless_Builders'])
         edge=set(self.catalog['scenario_additions']['Reconquest'])
         for key in ('BoilerBufferDrums','ArtificialSpring','AutonomousMaintenance','BuilderAssemblyPlatforms'):
             self.assertNotIn(self.techs[key]['guid'],edge)
         for key in ('SlowSimmeredBroth','LimbSparingSurgery','FieldInfirmaries','CondensateHeaters','WinterArtisanGuilds','CoreChargedRetorts'):
-            self.assertIn(self.techs[key]['guid'],edge)
+            target=self.catalog.get('consolidated_technologies',{}).get(key,key)
+            self.assertIn(self.techs[target]['guid'],edge)
 
     def test_production_selectors_never_exceed_four_options(self):
         # Native maxima include law-dependent cooking choices and mutually
@@ -74,11 +82,15 @@ class PlaystyleTests(unittest.TestCase):
             self.assertGreater(net/closed['inputs']['Wood'],retort['amount']/retort['inputs']['Wood'])
             self.assertLess(net/closed['hours'],rapid['amount']/rapid['hours'])
 
-    def test_core_conversion_recipes_require_renewable_core_research(self):
+    def test_core_conversion_recipes_keep_costs_without_hidden_factory_dependencies(self):
         for key in ('CoreChargedRetorts','ArtificialSpring','IndustrialArtificialSpring'):
             recipe=self.recipes[key]
             self.assertEqual(recipe['inputs']['Steam Cores'],1)
-            self.assertIn(self.techs['Cores3']['guid'],self.ancestors(recipe['unlock']))
+            unlock=self.by_guid[recipe['unlock']]
+            for parent in unlock['requires']:
+                if parent in self.by_guid:
+                    self.assertEqual(self.by_guid[parent]['category'],unlock['category'])
+                    self.assertEqual(self.by_guid[parent]['column'],unlock['column'])
         self.assertEqual(self.recipes['CoreChargedRetorts']['building'],'Charcoal Kiln')
         self.assertNotEqual(self.recipes['ArtificialSpring']['building'],'Factory')
 

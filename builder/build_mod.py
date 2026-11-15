@@ -183,9 +183,9 @@ new_modifiers, choice_recipes, choice_targets, choice_ids = add_choices(
 recipes.extend(choice_recipes)
 for path,additions in choice_targets.items():
     station_targets.setdefault(path,[]).extend(additions)
-for spec in specs:
-    spec['unscaled_hours']=spec['hours']
-    spec['hours']*=PERK_RESEARCH_DURATION
+from civic_progression import add_civic, build_laws
+new_modifiers, civic_laws = add_civic(technology,specs,techinfo,new_modifiers,
+    (SRC/'common/configs/frostpunkbuildingsconfig.bin').read_bytes(),gid,loc,EXPLORATION)
 
 old_category_count=struct.unpack_from('<I',TC,0)[0]
 tech_count_pos=techinfo[0]['start']-4
@@ -230,7 +230,7 @@ for name in supported_sets:
             continue
         if 'scenarios' in spec and name not in spec['scenarios']:
             continue
-        if (name == 'Builders') != (spec['category'] in autumn_categories):
+        if not spec.get('shared_all_scenarios') and (name == 'Builders') != (spec['category'] in autumn_categories):
             continue
         if name == 'Reconquest':
             if 'scenarios' not in spec and spec['id'] not in EDGE_SHARED | EDGE_COMPATIBLE | EDGE_ADDITIONS | EDGE_OPENING | EDGE_RESOURCEFUL | EDGE_GAMEPLAY | EDGE_RECIPES | edge_ids | trade_ids:
@@ -247,8 +247,17 @@ for name in supported_sets:
         additions.append(item)
         members.add(item)
     scenario_additions[name] = [item.hex() for item in additions]
-    sets=sets[:p]+u32(n+len(additions))+sets[p+4:end]+b''.join(additions)+sets[end:]
+from research_organization import organize
+consolidated = organize(specs,scenario_additions,techinfo,gid)
+retired.update(consolidated)
+for name, additions in scenario_additions.items():
+    marker=b'\1\1'+name.encode()+b'\0';p=sets.index(marker)+len(marker)+16
+    n=struct.unpack_from('<I',sets,p)[0];end=p+4+n*16
+    sets=sets[:p]+u32(n+len(additions))+sets[p+4:end]+b''.join(bytes.fromhex(g) for g in additions)+sets[end:]
 research_tabs = arrange(specs,scenario_additions,gid)
+for spec in specs:
+    spec['unscaled_hours']=spec['hours']
+    spec['hours']*=PERK_RESEARCH_DURATION
 categories = b''.join(b'\1'+string(title)+bytes.fromhex(g)+loc('Tabs/'+g,title)+u32(0)
                       for title,g in research_tabs)
 # Resolve native prerequisite names from the owned English table instead of
@@ -264,7 +273,12 @@ for row in techinfo:
     token=re.search(rb'\x01@([^\0]+)\0',TC[row['start']:row['tail']])
     assert token
     row['title']=native_texts[token[1]]
+from icon_curation import curate_icons
+curate_icons(specs,techinfo)
 rebuild_entries(specs,newtechs,techinfo,loc,req,costs)
+society_path='configs/frostpunksocietyconfig.bin'
+new_society=build_laws((SRC/'common'/society_path).read_bytes(),
+    (SRC/'common/configs/frostpunkeffectsconfig.bin').read_bytes(),civic_laws,gid,loc,req)
 effect_records=modifiers(new_modifiers)
 for tech in specs:
     tech['effect_fingerprint']=effect_signature(tech,effect_records)
@@ -347,6 +361,7 @@ patches['common'][scenarios_path]=starting_supplies((SRC/'common'/scenarios_path
 # The public menu preset is an identity patch. Installation can replace only its
 # native difficulty effect vectors without changing scenario assets or scripts.
 patches['common'][difficulty_path]=(SRC/'common'/difficulty_path).read_bytes()
+patches['common'][society_path]=new_society
 for path, additions in station_targets.items():
     if path==factory_path:
         # The Factory queue above collects every Factory recipe, including the
@@ -374,6 +389,8 @@ for spec,entry in zip(specs,newtechs):
     duration_offsets.append([newTC.index(entry)+duration,spec['unscaled_hours']])
 manifest['configuration']={'schema_version':1,'resource_ids':{name:RES[name].hex() for name in OPENING_STOCK},
                            'research_durations':duration_offsets,'workshop_curve_offset':len(newTC)-len(sets)}
+manifest['laws']=civic_laws
+manifest['consolidated_technologies']=consolidated
 for base,files in patches.items():
     records=entries(base);byname={NAMES.get(e[1]):e for e in records};items=[]
     with (GAME/(base+'.dat')).open('rb') as src:

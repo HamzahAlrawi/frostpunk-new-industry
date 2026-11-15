@@ -8,7 +8,7 @@ from collections import Counter
 import itertools
 
 
-TAB_NAMES = ("Engineering", "Industry", "City Life", "Logistics")
+TAB_NAMES = ("Engineering", "Industry", "City Life", "Logistics", "Production")
 LANES = (2, 5, 8, 11, 14, 17, 20)
 
 
@@ -153,6 +153,16 @@ def _solve(nodes, masks):
 
 
 def arrange(specs, scenario_additions, guid):
+    if all('route' in t for t in specs if any(t['guid'] in ids for ids in scenario_additions.values())):
+        categories = [guid('city-mastery-category').hex()] + [guid('research-tab/' + name).hex() for name in TAB_NAMES[1:]]
+        for tech in specs:
+            if 'route' not in tech:continue
+            tab, lane = tech['route']
+            tech.update(category=categories[tab], column=LANES[lane], tab=TAB_NAMES[tab])
+        for ids in scenario_additions.values():
+            for category in categories:
+                assert not geometry_errors([t for t in specs if t['guid'] in ids and t['category'] == category])
+        return list(zip(TAB_NAMES, categories))
     # Reuse the previous City Mastery GUID for Engineering; keep save identifiers.
     categories = [guid("city-mastery-category").hex()] + [guid("research-tab/" + name).hex() for name in TAB_NAMES[1:]]
     active = {g for ids in scenario_additions.values() for g in ids}

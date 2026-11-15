@@ -26,3 +26,12 @@ persistent config across updates; apply the owner's easiest preset for this
 local installation. Public defaults remain standard. Validate all 17 starting
 profiles and native difficulty vectors with `builder/validate_configuration.py`.
 Configurable research defaults remain 0.5 / 1.5625; user overrides are explicit.
+
+Keep added research in the explicit columns in `builder/research_organization.py`.
+Every non-tier research prerequisite must be visible in the same column and
+earlier tier; do not restore hidden native/cross-tab gates. Recipe output icons
+must match native economy coordinates. Validate civic laws and all icon subjects
+with `builder/validate_civic.py`. Preserve the 112 native law records. New laws
+use the native on-sign effect vector at layout +67, not the unrelated +50
+metadata vector. Prepend new records to counted society vectors; unlabelled
+native fields follow the final law before the agent-label vector.

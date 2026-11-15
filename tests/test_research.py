@@ -55,17 +55,52 @@ class ResearchTests(unittest.TestCase):
                         self.assertIn(parent, members, (scenario, tech['id']))
                         self.assertLessEqual(self.by_guid[parent]['tier'], tech['tier'])
 
-    def test_opening_and_midgame_tools_are_no_longer_endgame_gated(self):
-        expected = {'SawmillSurvey':0, 'SawmillOutput2':1, 'GatheringLogistics':1,
+    def test_opening_and_midgame_tools_have_deliberate_timing(self):
+        expected = {'StarterTimberTools':0, 'SawmillOutput2':1, 'GatheringLogistics':1,
                     'HuntingSleds':1, 'ScoutBearings':2, 'ScoutOverhaul':3,
                     'ConvoyBearings':2, 'ConvoyRelays':3, 'WardProtocols':3,
-                    'MedicalHeat3':3, 'HothouseHeat3':3, 'GatheringHeat3':3,
-                    'SeedSelection2':3, 'FlightRigs':3, 'MiningCoreMounts':2,
-                    'DeepScrapRecovery':2}
+                    'GatheringHeat3':2, 'SeedSelection2':3, 'FlightRigs':3,
+                    'MiningCoreMounts':0,'AutumnReclaimedReloading':0,'DeepScrapRecovery':1}
         for key, tier in expected.items():
             tech = self.by_id[key]
             self.assertEqual(tech['tier'], tier)
-            self.assertLess(tier, tech['previous_tier'])
+        for key in ('MiningCoreMounts','AutumnReclaimedReloading'):
+            self.assertEqual(self.by_id[key]['requires'],[])
+            self.assertEqual(self.by_id[key]['cost'],{'Wood':24,'Steel':10})
+            self.assertEqual(self.by_id[key]['hours'],2)
+
+    def test_all_non_tier_requirements_are_visible_in_the_same_column(self):
+        for mode,ids in self.catalog['scenario_additions'].items():
+            for g in ids:
+                tech=self.by_guid[g]
+                parents=[self.by_guid[p] for p in tech['requires'] if p in self.by_guid]
+                self.assertLessEqual(len(parents),1,(mode,tech['id']))
+                for parent in parents:
+                    self.assertEqual(parent['category'],tech['category'])
+                    self.assertEqual(parent['column'],tech['column'])
+                    self.assertLess(parent['tier'],tech['tier'])
+                self.assertEqual(len(tech['requires'])-len(parents),int(tech['tier']>0))
+
+    def test_six_thermal_envelopes_form_one_unbroken_column(self):
+        keys=['CitywideLagging']+['CitywideLagging'+str(n) for n in range(2,7)]
+        for tier,key in enumerate(keys):
+            tech=self.by_id[key]
+            self.assertEqual(tech['tier'],tier)
+            if tier:self.assertEqual(tech['visible_parent'],self.by_id[keys[tier-1]]['guid'])
+        self.assertGreater(self.by_id[keys[-1]]['cost']['Steam Cores'],0)
+
+    def test_civic_laws_have_shared_research_and_distinct_policies(self):
+        self.assertEqual(len(self.catalog['laws']),4)
+        for law in self.catalog['laws']:
+            self.assertEqual(law['book'],'Civic Charters')
+            self.assertEqual(law['cooldown'],18)
+            for ids in self.catalog['scenario_additions'].values():self.assertIn(law['research'],ids)
+        self.assertEqual(len({law['modifier'] for law in self.catalog['laws']}),4)
+
+    def test_three_core_factory_recipe_uses_a_steam_core_icon(self):
+        recipe=next(r for r in self.catalog['recipes'] if r['id']=='MassCoreFabrication')
+        self.assertEqual(recipe['icon_atlas'],'UI\\Elements\\Resources_Icos.dds')
+        self.assertEqual(recipe['icon'],[1,0])
 
     def test_layout_checker_rejects_icon_and_line_collisions(self):
         def node(g, column, tier, parents=()):

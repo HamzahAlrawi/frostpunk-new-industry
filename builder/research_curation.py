@@ -338,7 +338,7 @@ def rebuild_entries(specs, entries, technology_info, loc, req, costs):
         for _ in range(3):
             assert original[position] == 1
             position = original.index(0, position + 1) + 1
-        icon = struct.unpack_from("<2i", original, position)
+        icon = tech.get('icon_override',struct.unpack_from("<2i", original, position))
         count, = struct.unpack_from("<I", original, position + 32)
         rest = original[position + 40 + count * 20:]
         assert rest[:4] == struct.pack("<I", 2)

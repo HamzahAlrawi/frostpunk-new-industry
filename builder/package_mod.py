@@ -50,6 +50,8 @@ def main():
                                            "retired_technologies", "opening_stock_bonus", "base_research_multiplier",
                                            "removed_team_perks", "redesigned_technologies", "research_tabs", "playstyle_research",
                                            "perk_research_duration_multiplier")}
+    catalog['laws'] = source['laws']
+    catalog['consolidated_technologies'] = source['consolidated_technologies']
     catalog["active_research_definitions"] = len(active)
     catalog["suspended_technologies"] = [entry["id"] for entry in source["suspended_field_operations"]]
     (output / "catalog.json").write_text(json.dumps(catalog, indent=2) + "\n", encoding="utf-8")

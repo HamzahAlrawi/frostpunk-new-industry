@@ -53,7 +53,7 @@ def add_resilience(*,add,place,reserve,recipe,supersede,clone,effect,records,pla
         5,180,150,26,['Cores3'],COLD,0,icon=(0,2),mechanic='multi-core-factory-batches')
     supersede('Cores3',unlock)
     recipe(key,'Core Fabrication Cells','Augmentation_parts','Factory',['resourceprocessing/prefabfactory'],
-           'Steam Cores',3,{'Steel':90,'Wood':50,'Coal':100},10,unlock,resource_icon=(0,2))
+           'Steam Cores',3,{'Steel':90,'Wood':50,'Coal':100},10,unlock,resource_icon=(1,0))
 
     for key,modes,tier,parent in [('PressureKitchens',COLD,4,'FuelledStockpots'),
                                  ('AutumnPressureKitchens',AUTUMN,2,'AutumnSlowSimmeredBroth')]:

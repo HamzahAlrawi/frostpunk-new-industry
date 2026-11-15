@@ -1,6 +1,7 @@
 """Optional production recipes using each station's native product and queue format."""
 import re
 import struct
+from icon_curation import RESOURCE_ICONS
 
 from last_autumn import AUTUMN_TABS
 
@@ -74,14 +75,18 @@ def encode_station_recipe(native, key, title, source, building, paths, output, a
         output_data = string("FrostpunkFoodRationProduct") + uint(1) + uint(amount) + uint(3)
     if resource_icon is not None:
         assert len(resource_icon)==2 and output!='Food Rations'
+        assert output not in RESOURCE_ICONS or tuple(resource_icon)==RESOURCE_ICONS[output], (key,'Icon does not match output resource')
         coordinates=struct.pack('<4i',*resource_icon,4,4)
+    elif output in RESOURCE_ICONS:
+        coordinates=struct.pack('<4i',*RESOURCE_ICONS[output],4,4)
     for name,quantity in byproducts.items():
         assert name!='Food Rations' and quantity>0
         output_data+=string('FrostpunkResourceProduct')+uint(1)+resources[name]+uint(quantity)
     data += display_atlas + coordinates + sample[icon_at + 16:icon_at + 17] + b"\1" + uint(1+len(byproducts))
     data += output_data + uint(0) + costs(inputs) + struct.pack("<f", hours) + tail
     info = dict(id=key, title=title, output=output, amount=amount, inputs=inputs, hours=hours,
-                building=building, source_blueprint=source, unlock=research.hex(), targets=paths)
+                building=building, source_blueprint=source, unlock=research.hex(), targets=paths,
+                icon_atlas=display_atlas[1:-1].decode(), icon=list(struct.unpack('<4i',coordinates)[:2]))
     if exclusions:
         info['excludes'] = [value.hex() for value in exclusions]
     if byproducts:

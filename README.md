@@ -2,21 +2,23 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.11.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.12.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.11.0/Frostpunk-New-Industry-3.11.0-Windows.zip) · [Research catalog](docs/research.md) · [Configuration](docs/configuration.md) · [Changes in 3.11](docs/releases/3.11.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.12.0/Frostpunk-New-Industry-3.12.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Configuration](docs/configuration.md) · [Changes in 3.12](docs/releases/3.12.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
 
 - **Renewable Steam Cores.** Research Factory fabrication and its improved production recipes.
-- **256 active research definitions across supported modes.** Engineering, Industry, City Life, and Logistics join the native tabs. Scenario research lists select the upgrades that fit each mode. Added research is checked for duplicate effect packages, icon collisions, and crossing or obstructed prerequisite lines.
+- **216 active research definitions across supported modes.** Engineering, Industry, City Life, Logistics and Production use fixed themed columns beside the native tabs. 47 smaller upgrades are consolidated into larger ones. Added research has at most one visible parent in its own column; hidden native and cross-tab requirements are removed.
+- **Four signable Civic Charters.** Research the City Life civic branch, then sign laws that improve Hope/Discontent and provide healthcare, civic heating and illness benefits. The Last Autumn receives a native Motivation benefit in place of Hope. [Policies and consolidated upgrades](docs/laws.md).
+- **Six citywide thermal envelopes.** Three additional stages provide expensive late-game insulation, illness protection and larger heat zones.
 - **Faster progression.** All mod-added perks have half their authored base research duration. Workshop base research output is 25% higher than version 3.9, or 56.25% above vanilla, with normal multiple-Workshop scaling. Research before Drawing Boards and additional starting supplies ease the opening.
 - **Configurable difficulty and bigger starting stockpiles.** Five presets and per-resource/category overrides cover all native starting profiles. Edit the persistent JSON, then apply it while the game is closed. Research pacing is configurable too; public defaults retain the current boosts.
 - **Stronger workplaces.** The permanent workplace-efficiency research bonuses grant at least 75% per upgrade where applicable.
 - **Alternate production.** Fuelled Stockpots, coal-heated and fermentation Hothouses, retort and rapid-coking kiln batches, baited fishing, dockside ration production, alternate generator-component recipes, and Warehouse salvage.
 - **New city strategies.** Safer Radical Treatment, cold protection, wider heat zones, faster construction, linked production-chain improvements, and large storm reserves. Added team-capacity perks have been removed; vanilla team research remains.
 - **Better timing.** Opening-game tools arrive earlier and cost less; late research supports sustained production, civic services in storms, and stronger generator stress management. A 1920-pixel-wide or larger display is recommended for the expanded tab bar.
-- **Core-saving building research.** Modular Hothouses, extraction machinery, and the restored Last Autumn Reloading Station discount.
+- **Core-saving construction before Drawing Boards.** Tier 0 packages combine Hothouse, extraction and Infirmary core discounts, or Autumn Reloading Station, fabrication and Infirmary discounts.
 - **Specialist city development.** Core-free Infirmaries, limb-sparing Radical Treatment, human and automaton industrial specialisations, compact or large reserve warehouses, and optional overdrive/fuel trade-offs.
 - **Core-powered production chains.** Consume renewable cores in Kilns for bulk coal or in Hothouses for burst food production. Alternate fuel, cooking and fishing recipes offer different material and throughput trade-offs. Selectors are checked to stay within four simultaneous options.
 - **Reclamation and component reuse.** Make cores in batches of three, reclaim cores into steel, recover wood and steel together at the Army Warehouse, and reuse generator components across The Last Autumn's three fabrication stations. Specialist heating research offers coal-free medical and industrial Heaters, or compact grids that trade heat radius for fuel savings.
@@ -57,10 +59,10 @@ and difficulty. See [all settings and presets](docs/configuration.md).
 
 ## Testing status
 
-- The default copy/insert patches reconstruct the local 3.11.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
+- The default copy/insert patches reconstruct the local 3.12.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
 - Research tests cover scenario membership, earlier unlocks, unique effect packages, icon/prerequisite-line geometry, and recipe-selector limits. The local binary validator also checks actual serialized recipe prices, outputs, requirements, attachments and effect vectors, and preserves native technology and modifier records.
-- The mod's configuration and startup checks passed. Earlier builds completed full campaigns. The newest gameplay effects still need broader campaign testing, so this release is marked **beta**.
+- The configuration and startup checks passed, including Society and Effects loading. Earlier builds completed full campaigns. In-city signing and presentation of the new law book have not been interactively verified; this release remains **beta**.
 
 When reporting a problem, include the mod version, scenario, game version, and the installer error or crash description. Installer logs are saved locally in the backup folder's parent directory.
 
@@ -75,6 +77,7 @@ python builder/prepare_sources.py --game "C:\Program Files (x86)\Steam\steamapps
 python builder/build_mod.py
 python builder/validate_build.py
 python builder/validate_configuration.py
+python builder/validate_civic.py
 python builder/package_mod.py --originals "C:\Program Files (x86)\Steam\steamapps\common\Frostpunk"
 python builder/write_catalog.py
 python -m unittest discover -s tests -v
@@ -95,7 +98,7 @@ The executable is written to `dist/`. The GitHub workflow runs installer tests o
 For a bounded local startup check, close Frostpunk and run
 `powershell -ExecutionPolicy Bypass -File builder/startup_check.ps1 -Game "D:\SteamLibrary\steamapps\common\Frostpunk"`.
 It launches and closes only its own test process, captures a fresh log, requires
-the seven required game configurations (including difficulty) to finish loading, and rejects serialization
+the nine required game configurations (including difficulty, Society and Effects) to finish loading, and rejects serialization
 or decompression errors. Logs and a JSON result are written under
 `build/startup-check/`. It does not load a save or test campaign balance.
 
