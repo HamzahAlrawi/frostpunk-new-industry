@@ -5,7 +5,7 @@ RESOURCE_ICONS = {'Steam Cores':(1,0), 'Steel':(0,0), 'Wood':(1,1), 'Coal':(2,1)
 
 THEMES = (
     ('Drawing Boards','Generator Efficiency Upgrade II','Steam Hub','Automaton Integration','Heaters','Factory','Gathering Post Insulation'),
-    ('Faster Gathering','Sawmill','Steelworks','Coal Thumper','Wall Drill','Charcoal Kiln','Factory'),
+    ('Factory','Sawmill','Steelworks','Coal Thumper','Wall Drill','Charcoal Kiln','Faster Gathering'),
     ('Medical Post Upgrade','Hothouse','Hunters\' Gear','Cookhouse Insulation','House','Medical Post Upgrade','Medical Post Upgrade'),
     ('Lighter Scout Sleds','Outpost Depot','Resource Depot Upgrade','Resource Depot Upgrade','Resource Depot Upgrade','Steelworks','Factory'),
     ('Factory','Steelworks','Charcoal Kiln','Hothouse','Cookhouse Insulation','Steelworks','Factory'),

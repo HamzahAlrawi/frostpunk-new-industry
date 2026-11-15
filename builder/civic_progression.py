@@ -8,6 +8,10 @@ from progression_choices import COLD
 
 LAW_MARKER = b'\1FrostpunkSociotechEntry\0'
 LAW_BOOK = 'Civic Charters'
+NATIVE_BOOK_NAMES = ('Purpose', 'Adaptation', 'Labour', 'ADMINISTRATION')
+BOOK_GUIDS = {'Adaptation':'aa9e39dee99e599452414bfb60af2960',
+              'Administration':'f80dd07aa593789558485d8c0cb8de65'}
+CHARTER_POSITIONS = ((-9,-8),(-3,-8),(3,-8),(9,-8))
 POLICIES = (
     ('Reassurance', 'Public Reassurance Charter', 'Public Assurance Offices',
      'Hope rises greatly when signed. Public Houses, Fighting Arenas, Care Houses and places of worship gain +1 insulation.',
@@ -26,7 +30,13 @@ POLICIES = (
 
 def law_records(data):
     marks = list(re.finditer(LAW_MARKER, data))
-    end = data.index(b'\1\1Gender_Male\0', marks[-1].start()) - 4
+    guard = data.index(b'\1\1Gender_Male\0', marks[-1].start()) - 4
+    # The label vector is not adjacent to the laws: 89 native society bytes
+    # follow the last native law. Locate its actual, pinned-build footer.
+    endings = list(re.finditer(re.escape(bytes.fromhex('00010000000000004040')),
+                               data[marks[-1].start():guard]))
+    assert len(endings) == 1, 'Ambiguous final law boundary'
+    end = marks[-1].start() + endings[0].end()
     assert struct.unpack_from('<I', data, marks[0].start() - 4)[0] == len(marks)
     records = {}
     for i, marker in enumerate(marks):
@@ -36,6 +46,42 @@ def law_records(data):
         name = raw[len(LAW_MARKER) + 1:name_end].decode()
         records[name] = raw
     return marks[0].start() - 4, end, records
+
+
+def book_records(data):
+    law_count, _, _ = law_records(data)
+    names = NATIVE_BOOK_NAMES + ((LAW_BOOK,) if b'\1\1Civic Charters\0' in data[:law_count] else ())
+    starts = sorted((data.index(b'\1\1'+name.encode()+b'\0'),name) for name in names)
+    count_pos = starts[0][0]-4
+    assert struct.unpack_from('<I',data,count_pos)[0] == len(starts)
+    return count_pos, {name:data[start:starts[i+1][0] if i+1<len(starts) else law_count]
+                       for i,(start,name) in enumerate(starts)}
+
+
+def law_layout(raw):
+    loc = raw.index(b'\1@')
+    for _ in range(2):loc=raw.index(0,loc+1)+1
+    position=loc+1 if raw[loc]==0 else raw.index(0,loc+1)+1
+    icon_x,icon_y,x,y=struct.unpack_from('<4i',raw,position)
+    return loc,(x,y),raw[position+16:position+32].hex()
+
+
+def law_layout_errors(new_laws, native):
+    """Only compare added nodes: native exclusive alternatives share slots."""
+    errors=[]
+    for law in new_laws:
+        x,y=law['position']
+        if abs(x)<4 and abs(y)<4:errors.append((law['id'],'book centre'))
+        for name,raw in native.items():
+            _,(nx,ny),category=law_layout(raw)
+            if category==law['book_guid'] and abs(x-nx)<5 and abs(y-ny)<2.5:
+                errors.append((law['id'],'native law',name))
+    for i,law in enumerate(new_laws):
+        for other in new_laws[i+1:]:
+            if law['book_guid']!=other['book_guid']:continue
+            if abs(law['position'][0]-other['position'][0])<5 and abs(law['position'][1]-other['position'][1])<2.5:
+                errors.append((law['id'],'added law',other['id']))
+    return errors
 
 
 def add_civic(technology, specs, techinfo, data, buildings, guid, localize, category):
@@ -82,14 +128,15 @@ def add_civic(technology, specs, techinfo, data, buildings, guid, localize, cate
     laws = []
     for tier, (key, title, research, description, effects, mechanic) in enumerate(POLICIES):
         identity = 'Civic' + key
-        text = 'Unlocks the signable ' + title + ' in the Civic Charters book. ' + description
+        text = 'Unlocks the signable ' + title + ' in the upper charter branch of Adaptation (Administration in The Last Autumn). ' + description
         technology(identity, research, text, tier, 20, [], {'Wood': 18 + tier * 14, 'Steel': 6 + tier * 8},
                    4 + tier * 3, (0, 2), category)
         specs[-1].update(scenarios=list(COLD) + ['Builders'], shared_all_scenarios=True,
                          mechanic='signable-civic-law', added_in='3.12.0')
         laws.append(dict(id=identity, title=title, research=specs[-1]['guid'], description=description,
                          effects=list(effects), modifier=policy_modifiers[key], research_title=research,
-                         position=[tier * 3, 0], cooldown=18, book=LAW_BOOK))
+                         position=list(CHARTER_POSITIONS[tier]), cooldown=18, book='Adaptation',
+                         book_guid=BOOK_GUIDS['Adaptation'], scenarios=list(COLD)))
 
     source = next(t for t in specs if t['id'] == 'CitywideLagging')
     for number, tier, cost in ((4, 3, (420, 320, 3)), (5, 4, (560, 420, 5)), (6, 5, (720, 560, 8))):
@@ -143,12 +190,15 @@ def build_laws(data, effects, laws, guid, localize, technology_requirement):
     assert probe.index(b'\1FrostpunkSwitchEffect\0',probe_layout) == probe_layout+71
     assert struct.unpack_from('<I',probe,probe_layout+67)[0] == 1
     assert source[layout+67:layout+71] == bytes(4)
-    # Copy the native category's UI resources, but require no scenario unlock.
+    # Retain the old category GUID only for saves. It is appended after all four
+    # native books and hidden with P AND NOT(P), so it cannot occupy a book slot.
     start = data.index(b'\1\1Adaptation\0')
     stop = data.index(b'\1\1Labour\0', start)
     category = data[start:stop]
     title_at = category.index(b'\1@Generated')
-    header = b'\1\1' + LAW_BOOK.encode() + b'\0' + guid('civic-law-book') + bytes(4)
+    gate=technology_requirement(bytes.fromhex(laws[0]['research']))
+    negate=b'\1FrostpunkCompositeRequirement\0'+bytes(17)+struct.pack('<II',2,1)+gate
+    header = b'\1\1' + LAW_BOOK.encode() + b'\0' + guid('civic-law-book') + struct.pack('<I',2) + gate + negate
     tail = category[title_at:]
     tail = re.sub(rb'\x01@Generated/[^\0]+\0', lambda m: localize('Laws/Book/' + str(m.start()), LAW_BOOK), tail)
     category = header + tail
@@ -160,13 +210,20 @@ def build_laws(data, effects, laws, guid, localize, technology_requirement):
     switch_prefix = data[switch_start:branch_start]
     assert b'\1\1Builders\0' in switch_prefix
     other = b'\1\1Other\0' + struct.pack('<II', 0, 1)
+    # Distinct scenario entries allow the native book unlock rules to decide
+    # which branch is shown. Original four GUIDs retain Arks/other cold saves.
+    for law in list(laws):
+        laws.append(dict(law,id='Autumn'+law['id'],book='Administration',
+                         book_guid=BOOK_GUIDS['Administration'],scenarios=['Builders'],
+                         legacy_equivalent=guid('law/'+law['id']).hex()))
+    assert not law_layout_errors(laws,native), law_layout_errors(laws,native)
     output = []
     for law in laws:
         record = bytearray(source[layout:])
         record = bytearray(bytes(record).replace(illustration,guid('law-illustration/'+law['id'])))
         law_icon = (2, 13)
         struct.pack_into('<4i', record, 1, *law_icon, *law['position'])
-        record[17:33] = guid('civic-law-book')
+        record[17:33] = bytes.fromhex(law['book_guid'])
         struct.pack_into('<f', record, 42, law['cooldown'])
         on_sign = []
         for name in law['effects']:
@@ -181,18 +238,22 @@ def build_laws(data, effects, laws, guid, localize, technology_requirement):
         record[67:71] = struct.pack('<I', len(on_sign)) + b''.join(on_sign)
         # Replace all four native locale references, without inheriting its text.
         text = law['description'] + ' In The Last Autumn, the Hope effect is replaced by a native Motivation benefit.'
-        text += '\n\nFirst research: ' + law['research_title'] + '. Sign in Civic Charters. Passive benefits remain after signing.'
+        text += '\n\nFirst research: ' + law['research_title'] + '. Sign in the upper charter branch of ' + law['book'] + '. Passive benefits remain after signing.'
         def law_text(match):
             content = 'Signed: ' + law['title'] + '.' if b'Popup notification text' in match[0] else law['description']
             return localize('Laws/' + law['id'] + '/Text/' + str(match.start()), content)
         record = re.sub(rb'\x01@Generated/[^\0]+\0', law_text, bytes(record))
         prefix = LAW_MARKER + b'\1NI ' + law['id'].encode() + b'\0' + guid('law/' + law['id']) + b'\1'
-        prefix += struct.pack('<I', 1) + technology_requirement(bytes.fromhex(law['research'])) + bytes(4)
+        required=[technology_requirement(bytes.fromhex(law['research']))]
+        if law.get('legacy_equivalent'):
+            old=b'\1FrostpunkSociotechRequirement\0'+bytes(17)+bytes.fromhex(law['legacy_equivalent'])
+            required.append(b'\1FrostpunkCompositeRequirement\0'+bytes(17)+struct.pack('<II',2,1)+old)
+        prefix += struct.pack('<I',len(required)) + b''.join(required) + bytes(4)
         prefix += localize('Laws/' + law['id'] + '/Name', law['title']) + localize('Laws/' + law['id'] + '/Description', text)
         output.append(prefix + record)
         law.update(guid=guid('law/' + law['id']).hex(), icon=list(law_icon), native_effects=[predefined[name].hex() for name in law['effects']])
-    # Prepend to both counted vectors. The native final law is followed by
-    # unlabelled society fields before the agent-label vector; those bytes must
-    # remain after the completed law vector, never between its old/new entries.
-    return (data[:first - 4] + struct.pack('<I', 5) + category + data[first:count_pos]
-            + struct.pack('<I', len(native) + len(output)) + b''.join(output) + data[count_pos + 4:])
+    # Native category and law indices stay intact. The last-law boundary above
+    # excludes the unlabelled society fields that follow that vector.
+    return (data[:first - 4] + struct.pack('<I', 5) + data[first:count_pos] + category
+            + struct.pack('<I', len(native) + len(output)) + data[count_pos+4:end]
+            + b''.join(output) + data[end:])

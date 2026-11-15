@@ -15,13 +15,13 @@ COLD = [
   ['CitywideLagging','CitywideLagging2','CitywideLagging3','CitywideLagging4','CitywideLagging5','CitywideLagging6'],
  ],
  [
-  ['StarterGatheringTeams+GatheringWorkwear','GatheringLogistics+GatheringSort+GatheringReach','GatheringHeat3','','',''],
+  ['','','Cores1','Cores2','Cores3','MassCoreFabrication'],
   ['StarterTimberTools+SawmillWindwalls+SawmillSurvey+MasteryTimberSurvey+EdgeSawmillCalibration+EdgeTimberMaps','SawmillOutput2','','','',''],
   ['StarterSteelTooling','SteelworksRolling+SteelworksRefractoryLining','MasterySteelFeeders','SteelworksShiftTeams','SteelworksContinuousCasting+IndustrialHeat+SteelOutput',''],
   ['ThumperScreens','CoalHandlingShelters','SteamThumperFeed','CoalCircuit','ThumperWinterization','ThumperOutput2'],
   ['','MineAirlocks','DrillGearboxes','CoalMineHeat+DrillHeat+EdgeCoalCrews','DrillOutput','CoalMineOutput3'],
   ['MasteryKilnRotas+EdgeKilnCrews','KilnHeat','MasteryFuelDistrict','','',''],
-  ['EdgeWarehouseSorting','EdgeWarehouseBaffles','EdgeWarehouseWinches','','',''],
+  ['StarterGatheringTeams+GatheringWorkwear','GatheringLogistics+GatheringSort+GatheringReach','GatheringHeat3','','',''],
  ],
  [
   ['FieldDressings+StarterWardStoves','MasteryClinicRotas+ConservativeSurgery+EdgeClinicRotas','MedicalEfficiency2+LimbSparingSurgery','WardProtocols+InfirmaryRounds+MasteryClinicSteam+InfirmaryRecoveryWards','MedicalHeat3','MedicalHeat4'],
@@ -42,7 +42,7 @@ COLD = [
   ['','RedeploymentKits','BuilderAssemblyPlatforms','','',''],
  ],
  [
-  ['','','Cores1','Cores2','Cores3','MassCoreFabrication'],
+  ['EdgeWarehouseSorting','EdgeWarehouseBaffles','EdgeWarehouseWinches','','',''],
   ['ScrapRecovery','DeepScrapRecovery','','','ClosedLoopMetallurgy',''],
   ['','RetortCharcoal','RapidCoking','ClosedCycleRetorts','','CoreChargedRetorts'],
   ['','CoalHeatedSeedbeds','FermentationBeds','','TimberSubstrateBeds','ArtificialSpring'],

@@ -1,6 +1,8 @@
 # Civic Charters
 
-Research the four linked charter upgrades in the City Life tab, then open Civic Charters in the Book of Laws. Signing a charter uses the normal law system and an 18-hour law cooldown. Its morale effect occurs once when signed; its passive benefit remains. Native laws are unchanged.
+Research the four linked charter upgrades in City Life. Open Adaptation in the Book of Laws, or Administration in The Last Autumn. The four charters are spaced across the upper branch, above the native laws; zoom or pan upward if needed. Signing uses the normal law system and an 18-hour cooldown. Morale changes happen once when signed; passive benefits remain.
+
+All four native books, their original order, their scenario unlock conditions and all 112 native laws are unchanged. Order and Faith remain governed by the normal Purpose unlock rules. The old separate Civic Charters book is hidden compatibility data. The original four charter IDs are retained for signed-law progress. Autumn entries prevent re-signing a policy already granted by version 3.12.
 
 The Last Autumn receives the native Workers Council Motivation benefit in place of each Hope effect. Discontent effects work normally.
 

@@ -390,6 +390,8 @@ for spec,entry in zip(specs,newtechs):
 manifest['configuration']={'schema_version':1,'resource_ids':{name:RES[name].hex() for name in OPENING_STOCK},
                            'research_durations':duration_offsets,'workshop_curve_offset':len(newTC)-len(sets)}
 manifest['laws']=civic_laws
+manifest['native_law_book_order']=['Purpose','Adaptation','Labour','ADMINISTRATION']
+manifest['legacy_civic_book']={'guid':gid('civic-law-book').hex(),'compatibility_only':True,'requirement':'P AND NOT(P)'}
 manifest['consolidated_technologies']=consolidated
 for base,files in patches.items():
     records=entries(base);byname={NAMES.get(e[1]):e for e in records};items=[]

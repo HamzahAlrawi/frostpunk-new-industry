@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 import struct
 
-from civic_progression import law_records
+from civic_progression import law_records, book_records, law_layout_errors, LAW_BOOK, NATIVE_BOOK_NAMES
 from icon_curation import RESOURCE_ICONS
 from research_curation import modifiers, normalized
 
@@ -21,12 +21,24 @@ def main():
     data = payload['configs/frostpunksocietyconfig.bin']
     _, native_end, native = law_records(original)
     _, revised_end, revised = law_records(data)
-    assert len(native) == 112 and len(revised) == 116
+    assert len(native) == 112 and len(revised) == 120
     assert all(revised[name] == record for name,record in native.items()), 'Native laws changed'
+    assert list(revised)[:112]==list(native), 'Native law order changed'
     assert original[native_end:] == data[revised_end:], 'Native society tail changed'
-    category = data.index(b'\1\1Civic Charters\0')
-    assert struct.unpack_from('<I',data,category-4)[0] == 5
-    assert data.count(b'\1\1Civic Charters\0') == 1
+    old_start,old_books=book_records(original)
+    new_start,new_books=book_records(data)
+    assert tuple(new_books)==NATIVE_BOOK_NAMES+(LAW_BOOK,), 'Native book indices changed'
+    assert old_start==new_start and all(new_books[name]==raw for name,raw in old_books.items()), 'Native book unlocks or UI resources changed'
+    restored=(data[:new_start]+struct.pack('<I',4)+b''.join(new_books[name] for name in NATIVE_BOOK_NAMES)
+              +struct.pack('<I',112)+b''.join(revised[name] for name in native)+data[revised_end:])
+    assert restored==original, 'Removing additions must restore the entire original society config byte for byte'
+    assert not law_layout_errors(manifest['laws'],native)
+    hidden=new_books[LAW_BOOK]
+    gate=b'\1FrostpunkTechnologyRequirement\0'+bytes(17)+bytes.fromhex(manifest['laws'][0]['research'])
+    neg=b'\1FrostpunkCompositeRequirement\0'+bytes(17)+struct.pack('<II',2,1)+gate
+    header_end=hidden.index(0,2)+17
+    assert hidden[header_end:header_end+4]==struct.pack('<I',2)
+    assert hidden[header_end+4:header_end+4+len(gate)+len(neg)]==gate+neg, 'Legacy book must require P and NOT(P)'
     records = modifiers(payload['configs/frostpunkmodifiersconfig.bin'])
     technologies = {t['guid']:t for t in manifest['technologies']}
     native_techs = {t['name']:t for t in json.loads((ROOT/'builder/cache/tech.json').read_text())}
@@ -51,6 +63,7 @@ def main():
         for _ in range(2):loc=raw.index(0,loc+1)+1
         assert raw[loc] == 0
         assert struct.unpack_from('<4i',raw,loc+1) == (*law['icon'],*law['position'])
+        assert raw[loc+17:loc+33].hex()==law['book_guid']
         assert struct.unpack_from('<f',raw,loc+42)[0] == 18
         assert struct.unpack_from('<I',raw,loc+46)[0] == 2
         assert struct.unpack_from('<I',raw,loc+50)[0] == 0
@@ -61,6 +74,14 @@ def main():
         assert first==effect_start, 'On-sign effects are not at the native effect-vector offset'
         assert all(law['research'] in ids for ids in manifest['scenario_additions'].values())
     active=set().union(*map(set,manifest['scenario_additions'].values()))
+    by_id={t['id']:t for t in technologies.values()}
+    tc=payload['configs/frostpunktechnologiesconfig.bin']
+    marker=b'\1\1TechHaven\0';p=tc.index(marker)+len(marker)+16
+    n=struct.unpack_from('<I',tc,p)[0]
+    arks={tc[i:i+16].hex() for i in range(p+4,p+4+16*n,16)}
+    for key in ('Cores1','Cores2','Cores3','MassCoreFabrication'):
+        t=by_id[key]
+        assert t['guid'] in arks and t['tab']=='Industry' and t['column']==2, 'Arks core manufacturing must be visible in Industry column one'
     native_guid={t['guid']:t for t in native_techs.values()}
     for g in active:
         t=technologies[g]
@@ -83,7 +104,7 @@ def main():
         atlas=re.search(rb'\x01UI\\[^\0]+\.dds\0',blueprints[start:])
         expected=(0,1) if recipe['output']=='Food Rations' else RESOURCE_ICONS[recipe['output']]
         assert struct.unpack_from('<2i',blueprints,start+atlas.end())==expected,(recipe['id'],'wrong output icon')
-    print(f"Verified 4 signable laws, 112 byte-identical native laws, native scenario-switched Hope/Motivation effects, all {len(active)} active research nodes and 43 output icons.")
+    print(f"Verified 4 policies in native civil books, native book/law order and unlock preservation, non-overlapping charter geometry, Arks core manufacturing, {len(active)} active research nodes and 43 output icons.")
 
 
 if __name__=='__main__':main()

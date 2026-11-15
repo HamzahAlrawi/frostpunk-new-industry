@@ -90,12 +90,41 @@ class ResearchTests(unittest.TestCase):
         self.assertGreater(self.by_id[keys[-1]]['cost']['Steam Cores'],0)
 
     def test_civic_laws_have_shared_research_and_distinct_policies(self):
-        self.assertEqual(len(self.catalog['laws']),4)
+        self.assertEqual(len(self.catalog['laws']),8)
         for law in self.catalog['laws']:
-            self.assertEqual(law['book'],'Civic Charters')
+            self.assertIn(law['book'],('Adaptation','Administration'))
             self.assertEqual(law['cooldown'],18)
             for ids in self.catalog['scenario_additions'].values():self.assertIn(law['research'],ids)
         self.assertEqual(len({law['modifier'] for law in self.catalog['laws']}),4)
+
+    def test_charters_leave_native_book_slots_and_centre_clear(self):
+        self.assertEqual(self.catalog['native_law_book_order'],['Purpose','Adaptation','Labour','ADMINISTRATION'])
+        self.assertTrue(self.catalog['legacy_civic_book']['compatibility_only'])
+        for mode in self.catalog['scenario_additions']:
+            laws=[law for law in self.catalog['laws'] if mode in law['scenarios']]
+            self.assertEqual(len(laws),4)
+            self.assertEqual(len({tuple(law['position']) for law in laws}),4)
+            for i,law in enumerate(laws):
+                self.assertEqual(law['book'],'Administration' if mode=='Builders' else 'Adaptation')
+                self.assertGreaterEqual(abs(law['position'][1]),4)
+                for other in laws[i+1:]:
+                    self.assertGreaterEqual(abs(law['position'][0]-other['position'][0]),5)
+
+    def test_arks_cores_are_in_the_first_industry_column(self):
+        arks=set(self.catalog['scenario_additions']['TechHaven'])
+        for key in ('Cores1','Cores2','Cores3','MassCoreFabrication'):
+            t=self.by_id[key]
+            self.assertIn(t['guid'],arks)
+            self.assertEqual(t['tab'],'Industry')
+            self.assertEqual(t['column'],2)
+
+    def test_previously_signed_charter_ids_are_preserved(self):
+        expected={'CivicReassurance':'d64185bebca48355a44aac34e21da1f9',
+                  'CivicGrievances':'657804c74475d456b7a06196abf18f83',
+                  'CivicRecovery':'f19aadba4fcba250b4ec61c77b750e90',
+                  'CivicMutualAid':'e302be4c073ff859a40215fc1c597979'}
+        actual={law['id']:law['guid'] for law in self.catalog['laws']}
+        for key,guid in expected.items():self.assertEqual(actual[key],guid)
 
     def test_three_core_factory_recipe_uses_a_steam_core_icon(self):
         recipe=next(r for r in self.catalog['recipes'] if r['id']=='MassCoreFabrication')

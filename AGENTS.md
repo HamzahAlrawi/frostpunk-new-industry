@@ -33,5 +33,9 @@ earlier tier; do not restore hidden native/cross-tab gates. Recipe output icons
 must match native economy coordinates. Validate civic laws and all icon subjects
 with `builder/validate_civic.py`. Preserve the 112 native law records. New laws
 use the native on-sign effect vector at layout +67, not the unrelated +50
-metadata vector. Prepend new records to counted society vectors; unlabelled
-native fields follow the final law before the agent-label vector.
+metadata vector. Preserve original book and law order. Append new laws at the
+actual footer located by `law_records`, before the 89 unlabelled society bytes.
+Native book slots and unlock predicates must remain byte-identical. Charters
+belong in Adaptation / Administration, away from the book centre and native
+nodes. The former Civic Charters category is hidden, appended compatibility
+data only. Verify Arks core manufacturing in Industry column one.

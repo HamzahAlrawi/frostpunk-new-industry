@@ -51,6 +51,8 @@ def main():
                                            "removed_team_perks", "redesigned_technologies", "research_tabs", "playstyle_research",
                                            "perk_research_duration_multiplier")}
     catalog['laws'] = source['laws']
+    catalog['native_law_book_order'] = source['native_law_book_order']
+    catalog['legacy_civic_book'] = source['legacy_civic_book']
     catalog['consolidated_technologies'] = source['consolidated_technologies']
     catalog["active_research_definitions"] = len(active)
     catalog["suspended_technologies"] = [entry["id"] for entry in source["suspended_field_operations"]]
