@@ -279,6 +279,9 @@ rebuild_entries(specs,newtechs,techinfo,loc,req,costs)
 society_path='configs/frostpunksocietyconfig.bin'
 new_society=build_laws((SRC/'common'/society_path).read_bytes(),
     (SRC/'common/configs/frostpunkeffectsconfig.bin').read_bytes(),civic_laws,gid,loc,req)
+from modifier_tooltips import improve_tooltips
+new_modifiers,modifier_tooltips=improve_tooltips(new_modifiers,
+    (SRC/'common/configs/frostpunkmodifiersconfig.bin').read_bytes(),specs,civic_laws,scenario_additions,loc)
 effect_records=modifiers(new_modifiers)
 for tech in specs:
     tech['effect_fingerprint']=effect_signature(tech,effect_records)
@@ -390,6 +393,7 @@ for spec,entry in zip(specs,newtechs):
 manifest['configuration']={'schema_version':1,'resource_ids':{name:RES[name].hex() for name in OPENING_STOCK},
                            'research_durations':duration_offsets,'workshop_curve_offset':len(newTC)-len(sets)}
 manifest['laws']=civic_laws
+manifest['modifier_tooltips']=modifier_tooltips
 manifest['native_law_book_order']=['Purpose','Adaptation','Labour','ADMINISTRATION']
 manifest['legacy_civic_book']={'guid':gid('civic-law-book').hex(),'compatibility_only':True,'requirement':'P AND NOT(P)'}
 manifest['consolidated_technologies']=consolidated

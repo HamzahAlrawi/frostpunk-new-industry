@@ -6,6 +6,10 @@ abilities, building component layouts, or save files are changed here.
 import hashlib
 import re
 import struct
+try:
+    from modifier_conditions import split_technology_condition
+except ImportError:
+    from .modifier_conditions import split_technology_condition
 
 
 REMOVED_TEAMS = frozenset({
@@ -15,7 +19,8 @@ REMOVED_TEAMS = frozenset({
 
 
 def normalized(body):
-    return re.sub(rb"\x01@(?:Generated/ModifiersConfig/Modifiers|Mods/NewIndustry/Modifier)/[^\0]+\0", b"\0", body)
+    _,body=split_technology_condition(body)
+    return re.sub(rb"\x01@(?:Generated/ModifiersConfig/Modifiers|Mods/NewIndustry/(?:Modifier|FieldOperation/Modifier))/[^\0]+\0", b"\0", body)
 
 
 def modifiers(data):
@@ -56,8 +61,12 @@ def place_scalar_offset(body, offset):
 
 
 def effect_signature(tech, records):
-    effects = [("global", "", records[g][0], normalized(records[g][2]).hex()) for g in tech.get("global_effects", [])]
-    effects += [(kind, target, records[g][0], normalized(records[g][2]).hex())
+    def signature(g):
+        condition,_=split_technology_condition(records[g][2])
+        predicate=(condition['technology'],condition['inverted']) if condition else ()
+        return (records[g][0], normalized(records[g][2]).hex(),predicate)
+    effects = [("global", "", *signature(g)) for g in tech.get("global_effects", [])]
+    effects += [(kind, target, *signature(g))
                 for kind in ("effects", "extra_effects") for target, g in tech.get(kind, [])]
     # An empty modifier vector is an unlock, not a duplicate of all other recipes.
     # Recipe-unlock GUIDs are checked independently against their blueprint records.

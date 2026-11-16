@@ -45,3 +45,14 @@ Native book slots and unlock predicates must remain byte-identical. Charters
 belong in Adaptation / Administration, away from the book centre and native
 nodes. The former Civic Charters category is hidden, appended compatibility
 data only. Verify Arks core manufacturing in Industry column one.
+
+Modifier source names and descriptions are authored in the final
+`builder/modifier_tooltips.py` pass, after research and laws are final. Preserve
+all modifier IDs. Cumulative insulation sources use the native next-technology
+predicate with its inversion byte set to 1; earlier records must be pure
+insulation so disabling them cannot drop another bonus. Maintain equal heat
+totals and one active source per building at every reachable research stage.
+`normalized()` provides a scalar view with presentation and this predicate
+removed; effect fingerprints must include the predicate separately. Run
+`builder/validate_tooltips.py` to verify actual serialized fields, preserved
+unrelated effects, native expression samples and all 13 language tables.

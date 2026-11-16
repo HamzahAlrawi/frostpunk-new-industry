@@ -91,7 +91,7 @@ def validate_choice_effects(manifest,records):
         assert expected[p:p+8]==struct.pack('<2f',-1,1)
         expected=expected[:p]+struct.pack('<2f',0,0.5)+expected[p+8:]
         for _,g in by_id[key]['extra_effects']:
-            assert records[g][2]==expected,'Heater predicates or unrelated fields changed'
+            assert normalized(records[g][2])==normalized(expected),'Heater predicates or unrelated fields changed'
     for key in ('LimbSparingSurgery','AutumnLimbSparingSurgery'):
         assert {p for p,_ in by_id[key]['effects']}=={buildings['Medical Post'].hex()}
         for _,g in by_id[key]['effects']:
@@ -109,9 +109,9 @@ def validate_choice_effects(manifest,records):
                       ('IndustrialHeatRecovery',('Factory','Engineers Lab')),
                       ('AutumnIndustrialHeaters',('[Builders]ScaffoldingManufacture','[Builders]PipeFoundry','[Builders]SteelPlateForge','Engineers Lab'))]:
         assert {target for target,_ in by_id[key]['effects']}=={buildings[n].hex() for n in names}
-        assert all(records[g][2]==free for _,g in by_id[key]['effects']), 'Free heaters changed native activation predicates'
+        assert all(normalized(records[g][2])==normalized(free) for _,g in by_id[key]['effects']), 'Free heaters changed native activation predicates'
     for key in ('CompactHeatingGrid','EdgeCompactHeatingGrid','AutumnCompactHeat'):
-        bodies=[records[g][2] for g in by_id[key]['global_effects']]
+        bodies=[normalized(records[g][2]) for g in by_id[key]['global_effects']]
         assert any(len(b)==186 and abs(struct.unpack_from('<f',b,69)[0]-0.8)<1e-6 for b in bodies)
     for tech in manifest['technologies']:
         if tech.get('added_in') not in ('3.9.0','3.10.0'):continue
