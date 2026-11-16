@@ -2,9 +2,9 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.14.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.14.1 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.14.0/Frostpunk-New-Industry-3.14.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [Configuration](docs/configuration.md) · [Changes in 3.14.0](docs/releases/3.14.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.14.1/Frostpunk-New-Industry-3.14.1-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [Configuration](docs/configuration.md) · [Changes in 3.14.1](docs/releases/3.14.1.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
 
@@ -61,10 +61,10 @@ and difficulty. See [all settings and presets](docs/configuration.md).
 
 ## Testing status
 
-- The default copy/insert patches reconstruct the local 3.14.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
+- The default copy/insert patches reconstruct the local 3.14.1 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
 - Research tests cover scenario membership, earlier unlocks, unique effect packages, icon/prerequisite-line geometry, and recipe-selector limits. The local binary validator also checks actual serialized recipe prices, outputs, requirements, attachments and effect vectors, and preserves native technology and modifier records.
-- 50 automated tests and owned-data checks cover source-tooltip completeness, cumulative heat totals across 133 scenario/research states, Arks core placement, native law-book preservation, branch parent/exclusion gates, serialized passive bonuses and geometry as well as progression and installation. Earlier builds completed full campaigns. The new source tooltips have not been checked in a live UI; this release remains **beta**.
+- 53 automated tests and owned-data checks cover joined law-choice circles, compact connections, source-tooltip completeness, cumulative heat totals across 133 scenario/research states, Arks core placement, native law-book preservation, branch gates and serialized passive bonuses as well as progression and installation. Earlier builds completed full campaigns. The corrected law layout has not been checked in a live UI; this release remains **beta**.
 
 When reporting a problem, include the mod version, scenario, game version, and the installer error or crash description. Installer logs are saved locally in the backup folder's parent directory.
 

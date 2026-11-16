@@ -6,6 +6,7 @@ import unittest
 
 from builder.research_curation import REMOVED_TEAMS, place_scalar_offset
 from builder.research_layout import geometry_errors, LANES, _solve
+from builder.law_layout import choice_pair
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -106,12 +107,13 @@ class ResearchTests(unittest.TestCase):
         for mode in self.catalog['scenario_additions']:
             laws=[law for law in self.catalog['laws'] if mode in law['scenarios']]
             self.assertEqual(len(laws),16)
-            self.assertEqual(len({tuple(law['position']) for law in laws}),16)
+            self.assertEqual(len({tuple(law['position']) for law in laws}),12)
             for i,law in enumerate(laws):
                 self.assertEqual(law['book'],'Administration' if mode=='Builders' else 'Adaptation')
                 self.assertGreaterEqual(abs(law['position'][1]),4)
                 for other in laws[i+1:]:
-                    self.assertTrue(abs(law['position'][0]-other['position'][0])>=5 or abs(law['position'][1]-other['position'][1])>=2.5)
+                    if choice_pair(law,other):self.assertEqual(law['position'],other['position'])
+                    else:self.assertTrue(abs(law['position'][0]-other['position'][0])>=5 or abs(law['position'][1]-other['position'][1])>=2)
 
     def test_default_laws_form_four_research_free_choice_trees(self):
         for mode in self.catalog['scenario_additions']:
@@ -137,6 +139,7 @@ class ResearchTests(unittest.TestCase):
                     self.assertEqual(len(law['excludes_laws']),1)
                     alternative=by[law['excludes_laws'][0]]
                     self.assertEqual(alternative['excludes_laws'],[law['id']])
+                    self.assertEqual(law['position'],alternative['position'])
                     self.assertTrue(law['exclusion_group'])
                     self.assertEqual(law['exclusion_group'],alternative['exclusion_group'])
                     self.assertEqual(sum(other['exclusion_group']==law['exclusion_group'] for other in self.catalog['laws']),2)

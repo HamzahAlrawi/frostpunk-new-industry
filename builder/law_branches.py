@@ -6,10 +6,10 @@ from progression_choices import COLD
 
 
 FAMILIES = (
-    ('care', 'Community Care', (-8,-12), ('LocalAid','CommunityHealth','CriticalCare')),
-    ('workforce', 'Workforce', (8,-12), ('TradeGuild','MasterCraftsmen','MechanicalMaintenance')),
-    ('winter', 'Winter Preparedness', (-12,12), ('HousingCode','DistrictHearths','FoodShelters')),
-    ('reserves', 'Public Reserves', (8,12), ('CommunalStockyards','StormReserves','IndustrialCapital')),
+    ('care', 'Community Care', (-5,-6), (-5,-10), ('LocalAid','CommunityHealth','CriticalCare')),
+    ('workforce', 'Workforce', (5,-6), (5,-10), ('TradeGuild','MasterCraftsmen','MechanicalMaintenance')),
+    ('winter', 'Winter Preparedness', (-8,8), (-11,10), ('HousingCode','DistrictHearths','FoodShelters')),
+    ('reserves', 'Public Reserves', (5,8), (10,8), ('CommunalStockyards','StormReserves','IndustrialCapital')),
 )
 
 
@@ -166,13 +166,12 @@ def default_laws(records, places, neutral_global, neutral_place, techinfo, resou
         autumn_sites=[(port[:3],dict(human=2,automaton=2))])
 
     by={law['id']:law for law in result}
-    for family,title,(x,y),keys in FAMILIES:
+    for family,title,root_position,choice_position,keys in FAMILIES:
         ids=['DefaultLaw'+key for key in keys]
         for index,identity in enumerate(ids):
             law=by[identity]
             law.update(family=family,family_title=title,book_guid='aa9e39dee99e599452414bfb60af2960',
-                       position=[x if index==0 else x+(-3 if index==1 else 3),
-                                 y if index==0 else y+(-4 if y<0 else 4)],
+                       position=list(root_position if index==0 else choice_position),
                        cooldown=12 if index==0 else 24,branch_root=index==0)
             if index:
                 law['requires_laws']=[ids[0]]

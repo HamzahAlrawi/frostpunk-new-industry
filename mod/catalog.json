@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.14.0",
+  "version": "3.14.1",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -19860,8 +19860,8 @@
       "family_title": "Community Care",
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
-        -8,
-        -12
+        -5,
+        -6
       ],
       "cooldown": 12,
       "branch_root": true,
@@ -19941,8 +19941,8 @@
       "family_title": "Community Care",
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
-        -11,
-        -16
+        -5,
+        -10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -20035,7 +20035,7 @@
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
         -5,
-        -16
+        -10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -20149,8 +20149,8 @@
       "family_title": "Workforce",
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
-        8,
-        -12
+        5,
+        -6
       ],
       "cooldown": 12,
       "branch_root": true,
@@ -20273,7 +20273,7 @@
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
         5,
-        -16
+        -10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -20379,8 +20379,8 @@
       "family_title": "Workforce",
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
-        11,
-        -16
+        5,
+        -10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -20456,8 +20456,8 @@
       "family_title": "Winter Preparedness",
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
-        -12,
-        12
+        -8,
+        8
       ],
       "cooldown": 12,
       "branch_root": true,
@@ -20554,8 +20554,8 @@
       "family_title": "Winter Preparedness",
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
-        -15,
-        16
+        -11,
+        10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -20639,8 +20639,8 @@
       "family_title": "Winter Preparedness",
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
-        -9,
-        16
+        -11,
+        10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -20722,8 +20722,8 @@
       "family_title": "Public Reserves",
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
-        8,
-        12
+        5,
+        8
       ],
       "cooldown": 12,
       "branch_root": true,
@@ -20805,8 +20805,8 @@
       "family_title": "Public Reserves",
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
-        5,
-        16
+        10,
+        8
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -20906,8 +20906,8 @@
       "family_title": "Public Reserves",
       "book_guid": "aa9e39dee99e599452414bfb60af2960",
       "position": [
-        11,
-        16
+        10,
+        8
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -20977,8 +20977,8 @@
       "family_title": "Community Care",
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
-        -8,
-        -12
+        -5,
+        -6
       ],
       "cooldown": 12,
       "branch_root": true,
@@ -21052,8 +21052,8 @@
       "family_title": "Community Care",
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
-        -11,
-        -16
+        -5,
+        -10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -21140,7 +21140,7 @@
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
         -5,
-        -16
+        -10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -21256,8 +21256,8 @@
       "family_title": "Workforce",
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
-        8,
-        -12
+        5,
+        -6
       ],
       "cooldown": 12,
       "branch_root": true,
@@ -21388,7 +21388,7 @@
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
         5,
-        -16
+        -10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -21480,8 +21480,8 @@
       "family_title": "Workforce",
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
-        11,
-        -16
+        5,
+        -10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -21551,8 +21551,8 @@
       "family_title": "Winter Preparedness",
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
-        -12,
-        12
+        -8,
+        8
       ],
       "cooldown": 12,
       "branch_root": true,
@@ -21638,8 +21638,8 @@
       "family_title": "Winter Preparedness",
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
-        -15,
-        16
+        -11,
+        10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -21717,8 +21717,8 @@
       "family_title": "Winter Preparedness",
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
-        -9,
-        16
+        -11,
+        10
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -21794,8 +21794,8 @@
       "family_title": "Public Reserves",
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
-        8,
-        12
+        5,
+        8
       ],
       "cooldown": 12,
       "branch_root": true,
@@ -21871,8 +21871,8 @@
       "family_title": "Public Reserves",
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
-        5,
-        16
+        10,
+        8
       ],
       "cooldown": 24,
       "branch_root": false,
@@ -21968,8 +21968,8 @@
       "family_title": "Public Reserves",
       "book_guid": "f80dd07aa593789558485d8c0cb8de65",
       "position": [
-        11,
-        16
+        10,
+        8
       ],
       "cooldown": 24,
       "branch_root": false,

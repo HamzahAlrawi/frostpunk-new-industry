@@ -36,7 +36,7 @@ def main():
            'All four native books, their original order, their scenario unlock conditions and all 112 native laws are unchanged. Order and Faith remain governed by the normal Purpose unlock rules. The old separate Civic Charters book is hidden compatibility data. The original four charter IDs are retained for signed-law progress. Autumn entries prevent re-signing a policy already granted by version 3.12.','',
            'The Last Autumn receives the native Workers Council Motivation benefit in place of each Hope effect. Discontent effects work normally. Its versions use camp accommodation, port and fabrication workplaces where appropriate. Native scenario restrictions, building availability and storm shutdowns still apply.','',
            '## Research-free choice trees','',
-           'Four roots plus one chosen follow-up per tree allow eight of the 12 new laws to be signed in one city. There are 16 policy definitions per mode including the four older charters. Each child below requires only its own root, and excludes only the other child in that tree.','']
+           'Four roots plus one chosen follow-up per tree allow eight of the 12 new laws to be signed in one city. There are 16 policy definitions per mode including the four older charters. Each choice pair shares one split-circle position and one connection from its root. Each child below requires only its own root, and excludes only the other child in that tree.','']
     defaults=[law for law in catalog['laws'] if law.get('default_available') and not law['id'].startswith('Autumn')]
     autumn={law['id'][6:]:law for law in catalog['laws'] if law['id'].startswith('Autumn')}
     for family in dict.fromkeys(law['family'] for law in defaults):
@@ -44,8 +44,7 @@ def main():
         root=next(law for law in tree if law['branch_root'])
         children=[law for law in tree if not law['branch_root']]
         lines+=['### '+root['family_title'],'','```mermaid','flowchart TD',
-                '    root["'+root['title']+'"] --> a["'+children[0]['title']+'"]',
-                '    root --> b["'+children[1]['title']+'"]','```','',
+                '    root["'+root['title']+'"] --> choice["'+children[0]['title']+'<br/>OR<br/>'+children[1]['title']+'"]','```','',
                 '| Law | Requirement | When signed and permanent benefit |','| --- | --- | --- |']
         for law in tree:
             gate='None; available from the start' if law['branch_root'] else root['title']+'; choose one follow-up'

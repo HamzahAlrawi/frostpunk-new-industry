@@ -6,6 +6,7 @@ from research_curation import modifiers, normalized, pack_modifiers
 from city_mastery import building_ids
 from progression_choices import COLD
 from law_branches import default_laws
+from law_layout import layout_errors
 
 LAW_MARKER = b'\1FrostpunkSociotechEntry\0'
 LAW_BOOK = 'Civic Charters'
@@ -68,44 +69,18 @@ def law_layout(raw):
 
 
 def law_layout_errors(new_laws, native):
-    """Only compare added nodes: native exclusive alternatives share slots."""
-    errors=[]
-    for law in new_laws:
-        x,y=law['position']
-        if abs(x)<4 and abs(y)<4:errors.append((law['id'],'book centre'))
-        for name,raw in native.items():
-            _,(nx,ny),category=law_layout(raw)
-            if category==law['book_guid'] and abs(x-nx)<5 and abs(y-ny)<2.5:
-                errors.append((law['id'],'native law',name))
-    for i,law in enumerate(new_laws):
-        for other in new_laws[i+1:]:
-            if law['book_guid']!=other['book_guid']:continue
-            if abs(law['position'][0]-other['position'][0])<5 and abs(law['position'][1]-other['position'][1])<2.5:
-                errors.append((law['id'],'added law',other['id']))
-    # New trees use direct parent-law links. Check their edges as well as node
-    # spacing, including the category-to-root spoke used by the native view.
-    from research_layout import point_hit, segment_conflict
-    for book in {law['book_guid'] for law in new_laws}:
-        nodes={law['id']:tuple(law['position']) for law in new_laws if law['book_guid']==book}
-        points=dict(nodes)
-        for name,raw in native.items():
-            _,pos,category=law_layout(raw)
-            if category==book:points['native/'+name]=pos
-        edges=[]
-        for law in new_laws:
-            if law['book_guid']!=book or not law.get('default_available'):continue
-            parents=law.get('requires_laws',[])
-            edges += [(parent,law['id']) for parent in parents]
-            if not parents:edges.append(('book centre',law['id']))
-        nodes['book centre']=(0,0)
-        for a,b in edges:
-            for key,pos in points.items():
-                if key not in (a,b) and point_hit(nodes[a],nodes[b],pos):errors.append((a,b,'line through',key))
-        for i,(a,b) in enumerate(edges):
-            for c,d in edges[i+1:]:
-                if not {a,b}&{c,d} and segment_conflict(nodes[a],nodes[b],nodes[c],nodes[d]):
-                    errors.append((a,b,'crosses',c,d))
-    return errors
+    points={}
+    for name,raw in native.items():
+        _,pos,category=law_layout(raw);points[name]=(pos,category)
+    return layout_errors(new_laws,points)
+
+
+def law_exclusion_group(raw):
+    loc,_,_=law_layout(raw)
+    position=loc+1 if raw[loc]==0 else raw.index(0,loc+1)+1
+    group=position+65
+    assert raw[group] in (0,1)
+    return raw[group+1:raw.index(0,group+1)].decode() if raw[group] else None
 
 
 def add_civic(technology, specs, techinfo, data, buildings, guid, localize, category, resources):

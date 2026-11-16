@@ -4,8 +4,9 @@ import json
 from pathlib import Path
 import re
 import struct
+from collections import defaultdict
 
-from civic_progression import law_records, book_records, law_layout_errors, LAW_BOOK, NATIVE_BOOK_NAMES
+from civic_progression import law_records, book_records, law_layout, law_exclusion_group, law_layout_errors, LAW_BOOK, NATIVE_BOOK_NAMES
 from icon_curation import RESOURCE_ICONS
 from research_curation import modifiers, normalized
 from city_mastery import building_ids
@@ -33,6 +34,23 @@ def main():
     restored=(data[:new_start]+struct.pack('<I',4)+b''.join(new_books[name] for name in NATIVE_BOOK_NAMES)
               +struct.pack('<I',112)+b''.join(revised[name] for name in native)+data[revised_end:])
     assert restored==original, 'Removing additions must restore the entire original society config byte for byte'
+    # Native mutually exclusive laws are two halves of ONE visual circle, not
+    # independent full nodes. Pin that rule against all shipped choice groups.
+    groups=defaultdict(list)
+    for name,raw in native.items():
+        group=law_exclusion_group(raw)
+        if group:
+            _,position,book=law_layout(raw);groups[book,group].append(position)
+    assert len(groups)==13
+    assert all(len(positions)==2 and positions[0]==positions[1] for positions in groups.values())
+    added_groups=defaultdict(list)
+    for law in manifest['laws']:
+        if law.get('exclusion_group'):
+            raw=revised['NI '+law['id']]
+            assert law_exclusion_group(raw)==law['exclusion_group']
+            _,position,book=law_layout(raw);added_groups[book,law['exclusion_group']].append(position)
+    assert len(added_groups)==8
+    assert all(len(positions)==2 and positions[0]==positions[1] for positions in added_groups.values()),'Split choice halves have different positions'
     assert not law_layout_errors(manifest['laws'],native)
     hidden=new_books[LAW_BOOK]
     gate=b'\1FrostpunkTechnologyRequirement\0'+bytes(17)+bytes.fromhex(manifest['laws'][0]['research'])
@@ -176,7 +194,7 @@ def main():
         atlas=re.search(rb'\x01UI\\[^\0]+\.dds\0',blueprints[start:])
         expected=(0,1) if recipe['output']=='Food Rations' else RESOURCE_ICONS[recipe['output']]
         assert struct.unpack_from('<2i',blueprints,start+atlas.end())==expected,(recipe['id'],'wrong output icon')
-    print(f"Verified 16 policies per mode, 12 research-free laws in four trees, actual parent/exclusion gates and passive values, native book preservation, law geometry, Arks cores, {len(active)} research nodes and 43 output icons.")
+    print(f"Verified eight joined choice circles against 13 native pairs, compact connections, 16 policies per mode, parent/exclusion gates and passive values, native book preservation, Arks cores, {len(active)} research nodes and 43 output icons.")
 
 
 if __name__=='__main__':main()

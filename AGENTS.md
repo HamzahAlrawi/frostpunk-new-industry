@@ -38,7 +38,13 @@ string is empty; otherwise advance past that string. Do not use the unrelated
 groups and a single positive parent-law gate, without research. Their group
 string must match the law's +66 field. Roots have no prerequisites. Preserve
 the original eight mod-law registrations before appending further entries.
-Check law connection geometry as well as node spacing. Preserve original book
+Exclusive law alternatives are the two halves of ONE circle: they must share
+the exact same position and parent, matching all 13 native choice groups.
+Validate 12 visual positions for 16 policies per book; do not require all 16
+positions to be distinct. Collapse each shared pair when checking its edge.
+Keep default law positions within x +/-11 and y +/-10, parent links <=5 units,
+and root spokes <=11.5 units. Native law rows support two units of vertical
+separation. Check law connection geometry as well as node spacing. Preserve original book
 and law order. Append new laws at the
 actual footer located by `law_records`, before the 89 unlabelled society bytes.
 Native book slots and unlock predicates must remain byte-identical. Charters

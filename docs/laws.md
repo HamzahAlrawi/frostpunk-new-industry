@@ -1,6 +1,6 @@
 # Civic laws
 
-Version 3.14.0 includes 12 research-free laws arranged in four choice trees, alongside the four existing researched charters. Open Adaptation in the Book of Laws, or Administration in The Last Autumn. Pan or zoom outward to see the new trees around the native branches. No new book replaces a native category.
+Version 3.14.1 includes 12 research-free laws arranged in four choice trees, alongside the four existing researched charters. Open Adaptation in the Book of Laws, or Administration in The Last Autumn. Pan or zoom outward to see the new trees around the native branches. No new book replaces a native category.
 
 The first law in each new tree is available as soon as the scenario allows law signing, without research or any previous law. It has a 12-hour cooldown. Then choose ONE of its two follow-ups, each with a 24-hour cooldown and no research requirement. Signing one permanently excludes its sibling using the native law exclusion-group system. These choices are independent of Order/Faith and the existing charters. Morale changes happen once when signed; passive benefits remain.
 
@@ -10,14 +10,13 @@ The Last Autumn receives the native Workers Council Motivation benefit in place 
 
 ## Research-free choice trees
 
-Four roots plus one chosen follow-up per tree allow eight of the 12 new laws to be signed in one city. There are 16 policy definitions per mode including the four older charters. Each child below requires only its own root, and excludes only the other child in that tree.
+Four roots plus one chosen follow-up per tree allow eight of the 12 new laws to be signed in one city. There are 16 policy definitions per mode including the four older charters. Each choice pair shares one split-circle position and one connection from its root. Each child below requires only its own root, and excludes only the other child in that tree.
 
 ### Community Care
 
 ```mermaid
 flowchart TD
-    root["Local Aid Societies"] --> a["Neighbourhood Health Service"]
-    root --> b["Critical Care Guarantee"]
+    root["Local Aid Societies"] --> choice["Neighbourhood Health Service<br/>OR<br/>Critical Care Guarantee"]
 ```
 
 | Law | Requirement | When signed and permanent benefit |
@@ -34,8 +33,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    root["Trade Guild Charter"] --> a["Master Craftsmen's Charter"]
-    root --> b["Mechanical Maintenance Charter"]
+    root["Trade Guild Charter"] --> choice["Master Craftsmen's Charter<br/>OR<br/>Mechanical Maintenance Charter"]
 ```
 
 | Law | Requirement | When signed and permanent benefit |
@@ -54,8 +52,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    root["Winter Housing Code"] --> a["District Hearths Ordinance"]
-    root --> b["Protected Food Supply"]
+    root["Winter Housing Code"] --> choice["District Hearths Ordinance<br/>OR<br/>Protected Food Supply"]
 ```
 
 | Law | Requirement | When signed and permanent benefit |
@@ -74,8 +71,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    root["Communal Stockyards"] --> a["Storm Reserve Mandate"]
-    root --> b["Industrial Capital Charter"]
+    root["Communal Stockyards"] --> choice["Storm Reserve Mandate<br/>OR<br/>Industrial Capital Charter"]
 ```
 
 | Law | Requirement | When signed and permanent benefit |
