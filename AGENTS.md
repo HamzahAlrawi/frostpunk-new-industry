@@ -32,8 +32,14 @@ Every non-tier research prerequisite must be visible in the same column and
 earlier tier; do not restore hidden native/cross-tab gates. Recipe output icons
 must match native economy coordinates. Validate civic laws and all icon subjects
 with `builder/validate_civic.py`. Preserve the 112 native law records. New laws
-use the native on-sign effect vector at layout +67, not the unrelated +50
-metadata vector. Preserve original book and law order. Append new laws at the
+use the native on-sign effect vector at layout +67 when the +66 exclusion-group
+string is empty; otherwise advance past that string. Do not use the unrelated
++50 metadata vector. New law choice forks use native SociotechExclusionRequirement
+groups and a single positive parent-law gate, without research. Their group
+string must match the law's +66 field. Roots have no prerequisites. Preserve
+the original eight mod-law registrations before appending further entries.
+Check law connection geometry as well as node spacing. Preserve original book
+and law order. Append new laws at the
 actual footer located by `law_records`, before the 89 unlabelled society bytes.
 Native book slots and unlock predicates must remain byte-identical. Charters
 belong in Adaptation / Administration, away from the book centre and native

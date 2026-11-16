@@ -8,6 +8,7 @@ import struct
 from civic_progression import law_records, book_records, law_layout_errors, LAW_BOOK, NATIVE_BOOK_NAMES
 from icon_curation import RESOURCE_ICONS
 from research_curation import modifiers, normalized
+from city_mastery import building_ids
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'builder/cache/extracted/common/configs'
@@ -21,7 +22,7 @@ def main():
     data = payload['configs/frostpunksocietyconfig.bin']
     _, native_end, native = law_records(original)
     _, revised_end, revised = law_records(data)
-    assert len(native) == 112 and len(revised) == 120
+    assert len(native) == 112 and len(revised) == 144
     assert all(revised[name] == record for name,record in native.items()), 'Native laws changed'
     assert list(revised)[:112]==list(native), 'Native law order changed'
     assert original[native_end:] == data[revised_end:], 'Native society tail changed'
@@ -43,12 +44,55 @@ def main():
     technologies = {t['guid']:t for t in manifest['technologies']}
     native_techs = {t['name']:t for t in json.loads((ROOT/'builder/cache/tech.json').read_text())}
     source_effects = (SOURCE/'frostpunkeffectsconfig.bin').read_bytes()
+    places=building_ids((SOURCE/'frostpunkbuildingsconfig.bin').read_bytes())
+    places['Army Warehouse']=bytes.fromhex(next(t for t in manifest['technologies'] if t['id']=='EdgeWarehouseSorting')['effects'][0][0])
+    economy=(SOURCE/'frostpunkeconomyconfig.bin').read_bytes()
+    resource_ids={}
+    for name in ('Augmentation parts','Coal','Wood','Steel','Raw Food','Food Rations'):
+        p=economy.index(b'\1\1'+name.encode()+b'\0')+len(name)+3
+        resource_ids[name]=economy[p:p+16]
+    law_by_id={law['id']:law for law in manifest['laws']}
     prefab = b'\1FrostpunkPredefinedEffect\0'
     apply = b'\1FrostpunkApplyModifierEffect\0'
     for law in manifest['laws']:
         raw = revised['NI '+law['id']]
-        marker = b'\1FrostpunkTechnologyRequirement\0' + bytes(17) + bytes.fromhex(law['research'])
-        assert marker in raw
+        # Decode the actual prerequisite vector. Metadata alone cannot prove a
+        # supposedly default law is free of an accidentally inherited tech gate.
+        p=raw.index(0,len(b'\1FrostpunkSociotechEntry\0')+1)+18
+        count=struct.unpack_from('<I',raw,p)[0];p+=4
+        tech=b'\1FrostpunkTechnologyRequirement\0'+bytes(17)
+        signed=b'\1FrostpunkSociotechRequirement\0'+bytes(17)
+        exclusion=b'\1FrostpunkSociotechExclusionRequirement\0'+bytes(17)
+        negate=b'\1FrostpunkCompositeRequirement\0'+bytes(17)+struct.pack('<II',2,1)
+        actual_tech=[];actual_signed=[];actual_excluded=[];actual_groups=[]
+        for _ in range(count):
+            negative=raw.startswith(negate,p)
+            if negative:p+=len(negate)
+            if raw.startswith(tech,p):
+                assert not negative
+                p+=len(tech);actual_tech.append(raw[p:p+16].hex());p+=16
+            elif raw.startswith(exclusion,p):
+                assert not negative
+                p+=len(exclusion)
+                assert raw[p]==1
+                end=raw.index(0,p+1);actual_groups.append(raw[p+1:end].decode());p=end+1
+            else:
+                assert raw.startswith(signed,p),'Unexpected law prerequisite type'
+                p+=len(signed)
+                (actual_excluded if negative else actual_signed).append(raw[p:p+16].hex());p+=16
+        assert raw[p:p+4]==bytes(4)
+        assert actual_tech==([law['research']] if law.get('research') else [])
+        assert actual_signed==law.get('required_law_guids',[])
+        assert actual_excluded==([law['legacy_equivalent']] if law.get('legacy_equivalent') else [])
+        assert actual_groups==([law['exclusion_group']] if law.get('exclusion_group') else [])
+        if law.get('default_available'):
+            assert not actual_tech
+            if law['branch_root']:assert count==0
+            else:
+                assert len(actual_signed)==len(actual_groups)==1 and count==2
+                assert law_by_id[law['requires_laws'][0]]['book_guid']==law['book_guid']
+                members=[other for other in manifest['laws'] if other.get('exclusion_group')==law['exclusion_group']]
+                assert {other['id'] for other in members}=={law['id'],*law['excludes_laws']}
         assert apply + bytes.fromhex(law['modifier']) in raw
         assert records[law['modifier']][0] == 'Global'
         global_body = normalized(records[law['modifier']][2])
@@ -56,6 +100,26 @@ def main():
         assert len(global_body) == 186+n*32
         for p in range(81,81+n*32,32):
             assert records[global_body[p+16:p+32].hex()][0] == 'Place'
+        if law.get('benefits'):
+            actual_pairs={(global_body[p:p+16].hex(),global_body[p+16:p+32].hex()) for p in range(81,81+n*32,32)}
+            expected_targets=set()
+            for info in law['benefits']['sites']:
+                for name in info['targets']:
+                    target=places[name].hex();expected_targets.add(target)
+                    matching=[modifier for site,modifier in actual_pairs if site==target]
+                    assert len(matching)==1,(law['id'],name)
+                    body=normalized(records[matching[0]][2])
+                    for field,offset,code in [('human',84,'f'),('automaton',88,'f'),('insulation',96,'i'),('amputation',173,'f'),('safety',185,'i')]:
+                        if field in info:assert struct.unpack_from('<'+code,body,offset)[0]==info[field],(law['id'],name,field)
+                    if 'storage' in info:
+                        start=body.index(struct.pack('<I',8)+resource_ids['Augmentation parts'])+4
+                        for q in range(start,start+8*24,24):
+                            expected=next((factor for resource,factor in info['storage'].items() if resource_ids[resource]==body[q:q+16]),1)
+                            assert struct.unpack_from('<If',body,q+16)==(0,expected),(law['id'],name,'storage')
+            assert {site for site,_ in actual_pairs}==expected_targets
+            for field,value in law['benefits']['global_changes'].items():
+                offset=69 if field=='heat_radius' else 166+n*32
+                assert struct.unpack_from('<f',global_body,offset)[0]==value,(law['id'],field)
         for g in law['native_effects']:
             assert prefab + bytes.fromhex(g) in raw and bytes.fromhex(g) in source_effects
         assert b'Oneliners/' not in raw and bytes.fromhex('1fb45ef57ba8a9994640f8a9e0a89eca') not in raw
@@ -64,15 +128,23 @@ def main():
         assert raw[loc] == 0
         assert struct.unpack_from('<4i',raw,loc+1) == (*law['icon'],*law['position'])
         assert raw[loc+17:loc+33].hex()==law['book_guid']
-        assert struct.unpack_from('<f',raw,loc+42)[0] == 18
+        assert struct.unpack_from('<f',raw,loc+42)[0] == law['cooldown']
         assert struct.unpack_from('<I',raw,loc+46)[0] == 2
         assert struct.unpack_from('<I',raw,loc+50)[0] == 0
-        assert struct.unpack_from('<I',raw,loc+67)[0] == len(law['native_effects'])+1
-        effect_start=loc+71
+        group_at=loc+66
+        if law.get('exclusion_group'):
+            expected=b'\1'+law['exclusion_group'].encode()+b'\0'
+            assert raw[group_at:group_at+len(expected)]==expected
+            effect_vector=group_at+len(expected)
+        else:
+            assert raw[group_at]==0
+            effect_vector=group_at+1
+        assert struct.unpack_from('<I',raw,effect_vector)[0] == len(law['native_effects'])+1
+        effect_start=effect_vector+4
         switch=b'\1FrostpunkSwitchEffect\0'
         first=raw.index(switch,effect_start) if 'Hope rise' in law['effects'][0] else raw.index(prefab,effect_start)
         assert first==effect_start, 'On-sign effects are not at the native effect-vector offset'
-        assert all(law['research'] in ids for ids in manifest['scenario_additions'].values())
+        if law.get('research'):assert all(law['research'] in ids for ids in manifest['scenario_additions'].values())
     active=set().union(*map(set,manifest['scenario_additions'].values()))
     by_id={t['id']:t for t in technologies.values()}
     tc=payload['configs/frostpunktechnologiesconfig.bin']
@@ -104,7 +176,7 @@ def main():
         atlas=re.search(rb'\x01UI\\[^\0]+\.dds\0',blueprints[start:])
         expected=(0,1) if recipe['output']=='Food Rations' else RESOURCE_ICONS[recipe['output']]
         assert struct.unpack_from('<2i',blueprints,start+atlas.end())==expected,(recipe['id'],'wrong output icon')
-    print(f"Verified 4 policies in native civil books, native book/law order and unlock preservation, non-overlapping charter geometry, Arks core manufacturing, {len(active)} active research nodes and 43 output icons.")
+    print(f"Verified 16 policies per mode, 12 research-free laws in four trees, actual parent/exclusion gates and passive values, native book preservation, law geometry, Arks cores, {len(active)} research nodes and 43 output icons.")
 
 
 if __name__=='__main__':main()

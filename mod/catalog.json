@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.12.1",
+  "version": "3.13.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -19538,6 +19538,7 @@
         "Refugees",
         "Reconquest"
       ],
+      "exclusion_group": null,
       "guid": "d64185bebca48355a44aac34e21da1f9",
       "icon": [
         2,
@@ -19545,7 +19546,9 @@
       ],
       "native_effects": [
         "ebe294e8521ca38e3f4be6db75b8ebc5"
-      ]
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
     },
     {
       "id": "CivicGrievances",
@@ -19573,6 +19576,7 @@
         "Refugees",
         "Reconquest"
       ],
+      "exclusion_group": null,
       "guid": "657804c74475d456b7a06196abf18f83",
       "icon": [
         2,
@@ -19580,7 +19584,9 @@
       ],
       "native_effects": [
         "0eb7aa1abdd80bb9e842ee04ba6009ba"
-      ]
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
     },
     {
       "id": "CivicRecovery",
@@ -19609,6 +19615,7 @@
         "Refugees",
         "Reconquest"
       ],
+      "exclusion_group": null,
       "guid": "f19aadba4fcba250b4ec61c77b750e90",
       "icon": [
         2,
@@ -19617,7 +19624,9 @@
       "native_effects": [
         "395985b5acccdf943e464192bd73a361",
         "96c111ec23556c89e247709d264c0831"
-      ]
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
     },
     {
       "id": "CivicMutualAid",
@@ -19646,6 +19655,7 @@
         "Refugees",
         "Reconquest"
       ],
+      "exclusion_group": null,
       "guid": "e302be4c073ff859a40215fc1c597979",
       "icon": [
         2,
@@ -19654,7 +19664,9 @@
       "native_effects": [
         "ebe294e8521ca38e3f4be6db75b8ebc5",
         "0eb7aa1abdd80bb9e842ee04ba6009ba"
-      ]
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
     },
     {
       "id": "AutumnCivicReassurance",
@@ -19677,6 +19689,7 @@
         "Builders"
       ],
       "legacy_equivalent": "d64185bebca48355a44aac34e21da1f9",
+      "exclusion_group": null,
       "guid": "b31f86cf8e8f745694fe2cf5ecad6cc8",
       "icon": [
         2,
@@ -19684,7 +19697,9 @@
       ],
       "native_effects": [
         "ebe294e8521ca38e3f4be6db75b8ebc5"
-      ]
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
     },
     {
       "id": "AutumnCivicGrievances",
@@ -19707,6 +19722,7 @@
         "Builders"
       ],
       "legacy_equivalent": "657804c74475d456b7a06196abf18f83",
+      "exclusion_group": null,
       "guid": "75351a42ceb25e5487b0c61083c6045e",
       "icon": [
         2,
@@ -19714,7 +19730,9 @@
       ],
       "native_effects": [
         "0eb7aa1abdd80bb9e842ee04ba6009ba"
-      ]
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
     },
     {
       "id": "AutumnCivicRecovery",
@@ -19738,6 +19756,7 @@
         "Builders"
       ],
       "legacy_equivalent": "f19aadba4fcba250b4ec61c77b750e90",
+      "exclusion_group": null,
       "guid": "1b66a4405a899355b12818ef04fd47a7",
       "icon": [
         2,
@@ -19746,7 +19765,9 @@
       "native_effects": [
         "395985b5acccdf943e464192bd73a361",
         "96c111ec23556c89e247709d264c0831"
-      ]
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
     },
     {
       "id": "AutumnCivicMutualAid",
@@ -19770,6 +19791,7 @@
         "Builders"
       ],
       "legacy_equivalent": "e302be4c073ff859a40215fc1c597979",
+      "exclusion_group": null,
       "guid": "bfa64a0ec8c0ca51a74ba5a5df15c151",
       "icon": [
         2,
@@ -19778,6 +19800,2193 @@
       "native_effects": [
         "ebe294e8521ca38e3f4be6db75b8ebc5",
         "0eb7aa1abdd80bb9e842ee04ba6009ba"
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
+    },
+    {
+      "id": "DefaultLawLocalAid",
+      "title": "Local Aid Societies",
+      "description": "Hope rises slightly. Medical Posts gain 75% healing efficiency for human and automaton staff and +1 insulation.",
+      "effects": [
+        "GOLD [Common] Hope rise - slightly"
+      ],
+      "modifier": "f8b8c810e4d6e95aac9f3245a046913b",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [],
+      "excludes_laws": [],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Medical Post"
+            ],
+            "human": 1.75,
+            "automaton": 1.75,
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Local Aid Societies",
+      "autumn_description": "Hope rises slightly. Medical Posts gain 75% healing efficiency for human and automaton staff and +1 insulation.",
+      "autumn_modifier": "f8b8c810e4d6e95aac9f3245a046913b",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Medical Post"
+            ],
+            "human": 1.75,
+            "automaton": 1.75,
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "care",
+      "family_title": "Community Care",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        -8,
+        -12
+      ],
+      "cooldown": 12,
+      "branch_root": true,
+      "exclusion_group": null,
+      "guid": "d3478871ceee6a5fb41dea511fb7d130",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "dc5940497d945d84e5470c22304690a0"
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
+    },
+    {
+      "id": "DefaultLawCommunityHealth",
+      "title": "Neighbourhood Health Service",
+      "description": "Hope rises moderately. Tents, Bunkhouses and Houses gain +1 insulation. Cold-related illness is reduced by 50%.",
+      "effects": [
+        "GOLD [Common] Hope rise - moderately"
+      ],
+      "modifier": "8ce13c6b15d07f5b9fe130371863c3d6",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "DefaultLawLocalAid"
+      ],
+      "excludes_laws": [
+        "DefaultLawCriticalCare"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Tent",
+              "Bunkhouse",
+              "House"
+            ],
+            "insulation": 1
+          }
+        ],
+        "global_changes": {
+          "cold_illness": 0.5
+        }
+      },
+      "autumn_title": "Neighbourhood Health Service",
+      "autumn_description": "Hope/Motivation improves. All camp accommodation grades gain +1 insulation. Cold-related illness is reduced by 50%.",
+      "autumn_modifier": "f871a69e51907c54a11fc59f53585339",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders] Tent",
+              "[Builders] Bunkhouse",
+              "[Builders] House"
+            ],
+            "insulation": 1
+          }
+        ],
+        "global_changes": {
+          "cold_illness": 0.5
+        }
+      },
+      "family": "care",
+      "family_title": "Community Care",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        -11,
+        -16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Adaptation/care",
+      "guid": "41ead5d2bf611c57ad15cc091c0e1b35",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "395985b5acccdf943e464192bd73a361"
+      ],
+      "required_law_guids": [
+        "d3478871ceee6a5fb41dea511fb7d130"
+      ],
+      "excluded_law_guids": [
+        "f86688790bd2e25cb6bfb48bc06ba36d"
+      ]
+    },
+    {
+      "id": "DefaultLawCriticalCare",
+      "title": "Critical Care Guarantee",
+      "description": "Discontent falls moderately. Infirmaries gain 150% healing efficiency for humans and automatons and +2 insulation. Medical Posts do not amputate under Radical Treatment; that native law must still be signed.",
+      "effects": [
+        "GOLD [Common] Discontent fall - moderately"
+      ],
+      "modifier": "bcd880bf40dea55782991f14e1b23b3e",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "DefaultLawLocalAid"
+      ],
+      "excludes_laws": [
+        "DefaultLawCommunityHealth"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Ambulatorium"
+            ],
+            "human": 2.5,
+            "automaton": 2.5,
+            "insulation": 2
+          },
+          {
+            "targets": [
+              "Medical Post"
+            ],
+            "amputation": 0
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Critical Care Guarantee",
+      "autumn_description": "Discontent falls moderately. Infirmaries gain 150% healing efficiency for humans and automatons and +2 insulation. Medical Posts do not amputate under Radical Treatment; that native law must still be signed.",
+      "autumn_modifier": "bcd880bf40dea55782991f14e1b23b3e",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Ambulatorium"
+            ],
+            "human": 2.5,
+            "automaton": 2.5,
+            "insulation": 2
+          },
+          {
+            "targets": [
+              "Medical Post"
+            ],
+            "amputation": 0
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "care",
+      "family_title": "Community Care",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        -5,
+        -16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Adaptation/care",
+      "guid": "f86688790bd2e25cb6bfb48bc06ba36d",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "96c111ec23556c89e247709d264c0831"
+      ],
+      "required_law_guids": [
+        "d3478871ceee6a5fb41dea511fb7d130"
+      ],
+      "excluded_law_guids": [
+        "41ead5d2bf611c57ad15cc091c0e1b35"
+      ]
+    },
+    {
+      "id": "DefaultLawTradeGuild",
+      "title": "Trade Guild Charter",
+      "description": "Hope rises slightly. Human crews gain 75% workplace efficiency at industrial workplaces, including Workshops and the Army Warehouse where present. Automaton efficiency is unchanged.",
+      "effects": [
+        "GOLD [Common] Hope rise - slightly"
+      ],
+      "modifier": "b172ee5e4f059e5cb5cb9a10a8c0326c",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [],
+      "excludes_laws": [],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "GatheringPost",
+              "Sawmill",
+              "SteamSawmill",
+              "WallDrill",
+              "WallDrillSteam",
+              "WallDrillAdvanced",
+              "Coal Mine",
+              "SteamCoalMine",
+              "AdvancedCoalMine",
+              "Iron Ore Mine",
+              "SteamIronOreMine",
+              "AdvancedOreMine",
+              "CoalThumper",
+              "CoalThumperSteam",
+              "CharcoalKiln",
+              "Factory",
+              "Engineers Lab",
+              "Army Warehouse"
+            ],
+            "human": 1.75
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Trade Guild Charter",
+      "autumn_description": "Hope/Motivation improves. Human crews gain 75% workplace efficiency at extraction, Workshops, Kilns, fabrication, Docks and Reloading Stations.",
+      "autumn_modifier": "b77a6b1cb8d62e5baed012b8e533ad97",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "GatheringPost",
+              "Sawmill",
+              "SteamSawmill",
+              "WallDrill",
+              "WallDrillSteam",
+              "WallDrillAdvanced",
+              "Coal Mine",
+              "SteamCoalMine",
+              "AdvancedCoalMine",
+              "Iron Ore Mine",
+              "SteamIronOreMine",
+              "AdvancedOreMine",
+              "CoalThumper",
+              "CoalThumperSteam",
+              "CharcoalKiln",
+              "Factory",
+              "Engineers Lab",
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge",
+              "[Builders]Dock_LVL1",
+              "[Builders]Dock_LVL2",
+              "[Builders]Dock_LVL3",
+              "[Builders]ReloadingPostUniversal",
+              "[Builders]ReloadingPostUniversal2",
+              "[Builders]ReloadingPostUniversal3"
+            ],
+            "human": 1.75
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "workforce",
+      "family_title": "Workforce",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        8,
+        -12
+      ],
+      "cooldown": 12,
+      "branch_root": true,
+      "exclusion_group": null,
+      "guid": "a4d3b9cfa5553353b965f24cbecd1152",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "dc5940497d945d84e5470c22304690a0"
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
+    },
+    {
+      "id": "DefaultLawMasterCraftsmen",
+      "title": "Master Craftsmen's Charter",
+      "description": "Hope rises moderately. Industrial human crews gain 150% workplace efficiency; their workplaces gain +1 insulation. Automaton efficiency is unchanged.",
+      "effects": [
+        "GOLD [Common] Hope rise - moderately"
+      ],
+      "modifier": "2d6594f0c18292589bcb79ea9ae0c792",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "DefaultLawTradeGuild"
+      ],
+      "excludes_laws": [
+        "DefaultLawMechanicalMaintenance"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "GatheringPost",
+              "Sawmill",
+              "SteamSawmill",
+              "WallDrill",
+              "WallDrillSteam",
+              "WallDrillAdvanced",
+              "Coal Mine",
+              "SteamCoalMine",
+              "AdvancedCoalMine",
+              "Iron Ore Mine",
+              "SteamIronOreMine",
+              "AdvancedOreMine",
+              "CoalThumper",
+              "CoalThumperSteam",
+              "CharcoalKiln",
+              "Factory",
+              "Engineers Lab",
+              "Army Warehouse"
+            ],
+            "human": 2.5,
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Master Craftsmen's Charter",
+      "autumn_description": "Hope/Motivation improves. Human crews at extraction, Workshops and Kilns gain 175% workplace efficiency and +1 insulation. Fabrication and port workplaces instead gain 75% human efficiency and +1 insulation.",
+      "autumn_modifier": "b0e5ca2162815e599ef34b6fdd07dc44",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "GatheringPost",
+              "Sawmill",
+              "SteamSawmill",
+              "WallDrill",
+              "WallDrillSteam",
+              "WallDrillAdvanced",
+              "Coal Mine",
+              "SteamCoalMine",
+              "AdvancedCoalMine",
+              "Iron Ore Mine",
+              "SteamIronOreMine",
+              "AdvancedOreMine",
+              "CoalThumper",
+              "CoalThumperSteam",
+              "CharcoalKiln",
+              "Factory",
+              "Engineers Lab"
+            ],
+            "human": 2.75,
+            "insulation": 1
+          },
+          {
+            "targets": [
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge",
+              "[Builders]Dock_LVL1",
+              "[Builders]Dock_LVL2",
+              "[Builders]Dock_LVL3",
+              "[Builders]ReloadingPostUniversal",
+              "[Builders]ReloadingPostUniversal2",
+              "[Builders]ReloadingPostUniversal3"
+            ],
+            "human": 1.75,
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "workforce",
+      "family_title": "Workforce",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        5,
+        -16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Adaptation/workforce",
+      "guid": "7b5276981faebf56851a3c490961cc3d",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "395985b5acccdf943e464192bd73a361"
+      ],
+      "required_law_guids": [
+        "a4d3b9cfa5553353b965f24cbecd1152"
+      ],
+      "excluded_law_guids": [
+        "178b408f57c6985591aefaf1c358f256"
+      ]
+    },
+    {
+      "id": "DefaultLawMechanicalMaintenance",
+      "title": "Mechanical Maintenance Charter",
+      "description": "Discontent falls slightly. Industrial human crews gain 75% workplace efficiency and automatons gain 175%; their workplaces gain +2 insulation. Normal automaton workplace permissions still apply.",
+      "effects": [
+        "GOLD [Common] Discontent fall - slightly"
+      ],
+      "modifier": "04167d62ee965951ab01598a46f96186",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "DefaultLawTradeGuild"
+      ],
+      "excludes_laws": [
+        "DefaultLawMasterCraftsmen"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "GatheringPost",
+              "Sawmill",
+              "SteamSawmill",
+              "WallDrill",
+              "WallDrillSteam",
+              "WallDrillAdvanced",
+              "Coal Mine",
+              "SteamCoalMine",
+              "AdvancedCoalMine",
+              "Iron Ore Mine",
+              "SteamIronOreMine",
+              "AdvancedOreMine",
+              "CoalThumper",
+              "CoalThumperSteam",
+              "CharcoalKiln",
+              "Factory",
+              "Engineers Lab",
+              "Army Warehouse"
+            ],
+            "human": 1.75,
+            "automaton": 2.75,
+            "insulation": 2
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Mechanised Worksites",
+      "autumn_description": "Discontent falls slightly. Fabrication, Docks and Reloading Stations gain 150% workplace efficiency, +2 safety and +1 insulation. This does not create automatons.",
+      "autumn_modifier": "eec7ce3f988e5550b265fad98239461c",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge",
+              "[Builders]Dock_LVL1",
+              "[Builders]Dock_LVL2",
+              "[Builders]Dock_LVL3",
+              "[Builders]ReloadingPostUniversal",
+              "[Builders]ReloadingPostUniversal2",
+              "[Builders]ReloadingPostUniversal3"
+            ],
+            "human": 2.5,
+            "automaton": 2.5,
+            "safety": 2,
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "workforce",
+      "family_title": "Workforce",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        11,
+        -16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Adaptation/workforce",
+      "guid": "178b408f57c6985591aefaf1c358f256",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "1abbc58b48d368b3664797883cde10d7"
+      ],
+      "required_law_guids": [
+        "a4d3b9cfa5553353b965f24cbecd1152"
+      ],
+      "excluded_law_guids": [
+        "7b5276981faebf56851a3c490961cc3d"
+      ]
+    },
+    {
+      "id": "DefaultLawHousingCode",
+      "title": "Winter Housing Code",
+      "description": "Discontent falls moderately. Tents, Bunkhouses and Houses gain +1 insulation.",
+      "effects": [
+        "GOLD [Common] Discontent fall - moderately"
+      ],
+      "modifier": "8ad57de15eae5e5ab276c1cbda081941",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [],
+      "excludes_laws": [],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Tent",
+              "Bunkhouse",
+              "House"
+            ],
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Camp Housing Code",
+      "autumn_description": "Discontent falls moderately. All camp accommodation grades gain +1 insulation.",
+      "autumn_modifier": "b623a9e852b6a05982565660ea6709b8",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders] Tent",
+              "[Builders] Bunkhouse",
+              "[Builders] House"
+            ],
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "winter",
+      "family_title": "Winter Preparedness",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        -12,
+        12
+      ],
+      "cooldown": 12,
+      "branch_root": true,
+      "exclusion_group": null,
+      "guid": "5f723fcbd8fc6850bfa3ff2b61988f54",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "96c111ec23556c89e247709d264c0831"
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
+    },
+    {
+      "id": "DefaultLawDistrictHearths",
+      "title": "District Hearths Ordinance",
+      "description": "Hope rises moderately. Civic and healthcare buildings gain +2 insulation. All heat zones gain 25% radius.",
+      "effects": [
+        "GOLD [Common] Hope rise - moderately"
+      ],
+      "modifier": "41ba124d8931d55494765fa711ad99be",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "DefaultLawHousingCode"
+      ],
+      "excludes_laws": [
+        "DefaultLawFoodShelters"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "PublicHouse",
+              "FightClube",
+              "CareHouse",
+              "HouseOfPrayer",
+              "Temple",
+              "FaithKeepers",
+              "Shrine",
+              "Neighborhood watch tower",
+              "Guardpost",
+              "Prison",
+              "CensusStation",
+              "HospitalOfMercy",
+              "Medical Post",
+              "Ambulatorium"
+            ],
+            "insulation": 2
+          }
+        ],
+        "global_changes": {
+          "heat_radius": 1.25
+        }
+      },
+      "autumn_title": "District Hearths Ordinance",
+      "autumn_description": "Hope/Motivation improves. Communal, labour-service and healthcare buildings gain +2 insulation. Heat zones, including Braziers, gain 25% radius.",
+      "autumn_modifier": "bec96522daa3f250b453ff888b68ba91",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "PublicHouse",
+              "[Builders] HouseOfPrayer",
+              "[Builders] Public Bath",
+              "CareHouse",
+              "[Builders] Labour Union",
+              "[Builders] Workers Council",
+              "[Builders]FieldPharmacy",
+              "Medical Post",
+              "Ambulatorium"
+            ],
+            "insulation": 2
+          }
+        ],
+        "global_changes": {
+          "heat_radius": 1.25
+        }
+      },
+      "family": "winter",
+      "family_title": "Winter Preparedness",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        -15,
+        16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Adaptation/winter",
+      "guid": "4381f73c3723f854a16ec5c947c9a22b",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "395985b5acccdf943e464192bd73a361"
+      ],
+      "required_law_guids": [
+        "5f723fcbd8fc6850bfa3ff2b61988f54"
+      ],
+      "excluded_law_guids": [
+        "b38ee785d8ae3a5abd8913c1833b650c"
+      ]
+    },
+    {
+      "id": "DefaultLawFoodShelters",
+      "title": "Protected Food Supply",
+      "description": "Discontent falls moderately. Cookhouses and both Hothouse grades gain 75% workplace efficiency for humans and automatons and +2 insulation. Scripted storm shutdowns are unchanged.",
+      "effects": [
+        "GOLD [Common] Discontent fall - moderately"
+      ],
+      "modifier": "57a177bb0aa0a955a1e71ef85225f0c3",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "DefaultLawHousingCode"
+      ],
+      "excludes_laws": [
+        "DefaultLawDistrictHearths"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Food Processing",
+              "Plantation",
+              "Steam Plantation"
+            ],
+            "human": 1.75,
+            "automaton": 1.75,
+            "insulation": 2
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Protected Food Supply",
+      "autumn_description": "Discontent falls moderately. Cookhouses and both Fishing Harbour grades gain 75% workplace efficiency and +2 insulation. Scripted shutdowns are unchanged.",
+      "autumn_modifier": "423ffdfa1048dd56adf81617df07c62b",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Food Processing",
+              "[Builders]DockFishing_LVL1",
+              "[Builders]DockFishing_LVL2"
+            ],
+            "human": 1.75,
+            "automaton": 1.75,
+            "insulation": 2
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "winter",
+      "family_title": "Winter Preparedness",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        -9,
+        16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Adaptation/winter",
+      "guid": "b38ee785d8ae3a5abd8913c1833b650c",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "96c111ec23556c89e247709d264c0831"
+      ],
+      "required_law_guids": [
+        "5f723fcbd8fc6850bfa3ff2b61988f54"
+      ],
+      "excluded_law_guids": [
+        "4381f73c3723f854a16ec5c947c9a22b"
+      ]
+    },
+    {
+      "id": "DefaultLawCommunalStockyards",
+      "title": "Communal Stockyards",
+      "description": "Hope rises slightly. Both Resource Depot sizes gain 100% additional coal, wood and steel capacity.",
+      "effects": [
+        "GOLD [Common] Hope rise - slightly"
+      ],
+      "modifier": "7328efa282993b52bff91ec807041b13",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [],
+      "excludes_laws": [],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "storage": {
+              "Coal": 2,
+              "Wood": 2,
+              "Steel": 2
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Communal Stockyards",
+      "autumn_description": "Hope rises slightly. Both Resource Depot sizes gain 100% additional coal, wood and steel capacity.",
+      "autumn_modifier": "7328efa282993b52bff91ec807041b13",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "storage": {
+              "Coal": 2,
+              "Wood": 2,
+              "Steel": 2
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "reserves",
+      "family_title": "Public Reserves",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        8,
+        12
+      ],
+      "cooldown": 12,
+      "branch_root": true,
+      "exclusion_group": null,
+      "guid": "cce291bc7cc00750b344166310b352b6",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "dc5940497d945d84e5470c22304690a0"
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
+    },
+    {
+      "id": "DefaultLawStormReserves",
+      "title": "Storm Reserve Mandate",
+      "description": "Hope rises moderately. Both Resource Depot sizes gain 400% additional coal capacity and 300% additional raw-food and food-ration capacity.",
+      "effects": [
+        "GOLD [Common] Hope rise - moderately"
+      ],
+      "modifier": "0681f48bd598ae528e40c493afe94a62",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "DefaultLawCommunalStockyards"
+      ],
+      "excludes_laws": [
+        "DefaultLawIndustrialCapital"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "storage": {
+              "Coal": 5,
+              "Raw Food": 4,
+              "Food Rations": 4
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Storm Reserve Mandate",
+      "autumn_description": "Hope rises moderately. Both Resource Depot sizes gain 400% additional coal capacity and 300% additional raw-food and food-ration capacity.",
+      "autumn_modifier": "0681f48bd598ae528e40c493afe94a62",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "storage": {
+              "Coal": 5,
+              "Raw Food": 4,
+              "Food Rations": 4
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "reserves",
+      "family_title": "Public Reserves",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        5,
+        16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Adaptation/reserves",
+      "guid": "c974d7eafbd80453a4d73afa90e33fbf",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "395985b5acccdf943e464192bd73a361"
+      ],
+      "required_law_guids": [
+        "cce291bc7cc00750b344166310b352b6"
+      ],
+      "excluded_law_guids": [
+        "6cc1f5d9b5bc575bab5bb106f756bccb"
+      ]
+    },
+    {
+      "id": "DefaultLawIndustrialCapital",
+      "title": "Industrial Capital Charter",
+      "description": "Hope rises moderately. Both Resource Depot sizes gain 400% additional wood and steel capacity. Factories gain 100% workplace efficiency for humans and automatons.",
+      "effects": [
+        "GOLD [Common] Hope rise - moderately"
+      ],
+      "modifier": "25f98b619d46115bab56a5ba3594ea95",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "DefaultLawCommunalStockyards"
+      ],
+      "excludes_laws": [
+        "DefaultLawStormReserves"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Adaptation",
+      "scenarios": [
+        "TechHaven",
+        "Winterhome",
+        "Default",
+        "Default_Endless_Builders",
+        "Default_Endless",
+        "Refugees",
+        "Reconquest"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Factory"
+            ],
+            "human": 2,
+            "automaton": 2
+          },
+          {
+            "storage": {
+              "Wood": 5,
+              "Steel": 5
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Industrial Capital Charter",
+      "autumn_description": "Hope/Motivation improves. Both Resource Depot sizes gain 400% additional wood and steel capacity. Profiles Manufactures, Machine Shops and Foundries gain 100% workplace efficiency.",
+      "autumn_modifier": "e3158868a708425b8642113963c2b05d",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge"
+            ],
+            "human": 2,
+            "automaton": 2
+          },
+          {
+            "storage": {
+              "Wood": 5,
+              "Steel": 5
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "reserves",
+      "family_title": "Public Reserves",
+      "book_guid": "aa9e39dee99e599452414bfb60af2960",
+      "position": [
+        11,
+        16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Adaptation/reserves",
+      "guid": "6cc1f5d9b5bc575bab5bb106f756bccb",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "395985b5acccdf943e464192bd73a361"
+      ],
+      "required_law_guids": [
+        "cce291bc7cc00750b344166310b352b6"
+      ],
+      "excluded_law_guids": [
+        "c974d7eafbd80453a4d73afa90e33fbf"
+      ]
+    },
+    {
+      "id": "AutumnDefaultLawLocalAid",
+      "title": "Local Aid Societies",
+      "description": "Hope rises slightly. Medical Posts gain 75% healing efficiency for human and automaton staff and +1 insulation.",
+      "effects": [
+        "GOLD [Common] Hope rise - slightly"
+      ],
+      "modifier": "f8b8c810e4d6e95aac9f3245a046913b",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [],
+      "excludes_laws": [],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Medical Post"
+            ],
+            "human": 1.75,
+            "automaton": 1.75,
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Local Aid Societies",
+      "autumn_description": "Hope rises slightly. Medical Posts gain 75% healing efficiency for human and automaton staff and +1 insulation.",
+      "autumn_modifier": "f8b8c810e4d6e95aac9f3245a046913b",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Medical Post"
+            ],
+            "human": 1.75,
+            "automaton": 1.75,
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "care",
+      "family_title": "Community Care",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        -8,
+        -12
+      ],
+      "cooldown": 12,
+      "branch_root": true,
+      "exclusion_group": null,
+      "guid": "628560493271e250bd9240be7c35f1f6",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "dc5940497d945d84e5470c22304690a0"
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
+    },
+    {
+      "id": "AutumnDefaultLawCommunityHealth",
+      "title": "Neighbourhood Health Service",
+      "description": "Hope/Motivation improves. All camp accommodation grades gain +1 insulation. Cold-related illness is reduced by 50%.",
+      "effects": [
+        "GOLD [Common] Hope rise - moderately"
+      ],
+      "modifier": "f871a69e51907c54a11fc59f53585339",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "AutumnDefaultLawLocalAid"
+      ],
+      "excludes_laws": [
+        "AutumnDefaultLawCriticalCare"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders] Tent",
+              "[Builders] Bunkhouse",
+              "[Builders] House"
+            ],
+            "insulation": 1
+          }
+        ],
+        "global_changes": {
+          "cold_illness": 0.5
+        }
+      },
+      "autumn_title": "Neighbourhood Health Service",
+      "autumn_description": "Hope/Motivation improves. All camp accommodation grades gain +1 insulation. Cold-related illness is reduced by 50%.",
+      "autumn_modifier": "f871a69e51907c54a11fc59f53585339",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders] Tent",
+              "[Builders] Bunkhouse",
+              "[Builders] House"
+            ],
+            "insulation": 1
+          }
+        ],
+        "global_changes": {
+          "cold_illness": 0.5
+        }
+      },
+      "family": "care",
+      "family_title": "Community Care",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        -11,
+        -16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Administration/care",
+      "guid": "3694f9c15795cf5aae364b7c8d29a653",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "395985b5acccdf943e464192bd73a361"
+      ],
+      "required_law_guids": [
+        "628560493271e250bd9240be7c35f1f6"
+      ],
+      "excluded_law_guids": [
+        "3d0a042adbf4075eba08e059363471a0"
+      ]
+    },
+    {
+      "id": "AutumnDefaultLawCriticalCare",
+      "title": "Critical Care Guarantee",
+      "description": "Discontent falls moderately. Infirmaries gain 150% healing efficiency for humans and automatons and +2 insulation. Medical Posts do not amputate under Radical Treatment; that native law must still be signed.",
+      "effects": [
+        "GOLD [Common] Discontent fall - moderately"
+      ],
+      "modifier": "bcd880bf40dea55782991f14e1b23b3e",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "AutumnDefaultLawLocalAid"
+      ],
+      "excludes_laws": [
+        "AutumnDefaultLawCommunityHealth"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Ambulatorium"
+            ],
+            "human": 2.5,
+            "automaton": 2.5,
+            "insulation": 2
+          },
+          {
+            "targets": [
+              "Medical Post"
+            ],
+            "amputation": 0
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Critical Care Guarantee",
+      "autumn_description": "Discontent falls moderately. Infirmaries gain 150% healing efficiency for humans and automatons and +2 insulation. Medical Posts do not amputate under Radical Treatment; that native law must still be signed.",
+      "autumn_modifier": "bcd880bf40dea55782991f14e1b23b3e",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Ambulatorium"
+            ],
+            "human": 2.5,
+            "automaton": 2.5,
+            "insulation": 2
+          },
+          {
+            "targets": [
+              "Medical Post"
+            ],
+            "amputation": 0
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "care",
+      "family_title": "Community Care",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        -5,
+        -16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Administration/care",
+      "guid": "3d0a042adbf4075eba08e059363471a0",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "96c111ec23556c89e247709d264c0831"
+      ],
+      "required_law_guids": [
+        "628560493271e250bd9240be7c35f1f6"
+      ],
+      "excluded_law_guids": [
+        "3694f9c15795cf5aae364b7c8d29a653"
+      ]
+    },
+    {
+      "id": "AutumnDefaultLawTradeGuild",
+      "title": "Trade Guild Charter",
+      "description": "Hope/Motivation improves. Human crews gain 75% workplace efficiency at extraction, Workshops, Kilns, fabrication, Docks and Reloading Stations.",
+      "effects": [
+        "GOLD [Common] Hope rise - slightly"
+      ],
+      "modifier": "b77a6b1cb8d62e5baed012b8e533ad97",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [],
+      "excludes_laws": [],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "GatheringPost",
+              "Sawmill",
+              "SteamSawmill",
+              "WallDrill",
+              "WallDrillSteam",
+              "WallDrillAdvanced",
+              "Coal Mine",
+              "SteamCoalMine",
+              "AdvancedCoalMine",
+              "Iron Ore Mine",
+              "SteamIronOreMine",
+              "AdvancedOreMine",
+              "CoalThumper",
+              "CoalThumperSteam",
+              "CharcoalKiln",
+              "Factory",
+              "Engineers Lab",
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge",
+              "[Builders]Dock_LVL1",
+              "[Builders]Dock_LVL2",
+              "[Builders]Dock_LVL3",
+              "[Builders]ReloadingPostUniversal",
+              "[Builders]ReloadingPostUniversal2",
+              "[Builders]ReloadingPostUniversal3"
+            ],
+            "human": 1.75
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Trade Guild Charter",
+      "autumn_description": "Hope/Motivation improves. Human crews gain 75% workplace efficiency at extraction, Workshops, Kilns, fabrication, Docks and Reloading Stations.",
+      "autumn_modifier": "b77a6b1cb8d62e5baed012b8e533ad97",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "GatheringPost",
+              "Sawmill",
+              "SteamSawmill",
+              "WallDrill",
+              "WallDrillSteam",
+              "WallDrillAdvanced",
+              "Coal Mine",
+              "SteamCoalMine",
+              "AdvancedCoalMine",
+              "Iron Ore Mine",
+              "SteamIronOreMine",
+              "AdvancedOreMine",
+              "CoalThumper",
+              "CoalThumperSteam",
+              "CharcoalKiln",
+              "Factory",
+              "Engineers Lab",
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge",
+              "[Builders]Dock_LVL1",
+              "[Builders]Dock_LVL2",
+              "[Builders]Dock_LVL3",
+              "[Builders]ReloadingPostUniversal",
+              "[Builders]ReloadingPostUniversal2",
+              "[Builders]ReloadingPostUniversal3"
+            ],
+            "human": 1.75
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "workforce",
+      "family_title": "Workforce",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        8,
+        -12
+      ],
+      "cooldown": 12,
+      "branch_root": true,
+      "exclusion_group": null,
+      "guid": "1bfb6f391652325bb8eed028cf4c1e33",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "dc5940497d945d84e5470c22304690a0"
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
+    },
+    {
+      "id": "AutumnDefaultLawMasterCraftsmen",
+      "title": "Master Craftsmen's Charter",
+      "description": "Hope/Motivation improves. Human crews at extraction, Workshops and Kilns gain 175% workplace efficiency and +1 insulation. Fabrication and port workplaces instead gain 75% human efficiency and +1 insulation.",
+      "effects": [
+        "GOLD [Common] Hope rise - moderately"
+      ],
+      "modifier": "b0e5ca2162815e599ef34b6fdd07dc44",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "AutumnDefaultLawTradeGuild"
+      ],
+      "excludes_laws": [
+        "AutumnDefaultLawMechanicalMaintenance"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "GatheringPost",
+              "Sawmill",
+              "SteamSawmill",
+              "WallDrill",
+              "WallDrillSteam",
+              "WallDrillAdvanced",
+              "Coal Mine",
+              "SteamCoalMine",
+              "AdvancedCoalMine",
+              "Iron Ore Mine",
+              "SteamIronOreMine",
+              "AdvancedOreMine",
+              "CoalThumper",
+              "CoalThumperSteam",
+              "CharcoalKiln",
+              "Factory",
+              "Engineers Lab"
+            ],
+            "human": 2.75,
+            "insulation": 1
+          },
+          {
+            "targets": [
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge",
+              "[Builders]Dock_LVL1",
+              "[Builders]Dock_LVL2",
+              "[Builders]Dock_LVL3",
+              "[Builders]ReloadingPostUniversal",
+              "[Builders]ReloadingPostUniversal2",
+              "[Builders]ReloadingPostUniversal3"
+            ],
+            "human": 1.75,
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Master Craftsmen's Charter",
+      "autumn_description": "Hope/Motivation improves. Human crews at extraction, Workshops and Kilns gain 175% workplace efficiency and +1 insulation. Fabrication and port workplaces instead gain 75% human efficiency and +1 insulation.",
+      "autumn_modifier": "b0e5ca2162815e599ef34b6fdd07dc44",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "GatheringPost",
+              "Sawmill",
+              "SteamSawmill",
+              "WallDrill",
+              "WallDrillSteam",
+              "WallDrillAdvanced",
+              "Coal Mine",
+              "SteamCoalMine",
+              "AdvancedCoalMine",
+              "Iron Ore Mine",
+              "SteamIronOreMine",
+              "AdvancedOreMine",
+              "CoalThumper",
+              "CoalThumperSteam",
+              "CharcoalKiln",
+              "Factory",
+              "Engineers Lab"
+            ],
+            "human": 2.75,
+            "insulation": 1
+          },
+          {
+            "targets": [
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge",
+              "[Builders]Dock_LVL1",
+              "[Builders]Dock_LVL2",
+              "[Builders]Dock_LVL3",
+              "[Builders]ReloadingPostUniversal",
+              "[Builders]ReloadingPostUniversal2",
+              "[Builders]ReloadingPostUniversal3"
+            ],
+            "human": 1.75,
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "workforce",
+      "family_title": "Workforce",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        5,
+        -16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Administration/workforce",
+      "guid": "d7d3ff8af5a60f5a8b56949723f91265",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "395985b5acccdf943e464192bd73a361"
+      ],
+      "required_law_guids": [
+        "1bfb6f391652325bb8eed028cf4c1e33"
+      ],
+      "excluded_law_guids": [
+        "369a33221c6f295fb21194ff8c05b66f"
+      ]
+    },
+    {
+      "id": "AutumnDefaultLawMechanicalMaintenance",
+      "title": "Mechanised Worksites",
+      "description": "Discontent falls slightly. Fabrication, Docks and Reloading Stations gain 150% workplace efficiency, +2 safety and +1 insulation. This does not create automatons.",
+      "effects": [
+        "GOLD [Common] Discontent fall - slightly"
+      ],
+      "modifier": "eec7ce3f988e5550b265fad98239461c",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "AutumnDefaultLawTradeGuild"
+      ],
+      "excludes_laws": [
+        "AutumnDefaultLawMasterCraftsmen"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge",
+              "[Builders]Dock_LVL1",
+              "[Builders]Dock_LVL2",
+              "[Builders]Dock_LVL3",
+              "[Builders]ReloadingPostUniversal",
+              "[Builders]ReloadingPostUniversal2",
+              "[Builders]ReloadingPostUniversal3"
+            ],
+            "human": 2.5,
+            "automaton": 2.5,
+            "safety": 2,
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Mechanised Worksites",
+      "autumn_description": "Discontent falls slightly. Fabrication, Docks and Reloading Stations gain 150% workplace efficiency, +2 safety and +1 insulation. This does not create automatons.",
+      "autumn_modifier": "eec7ce3f988e5550b265fad98239461c",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge",
+              "[Builders]Dock_LVL1",
+              "[Builders]Dock_LVL2",
+              "[Builders]Dock_LVL3",
+              "[Builders]ReloadingPostUniversal",
+              "[Builders]ReloadingPostUniversal2",
+              "[Builders]ReloadingPostUniversal3"
+            ],
+            "human": 2.5,
+            "automaton": 2.5,
+            "safety": 2,
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "workforce",
+      "family_title": "Workforce",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        11,
+        -16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Administration/workforce",
+      "guid": "369a33221c6f295fb21194ff8c05b66f",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "1abbc58b48d368b3664797883cde10d7"
+      ],
+      "required_law_guids": [
+        "1bfb6f391652325bb8eed028cf4c1e33"
+      ],
+      "excluded_law_guids": [
+        "d7d3ff8af5a60f5a8b56949723f91265"
+      ]
+    },
+    {
+      "id": "AutumnDefaultLawHousingCode",
+      "title": "Camp Housing Code",
+      "description": "Discontent falls moderately. All camp accommodation grades gain +1 insulation.",
+      "effects": [
+        "GOLD [Common] Discontent fall - moderately"
+      ],
+      "modifier": "b623a9e852b6a05982565660ea6709b8",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [],
+      "excludes_laws": [],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders] Tent",
+              "[Builders] Bunkhouse",
+              "[Builders] House"
+            ],
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Camp Housing Code",
+      "autumn_description": "Discontent falls moderately. All camp accommodation grades gain +1 insulation.",
+      "autumn_modifier": "b623a9e852b6a05982565660ea6709b8",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders] Tent",
+              "[Builders] Bunkhouse",
+              "[Builders] House"
+            ],
+            "insulation": 1
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "winter",
+      "family_title": "Winter Preparedness",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        -12,
+        12
+      ],
+      "cooldown": 12,
+      "branch_root": true,
+      "exclusion_group": null,
+      "guid": "9b55a34f29cd0e55a8b617b581f48258",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "96c111ec23556c89e247709d264c0831"
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
+    },
+    {
+      "id": "AutumnDefaultLawDistrictHearths",
+      "title": "District Hearths Ordinance",
+      "description": "Hope/Motivation improves. Communal, labour-service and healthcare buildings gain +2 insulation. Heat zones, including Braziers, gain 25% radius.",
+      "effects": [
+        "GOLD [Common] Hope rise - moderately"
+      ],
+      "modifier": "bec96522daa3f250b453ff888b68ba91",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "AutumnDefaultLawHousingCode"
+      ],
+      "excludes_laws": [
+        "AutumnDefaultLawFoodShelters"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "PublicHouse",
+              "[Builders] HouseOfPrayer",
+              "[Builders] Public Bath",
+              "CareHouse",
+              "[Builders] Labour Union",
+              "[Builders] Workers Council",
+              "[Builders]FieldPharmacy",
+              "Medical Post",
+              "Ambulatorium"
+            ],
+            "insulation": 2
+          }
+        ],
+        "global_changes": {
+          "heat_radius": 1.25
+        }
+      },
+      "autumn_title": "District Hearths Ordinance",
+      "autumn_description": "Hope/Motivation improves. Communal, labour-service and healthcare buildings gain +2 insulation. Heat zones, including Braziers, gain 25% radius.",
+      "autumn_modifier": "bec96522daa3f250b453ff888b68ba91",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "PublicHouse",
+              "[Builders] HouseOfPrayer",
+              "[Builders] Public Bath",
+              "CareHouse",
+              "[Builders] Labour Union",
+              "[Builders] Workers Council",
+              "[Builders]FieldPharmacy",
+              "Medical Post",
+              "Ambulatorium"
+            ],
+            "insulation": 2
+          }
+        ],
+        "global_changes": {
+          "heat_radius": 1.25
+        }
+      },
+      "family": "winter",
+      "family_title": "Winter Preparedness",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        -15,
+        16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Administration/winter",
+      "guid": "e316dbd9627bda5aae39959713317c6f",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "395985b5acccdf943e464192bd73a361"
+      ],
+      "required_law_guids": [
+        "9b55a34f29cd0e55a8b617b581f48258"
+      ],
+      "excluded_law_guids": [
+        "a4735099c686da52891714def7c7d378"
+      ]
+    },
+    {
+      "id": "AutumnDefaultLawFoodShelters",
+      "title": "Protected Food Supply",
+      "description": "Discontent falls moderately. Cookhouses and both Fishing Harbour grades gain 75% workplace efficiency and +2 insulation. Scripted shutdowns are unchanged.",
+      "effects": [
+        "GOLD [Common] Discontent fall - moderately"
+      ],
+      "modifier": "423ffdfa1048dd56adf81617df07c62b",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "AutumnDefaultLawHousingCode"
+      ],
+      "excludes_laws": [
+        "AutumnDefaultLawDistrictHearths"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Food Processing",
+              "[Builders]DockFishing_LVL1",
+              "[Builders]DockFishing_LVL2"
+            ],
+            "human": 1.75,
+            "automaton": 1.75,
+            "insulation": 2
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Protected Food Supply",
+      "autumn_description": "Discontent falls moderately. Cookhouses and both Fishing Harbour grades gain 75% workplace efficiency and +2 insulation. Scripted shutdowns are unchanged.",
+      "autumn_modifier": "423ffdfa1048dd56adf81617df07c62b",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "Food Processing",
+              "[Builders]DockFishing_LVL1",
+              "[Builders]DockFishing_LVL2"
+            ],
+            "human": 1.75,
+            "automaton": 1.75,
+            "insulation": 2
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "winter",
+      "family_title": "Winter Preparedness",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        -9,
+        16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Administration/winter",
+      "guid": "a4735099c686da52891714def7c7d378",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "96c111ec23556c89e247709d264c0831"
+      ],
+      "required_law_guids": [
+        "9b55a34f29cd0e55a8b617b581f48258"
+      ],
+      "excluded_law_guids": [
+        "e316dbd9627bda5aae39959713317c6f"
+      ]
+    },
+    {
+      "id": "AutumnDefaultLawCommunalStockyards",
+      "title": "Communal Stockyards",
+      "description": "Hope rises slightly. Both Resource Depot sizes gain 100% additional coal, wood and steel capacity.",
+      "effects": [
+        "GOLD [Common] Hope rise - slightly"
+      ],
+      "modifier": "7328efa282993b52bff91ec807041b13",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [],
+      "excludes_laws": [],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "storage": {
+              "Coal": 2,
+              "Wood": 2,
+              "Steel": 2
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Communal Stockyards",
+      "autumn_description": "Hope rises slightly. Both Resource Depot sizes gain 100% additional coal, wood and steel capacity.",
+      "autumn_modifier": "7328efa282993b52bff91ec807041b13",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "storage": {
+              "Coal": 2,
+              "Wood": 2,
+              "Steel": 2
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "reserves",
+      "family_title": "Public Reserves",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        8,
+        12
+      ],
+      "cooldown": 12,
+      "branch_root": true,
+      "exclusion_group": null,
+      "guid": "a8e68b76b412b357ba27710801443679",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "dc5940497d945d84e5470c22304690a0"
+      ],
+      "required_law_guids": [],
+      "excluded_law_guids": []
+    },
+    {
+      "id": "AutumnDefaultLawStormReserves",
+      "title": "Storm Reserve Mandate",
+      "description": "Hope rises moderately. Both Resource Depot sizes gain 400% additional coal capacity and 300% additional raw-food and food-ration capacity.",
+      "effects": [
+        "GOLD [Common] Hope rise - moderately"
+      ],
+      "modifier": "0681f48bd598ae528e40c493afe94a62",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "AutumnDefaultLawCommunalStockyards"
+      ],
+      "excludes_laws": [
+        "AutumnDefaultLawIndustrialCapital"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "storage": {
+              "Coal": 5,
+              "Raw Food": 4,
+              "Food Rations": 4
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Storm Reserve Mandate",
+      "autumn_description": "Hope rises moderately. Both Resource Depot sizes gain 400% additional coal capacity and 300% additional raw-food and food-ration capacity.",
+      "autumn_modifier": "0681f48bd598ae528e40c493afe94a62",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "storage": {
+              "Coal": 5,
+              "Raw Food": 4,
+              "Food Rations": 4
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "reserves",
+      "family_title": "Public Reserves",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        5,
+        16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Administration/reserves",
+      "guid": "bf4f2f2f17096c57984d93cda79e6ff5",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "395985b5acccdf943e464192bd73a361"
+      ],
+      "required_law_guids": [
+        "a8e68b76b412b357ba27710801443679"
+      ],
+      "excluded_law_guids": [
+        "67afd893bc157e5eab9592e5fd8ef7ef"
+      ]
+    },
+    {
+      "id": "AutumnDefaultLawIndustrialCapital",
+      "title": "Industrial Capital Charter",
+      "description": "Hope/Motivation improves. Both Resource Depot sizes gain 400% additional wood and steel capacity. Profiles Manufactures, Machine Shops and Foundries gain 100% workplace efficiency.",
+      "effects": [
+        "GOLD [Common] Hope rise - moderately"
+      ],
+      "modifier": "e3158868a708425b8642113963c2b05d",
+      "research": null,
+      "default_available": true,
+      "requires_laws": [
+        "AutumnDefaultLawCommunalStockyards"
+      ],
+      "excludes_laws": [
+        "AutumnDefaultLawStormReserves"
+      ],
+      "introduced_in": "3.13.0",
+      "book": "Administration",
+      "scenarios": [
+        "Builders"
+      ],
+      "benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge"
+            ],
+            "human": 2,
+            "automaton": 2
+          },
+          {
+            "storage": {
+              "Wood": 5,
+              "Steel": 5
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "autumn_title": "Industrial Capital Charter",
+      "autumn_description": "Hope/Motivation improves. Both Resource Depot sizes gain 400% additional wood and steel capacity. Profiles Manufactures, Machine Shops and Foundries gain 100% workplace efficiency.",
+      "autumn_modifier": "e3158868a708425b8642113963c2b05d",
+      "autumn_benefits": {
+        "sites": [
+          {
+            "targets": [
+              "[Builders]ScaffoldingManufacture",
+              "[Builders]PipeFoundry",
+              "[Builders]SteelPlateForge"
+            ],
+            "human": 2,
+            "automaton": 2
+          },
+          {
+            "storage": {
+              "Wood": 5,
+              "Steel": 5
+            },
+            "targets": [
+              "Resource Depot",
+              "Resource Depot Big"
+            ]
+          }
+        ],
+        "global_changes": {}
+      },
+      "family": "reserves",
+      "family_title": "Public Reserves",
+      "book_guid": "f80dd07aa593789558485d8c0cb8de65",
+      "position": [
+        11,
+        16
+      ],
+      "cooldown": 24,
+      "branch_root": false,
+      "exclusion_group": "NI/choices/Administration/reserves",
+      "guid": "67afd893bc157e5eab9592e5fd8ef7ef",
+      "icon": [
+        2,
+        13
+      ],
+      "native_effects": [
+        "395985b5acccdf943e464192bd73a361"
+      ],
+      "required_law_guids": [
+        "a8e68b76b412b357ba27710801443679"
+      ],
+      "excluded_law_guids": [
+        "bf4f2f2f17096c57984d93cda79e6ff5"
       ]
     }
   ],

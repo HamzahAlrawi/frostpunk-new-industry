@@ -2,15 +2,16 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.12.1 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.13.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.12.1/Frostpunk-New-Industry-3.12.1-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Configuration](docs/configuration.md) · [Changes in 3.12.1](docs/releases/3.12.1.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.13.0/Frostpunk-New-Industry-3.13.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Configuration](docs/configuration.md) · [Changes in 3.13.0](docs/releases/3.13.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
 
 - **Renewable Steam Cores.** Find Steam Core Fabrication in the **first column of the added Industry tab, tier II**, then select its recipe at a Factory. Further upgrades culminate in three-core batches. The Arks is explicitly checked.
 - **216 active research definitions across supported modes.** Engineering, Industry, City Life, Logistics and Production use fixed themed columns beside the native tabs. 47 smaller upgrades are consolidated into larger ones. Added research has at most one visible parent in its own column; hidden native and cross-tab requirements are removed.
 - **Four signable Civic Charters.** Research the City Life civic branch, then sign them in the upper branch of **Adaptation**, or **Administration** in The Last Autumn. Native books, scenario unlocks and Order/Faith laws are preserved. Charters improve Hope/Discontent and provide healthcare, civic heating and illness benefits. [Policies and consolidated upgrades](docs/laws.md).
+- **12 research-free laws in four choice trees.** Community Care, Workforce, Winter Preparedness and Public Reserves each start with an immediately available root, followed by two mutually exclusive policies. Choose preventive or critical care, human or mechanical specialisation, district heating or food protection, and storm reserves or industrial capital. These trees share the native Adaptation/Administration book without changing its original branches.
 - **Six citywide thermal envelopes.** Three additional stages provide expensive late-game insulation, illness protection and larger heat zones.
 - **Faster progression.** All mod-added perks have half their authored base research duration. Workshop base research output is 25% higher than version 3.9, or 56.25% above vanilla, with normal multiple-Workshop scaling. Research before Drawing Boards and additional starting supplies ease the opening.
 - **Configurable difficulty and bigger starting stockpiles.** Five presets and per-resource/category overrides cover all native starting profiles. Edit the persistent JSON, then apply it while the game is closed. Research pacing is configurable too; public defaults retain the current boosts.
@@ -59,10 +60,10 @@ and difficulty. See [all settings and presets](docs/configuration.md).
 
 ## Testing status
 
-- The default copy/insert patches reconstruct the local 3.12.1 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
+- The default copy/insert patches reconstruct the local 3.13.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
 - Research tests cover scenario membership, earlier unlocks, unique effect packages, icon/prerequisite-line geometry, and recipe-selector limits. The local binary validator also checks actual serialized recipe prices, outputs, requirements, attachments and effect vectors, and preserves native technology and modifier records.
-- 45 automated tests and owned-data checks cover Arks core placement, native law-book preservation and charter geometry as well as progression and installation. Earlier builds completed full campaigns. The law placement fix has not been checked in a live UI; this release remains **beta**.
+- 46 automated tests and owned-data checks cover Arks core placement, native law-book preservation, research-free roots, branch parent/exclusion gates, serialized passive bonuses and law geometry as well as progression and installation. Earlier builds completed full campaigns. The new law trees have not been checked in a live UI; this release remains **beta**.
 
 When reporting a problem, include the mod version, scenario, game version, and the installer error or crash description. Installer logs are saved locally in the backup folder's parent directory.
 

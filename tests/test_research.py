@@ -90,25 +90,57 @@ class ResearchTests(unittest.TestCase):
         self.assertGreater(self.by_id[keys[-1]]['cost']['Steam Cores'],0)
 
     def test_civic_laws_have_shared_research_and_distinct_policies(self):
-        self.assertEqual(len(self.catalog['laws']),8)
-        for law in self.catalog['laws']:
+        legacy=[law for law in self.catalog['laws'] if not law.get('default_available')]
+        self.assertEqual(len(legacy),8)
+        cold=['CivicReassurance','CivicGrievances','CivicRecovery','CivicMutualAid']
+        self.assertEqual([law['id'] for law in self.catalog['laws'][:8]],cold+['Autumn'+key for key in cold])
+        for law in legacy:
             self.assertIn(law['book'],('Adaptation','Administration'))
             self.assertEqual(law['cooldown'],18)
             for ids in self.catalog['scenario_additions'].values():self.assertIn(law['research'],ids)
-        self.assertEqual(len({law['modifier'] for law in self.catalog['laws']}),4)
+        self.assertEqual(len({law['modifier'] for law in legacy}),4)
 
     def test_charters_leave_native_book_slots_and_centre_clear(self):
         self.assertEqual(self.catalog['native_law_book_order'],['Purpose','Adaptation','Labour','ADMINISTRATION'])
         self.assertTrue(self.catalog['legacy_civic_book']['compatibility_only'])
         for mode in self.catalog['scenario_additions']:
             laws=[law for law in self.catalog['laws'] if mode in law['scenarios']]
-            self.assertEqual(len(laws),4)
-            self.assertEqual(len({tuple(law['position']) for law in laws}),4)
+            self.assertEqual(len(laws),16)
+            self.assertEqual(len({tuple(law['position']) for law in laws}),16)
             for i,law in enumerate(laws):
                 self.assertEqual(law['book'],'Administration' if mode=='Builders' else 'Adaptation')
                 self.assertGreaterEqual(abs(law['position'][1]),4)
                 for other in laws[i+1:]:
-                    self.assertGreaterEqual(abs(law['position'][0]-other['position'][0]),5)
+                    self.assertTrue(abs(law['position'][0]-other['position'][0])>=5 or abs(law['position'][1]-other['position'][1])>=2.5)
+
+    def test_default_laws_form_four_research_free_choice_trees(self):
+        for mode in self.catalog['scenario_additions']:
+            laws=[law for law in self.catalog['laws'] if law.get('default_available') and mode in law['scenarios']]
+            self.assertEqual(len(laws),12)
+            by={law['id']:law for law in laws}
+            self.assertEqual(len({law['family'] for law in laws}),4)
+            for family in {law['family'] for law in laws}:
+                group=[law for law in laws if law['family']==family]
+                roots=[law for law in group if law['branch_root']]
+                self.assertEqual(len(roots),1)
+                root=roots[0]
+                self.assertFalse(root['research'])
+                self.assertEqual(root['requires_laws'],[])
+                self.assertEqual(root['excludes_laws'],[])
+                self.assertIsNone(root['exclusion_group'])
+                self.assertEqual(root['cooldown'],12)
+                for law in group:
+                    self.assertFalse(law['research'])
+                    if law is root:continue
+                    self.assertEqual(law['requires_laws'],[root['id']])
+                    self.assertEqual(law['cooldown'],24)
+                    self.assertEqual(len(law['excludes_laws']),1)
+                    alternative=by[law['excludes_laws'][0]]
+                    self.assertEqual(alternative['excludes_laws'],[law['id']])
+                    self.assertTrue(law['exclusion_group'])
+                    self.assertEqual(law['exclusion_group'],alternative['exclusion_group'])
+                    self.assertEqual(sum(other['exclusion_group']==law['exclusion_group'] for other in self.catalog['laws']),2)
+                    self.assertEqual(law['book_guid'],root['book_guid'])
 
     def test_arks_cores_are_in_the_first_industry_column(self):
         arks=set(self.catalog['scenario_additions']['TechHaven'])

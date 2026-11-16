@@ -185,7 +185,7 @@ for path,additions in choice_targets.items():
     station_targets.setdefault(path,[]).extend(additions)
 from civic_progression import add_civic, build_laws
 new_modifiers, civic_laws = add_civic(technology,specs,techinfo,new_modifiers,
-    (SRC/'common/configs/frostpunkbuildingsconfig.bin').read_bytes(),gid,loc,EXPLORATION)
+    (SRC/'common/configs/frostpunkbuildingsconfig.bin').read_bytes(),gid,loc,EXPLORATION,RES)
 
 old_category_count=struct.unpack_from('<I',TC,0)[0]
 tech_count_pos=techinfo[0]['start']-4
