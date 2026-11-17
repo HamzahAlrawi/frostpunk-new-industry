@@ -32,7 +32,7 @@ def main():
         exported = []
         with (archive.GAME / (group + ".dat")).open("rb") as stream:
             for entry in settings["entries"]:
-                original = archive.read(stream, entries[entry["hash"]])
+                original = archive.read(stream, entries[entry.get("original_hash", entry["hash"])])
                 revised = gzip.decompress((args.native / "payload" / entry["payload"]).read_bytes())
                 if hashlib.sha256(original).hexdigest() != entry["original_sha256"]:
                     raise ValueError("Build original does not match the supplied game files")

@@ -10,7 +10,7 @@ import zlib
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from installer import ARCHIVES, ENTRY, Installer
+from installer import ENTRY, Installer
 from patch_format import apply_patch
 from configuration import DEFAULT, PRESETS, configure_entry, resolve
 
@@ -31,8 +31,8 @@ def main():
     setup=Installer(game,state,manifest,ROOT,document=document)
     assert setup.installed() is None and not setup.journal.exists(), 'Restore or recover the previous QA operation first'
     setup.verify(args.originals,setup.originals)
-    for name in ARCHIVES:shutil.copyfile(args.originals/name,game/name)
-    # Process enumeration is irrelevant for this isolated copy of six archives.
+    for name in setup.archives:shutil.copyfile(args.originals/name,game/name)
+    # Process enumeration is irrelevant for this isolated archive copy.
     # No executable, save, user installation, or original input is modified.
     with patch('installer.game_running',return_value=False):
         setup.install();receipt=setup.installed();setup.verify(game,receipt['files']);checked=0
@@ -41,12 +41,16 @@ def main():
             entries={ENTRY.unpack_from(index,p)[0]:ENTRY.unpack_from(index,p) for p in range(11,len(index),ENTRY.size)}
             pristine=(args.originals/(group+'.idx')).read_bytes()
             originals={ENTRY.unpack_from(pristine,p)[0]:ENTRY.unpack_from(pristine,p) for p in range(11,len(pristine),ENTRY.size)}
+            if group=='scenes':
+                assert list(entries)==sorted(entries)
+                assert all(entries[key]==record for key,record in originals.items())
+                assert set(entries)-set(originals)=={e['hash'] for e in settings['entries']}
             with (game/(group+'.dat')).open('rb') as stream, (args.originals/(group+'.dat')).open('rb') as source:
                 for expected in settings['entries']:
                     _,size,length,offset,packed=entries[expected['hash']]
                     stream.seek(offset);data=stream.read(size)
                     if packed:data=zlib.decompressobj(31).decompress(data)
-                    _,stored,_,start,packed=originals[expected['hash']]
+                    _,stored,_,start,packed=originals[expected.get('original_hash',expected['hash'])]
                     source.seek(start);original=source.read(stored)
                     if packed:original=zlib.decompressobj(31).decompress(original)
                     baseline=apply_patch(original,(ROOT/'mod/patches'/expected['patch']).read_bytes())
@@ -58,7 +62,7 @@ def main():
     report=dict(version=manifest['version'],preset=args.preset,checked_entries=checked,installed_archives=receipt['files'],
                 restored_archives=setup.originals,status='passed')
     (folder/'verification.json').write_text(json.dumps(report,indent=2)+'\n')
-    print(f'Public distribution QA passed: {checked} patched entries and six archive hashes; restored exact originals.')
+    print(f'Public distribution QA passed: {checked} patched entries and {len(setup.archives)} archive hashes; restored exact originals.')
 
 
 if __name__=='__main__':

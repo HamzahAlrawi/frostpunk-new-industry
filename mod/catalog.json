@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.20.0",
+  "version": "3.21.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -23416,7 +23416,7 @@
         "modifier": "29146dd29a92565ba331f629b05c1e19"
       }
     ],
-    "events": 361,
+    "events": 362,
     "dilemmas": 210,
     "quests": 149,
     "poll_days": 0.25,
@@ -26924,6 +26924,7 @@
         }
       },
       "winter_road": {
+        "scenario": "c0e7cb914641b054b90151322780f029",
         "chapters": 8,
         "missions": [
           {
@@ -28082,6 +28083,98 @@
           "exposed": "48ca1b4bee9bdd54a3a9ba41f0e094d8",
           "braced": "d4f9722cec42f1538505f6557281530b",
           "home": "29146dd29a92565ba331f629b05c1e19"
+        },
+        "map": {
+          "name": "Switchback Basin",
+          "city": "CityMaps/WINTER_ROAD/SwitchbackBasin",
+          "world": "WorldMaps/WinterRoadSwitchbackBasinRoutes",
+          "piles": {
+            "RES_Pickable_Wood_004": [
+              -128.1,
+              -0.1,
+              224.91
+            ],
+            "RES_Pickable_Steel_001": [
+              -81.04,
+              -0.1,
+              212.77
+            ],
+            "RES_Pickable_Wood_002": [
+              -99.55,
+              -0.1,
+              250.41
+            ],
+            "RES_Pickable_Coal_004_015": [
+              -76.47,
+              -0.1,
+              137.4
+            ],
+            "RES_Pickable_Wood_000": [
+              -81.4,
+              -0.1,
+              104.42
+            ],
+            "RES_Pickable_Coal_004_003": [
+              -49.16,
+              -0.1,
+              57.74
+            ],
+            "RES_Pickable_Steel_000": [
+              97.58,
+              -0.1,
+              115.05
+            ],
+            "RES_Pickable_Coal_004_000": [
+              59.42,
+              -0.1,
+              134.3
+            ],
+            "RES_Pickable_Steel_002": [
+              -94.66,
+              -0.1,
+              -23.23
+            ],
+            "RES_Pickable_Coal_004_002": [
+              -200.56,
+              -0.1,
+              25.55
+            ]
+          },
+          "sites": [
+            {
+              "point": "DefaultRandomizationPoint_000",
+              "template": "0061e4cb23f4f4b1144bf630cfbcbbbc",
+              "name": "Snow-covered Supplies",
+              "position": [
+                -676.4295043945312,
+                209.12403869628906,
+                871.2553100585938
+              ],
+              "distance": 1081
+            },
+            {
+              "point": "DefaultRandomizationPoint_004",
+              "template": "dbc9ce79407f5ea21e40a8ecad11519d",
+              "name": "Abandoned Sawmill",
+              "position": [
+                -1762.9002685546875,
+                307.3449401855469,
+                765.8961181640625
+              ],
+              "distance": 1932
+            },
+            {
+              "point": "DefaultRandomizationPoint_005",
+              "template": "d50c9b355e4e3394fa4f71e4a96fe43d",
+              "name": "Salvage site",
+              "position": [
+                -484.9403076171875,
+                243.93077087402344,
+                2163.2939453125
+              ],
+              "distance": 2176
+            }
+          ]
         }
       }
     },

@@ -17,7 +17,7 @@ def audit(records,metadata,ids):
     count=road["chapters"]
     assert count==8 and len(missions)==17 and len(projects)==6
     stock={value:10000 for value in ids.values()}
-    def new(scenario=story["scenario"],selected=()):
+    def new(scenario=road["scenario"],selected=()):
         return World(selected,events,dialogs,quests,stock,scenario)
     def get(w,key,default=0):return w.variables.get(PREFIX+key,default)
     def name(key):return names["NI Winter Road "+key]
@@ -160,12 +160,30 @@ def audit(records,metadata,ids):
             probe.run(0.5,False)
             assert get(probe,"chapter")==stage and row["quest"] in probe.active
     for legacy in ("NI/Lifeline/chapter","NI/LastSignal/act"):
-        old=new();old.variables[legacy]=1;old.start();old.run(2,False)
+        old=new(story["scenario"]);old.variables[legacy]=1;old.start();old.run(2,False)
         assert get(old,"chapter")==0
     for scenario in (DEFAULT,None):
         w=new(scenario);w.start();w.run(4,False)
         w.activate_building(BEACON)
         assert not any(key.startswith(PREFIX) for key in w.variables)
         assert not w.world_map
+    chart = new()
+    chart.start()
+    chart.run(1,False)
+    assert not chart.world_map and not chart.frostland_sites
+    chart.buildings[BEACON] = 1
+    chart.run(0.5,False)
+    assert chart.world_map
+    assert chart.frostland_sites == {s["template"]:s["point"] for s in road["map"]["sites"]}
+    assert chart.revealed_sites == {("site",s["template"]) for s in road["map"]["sites"]}
+    saved = chart.checkpoint()
+    saved.start();saved.run(1,False)
+    assert saved.frostland_sites == chart.frostland_sites and saved.revealed_sites == chart.revealed_sites
+    existing = new(story["scenario"])
+    existing.variables.update({PREFIX+"chapter":4, PREFIX+"map_open":1})
+    existing.buildings[BEACON] = 1
+    existing.run(0.5,False)
+    assert existing.world_map and not existing.frostland_sites and existing.revealed_sites
     return dict(full_paths=len(branches),mission_variants=len(missions),side_projects=len(side_runs),
-        missed_chapters=count,ending_paths=3,heating_watch_resets=True,legacy_isolation=True)
+        missed_chapters=count,ending_paths=3,heating_watch_resets=True,legacy_isolation=True,
+        revealed_scout_sites=len(chart.frostland_sites),legacy_beacon_repaired=True)

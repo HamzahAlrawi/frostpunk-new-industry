@@ -3,27 +3,56 @@ from itertools import product
 
 from tools.native_binary import Cursor, entry, string, u32
 from tools.scenario_model import World
-from tools.story_schema import DEFAULT, DEFAULT_EVENTS, NAME, NATIVE_INTRO, WEATHER_DONOR, forecast_record
+from tools.story_schema import DEFAULT, DEFAULT_EVENTS, NAME, ROAD_NAME, NATIVE_INTRO, WEATHER_DONOR, forecast_record
+from winter_road_maps import CITY, NATIVE_CITY, NATIVE_WORLD, WORLD
 
 
 def validate_registration(before, after, story):
-    assert after[:20]==before[:16]+u32(15)
+    assert after[:20]==before[:16]+u32(16)
     assert after[20:].startswith(before[20:before.index(entry("Default",DEFAULT_EVENTS))-4])
     start=after.index(entry(NAME,story["scenario"]))
     cursor=Cursor(after,start)
     cursor.entry()
-    assert cursor.take(18)==b"\1\0"+u32(0)*4
+    assert cursor.take(18)==b"\0\0"+u32(0)*4
     setup=entry(NAME,story["event_setup"])+u32(1)+bytes.fromhex("09e8fe41e1464e8d284bec7c9373e8f5")
     offset=after.index(entry("Default",DEFAULT_EVENTS))
-    clone=after[start:offset-4]
-    assert NATIVE_INTRO not in clone and bytes.fromhex(DEFAULT_EVENTS) not in clone
-    assert clone.count(bytes.fromhex(story["event_setup"]))==1
+    mapped=after.index(entry(ROAD_NAME,story["winter_road"]["scenario"]))
+    legacy=after[start:mapped]
+    clone=after[mapped:offset-4]
+    assert NATIVE_INTRO not in legacy+clone and bytes.fromhex(DEFAULT_EVENTS) not in legacy+clone
+    assert clone.count(bytes.fromhex(story["event_setup"]))==legacy.count(bytes.fromhex(story["event_setup"]))==1
+    assert clone.startswith(entry(ROAD_NAME,story["winter_road"]["scenario"])+b"\1\0")
     assert string("@Mods/NewIndustry/LastSignal/Menu/DisplayName") in clone
+    for native in (NATIVE_CITY,NATIVE_WORLD):
+        assert bytes.fromhex(native) in legacy and bytes.fromhex(native) not in clone
     forecast=story["winter_road"]["forecast"]
     assert clone.count(bytes.fromhex(forecast))==1
     old=before.index(entry("Default",DEFAULT_EVENTS))
     assert after[offset-4:offset]==u32(9) and before[old-4:old]==u32(8)
     record=forecast_record(story["lifeline"]["forecast"])+forecast_record(forecast,True)
+    for prefix,path,old_next,count in (
+        ("NI Switchback Basin",CITY,entry("Default",NATIVE_CITY),30),
+        ("NI Switchback Frostland",WORLD,entry("Refugees","e56253859755dc8b364092403628c7ef"),19),
+    ):
+        cursor=Cursor(after,after.index(b"\1"+string(prefix)))
+        at=cursor.position
+        _,uid=cursor.entry()
+        assert bytes.fromhex(uid) in clone
+        assert cursor.string()==path and cursor.count(8)==1
+        if path==CITY:
+            assert cursor.string()=="Var1"
+            cursor.guid()
+            assert cursor.f32()==1 and cursor.take(3)==bytes(3)
+        else:
+            assert cursor.string()=="Random A"
+            cursor.guid()
+            assert cursor.count()==0 and cursor.count()==0
+            assert cursor.string() and cursor.string() is None
+        assert cursor.string() and cursor.string()
+        if path==WORLD:assert cursor.take(1)==b"\0"
+        assert after[cursor.position:].startswith(old_next)
+        assert after[at-4:at]==u32(count+1)
+        after=after[:at-4]+u32(count)+after[cursor.position:]
     assert after[offset:].replace(setup,b"",1).replace(u32(68)+record+WEATHER_DONOR,u32(66)+WEATHER_DONOR,1)==before[old:]
 
 

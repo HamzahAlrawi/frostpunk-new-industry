@@ -2,7 +2,7 @@
 
 Close Frostpunk before applying changes. Double-click **Edit configuration.cmd**
 to open the saved JSON in Notepad, save it, then run **Apply configuration.cmd**.
-Apply rebuilds from verified originals and checks all six archives. It does not
+Apply rebuilds from verified originals and checks all eight archive files. It does not
 stack bonuses on a previous installation.
 
 The saved file is

@@ -21,6 +21,16 @@ from configuration import DEFAULT, PRESETS, configure_entry, fingerprint, resolv
 ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
 ENTRY = struct.Struct("<IQQQB")
 ARCHIVES = ("common.dat", "common.idx", "templates.dat", "templates.idx", "localizations.dat", "localizations.idx")
+WITH_SCENES = ARCHIVES + ("scenes.dat", "scenes.idx")
+
+
+def archive_scope(files):
+    names = set(files)
+    if names == set(ARCHIVES):
+        return ARCHIVES
+    if names == set(WITH_SCENES):
+        return WITH_SCENES
+    raise ValueError("Unsupported Frostpunk archive set")
 
 
 def sha(path):
@@ -106,12 +116,11 @@ class Installer:
         self.document = document
         self.originals = {base + extension: digest for base, archive in manifest["archives"].items()
                           for extension, digest in archive["original_files"].items()}
-        if set(self.originals) != set(ARCHIVES):
-            raise ValueError("Manifest must describe exactly the six Frostpunk archives")
+        self.archives = archive_scope(self.originals)
 
     def verify(self, folder, expected):
         for name, digest in expected.items():
-            if Path(name).name != name or name not in ARCHIVES:
+            if name not in WITH_SCENES:
                 raise ValueError("Invalid archive name")
             if sha(Path(folder) / name) != digest:
                 raise RuntimeError(f"{name} does not match the expected build. Use an unmodified supported Steam installation.")
@@ -140,11 +149,16 @@ class Installer:
             if index[:3] != b"\0\2\1" or len(index) != 11 + count * ENTRY.size:
                 raise ValueError(f"Invalid {base} archive index")
             positions = {ENTRY.unpack_from(index, position)[0]: position for position in range(11, len(index), ENTRY.size)}
+            added = {}
             shutil.copyfile(Path(source) / (base + ".dat"), destination / (base + ".dat"))
             with (Path(source) / (base + ".dat")).open("rb") as reader, (destination / (base + ".dat")).open("ab") as writer:
                 for patch in archive["entries"]:
-                    position = positions[patch["hash"]]
-                    identifier, stored, size, offset, packed = ENTRY.unpack_from(index, position)
+                    identifier = patch["hash"]
+                    donor = patch.get("original_hash")
+                    position = positions[identifier if donor is None else donor]
+                    if donor is not None and (base != "scenes" or identifier in positions or identifier in added):
+                        raise ValueError(f"Invalid additional scene entry: {patch['name']}")
+                    _, stored, size, offset, packed = ENTRY.unpack_from(index, position)
                     reader.seek(offset)
                     original = reader.read(stored)
                     if packed and original.startswith(b"\x1f\x8b"):
@@ -164,10 +178,20 @@ class Installer:
                                                   configuration["effective"])
                     logging.info("Staged %s bytes=%s sha256=%s", patch["name"], len(revised), hashlib.sha256(revised).hexdigest())
                     compressed = gzip.compress(revised, compresslevel=9, mtime=0)[:-8]
-                    ENTRY.pack_into(index, position, identifier, len(compressed), len(revised), writer.tell(), 1)
+                    record = ENTRY.pack(identifier, len(compressed), len(revised), writer.tell(), 1)
+                    if donor is None:
+                        index[position:position+ENTRY.size] = record
+                    else:
+                        added[identifier] = record
                     writer.write(compressed)
+            if added:
+                if list(positions) != sorted(positions) or len(positions) != count:
+                    raise ValueError(f"Invalid {base} archive ordering")
+                records = {identifier: index[position:position+ENTRY.size] for identifier, position in positions.items()}
+                records.update(added)
+                index = index[:3] + struct.pack("<Q", len(records)) + b"".join(records[key] for key in sorted(records))
             (destination / (base + ".idx")).write_bytes(index)
-        return {name: sha(destination / name) for name in ARCHIVES}
+        return {name: sha(destination / name) for name in self.archives}
 
     def replace(self, source, expected, rollback):
         if game_running():
@@ -175,7 +199,7 @@ class Installer:
         changed = []
         pending = []
         try:
-            for name in ARCHIVES:
+            for name in archive_scope(expected):
                 temporary = self.game / (name + ".new-industry-pending")
                 pending.append(temporary)
                 shutil.copyfile(Path(source) / name, temporary)
@@ -198,7 +222,11 @@ class Installer:
         if game_running():
             raise RuntimeError("Close Frostpunk to finish the interrupted installation")
         plan = json.loads(self.journal.read_text(encoding="utf-8"))
-        current = {name: sha(self.game / name) for name in ARCHIVES}
+        scope = archive_scope(plan["before"])
+        if scope != archive_scope(plan["target"]) or any(name not in self.originals for name in scope):
+            raise ValueError("Interrupted operation has incompatible archives")
+        originals = {name: self.originals[name] for name in scope}
+        current = {name: sha(self.game / name) for name in scope}
         for name, digest in current.items():
             if digest not in (plan["before"][name], plan["target"][name]):
                 raise RuntimeError(f"{name} changed outside the interrupted installer. Restore using Steam's file verification.")
@@ -207,11 +235,11 @@ class Installer:
                 write_json(self.config_path, plan["receipt"]["configuration"]["document"])
             write_json(self.receipt, plan["receipt"])
         else:
-            self.verify(self.backup, self.originals)
+            self.verify(self.backup, originals)
             with tempfile.TemporaryDirectory(prefix="recovery-", dir=self.state) as temporary:
-                for name in ARCHIVES:
+                for name in scope:
                     shutil.copyfile(self.game / name, Path(temporary) / name)
-                self.replace(self.backup, self.originals, temporary)
+                self.replace(self.backup, originals, temporary)
             self.receipt.unlink(missing_ok=True)
         self.journal.unlink()
         print("Recovered the interrupted archive operation.")
@@ -268,6 +296,8 @@ class Installer:
             raise RuntimeError("Install this release before applying its configuration")
         if configuration is None:
             raise RuntimeError("This release has no configurable settings")
+        if archive_scope(receipt["files"]) != self.archives:
+            raise ValueError("Installed release has incompatible archives")
         self.verify(self.game, receipt["files"])
         self.verify(self.backup, self.originals)
         with tempfile.TemporaryDirectory(prefix="configure-", dir=self.state) as temporary:
@@ -275,7 +305,7 @@ class Installer:
             staged, rollback = folder / "staged", folder / "rollback"
             expected = self.stage(self.backup, staged, configuration)
             rollback.mkdir()
-            for name in ARCHIVES:
+            for name in self.archives:
                 shutil.copyfile(self.game / name, rollback / name)
             updated = {"game": str(self.game), "version": self.manifest["version"],
                        "files": expected, "configuration": configuration}
@@ -318,20 +348,24 @@ class Installer:
             self.verify(self.game, self.originals)
             print("Original Frostpunk archives are already installed.")
             return
+        scope = archive_scope(receipt["files"])
+        if any(name not in self.originals for name in scope):
+            raise ValueError("Use the installed version to uninstall its additional archives")
+        originals = {name: self.originals[name] for name in scope}
         self.verify(self.game, receipt["files"])
-        self.verify(self.backup, self.originals)
+        self.verify(self.backup, originals)
         with tempfile.TemporaryDirectory(prefix="rollback-", dir=self.state) as temporary:
-            for name in ARCHIVES:
+            for name in scope:
                 shutil.copyfile(self.game / name, Path(temporary) / name)
-            write_json(self.journal, {"action": "uninstall", "before": receipt["files"], "target": self.originals})
-            self.replace(self.backup, self.originals, temporary)
+            write_json(self.journal, {"action": "uninstall", "before": receipt["files"], "target": originals})
+            self.replace(self.backup, originals, temporary)
             try:
                 self.receipt.unlink()
             except BaseException:
                 self.replace(temporary, receipt["files"], self.backup)
                 raise
             self.journal.unlink()
-        print("Restored and verified all six original Frostpunk archives.")
+        print(f"Restored and verified all {len(scope)} original Frostpunk archive files.")
 
     def status(self):
         receipt = self.installed()

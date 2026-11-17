@@ -9,6 +9,7 @@ import struct
 import tempfile
 import unittest
 from unittest.mock import patch
+import zlib
 
 from builder.make_delta import make_delta
 from installer import ARCHIVES, ENTRY, Installer, exclusive_lock, sha, write_json
@@ -68,6 +69,38 @@ class InstallerTests(unittest.TestCase):
         self.installer.uninstall()
         self.assert_originals()
         self.assertFalse(self.installer.receipt.exists())
+
+    def test_scene_upgrade_adds_sorted_entry_and_restores_donor(self):
+        archive, index = self.game / "scenes.dat", self.game / "scenes.idx"
+        original = b"native scene fixture" * 50
+        revised = original + b"new placement table"
+        archive.write_bytes(original)
+        index.write_bytes(b"\0\2\1" + struct.pack("<Q", 1) + ENTRY.pack(20, len(original), len(original), 0, 0))
+        saved_index = index.read_bytes()
+        self.installer.install()
+        delta, _ = make_delta(original, revised)
+        (self.package / "mod/patches/scenes.nid").write_bytes(delta)
+        self.manifest["archives"]["scenes"] = {
+            "original_files": {".dat": sha(archive), ".idx": sha(index)},
+            "entries": [{"name": "example.binaryscene", "hash": 10, "original_hash": 20,
+                         "patch": "scenes.nid", "patch_sha256": hashlib.sha256(delta).hexdigest(),
+                         "original_sha256": hashlib.sha256(original).hexdigest(),
+                         "new_sha256": hashlib.sha256(revised).hexdigest(), "size": len(revised)}],
+        }
+        self.manifest["version"] = "3.21.0"
+        installer = Installer(self.game, self.state, self.manifest, self.package)
+        installer.uninstall()  # Previous install has no scene backup.
+        self.assertEqual(index.read_bytes(), saved_index)
+        installer.install()
+        data = index.read_bytes()
+        self.assertEqual(struct.unpack_from("<Q", data, 3), (2,))
+        identifier, length, size, offset, compressed = ENTRY.unpack_from(data, 11)
+        self.assertEqual((identifier, size, offset, compressed), (10, len(revised), len(original), 1))
+        self.assertEqual(data[11+ENTRY.size:], saved_index[11:])
+        self.assertEqual(zlib.decompressobj(31).decompress(archive.read_bytes()[offset:offset+length]), revised)
+        installer.uninstall()
+        self.assert_originals()
+        self.assertEqual((archive.read_bytes(), index.read_bytes()), (original, saved_index))
 
     def enable_configuration(self):
         original = difficulty_fixture()

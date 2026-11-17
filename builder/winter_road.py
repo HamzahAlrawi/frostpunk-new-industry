@@ -7,22 +7,28 @@ from tools.native_binary import entry, f32, u32
 from tools.native_scenario import (affordable, amount, apply_modifier, change_resource, compare, delayed,
     dilemma, equals, event, guarded, integer, predefined, progress_quest, set_variable, start_quest, typed, variable)
 from winter_road_story import CHAPTERS, PROJECTS
+from winter_road_maps import (CREATE, LEGACY_POINTS, LEGACY_TEMPLATES, REVEAL, SITES, beacon_exists,
+    reveal_site, select_name, validate_native_map_effects)
 
 PREFIX="NI/WinterRoad/"
 LEGACY=("NI/Lifeline/chapter","NI/LastSignal/act")
 
 
-def build(source, buildings, techinfo, resources, guid, scenario, bonuses, localize, dt, qt):
+def build(source, buildings, techinfo, resources, guid, scenario, switchback, bonuses, localize, dt, qt):
     identity=lambda key:guid("winter-road/"+key).hex()
     quest_data=(source/"configs/frostpunkquestsconfig.bin").read_bytes()
-    validate(quest_data,(source/"configs/frostpunkgameeventsconfig.bin").read_bytes())
+    native_events=(source/"configs/frostpunkgameeventsconfig.bin").read_bytes()
+    validate(quest_data,native_events)
+    validate_native_map_effects(native_events)
     blueprints=(source/"configs/frostpunkblueprintsconfig.bin").read_bytes()
     native_effects=(source/"configs/frostpunkeffectsconfig.bin").read_bytes()
     writer=MissionWriter(quest_data,qt)
     places={name:value.hex() for name,value in building_ids(buildings).items()}
     techs={row["name"]:row["guid"] for row in techinfo}
     resources={name:value.hex() for name,value in resources.items()}
-    scoped=typed("FrostpunkCurrentScenarioCheckExpression")+bytes.fromhex(scenario)+b"\0"
+    def scenario_is(uid):
+        return typed("FrostpunkCurrentScenarioCheckExpression")+bytes.fromhex(uid)+b"\0"
+    scoped=typed("BooleanOperationExpression")+u32(1)+u32(2)+scenario_is(scenario)+scenario_is(switchback)
     running=typed("FrostpunkGeneratorIsActiveExpression")
     events,dialogs,quests,main_meta,side_meta=[],[],[],[],[]
 
@@ -95,6 +101,18 @@ def build(source, buildings, techinfo, resources, guid, scenario, bonuses, local
     beacon_checks=[scoped,compare(variable(PREFIX+"chapter"),4,integer(1)),eq("map_open",0)]
     beacon_actions=[put("map_open",1),OPEN_MAP]
     events.append(beacon+u32(len(beacon_checks))+b"".join(beacon_checks)+u32(len(beacon_actions))+b"".join(beacon_actions))
+    # A finished Beacon can predate the patch. The periodic fallback observes
+    # it directly instead of relying on a construction notification replay.
+    fresh = [select_name(point, CREATE+bytes.fromhex(uid)+bytes(4)) for point,uid,_,_ in SITES]
+    discover = [reveal_site(uid) for _,uid,_,_ in SITES]
+    legacy = [select_name("DefaultRandomizationPoint_"+point, REVEAL) for point in LEGACY_POINTS]
+    legacy.extend(reveal_site(uid) for uid in LEGACY_TEMPLATES)
+    fire("chart Frostland",[scoped,beacon_exists(),eq("frostland_charted",0)],[
+        put("frostland_charted",1),put("map_open",1),OPEN_MAP,
+        guarded([scenario_is(switchback)], fresh + [
+            after("survey markers",0.05,[guarded([scenario_is(switchback)],discover)])]),
+        guarded([scenario_is(scenario)], legacy),
+    ])
 
     def resolution(key,check,quest,days,goals,cost,success,miss,watch=0,slot="main"):
         state=lambda key:eq(slot+"/"+key,0)
@@ -234,6 +252,6 @@ def build(source, buildings, techinfo, resources, guid, scenario, bonuses, local
           [put("chapter",99),put("ending",3)])])
     # Only the scenario that signed the treaty can execute its cargo callbacks.
     fire("treaty",ending+[eq("offered",7)],[put("offered",8),signature])
-    return events,dialogs,quests,dict(chapters=len(CHAPTERS),missions=main_meta,projects=side_meta,
+    return events,dialogs,quests,dict(scenario=switchback,chapters=len(CHAPTERS),missions=main_meta,projects=side_meta,
         finale=identity("dialog/treaty"),forecast=identity("forecast"),treaty=treaty,
         recipes=recipes,bonuses={key.removeprefix("road/"):value for key,value in bonuses.items() if key.startswith("road/")})

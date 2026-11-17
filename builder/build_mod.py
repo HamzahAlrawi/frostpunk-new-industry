@@ -369,6 +369,17 @@ patches['common'][scenarios_path]=starting_supplies(endless_patches[scenarios_pa
 # native difficulty effect vectors without changing scenario assets or scripts.
 patches['common'][difficulty_path]=(SRC/'common'/difficulty_path).read_bytes()
 patches['common'][society_path]=new_society
+from winter_road_maps import build_scenes
+
+def read_owned(base, name):
+    identity = archive.murmur(name.encode())
+    record, = (record for record in entries(base) if record[1] == identity)
+    with (GAME/(base+'.dat')).open('rb') as stream:
+        return read(stream, record)
+
+new_scenes, map_metadata = build_scenes(read_owned)
+patches['scenes'] = {name: data for name, (_, data) in new_scenes.items()}
+endless_metadata['story']['winter_road']['map'] = map_metadata
 from menu_layout import build as build_menu_layout,native_mode_labels
 ui_patches,ui_metadata=build_menu_layout(SRC/'templates')
 patches['templates'].update(ui_patches)
@@ -409,12 +420,24 @@ manifest['legacy_civic_book']={'guid':gid('civic-law-book').hex(),'compatibility
 manifest['consolidated_technologies']=consolidated
 for base,files in patches.items():
     records=entries(base);byname={NAMES.get(e[1]):e for e in records};items=[]
+    byhash={e[1]:e for e in records}
     with (GAME/(base+'.dat')).open('rb') as src:
         for name,newdata in files.items():
-            e=byname[name];original=read(src,e)
-            assert original!=newdata or name==difficulty_path
-            payload=f'{base}-{e[1]:08x}.bin.gz';(PAY/payload).write_bytes(gzip.compress(newdata,compresslevel=9,mtime=0))
-            items.append({'name':name,'hash':e[1],'payload':payload,'original_sha256':hashlib.sha256(original).hexdigest(),'new_sha256':hashlib.sha256(newdata).hexdigest(),'size':len(newdata)})
+            added=base=='scenes'
+            if added:
+                target=archive.murmur(name.encode())
+                assert target not in byhash, name
+                donor=new_scenes[name][0]
+                e=byhash[archive.murmur(donor.encode())]
+            else:
+                e=byname[name]
+                target=e[1]
+            original=read(src,e)
+            assert added or original!=newdata or name==difficulty_path
+            payload=f'{base}-{target:08x}.bin.gz';(PAY/payload).write_bytes(gzip.compress(newdata,compresslevel=9,mtime=0))
+            item={'name':name,'hash':target,'payload':payload,'original_sha256':hashlib.sha256(original).hexdigest(),'new_sha256':hashlib.sha256(newdata).hexdigest(),'size':len(newdata)}
+            if added:item['original_hash']=e[1]
+            items.append(item)
     manifest['archives'][base]={'entries':items,'original_files':{ext:hashlib.file_digest((GAME/(base+ext)).open('rb'),'sha256').hexdigest() for ext in ['.dat','.idx']}}
 (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2))
 print(f'Built {len(newtechs)} technologies, {len(recipes)} recipes, {len(texts)} text entries in {len(patches["localizations"])} languages.')

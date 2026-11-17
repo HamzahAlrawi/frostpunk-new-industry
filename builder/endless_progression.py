@@ -256,7 +256,8 @@ def build(source,modifier_data,buildings,techinfo,guid,localize,resources):
     lifeline_id=lambda key:story_id(key) if key=='forecast' else guid('lifeline/'+key).hex()
     le,ld,lq,lifeline=build_lifeline(source,buildings,resources,lifeline_id,story['scenario'],localize,dt,qt)
     story['lifeline']=lifeline
-    we,wd,wq,winter=build_winter_road(source,buildings,techinfo,resources,guid,story['scenario'],frontiers['bonuses'],localize,dt,qt)
+    we,wd,wq,winter=build_winter_road(source,buildings,techinfo,resources,guid,story['scenario'],story_id('switchback-scenario'),
+                                    frontiers['bonuses'],localize,dt,qt)
     story['winter_road']=winter
     events=fe+we+le+se+events;dilemmas+=fd+wd+ld+sd;quests+=fq+wq+lq+sq;owners+=fo
     story_directory='09e8fe41e1464e8d284bec7c9373e8f5'

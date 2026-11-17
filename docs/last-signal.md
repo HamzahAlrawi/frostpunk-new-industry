@@ -1,6 +1,6 @@
 # The Last Signal: Winter Road
 
-Start a fresh city from **Select Scenario → The Last Signal: Winter Road**. Saved cities from the previous two versions of The Last Signal keep their original chapters.
+Start a fresh city from **Select Scenario → The Last Signal: Winter Road** to play on **Switchback Basin**. Its terrain comes from the Endless Points map, with a fixed starting position and a custom arrangement of wood, coal, and steel piles. Existing cities keep the map they started on.
 
 Two convoys are following the same guide rope into the crater. The first rescues are just the beginning: their survivors need a settlement that can house them, a winter reserve, and a way to bring down the people still on the ridge. The story ends with a decision about what the city will do with the road it built.
 
@@ -17,7 +17,7 @@ Two convoys are following the same guide rope into the crater. The first rescues
 
 Deadlines start when you choose a plan. Completion spends the listed supplies once. If the Generator goes out or reserves dip below the listed amount during the Long Night, the next failed inspection restarts the six-check count. A missed chapter can cost its convoy, charter, or reserve; the story still moves forward.
 
-The quest tracker shows the work each plan needs. **Operate** means open and staff the building so it can work. For warmth goals, use the temperature overlay: only homes rated **Liveable** or warmer count. For the scout route, build the Beacon, create a scout team, visit a Frostland site, then order the team back to the city.
+The quest tracker shows the work each plan needs. **Operate** means open and staff the building so it can work. For warmth goals, use the temperature overlay: only homes rated **Liveable** or warmer count. The Beacon charts three salvage destinations on the Switchback Frostland map. Create Scouts at the Beacon, send them to a destination, explore it, then order them home. The chapter IV scout objective tracks the return trip.
 
 The six optional projects are **The Spare Rope**, **A Room for the School**, **The Night Clinic**, **Keep the Signal Lit**, **Bread for the Landing**, and **The Apprentice’s Machine**. Each offers a specific job and reward alongside one of the main chapters. You can have one side project active at a time. The spare rope opens the twin crossing, school repairs insulate Bunkhouses and Houses, and the apprentice braces the steam joint. Other projects bring supplies or working families.
 

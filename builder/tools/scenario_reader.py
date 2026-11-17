@@ -23,6 +23,15 @@ def expression(c,compact=False):
         return ('mode',c.guid(),c.boolean())
     if name=='FrostpunkCurrentScenarioCheckExpression':
         return ('scenario',c.guid(),c.boolean())
+    if name=='BooleanOperationExpression':
+        if c.u32()!=1:raise SchemaError('Unsupported boolean operation')
+        return ('any',expressions(c))
+    if name=='CountExpression':
+        if not compact or c.take(c.u8())!=b'FrostpunkBuildingsSelector':
+            raise SchemaError('Unsupported count selector')
+        identity=c.guid()
+        if c.take(12)!=b'\1'+bytes(11):raise SchemaError('Unexpected building selector flags')
+        return ('building_count',identity)
     if name=='FrostpunkGeneratorIsActiveExpression':return ('generator',c.boolean())
     raise SchemaError('Unsupported expression '+str(name))
 
@@ -50,6 +59,25 @@ def effect(c):
     if name=='FrostpunkModifyWorldMapEffect':
         if c.take(11)!=bytes.fromhex("01ffffffff000000000000"):raise SchemaError('Unexpected world map effect')
         return ('open_map',)
+    if name=='FrostpunkSelectEffect':
+        selector=c.take(c.u8()).decode()
+        if selector=='FrostpunkEntitiesByNameSelector':
+            target=('marker',c.string())
+        elif selector=='FrostpunkExpeditionSitesSelector':
+            target=('site',c.guid())
+        else:
+            raise SchemaError('Unsupported world map selector '+selector)
+        if c.take(7)!=bytes(7):raise SchemaError('Unexpected world map selector flags')
+        operations=effects(c)
+        if len(operations)!=1 or operations[0][0] not in ('map_create','map_reveal'):
+            raise SchemaError('Unexpected world map selector action')
+        return ('map_select',target,operations[0])
+    if name=='FrostpunkCreateWorldMapEntityEffect':
+        guid=c.guid()
+        if c.u32()!=0:raise SchemaError('Unsupported map entity creation flags')
+        return ('map_create',guid)
+    if name=='FrostpunkRevealWorldMapEntityEffect':
+        return ('map_reveal',)
     if name=='FrostpunkProgressCustomQuestObjectiveEffect':return ('progress',c.guid(),c.string(),c.i32())
     if name=='FrostpunkTimedEffect':
         guid=c.guid();days=c.f32();unit=c.u32();random=c.f32();random_unit=c.u32()

@@ -2,9 +2,9 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.20.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.21.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.20.0/Frostpunk-New-Industry-3.20.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [New Endless modes](docs/frontiers.md) · [Winter Road player guide](docs/last-signal.md) · [Configuration](docs/configuration.md) · [Changes in 3.20.0](docs/releases/3.20.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.21.0/Frostpunk-New-Industry-3.21.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [New Endless modes](docs/frontiers.md) · [Winter Road player guide](docs/last-signal.md) · [Configuration](docs/configuration.md) · [Changes in 3.21.0](docs/releases/3.21.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
 
@@ -52,7 +52,7 @@ The installer requires original supported archives. It refuses incompatible buil
 
 Close Frostpunk and double-click **Uninstall.cmd**. It verifies the installed files and restores the original archives. **Check installation.cmd** checks the current state.
 
-Backups and installer logs live under `%LOCALAPPDATA%\FrostpunkNewIndustry\`, in a separate folder for each game installation. The installer changes six game archive files. Save files are outside its installation targets.
+Backups and installer logs live under `%LOCALAPPDATA%\FrostpunkNewIndustry\`, in a separate folder for each game installation. The installer changes eight game archive files, including the scene archive pair for Switchback Basin. Save files are outside its installation targets.
 
 Uninstall the previous version before installing an update. If an archive operation is interrupted, the next installer run checks its operation journal and recovers the known files.
 
@@ -64,10 +64,10 @@ and difficulty. See [all settings and presets](docs/configuration.md).
 
 ## Testing status
 
-- The default copy/insert patches reconstruct the local 3.20.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
+- The default copy/insert patches reconstruct the local 3.21.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
 - Research tests cover scenario membership, earlier unlocks, unique effect packages, icon/prerequisite-line geometry, and recipe-selector limits. The local binary validator also checks actual serialized recipe prices, outputs, requirements, attachments and effect vectors, and preserves native technology and modifier records.
-- Automated tests and owned-data audits cover six Endless paths, 54 incident responses, and the Winter Road missions, projects and endings. See the [release notes](docs/releases/3.20.0.md) for the scope of live testing.
+- Automated tests and owned-data audits cover six Endless paths, 54 incident responses, and the Winter Road missions, projects and endings. See the [release notes](docs/releases/3.21.0.md) for the scope of live testing.
 
 When reporting a problem, include the mod version, scenario, game version, and the installer error or crash description. Installer logs are saved locally in the backup folder's parent directory.
 

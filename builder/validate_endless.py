@@ -70,7 +70,9 @@ def audit(records,meta,resource_ids):
     events=records['gameevents'];dilemmas={r['guid']:r for r in records['dilemmas']};quests={r['guid']:r for r in records['quests']}
     flag=('mode',meta['enabled'],False)
     story_flag=('scenario',meta['story']['scenario'],False)
-    assert all(e['conditions'][0]==(story_flag if e['name'].startswith(('NI Last Signal ','NI Lifeline ','NI Winter Road ')) else flag)
+    road_flag=('any',[story_flag,('scenario',meta['story']['winter_road']['scenario'],False)])
+    assert all(e['conditions'][0]==(road_flag if e['name'].startswith('NI Winter Road ')
+                                   else story_flag if e['name'].startswith(('NI Last Signal ','NI Lifeline ')) else flag)
                and e['enabled'] and e['weight']==1 for e in events)
     assert all(t[0] in ('start','quest','scout_return','construction') or t[2] in (0.25,0.5,1,2) for e in events for t in e['triggers'])
     for row in dilemmas.values():
