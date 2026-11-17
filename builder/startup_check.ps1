@@ -15,7 +15,10 @@ $startedUtc = [DateTime]::UtcNow
 $gameTest = Start-Process -FilePath (Join-Path $gameFolder 'Frostpunk.exe') -WorkingDirectory $gameFolder -ArgumentList '-devconsole' -WindowStyle Hidden -PassThru
 $exitedEarly = $false
 $exitCode = $null
+$firstErrors = [Collections.Generic.List[string]]::new()
 try {
+    # The engine holds ConsoleOutput.html exclusively while running. Read it
+    # only after this bounded process exits; a live tail can disturb logging.
     $exitedEarly = $gameTest.WaitForExit($Seconds * 1000)
     if ($exitedEarly) { $exitCode = $gameTest.ExitCode }
 } finally {
@@ -32,9 +35,12 @@ $loaded = [Collections.Generic.HashSet[string]]::new()
 $errorsFound = 0
 foreach ($line in [IO.File]::ReadLines($captured)) {
     if ($line -match 'Configuration file (Frostpunk\w+Config) loaded') { $null = $loaded.Add($Matches[1]) }
-    if ($line.Contains('Class factory cannot create') -or $line.Contains('SERIALIZATIONFLAG_VERSIONTOLERANT') -or $line.Contains('inflate() failed')) { $errorsFound++ }
+    if ($line.Contains('Class factory cannot create') -or $line.Contains('SERIALIZATIONFLAG_VERSIONTOLERANT') -or $line.Contains('inflate() failed')) {
+        $errorsFound++
+        if ($firstErrors.Count -lt 6) { $firstErrors.Add(($line -replace '<[^>]*>', '')) }
+    }
 }
-$required = @('FrostpunkScenariosConfig', 'FrostpunkDifficultyConfig', 'FrostpunkTechnologiesConfig', 'FrostpunkBlueprintsConfig', 'FrostpunkModifiersConfig', 'FrostpunkAbilitiesConfig', 'FrostpunkGraphicsConfig', 'FrostpunkSocietyConfig', 'FrostpunkEffectsConfig')
+$required = @('FrostpunkScenariosConfig', 'FrostpunkDifficultyConfig', 'FrostpunkTechnologiesConfig', 'FrostpunkBlueprintsConfig', 'FrostpunkModifiersConfig', 'FrostpunkAbilitiesConfig', 'FrostpunkGraphicsConfig', 'FrostpunkSocietyConfig', 'FrostpunkEffectsConfig', 'FrostpunkEndlessModeConfig', 'FrostpunkGameEventsConfig', 'FrostpunkDilemmasConfig', 'FrostpunkQuestsConfig')
 $missing = @($required | Where-Object { -not $loaded.Contains($_) })
 $passed = (-not $exitedEarly) -and $errorsFound -eq 0 -and $missing.Count -eq 0
 @{
@@ -42,6 +48,7 @@ $passed = (-not $exitedEarly) -and $errorsFound -eq 0 -and $missing.Count -eq 0
     exited_during_startup = $exitedEarly; early_exit_code = $exitCode
     serialization_or_inflate_errors = $errorsFound; loaded_configs = @($loaded | Sort-Object)
     missing_required_configs = $missing; log_bytes = $log.Length
+    first_errors = @($firstErrors)
 } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $diagnosticFolder 'startup.json')
 if (-not $passed) { throw "Startup check failed: $errorsFound serialization/inflate errors; missing configs: $($missing -join ', '). See $diagnosticFolder" }
-Write-Output "Startup check passed: all nine required configs loaded, zero serialization/inflate errors. Logs: $diagnosticFolder"
+Write-Output "Startup check passed: all $($required.Count) required configs loaded, zero serialization/inflate errors. Logs: $diagnosticFolder"

@@ -101,6 +101,12 @@ class ConfigurationTests(unittest.TestCase):
             self.assertEqual(items[unknown], 70)
             for name, bonus in settings["starting_resources_bonus"].items():
                 self.assertEqual(items[resource_ids[name]], dict(old["items"]).get(resource_ids[name], 0) + bonus)
+        # Reconfiguration must preserve later scenario additions, replacing the
+        # supply bonus from the original values instead of stacking it again.
+        with_mode=revised+b'new native Reconstruction parameter'
+        configured=starting_supplies(with_mode,{name:guid.hex() for name,guid in resource_ids.items()},
+                                     settings['starting_resources_bonus'],original)
+        self.assertEqual(configured,with_mode)
 
 
 if __name__ == "__main__":

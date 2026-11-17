@@ -279,9 +279,12 @@ rebuild_entries(specs,newtechs,techinfo,loc,req,costs)
 society_path='configs/frostpunksocietyconfig.bin'
 new_society=build_laws((SRC/'common'/society_path).read_bytes(),
     (SRC/'common/configs/frostpunkeffectsconfig.bin').read_bytes(),civic_laws,gid,loc,req)
+from endless_progression import build as build_endless
+endless_patches,new_modifiers,endless_owners,endless_metadata=build_endless(SRC/'common',new_modifiers,
+    (SRC/'common/configs/frostpunkbuildingsconfig.bin').read_bytes(),techinfo,gid,loc,RES)
 from modifier_tooltips import improve_tooltips
 new_modifiers,modifier_tooltips=improve_tooltips(new_modifiers,
-    (SRC/'common/configs/frostpunkmodifiersconfig.bin').read_bytes(),specs,civic_laws,scenario_additions,loc)
+    (SRC/'common/configs/frostpunkmodifiersconfig.bin').read_bytes(),specs,civic_laws,scenario_additions,loc,endless_owners)
 effect_records=modifiers(new_modifiers)
 for tech in specs:
     tech['effect_fingerprint']=effect_signature(tech,effect_records)
@@ -360,7 +363,8 @@ difficulty_path='configs/frostpunkdifficultyconfig.bin'
 patches={
  'common':{'configs/frostpunktechnologiesconfig.bin':newTC,'configs/frostpunkblueprintsconfig.bin':newBP,'configs/frostpunkeconomyconfig.bin':newEC,mods_path:new_modifiers},
  'templates':{factory_path:factory,cookhouse_path:cookhouse},'localizations':{}}
-patches['common'][scenarios_path]=starting_supplies((SRC/'common'/scenarios_path).read_bytes(),RES)
+patches['common'].update(endless_patches)
+patches['common'][scenarios_path]=starting_supplies(endless_patches[scenarios_path],RES)
 # The public menu preset is an identity patch. Installation can replace only its
 # native difficulty effect vectors without changing scenario assets or scripts.
 patches['common'][difficulty_path]=(SRC/'common'/difficulty_path).read_bytes()
@@ -393,6 +397,7 @@ for spec,entry in zip(specs,newtechs):
 manifest['configuration']={'schema_version':1,'resource_ids':{name:RES[name].hex() for name in OPENING_STOCK},
                            'research_durations':duration_offsets,'workshop_curve_offset':len(newTC)-len(sets)}
 manifest['laws']=civic_laws
+manifest['endless']=endless_metadata
 manifest['modifier_tooltips']=modifier_tooltips
 manifest['native_law_book_order']=['Purpose','Adaptation','Labour','ADMINISTRATION']
 manifest['legacy_civic_book']={'guid':gid('civic-law-book').hex(),'compatibility_only':True,'requirement':'P AND NOT(P)'}

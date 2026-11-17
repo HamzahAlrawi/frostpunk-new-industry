@@ -2,18 +2,20 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.14.1 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.15.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.14.1/Frostpunk-New-Industry-3.14.1-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [Configuration](docs/configuration.md) · [Changes in 3.14.1](docs/releases/3.14.1.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.15.0/Frostpunk-New-Industry-3.15.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [Reconstruction](docs/reconstruction.md) · [Configuration](docs/configuration.md) · [Changes in 3.15.0](docs/releases/3.15.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
+
+- **Experimental Reconstruction Endless mode.** Twelve permanent megaprojects, three relief routes with five levels and optional timed industrial contracts consume large late-game stockpiles. Recurring deliveries continue after the final project. [Rules, budgets and beta limitations](docs/reconstruction.md).
 
 - **Renewable Steam Cores.** Find Steam Core Fabrication in the **first column of the added Industry tab, tier II**, then select its recipe at a Factory. Further upgrades culminate in three-core batches. The Arks is explicitly checked.
 - **216 active research definitions across supported modes.** Engineering, Industry, City Life, Logistics and Production use fixed themed columns beside the native tabs. 47 smaller upgrades are consolidated into larger ones. Added research has at most one visible parent in its own column; hidden native and cross-tab requirements are removed.
 - **Four signable Civic Charters.** Research the City Life civic branch, then sign them in the upper branch of **Adaptation**, or **Administration** in The Last Autumn. Native books, scenario unlocks and Order/Faith laws are preserved. Charters improve Hope/Discontent and provide healthcare, civic heating and illness benefits. [Policies and consolidated upgrades](docs/laws.md).
 - **12 research-free laws in four choice trees.** Community Care, Workforce, Winter Preparedness and Public Reserves each start with an immediately available root, followed by two mutually exclusive policies. Choose preventive or critical care, human or mechanical specialisation, district heating or food protection, and storm reserves or industrial capital. These trees share the native Adaptation/Administration book without changing its original branches.
 - **Six citywide thermal envelopes.** Three additional stages provide expensive late-game insulation, illness protection and larger heat zones.
-- **Readable building modifier sources.** All 326 mod-added modifiers have names and descriptions. Six insulation families use one cumulative heat-tooltip source per building; Thermal Envelope grows from +1 to +7 instead of displaying six separate rows. [Tooltip scope](docs/tooltips.md).
+- **Readable building modifier sources.** All 346 mod-added modifiers have names and descriptions. Six insulation families use one cumulative heat-tooltip source per building; Thermal Envelope grows from +1 to +7 instead of displaying six separate rows. [Tooltip scope](docs/tooltips.md).
 - **Faster progression.** All mod-added perks have half their authored base research duration. Workshop base research output is 25% higher than version 3.9, or 56.25% above vanilla, with normal multiple-Workshop scaling. Research before Drawing Boards and additional starting supplies ease the opening.
 - **Configurable difficulty and bigger starting stockpiles.** Five presets and per-resource/category overrides cover all native starting profiles. Edit the persistent JSON, then apply it while the game is closed. Research pacing is configurable too; public defaults retain the current boosts.
 - **Stronger workplaces.** The permanent workplace-efficiency research bonuses grant at least 75% per upgrade where applicable.
@@ -61,10 +63,10 @@ and difficulty. See [all settings and presets](docs/configuration.md).
 
 ## Testing status
 
-- The default copy/insert patches reconstruct the local 3.14.1 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
+- The default copy/insert patches reconstruct the local 3.15.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
 - Research tests cover scenario membership, earlier unlocks, unique effect packages, icon/prerequisite-line geometry, and recipe-selector limits. The local binary validator also checks actual serialized recipe prices, outputs, requirements, attachments and effect vectors, and preserves native technology and modifier records.
-- 53 automated tests and owned-data checks cover joined law-choice circles, compact connections, source-tooltip completeness, cumulative heat totals across 133 scenario/research states, Arks core placement, native law-book preservation, branch gates and serialized passive bonuses as well as progression and installation. Earlier builds completed full campaigns. The corrected law layout has not been checked in a live UI; this release remains **beta**.
+- 59 automated tests and owned-data checks cover research, laws, tooltips, configuration and installation. Reconstruction additionally has an independent decoder, all 60 payment cases, timer-cycle checks and a 200-day model simulation. A bounded startup loaded all 13 required configurations with zero serialization errors. Live mode selection, deliveries and real save/load were not verified because computer control was stopped; the new mode is an **experimental beta**.
 
 When reporting a problem, include the mod version, scenario, game version, and the installer error or crash description. Installer logs are saved locally in the backup folder's parent directory.
 
@@ -81,6 +83,7 @@ python builder/validate_build.py
 python builder/validate_configuration.py
 python builder/validate_civic.py
 python builder/validate_tooltips.py
+python builder/validate_endless.py
 python builder/package_mod.py --originals "C:\Program Files (x86)\Steam\steamapps\common\Frostpunk"
 python builder/write_catalog.py
 python -m unittest discover -s tests -v
@@ -101,7 +104,7 @@ The executable is written to `dist/`. The GitHub workflow runs installer tests o
 For a bounded local startup check, close Frostpunk and run
 `powershell -ExecutionPolicy Bypass -File builder/startup_check.ps1 -Game "D:\SteamLibrary\steamapps\common\Frostpunk"`.
 It launches and closes only its own test process, captures a fresh log, requires
-the nine required game configurations (including difficulty, Society and Effects) to finish loading, and rejects serialization
+the thirteen required game configurations (including Endless modes, events, dilemmas and quests) to finish loading, and rejects serialization
 or decompression errors. Logs and a JSON result are written under
 `build/startup-check/`. It does not load a save or test campaign balance.
 

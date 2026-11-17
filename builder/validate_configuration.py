@@ -19,6 +19,7 @@ def main():
     revised = {e["name"]: gzip.decompress((ROOT / "build/native/payload" / e["payload"]).read_bytes())
                for e in manifest["archives"]["common"]["entries"] if e["name"] in original}
     profiles = starting_profiles(original[SCENARIOS])
+    baseline_profiles = starting_profiles(revised[SCENARIOS])
     categories = difficulty_categories(original[DIFFICULTY])
     assert revised[DIFFICULTY] == original[DIFFICULTY]
     for preset in PRESETS:
@@ -27,7 +28,7 @@ def main():
         rows = starting_profiles(output[SCENARIOS])
         assert len(rows) == 17
         assert original[SCENARIOS][:profiles[0]["start"]] == output[SCENARIOS][:rows[0]["start"]]
-        assert original[SCENARIOS][profiles[-1]["end"]:] == output[SCENARIOS][rows[-1]["end"]:]
+        assert revised[SCENARIOS][baseline_profiles[-1]["end"]:] == output[SCENARIOS][rows[-1]["end"]:]
         extras = {bytes.fromhex(metadata["resource_ids"][name]): amount
                   for name, amount in settings["starting_resources_bonus"].items()}
         for before, after in zip(profiles, rows):

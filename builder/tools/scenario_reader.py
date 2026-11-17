@@ -1,0 +1,108 @@
+"""Bounded independent decoder for the native subset used by Reconstruction.
+
+The decoder is also the input to the state-machine checks: those checks execute
+serialized effects rather than an optimistic second implementation of gameplay.
+Unsupported classes, trailing bytes and malformed vectors are hard failures.
+"""
+from .native_binary import Cursor,SchemaError
+
+
+def expression(c,compact=False):
+    name=c.take(c.u8()).decode() if compact else c.string()
+    if name=='ConstantIntegerExpression':return ('constant',c.i32())
+    if name=='ConstantFloatExpression':return ('constant',c.f32())
+    if name=='FrostpunkVariableValueIntegerExpression':
+        if not c.boolean():raise SchemaError('Expected global variable')
+        return ('variable',c.string())
+    if name=='FrostpunkResourceAmountExpression':return ('resource',c.guid())
+    if name=='IntegerComparisonExpression':
+        left=expression(c,True);op=c.u32();right=expression(c,True)
+        if op not in (0,4):raise SchemaError('Unsupported comparison')
+        return ('compare',op,left,right)
+    if name=='FrostpunkCustomScenarioParameterCheckExpression':
+        return ('mode',c.guid(),c.boolean())
+    raise SchemaError('Unsupported expression '+str(name))
+
+
+def expressions(c):return [expression(c) for _ in range(c.count(32))]
+
+
+def effects(c):return [effect(c) for _ in range(c.count(256))]
+
+
+def effect(c):
+    name=c.string()
+    if name=='FrostpunkSetVariableEffect':
+        if not c.boolean():raise SchemaError('Expected global variable')
+        return ('set',c.string(),c.u32(),expression(c,True))
+    if name=='FrostpunkChangeResourcesEffect':
+        return ('resource',c.guid(),expression(c,True),expression(c,True),c.u32())
+    if name in ('FrostpunkPredefinedEffect','FrostpunkApplyModifierEffect','FrostpunkCreateDilemmaEffect','FrostpunkStartQuestEffect'):
+        return ({'FrostpunkPredefinedEffect':'predefined','FrostpunkApplyModifierEffect':'modifier',
+                 'FrostpunkCreateDilemmaEffect':'dilemma','FrostpunkStartQuestEffect':'quest'}[name],c.guid())
+    if name=='FrostpunkProgressCustomQuestObjectiveEffect':return ('progress',c.guid(),c.string(),c.i32())
+    if name=='FrostpunkTimedEffect':
+        guid=c.guid();days=c.f32();unit=c.u32();random=c.f32();random_unit=c.u32()
+        if unit!=1 or random!=0 or random_unit!=0 or days<=0:raise SchemaError('Unsupported timer')
+        return ('timer',guid,days,effects(c))
+    if name=='FrostpunkSwitchEffect':
+        cases=[]
+        for _ in range(c.count(32)):
+            if not c.boolean():raise SchemaError('Null switch case')
+            label=c.string();conditions=expressions(c);actions=effects(c)
+            cases.append((label,conditions,actions))
+        return ('switch',cases,('No match',[],[]))
+    raise SchemaError('Unsupported effect '+str(name))
+
+
+def event(c):
+    name,guid=c.entry();comments=c.string();enabled=c.boolean();weight=c.f32()
+    triggers=[]
+    for _ in range(c.count(8)):
+        kind=c.string();identity=c.guid()
+        if kind=='FrostpunkGameStartedEventTrigger':triggers.append(('start',identity))
+        elif kind=='FrostpunkPeriodicEventTrigger':
+            period,unit,initial,initial_unit=c.f32(),c.u32(),c.f32(),c.u32()
+            if unit!=1 or initial!=0 or initial_unit!=0:raise SchemaError('Unsupported periodic clock')
+            triggers.append(('periodic',identity,period))
+        else:raise SchemaError('Unsupported trigger '+str(kind))
+    return dict(name=name,guid=guid,enabled=enabled,weight=weight,triggers=triggers,
+                conditions=expressions(c),effects=effects(c))
+
+
+CHOICE_METADATA=bytes.fromhex('00000000000000000000000000000000000000000000000000000000000000000100000001000000000000000000000000010000000100000000000000')
+
+
+def choice(c):
+    name,guid=c.entry()
+    if c.take(38)!=bytes(38):raise SchemaError('Unexpected choice metadata')
+    conditions=expressions(c);actions=effects(c)
+    if c.count()!=0:raise SchemaError('Unexpected post-choice effects')
+    text=c.string();description=c.string()
+    if c.boolean():raise SchemaError('Unexpected choice description option')
+    disabled=c.string()
+    if c.take(61)!=CHOICE_METADATA:raise SchemaError('Unexpected choice footer')
+    return dict(name=name,guid=guid,conditions=conditions,effects=actions,text=text,description=description,disabled=disabled)
+
+
+def quest(c):
+    if not c.boolean():raise SchemaError('Null quest')
+    guid=c.guid();name=c.string();length=c.u8();deadline=None
+    if length:
+        if c.take(length)!=b'FrostpunkFixedDurationTimeout':raise SchemaError('Unknown timeout')
+        deadline=c.f32()
+        if c.u32()!=1:raise SchemaError('Deadline must use game days')
+    if c.boolean() or (c.i32(),c.i32(),c.i32())!=(1,-1,1):raise SchemaError('Unexpected quest type/occurrence limits')
+    if c.count()!=1:raise SchemaError('Expected one custom delivery objective')
+    if c.string()!='FrostpunkCustomQuestObjective':raise SchemaError('Expected custom delivery objective')
+    objective=c.guid()
+    if c.count()!=0 or c.boolean():raise SchemaError('Unexpected objective conditions')
+    text=c.string();description=c.string();metadata=c.take(24)
+    label=c.string();quantity=c.u32();bound=c.boolean()
+    if label!='Dispatch' or quantity!=1 or bound:raise SchemaError('Unexpected delivery progress')
+    if c.take(44)!=bytes(44):raise SchemaError('Unexpected quest callbacks/social problem')
+    title=c.string()
+    if c.string() is not None or c.string() is not None:raise SchemaError('Unexpected quest descriptions')
+    priority=c.f32();hide=c.boolean();color=c.boolean();atlas=c.string();icon=[c.i32() for _ in range(4)];height=c.boolean()
+    if hide or not color or height or atlas!='UI\\Tiles\\Icons.dds' or icon!=[4,1,16,16]:raise SchemaError('Unexpected quest view')
+    return dict(name=name,guid=guid,deadline=deadline,objective=objective,text=text,description=description,title=title,metadata=metadata.hex(),priority=priority)

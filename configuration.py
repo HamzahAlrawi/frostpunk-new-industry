@@ -101,12 +101,15 @@ def starting_profiles(data):
     return rows
 
 
-def starting_supplies(data, resource_ids, bonuses):
+def starting_supplies(data, resource_ids, bonuses, base_data=None):
     rows = starting_profiles(data)
+    baseline = starting_profiles(base_data) if base_data is not None else rows
+    if [row['name'] for row in rows] != [row['name'] for row in baseline]:
+        raise ValueError('Starting-profile identities differ from the native baseline')
     extras = {bytes.fromhex(resource_ids[name]): amount for name, amount in bonuses.items() if amount}
     chunks = [data[:rows[0]["start"]]]
-    for row in rows:
-        items = row["items"]
+    for row, base in zip(rows, baseline):
+        items = base["items"]
         if len(dict(items)) != len(items):
             raise ValueError("Duplicate resource in starting profile")
         revised = [(guid, value + extras.get(guid, 0)) for guid, value in items]
@@ -164,7 +167,7 @@ def difficulty_settings(data, settings):
 
 def configure_entry(name, original, revised, metadata, settings):
     if name == SCENARIOS:
-        return starting_supplies(original, metadata["resource_ids"], settings["starting_resources_bonus"])
+        return starting_supplies(revised, metadata["resource_ids"], settings["starting_resources_bonus"], original)
     if name == DIFFICULTY:
         return difficulty_settings(original, settings)
     if name == TECHNOLOGIES:

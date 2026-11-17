@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.14.1",
+  "version": "3.15.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -21990,6 +21990,1142 @@
       ]
     }
   ],
+  "endless": {
+    "id": "Reconstruction",
+    "parameter": "d1ceb3dd2413015086d0fafcc9d5d3f9",
+    "enabled": "11a82d1beef7bc5ab3f08285b62a1338",
+    "disabled": "95e009540d9fce5cbf681a7f8e908208",
+    "tracks": [
+      {
+        "id": "Projects",
+        "start": 0.5,
+        "initial": 1,
+        "stages": [
+          {
+            "state": 1,
+            "title": "Surveyors Camp",
+            "cost": {
+              "Wood": 300,
+              "Steel": 150,
+              "Coal": 500,
+              "Food Rations": 100
+            },
+            "description": "Open a permanent surveying camp. Establish the reconstruction ledger and earn a large Hope increase.",
+            "reward": null,
+            "next": 2,
+            "cooldown": 0.5
+          },
+          {
+            "state": 2,
+            "title": "Frostland Storehouses",
+            "cost": {
+              "Wood": 900,
+              "Steel": 600,
+              "Coal": 1500,
+              "Food Rations": 400
+            },
+            "description": "Build a regional reserve network. Both Resource Depot sizes gain 100% capacity for every stored resource.",
+            "reward": "storage",
+            "next": 3,
+            "cooldown": 0.5
+          },
+          {
+            "state": 3,
+            "title": "Engineers Exchange",
+            "cost": {
+              "Wood": 1800,
+              "Steel": 1400,
+              "Coal": 4000,
+              "Food Rations": 900,
+              "Steam Cores": 8
+            },
+            "description": "Found a technical exchange. Workshops gain 75% workplace efficiency.",
+            "reward": "research",
+            "next": 4,
+            "cooldown": 0.5
+          },
+          {
+            "state": 4,
+            "title": "Refuge Clinics",
+            "cost": {
+              "Wood": 3500,
+              "Steel": 2500,
+              "Coal": 8000,
+              "Food Rations": 1800,
+              "Steam Cores": 20
+            },
+            "description": "Equip the relief clinics. Medical Posts, Infirmaries and Houses of Healing gain 100% workplace efficiency.",
+            "reward": "medical",
+            "next": 5,
+            "cooldown": 0.5
+          },
+          {
+            "state": 5,
+            "title": "The Great Foundry",
+            "cost": {
+              "Wood": 5500,
+              "Steel": 5000,
+              "Coal": 16000,
+              "Food Rations": 2500,
+              "Steam Cores": 40
+            },
+            "description": "Connect the city to a new foundry complex. Steelworks and Factories gain 75% workplace efficiency.",
+            "reward": "industry",
+            "next": 6,
+            "cooldown": 0.5
+          },
+          {
+            "state": 6,
+            "title": "Sheltered Roads",
+            "cost": {
+              "Wood": 9000,
+              "Steel": 8000,
+              "Coal": 25000,
+              "Food Rations": 5000,
+              "Steam Cores": 70
+            },
+            "description": "Enclose the reconstruction supply roads. Every building with insulation gains one insulation level.",
+            "reward": "warmth",
+            "next": 7,
+            "cooldown": 0.5
+          },
+          {
+            "state": 7,
+            "title": "Seed Conservatory",
+            "cost": {
+              "Wood": 15000,
+              "Steel": 12000,
+              "Coal": 40000,
+              "Food Rations": 9000,
+              "Steam Cores": 110
+            },
+            "description": "Found a seed reserve. Hothouses, Industrial Hothouses and Cookhouses gain 75% workplace efficiency.",
+            "reward": "food",
+            "next": 8,
+            "cooldown": 0.5
+          },
+          {
+            "state": 8,
+            "title": "Continental Reserve",
+            "cost": {
+              "Wood": 22000,
+              "Steel": 18000,
+              "Coal": 65000,
+              "Food Rations": 14000,
+              "Steam Cores": 180
+            },
+            "description": "Open deep supply vaults. Both Resource Depot sizes gain a further 100% capacity.",
+            "reward": "storage2",
+            "next": 9,
+            "cooldown": 0.5
+          },
+          {
+            "state": 9,
+            "title": "Relay Citadels",
+            "cost": {
+              "Wood": 32000,
+              "Steel": 28000,
+              "Coal": 95000,
+              "Food Rations": 20000,
+              "Steam Cores": 280
+            },
+            "description": "Equip permanent relay settlements. Coal mines, sawmills and wall drills gain 75% workplace efficiency.",
+            "reward": "extraction",
+            "next": 10,
+            "cooldown": 0.5
+          },
+          {
+            "state": 10,
+            "title": "Polar Sanctuary",
+            "cost": {
+              "Wood": 45000,
+              "Steel": 42000,
+              "Coal": 140000,
+              "Food Rations": 30000,
+              "Steam Cores": 450
+            },
+            "description": "Complete an inhabited refuge beyond the city. Cold-related illness is reduced by 25%.",
+            "reward": "health",
+            "next": 11,
+            "cooldown": 0.5
+          },
+          {
+            "state": 11,
+            "title": "The Northern Railway",
+            "cost": {
+              "Wood": 60000,
+              "Steel": 70000,
+              "Coal": 200000,
+              "Food Rations": 45000,
+              "Steam Cores": 750
+            },
+            "description": "Lay the final railway across the Frostland. All heat zones gain 25% radius.",
+            "reward": "radius",
+            "next": 12,
+            "cooldown": 0.5
+          },
+          {
+            "state": 12,
+            "title": "A World Rebuilt",
+            "cost": {
+              "Wood": 80000,
+              "Steel": 100000,
+              "Coal": 250000,
+              "Food Rations": 60000,
+              "Steam Cores": 1200
+            },
+            "description": "Complete the reconstruction programme. All workplaces gain 75% efficiency. Relief routes and contracts continue indefinitely.",
+            "reward": "all",
+            "next": 99,
+            "cooldown": 0.5
+          }
+        ]
+      },
+      {
+        "id": "Foundry",
+        "start": 2,
+        "initial": 2,
+        "stages": [
+          {
+            "state": 2,
+            "title": "Foundry Settlement - Route 1",
+            "cost": {
+              "Coal": 1600,
+              "Food Rations": 200
+            },
+            "cargo": {
+              "Steel": 600
+            },
+            "description": "Sustain foundry settlement. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 4,
+            "failure": 3,
+            "deadline": null,
+            "cooldown": 7
+          },
+          {
+            "state": 3,
+            "title": "Foundry Settlement - Route 1",
+            "cost": {
+              "Coal": 1600,
+              "Food Rations": 200
+            },
+            "cargo": {
+              "Steel": 600
+            },
+            "description": "Sustain foundry settlement. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 4,
+            "failure": 2,
+            "deadline": null,
+            "cooldown": 7
+          },
+          {
+            "state": 4,
+            "title": "Foundry Settlement - Route 2",
+            "cost": {
+              "Coal": 4800,
+              "Food Rations": 600
+            },
+            "cargo": {
+              "Steel": 1800
+            },
+            "description": "Sustain foundry settlement. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 6,
+            "failure": 5,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 5,
+            "title": "Foundry Settlement - Route 2",
+            "cost": {
+              "Coal": 4800,
+              "Food Rations": 600
+            },
+            "cargo": {
+              "Steel": 1800
+            },
+            "description": "Sustain foundry settlement. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 6,
+            "failure": 4,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 6,
+            "title": "Foundry Settlement - Route 3",
+            "cost": {
+              "Coal": 12800,
+              "Food Rations": 1600
+            },
+            "cargo": {
+              "Steel": 4800
+            },
+            "description": "Sustain foundry settlement. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 8,
+            "failure": 7,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 7,
+            "title": "Foundry Settlement - Route 3",
+            "cost": {
+              "Coal": 12800,
+              "Food Rations": 1600
+            },
+            "cargo": {
+              "Steel": 4800
+            },
+            "description": "Sustain foundry settlement. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 8,
+            "failure": 6,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 8,
+            "title": "Foundry Settlement - Route 4",
+            "cost": {
+              "Coal": 32000,
+              "Food Rations": 4000
+            },
+            "cargo": {
+              "Steel": 12000
+            },
+            "description": "Sustain foundry settlement. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 10,
+            "failure": 9,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 9,
+            "title": "Foundry Settlement - Route 4",
+            "cost": {
+              "Coal": 32000,
+              "Food Rations": 4000
+            },
+            "cargo": {
+              "Steel": 12000
+            },
+            "description": "Sustain foundry settlement. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 10,
+            "failure": 8,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 10,
+            "title": "Foundry Settlement - Route 5",
+            "cost": {
+              "Coal": 80000,
+              "Food Rations": 10000
+            },
+            "cargo": {
+              "Steel": 30000
+            },
+            "description": "Sustain foundry settlement. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 11,
+            "failure": 11,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 11,
+            "title": "Foundry Settlement - Route 5",
+            "cost": {
+              "Coal": 80000,
+              "Food Rations": 10000
+            },
+            "cargo": {
+              "Steel": 30000
+            },
+            "description": "Sustain foundry settlement. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 10,
+            "failure": 10,
+            "deadline": 8,
+            "cooldown": 7
+          }
+        ]
+      },
+      {
+        "id": "Gardens",
+        "start": 5,
+        "initial": 2,
+        "stages": [
+          {
+            "state": 2,
+            "title": "Sheltered Gardens - Route 1",
+            "cost": {
+              "Wood": 500,
+              "Coal": 800,
+              "Steel": 200
+            },
+            "cargo": {
+              "Food Rations": 1000
+            },
+            "description": "Sustain sheltered gardens. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 4,
+            "failure": 3,
+            "deadline": null,
+            "cooldown": 7
+          },
+          {
+            "state": 3,
+            "title": "Sheltered Gardens - Route 1",
+            "cost": {
+              "Wood": 500,
+              "Coal": 800,
+              "Steel": 200
+            },
+            "cargo": {
+              "Food Rations": 1000
+            },
+            "description": "Sustain sheltered gardens. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 4,
+            "failure": 2,
+            "deadline": null,
+            "cooldown": 7
+          },
+          {
+            "state": 4,
+            "title": "Sheltered Gardens - Route 2",
+            "cost": {
+              "Wood": 1500,
+              "Coal": 2400,
+              "Steel": 600
+            },
+            "cargo": {
+              "Food Rations": 3000
+            },
+            "description": "Sustain sheltered gardens. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 6,
+            "failure": 5,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 5,
+            "title": "Sheltered Gardens - Route 2",
+            "cost": {
+              "Wood": 1500,
+              "Coal": 2400,
+              "Steel": 600
+            },
+            "cargo": {
+              "Food Rations": 3000
+            },
+            "description": "Sustain sheltered gardens. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 6,
+            "failure": 4,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 6,
+            "title": "Sheltered Gardens - Route 3",
+            "cost": {
+              "Wood": 4000,
+              "Coal": 6400,
+              "Steel": 1600
+            },
+            "cargo": {
+              "Food Rations": 8000
+            },
+            "description": "Sustain sheltered gardens. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 8,
+            "failure": 7,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 7,
+            "title": "Sheltered Gardens - Route 3",
+            "cost": {
+              "Wood": 4000,
+              "Coal": 6400,
+              "Steel": 1600
+            },
+            "cargo": {
+              "Food Rations": 8000
+            },
+            "description": "Sustain sheltered gardens. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 8,
+            "failure": 6,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 8,
+            "title": "Sheltered Gardens - Route 4",
+            "cost": {
+              "Wood": 10000,
+              "Coal": 16000,
+              "Steel": 4000
+            },
+            "cargo": {
+              "Food Rations": 20000
+            },
+            "description": "Sustain sheltered gardens. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 10,
+            "failure": 9,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 9,
+            "title": "Sheltered Gardens - Route 4",
+            "cost": {
+              "Wood": 10000,
+              "Coal": 16000,
+              "Steel": 4000
+            },
+            "cargo": {
+              "Food Rations": 20000
+            },
+            "description": "Sustain sheltered gardens. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 10,
+            "failure": 8,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 10,
+            "title": "Sheltered Gardens - Route 5",
+            "cost": {
+              "Wood": 25000,
+              "Coal": 40000,
+              "Steel": 10000
+            },
+            "cargo": {
+              "Food Rations": 50000
+            },
+            "description": "Sustain sheltered gardens. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 11,
+            "failure": 11,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 11,
+            "title": "Sheltered Gardens - Route 5",
+            "cost": {
+              "Wood": 25000,
+              "Coal": 40000,
+              "Steel": 10000
+            },
+            "cargo": {
+              "Food Rations": 50000
+            },
+            "description": "Sustain sheltered gardens. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 10,
+            "failure": 10,
+            "deadline": 8,
+            "cooldown": 7
+          }
+        ]
+      },
+      {
+        "id": "Salvage",
+        "start": 8,
+        "initial": 2,
+        "stages": [
+          {
+            "state": 2,
+            "title": "Salvage Anchorage - Route 1",
+            "cost": {
+              "Steel": 400,
+              "Food Rations": 250
+            },
+            "cargo": {
+              "Wood": 1200,
+              "Steam Cores": 2
+            },
+            "description": "Sustain salvage anchorage. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 4,
+            "failure": 3,
+            "deadline": null,
+            "cooldown": 7
+          },
+          {
+            "state": 3,
+            "title": "Salvage Anchorage - Route 1",
+            "cost": {
+              "Steel": 400,
+              "Food Rations": 250
+            },
+            "cargo": {
+              "Wood": 1200,
+              "Steam Cores": 2
+            },
+            "description": "Sustain salvage anchorage. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 4,
+            "failure": 2,
+            "deadline": null,
+            "cooldown": 7
+          },
+          {
+            "state": 4,
+            "title": "Salvage Anchorage - Route 2",
+            "cost": {
+              "Steel": 1200,
+              "Food Rations": 750
+            },
+            "cargo": {
+              "Wood": 3600,
+              "Steam Cores": 6
+            },
+            "description": "Sustain salvage anchorage. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 6,
+            "failure": 5,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 5,
+            "title": "Salvage Anchorage - Route 2",
+            "cost": {
+              "Steel": 1200,
+              "Food Rations": 750
+            },
+            "cargo": {
+              "Wood": 3600,
+              "Steam Cores": 6
+            },
+            "description": "Sustain salvage anchorage. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 6,
+            "failure": 4,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 6,
+            "title": "Salvage Anchorage - Route 3",
+            "cost": {
+              "Steel": 3200,
+              "Food Rations": 2000
+            },
+            "cargo": {
+              "Wood": 9600,
+              "Steam Cores": 16
+            },
+            "description": "Sustain salvage anchorage. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 8,
+            "failure": 7,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 7,
+            "title": "Salvage Anchorage - Route 3",
+            "cost": {
+              "Steel": 3200,
+              "Food Rations": 2000
+            },
+            "cargo": {
+              "Wood": 9600,
+              "Steam Cores": 16
+            },
+            "description": "Sustain salvage anchorage. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 8,
+            "failure": 6,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 8,
+            "title": "Salvage Anchorage - Route 4",
+            "cost": {
+              "Steel": 8000,
+              "Food Rations": 5000
+            },
+            "cargo": {
+              "Wood": 24000,
+              "Steam Cores": 40
+            },
+            "description": "Sustain salvage anchorage. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 10,
+            "failure": 9,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 9,
+            "title": "Salvage Anchorage - Route 4",
+            "cost": {
+              "Steel": 8000,
+              "Food Rations": 5000
+            },
+            "cargo": {
+              "Wood": 24000,
+              "Steam Cores": 40
+            },
+            "description": "Sustain salvage anchorage. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 10,
+            "failure": 8,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 10,
+            "title": "Salvage Anchorage - Route 5",
+            "cost": {
+              "Steel": 20000,
+              "Food Rations": 12500
+            },
+            "cargo": {
+              "Wood": 60000,
+              "Steam Cores": 100
+            },
+            "description": "Sustain salvage anchorage. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 11,
+            "failure": 11,
+            "deadline": 8,
+            "cooldown": 7
+          },
+          {
+            "state": 11,
+            "title": "Salvage Anchorage - Route 5",
+            "cost": {
+              "Steel": 20000,
+              "Food Rations": 12500
+            },
+            "cargo": {
+              "Wood": 60000,
+              "Steam Cores": 100
+            },
+            "description": "Sustain salvage anchorage. Dispatch supplies for a return shipment one day later. Completed route infrastructure survives a missed delivery.",
+            "next": 10,
+            "failure": 10,
+            "deadline": 8,
+            "cooldown": 7
+          }
+        ]
+      },
+      {
+        "id": "Contracts",
+        "start": 3,
+        "initial": 10,
+        "stages": [
+          {
+            "state": 10,
+            "title": "Industrial Reserve - Grade 1",
+            "cost": {
+              "Coal": 3000,
+              "Steel": 700,
+              "Steam Cores": 2
+            },
+            "cargo": {
+              "Wood": 900,
+              "Food Rations": 450
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 21,
+            "failure": 11,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 11,
+            "title": "Emergency Provisioning - Grade 1",
+            "cost": {
+              "Food Rations": 1200,
+              "Wood": 600,
+              "Coal": 1200
+            },
+            "cargo": {
+              "Steel": 1000,
+              "Steam Cores": 4
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 22,
+            "failure": 12,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 12,
+            "title": "Engineering Expedition - Grade 1",
+            "cost": {
+              "Wood": 1000,
+              "Steel": 1000,
+              "Steam Cores": 4
+            },
+            "cargo": {
+              "Coal": 6000,
+              "Food Rations": 600
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 20,
+            "failure": 10,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 20,
+            "title": "Industrial Reserve - Grade 2",
+            "cost": {
+              "Coal": 9000,
+              "Steel": 2100,
+              "Steam Cores": 6
+            },
+            "cargo": {
+              "Wood": 2700,
+              "Food Rations": 1350
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 31,
+            "failure": 21,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 21,
+            "title": "Emergency Provisioning - Grade 2",
+            "cost": {
+              "Food Rations": 3600,
+              "Wood": 1800,
+              "Coal": 3600
+            },
+            "cargo": {
+              "Steel": 3000,
+              "Steam Cores": 12
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 32,
+            "failure": 22,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 22,
+            "title": "Engineering Expedition - Grade 2",
+            "cost": {
+              "Wood": 3000,
+              "Steel": 3000,
+              "Steam Cores": 12
+            },
+            "cargo": {
+              "Coal": 18000,
+              "Food Rations": 1800
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 30,
+            "failure": 20,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 30,
+            "title": "Industrial Reserve - Grade 3",
+            "cost": {
+              "Coal": 24000,
+              "Steel": 5600,
+              "Steam Cores": 16
+            },
+            "cargo": {
+              "Wood": 7200,
+              "Food Rations": 3600
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 41,
+            "failure": 31,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 31,
+            "title": "Emergency Provisioning - Grade 3",
+            "cost": {
+              "Food Rations": 9600,
+              "Wood": 4800,
+              "Coal": 9600
+            },
+            "cargo": {
+              "Steel": 8000,
+              "Steam Cores": 32
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 42,
+            "failure": 32,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 32,
+            "title": "Engineering Expedition - Grade 3",
+            "cost": {
+              "Wood": 8000,
+              "Steel": 8000,
+              "Steam Cores": 32
+            },
+            "cargo": {
+              "Coal": 48000,
+              "Food Rations": 4800
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 40,
+            "failure": 30,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 40,
+            "title": "Industrial Reserve - Grade 4",
+            "cost": {
+              "Coal": 60000,
+              "Steel": 14000,
+              "Steam Cores": 40
+            },
+            "cargo": {
+              "Wood": 18000,
+              "Food Rations": 9000
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 51,
+            "failure": 41,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 41,
+            "title": "Emergency Provisioning - Grade 4",
+            "cost": {
+              "Food Rations": 24000,
+              "Wood": 12000,
+              "Coal": 24000
+            },
+            "cargo": {
+              "Steel": 20000,
+              "Steam Cores": 80
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 52,
+            "failure": 42,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 42,
+            "title": "Engineering Expedition - Grade 4",
+            "cost": {
+              "Wood": 20000,
+              "Steel": 20000,
+              "Steam Cores": 80
+            },
+            "cargo": {
+              "Coal": 120000,
+              "Food Rations": 12000
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 50,
+            "failure": 40,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 50,
+            "title": "Industrial Reserve - Grade 5",
+            "cost": {
+              "Coal": 150000,
+              "Steel": 35000,
+              "Steam Cores": 100
+            },
+            "cargo": {
+              "Wood": 45000,
+              "Food Rations": 22500
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 61,
+            "failure": 51,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 51,
+            "title": "Emergency Provisioning - Grade 5",
+            "cost": {
+              "Food Rations": 60000,
+              "Wood": 30000,
+              "Coal": 60000
+            },
+            "cargo": {
+              "Steel": 50000,
+              "Steam Cores": 200
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 62,
+            "failure": 52,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 52,
+            "title": "Engineering Expedition - Grade 5",
+            "cost": {
+              "Wood": 50000,
+              "Steel": 50000,
+              "Steam Cores": 200
+            },
+            "cargo": {
+              "Coal": 300000,
+              "Food Rations": 30000
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 60,
+            "failure": 50,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 60,
+            "title": "Industrial Reserve - Grade 6",
+            "cost": {
+              "Coal": 300000,
+              "Steel": 70000,
+              "Steam Cores": 200
+            },
+            "cargo": {
+              "Wood": 90000,
+              "Food Rations": 45000
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 61,
+            "failure": 61,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 61,
+            "title": "Emergency Provisioning - Grade 6",
+            "cost": {
+              "Food Rations": 120000,
+              "Wood": 60000,
+              "Coal": 120000
+            },
+            "cargo": {
+              "Steel": 100000,
+              "Steam Cores": 400
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 62,
+            "failure": 62,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          },
+          {
+            "state": 62,
+            "title": "Engineering Expedition - Grade 6",
+            "cost": {
+              "Wood": 100000,
+              "Steel": 100000,
+              "Steam Cores": 400
+            },
+            "cargo": {
+              "Coal": 600000,
+              "Food Rations": 60000
+            },
+            "description": "An optional industrial contract. Accept for a three-day deadline, or pass without penalty. Payment earns the listed return shipment and a harder commission.",
+            "next": 60,
+            "failure": 60,
+            "deadline": 3,
+            "cooldown": 7,
+            "optional": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "id": "Reconstruction/storage",
+        "title": "Frostland Storehouses",
+        "description": "Build a regional reserve network. Both Resource Depot sizes gain 100% capacity for every stored resource.",
+        "modifier": "98153b03f4db415faf394d602173a416"
+      },
+      {
+        "id": "Reconstruction/research",
+        "title": "Engineers Exchange",
+        "description": "Found a technical exchange. Workshops gain 75% workplace efficiency.",
+        "modifier": "bc1dceca610cad5eb59eaac2bc2e1322"
+      },
+      {
+        "id": "Reconstruction/medical",
+        "title": "Refuge Clinics",
+        "description": "Equip the relief clinics. Medical Posts, Infirmaries and Houses of Healing gain 100% workplace efficiency.",
+        "modifier": "89e2736854fa80568f0ac5bddd007cec"
+      },
+      {
+        "id": "Reconstruction/industry",
+        "title": "The Great Foundry",
+        "description": "Connect the city to a new foundry complex. Steelworks and Factories gain 75% workplace efficiency.",
+        "modifier": "0d6e216ce9fac153ba427a245b3f7f88"
+      },
+      {
+        "id": "Reconstruction/warmth",
+        "title": "Sheltered Roads",
+        "description": "Enclose the reconstruction supply roads. Every building with insulation gains one insulation level.",
+        "modifier": "e24b5fbb5744eb52add8529b8639e933"
+      },
+      {
+        "id": "Reconstruction/food",
+        "title": "Seed Conservatory",
+        "description": "Found a seed reserve. Hothouses, Industrial Hothouses and Cookhouses gain 75% workplace efficiency.",
+        "modifier": "b87476973f78585eb694a37224db773a"
+      },
+      {
+        "id": "Reconstruction/storage2",
+        "title": "Continental Reserve",
+        "description": "Open deep supply vaults. Both Resource Depot sizes gain a further 100% capacity.",
+        "modifier": "f2286e497cda73519eacfe87fe412f01"
+      },
+      {
+        "id": "Reconstruction/extraction",
+        "title": "Relay Citadels",
+        "description": "Equip permanent relay settlements. Coal mines, sawmills and wall drills gain 75% workplace efficiency.",
+        "modifier": "f320a58ca011855f90a3f1df70da223e"
+      },
+      {
+        "id": "Reconstruction/health",
+        "title": "Polar Sanctuary",
+        "description": "Complete an inhabited refuge beyond the city. Cold-related illness is reduced by 25%.",
+        "modifier": "751d0fcd5e680259a24ba6c74856272a"
+      },
+      {
+        "id": "Reconstruction/radius",
+        "title": "The Northern Railway",
+        "description": "Lay the final railway across the Frostland. All heat zones gain 25% radius.",
+        "modifier": "9ca1a4c03a71d057a0b2a3d12faa1eba"
+      },
+      {
+        "id": "Reconstruction/all",
+        "title": "A World Rebuilt",
+        "description": "Complete the reconstruction programme. All workplaces gain 75% efficiency. Relief routes and contracts continue indefinitely.",
+        "modifier": "9b46c193f990be598c616384d0b9419c"
+      }
+    ],
+    "events": 121,
+    "dilemmas": 80,
+    "quests": 60,
+    "poll_days": 0.25,
+    "description": "Twelve permanent megaprojects, three recurring relief routes, optional industrial contracts."
+  },
   "modifier_tooltips": {
     "records": [
       {
@@ -22097,6 +23233,17 @@
           "StarterGeneratorGrates"
         ],
         "effects_before_sha256": "094594ad64a9472d1a6c098eb2207b2798181b0937601dd7471ff0594535dd3e"
+      },
+      {
+        "guid": "0d6e216ce9fac153ba427a245b3f7f88",
+        "title": "The Great Foundry",
+        "description": "Connect the city to a new foundry complex. Steelworks and Factories gain 75% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/0d6e216ce9fac153ba427a245b3f7f88/Name",
+        "description_key": "Mods/NewIndustry/Modifier/0d6e216ce9fac153ba427a245b3f7f88/Description",
+        "source_ids": [
+          "Reconstruction/industry"
+        ],
+        "effects_before_sha256": "09490fc872efdd0744e2b0d50e82619d8815b9ecbedace66a563a0c8c06b6868"
       },
       {
         "guid": "0e85484b30010650b722c2491874ef2d",
@@ -22668,6 +23815,17 @@
         "effects_before_sha256": "07d37bd252fe9fa74b8e6dc2a9e1516088bcb59963f3afdf5ca209b2ff336774"
       },
       {
+        "guid": "398c1c06510c205dab22d2bb36714531",
+        "title": "Seed Conservatory",
+        "description": "Found a seed reserve. Hothouses, Industrial Hothouses and Cookhouses gain 75% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/398c1c06510c205dab22d2bb36714531/Name",
+        "description_key": "Mods/NewIndustry/Modifier/398c1c06510c205dab22d2bb36714531/Description",
+        "source_ids": [
+          "Reconstruction/food"
+        ],
+        "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
+      },
+      {
         "guid": "3b570d195add5b5792f972e062407ecf",
         "title": "Trade Guild Charter",
         "description": "Hope/Motivation improves. Human crews gain 75% workplace efficiency at extraction, Workshops, Kilns, fabrication, Docks and Reloading Stations.",
@@ -22866,6 +24024,17 @@
           "CitywideLagging3"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "484b90c683413957982d328d734676a8",
+        "title": "The Great Foundry",
+        "description": "Connect the city to a new foundry complex. Steelworks and Factories gain 75% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/484b90c683413957982d328d734676a8/Name",
+        "description_key": "Mods/NewIndustry/Modifier/484b90c683413957982d328d734676a8/Description",
+        "source_ids": [
+          "Reconstruction/industry"
+        ],
+        "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
       },
       {
         "guid": "48557c19f1de1859a08d1e4c91141800",
@@ -23137,6 +24306,17 @@
         "effects_before_sha256": "6c681c669ddb983aa6c18bc3eff9370e717fbae520eabca7528b3df73d8fe16f"
       },
       {
+        "guid": "5a6f4caded738751b9b2452f2dd060ad",
+        "title": "Relay Citadels",
+        "description": "Equip permanent relay settlements. Coal mines, sawmills and wall drills gain 75% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/5a6f4caded738751b9b2452f2dd060ad/Name",
+        "description_key": "Mods/NewIndustry/Modifier/5a6f4caded738751b9b2452f2dd060ad/Description",
+        "source_ids": [
+          "Reconstruction/extraction"
+        ],
+        "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
+      },
+      {
         "guid": "5be1f6321d2fcf5cbdc9b63e9cdf63e5",
         "title": "Citywide Thermal Envelope II",
         "description": "All buildings that use insulation gain +1 insulation. Citizens also have a 25% lower chance of illness caused by cold, protecting travel between heated buildings.",
@@ -23190,6 +24370,17 @@
           "AutumnWinterLining"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "5cff627ec456db5abb02320e791605ca",
+        "title": "Refuge Clinics",
+        "description": "Equip the relief clinics. Medical Posts, Infirmaries and Houses of Healing gain 100% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/5cff627ec456db5abb02320e791605ca/Name",
+        "description_key": "Mods/NewIndustry/Modifier/5cff627ec456db5abb02320e791605ca/Description",
+        "source_ids": [
+          "Reconstruction/medical"
+        ],
+        "effects_before_sha256": "07d37bd252fe9fa74b8e6dc2a9e1516088bcb59963f3afdf5ca209b2ff336774"
       },
       {
         "guid": "5d13339dc12a44518299b8e720773ddb",
@@ -23463,6 +24654,17 @@
         "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
       },
       {
+        "guid": "6a4bd75abb0f7e529d4b7d6aac1967ae",
+        "title": "A World Rebuilt",
+        "description": "Complete the reconstruction programme. All workplaces gain 75% efficiency. Relief routes and contracts continue indefinitely.",
+        "name_key": "Mods/NewIndustry/Modifier/6a4bd75abb0f7e529d4b7d6aac1967ae/Name",
+        "description_key": "Mods/NewIndustry/Modifier/6a4bd75abb0f7e529d4b7d6aac1967ae/Description",
+        "source_ids": [
+          "Reconstruction/all"
+        ],
+        "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
+      },
+      {
         "guid": "6b6d8f6d124a3851a1f4296abd740c19",
         "title": "Industrial Safety Dispensaries",
         "description": "Profiles Manufactures, Machine Shops, Foundries and Reloading Stations gain +1 safety. Medical Posts and Infirmaries gain 100% healing efficiency. Combines accident-risk management with stronger treatment capacity; it does not prevent every accident.",
@@ -23585,6 +24787,17 @@
         "source_ids": [
           "AutumnFieldDressings",
           "AutumnPreventiveMedicine"
+        ],
+        "effects_before_sha256": "4374006a617e8605bb417d69ef57d43e3586d7cebe40b9f2994bcad50a3dd1aa"
+      },
+      {
+        "guid": "751d0fcd5e680259a24ba6c74856272a",
+        "title": "Polar Sanctuary",
+        "description": "Complete an inhabited refuge beyond the city. Cold-related illness is reduced by 25%.",
+        "name_key": "Mods/NewIndustry/Modifier/751d0fcd5e680259a24ba6c74856272a/Name",
+        "description_key": "Mods/NewIndustry/Modifier/751d0fcd5e680259a24ba6c74856272a/Description",
+        "source_ids": [
+          "Reconstruction/health"
         ],
         "effects_before_sha256": "4374006a617e8605bb417d69ef57d43e3586d7cebe40b9f2994bcad50a3dd1aa"
       },
@@ -23883,6 +25096,17 @@
         "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
       },
       {
+        "guid": "89e2736854fa80568f0ac5bddd007cec",
+        "title": "Refuge Clinics",
+        "description": "Equip the relief clinics. Medical Posts, Infirmaries and Houses of Healing gain 100% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/89e2736854fa80568f0ac5bddd007cec/Name",
+        "description_key": "Mods/NewIndustry/Modifier/89e2736854fa80568f0ac5bddd007cec/Description",
+        "source_ids": [
+          "Reconstruction/medical"
+        ],
+        "effects_before_sha256": "77c2638e53fabe520c611d367ab3c27ede282d75192d192328cf4ea0cf5c690e"
+      },
+      {
         "guid": "8ad57de15eae5e5ab276c1cbda081941",
         "title": "Winter Housing Code",
         "description": "Discontent falls moderately. Tents, Bunkhouses and Houses gain +1 insulation.",
@@ -24094,6 +25318,17 @@
         "effects_before_sha256": "b425fd19d777dcb4ad15a4052a86a3984b3c712f3d5831cf87ccef7144c79a06"
       },
       {
+        "guid": "98153b03f4db415faf394d602173a416",
+        "title": "Frostland Storehouses",
+        "description": "Build a regional reserve network. Both Resource Depot sizes gain 100% capacity for every stored resource.",
+        "name_key": "Mods/NewIndustry/Modifier/98153b03f4db415faf394d602173a416/Name",
+        "description_key": "Mods/NewIndustry/Modifier/98153b03f4db415faf394d602173a416/Description",
+        "source_ids": [
+          "Reconstruction/storage"
+        ],
+        "effects_before_sha256": "71c9a34480dd1a3af9c91383b51ceaa5cf961396abd30c47a312f2c82c6c63b2"
+      },
+      {
         "guid": "98875d55fe0ca2598457bc93399c1433",
         "title": "Modular Factory Lines",
         "description": "Factories gain a 75% workplace efficiency bonus.",
@@ -24139,6 +25374,17 @@
         "effects_before_sha256": "07d37bd252fe9fa74b8e6dc2a9e1516088bcb59963f3afdf5ca209b2ff336774"
       },
       {
+        "guid": "9b46c193f990be598c616384d0b9419c",
+        "title": "A World Rebuilt",
+        "description": "Complete the reconstruction programme. All workplaces gain 75% efficiency. Relief routes and contracts continue indefinitely.",
+        "name_key": "Mods/NewIndustry/Modifier/9b46c193f990be598c616384d0b9419c/Name",
+        "description_key": "Mods/NewIndustry/Modifier/9b46c193f990be598c616384d0b9419c/Description",
+        "source_ids": [
+          "Reconstruction/all"
+        ],
+        "effects_before_sha256": "34deffadd8096ce3719aac48a5db87cb633f58453872e428588deb8e88712a49"
+      },
+      {
         "guid": "9bdad2e9371c5150adabc375d7dc62a3",
         "title": "Housing Insulation",
         "description": "Researched stages of Housing Insulation provide +1 insulation at this building.",
@@ -24148,6 +25394,17 @@
           "HouseInsulatedFloors"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "9ca1a4c03a71d057a0b2a3d12faa1eba",
+        "title": "The Northern Railway",
+        "description": "Lay the final railway across the Frostland. All heat zones gain 25% radius.",
+        "name_key": "Mods/NewIndustry/Modifier/9ca1a4c03a71d057a0b2a3d12faa1eba/Name",
+        "description_key": "Mods/NewIndustry/Modifier/9ca1a4c03a71d057a0b2a3d12faa1eba/Description",
+        "source_ids": [
+          "Reconstruction/radius"
+        ],
+        "effects_before_sha256": "182b17fe9fd3aed94c2d2b0914e5e60bfee46f06688212c50f4e8d07a0ef64aa"
       },
       {
         "guid": "9d3480c26e2771589e034bd1e02364b0",
@@ -24338,6 +25595,17 @@
           "MasteryClinicRotas"
         ],
         "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
+      },
+      {
+        "guid": "aa95b9796f62af58aef8f5ff5eb3d50e",
+        "title": "Continental Reserve",
+        "description": "Open deep supply vaults. Both Resource Depot sizes gain a further 100% capacity.",
+        "name_key": "Mods/NewIndustry/Modifier/aa95b9796f62af58aef8f5ff5eb3d50e/Name",
+        "description_key": "Mods/NewIndustry/Modifier/aa95b9796f62af58aef8f5ff5eb3d50e/Description",
+        "source_ids": [
+          "Reconstruction/storage2"
+        ],
+        "effects_before_sha256": "a3602c782f78ca251c200e6b56bdfa21c6f710eec2ec86ae86c8b91b30fc3b61"
       },
       {
         "guid": "aa99640a2a1dfb5cb3e1f7face5aabb8",
@@ -24595,6 +25863,28 @@
           "AutumnDefaultLawTradeGuild"
         ],
         "effects_before_sha256": "fbcd92e5dfed35242f012ba2266c3de1c4d618aabdfcb8acc0ad4dd0d395c2b5"
+      },
+      {
+        "guid": "b87476973f78585eb694a37224db773a",
+        "title": "Seed Conservatory",
+        "description": "Found a seed reserve. Hothouses, Industrial Hothouses and Cookhouses gain 75% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/b87476973f78585eb694a37224db773a/Name",
+        "description_key": "Mods/NewIndustry/Modifier/b87476973f78585eb694a37224db773a/Description",
+        "source_ids": [
+          "Reconstruction/food"
+        ],
+        "effects_before_sha256": "6b9cf8a9e9e1a592022108652801febcec8145962ec6442d00e093abbcd958b4"
+      },
+      {
+        "guid": "bc1dceca610cad5eb59eaac2bc2e1322",
+        "title": "Engineers Exchange",
+        "description": "Found a technical exchange. Workshops gain 75% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/bc1dceca610cad5eb59eaac2bc2e1322/Name",
+        "description_key": "Mods/NewIndustry/Modifier/bc1dceca610cad5eb59eaac2bc2e1322/Description",
+        "source_ids": [
+          "Reconstruction/research"
+        ],
+        "effects_before_sha256": "1f11555a0387e3f313d3e737042bd47ebcc5131c4c6e545c0188f79ab5e4e059"
       },
       {
         "guid": "bcc49272375b7451bbdfa59f007de3c1",
@@ -24999,6 +26289,17 @@
         "effects_before_sha256": "a8c630e9c023e66b54e0e4e38b5703a5f552a29a0d52e7e8f2a44248e13e6874"
       },
       {
+        "guid": "daf01078a82b2f5e92b999bff50669c3",
+        "title": "Sheltered Roads",
+        "description": "Enclose the reconstruction supply roads. Every building with insulation gains one insulation level.",
+        "name_key": "Mods/NewIndustry/Modifier/daf01078a82b2f5e92b999bff50669c3/Name",
+        "description_key": "Mods/NewIndustry/Modifier/daf01078a82b2f5e92b999bff50669c3/Description",
+        "source_ids": [
+          "Reconstruction/warmth"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
         "guid": "dca2005f5ee4ab5c830d68f6a5116889",
         "title": "Thermal Vestibules",
         "description": "Bunkhouses and Houses gain another heat level from sealed entrance chambers.",
@@ -25008,6 +26309,17 @@
           "ThermalVestibules"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "dd3e235098ea5a56adb2187d4c18d950",
+        "title": "Frostland Storehouses",
+        "description": "Build a regional reserve network. Both Resource Depot sizes gain 100% capacity for every stored resource.",
+        "name_key": "Mods/NewIndustry/Modifier/dd3e235098ea5a56adb2187d4c18d950/Name",
+        "description_key": "Mods/NewIndustry/Modifier/dd3e235098ea5a56adb2187d4c18d950/Description",
+        "source_ids": [
+          "Reconstruction/storage"
+        ],
+        "effects_before_sha256": "a3602c782f78ca251c200e6b56bdfa21c6f710eec2ec86ae86c8b91b30fc3b61"
       },
       {
         "guid": "ddb32ae7c83a815abb1cf547e2d849b2",
@@ -25052,6 +26364,17 @@
           "AutumnRedeploymentKits"
         ],
         "effects_before_sha256": "b4c634e122e35aa279a4b76fdefcc2930efa638e906b784cb82fd77d0f38f957"
+      },
+      {
+        "guid": "e24b5fbb5744eb52add8529b8639e933",
+        "title": "Sheltered Roads",
+        "description": "Enclose the reconstruction supply roads. Every building with insulation gains one insulation level.",
+        "name_key": "Mods/NewIndustry/Modifier/e24b5fbb5744eb52add8529b8639e933/Name",
+        "description_key": "Mods/NewIndustry/Modifier/e24b5fbb5744eb52add8529b8639e933/Description",
+        "source_ids": [
+          "Reconstruction/warmth"
+        ],
+        "effects_before_sha256": "f47ca8d5f9f12293e641cbccf3cf32a47d934c468ca6f3e6876fb67ded23822a"
       },
       {
         "guid": "e25f99701959d858be8d99dcf139ce31",
@@ -25324,6 +26647,17 @@
         "effects_before_sha256": "3ba564cdec09e8508c992024d32dd137b5a8e1222f373c2abbce7fd44730410b"
       },
       {
+        "guid": "f2286e497cda73519eacfe87fe412f01",
+        "title": "Continental Reserve",
+        "description": "Open deep supply vaults. Both Resource Depot sizes gain a further 100% capacity.",
+        "name_key": "Mods/NewIndustry/Modifier/f2286e497cda73519eacfe87fe412f01/Name",
+        "description_key": "Mods/NewIndustry/Modifier/f2286e497cda73519eacfe87fe412f01/Description",
+        "source_ids": [
+          "Reconstruction/storage2"
+        ],
+        "effects_before_sha256": "09c5b2b57629ee91f92325abac044d19a3d6ced6fdb2a3f2ab3201951c2425c2"
+      },
+      {
         "guid": "f23b582925d7bd549ff15cb3f61ca32d",
         "title": "Citywide Thermal Envelope",
         "description": "Researched stages of Citywide Thermal Envelope provide +7 insulation at this building.",
@@ -25344,6 +26678,17 @@
           "AutumnDefaultLawHousingCode"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "f320a58ca011855f90a3f1df70da223e",
+        "title": "Relay Citadels",
+        "description": "Equip permanent relay settlements. Coal mines, sawmills and wall drills gain 75% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/f320a58ca011855f90a3f1df70da223e/Name",
+        "description_key": "Mods/NewIndustry/Modifier/f320a58ca011855f90a3f1df70da223e/Description",
+        "source_ids": [
+          "Reconstruction/extraction"
+        ],
+        "effects_before_sha256": "92238b2bccd54aa7ddc55d2e87447182626bb0ee1739489ca0de3193b62bda2f"
       },
       {
         "guid": "f391871d1efd9357b4937a24471b37b7",
@@ -25500,6 +26845,17 @@
           "AutumnEmergencyWards"
         ],
         "effects_before_sha256": "62316487d71d96444f7cdb263f435ba9a31b0581c8fcc96f5d5451c829b8abce"
+      },
+      {
+        "guid": "faa390dc79260f54b9f36f8d927ef159",
+        "title": "Engineers Exchange",
+        "description": "Found a technical exchange. Workshops gain 75% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/faa390dc79260f54b9f36f8d927ef159/Name",
+        "description_key": "Mods/NewIndustry/Modifier/faa390dc79260f54b9f36f8d927ef159/Description",
+        "source_ids": [
+          "Reconstruction/research"
+        ],
+        "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
       },
       {
         "guid": "fac4476aebd3c055a4cafa3eed8266da",

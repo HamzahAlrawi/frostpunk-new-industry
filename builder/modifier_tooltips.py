@@ -23,7 +23,7 @@ CHAINS = (
 )
 
 
-def improve_tooltips(data,original,specs,laws,membership,localize):
+def improve_tooltips(data,original,specs,laws,membership,localize,extra_sources=()):
     records=modifiers(data);native=modifiers(original)
     custom={g for g in records if g not in native}
     before={g:hashlib.sha256(normalized(records[g][2])).hexdigest() for g in custom}
@@ -50,6 +50,7 @@ def improve_tooltips(data,original,specs,laws,membership,localize):
         for g in tech['global_effects']+[g for k in ('effects','extra_effects') for _,g in tech[k]]:
             own(g,tech,0 if tech['guid'] in active else 2)
     for law in laws:own(law['modifier'],law,1)
+    for source in extra_sources:own(source['modifier'],source,1)
     # Retired clones can be unreferenced by the final effect vectors. Their
     # registration name still identifies the original authored research.
     for g in custom-owners.keys():

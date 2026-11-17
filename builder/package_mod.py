@@ -51,6 +51,7 @@ def main():
                                            "removed_team_perks", "redesigned_technologies", "research_tabs", "playstyle_research",
                                            "perk_research_duration_multiplier")}
     catalog['laws'] = source['laws']
+    catalog['endless'] = source['endless']
     catalog['modifier_tooltips'] = source['modifier_tooltips']
     catalog['native_law_book_order'] = source['native_law_book_order']
     catalog['legacy_civic_book'] = source['legacy_civic_book']
