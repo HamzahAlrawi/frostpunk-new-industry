@@ -11,7 +11,7 @@ COLD = ('TechHaven','Winterhome','Default','Default_Endless_Builders','Default_E
 GENERATOR = tuple(name for name in COLD if name != 'Reconquest')
 GROWING = GENERATOR
 AUTUMN = ('Builders',)
-VERSION = '3.19.0'
+VERSION = '3.20.0'
 
 
 def add_choices(technology, specs, techinfo, data, buildings, blueprints, resources,
@@ -134,11 +134,11 @@ def add_choices(technology, specs, techinfo, data, buildings, blueprints, resour
         recipe(key,'Slow-Simmered Broth','Canteen_FoodRations_standard','Cookhouse',
                ['resourceprocessing/foodprocessing'],'Food Rations',8,{'Raw Food':2,'Coal':6},0.5,research)
 
-    stress,_,_=from_technology('BoilerBufferDrums','H 6_Generator Upgrade - less stress',[(0.75,0.5),(1.25,1)])
-    _,_,fuel=from_technology('BoilerBufferDrums','H 3_Generator Upgrade - less coal',[(0.9,1.2)])
+    stress,_,_=from_technology('BoilerBufferDrums','H 6_Generator Upgrade - less stress',[(0.75,0.9),(1.25,1)])
+    _,_,fuel=from_technology('BoilerBufferDrums','H 3_Generator Upgrade - less coal',[(0.9,1)])
     add('BoilerBufferDrums','Pressure-Buffer Boiler Drums',
-        'Generator stress builds 50% more slowly. Trade-off: the Generator burns 20% more coal at every power and range setting, including when overdrive is off. Optional permanent specialisation for longer overdrive use.',
-        0,24,10,5,[],GENERATOR,0,globals_=stress,extras=fuel,icon=(1,6),mechanic='overdrive-fuel-trade')
+        'Generator stress builds 10% more slowly.',
+        0,24,10,5,[],GENERATOR,0,globals_=stress,extras=fuel,icon=(1,6),mechanic='overdrive-pressure-buffer')
 
     for key,scenarios,parent in [('LimbSparingSurgery',COLD,'ConservativeSurgery'),
                                  ('AutumnLimbSparingSurgery',AUTUMN,'AutumnConservativeSurgery')]:
@@ -193,30 +193,32 @@ def add_choices(technology, specs, techinfo, data, buildings, blueprints, resour
             ('IndustrialArtificialSpring','SteamPlantation_Food','resourceextraction/foodplantation_steam','Industrial Hothouse',180)]:
         recipe(key,'Artificial Spring Cultivation',source,building,[path],'Raw Food',amount,{'Steam Cores':1,'Coal':24},6,research)
 
-    for key,scenarios,tier,factor in [('DistributedCaches',COLD,4,4),('AutumnDistributedCaches',AUTUMN,1,3)]:
+    for key,scenarios,tier,factor in [('DistributedCaches',COLD,4,2),('AutumnDistributedCaches',AUTUMN,1,2)]:
         add(key,'Neighbourhood Cache Networks',
             f'Small Resource Depots gain {int((factor-1)*100)}% capacity for coal, wood, steel, raw food and food rations. Large Resource Depots are unaffected. Gives compact, distributed depots a distinct role instead of forcing every stockyard to use large warehouses.',
             tier,85 if tier==4 else 28,55 if tier==4 else 12,13 if tier==4 else 6,[],scenarios,3,
             sites=reserve(key,'Resource Depot',{n:factor for n in ('Coal','Wood','Steel','Raw Food','Food Rations')}),
             icon=(3,6),mechanic='small-depot-specialisation')
     add('PolarProvisionVaults','Polar Provision Vaults',
-        'Large Resource Depots gain 500% capacity for raw food and food rations, and 300% capacity for coal. Other resources and small depots are unaffected. Specialise large warehouses as food and heating reserves for prolonged supply interruptions.',
-        5,150,120,20,['ModularWarehouses'],COLD,3,
-        sites=reserve('PolarProvisionVaults','Resource Depot Big',{'Raw Food':6,'Food Rations':6,'Coal':4}),
+        'Large Resource Depots gain 150% capacity for raw food and food rations, and 100% capacity for coal. Specialise large warehouses as food and heating reserves for supply interruptions.',
+        5,120,95,16,['ModularWarehouses'],COLD,3,
+        sites=reserve('PolarProvisionVaults','Resource Depot Big',{'Raw Food':2.5,'Food Rations':2.5,'Coal':2}),
         icon=(3,6),mechanic='large-depot-storm-reserves')
 
     industrial=['GatheringPost','Sawmill','SteamSawmill','WallDrill','WallDrillSteam','WallDrillAdvanced',
                 'Coal Mine','SteamCoalMine','AdvancedCoalMine','Iron Ore Mine','SteamIronOreMine','AdvancedOreMine',
-                'CoalThumper','CoalThumperSteam','CharcoalKiln','Factory','Engineers Lab']
+                'CoalThumper','CoalThumperSteam','CharcoalKiln','Factory']
     # Reuse the established Army Warehouse binding instead of guessing its name.
     warehouse=existing['EdgeWarehouseSorting']['effects'][0][0]
     for key,title,tier,human,robot,heat,parents in [
-            ('WinterArtisanGuilds','Winter Artisan Guilds',4,2.5,1,2,['WorkshopBench']),
-            ('AutonomousMaintenance','Autonomous Maintenance Network',5,1,2.5,0,['ClockworkSynchronisers','Cores2'])]:
-        description=('Human crews gain 150% workplace efficiency at Gathering Posts, resource-extraction buildings, Kilns, Factories and Workshops, plus the Army Warehouse where present. Those workplaces also gain +2 insulation. Automaton efficiency is unchanged; supports a sheltered, human-staffed industrial city.' if human>1 else
-                     'Automatons gain 150% workplace efficiency at Gathering Posts, resource-extraction buildings, Kilns, Factories and Workshops, plus the Army Warehouse where present. Human efficiency is unchanged. Normal automaton workplace permissions still apply; supports a city supplied by round-the-clock machine labour.')
+            ('WinterArtisanGuilds','Winter Artisan Guilds',4,1.5,1,2,['WorkshopBench']),
+            ('AutonomousMaintenance','Autonomous Maintenance Network',5,1,1.6,0,['ClockworkSynchronisers','Cores2'])]:
+        description=('Human crews gain 50% workplace efficiency at Gathering Posts, resource-extraction buildings, Kilns, Factories and the Army Warehouse where present. Those workplaces and Workshops gain +2 insulation.' if human>1 else
+                     'Automatons gain 60% workplace efficiency at Gathering Posts, resource-extraction buildings, Kilns, Factories and the Army Warehouse where present. Normal automaton workplace permissions apply.')
         pairs=place(key,industrial,[(84,'f',human),(88,'f',robot),(96,'i',heat)])
         pairs.append((warehouse,pairs[0][1]))
+        if heat:
+            pairs.extend(place(key,['Engineers Lab'],[(96,'i',heat)],'workshop-insulation'))
         add(key,title,description,tier,130 if tier==4 else 170,95 if tier==4 else 140,18 if tier==4 else 24,parents,GENERATOR if robot>1 else COLD,0,
             sites=pairs,icon=(2,5) if robot>1 else (8,0),mechanic='automaton-specialisation' if robot>1 else 'human-industry-specialisation')
 
@@ -245,9 +247,9 @@ def add_choices(technology, specs, techinfo, data, buildings, blueprints, resour
                  '[Builders]Dock_LVL1','[Builders]Dock_LVL2','[Builders]Dock_LVL3',
                  '[Builders]ReloadingPostUniversal','[Builders]ReloadingPostUniversal2','[Builders]ReloadingPostUniversal3']
     add('AutumnArtisanGuilds','Port Craft Apprenticeships',
-        'Human crews gain 150% workplace efficiency at Profiles Manufactures, Machine Shops, Foundries, Docks and Reloading Stations. These workplaces also gain +1 insulation, strengthening the whole delivery-to-assembly supply chain before the freeze.',
+        'Human crews gain 40% workplace efficiency at Profiles Manufactures, Machine Shops, Foundries, Docks and Reloading Stations. These workplaces also gain +1 insulation.',
         2,52,28,10,['AutumnFabricationShifts'],AUTUMN,1,
-        sites=place('AutumnArtisanGuilds',fabrication,[(84,'f',2.5),(96,'i',1)]),icon=(10,2),mechanic='port-supply-chain-specialisation')
+        sites=place('AutumnArtisanGuilds',fabrication,[(84,'f',1.4),(96,'i',1)]),icon=(10,2),mechanic='port-supply-chain-specialisation')
     assert len(additions)==22
     from resilience_expansion import add_resilience
     add_resilience(add=add,place=place,reserve=reserve,recipe=recipe,supersede=supersede,

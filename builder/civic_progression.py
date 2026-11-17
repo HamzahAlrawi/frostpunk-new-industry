@@ -145,14 +145,14 @@ def add_civic(technology, specs, techinfo, data, buildings, guid, localize, cate
         g = register(key + '/insulation', 'Place', site)
         global_body = bytearray(neutral)
         if number == 4:
-            struct.pack_into('<f', global_body, 166, 0.65)
-            extra = 'Citizens also suffer 35% less cold-related illness.'
+            struct.pack_into('<f', global_body, 166, 0.85)
+            extra = 'Citizens also have a 15% lower chance of illness caused by cold.'
         elif number == 5:
-            struct.pack_into('<f', global_body, 69, 1.5)
-            extra = 'All heat zones also gain 50% radius.'
+            struct.pack_into('<f', global_body, 69, 1.15)
+            extra = 'All heat zones also gain 15% radius.'
         else:
-            struct.pack_into('<f', global_body, 166, 0.5)
-            extra = 'Citizens also suffer 50% less cold-related illness.'
+            struct.pack_into('<f', global_body, 166, 0.8)
+            extra = 'Citizens also have a 20% lower chance of illness caused by cold.'
         global_id = register(key + '/global', 'Global', global_body)
         pairs = [(p.hex(), g) for p in places.values()]
         rest = struct.pack('<II', 2, 1) + bytes.fromhex(global_id) + struct.pack('<I', len(pairs))

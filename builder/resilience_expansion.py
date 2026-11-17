@@ -34,10 +34,10 @@ def add_resilience(*,add,place,reserve,recipe,supersede,clone,effect,records,pla
 
     for key,modes in [('PreventiveMedicine',COLD),('AutumnPreventiveMedicine',AUTUMN)]:
         research(key,'Preventive Field Medicine',
-            'Citizens have a 25% lower chance of illness caused by cold. Medical Posts also gain 75% healing efficiency for human staff and automatons. Available before Drawing Boards, helping prevent and treat the opening wave of sickness.',
-            0,18,6,4,[],modes,2,
-            globals_=[global_effect(key,[(166,0.75)])],
-            sites=place(key,['Medical Post'],[(84,'f',1.75),(88,'f',1.75)]),icon=(4,9),mechanic='opening-prevention-and-treatment')
+            'Citizens have a 20% lower chance of illness caused by cold. Available before Drawing Boards, to reduce sickness before it reaches the wards.',
+            0,14,4,4,[],modes,2,
+            globals_=[global_effect(key,[(166,0.80)])],
+            sites=place(key,['Medical Post'],[]),icon=(4,9),mechanic='opening-cold-illness-prevention')
 
     key='ClosedLoopMetallurgy'
     unlock=research(key,'Closed-Loop Metallurgy',
@@ -77,11 +77,11 @@ def add_resilience(*,add,place,reserve,recipe,supersede,clone,effect,records,pla
         recipe(recipe_key,'Timber-Substrate Growing Beds',source,building,[path],'Raw Food',amount,{'Wood':wood,'Coal':coal},2,unlock)
 
     key='ReclamationStockyards'
-    sites=reserve(key,'Resource Depot Big',{'Wood':5,'Steel':5})
-    sites+=place(key,['Factory'],[(84,'f',2),(88,'f',2)],'factory')
+    sites=reserve(key,'Resource Depot Big',{'Wood':2.5,'Steel':2.5})
+    sites+=place(key,['Factory'],[(84,'f',1.45),(88,'f',1.45)],'factory')
     research(key,'Reclamation Stockyards',
-        'Large Resource Depots gain 400% capacity for wood and steel. Factories gain 100% workplace efficiency for both work roles. Gives the core-and-steel reclamation industry room to store its inputs and output; small depots and food storage are unaffected.',
-        5,150,120,22,['ClosedLoopMetallurgy','ModularWarehouses'],COLD,0,sites=sites,icon=(3,6),mechanic='factory-and-bulk-material-districts')
+        'Large Resource Depots gain 150% capacity for wood and steel. Factories gain 45% workplace efficiency for both work roles, including core fabrication and salvage.',
+        5,120,95,18,['ClosedLoopMetallurgy','ModularWarehouses'],COLD,0,sites=sites,icon=(3,6),mechanic='factory-and-bulk-material-districts')
 
     for key,modes,tier,parents in [
             ('ProtectedHealthcareHeaters',COLD,4,['CondensateHeaters','FieldInfirmaries']),
@@ -115,29 +115,29 @@ def add_resilience(*,add,place,reserve,recipe,supersede,clone,effect,records,pla
         radius=global_effect(key,[(69,0.8)],'radius')
         globals_=[radius];sites=[];extras=[]
         if modes==GENERATOR:
-            g,s,e=clone(key,'H 3_Generator Upgrade - less coal',[(0.9,0.75)])
+            g,s,e=clone(key,'H 3_Generator Upgrade - less coal',[(0.9,0.95)])
             globals_+=g;sites+=s;extras+=e
-            g,s,e=clone(key,'H 5_Steamhub Upgrade - less coal',[(0.666667,0.6)])
+            g,s,e=clone(key,'H 5_Steamhub Upgrade - less coal',[(0.666667,0.85)])
             globals_+=g;sites+=s;extras+=e
-            text='The Generator uses 25% less coal and Steam Hubs use 40% less coal.'
+            text='The Generator burns 5% less coal and Steam Hubs burn 15% less coal.'
         else:
             target,source=existing['EdgeBrazierGrates']['effects'][0]
             kind,_,body=records[source];assert kind=='Place'
             p=body.index(resources['Coal'])+16
             assert body[p:p+8]==struct.pack('<2f',0,0.75)
-            body=body[:p]+struct.pack('<2f',0,0.6)+body[p+8:]
+            body=body[:p]+struct.pack('<2f',0,0.80)+body[p+8:]
             sites=[(target,effect(key,kind,body,'brazier'))]
-            text='Braziers use 40% less coal.'
+            text='Braziers burn 20% less coal.'
         research(key,'Compact Heating Grids',text+
-            ' Trade-off: all heat-zone radii shrink by 20%. Heater power is unaffected. Optional permanent specialisation for compact districts rather than wide heat coverage.',
-            tier,95 if tier==4 else 48,60 if tier==4 else 25,16 if tier==4 else 9,parents,modes,0,
+            ' All heat-zone radii shrink by 20%. This is a permanent sidegrade for dense districts, with no further research gated behind it.',
+            tier,60 if tier==4 else 48,35 if tier==4 else 25,12 if tier==4 else 9,parents,modes,0,
             globals_=globals_,sites=sites,extras=extras,icon=(1,6),mechanic='heat-coverage-for-fuel-trade')
 
     key='RecuperatingAccumulators'
-    globals_,_,_=clone(key,'H 6_Generator Upgrade - less stress',[(0.75,1),(1.25,2)])
-    _,_,extras=clone(key,'H 3_Generator Upgrade - less coal',[(0.9,0.85)])
+    globals_,_,_=clone(key,'H 6_Generator Upgrade - less stress',[(0.75,1),(1.25,1.25)])
+    _,_,extras=clone(key,'H 3_Generator Upgrade - less coal',[(0.9,1)])
     research(key,'Recuperating Accumulators',
-        'Generator stress recovers 100% faster and the Generator uses 15% less coal. Develops Pressure-Buffer Boiler Drums into a system for recovering between overdrive periods; the earlier research and other fuel modifiers remain active.',
+        'Generator stress recovers 25% faster.',
         4,110,75,18,['BoilerBufferDrums','MasteryOverdriveRecovery'],GENERATOR,3,
         globals_=globals_,extras=extras,icon=(1,6),mechanic='overdrive-recovery-and-fuel-reclamation')
 

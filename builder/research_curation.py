@@ -136,27 +136,40 @@ def curate(specs, data, guid, places, technology_info):
 
     modify("GatheringHeat3", [(96, "i", 2), (157, "f", 1.25)], title="Enclosed Collection Networks",
            description="Gathering Posts gain +2 insulation and 25% more collection radius. Reach scattered piles without opening another exposed post.")
-    modify("WorkshopSteam", [(96, "i", 2), (88, "f", 2)], title="Automated Design Chambers",
-           description="Workshops gain +2 insulation. Automatons working in Workshops gain an additional 100% workplace efficiency; human research efficiency is unchanged.")
-    modify("IndustrialHeat", [(96, "i", 2), (84, "f", 1.75), (88, "f", 1.75)], title="Hot Rolling Halls",
-           description="All grades of Steelworks gain +2 insulation and 75% workplace efficiency for human crews and automatons.")
-    modify("CoalMineHeat", [(96, "i", 2), (84, "f", 1.75), (88, "f", 1.75)], title="Pressurised Mine Cabins",
-           description="All grades of Coal Mine gain +2 insulation and 75% workplace efficiency for human crews and automatons.")
+    modify("WorkshopSteam", [(96, "i", 2), (88, "f", 1.35)], title="Automated Design Chambers",
+           description="Workshops gain +2 insulation. Automatons working in Workshops gain 35% workplace efficiency.")
+    modify("IndustrialHeat", [(96, "i", 2)], title="Hot Rolling Halls",
+           description="All grades of Steelworks gain +2 insulation.")
+    modify("CoalMineHeat", [(96, "i", 2)], title="Pressurised Mine Cabins",
+           description="All grades of Coal Mine gain +2 insulation.")
     modify("MedicalHeat4", [(96, "i", 2)], title="Sealed Healthcare Districts",
-           description="Buildings covered by Healthcare Insulation III gain +2 insulation. Medical Posts and Infirmaries also gain 100% healing efficiency.")
-    add_place("MedicalHeat4", "recovery", ["Medical Post", "Ambulatorium"], [(84, "f", 2), (88, "f", 2)])
-    modify("CookhouseHeat2", [(96, "i", 2), (84, "f", 1.75), (88, "f", 1.75)], title="Steam-Jacketed Kitchens",
-           description="Cookhouses gain +2 insulation and 75% workplace efficiency for human crews and automatons. This accelerates every available ration recipe.")
-    modify("HothouseHeat4", [(96, "i", 2), (84, "f", 1.75), (88, "f", 1.75)], title="Winter Conservatories",
-           description="Both Hothouse grades gain +2 insulation and 75% workplace efficiency for human crews and automatons, including alternate growing recipes.")
-    modify("MedicalEfficiency2", [(173, "f", 0.5)], title="Medical Post Triage",
-           description="Medical Posts gain 75% healing efficiency for human crews and automatons. Radical Treatment amputation risk is halved while that law is active.")
-    modify("WardProtocols", [(84, "f", 2), (88, "f", 2), (96, "i", 1)], title="Infirmary Recovery Suites",
-           description="Infirmaries gain 100% healing efficiency for human crews and automatons, plus +1 insulation. Faster recovery frees beds sooner.")
-    modify("SeedSelection2", [(84, "f", 2.25), (88, "f", 2.25)], title="High-Yield Seed Banks",
-           description="Both Hothouse grades gain 125% workplace efficiency for human crews and automatons. Applies to every growing recipe.")
-    modify("MasteryIrrigation", [(96, "i", 1)], title="Warm-Water Irrigation",
-           description="Both Hothouse grades gain 75% workplace efficiency for human crews and automatons and +1 insulation, supporting food production during cold snaps.")
+           description="Buildings covered by Healthcare Insulation III gain +2 insulation. Medical Posts and Infirmaries also gain 30% healing efficiency for both work roles.")
+    add_place("MedicalHeat4", "recovery", ["Medical Post", "Ambulatorium"], [(84, "f", 1.30), (88, "f", 1.30)])
+    modify("CookhouseHeat2", [(96, "i", 2), (84, "f", 1.35), (88, "f", 1.35)], title="Steam-Jacketed Kitchens",
+           description="Cookhouses gain +2 insulation and 35% workplace efficiency for both work roles on all ration recipes.")
+    modify("HothouseHeat4", [(96, "i", 2)], title="Winter Conservatories",
+           description="Both Hothouse grades gain +2 insulation.")
+    modify("MedicalEfficiency2", [(84, "f", 1.50), (88, "f", 1.50), (173, "f", 1)], title="Medical Post Triage",
+           description="Medical Posts gain 50% healing efficiency for both work roles.")
+    modify("WardProtocols", [(84, "f", 1.55), (88, "f", 1.55), (96, "i", 1)], title="Infirmary Recovery Suites",
+           description="Infirmaries gain 55% healing efficiency for both work roles and +1 insulation.")
+    modify("InfirmaryRounds", [(84, "f", 1), (88, "f", 1)],
+           description="Infirmary round scheduling is included in Infirmary Recovery Suites.")
+    modify("InfirmaryRecoveryWards", [(84, "f", 1.75), (88, "f", 1.75)],
+           description="Houses of Healing gain 75% healing efficiency.")
+    by_id["InfirmaryRecoveryWards"]["effects"] = [
+        (target, effect) for target, effect in by_id["InfirmaryRecoveryWards"]["effects"]
+        if target == places["HospitalOfMercy"].hex()
+    ]
+    assert by_id["InfirmaryRecoveryWards"]["effects"], "Missing House of Healing binding"
+    modify("CropRotation", [(84, "f", 1.45), (88, "f", 1.45)],
+           description="Both Hothouse grades gain 45% workplace efficiency for both work roles on every growing recipe.")
+    modify("SeedSelection2", [(84, "f", 1.65), (88, "f", 1.65)], title="High-Yield Seed Banks",
+           description="Both Hothouse grades gain 65% workplace efficiency for both work roles on every growing recipe.")
+    modify("MasteryIrrigation", [(84, "f", 1), (88, "f", 1), (96, "i", 1)], title="Warm-Water Irrigation",
+           description="Both Hothouse grades gain +1 insulation. Insulated feedwater pipes help keep the beds growing during cold snaps.")
+    modify("MasteryProvisionLines", [(84, "f", 1.25), (88, "f", 1.25)],
+           description="Hothouses and Cookhouses gain 25% workplace efficiency for both work roles on their production recipes.")
     modify("HuntingSleds", [(161, "i", 6)], title="Frostland Game Logistics",
            description="Hunters' Huts and Hunters' Hangars bring home 6 additional raw food per hunt at full staffing. The logistics upgrade follows hunters into either building grade.")
     add_place("HuntingSleds", "hangars", ["Flying Hunter's Hut"], [(161, "i", 6)])
@@ -172,51 +185,65 @@ def curate(specs, data, guid, places, technology_info):
             records[effect][2] = body.replace(needle, struct.pack("<f", after))
         by_id[key]["description"] = description
         changed.add(key)
-    replace_float("HubReturnLines", 0.85, 0.70, "Steam Hubs use 30% less coal, preserving heat coverage. A late-game improvement over basic pipe lagging.")
-    replace_float("GeneratorDraught", 0.80, 0.70, "The Generator uses 30% less coal at every power and range setting. Starter Generator Grates remain a separate earlier improvement.")
-    replace_float("MasterySteelFeeders", 1.30, 1.45, "All three Steelworks grades gain 45% more steel output through continuous feed handling.")
+    replace_float("StarterHubValves", 0.80, 0.90, "Steam Hubs burn 10% less coal.")
+    replace_float("MasteryHubDraught", 0.90, 0.94, "Steam Hubs burn 6% less coal. A quick, low-cost tune-up.")
+    replace_float("HubPipeLagging", 0.85, 0.88, "Steam Hubs burn 12% less coal.")
+    by_id["HubReturnLines"]["description"] = "Steam Hubs burn 15% less coal. No change to their heat output or radius."
+    replace_float("StarterGeneratorGrates", 0.80, 0.88, "The Generator burns 12% less coal.")
+    replace_float("GeneratorDraught", 0.80, 0.90, "The Generator burns 10% less coal at every power and range setting.")
+    replace_float("MasterySteelFeeders", 1.30, 1.25, "All Steelworks grades gain 25% more steel output through continuous feed handling.")
+    modify("StarterSteelTooling", [(149, "f", 1.40)],
+           description="All Steelworks grades produce 40% more steel.")
+    modify("SteelworksShiftTeams", [(84, "f", 1.45), (88, "f", 1.45)],
+           description="Human crews and automatons gain 45% workplace efficiency at all Steelworks grades.")
     replace_float("CoalCircuit", 1.25, 1.75, "Both Coal Thumper grades produce coal piles 75% faster. Gathering Posts gain 25% collection radius, easing the collection bottleneck around thumpers.")
     add_place("CoalCircuit", "collection", ["GatheringPost"], [(157, "f", 1.25)])
-    add_global("CitywideLagging2", 166, 0.75)
-    by_id["CitywideLagging2"]["description"] = "All buildings that use insulation gain +1 insulation. Citizens also have a 25% lower chance of illness caused by cold, protecting travel between heated buildings."
-    add_global("CitywideLagging3", 69, 1.25)
-    by_id["CitywideLagging3"]["description"] = "All buildings that use insulation gain +1 insulation. Every heat zone also gains 25% radius, extending Generator, Steam Hub and Brazier coverage where present."
+    add_global("CitywideLagging2", 166, 0.90)
+    by_id["CitywideLagging2"]["description"] = "All buildings that use insulation gain +1 insulation. Citizens also have a 10% lower chance of illness caused by cold."
+    add_global("CitywideLagging3", 69, 1.10)
+    by_id["CitywideLagging3"]["description"] = "All buildings that use insulation gain +1 insulation. Heat zones gain 10% radius."
     add_place("HouseInsulatedFloors", "bunkhouses", ["Bunkhouse"], [(96, "i", 1)])
     by_id["HouseInsulatedFloors"]["title"] = "District Underfloor Heating"
     by_id["HouseInsulatedFloors"]["description"] = "Houses and Bunkhouses gain +1 insulation. Keep older residential districts viable alongside fully upgraded Houses."
 
     for prefix in ("", "Autumn"):
-        modify(prefix + "WorkshopSpeed2", [(84, "f", 2), (88, "f", 2)],
-               description="Workshops gain 100% workplace efficiency for human researchers and automatons. Normal citywide Workshop research scaling still applies.")
-        modify(prefix + "WorkshopSpeed3", [(84, "f", 2.25), (88, "f", 2.25), (96, "i", 1)],
-               description="Workshops gain 125% workplace efficiency for human researchers and automatons, plus +1 insulation. Normal citywide Workshop research scaling still applies.")
-    modify("WorkshopBench", [(84, "f", 2.5), (88, "f", 2.5)], title="Collaborative Design Bureau",
-           description="Workshops gain 150% workplace efficiency for human researchers and automatons. Normal citywide Workshop research scaling still applies.")
+        modify(prefix + "WorkshopSpeed1", [(84, "f", 1.35), (88, "f", 1.35)],
+               description="Workshops gain 35% workplace efficiency for both work roles.")
+        modify(prefix + "WorkshopSpeed2", [(84, "f", 1.30), (88, "f", 1.30)],
+               description="Workshops gain 30% workplace efficiency for both work roles.")
+        modify(prefix + "WorkshopSpeed3", [(84, "f", 1.25), (88, "f", 1.25), (96, "i", 1)],
+               description="Workshops gain 25% workplace efficiency for both work roles and +1 insulation.")
+    modify("WorkshopBench", [(84, "f", 1.20), (88, "f", 1.20)], title="Collaborative Design Bureau",
+           description="Workshops gain 20% workplace efficiency for both work roles.")
 
-    modify("AutumnDockRosters", [(84, "f", 2), (88, "f", 2), (96, "i", 1)], title="All-Weather Dock Rosters",
-           description="All Dock grades gain 100% unloading efficiency and +1 insulation, improving throughput while preparing the port for the freeze.")
+    modify("AutumnDockRosters", [(84, "f", 1.40), (88, "f", 1.40), (96, "i", 1)], title="All-Weather Dock Rosters",
+           description="All Dock grades gain 40% unloading efficiency and +1 insulation.")
     add_place("AutumnPortClearing", "collection", ["GatheringPost"], [(157, "f", 1.25)])
     by_id["AutumnPortClearing"]["title"] = "Dockside Collection Routes"
     by_id["AutumnPortClearing"]["description"] = "All Dock grades gain 75% unloading efficiency. Gathering Posts gain 25% collection radius to collect dockside piles more easily before Reloading Stations are available."
-    modify("AutumnHeavyCargo", [(84, "f", 2), (88, "f", 2), (96, "i", 1)], title="Sheltered Cargo Gantries",
-           description="All Reloading Station grades gain 100% gathering efficiency and +1 insulation, combining heavy handling with cold protection.")
-    modify("AutumnCraneRigging", [(84, "f", 2.25), (88, "f", 2.25), (185, "i", 1)], title="Interlocked Crane Rigging",
-           description="All Reloading Station grades gain 125% gathering efficiency and +1 workplace safety. Faster machinery no longer needs to sacrifice safe handling.")
-    modify("AutumnSeasonalFishing", [(84, "f", 2), (88, "f", 2)], title="Seasonal Catch Planning",
-           description="Both Fishing Harbour grades gain 100% fishing efficiency, accelerating every available catch or ration recipe.")
+    modify("AutumnHeavyCargo", [(84, "f", 1.45), (88, "f", 1.45), (96, "i", 1)], title="Sheltered Cargo Gantries",
+           description="All Reloading Station grades gain 45% gathering efficiency and +1 insulation.")
+    modify("AutumnCraneRigging", [(84, "f", 1.60), (88, "f", 1.60), (185, "i", 1)], title="Interlocked Crane Rigging",
+           description="All Reloading Station grades gain 60% gathering efficiency and +1 workplace safety.")
+    modify("AutumnSeasonalFishing", [(84, "f", 1.25), (88, "f", 1.25)], title="Seasonal Catch Planning",
+           description="Both Fishing Harbour grades gain 25% fishing efficiency on every available recipe.")
+    modify("AutumnNetCrews", [(84, "f", 1), (88, "f", 1)],
+           description="The harbour crew bonus is included in Seasonal Catch Planning.")
     add_place("AutumnNetCrews", "kitchens", ["Food Processing"], [(84, "f", 1.75), (88, "f", 1.75)])
     by_id["AutumnNetCrews"]["title"] = "Harbour-to-Kitchen Crews"
-    by_id["AutumnNetCrews"]["description"] = "Fishing Harbours and Cookhouses gain 75% workplace efficiency. Processing capacity grows alongside the catch so raw food does not queue at the kitchens."
-    modify("AutumnColdwaterNets", [(84, "f", 2.25), (88, "f", 2.25), (96, "i", 1)], title="Coldwater Trawling Gear",
-           description="Both Fishing Harbour grades gain 125% fishing efficiency and +1 insulation. Applies to standard fishing and alternate harbour recipes.")
+    by_id["AutumnNetCrews"]["description"] = "Cookhouses gain 75% workplace efficiency to process the extra catch."
+    modify("AutumnColdwaterNets", [(84, "f", 1.60), (88, "f", 1.60), (96, "i", 1)], title="Coldwater Trawling Gear",
+           description="Both Fishing Harbour grades gain 60% fishing efficiency and +1 insulation on standard and alternate recipes.")
     modify("AutumnFabricationSafety", [(185, "i", 2), (96, "i", 1)], title="Protected Fabrication Halls",
            description="Profiles Manufactures, Machine Shops and Foundries gain +2 workplace safety and +1 insulation, making high-output component production safer and more weather resistant.")
-    modify("AutumnEmergencyWards", [(84, "f", 2.25), (88, "f", 2.25), (96, "i", 1)], title="Emergency Recovery Wards",
-           description="Medical Posts and Infirmaries gain 125% healing efficiency and +1 insulation, providing a distinct emergency-care improvement over routine medical rotas.")
-    modify("EdgeWarehouseWinches", [(84, "f", 2.25), (88, "f", 2.25), (96, "i", 1)], title="Enclosed Warehouse Winches",
-           description="The Army Warehouse gains 125% workplace efficiency and +1 insulation. Applies to its steel, Steam Core, and salvage recipes.")
-    modify("EdgeCoalCrews", [(84, "f", 2), (88, "f", 2), (96, "i", 1)], title="Heated Coal-Mine Crews",
-           description="All Coal Mine grades gain 100% workplace efficiency for human crews and automatons, plus +1 insulation.")
+    modify("AutumnMedicalRotas", [(84, "f", 1.30), (88, "f", 1.30)],
+           description="Medical Posts and Infirmaries gain 30% healing efficiency for both work roles.")
+    modify("AutumnEmergencyWards", [(84, "f", 1.45), (88, "f", 1.45), (96, "i", 1)], title="Emergency Recovery Wards",
+           description="Medical Posts and Infirmaries gain 45% healing efficiency and +1 insulation.")
+    modify("EdgeWarehouseWinches", [(84, "f", 1.65), (88, "f", 1.65), (96, "i", 1)], title="Enclosed Warehouse Winches",
+           description="The Army Warehouse gains 65% workplace efficiency and +1 insulation on steel, Steam Core and salvage recipes.")
+    modify("EdgeCoalCrews", [(84, "f", 1.30), (88, "f", 1.30), (96, "i", 1)], title="Heated Coal-Mine Crews",
+           description="All Coal Mine grades gain 30% workplace efficiency for both work roles and +1 insulation.")
 
     # Move transient-resource and exploration improvements into the period when
     # those resources and destinations are still useful. Change the real tier
@@ -253,8 +280,12 @@ def curate(specs, data, guid, places, technology_info):
     by_id['CoalReserveBins']['requires']=[by_id['CoalStorageCompactors']['guid'] if g==by_id['DepotShelving']['guid'] else g
                                         for g in by_id['CoalReserveBins']['requires']]
     changed.add('CoalReserveBins')
-    modify('GatheringLogistics',[(149,'f',1.75),(157,'f',1.25)],title='Collection Relay Depots',
-           description='Gathering Posts collect resources 75% faster and gain 25% collection radius. Available early enough to help clear starting piles and later supply Coal Thumpers.')
+    modify('StarterGatheringTeams', [(149,'f',1.45)],
+           description='Gathering Posts collect resources 45% faster.')
+    modify('GatheringLogistics',[(149,'f',1.30),(157,'f',1)],title='Collection Relay Depots',
+           description='Gathering Posts collect resources 30% faster.')
+    modify('GatheringSort',[(149,'f',1)],description='Post sorting is included in Collection Relay Depots.')
+    modify('GatheringReach',[(157,'f',1.35)],description='Gathering Posts gain 35% collection radius.')
     modify('SawmillOutput2',[(149,'f',1.5),(96,'i',1)],title='Cold-Weather Sawmill Tooling',
            description='Both Sawmill grades produce 50% more wood and gain +1 insulation. An early upgrade for extracting timber before nearby trees run out.')
     modify('SawmillSurvey',[(157,'f',1.5),(96,'i',1)],title='Extended Timber Surveys',
@@ -264,28 +295,30 @@ def curate(specs, data, guid, places, technology_info):
 
     # Late-game engineering should solve storm-scale throughput and reserve
     # problems, rather than sell a small opening-game bonus at a high-tier price.
-    modify('IndustrialStorm',[(96,'i',3),(84,'f',2),(88,'f',2)],title='Stormproof Industrial Districts',
-           description='All grades of Coal Mine, Steelworks and Wall Drill gain +3 insulation and 100% workplace efficiency for human crews and automatons. A major retrofit for sustained production in extreme cold.')
-    modify('CoalMineOutput3',[(84,'f',2.5),(88,'f',2.5)],title='Deep-Seam Extraction Systems',
-           description='Every Coal Mine grade gains 150% workplace efficiency for human crews and automatons, supporting large endgame heating networks.')
+    modify('IndustrialStorm',[(96,'i',3)],title='Stormproof Industrial Districts',
+           description='All grades of Coal Mine, Steelworks and Wall Drill gain +3 insulation.')
+    modify('CoalMineOutput3',[(84,'f',1.75),(88,'f',1.75)],title='Deep-Seam Extraction Systems',
+           description='Every Coal Mine grade gains 75% workplace efficiency for human crews and automatons.')
     modify('DrillOutput',[(149,'f',2),(96,'i',1)],title='Deep-Wall Pressure Drilling',
            description='All Wall Drill grades produce 100% more wood and gain +1 insulation, sustaining late-game expansion after sawmill forests are exhausted.')
-    modify('SteelOutput',[(149,'f',2.25),(96,'i',1)],title='High-Pressure Steel Refining',
-           description='All Steelworks grades produce 125% more steel and gain +1 insulation, supplying core fabrication and major industrial expansion.')
+    modify('SteelOutput',[(149,'f',1),(96,'i',1)],title='High-Pressure Steel Refining',
+           description='All Steelworks grades gain +1 insulation.')
     modify('ThumperOutput2',[(149,'f',2)],title='Balanced Coal Production Lines',
            description='Both Coal Thumper grades produce piles 100% faster. Gathering Posts also collect resources 100% faster, expanding both sides of the coal supply chain.')
     add_place('ThumperOutput2','collection',['GatheringPost'],[(149,'f',2)])
-    replace_float('ToolLibraries',1.30,1.75,'Sawmills, Wall Drills and Steelworks produce 75% more resources across all grades, sharing an upgraded industrial tooling network.')
-    replace_float('MineLifts',1.30,1.75,'Every Coal Mine and Steelworks grade produces 75% more resources through high-capacity industrial lifts.')
-    replace_float('MasteryWorksNetwork',1.35,2.0,'Every Sawmill, Steelworks, Coal Mine and Wall Drill grade produces 100% more resources. This late-game network supports permanent high-volume industry.')
-    replace_float('ModularWarehouses',1.50,2.0,'Both Resource Depot sizes gain 100% storage capacity for every supported resource.',count=8)
-    replace_float('DeepCoalBins',1.55,2.5,'Both Resource Depot sizes gain 150% more coal capacity, providing a substantial reserve for prolonged storms.')
-    replace_float('CoalReserveBins',1.60,2.0,'Both Resource Depot sizes gain 100% more coal capacity. Build a substantial heating reserve before the final storm.')
-    replace_float('ProvisionCells',1.55,3.0,'Both Resource Depot sizes gain 200% more raw-food and food-ration capacity for prolonged supply interruptions.',count=2)
-    replace_float('GeneratorReheat',0.85,0.65,'The Generator uses 35% less coal at every power and range setting, supporting sustained high-output heating.')
-    replace_float('GeneratorSeal',0.90,0.60,'The Generator uses 40% less coal at every power and range setting. A substantial final-tier improvement for permanent high-power heating.')
-    replace_float('GovernorSafeties',0.80,0.50,'Generator stress builds 50% more slowly and recovers 50% faster, making overdrive a practical storm-management tool.')
-    replace_float('GovernorSafeties',1.15,1.50,by_id['GovernorSafeties']['description'])
+    by_id['ToolLibraries']['description']='All Sawmill and Wall Drill grades produce 30% more wood.'
+    replace_float('MineLifts',1.30,1.40,'All Coal Mine grades produce 40% more coal.')
+    by_id['MasteryWorksNetwork']['description']='All Sawmill, Steelworks, Coal Mine and Wall Drill grades produce 35% more resources.'
+    steelworks = {places[name].hex() for name in ('Iron Ore Mine', 'SteamIronOreMine', 'AdvancedOreMine')}
+    for key in ('ToolLibraries', 'MineLifts'):
+        by_id[key]['effects'] = [(target, effect) for target, effect in by_id[key]['effects'] if target not in steelworks]
+    replace_float('ModularWarehouses',1.50,1.65,'Both Resource Depot sizes gain 65% storage capacity for every supported resource.',count=8)
+    replace_float('DeepCoalBins',1.55,1.75,'Both Resource Depot sizes gain 75% coal capacity, providing a substantial reserve for prolonged storms.')
+    by_id['CoalReserveBins']['description']='Both Resource Depot sizes gain 60% coal capacity.'
+    replace_float('ProvisionCells',1.55,1.85,'Both Resource Depot sizes gain 85% raw-food and food-ration capacity for prolonged supply interruptions.',count=2)
+    replace_float('GeneratorReheat',0.85,0.88,'The Generator burns 12% less coal at every power and range setting.')
+    replace_float('GovernorSafeties',0.80,0.85,'Generator stress builds 15% more slowly and recovers 10% faster.')
+    replace_float('GovernorSafeties',1.15,1.10,by_id['GovernorSafeties']['description'])
     modify('CivicLagging',[(96,'i',2)],title='Civic Storm Shelters',
            description='Faith, Order and communal buildings gain +2 insulation, including Temples, Guard Stations, Prisons, Care Houses and Houses of Healing. Sustain essential civic services during extreme cold.')
     source=by_id['AutumnBulkStockyards']['effects'][0][1]
@@ -314,11 +347,12 @@ def curate(specs, data, guid, places, technology_info):
                     mapping[old]=new
                 by_id[key][field].append(mapping[old] if field=='global_effects' else (value[0],mapping[old]))
         changed.add(key)
-    copy_effects('GeneratorReheat','MasteryOverdriveRecovery',[(1.2,1.3)])
-    by_id['GeneratorReheat']['description']='The Generator uses 35% less coal at every power and range setting. Generator stress also recovers 30% faster, improving recovery between overdrive periods.'
-    copy_effects('GeneratorSeal','MasteryOverdriveValves',[(0.85,0.75),(1.15,1.0)])
-    by_id['GeneratorSeal']['description']='The Generator uses 40% less coal at every power and range setting. Stress builds 25% more slowly, supporting sustained high-power heating and longer overdrive use.'
-    replace_float('SteelworksContinuousCasting',1.45,2.0,'All Steelworks grades produce 100% more steel. Resource Depots also gain 100% steel capacity, giving the increased output somewhere to go.')
+    # Retain the legacy derived IDs. Their former additional bonuses now live
+    # once on the paired Accumulators and Safety Governors records.
+    copy_effects('GeneratorReheat','MasteryOverdriveRecovery',[(1.2,1.0)])
+    copy_effects('GeneratorSeal','MasteryOverdriveValves',[(0.85,1.0),(1.15,1.0)])
+    by_id['GeneratorSeal']['description']='The Generator burns 10% less coal at every power and range setting.'
+    replace_float('SteelworksContinuousCasting',1.45,1.65,'All Steelworks grades produce 65% more steel. Resource Depots gain 50% steel capacity.')
     # Clone the already supported, steel-only storage vector rather than creating
     # a new serialization layout or writing offsets into its variable-size body.
     storage_ids={}
@@ -327,9 +361,23 @@ def curate(specs, data, guid, places, technology_info):
             kind,_,body=records[old];needle=struct.pack('<f',1.8)
             assert kind=='Place' and body.count(needle)==1
             new=guid('curation/SteelworksContinuousCasting/storage/'+old).hex()
-            records[new]=[kind,b'NI curated/ContinuousCasting/storage',body.replace(needle,struct.pack('<f',2))]
+            records[new]=[kind,b'NI curated/ContinuousCasting/storage',body.replace(needle,struct.pack('<f',1.5))]
             storage_ids[old]=new
         by_id['SteelworksContinuousCasting']['effects'].append((target,storage_ids[old]))
+    # Price narrow improvements for the tier where they are actually displayed.
+    for key, wood, steel, hours in (
+        ('GatheringHeat3', 40, 20, 8), ('MasteryHubDraught', 16, 6, 4),
+        ('HubPipeLagging', 26, 12, 6), ('HubReturnLines', 65, 42, 13),
+        ('ThumperWinterization', 26, 12, 6), ('MineAirlocks', 18, 6, 4),
+        ('CareHouseLiners', 18, 6, 4), ('CookhouseHeat2', 50, 28, 10),
+        ('HothouseHeat3', 44, 22, 8), ('HothouseHeat4', 80, 50, 13),
+        ('IndustrialStorm', 125, 80, 16), ('ToolLibraries', 40, 20, 8),
+        ('MineLifts', 62, 34, 10), ('MasteryWorksNetwork', 120, 80, 16),
+        ('CitywideLagging', 115, 85, 14), ('CitywideLagging2', 205, 145, 22),
+        ('SteelworksContinuousCasting', 125, 90, 15), ('WardProtocols', 76, 42, 11),
+    ):
+        by_id[key].update(cost={'Wood': wood, 'Steel': steel}, hours=hours)
+        changed.add(key)
     return pack_modifiers(records), changed
 
 

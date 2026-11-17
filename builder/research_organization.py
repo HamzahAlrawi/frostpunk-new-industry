@@ -8,7 +8,7 @@ COLD = [
  [
   ['WorkshopSpeed1+WorkshopHeat','WorkshopSpeed2','WorkshopSpeed3','WorkshopBench','WorkshopSteam','WinterArtisanGuilds'],
   ['StarterGeneratorGrates+BoilerBufferDrums','GeneratorDraught','MasteryOverdriveValves','MasteryOverdriveRecovery','GeneratorReheat+RecuperatingAccumulators','GeneratorSeal+GovernorSafeties'],
-  ['StarterHubValves|EdgeBrazierGrates','MasteryHubDraught|EdgeBrazierRadius','HubPipeLagging','SteamTrunklines|EdgeBrazierNetworks','CompactHeatingGrid|EdgeCompactHeatingGrid','HubReturnLines'],
+  ['StarterHubValves|EdgeBrazierGrates','MasteryHubDraught|EdgeBrazierRadius','HubPipeLagging','SteamTrunklines|EdgeBrazierNetworks','HubReturnLines|EdgeCompactHeatingGrid','CompactHeatingGrid'],
   ['MasteryAutomatonCalibration','AutomatonSawmillServos+AutomatonSteelworksServos+AutomatonWallDrillServos','ClockworkSynchronisers','MasteryMedicalAutomata','AutonomousMaintenance',''],
   ['ServiceLiners','WorksiteWarmBreaks+StormDutyClothing','CondensateHeaters','ProtectedHealthcareHeaters','IndustrialHeatRecovery','CivicLagging'],
   ['MiningCoreMounts+HothouseCoreMounts+FieldInfirmaries','ToolLibraries','MineLifts','IndustrialStorm','MasteryWorksNetwork','MasteryFactoryLines'],
@@ -93,6 +93,20 @@ AUTUMN = [
 ]
 
 
+COMBINED_DESCRIPTIONS = {
+    'WorkshopSpeed1': 'Workshops gain 35% workplace efficiency for both work roles and +1 insulation.',
+    'AutumnWorkshopSpeed1': 'Workshops gain 35% workplace efficiency for both work roles and +1 insulation.',
+    'StarterGeneratorGrates': 'The Generator burns 12% less coal and overdrive stress builds 10% more slowly.',
+    'GeneratorReheat': 'The Generator burns 12% less coal and recovers from overdrive stress 25% faster.',
+    'GeneratorSeal': 'The Generator burns 10% less coal. Overdrive stress builds 15% more slowly and recovers 10% faster.',
+    'StarterGatheringTeams': 'Gathering Posts collect resources 45% faster and gain +1 insulation.',
+    'GatheringLogistics': 'Gathering Posts collect resources 30% faster and gain 35% collection radius.',
+    'MedicalEfficiency2': 'Medical Posts gain 50% healing efficiency for both work roles. Radical Treatment no longer causes amputations at Medical Posts.',
+    'WardProtocols': 'Infirmaries gain 55% healing efficiency and +2 insulation. Medical Posts gain +1 insulation. Houses of Healing gain 75% healing efficiency.',
+    'SteelworksContinuousCasting': 'All Steelworks grades produce 65% more steel and gain +3 insulation. Both Resource Depot sizes gain 50% steel capacity.',
+}
+
+
 def organize(specs, membership, native, guid):
     by_id = {t['id']: t for t in specs}
     by_guid = {t['guid']: t for t in specs}
@@ -119,7 +133,7 @@ def organize(specs, membership, native, guid):
                                     ids.remove(source['guid'])
                         if sources:
                             descriptions = [t['description'].split('\n\nRequires:')[0] for t in [target] + sources]
-                            target['description'] = '\n\n'.join(dict.fromkeys(descriptions))
+                            target['description'] = COMBINED_DESCRIPTIONS.get(target['id'], '\n\n'.join(dict.fromkeys(descriptions)))
                             target['consolidated_upgrades'] = keys[1:]
                         target['pre_organization_tier'] = target['tier']
                         target['tier'] = tier

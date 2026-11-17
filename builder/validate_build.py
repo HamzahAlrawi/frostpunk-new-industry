@@ -5,6 +5,7 @@ metadata. Game inputs remain local and are never needed by the public CI tests.
 """
 import gzip
 import json
+import math
 from pathlib import Path
 import re
 import struct
@@ -96,10 +97,14 @@ def validate_choice_effects(manifest,records):
         assert {p for p,_ in by_id[key]['effects']}=={buildings['Medical Post'].hex()}
         for _,g in by_id[key]['effects']:
             assert struct.unpack_from('<f',normalized(records[g][2]),173)[0]==0
-    for key,human,robot,heat in [('WinterArtisanGuilds',2.5,1,2),('AutonomousMaintenance',1,2.5,0)]:
-        for _,g in by_id[key]['effects']:
+    workshop = buildings['Engineers Lab'].hex()
+    for key,human,robot,heat in [('WinterArtisanGuilds',1.5,1,2),('AutonomousMaintenance',1,1.6,0)]:
+        assert any(target == workshop for target, _ in by_id[key]['effects']) == (key == 'WinterArtisanGuilds')
+        for target,g in by_id[key]['effects']:
             b=normalized(records[g][2]);p=place_scalar_offset(b,72)
-            assert struct.unpack_from('<fIIff',b,p)==(1,0,2,human,robot)
+            expected = (1, 1) if target == workshop else (human, robot)
+            assert tuple(round(value, 3) for value in struct.unpack_from('<2f',b,p+12)) == expected
+            assert struct.unpack_from('<fII', b, p) == (1, 0, 2)
             assert struct.unpack_from('<i',b,place_scalar_offset(b,96))[0]==heat
     heater=original['ccae6fbb0e236596b44ca8189e01248f'][2]
     p=heater.index(coal)+16
@@ -120,6 +125,56 @@ def validate_choice_effects(manifest,records):
             if kind=='Place' and len(b)==238:
                 assert struct.unpack_from('<i',b,177)[0]==0,('Restored an extra-team perk',tech['id'])
     print('Verified heater condition preservation, surgery scope and separate human/automaton work roles.')
+
+
+def validate_research_balance(manifest, records):
+    """Check cumulative research from actual modifier fields, by scenario."""
+    buildings = building_ids((SOURCE/'frostpunkbuildingsconfig.bin').read_bytes())
+    by_guid = {t['guid']: t for t in manifest['technologies']}
+    by_id = {t['id']: t for t in manifest['technologies']}
+
+    def scalar(g, offset, code='f'):
+        body = normalized(records[g][2])
+        return struct.unpack_from('<'+code, body, place_scalar_offset(body, offset))[0]
+
+    def at_site(technologies, name):
+        site = buildings[name].hex()
+        return {g for tech in technologies for target, g in tech['effects'] if target == site
+                and len(normalized(records[g][2])) in (238, 257)}
+
+    for scenario, members in manifest['scenario_additions'].items():
+        active = [by_guid[g] for g in members]
+        workshop = at_site(active, 'Engineers Lab')
+        for role_offset, bounds in ((84, (2.1, 2.7)), (88, (2.1, 3.6))):
+            product = math.prod(scalar(g,72)*scalar(g,role_offset) for g in workshop)
+            assert bounds[0] <= product <= bounds[1], (scenario, 'Workshop research stack', product)
+        assert not any(by_id[k]['guid'] in tech['requires'] for tech in active
+                       for k in ('CompactHeatingGrid', 'EdgeCompactHeatingGrid', 'AutumnCompactHeat')), scenario
+
+    capstone = [by_id['SteelworksContinuousCasting']]
+    for building in ('Iron Ore Mine', 'SteamIronOreMine', 'AdvancedOreMine'):
+        effects = at_site(capstone, building)
+        assert math.isclose(math.prod(scalar(g,149) for g in effects), 1.65, rel_tol=1e-6)
+        assert all(scalar(g,84) == scalar(g,88) == 1 for g in effects)
+        assert sum(scalar(g,96,'i') for g in effects) == 3
+
+    coal = bytes.fromhex('0bcf0b94b94337859c44bcdf67f9bee1')
+    for base, floor in (('StarterGeneratorGrates', 0.50), ('StarterHubValves', 0.40)):
+        targets = {target for field in ('effects', 'extra_effects') for target, _ in by_id[base][field]}
+        assert targets, base
+        for scenario, members in manifest['scenario_additions'].items():
+            for target in targets:
+                factors = []
+                attached = {g for tech in members for field in ('effects', 'extra_effects')
+                            for t, g in by_guid[tech][field] if t == target}
+                for g in attached:
+                    body = normalized(records[g][2])
+                    if coal in body:
+                        factors.append(struct.unpack_from('<f', body, body.index(coal)+20)[0])
+                # Bound both additive and multiplicative interpretations of the
+                # mod-only savings. Native technologies have a separate budget.
+                assert min(math.prod(factors), 1 + sum(f-1 for f in factors)) >= floor, (scenario, base, factors)
+    print('Verified Workshop stacking limits, a single steelworks capstone output bonus, fuel savings budgets and optional compact heating.')
 
 
 def parse_entry(data):
@@ -233,6 +288,7 @@ def main():
     assert not any('abilitiesconfig' in name or 'buildingsconfig' in name for name in payload)
     validate_recipes(manifest,payload)
     validate_choice_effects(manifest,mods)
+    validate_research_balance(manifest,mods)
     print(f"Verified {len(starts)} technology records, {len(mods)} modifiers, {len(manifest['scenario_additions'])} scenario graphs, halved perk durations, boosted Workshop curve, native-record preservation and team neutralization.")
 
 
