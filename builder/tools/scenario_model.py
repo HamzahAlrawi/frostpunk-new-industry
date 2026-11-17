@@ -6,15 +6,19 @@ import heapq
 class World:
     def __init__(self,enabled,events,dilemmas,quests,stock=None):
         self.enabled=enabled;self.events=events;self.dilemmas=dilemmas;self.quests=quests
+        self.selected=set(enabled) if isinstance(enabled,(list,tuple,set)) else {enabled}
         self.time=0;self.variables={};self.stock=dict(stock or {});self.queue=[];self.serial=0
         self.open=[];self.active={};self.completed=[];self.modifiers=set();self.predefined=[];self.paid=[]
+        self.buildings={};self.researched=set();self.produced={};self.production_start={};self.progress={}
+        self.automation=0;self.generator=True
 
     def value(self,value):
         kind=value[0]
         if kind=='constant':return value[1]
         if kind=='variable':return self.variables.get(value[1],0)
         if kind=='resource':return self.stock.get(value[1],0)
-        if kind=='mode':return (self.enabled==value[1])!=value[2]
+        if kind=='mode':return (value[1] in self.selected)!=value[2]
+        if kind=='generator':return self.generator!=value[1]
         if kind=='compare':
             left,right=self.value(value[2]),self.value(value[3])
             return left==right if value[1]==0 else left>=right
@@ -45,17 +49,38 @@ class World:
             elif kind=='quest':
                 guid=action[1];assert guid in self.quests and guid not in self.active,'Duplicate active quest'
                 deadline=self.quests[guid]['deadline'];self.active[guid]=None if deadline is None else self.time+deadline
+                self.production_start[guid]=dict(self.produced);self.progress[guid]={}
             elif kind=='progress':
-                _,guid,label,quantity=action;assert label=='Dispatch' and quantity==1
+                _,guid,label,quantity=action
                 assert guid in self.active,'Completed absent/expired quest'
-                self.active.pop(guid);self.completed.append(guid)
+                self.progress.setdefault(guid,{})[label]=self.progress.get(guid,{}).get(label,0)+quantity
+                self.update_quests()
             elif kind=='modifier':self.modifiers.add(action[1])
+            elif kind=='remove_modifier':self.modifiers.discard(action[1])
             elif kind=='predefined':self.predefined.append(action[1])
             else:raise AssertionError(action)
 
     def start(self):
         for event in self.events:
             if event['triggers'][0][0]=='start' and self.all(event['conditions']):self.execute(event['effects'])
+
+    def goal_met(self,guid,goal):
+        kind=goal['kind'];quantity=goal['quantity']
+        if kind=='checks':return self.progress.get(guid,{}).get(goal['label'],0)>=quantity
+        if kind=='build':return sum(self.buildings.get(g,0) for g in goal['target'])>=quantity
+        if kind=='research':return goal['target'] in self.researched
+        if kind=='produce':return sum(self.produced.get(g,0)-self.production_start[guid].get(g,0) for g in goal['target'])>=quantity
+        if kind=='automate':return self.automation>quantity
+        if kind=='stock':return self.stock.get(goal['target'],0)>=self.value(quantity)
+        raise AssertionError(goal)
+
+    def update_quests(self):
+        for guid in list(self.active):
+            if not all(self.goal_met(guid,goal) for goal in self.quests[guid]['objectives']):continue
+            self.active.pop(guid);self.completed.append(guid)
+            for event in self.events:
+                trigger=event['triggers'][0]
+                if trigger[0]=='quest' and trigger[2:]==(''+guid,0) and self.all(event['conditions']):self.execute(event['effects'])
 
     def click(self,guid,index=0):
         choice=self.dilemmas[guid]['choices'][index]
@@ -72,7 +97,9 @@ class World:
         for guid,deadline in list(self.active.items()):
             if deadline is not None and deadline<=self.time:self.active.pop(guid)
         for event in self.events:
-            if event['triggers'][0][0]=='periodic' and self.all(event['conditions']):self.execute(event['effects'])
+            trigger=event['triggers'][0]
+            if trigger[0]=='periodic' and abs(self.time/trigger[2]-round(self.time/trigger[2]))<0.0001 and self.all(event['conditions']):self.execute(event['effects'])
+        self.update_quests()
 
     def automate(self):
         for guid in list(self.open):

@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk New Industry",
-  "version": "3.15.0",
+  "version": "3.16.0",
   "format": "nind-copy-insert-v1",
   "game": "Frostpunk",
   "supported_build": "Windows Steam 1.6.2, exact original archive hashes required",
@@ -42,55 +42,55 @@
           "name": "configs/frostpunkmodifiersconfig.bin",
           "hash": 3195343433,
           "original_sha256": "e31d65111d67841e1e752080ad1d91b7e603338eaa7380a5a8302b27472b3351",
-          "new_sha256": "fc11c253cbf2140cd979afd22e128b03d54a684663ab170f1678c4d34ea4a585",
-          "size": 420564,
+          "new_sha256": "8d5946d1e12dff8d6e0f9d5ef0ef49ea7f2bdfde50156f964337e41a33e827f9",
+          "size": 512107,
           "patch": "common-be751249.nid",
-          "patch_sha256": "0adb61f279167f241dd4a87dbd8833cfcaf3a9cad543295e35a19586abe2667d"
+          "patch_sha256": "8e9b066e4b557cc9dc4bec2b316b9f686bef8571ec204662f1143a2909469b7c"
         },
         {
           "name": "configs/frostpunkendlessmodeconfig.bin",
           "hash": 281393109,
           "original_sha256": "97bbb0290a4c03e4ecdc23fb09557a45791ca3f3dd11c1a792e02d322463d780",
-          "new_sha256": "387c21b7dbf219130c4f88e5f76a79c224395651a593d25737f67f74190f239a",
-          "size": 28054,
+          "new_sha256": "4c771133f0784023f8c7305f964d12d22f59001c185cd1bcb1d77a0c2311abaf",
+          "size": 41827,
           "patch": "common-10c5b7d5.nid",
-          "patch_sha256": "366a779c956691930177f9f1152204498387c1d71144212e7144b63c785512d3"
+          "patch_sha256": "dbcc262b832814a6902e429fac7f0927ee9968aad6c53eb779540adc3c007af1"
         },
         {
           "name": "configs/frostpunkscenariosconfig.bin",
           "hash": 3837298644,
           "original_sha256": "e1dacd463e9523133ccccb26f2898b39403975039076afcaa7839c8f241ca511",
-          "new_sha256": "66e9187e5c91e52c944870eaed39d265da3c6347a774dd273b0384cbce376bbe",
-          "size": 174304,
+          "new_sha256": "fe839dc38ac27ebe4807cfbe4bc89d65606e1376d0ebe3428891f437d86d3bb2",
+          "size": 174467,
           "patch": "common-e4b887d4.nid",
-          "patch_sha256": "032240fd67f135059d2b22dc5c13f8e49c9f39dc1b07e4649df830f0abb34f96"
+          "patch_sha256": "bf2b288d5217958c3ce3e51649900058b9e0da8c490aedf88d66e6ee7d695bf0"
         },
         {
           "name": "configs/frostpunkgameeventsconfig.bin",
           "hash": 1362127853,
           "original_sha256": "dc8cd870619a8eafed33224ee3854eaa8ea46041f2d575d4d8e96665b873f97e",
-          "new_sha256": "09440d4b8a2172aaaa810610973182187ddc22cecf030515b6f0c793fd577c0e",
-          "size": 1272941,
+          "new_sha256": "157df3b820010f248730ca9a2a8ac96680e772429492fcea16fc245a0a2cfd38",
+          "size": 1412353,
           "patch": "common-51306bed.nid",
-          "patch_sha256": "3df39524e2c03b875993b16f5b11689923dca5d1350b2141d5050732851abd94"
+          "patch_sha256": "e53f72f0d0ed730f108d2b453c5fde33f4f9ff0d41109f7c2e3d589732274a6c"
         },
         {
           "name": "configs/frostpunkdilemmasconfig.bin",
           "hash": 1592078925,
           "original_sha256": "a21580d4e750f422b3b684ae0ed2c1e3d01e28d3de222b090557ac7d86ae9e7d",
-          "new_sha256": "a1915611bff259642b2dad7fbf13dca991f807019f51c95012cbcb6f027a78cf",
-          "size": 3079272,
+          "new_sha256": "37d79595f772f569198cb9d09aa2be81bf28799547215f00f9fbbf916b96fe3d",
+          "size": 3280648,
           "patch": "common-5ee5324d.nid",
-          "patch_sha256": "ebccbe13ef074163341abc0d67d4f47a01f37c7e43e5c0f7846138d4fabcf5af"
+          "patch_sha256": "6d64d37e0de3a4cfa78bd394007d5bf4469ee597dfe4e8572708b02a49bf82d7"
         },
         {
           "name": "configs/frostpunkquestsconfig.bin",
           "hash": 1066762407,
           "original_sha256": "fd8fe0c342ec5437a67b010ec5eabc52d12696f79a67ab34d380b4beb4cb9089",
-          "new_sha256": "8b623cf297079883e3c7d11e723f8a66b806e75859518144933d41cd3107606e",
-          "size": 445012,
+          "new_sha256": "48ab8072bb60bc063e68d333b47010a01f9da4f3aff0ef848a7cf34c3dcdc7cb",
+          "size": 473144,
           "patch": "common-3f9580a7.nid",
-          "patch_sha256": "67f2adce582c9c17f956f63be512426de72189a6705a46b3f3ccaabfb2870687"
+          "patch_sha256": "a42be17b706323b1a10ec7138de9dd4f8f1cd7394cae396c66ce39910f4890c3"
         },
         {
           "name": "configs/frostpunkdifficultyconfig.bin",
@@ -135,6 +135,24 @@
           "size": 9429,
           "patch": "templates-9edb4d34.nid",
           "patch_sha256": "c790c146820538ec75f8292cb71bd926bf87c93ed91fb54b7d77d46463a9510c"
+        },
+        {
+          "name": "ui/menu/mainmenuendlessmodeselection.binarytemplate",
+          "hash": 888469261,
+          "original_sha256": "e3933d9b74878c9de7b1bc02675e09cc6bb0635764732bb510881f51ee11491a",
+          "new_sha256": "4808ce323ce73a8c5ca6931fe9cbdc230c5ca7e0535e36c8ddfea2a581a5b464",
+          "size": 54380,
+          "patch": "templates-34f4f70d.nid",
+          "patch_sha256": "efbab073205eb3562260271aab40f7c8caff3fe9829844de53834659c2aa14c6"
+        },
+        {
+          "name": "ui/panels/city/technologypanel.binarytemplate",
+          "hash": 3761858454,
+          "original_sha256": "18ea4fa867ec221574731f15abb6478ac9177ff9cf3ac67c4ed7603a5f11e523",
+          "new_sha256": "ebeedc88e527f0b6ed1289936da79ee988596dc8c845210edf51bb32ba4a7096",
+          "size": 295905,
+          "patch": "templates-e0396796.nid",
+          "patch_sha256": "578bd1602f7b40fcbb8d57b86bd48f1efeba7c628cd4468e8700bf2c7e31c939"
         },
         {
           "name": "gameentities/buildings/resourceprocessing/charcoalkiln.binarytemplate",
@@ -247,118 +265,118 @@
           "name": "brazilian.lang",
           "hash": 2624505945,
           "original_sha256": "75894ebb3baf776004eb13cf391ed90fccedbb77afc097b6fc32f2a258dcde99",
-          "new_sha256": "00666e4b4f26cc234e87b6efd1381654028ff73ab9f9e0a577feec01f6db2dc6",
-          "size": 5773637,
+          "new_sha256": "3c484830f5212fa9404c64a99f0682279e6f4209d7417a5f3444c8abeb87bd7d",
+          "size": 5896029,
           "patch": "localizations-9c6ec859.nid",
-          "patch_sha256": "f3ee212b11b762176b225ffb1a2f4ca4b97883991f35f3fd4408cf5224df8c06"
+          "patch_sha256": "5ddd59a03a2dbae4c21058f9715b12f83a5c764c0b06dcd03c4c8163d7ac6c01"
         },
         {
           "name": "chinese.lang",
           "hash": 4242838552,
           "original_sha256": "3b8274d62e46d9c98ab4fbb2816d686db66339abb08e5ca7e9c94fed42e98953",
-          "new_sha256": "171bd8dc06c8bb3af1aa690114e6aaf6e75efd155f5703cb8c139ad611e107e2",
-          "size": 4127201,
+          "new_sha256": "61ad96fb3d1d06f80be35ba4ed436e895d5523fc2e9a9713add0c78c6c4120d7",
+          "size": 4250015,
           "patch": "localizations-fce49418.nid",
-          "patch_sha256": "2c00863c8f9f2b4bba47827f48d88778c0052d1cc75d935ca63d9a23ee508451"
+          "patch_sha256": "4d8b846ce332dd2dd9c4c0135da3917d0ce5d75ea4ca6337ba90edefbf6f7882"
         },
         {
           "name": "english.lang",
           "hash": 2014871732,
           "original_sha256": "7dfe5ac8dc242edc793074471cced64af9ce080c6c3265524102ac320419c085",
-          "new_sha256": "7237367086afd20ca9d2c714840ec13ecacda9dac5430505496c659728bef42d",
-          "size": 5746243,
+          "new_sha256": "49aeb450ae395a7258332ce736614a00c588d4da7a6461dbf0ff5e73860a9fe4",
+          "size": 5868649,
           "patch": "localizations-781880b4.nid",
-          "patch_sha256": "f3f2962a3608c96371e13c776dcfb06432b4e6471cb516b6eb86116442090445"
+          "patch_sha256": "961ce36f42ea3b1bbff081f4f8366fbaf2d7ac49573fba4c0de74929d5ad3f50"
         },
         {
           "name": "farsi.lang",
           "hash": 2847863096,
           "original_sha256": "ee3d3bdd6839c555201d1fe0021a34b65063c2367ab9c4ac9f308d705319b707",
-          "new_sha256": "c8c432a98e70835d3c218e795cfb9c63729315b28e34b56895c3836f6c1b58b7",
-          "size": 2716083,
+          "new_sha256": "c4b6d15a10b664ecbd22f020f9d2426b3640e6da6b63ba19b17a838b09c3ac75",
+          "size": 2839473,
           "patch": "localizations-a9bef138.nid",
-          "patch_sha256": "8bd1d105dd0752b9c7b388ce936a653b328d6f6b492957917d054e41ff3d8c05"
+          "patch_sha256": "0ba6cecc2db7b9ac9b2555b2ed1f9ad55cdc08f27f03b506985ec7686c97cf52"
         },
         {
           "name": "french.lang",
           "hash": 4172357012,
           "original_sha256": "de882a8450d11a41de491a2f3452ce8b3d5155ca9711a57665fb3f75857d7cce",
-          "new_sha256": "98ac6fe8af86230c836d9c8b5b99e5508fce53f524bb3049229d19c17e8e38f9",
-          "size": 6183141,
+          "new_sha256": "bc456a6cf9090c37168e82b796e1f34567488ca146836b3edc924c7a2f49432c",
+          "size": 6305361,
           "patch": "localizations-f8b11d94.nid",
-          "patch_sha256": "fa201d4bd876f79c6e47165f81f3311f0a927fee86b91916ac0e081c47d9f268"
+          "patch_sha256": "10980b4c3d318cc25244bd7a5c6f087219f55aa262d8127b31dc0f8ea1b097ee"
         },
         {
           "name": "german.lang",
           "hash": 845718737,
           "original_sha256": "ed4b3ba0210b0af2a90d7f084c8f5fa3c2f0dec36386f80943247a3ff8d05d0c",
-          "new_sha256": "8665ce0196e06aa1ec80c175afaeab78fc2867ff6e2ae9c11373639cbe0465d7",
-          "size": 6197662,
+          "new_sha256": "090264b6541a59c3af5ac53606f2afb2981cc1cd4af1377caf0a8b29400745a5",
+          "size": 6319890,
           "patch": "localizations-3268a4d1.nid",
-          "patch_sha256": "7f6cf467260b8da18a35f61827807d6ffbf0c224fb38a9ed4042377ef4e28775"
+          "patch_sha256": "165b483062e1aecf9b1c775b359c8033105ed7fd3cc6d7fe082430d3919e17ce"
         },
         {
           "name": "italian.lang",
           "hash": 3498510465,
           "original_sha256": "282c9511b63cbd0622dccb0fae8ad3786946d2f57898f6ccc10f03e6eb919e15",
-          "new_sha256": "625044c6f727d44a0d6999cb6faec6d04544d654bf13a5fe75277bc0534220eb",
-          "size": 6093246,
+          "new_sha256": "69698719a51209e550d89602ef563c2e4ef40b34398abbb30da2c4e2a0aefced",
+          "size": 6215570,
           "patch": "localizations-d0870881.nid",
-          "patch_sha256": "a9f02e8b2974369fe59daca4531db8f3376a6b9c45fb2c9d468a3eaa2f959853"
+          "patch_sha256": "8c033e35021d89fde5210f3b89c2c779600915bbdaed67c0084fba418f9dadb4"
         },
         {
           "name": "japanese.lang",
           "hash": 2862372073,
           "original_sha256": "eb37d529a7b737d64b3b3f9bbf27949ff4ac8e8169277b0cb1b6ebb42cb353b3",
-          "new_sha256": "8d1fdc35bc902e9bae603d51884744679214959d6cb3d6277ff57b5fd83e05cb",
-          "size": 4353277,
+          "new_sha256": "39c5ad5aa47921896d8ca701997098200092a19bdc68cfcaece2eacc3a59e3fe",
+          "size": 4476039,
           "patch": "localizations-aa9c54e9.nid",
-          "patch_sha256": "69e7e345125f854b6fb0cf9e51cd9db89c854cfa7586a19b968894ab52296b23"
+          "patch_sha256": "4741a8141a0b129be4d6a956282747d4fe2bab91af574b44939b9b2a14094628"
         },
         {
           "name": "korean.lang",
           "hash": 1017381045,
           "original_sha256": "34f74cf93d72670dee7a902480d0ec8d092015a9c9e721ed09661aab8afe5886",
-          "new_sha256": "8c9400c815f1898c40616ac9ad7794e5c14f2dbecf1b7d758b104608ef4ae2f4",
-          "size": 4488375,
+          "new_sha256": "012a43d22f4f4fefe06163aafd5f2626808e07d7201c984b6d50717011824d70",
+          "size": 4611063,
           "patch": "localizations-3ca400b5.nid",
-          "patch_sha256": "ff95050e2d09da2dba492802b317726b1e25c00800f0786fcca9df84f3a118da"
+          "patch_sha256": "04dd6cca32fea00f8da6f68500e6a38c5da2bb9e0edbe4a27cf121c5631bed83"
         },
         {
           "name": "polish.lang",
           "hash": 2106691904,
           "original_sha256": "d81c043f26607325b9be6dc0fe2b39cbf1e8b2abaa5ea3ee60c0593137a50aac",
-          "new_sha256": "6dd719dbb0a6ced1db07a72d6ea4a26094107b63a5ee424571bd3ccfdb88a18a",
-          "size": 5887129,
+          "new_sha256": "4b93d325337494d84d1e9a995b646fd7b993ccfda8f7d3abbb3494aa23feb3ae",
+          "size": 6009533,
           "patch": "localizations-7d919140.nid",
-          "patch_sha256": "55ae72497718bb9cb9057d0f3aacaafcbef9fc875ccaa5a358ecbbb58ef671e8"
+          "patch_sha256": "f5026583dacd04f520cf8ce35c5d33d7aaf077d967a60431d373e03c238cb606"
         },
         {
           "name": "russian.lang",
           "hash": 4062391267,
           "original_sha256": "a43cb3d7433ff316fee5b8ca9b644656f5cced65d34bf46cef35ae288f8b3ee1",
-          "new_sha256": "96e476e31b595e42a8eac90a3c2bf5b12730e28c19f6732f561e1ab94ff9623a",
-          "size": 5650264,
+          "new_sha256": "eedef3546c97215b53fbdb0ce979216a94515d274d42934fb597b70d90b0aba9",
+          "size": 5772668,
           "patch": "localizations-f2232be3.nid",
-          "patch_sha256": "3a00bf496b79e3610530d7605cdd0169573908b0125e0b379ce2b9e30712d459"
+          "patch_sha256": "53202ad31265f4204b0ca11108daa2ba747866a963c3bb265dbe60b35e4d4349"
         },
         {
           "name": "spanish.lang",
           "hash": 2480292458,
           "original_sha256": "3f00933c14fd20c39c52661edc86241e5d15d0d41584dbe4da829652431986f6",
-          "new_sha256": "bb3584a3368479831b91d7a3082ab9b95443dbf74f84a069c01b5076b877e1e9",
-          "size": 6132238,
+          "new_sha256": "bf57e86cbe4230e547e7a922fcd41fd7a9bda2923cc37ca2ce4dd2c7d4dd741a",
+          "size": 6254596,
           "patch": "localizations-93d6426a.nid",
-          "patch_sha256": "e925f04e66e88450b5e45a618056064a989dc24efbf8fc673430614a206fd411"
+          "patch_sha256": "96052bfd411a674def3199da70669e460acfb5850fee97a1db5b3e0dfe5fcf31"
         },
         {
           "name": "turkish.lang",
           "hash": 3896553063,
           "original_sha256": "350a71b6e3970aad9ee4a10631043511f2e2056847ceb1b669f53b6f579927af",
-          "new_sha256": "a75731b019f863c891300160e1175d145effaac8b7a4150773ad9d493d9c7cee",
-          "size": 5475177,
+          "new_sha256": "81d37881949c26c7605e5d4cce2a307fe6e83ba58611ddd25b6bcddc0f648da0",
+          "size": 5597547,
           "patch": "localizations-e840ae67.nid",
-          "patch_sha256": "7e2f6c19d3b9a7422b4d37ca9f2ab359281a3896a80b0c264ed71e2380100c46"
+          "patch_sha256": "259ef8d32d7546604b6034657110fdf7b00e58e1db642a509e99a3a9f4ed5a47"
         }
       ]
     }

@@ -105,13 +105,13 @@ class DilemmaTemplate:
         return (entry(name,identity)+bytes(38)+u32(len(conditions))+b''.join(conditions)
                 +u32(len(effects))+b''.join(effects)+u32(0)+footer)
 
-    def build(self,name,identity,title,description,choices,localize,key,small=True):
+    def build(self,name,identity,title,description,choices,localize,key,small=True,subtitle='Reconstruction'):
         prefix=bytearray(self.source[self.header_end:self.choices_at])
         if small:prefix[:16]=bytes.fromhex('0ce922d2839700b94741c2c0ba95d45c')
         tail=self.source[self.choice_end:]
         def label(match):
             field=match.group().decode().rstrip('\0').rsplit('/',1)[-1]
-            value={'Displayed name':title,'Arc subtitle text':'Reconstruction','Description':description}[field]
+            value={'Displayed name':title,'Arc subtitle text':subtitle,'Description':description}[field]
             return localize(key+'/'+field,value)
         tail=re.sub(rb'\x01@Generated/[^\0]+\0',label,tail)
         return entry(name,identity)+prefix+u32(len(choices))+b''.join(choices)+tail
@@ -164,6 +164,13 @@ def validate_native_samples(events,dilemmas,quests,resources):
     if change_resource(resources['Steam Cores'],-1) not in dilemmas:raise SchemaError('Native payment layout differs')
     if set_variable('HintPossible',42) not in events:raise SchemaError('Native global variable layout differs')
     if progress_quest('9c0badecb6450eb25e40da0c0c0930b1','Wait') not in events:raise SchemaError('Native quest progress layout differs')
+    finish=(typed('FrostpunkQuestFinishedEventTrigger')+bytes.fromhex('401a486799d7b68712460cfd5d1ed0f6')
+        +bytes.fromhex('76bf929444a495918f4b9d477f9f38da')+u32(0))
+    if finish not in events:raise SchemaError('Native successful-quest trigger differs')
+    remove=(typed('FrostpunkRemoveModifierEffect')+bytes.fromhex('b0cea22de6636197d34697c845d1d79b')+typed('FrostpunkApplyModifierEffect'))
+    if remove not in events:raise SchemaError('Native modifier removal boundary differs')
+    if typed('FrostpunkGeneratorIsActiveExpression')+b'\1'+typed('IntegerComparisonExpression') not in events:
+        raise SchemaError('Native inverted generator predicate differs')
     # A complete nested native switch ends immediately after its final effect;
     # it has no implicit default-case record. Pin both cases and their boundary.
     probe=(typed('FrostpunkSwitchEffect')+u32(2)+b'\1'+string('kid')+u32(1)

@@ -38,5 +38,7 @@
   "2934292820": "configs/frostpunksocietyconfig.bin",
   "948521060": "configs/frostpunkeffectsconfig.bin",
   "281393109": "configs/frostpunkendlessmodeconfig.bin",
-  "1066762407": "configs/frostpunkquestsconfig.bin"
+  "1066762407": "configs/frostpunkquestsconfig.bin",
+  "888469261": "ui/menu/mainmenuendlessmodeselection.binarytemplate",
+  "3761858454": "ui/panels/city/technologypanel.binarytemplate"
 }

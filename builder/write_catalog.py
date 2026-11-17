@@ -66,7 +66,7 @@ def main():
     for old,new in sorted(catalog['consolidated_technologies'].items()):
         lines.append(f"| {by_id[old]['title']} | {by_id[new]['title']} |")
     (ROOT/'docs/laws.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
-    from write_endless_guide import write
+    from write_mode_guide import write
     write(ROOT,catalog)
     print(f'Wrote {len(active)} research entries.')
 

@@ -54,21 +54,20 @@ def modes(data):
     return {name:data[start:starts[i+1][0] if i+1<len(starts) else len(data)] for i,(start,name) in enumerate(starts)}
 
 
-def append_mode(data,name,enabled_value,localize):
+def append_modes(data,definitions,enabled_value,localize):
     original=modes(data);source=original['Endurance'];cursor=Cursor(source)
     if cursor.string()!='Endurance':raise SchemaError('Invalid donor mode')
-    edits=[(Span(0,cursor.position),string(name))]
+    name_end=cursor.position;clones=[]
     if source.count(ENDURANCE_VALUE)!=1:raise SchemaError('Ambiguous Endurance parameter')
     selected=source.index(ENDURANCE_VALUE);start=selected-4
     if source[start:selected]!=u32(1):raise SchemaError('Unsupported default parameter vector')
-    edits.append((Span(start,selected+16),u32(2)+ENDURANCE_VALUE+bytes.fromhex(enabled_value)))
-    for suffix,text in (
-        ('Display name','Reconstruction'),
-        ('Short description','Rebuild the Frostland. Finance megaprojects, sustain relief routes and compete for industrial contracts. An Endless economy for New Industry.'),
-    ):
-        old=string('@Generated/EndlessModeConfig/Endless modes/Endurance/'+suffix)
-        at=source.index(old);edits.append((Span(at,at+len(old)),localize('Endless/Menu/'+suffix,text)))
-    old=string('@UI/Menu/EndlessMode/Endurance_ForSurvivalists');at=source.index(old)
-    edits.append((Span(at,at+len(old)),localize('Endless/Menu/Subtitle','For builders of a new world')))
-    clone=replace_spans(source,edits)
-    return u32(4)+data[4:]+clone
+    for definition in definitions:
+        values=ENDURANCE_VALUE+bytes.fromhex(enabled_value)+bytes.fromhex(definition['value'])
+        edits=[(Span(0,name_end),string(definition['name'])),(Span(start,selected+16),u32(3)+values)]
+        for suffix,text in (('Display name',definition['title']),('Short description',definition['description'])):
+            old=string('@Generated/EndlessModeConfig/Endless modes/Endurance/'+suffix)
+            at=source.index(old);edits.append((Span(at,at+len(old)),localize('Endless/Menu/'+definition['name']+'/'+suffix,text)))
+        old=string('@UI/Menu/EndlessMode/Endurance_ForSurvivalists');at=source.index(old)
+        edits.append((Span(at,at+len(old)),localize('Endless/Menu/'+definition['name']+'/Subtitle',definition['subtitle'])))
+        clones.append(replace_spans(source,edits))
+    return u32(3+len(clones))+data[4:]+b''.join(clones)

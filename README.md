@@ -2,26 +2,26 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.15.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.16.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.15.0/Frostpunk-New-Industry-3.15.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [Reconstruction](docs/reconstruction.md) · [Configuration](docs/configuration.md) · [Changes in 3.15.0](docs/releases/3.15.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.16.0/Frostpunk-New-Industry-3.16.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [New Endless modes](docs/frontiers.md) · [Configuration](docs/configuration.md) · [Changes in 3.16.0](docs/releases/3.16.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
 
-- **Experimental Reconstruction Endless mode.** Twelve permanent megaprojects, three relief routes with five levels and optional timed industrial contracts consume large late-game stockpiles. Recurring deliveries continue after the final project. [Rules, budgets and beta limitations](docs/reconstruction.md).
+- **Three new Endless modes.** Choose Restoration, Whiteout or Machine Age directly from Endless. Each has six automatic founding chapters, two city doctrines and six recurring incident families. Eighteen incidents provide 54 responses, 36-hour-to-five-day response windows and optional four-to-eight-day manufacturing programmes. [Mode rules, objectives and deadlines](docs/frontiers.md).
 
 - **Renewable Steam Cores.** Find Steam Core Fabrication in the **first column of the added Industry tab, tier II**, then select its recipe at a Factory. Further upgrades culminate in three-core batches. The Arks is explicitly checked.
 - **216 active research definitions across supported modes.** Engineering, Industry, City Life, Logistics and Production use fixed themed columns beside the native tabs. 47 smaller upgrades are consolidated into larger ones. Added research has at most one visible parent in its own column; hidden native and cross-tab requirements are removed.
 - **Four signable Civic Charters.** Research the City Life civic branch, then sign them in the upper branch of **Adaptation**, or **Administration** in The Last Autumn. Native books, scenario unlocks and Order/Faith laws are preserved. Charters improve Hope/Discontent and provide healthcare, civic heating and illness benefits. [Policies and consolidated upgrades](docs/laws.md).
 - **12 research-free laws in four choice trees.** Community Care, Workforce, Winter Preparedness and Public Reserves each start with an immediately available root, followed by two mutually exclusive policies. Choose preventive or critical care, human or mechanical specialisation, district heating or food protection, and storm reserves or industrial capital. These trees share the native Adaptation/Administration book without changing its original branches.
 - **Six citywide thermal envelopes.** Three additional stages provide expensive late-game insulation, illness protection and larger heat zones.
-- **Readable building modifier sources.** All 346 mod-added modifiers have names and descriptions. Six insulation families use one cumulative heat-tooltip source per building; Thermal Envelope grows from +1 to +7 instead of displaying six separate rows. [Tooltip scope](docs/tooltips.md).
+- **Readable building modifier sources.** All 437 mod-added modifiers have names and descriptions. Six insulation families use one cumulative heat-tooltip source per building; Thermal Envelope grows from +1 to +7 instead of displaying six separate rows. [Tooltip scope](docs/tooltips.md).
 - **Faster progression.** All mod-added perks have half their authored base research duration. Workshop base research output is 25% higher than version 3.9, or 56.25% above vanilla, with normal multiple-Workshop scaling. Research before Drawing Boards and additional starting supplies ease the opening.
 - **Configurable difficulty and bigger starting stockpiles.** Five presets and per-resource/category overrides cover all native starting profiles. Edit the persistent JSON, then apply it while the game is closed. Research pacing is configurable too; public defaults retain the current boosts.
 - **Stronger workplaces.** The permanent workplace-efficiency research bonuses grant at least 75% per upgrade where applicable.
 - **Alternate production.** Fuelled Stockpots, coal-heated and fermentation Hothouses, retort and rapid-coking kiln batches, baited fishing, dockside ration production, alternate generator-component recipes, and Warehouse salvage.
 - **New city strategies.** Safer Radical Treatment, cold protection, wider heat zones, faster construction, linked production-chain improvements, and large storm reserves. Added team-capacity perks have been removed; vanilla team research remains.
-- **Better timing.** Opening-game tools arrive earlier and cost less; late research supports sustained production, civic services in storms, and stronger generator stress management. A 1920-pixel-wide or larger display is recommended for the expanded tab bar.
+- **Better timing.** Opening-game tools arrive earlier and cost less; late research supports sustained production, civic services in storms, and stronger generator stress management. The expanded nine-tab bar uses a narrower layout to keep Production inside the frame.
 - **Core-saving construction before Drawing Boards.** Tier 0 packages combine Hothouse, extraction and Infirmary core discounts, or Autumn Reloading Station, fabrication and Infirmary discounts.
 - **Specialist city development.** Core-free Infirmaries, limb-sparing Radical Treatment, human and automaton industrial specialisations, compact or large reserve warehouses, and optional overdrive/fuel trade-offs.
 - **Core-powered production chains.** Consume renewable cores in Kilns for bulk coal or in Hothouses for burst food production. Alternate fuel, cooking and fishing recipes offer different material and throughput trade-offs. Selectors are checked to stay within four simultaneous options.
@@ -63,10 +63,10 @@ and difficulty. See [all settings and presets](docs/configuration.md).
 
 ## Testing status
 
-- The default copy/insert patches reconstruct the local 3.15.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
+- The default copy/insert patches reconstruct the local 3.16.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
 - Research tests cover scenario membership, earlier unlocks, unique effect packages, icon/prerequisite-line geometry, and recipe-selector limits. The local binary validator also checks actual serialized recipe prices, outputs, requirements, attachments and effect vectors, and preserves native technology and modifier records.
-- 59 automated tests and owned-data checks cover research, laws, tooltips, configuration and installation. Reconstruction additionally has an independent decoder, all 60 payment cases, timer-cycle checks and a 200-day model simulation. A bounded startup loaded all 13 required configurations with zero serialization errors. Live mode selection, deliveries and real save/load were not verified because computer control was stopped; the new mode is an **experimental beta**.
+- 66 automated tests and owned-data audits cover all six founding paths, 54 incident responses, 18 response expiries, five repair successes/failures, upkeep, cached callbacks, timer safety and mode isolation. Declared geometry fits six card slots and nine research tabs. The final installed build loaded all thirteen required configurations and the Endless menu template without serialization errors. Visual layout, live campaign behavior and real save/load remain unverified; this is an **experimental beta**.
 
 When reporting a problem, include the mod version, scenario, game version, and the installer error or crash description. Installer logs are saved locally in the backup folder's parent directory.
 

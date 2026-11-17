@@ -21,6 +21,7 @@ def expression(c,compact=False):
         return ('compare',op,left,right)
     if name=='FrostpunkCustomScenarioParameterCheckExpression':
         return ('mode',c.guid(),c.boolean())
+    if name=='FrostpunkGeneratorIsActiveExpression':return ('generator',c.boolean())
     raise SchemaError('Unsupported expression '+str(name))
 
 
@@ -37,9 +38,9 @@ def effect(c):
         return ('set',c.string(),c.u32(),expression(c,True))
     if name=='FrostpunkChangeResourcesEffect':
         return ('resource',c.guid(),expression(c,True),expression(c,True),c.u32())
-    if name in ('FrostpunkPredefinedEffect','FrostpunkApplyModifierEffect','FrostpunkCreateDilemmaEffect','FrostpunkStartQuestEffect'):
+    if name in ('FrostpunkPredefinedEffect','FrostpunkApplyModifierEffect','FrostpunkRemoveModifierEffect','FrostpunkCreateDilemmaEffect','FrostpunkStartQuestEffect'):
         return ({'FrostpunkPredefinedEffect':'predefined','FrostpunkApplyModifierEffect':'modifier',
-                 'FrostpunkCreateDilemmaEffect':'dilemma','FrostpunkStartQuestEffect':'quest'}[name],c.guid())
+                 'FrostpunkRemoveModifierEffect':'remove_modifier','FrostpunkCreateDilemmaEffect':'dilemma','FrostpunkStartQuestEffect':'quest'}[name],c.guid())
     if name=='FrostpunkProgressCustomQuestObjectiveEffect':return ('progress',c.guid(),c.string(),c.i32())
     if name=='FrostpunkTimedEffect':
         guid=c.guid();days=c.f32();unit=c.u32();random=c.f32();random_unit=c.u32()
@@ -61,6 +62,7 @@ def event(c):
     for _ in range(c.count(8)):
         kind=c.string();identity=c.guid()
         if kind=='FrostpunkGameStartedEventTrigger':triggers.append(('start',identity))
+        elif kind=='FrostpunkQuestFinishedEventTrigger':triggers.append(('quest',identity,c.guid(),c.u32()))
         elif kind=='FrostpunkPeriodicEventTrigger':
             period,unit,initial,initial_unit=c.f32(),c.u32(),c.f32(),c.u32()
             if unit!=1 or initial!=0 or initial_unit!=0:raise SchemaError('Unsupported periodic clock')
@@ -93,16 +95,27 @@ def quest(c):
         deadline=c.f32()
         if c.u32()!=1:raise SchemaError('Deadline must use game days')
     if c.boolean() or (c.i32(),c.i32(),c.i32())!=(1,-1,1):raise SchemaError('Unexpected quest type/occurrence limits')
-    if c.count()!=1:raise SchemaError('Expected one custom delivery objective')
-    if c.string()!='FrostpunkCustomQuestObjective':raise SchemaError('Expected custom delivery objective')
-    objective=c.guid()
-    if c.count()!=0 or c.boolean():raise SchemaError('Unexpected objective conditions')
-    text=c.string();description=c.string();metadata=c.take(24)
-    label=c.string();quantity=c.u32();bound=c.boolean()
-    if label!='Dispatch' or quantity!=1 or bound:raise SchemaError('Unexpected delivery progress')
+    goals=[]
+    for _ in range(c.count(16)):
+        kind=c.string();objective=c.guid()
+        if c.count()!=0 or c.boolean():raise SchemaError('Unexpected objective conditions')
+        text=c.string();description=c.string();metadata=c.take(24)
+        goal=dict(guid=objective,text=text,description=description,metadata=metadata.hex())
+        if kind=='FrostpunkCustomQuestObjective':
+            goal.update(kind='checks',label=c.string(),quantity=c.u32(),bound=c.boolean())
+        elif kind=='FrostpunkConstructBuildingOfTypeQuestObjective':
+            goal.update(kind='build',target=[c.guid() for _ in range(c.count(112))],quantity=c.u32(),existing=c.boolean())
+        elif kind=='FrostpunkResearchTechnologyQuestObjective':goal.update(kind='research',target=c.guid(),quantity=1)
+        elif kind=='FrostpunkProduceQuestObjective':
+            goal.update(kind='produce',quantity=c.u32(),target=[c.guid() for _ in range(c.count(32))])
+        elif kind=='FrostpunkEmployAutomatonsQuestObjective':goal.update(kind='automate',quantity=c.f32())
+        elif kind=='FrostpunkGatherResourceQuestObjective':
+            goal.update(kind='stock',target=c.guid(),quantity=expression(c,True),flags=[c.boolean(),c.boolean()])
+        else:raise SchemaError('Unsupported quest objective '+str(kind))
+        goals.append(goal)
     if c.take(44)!=bytes(44):raise SchemaError('Unexpected quest callbacks/social problem')
     title=c.string()
     if c.string() is not None or c.string() is not None:raise SchemaError('Unexpected quest descriptions')
     priority=c.f32();hide=c.boolean();color=c.boolean();atlas=c.string();icon=[c.i32() for _ in range(4)];height=c.boolean()
     if hide or not color or height or atlas!='UI\\Tiles\\Icons.dds' or icon!=[4,1,16,16]:raise SchemaError('Unexpected quest view')
-    return dict(name=name,guid=guid,deadline=deadline,objective=objective,text=text,description=description,title=title,metadata=metadata.hex(),priority=priority)
+    return dict(name=name,guid=guid,deadline=deadline,objectives=goals,objective=goals[0]['guid'],text=goals[0]['text'],description=goals[0]['description'],title=title,metadata=goals[0]['metadata'],priority=priority)

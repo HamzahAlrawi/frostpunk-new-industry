@@ -3,6 +3,7 @@ import gzip
 import json
 from pathlib import Path
 import re
+import struct
 from tools.native_binary import Cursor,SchemaError,string
 from tools.endless_schema import parameters,modes
 from tools.scenario_reader import event,choice,quest
@@ -51,14 +52,16 @@ def decode(original,payload,meta):
         assert len({row['guid'] for row in rows})==len(rows)
         records[key]=rows
     span,before=parameters(original['scenarios']);after_span,after=parameters(payload['scenarios'])
-    assert before==after[:-1] and len(after)==8 and after[-1].guid==meta['parameter']
+    assert before==after[:-2] and len(after)==9 and after[-2].guid==meta['parameter'] and after[-1].guid==meta['campaign_parameter']
     assert payload['scenarios'][:span.start]==original['scenarios'][:span.start]
     assert payload['scenarios'][after_span.end:]==original['scenarios'][span.end:]
     original_modes=modes(original['endlessmode'])
-    assert payload['endlessmode'][:4]==(4).to_bytes(4,'little')
+    assert payload['endlessmode'][:4]==(6).to_bytes(4,'little')
     assert payload['endlessmode'][4:len(original['endlessmode'])]==original['endlessmode'][4:]
     clone=payload['endlessmode'][len(original['endlessmode']):]
     assert clone.startswith(string('Reconstruction')) and bytes.fromhex(meta['enabled']) in clone
+    for mode in meta['modes']:
+        assert clone.count(string(mode['name']))==1 and clone.count(bytes.fromhex(mode['value']))==1
     return records
 
 
@@ -66,7 +69,7 @@ def audit(records,meta,resource_ids):
     events=records['gameevents'];dilemmas={r['guid']:r for r in records['dilemmas']};quests={r['guid']:r for r in records['quests']}
     flag=('mode',meta['enabled'],False)
     assert all(e['conditions'][0]==flag and e['enabled'] and e['weight']==1 for e in events)
-    assert all(t[0]=='start' or t[2]==0.25 for e in events for t in e['triggers'])
+    assert all(t[0] in ('start','quest') or t[2] in (0.25,1) for e in events for t in e['triggers'])
     for row in dilemmas.values():
         for c in row['choices']:
             assert c['text'] and c['description'] and c['disabled']
@@ -80,13 +83,13 @@ def audit(records,meta,resource_ids):
         world=World(selected,events,dilemmas,quests);world.start();world.run(100)
         assert not world.variables and not world.open and not world.active and not world.queue
     stock={guid:1_000_000_000 for guid in resource_ids.values()}
-    world=World(meta['enabled'],events,dilemmas,quests,stock);world.start();world.run(200)
+    world=World(meta['enabled'],events,dilemmas,quests,stock);world.variables['NI/Frontiers/version']=-1;world.start();world.run(200)
     assert world.variables['NI/Reconstruction/Projects/stage']==99
-    assert len(world.modifiers)==len(meta['rewards'])==11
+    assert len(world.modifiers)==len([r for r in meta['rewards'] if r['id'].startswith('Reconstruction/')])==11
     assert len(world.completed)>90 and len(world.active)<=5 and len(world.queue)<20
     assert all(world.variables['NI/Reconstruction/'+track['id']+'/stage']>=10 for track in meta['tracks'][1:])
     # Save/load checkpoint with pending timers and open delivery choices.
-    saved=World(meta['enabled'],events,dilemmas,quests,stock);saved.start();saved.run(4,False)
+    saved=World(meta['enabled'],events,dilemmas,quests,stock);saved.variables['NI/Frontiers/version']=-1;saved.start();saved.run(4,False)
     restored=saved.checkpoint();restored.start() # GameStarted must not reset a saved city.
     saved.run(40);restored.run(40)
     assert saved.__dict__==restored.__dict__,'Load changed progress or replayed initialization'
@@ -149,7 +152,7 @@ def main():
     from validate_tooltips import language_table
     references=set()
     for data in current.values():
-        references.update(match[1:].decode() for match in re.findall(rb'\x01(@Mods/NewIndustry/Endless/[^\0]+)\0',data))
+        references.update(match[1:].decode() for match in re.findall(rb'\x01(@Mods/NewIndustry/(?:Endless|Frontiers)/[^\0]+)\0',data))
     languages=0
     for item in manifest['archives']['localizations']['entries']:
         table=language_table(gzip.decompress((ROOT/'build/native/payload'/item['payload']).read_bytes()))
@@ -157,6 +160,14 @@ def main():
         languages+=1
     assert languages==13
     result.update(localized_references=len(references),language_tables=languages)
+    from validate_frontiers import audit as audit_frontiers
+    result['frontiers']=audit_frontiers(decoded,meta,manifest['configuration']['resource_ids'])
+    technology_data=payload['configs/frostpunktechnologiesconfig.bin']
+    token=b'\1\1Default_Endless\0';at=technology_data.index(token)+len(token)+16
+    count=struct.unpack_from('<I',technology_data,at)[0]
+    members={technology_data[p:p+16].hex() for p in range(at+4,at+4+16*count,16)}
+    assert all(g['target'] in members for q in meta['frontiers']['missions'] for g in q['goals'] if g['kind']=='research')
+    result['frontiers']['research_targets_available']=True
     (ROOT/'build/endless-validation.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result))
 

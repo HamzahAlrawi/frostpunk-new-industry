@@ -15,14 +15,14 @@ class ReconstructionTests(unittest.TestCase):
     def test_five_tracks_and_unique_mode_parameter(self):
         self.assertEqual([t['id'] for t in self.mode['tracks']],['Projects','Foundry','Gardens','Salvage','Contracts'])
         self.assertEqual(len({self.mode[k] for k in ('parameter','enabled','disabled')}),3)
-        self.assertEqual(self.mode['quests'],60)
-        self.assertEqual(self.mode['events'],121)
+        self.assertEqual(self.mode['quests'],60+len(self.mode['frontiers']['missions'])+len(self.mode['frontiers']['incidents'])+len(self.mode['frontiers']['work_orders']))
+        self.assertGreater(self.mode['events'],121)
 
     def test_projects_have_permanent_rewards_and_no_deadlines(self):
         stages=self.mode['tracks'][0]['stages']
         self.assertEqual(len(stages),12)
         self.assertEqual(stages[-1]['next'],99)
-        self.assertEqual(len(self.mode['rewards']),11)
+        self.assertEqual(len([r for r in self.mode['rewards'] if r['id'].startswith('Reconstruction/')]),11)
         for number,stage in enumerate(stages,1):
             self.assertEqual(stage['state'],number)
             self.assertNotIn('deadline',stage)

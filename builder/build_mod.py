@@ -369,6 +369,10 @@ patches['common'][scenarios_path]=starting_supplies(endless_patches[scenarios_pa
 # native difficulty effect vectors without changing scenario assets or scripts.
 patches['common'][difficulty_path]=(SRC/'common'/difficulty_path).read_bytes()
 patches['common'][society_path]=new_society
+from menu_layout import build as build_menu_layout,native_mode_labels
+ui_patches,ui_metadata=build_menu_layout(SRC/'templates')
+patches['templates'].update(ui_patches)
+texts.update(native_mode_labels())
 for path, additions in station_targets.items():
     if path==factory_path:
         # The Factory queue above collects every Factory recipe, including the
@@ -398,6 +402,7 @@ manifest['configuration']={'schema_version':1,'resource_ids':{name:RES[name].hex
                            'research_durations':duration_offsets,'workshop_curve_offset':len(newTC)-len(sets)}
 manifest['laws']=civic_laws
 manifest['endless']=endless_metadata
+manifest['endless']['ui']=ui_metadata
 manifest['modifier_tooltips']=modifier_tooltips
 manifest['native_law_book_order']=['Purpose','Adaptation','Labour','ADMINISTRATION']
 manifest['legacy_civic_book']={'guid':gid('civic-law-book').hex(),'compatibility_only':True,'requirement':'P AND NOT(P)'}

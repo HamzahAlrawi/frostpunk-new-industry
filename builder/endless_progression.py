@@ -4,7 +4,7 @@ Content is data first. The compiler below emits only known native event, quest
 and dilemma classes. No Lua, DLL, executable or ability-component patch is used.
 """
 import struct
-from tools.endless_schema import Parameter,append_parameter,append_mode
+from tools.endless_schema import Parameter,append_parameter,append_modes
 from tools.native_scenario import (validate_native_samples,event,append_directory,mode_selected,
     set_variable,equals,affordable,change_resource,delayed,guarded,dilemma,start_quest,
     progress_quest,apply_modifier,predefined)
@@ -148,6 +148,16 @@ def build(source,modifier_data,buildings,techinfo,guid,localize,resources):
     parameter=Parameter('NI Reconstruction',identity('parameter'),[
         dict(name='Disabled',guid=identity('disabled'),default=True,display=None,description=None),
         dict(name='Enabled',guid=enabled,default=False,display=None,description=None)],None,None)
+    campaign_values={i:guid('frontiers/campaign/'+str(i)).hex() for i in (1,2,3)}
+    campaign_parameter=Parameter('NI Frontier Mode',guid('frontiers/campaign-parameter').hex(),[
+        dict(name='None',guid=guid('frontiers/campaign/none').hex(),default=True,display=None,description=None)]+
+        [dict(name=name,guid=campaign_values[i],default=False,display=None,description=None)
+         for i,name in ((1,'Restoration'),(2,'Whiteout'),(3,'Machine Age'))],None,None)
+    mode_definitions=[dict(name=name,title=title,subtitle=subtitle,description=description,value=campaign_values[i])
+        for i,name,title,subtitle,description in (
+            (1,'Reconstruction','Restoration','Rebuild','Build a capital. Choose its future.'),
+            (2,'Whiteout','Whiteout','Endure','Survive the front. Protect the city.'),
+            (3,'MachineAge','Machine Age','Automate','Build a working machine commonwealth.'))]
     paths={key:'configs/frostpunk'+key+'config.bin' for key in ('endlessmode','scenarios','gameevents','dilemmas','quests')}
     originals={key:(source/path).read_bytes() for key,path in paths.items()}
     resource_ids={k:v.hex() for k,v in resources.items()}
@@ -234,13 +244,17 @@ def build(source,modifier_data,buildings,techinfo,guid,localize,resources):
         key=track['id'];initial=track['initial']
         effects.extend([setv(key,'stage',initial),setv(key,'status',3),ready(key,initial,key+'/initial',track['start'])])
     events.insert(0,event('NI Reconstruction Initialize',identity('event/init'),identity('trigger/init'),
-        [flag,equals('NI/Reconstruction/initialized',0)],effects))
-    revised={paths['endlessmode']:append_mode(originals['endlessmode'],'Reconstruction',enabled,localize),
-        paths['scenarios']:append_parameter(originals['scenarios'],parameter),
+        [flag,equals('NI/Reconstruction/initialized',0),equals('NI/Frontiers/version',-1)],effects))
+    from frontier_campaigns import build as build_campaigns
+    fe,fd,fq,modifier_data,fo,frontiers=build_campaigns(source,modifier_data,buildings,techinfo,guid,localize,resources,dt,qt,enabled,tracks,campaign_values)
+    events=fe+events;dilemmas+=fd;quests+=fq;owners+=fo
+    revised={paths['endlessmode']:append_modes(originals['endlessmode'],mode_definitions,enabled,localize),
+        paths['scenarios']:append_parameter(append_parameter(originals['scenarios'],parameter),campaign_parameter),
         paths['gameevents']:append_directory(originals['gameevents'],'CustomScenarioEvents','Scenario Builders Quest',events),
         paths['dilemmas']:append_directory(originals['dilemmas'],'CustomScenario','Winterhome Scenario',dilemmas),
         paths['quests']:append_directory(originals['quests'],'CustomScenarios','Scenario Builders',quests)}
     metadata=dict(id='Reconstruction',parameter=parameter.guid,enabled=enabled,disabled=identity('disabled'),
         tracks=tracks,rewards=owners,events=len(events),dilemmas=len(dilemmas),quests=len(quests),
-        poll_days=0.25,description='Twelve permanent megaprojects, three recurring relief routes, optional industrial contracts.')
+        poll_days=0.25,description='Three separate Endless modes with automatic chapters and timed incidents.',frontiers=frontiers,
+        campaign_parameter=campaign_parameter.guid,campaign_values=campaign_values,modes=mode_definitions)
     return revised,modifier_data,owners,metadata

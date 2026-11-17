@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.15.0",
+  "version": "3.16.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -23118,13 +23118,2478 @@
         "title": "A World Rebuilt",
         "description": "Complete the reconstruction programme. All workplaces gain 75% efficiency. Relief routes and contracts continue indefinitely.",
         "modifier": "9b46c193f990be598c616384d0b9419c"
+      },
+      {
+        "id": "Frontiers/civic",
+        "title": "Civic Commonwealth",
+        "description": "Homes and civic services gain +1 insulation; healthcare +100% efficiency; industry -15%.",
+        "modifier": "459faf222a7e7555abdb149fd08d5e28"
+      },
+      {
+        "id": "Frontiers/league",
+        "title": "Industrial League",
+        "description": "Factories and Steelworks +100% efficiency; Workshops +75%. Requires 150 coal and 10 steel every six hours.",
+        "modifier": "99dfd03883d486549dd9c07f065c1de3"
+      },
+      {
+        "id": "Frontiers/grid",
+        "title": "Emergency Heat Grid",
+        "description": "Citywide +2 insulation while its 250-coal six-hour upkeep is funded.",
+        "modifier": "28a8b181b679975e936cfa28fb254879"
+      },
+      {
+        "id": "Frontiers/shelter",
+        "title": "Shelter Network",
+        "description": "Homes, healthcare and civic buildings +3 insulation; Workshop efficiency -20%.",
+        "modifier": "b993272948bc475c9e64c4e94aee2e06"
+      },
+      {
+        "id": "Frontiers/closed",
+        "title": "Closed-loop Industry",
+        "description": "Industrial and extraction automaton efficiency +150%; human efficiency -25%. Requires one Steam Core per day.",
+        "modifier": "de6b7227d33c1558b7e536cfe8110b93"
+      },
+      {
+        "id": "Frontiers/partnership",
+        "title": "Human-machine Partnership",
+        "description": "Industry and extraction: human efficiency +50%, automaton efficiency +75%. Medical efficiency -15%.",
+        "modifier": "831ad21c41089354bc4e2f052d30fee3"
+      },
+      {
+        "id": "Frontiers/front1",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 1 insulation levels from every insulated building.",
+        "modifier": "493db2272daf14589a533b38c8b8a3a8"
+      },
+      {
+        "id": "Frontiers/front2",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 2 insulation levels from every insulated building.",
+        "modifier": "a32f50ae14626d54bcfd3e4339245762"
+      },
+      {
+        "id": "Frontiers/front3",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 3 insulation levels from every insulated building.",
+        "modifier": "58f9bebb63830d58a2f311a7dccd2be9"
+      },
+      {
+        "id": "Frontiers/front4",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 4 insulation levels from every insulated building.",
+        "modifier": "2042b87dbf85d952a480c465a056336e"
+      },
+      {
+        "id": "Frontiers/quarantine",
+        "title": "Emergency Quarantine",
+        "description": "For two days: healthcare +100% efficiency; industrial efficiency -35%.",
+        "modifier": "d9935a702d23795498ce43199f2a1ed3"
+      },
+      {
+        "id": "Frontiers/stretch",
+        "title": "Stretched Provisions",
+        "description": "For two days: food workplace efficiency +100%, cold-related illness +30%.",
+        "modifier": "96a2a85fd6cccf5da9531e9dc613a53e"
+      },
+      {
+        "id": "Frontiers/engineers",
+        "title": "Engineers on Repair Duty",
+        "description": "For two days: Factory efficiency +100%; Workshop efficiency -50%.",
+        "modifier": "a1a9c12c1ef1c85eb09506750d252310"
+      },
+      {
+        "id": "Frontiers/retool",
+        "title": "New Machine Assemblies",
+        "description": "For two days: Factory efficiency +75%.",
+        "modifier": "4bbc190a5330c350ab77763790eebb28"
+      },
+      {
+        "id": "Frontiers/rest",
+        "title": "Maintenance Shutdown",
+        "description": "For two days: Factory efficiency -40%.",
+        "modifier": "ea007265f48e2453acfdaa220418c13e"
+      },
+      {
+        "id": "Frontiers/seal",
+        "title": "Sealed Districts",
+        "description": "For two days: citywide +2 insulation; industry and food workplace efficiency -25%.",
+        "modifier": "a528b14ab4c6d65ca3409a35321f77b2"
+      },
+      {
+        "id": "Frontiers/burn",
+        "title": "Emergency Fuel Burn",
+        "description": "For two days: citywide +3 insulation.",
+        "modifier": "ee18a487a3a4105d9acd9c9b8b851cc5"
+      },
+      {
+        "id": "Frontiers/push",
+        "title": "Exposed Production Drive",
+        "description": "For two days: workplaces +50% efficiency; citywide insulation -1.",
+        "modifier": "409647574875785a91e889fd17516be7"
+      },
+      {
+        "id": "Frontiers/community",
+        "title": "Community Service Programme",
+        "description": "Homes/civic services +1 insulation; healthcare +50% efficiency.",
+        "modifier": "fed674d6710a095889884e48936fd45a"
+      },
+      {
+        "id": "Frontiers/council",
+        "title": "Civic Assembly",
+        "description": "Food and healthcare efficiency +75%; industry efficiency -25%.",
+        "modifier": "67d50eac05dadf54806a682b9f3dcd3d"
+      },
+      {
+        "id": "Frontiers/overclock",
+        "title": "Fabrication Drive",
+        "description": "Industry efficiency +125%; food workplace efficiency -25%.",
+        "modifier": "10b329d226b7b251a29ea03953c75085"
+      },
+      {
+        "id": "Frontiers/relief",
+        "title": "Expanded Relief Services",
+        "description": "Healthcare +100%, food +75%, industry -25% efficiency.",
+        "modifier": "830ad06f475ae3599a70774b2ae2050e"
+      },
+      {
+        "id": "Frontiers/care",
+        "title": "Consolidated Warm Wards",
+        "description": "Healthcare +2 insulation but -25% efficiency; food efficiency +50%.",
+        "modifier": "e18e7b8bd174d7578f9caf43753736f8"
+      },
+      {
+        "id": "Frontiers/coalshift",
+        "title": "Forced Coal Extraction",
+        "description": "Coal mine/thumper efficiency +75%; citywide insulation -1.",
+        "modifier": "c982f3ea152f635987e157c7ec20d0fa"
+      },
+      {
+        "id": "Frontiers/housing",
+        "title": "Sheltered Housing Blocks",
+        "description": "Homes +3 insulation; industry efficiency -25%.",
+        "modifier": "2cc6293bbc6107589dad40e648c0492e"
+      },
+      {
+        "id": "Frontiers/thermal_kits",
+        "title": "Distributed Thermal Kits",
+        "description": "Homes, healthcare and civic services gain +3 insulation.",
+        "modifier": "5e7750043cfe755e9899cd8e1994b94a"
+      },
+      {
+        "id": "Frontiers/restcity",
+        "title": "Recovery Shifts",
+        "description": "All workplace efficiency -35%; cold-related illness -50%.",
+        "modifier": "6fbdd7e13065695785651f3871910b05"
+      },
+      {
+        "id": "Frontiers/driven",
+        "title": "Demanded Production Drive",
+        "description": "All workplace efficiency +75%; cold-related illness +50%.",
+        "modifier": "df54eb564e7a705aa20a8217afc7d10d"
+      },
+      {
+        "id": "Frontiers/equipment",
+        "title": "Protected Work Shifts",
+        "description": "All workplace efficiency +25%; citywide insulation +1.",
+        "modifier": "aaa5ccf7e7f25552809d8e5334e6b1f3"
+      },
+      {
+        "id": "Frontiers/survey",
+        "title": "Specialists on Rescue Duty",
+        "description": "Industry efficiency +50%; healthcare efficiency -35%.",
+        "modifier": "2a4a801766dced50a0aed9b5a0a1b3a0"
+      },
+      {
+        "id": "Frontiers/servo",
+        "title": "Standardised Automation",
+        "description": "Industry/extraction: automaton efficiency +100%, human efficiency -35%.",
+        "modifier": "a55699a9d85dc951b1808c17ec68ead7"
+      },
+      {
+        "id": "Frontiers/human",
+        "title": "Human Industrial Expertise",
+        "description": "Industry/extraction: human efficiency +100%, automaton efficiency -25%.",
+        "modifier": "878b4993e1877d5db4b5e03b8383595a"
+      },
+      {
+        "id": "Frontiers/shared",
+        "title": "Joint Production Standards",
+        "description": "Industry/extraction human and automaton efficiency +50%.",
+        "modifier": "d05925bd560e7e56b9e0cbcecbf70fe3"
+      },
+      {
+        "id": "Frontiers/masterwork",
+        "title": "The Factory Masterwork",
+        "description": "Industry efficiency +150%; healthcare efficiency +25%.",
+        "modifier": "ad46490a2d946e57855df847334ba498"
+      },
+      {
+        "id": "Frontiers/neglect",
+        "title": "Emergency Heat Restrictions",
+        "description": "Citywide insulation -1; industry efficiency -25%.",
+        "modifier": "a1a96d228f7fd958b63a3ad2ba9cc6be"
+      },
+      {
+        "id": "Frontiers/workprogramme",
+        "title": "Factory Repair Programme",
+        "description": "Factory efficiency -25% while the repair programme is active.",
+        "modifier": "91f45e509621ca598f7da6b4ba39d091"
       }
     ],
-    "events": 121,
-    "dilemmas": 80,
-    "quests": 60,
+    "events": 203,
+    "dilemmas": 109,
+    "quests": 103,
     "poll_days": 0.25,
-    "description": "Twelve permanent megaprojects, three recurring relief routes, optional industrial contracts."
+    "description": "Three separate Endless modes with automatic chapters and timed incidents.",
+    "frontiers": {
+      "campaigns": [
+        {
+          "id": 1,
+          "key": "Restoration",
+          "title": "The Restoration",
+          "description": "Build a regional capital. Choose civic self-sufficiency or industrial expansion, develop real districts and prove the city can sustain them.",
+          "branches": [
+            {
+              "title": "Civic Commonwealth",
+              "description": "Homes and civic buildings gain +1 insulation; healthcare gains 100% efficiency. Industry loses 15% efficiency. No upkeep.",
+              "bonus": "civic"
+            },
+            {
+              "title": "Industrial League",
+              "description": "Factories and Steelworks gain 100% efficiency; Workshops gain 75%. Upkeep: 150 coal and 10 steel every six hours. Bonuses pause if supplies run short.",
+              "bonus": "league",
+              "upkeep": {
+                "Coal": 150,
+                "Steel": 10
+              },
+              "period": 0.25
+            }
+          ],
+          "missions": [
+            {
+              "phase": 1,
+              "title": "A functioning settlement",
+              "goals": [
+                {
+                  "kind": "build",
+                  "text": "Build a Workshop",
+                  "names": [
+                    "Engineers Lab"
+                  ],
+                  "quantity": 1
+                },
+                {
+                  "kind": "build",
+                  "text": "Build a healthcare workplace",
+                  "names": [
+                    "Medical Post",
+                    "Ambulatorium",
+                    "HospitalOfMercy"
+                  ],
+                  "quantity": 1
+                },
+                {
+                  "kind": "build",
+                  "text": "Build a Cookhouse",
+                  "names": [
+                    "Food Processing"
+                  ],
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "phase": 2,
+              "title": "Build the supply chains",
+              "goals": [
+                {
+                  "kind": "build",
+                  "text": "Build a Sawmill or Steam Sawmill",
+                  "names": [
+                    "Sawmill",
+                    "SteamSawmill"
+                  ],
+                  "quantity": 1
+                },
+                {
+                  "kind": "build",
+                  "text": "Build a Steelworks",
+                  "names": [
+                    "Iron Ore Mine",
+                    "SteamIronOreMine",
+                    "AdvancedOreMine"
+                  ],
+                  "quantity": 1
+                },
+                {
+                  "kind": "research",
+                  "text": "Research Drawing Boards",
+                  "technology": "01_TierUnlock 1"
+                }
+              ]
+            },
+            {
+              "phase": 3,
+              "path": 1,
+              "title": "The civic quarter",
+              "goals": [
+                {
+                  "kind": "build",
+                  "text": "Build four Houses",
+                  "names": [
+                    "House"
+                  ],
+                  "quantity": 4
+                },
+                {
+                  "kind": "build",
+                  "text": "Build an Infirmary",
+                  "names": [
+                    "Ambulatorium"
+                  ],
+                  "quantity": 1
+                },
+                {
+                  "kind": "build",
+                  "text": "Build a Hothouse",
+                  "names": [
+                    "Plantation",
+                    "Steam Plantation"
+                  ],
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "phase": 3,
+              "path": 2,
+              "title": "The industrial quarter",
+              "goals": [
+                {
+                  "kind": "build",
+                  "text": "Build a Factory",
+                  "names": [
+                    "Factory"
+                  ],
+                  "quantity": 1
+                },
+                {
+                  "kind": "produce",
+                  "text": "Manufacture 2 new automatons",
+                  "quantity": 2
+                },
+                {
+                  "kind": "research",
+                  "text": "Research Steam Core Fabrication (Industry, tier II)",
+                  "technology": "mod:Cores1"
+                }
+              ]
+            },
+            {
+              "phase": 4,
+              "path": 1,
+              "title": "A healthy city",
+              "goals": [
+                {
+                  "kind": "build",
+                  "text": "Build two Infirmaries",
+                  "names": [
+                    "Ambulatorium"
+                  ],
+                  "quantity": 2
+                },
+                {
+                  "kind": "research",
+                  "text": "Research Healthcare Insulation",
+                  "technology": "F 6_Healthcare Buildings - warmer"
+                },
+                {
+                  "kind": "build",
+                  "text": "Build a Public House",
+                  "names": [
+                    "PublicHouse"
+                  ],
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "phase": 4,
+              "path": 2,
+              "title": "Mechanise the frontier",
+              "goals": [
+                {
+                  "kind": "produce",
+                  "text": "Manufacture 4 new automatons",
+                  "quantity": 4
+                },
+                {
+                  "kind": "build",
+                  "text": "Build a Wall Drill",
+                  "names": [
+                    "WallDrill",
+                    "WallDrillSteam",
+                    "WallDrillAdvanced"
+                  ],
+                  "quantity": 1
+                },
+                {
+                  "kind": "research",
+                  "text": "Research Automaton Integration",
+                  "technology": "E 4_Automaton Efficiency"
+                }
+              ]
+            },
+            {
+              "phase": 5,
+              "title": "The regional capital",
+              "goals": [
+                {
+                  "kind": "build",
+                  "text": "Build two Large Resource Depots",
+                  "names": [
+                    "Resource Depot Big"
+                  ],
+                  "quantity": 2
+                },
+                {
+                  "kind": "build",
+                  "text": "Build eight Houses",
+                  "names": [
+                    "House"
+                  ],
+                  "quantity": 8
+                },
+                {
+                  "kind": "research",
+                  "text": "Research Difference Engine",
+                  "technology": "04_TierUnlock4"
+                }
+              ]
+            },
+            {
+              "phase": 6,
+              "title": "Prove the capital can endure",
+              "checks": 12,
+              "reserves": {
+                "Coal": 10000,
+                "Wood": 3000,
+                "Steel": 3000,
+                "Food Rations": 4000,
+                "Steam Cores": 10
+              },
+              "goals": []
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "key": "Whiteout",
+          "title": "The Whiteout",
+          "description": "Four thermal fronts arrive 2, 5, 9 and 13 days after the city begins. Build redundant heating and healthcare, choose how to protect the city, then keep the Generator and storm reserves running.",
+          "branches": [
+            {
+              "title": "Emergency Heat Grid",
+              "description": "Every insulated building gains +2 insulation. Upkeep: 250 coal every six hours. The extra heat pauses when fuel is unavailable.",
+              "bonus": "grid",
+              "upkeep": {
+                "Coal": 250
+              },
+              "period": 0.25
+            },
+            {
+              "title": "Shelter Network",
+              "description": "Homes, healthcare and civic buildings gain +3 insulation. Workshop efficiency falls by 20%. Industry gets no extra heat. No upkeep.",
+              "bonus": "shelter"
+            }
+          ],
+          "missions": [
+            {
+              "phase": 1,
+              "title": "Prepare the emergency services",
+              "goals": [
+                {
+                  "kind": "build",
+                  "text": "Build two Workshops",
+                  "names": [
+                    "Engineers Lab"
+                  ],
+                  "quantity": 2
+                },
+                {
+                  "kind": "build",
+                  "text": "Build two healthcare workplaces",
+                  "names": [
+                    "Medical Post",
+                    "Ambulatorium",
+                    "HospitalOfMercy"
+                  ],
+                  "quantity": 2
+                },
+                {
+                  "kind": "build",
+                  "text": "Build four homes",
+                  "names": [
+                    "Tent",
+                    "Bunkhouse",
+                    "House"
+                  ],
+                  "quantity": 4
+                }
+              ]
+            },
+            {
+              "phase": 2,
+              "title": "Establish heat redundancy",
+              "goals": [
+                {
+                  "kind": "research",
+                  "text": "Research Steam Hubs",
+                  "technology": "H 1_SteamHub"
+                },
+                {
+                  "kind": "build",
+                  "text": "Build two Steam Hubs",
+                  "names": [
+                    "Steam Hub"
+                  ],
+                  "quantity": 2
+                },
+                {
+                  "kind": "research",
+                  "text": "Research Generator Power Upgrade I",
+                  "technology": "H 2_Generator Upgrade - power 1"
+                }
+              ]
+            },
+            {
+              "phase": 3,
+              "title": "Protect the vulnerable",
+              "goals": [
+                {
+                  "kind": "build",
+                  "text": "Build six Houses",
+                  "names": [
+                    "House"
+                  ],
+                  "quantity": 6
+                },
+                {
+                  "kind": "build",
+                  "text": "Build an Infirmary",
+                  "names": [
+                    "Ambulatorium"
+                  ],
+                  "quantity": 1
+                },
+                {
+                  "kind": "research",
+                  "text": "Research Healthcare Insulation",
+                  "technology": "F 6_Healthcare Buildings - warmer"
+                }
+              ]
+            },
+            {
+              "phase": 4,
+              "title": "Keep the fuel coming",
+              "goals": [
+                {
+                  "kind": "build",
+                  "text": "Build three coal mines or Coal Thumpers",
+                  "names": [
+                    "Coal Mine",
+                    "SteamCoalMine",
+                    "AdvancedCoalMine",
+                    "CoalThumper",
+                    "CoalThumperSteam"
+                  ],
+                  "quantity": 3
+                },
+                {
+                  "kind": "produce",
+                  "text": "Manufacture 2 new automatons",
+                  "quantity": 2
+                },
+                {
+                  "kind": "research",
+                  "text": "Research Generator Efficiency Upgrade",
+                  "technology": "H 3_Generator Upgrade - less coal"
+                }
+              ]
+            },
+            {
+              "phase": 5,
+              "title": "The last heating reserve",
+              "goals": [
+                {
+                  "kind": "research",
+                  "text": "Research House Insulation",
+                  "technology": "F 6_House Insulation"
+                },
+                {
+                  "kind": "research",
+                  "text": "Research Generator Power Upgrade II",
+                  "technology": "H 4_Generator Upgrade - power 2"
+                },
+                {
+                  "kind": "build",
+                  "text": "Build two Large Resource Depots",
+                  "names": [
+                    "Resource Depot Big"
+                  ],
+                  "quantity": 2
+                }
+              ]
+            },
+            {
+              "phase": 6,
+              "title": "Hold through the whiteout",
+              "checks": 16,
+              "reserves": {
+                "Coal": 12000,
+                "Wood": 1500,
+                "Steel": 1500,
+                "Food Rations": 3500
+              },
+              "goals": []
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "key": "Commonwealth",
+          "title": "The Machine Commonwealth",
+          "description": "Create a working automaton economy. Production objectives count new machines, staffing objectives require actual assignments, and the city must finance the system it builds.",
+          "branches": [
+            {
+              "title": "Closed-loop Industry",
+              "description": "Industrial and extraction workplaces: automaton efficiency +150%, human efficiency -25%. Upkeep: one Steam Core per day. Bonuses pause without a core.",
+              "bonus": "closed",
+              "upkeep": {
+                "Steam Cores": 1
+              },
+              "period": 1
+            },
+            {
+              "title": "Human-machine Partnership",
+              "description": "Industrial and extraction workplaces: automaton efficiency +75%, human efficiency +50%. Medical workplace efficiency falls by 15%. No upkeep.",
+              "bonus": "partnership"
+            }
+          ],
+          "missions": [
+            {
+              "phase": 1,
+              "title": "Lay the industrial foundations",
+              "goals": [
+                {
+                  "kind": "build",
+                  "text": "Build two Workshops",
+                  "names": [
+                    "Engineers Lab"
+                  ],
+                  "quantity": 2
+                },
+                {
+                  "kind": "build",
+                  "text": "Build a Sawmill",
+                  "names": [
+                    "Sawmill",
+                    "SteamSawmill"
+                  ],
+                  "quantity": 1
+                },
+                {
+                  "kind": "build",
+                  "text": "Build a Steelworks",
+                  "names": [
+                    "Iron Ore Mine",
+                    "SteamIronOreMine",
+                    "AdvancedOreMine"
+                  ],
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "phase": 2,
+              "title": "Commission the first machines",
+              "goals": [
+                {
+                  "kind": "research",
+                  "text": "Research the Factory",
+                  "technology": "E 3_Factory"
+                },
+                {
+                  "kind": "build",
+                  "text": "Build a Factory",
+                  "names": [
+                    "Factory"
+                  ],
+                  "quantity": 1
+                },
+                {
+                  "kind": "research",
+                  "text": "Research Steam Core Fabrication (Industry, tier II)",
+                  "technology": "mod:Cores1"
+                },
+                {
+                  "kind": "produce",
+                  "text": "Manufacture 2 new automatons",
+                  "quantity": 2
+                }
+              ]
+            },
+            {
+              "phase": 3,
+              "title": "Build the machine workforce",
+              "goals": [
+                {
+                  "kind": "produce",
+                  "text": "Manufacture 4 new automatons",
+                  "quantity": 4
+                },
+                {
+                  "kind": "research",
+                  "text": "Research Automaton Integration",
+                  "technology": "E 4_Automaton Efficiency"
+                }
+              ]
+            },
+            {
+              "phase": 4,
+              "title": "Put the machines to work",
+              "goals": [
+                {
+                  "kind": "automate",
+                  "text": "Assign automatons to more than 30% of workplaces",
+                  "quantity": 0.3
+                },
+                {
+                  "kind": "produce",
+                  "text": "Manufacture 4 new automatons",
+                  "quantity": 4
+                },
+                {
+                  "kind": "build",
+                  "text": "Build a second Factory",
+                  "names": [
+                    "Factory"
+                  ],
+                  "quantity": 2
+                }
+              ]
+            },
+            {
+              "phase": 5,
+              "title": "An autonomous production network",
+              "goals": [
+                {
+                  "kind": "research",
+                  "text": "Research Engineer Automatons",
+                  "technology": "E 5_Automaton Engineers"
+                },
+                {
+                  "kind": "automate",
+                  "text": "Assign automatons to more than 50% of workplaces",
+                  "quantity": 0.5
+                },
+                {
+                  "kind": "produce",
+                  "text": "Manufacture 6 new automatons",
+                  "quantity": 6
+                }
+              ]
+            },
+            {
+              "phase": 6,
+              "title": "Sustain the machine commonwealth",
+              "checks": 12,
+              "reserves": {
+                "Coal": 18000,
+                "Steel": 4000,
+                "Food Rations": 5000,
+                "Steam Cores": 12
+              },
+              "goals": [
+                {
+                  "kind": "automate",
+                  "text": "Assign automatons to more than 50% of workplaces",
+                  "quantity": 0.5
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "missions": [
+        {
+          "campaign": 1,
+          "phase": 1,
+          "path": null,
+          "guid": "91e523e793817858bda4d17b8baaa435",
+          "title": "A functioning settlement",
+          "goals": [
+            {
+              "kind": "build",
+              "text": "Build a Workshop",
+              "quantity": 1,
+              "target": [
+                "ef89bf3e0a1a40bfa149355bdc4e83b5"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build a healthcare workplace",
+              "quantity": 1,
+              "target": [
+                "f6a831d9683c3d9b904cd09ded358f8a",
+                "98c676299c50c1841a4568ff11d61bde",
+                "8914dc6cfe447894474dd2f0d9ee527e"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build a Cookhouse",
+              "quantity": 1,
+              "target": [
+                "59b3ef3d8505aea51a45828da82a1c3d"
+              ]
+            }
+          ]
+        },
+        {
+          "campaign": 1,
+          "phase": 2,
+          "path": null,
+          "guid": "44c90cbed3ada6519d52efe12cdf3026",
+          "title": "Build the supply chains",
+          "goals": [
+            {
+              "kind": "build",
+              "text": "Build a Sawmill or Steam Sawmill",
+              "quantity": 1,
+              "target": [
+                "86c6b20dcd79b083a048d4461ff99971",
+                "fad2f1d169d320b4b5481ccae7d014f7"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build a Steelworks",
+              "quantity": 1,
+              "target": [
+                "a18dbc3c1439ba9c04447717e2610bfd",
+                "44b57d5b4469cca01141048637022110",
+                "b632fa1cb69bc086874602c5f4b57a44"
+              ]
+            },
+            {
+              "kind": "research",
+              "text": "Research Drawing Boards",
+              "target": "ae4ab761365f5bbefd4822639a66ddf5"
+            }
+          ]
+        },
+        {
+          "campaign": 1,
+          "phase": 3,
+          "path": 1,
+          "guid": "36e64c42bd868553b84f66e453de37da",
+          "title": "The civic quarter",
+          "goals": [
+            {
+              "kind": "build",
+              "text": "Build four Houses",
+              "quantity": 4,
+              "target": [
+                "a7377de655c61d9b3745e66c0f2ec651"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build an Infirmary",
+              "quantity": 1,
+              "target": [
+                "98c676299c50c1841a4568ff11d61bde"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build a Hothouse",
+              "quantity": 1,
+              "target": [
+                "20e9be8106e19f838b4bb73be86d04de",
+                "20e9be8106e19f838b4bb73ae86d04de"
+              ]
+            }
+          ]
+        },
+        {
+          "campaign": 1,
+          "phase": 3,
+          "path": 2,
+          "guid": "c0d243320efd9857a5a0dbf1e2050d3f",
+          "title": "The industrial quarter",
+          "goals": [
+            {
+              "kind": "build",
+              "text": "Build a Factory",
+              "quantity": 1,
+              "target": [
+                "20e819887723898b4b46612b11d272f6"
+              ]
+            },
+            {
+              "kind": "produce",
+              "text": "Manufacture 2 new automatons",
+              "quantity": 2,
+              "target": [
+                "cc33ac0c093846b56040ff68fee8e948",
+                "3aa98fd2adb62d8e8d4ecd95f54f2a11",
+                "061c4e12f375c4a75b42f32d97bc2d1e",
+                "779e0650acc4a99da24b53fe21be23e5",
+                "b21a11b15c4a53803b418396e9e7b82c",
+                "ce273b022251a6904842e7fd0e6999b4"
+              ]
+            },
+            {
+              "kind": "research",
+              "text": "Research Steam Core Fabrication (Industry, tier II)",
+              "target": "810d520980b7385ba43c20fedabb12cf"
+            }
+          ]
+        },
+        {
+          "campaign": 1,
+          "phase": 4,
+          "path": 1,
+          "guid": "c038130d86d2a655a5ca194ca79a605f",
+          "title": "A healthy city",
+          "goals": [
+            {
+              "kind": "build",
+              "text": "Build two Infirmaries",
+              "quantity": 2,
+              "target": [
+                "98c676299c50c1841a4568ff11d61bde"
+              ]
+            },
+            {
+              "kind": "research",
+              "text": "Research Healthcare Insulation",
+              "target": "1f8369ef01981f8852433d4e4e8ea639"
+            },
+            {
+              "kind": "build",
+              "text": "Build a Public House",
+              "quantity": 1,
+              "target": [
+                "12817dcd6021fe91714474cd291c5259"
+              ]
+            }
+          ]
+        },
+        {
+          "campaign": 1,
+          "phase": 4,
+          "path": 2,
+          "guid": "205172d8292337599e917402378d5c40",
+          "title": "Mechanise the frontier",
+          "goals": [
+            {
+              "kind": "produce",
+              "text": "Manufacture 4 new automatons",
+              "quantity": 4,
+              "target": [
+                "cc33ac0c093846b56040ff68fee8e948",
+                "3aa98fd2adb62d8e8d4ecd95f54f2a11",
+                "061c4e12f375c4a75b42f32d97bc2d1e",
+                "779e0650acc4a99da24b53fe21be23e5",
+                "b21a11b15c4a53803b418396e9e7b82c",
+                "ce273b022251a6904842e7fd0e6999b4"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build a Wall Drill",
+              "quantity": 1,
+              "target": [
+                "a2d3c14ee1070c8f9e4d81dcc8dc161d",
+                "e9206f847f7b51a5404fe88109f9838d",
+                "42e71b620a0fd9a0ad422b42bbcf2893"
+              ]
+            },
+            {
+              "kind": "research",
+              "text": "Research Automaton Integration",
+              "target": "c625132c96c1169e6a44d9c19ff272ef"
+            }
+          ]
+        },
+        {
+          "campaign": 1,
+          "phase": 5,
+          "path": null,
+          "guid": "417193cfa72868508184f3cbdddfa5e6",
+          "title": "The regional capital",
+          "goals": [
+            {
+              "kind": "build",
+              "text": "Build two Large Resource Depots",
+              "quantity": 2,
+              "target": [
+                "d17fb879d88864a9444ee0283802c4cd"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build eight Houses",
+              "quantity": 8,
+              "target": [
+                "a7377de655c61d9b3745e66c0f2ec651"
+              ]
+            },
+            {
+              "kind": "research",
+              "text": "Research Difference Engine",
+              "target": "96557513559e5c9fc44d4409e3849779"
+            }
+          ]
+        },
+        {
+          "campaign": 1,
+          "phase": 6,
+          "path": null,
+          "guid": "3e2124fda5488a50870d10a5f686a098",
+          "title": "Prove the capital can endure",
+          "goals": [
+            {
+              "kind": "checks",
+              "quantity": 12,
+              "text": "Complete 12 operating checks",
+              "description": "Every six game hours: keep the Generator on and retain 10,000 coal, 3,000 wood, 3,000 steel, 4,000 food rations, 10 steam cores. Checks pause while conditions fail. Supplies are retained; charter upkeep still applies."
+            }
+          ]
+        },
+        {
+          "campaign": 2,
+          "phase": 1,
+          "path": null,
+          "guid": "4fdf43cd5633a9509339fc9a972da059",
+          "title": "Prepare the emergency services",
+          "goals": [
+            {
+              "kind": "build",
+              "text": "Build two Workshops",
+              "quantity": 2,
+              "target": [
+                "ef89bf3e0a1a40bfa149355bdc4e83b5"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build two healthcare workplaces",
+              "quantity": 2,
+              "target": [
+                "f6a831d9683c3d9b904cd09ded358f8a",
+                "98c676299c50c1841a4568ff11d61bde",
+                "8914dc6cfe447894474dd2f0d9ee527e"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build four homes",
+              "quantity": 4,
+              "target": [
+                "6373a47b5aae7aad2d40767fbe2a88e2",
+                "16cf34d7b28d649c874e25c03692b52a",
+                "a7377de655c61d9b3745e66c0f2ec651"
+              ]
+            }
+          ]
+        },
+        {
+          "campaign": 2,
+          "phase": 2,
+          "path": null,
+          "guid": "938918c50f2998579117a6039f5d6ab2",
+          "title": "Establish heat redundancy",
+          "goals": [
+            {
+              "kind": "research",
+              "text": "Research Steam Hubs",
+              "target": "6a330b7d72d2e0a06a454943cf2980a1"
+            },
+            {
+              "kind": "build",
+              "text": "Build two Steam Hubs",
+              "quantity": 2,
+              "target": [
+                "d3aee53d931e86bd204dab5ab7d320d1"
+              ]
+            },
+            {
+              "kind": "research",
+              "text": "Research Generator Power Upgrade I",
+              "target": "56b08c25231e5ca56f43b83ed0c154fd"
+            }
+          ]
+        },
+        {
+          "campaign": 2,
+          "phase": 3,
+          "path": null,
+          "guid": "6be1b6ec84560e5ba422c95ae5f3f858",
+          "title": "Protect the vulnerable",
+          "goals": [
+            {
+              "kind": "build",
+              "text": "Build six Houses",
+              "quantity": 6,
+              "target": [
+                "a7377de655c61d9b3745e66c0f2ec651"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build an Infirmary",
+              "quantity": 1,
+              "target": [
+                "98c676299c50c1841a4568ff11d61bde"
+              ]
+            },
+            {
+              "kind": "research",
+              "text": "Research Healthcare Insulation",
+              "target": "1f8369ef01981f8852433d4e4e8ea639"
+            }
+          ]
+        },
+        {
+          "campaign": 2,
+          "phase": 4,
+          "path": null,
+          "guid": "43f8ea715d2a1d5d835dcc33e3ffcef5",
+          "title": "Keep the fuel coming",
+          "goals": [
+            {
+              "kind": "build",
+              "text": "Build three coal mines or Coal Thumpers",
+              "quantity": 3,
+              "target": [
+                "7f5d92438ed6d18e994473ff2014dc3d",
+                "7226772eb77bc49f9c4c520f3df2c7dc",
+                "06cdc0a0e6d288a8d2435294d142c9b5",
+                "145e292916c2d6826b4c1b7cd624f1ce",
+                "c4a1ac4584d524a749436429f81880a3"
+              ]
+            },
+            {
+              "kind": "produce",
+              "text": "Manufacture 2 new automatons",
+              "quantity": 2,
+              "target": [
+                "cc33ac0c093846b56040ff68fee8e948",
+                "3aa98fd2adb62d8e8d4ecd95f54f2a11",
+                "061c4e12f375c4a75b42f32d97bc2d1e",
+                "779e0650acc4a99da24b53fe21be23e5",
+                "b21a11b15c4a53803b418396e9e7b82c",
+                "ce273b022251a6904842e7fd0e6999b4"
+              ]
+            },
+            {
+              "kind": "research",
+              "text": "Research Generator Efficiency Upgrade",
+              "target": "f1258b8a9b7ae3aa2d4175d995bb11a3"
+            }
+          ]
+        },
+        {
+          "campaign": 2,
+          "phase": 5,
+          "path": null,
+          "guid": "886d49b1213d865aa118da986ce84a2b",
+          "title": "The last heating reserve",
+          "goals": [
+            {
+              "kind": "research",
+              "text": "Research House Insulation",
+              "target": "d5ab453790c351a7c94c93cfac01f58b"
+            },
+            {
+              "kind": "research",
+              "text": "Research Generator Power Upgrade II",
+              "target": "657c98411dcff0bded49fb88ff95645d"
+            },
+            {
+              "kind": "build",
+              "text": "Build two Large Resource Depots",
+              "quantity": 2,
+              "target": [
+                "d17fb879d88864a9444ee0283802c4cd"
+              ]
+            }
+          ]
+        },
+        {
+          "campaign": 2,
+          "phase": 6,
+          "path": null,
+          "guid": "9b82e4785421ce58a9cc2a18657072a9",
+          "title": "Hold through the whiteout",
+          "goals": [
+            {
+              "kind": "checks",
+              "quantity": 16,
+              "text": "Complete 16 operating checks",
+              "description": "After the fourth front arrives, 13 days into this campaign. Every six game hours: keep the Generator on and retain 12,000 coal, 1,500 wood, 1,500 steel, 3,500 food rations. Checks pause while conditions fail. Supplies are retained; charter upkeep still applies."
+            }
+          ]
+        },
+        {
+          "campaign": 3,
+          "phase": 1,
+          "path": null,
+          "guid": "63fe54fef5423256bbf2557affd79d06",
+          "title": "Lay the industrial foundations",
+          "goals": [
+            {
+              "kind": "build",
+              "text": "Build two Workshops",
+              "quantity": 2,
+              "target": [
+                "ef89bf3e0a1a40bfa149355bdc4e83b5"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build a Sawmill",
+              "quantity": 1,
+              "target": [
+                "86c6b20dcd79b083a048d4461ff99971",
+                "fad2f1d169d320b4b5481ccae7d014f7"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build a Steelworks",
+              "quantity": 1,
+              "target": [
+                "a18dbc3c1439ba9c04447717e2610bfd",
+                "44b57d5b4469cca01141048637022110",
+                "b632fa1cb69bc086874602c5f4b57a44"
+              ]
+            }
+          ]
+        },
+        {
+          "campaign": 3,
+          "phase": 2,
+          "path": null,
+          "guid": "c3bc5404e6b8475c8f11ff7051fd11a6",
+          "title": "Commission the first machines",
+          "goals": [
+            {
+              "kind": "research",
+              "text": "Research the Factory",
+              "target": "7f2b6ceb4c5ce9a3f64a718986a73b7d"
+            },
+            {
+              "kind": "build",
+              "text": "Build a Factory",
+              "quantity": 1,
+              "target": [
+                "20e819887723898b4b46612b11d272f6"
+              ]
+            },
+            {
+              "kind": "research",
+              "text": "Research Steam Core Fabrication (Industry, tier II)",
+              "target": "810d520980b7385ba43c20fedabb12cf"
+            },
+            {
+              "kind": "produce",
+              "text": "Manufacture 2 new automatons",
+              "quantity": 2,
+              "target": [
+                "cc33ac0c093846b56040ff68fee8e948",
+                "3aa98fd2adb62d8e8d4ecd95f54f2a11",
+                "061c4e12f375c4a75b42f32d97bc2d1e",
+                "779e0650acc4a99da24b53fe21be23e5",
+                "b21a11b15c4a53803b418396e9e7b82c",
+                "ce273b022251a6904842e7fd0e6999b4"
+              ]
+            }
+          ]
+        },
+        {
+          "campaign": 3,
+          "phase": 3,
+          "path": null,
+          "guid": "cd8e1f9049ebd35281dd5336e4b07f29",
+          "title": "Build the machine workforce",
+          "goals": [
+            {
+              "kind": "produce",
+              "text": "Manufacture 4 new automatons",
+              "quantity": 4,
+              "target": [
+                "cc33ac0c093846b56040ff68fee8e948",
+                "3aa98fd2adb62d8e8d4ecd95f54f2a11",
+                "061c4e12f375c4a75b42f32d97bc2d1e",
+                "779e0650acc4a99da24b53fe21be23e5",
+                "b21a11b15c4a53803b418396e9e7b82c",
+                "ce273b022251a6904842e7fd0e6999b4"
+              ]
+            },
+            {
+              "kind": "research",
+              "text": "Research Automaton Integration",
+              "target": "c625132c96c1169e6a44d9c19ff272ef"
+            }
+          ]
+        },
+        {
+          "campaign": 3,
+          "phase": 4,
+          "path": null,
+          "guid": "c11db641aaa6d755a6c94d4c016f1cf3",
+          "title": "Put the machines to work",
+          "goals": [
+            {
+              "kind": "automate",
+              "text": "Assign automatons to more than 30% of workplaces",
+              "quantity": 0.3
+            },
+            {
+              "kind": "produce",
+              "text": "Manufacture 4 new automatons",
+              "quantity": 4,
+              "target": [
+                "cc33ac0c093846b56040ff68fee8e948",
+                "3aa98fd2adb62d8e8d4ecd95f54f2a11",
+                "061c4e12f375c4a75b42f32d97bc2d1e",
+                "779e0650acc4a99da24b53fe21be23e5",
+                "b21a11b15c4a53803b418396e9e7b82c",
+                "ce273b022251a6904842e7fd0e6999b4"
+              ]
+            },
+            {
+              "kind": "build",
+              "text": "Build a second Factory",
+              "quantity": 2,
+              "target": [
+                "20e819887723898b4b46612b11d272f6"
+              ]
+            }
+          ]
+        },
+        {
+          "campaign": 3,
+          "phase": 5,
+          "path": null,
+          "guid": "eb0bfb6d988bd45380e58d3de9a6ccd9",
+          "title": "An autonomous production network",
+          "goals": [
+            {
+              "kind": "research",
+              "text": "Research Engineer Automatons",
+              "target": "1719b2ba7d9f1fa00c43853d5002ed94"
+            },
+            {
+              "kind": "automate",
+              "text": "Assign automatons to more than 50% of workplaces",
+              "quantity": 0.5
+            },
+            {
+              "kind": "produce",
+              "text": "Manufacture 6 new automatons",
+              "quantity": 6,
+              "target": [
+                "cc33ac0c093846b56040ff68fee8e948",
+                "3aa98fd2adb62d8e8d4ecd95f54f2a11",
+                "061c4e12f375c4a75b42f32d97bc2d1e",
+                "779e0650acc4a99da24b53fe21be23e5",
+                "b21a11b15c4a53803b418396e9e7b82c",
+                "ce273b022251a6904842e7fd0e6999b4"
+              ]
+            }
+          ]
+        },
+        {
+          "campaign": 3,
+          "phase": 6,
+          "path": null,
+          "guid": "ffe495a3dfafea5ebfdb0a2a6dcaacf6",
+          "title": "Sustain the machine commonwealth",
+          "goals": [
+            {
+              "kind": "automate",
+              "text": "Assign automatons to more than 50% of workplaces",
+              "quantity": 0.5
+            },
+            {
+              "kind": "checks",
+              "quantity": 12,
+              "text": "Complete 12 operating checks",
+              "description": "Every six game hours: keep the Generator on and retain 18,000 coal, 4,000 steel, 5,000 food rations, 12 steam cores. Checks pause while conditions fail. Supplies are retained; charter upkeep still applies."
+            }
+          ]
+        }
+      ],
+      "bonuses": {
+        "civic": "459faf222a7e7555abdb149fd08d5e28",
+        "league": "99dfd03883d486549dd9c07f065c1de3",
+        "grid": "28a8b181b679975e936cfa28fb254879",
+        "shelter": "b993272948bc475c9e64c4e94aee2e06",
+        "closed": "de6b7227d33c1558b7e536cfe8110b93",
+        "partnership": "831ad21c41089354bc4e2f052d30fee3",
+        "front1": "493db2272daf14589a533b38c8b8a3a8",
+        "front2": "a32f50ae14626d54bcfd3e4339245762",
+        "front3": "58f9bebb63830d58a2f311a7dccd2be9",
+        "front4": "2042b87dbf85d952a480c465a056336e",
+        "quarantine": "d9935a702d23795498ce43199f2a1ed3",
+        "stretch": "96a2a85fd6cccf5da9531e9dc613a53e",
+        "engineers": "a1a9c12c1ef1c85eb09506750d252310",
+        "retool": "4bbc190a5330c350ab77763790eebb28",
+        "rest": "ea007265f48e2453acfdaa220418c13e",
+        "seal": "a528b14ab4c6d65ca3409a35321f77b2",
+        "burn": "ee18a487a3a4105d9acd9c9b8b851cc5",
+        "push": "409647574875785a91e889fd17516be7",
+        "community": "fed674d6710a095889884e48936fd45a",
+        "council": "67d50eac05dadf54806a682b9f3dcd3d",
+        "overclock": "10b329d226b7b251a29ea03953c75085",
+        "relief": "830ad06f475ae3599a70774b2ae2050e",
+        "care": "e18e7b8bd174d7578f9caf43753736f8",
+        "coalshift": "c982f3ea152f635987e157c7ec20d0fa",
+        "housing": "2cc6293bbc6107589dad40e648c0492e",
+        "thermal_kits": "5e7750043cfe755e9899cd8e1994b94a",
+        "restcity": "6fbdd7e13065695785651f3871910b05",
+        "driven": "df54eb564e7a705aa20a8217afc7d10d",
+        "equipment": "aaa5ccf7e7f25552809d8e5334e6b1f3",
+        "survey": "2a4a801766dced50a0aed9b5a0a1b3a0",
+        "servo": "a55699a9d85dc951b1808c17ec68ead7",
+        "human": "878b4993e1877d5db4b5e03b8383595a",
+        "shared": "d05925bd560e7e56b9e0cbcecbf70fe3",
+        "masterwork": "ad46490a2d946e57855df847334ba498",
+        "neglect": "a1a96d228f7fd958b63a3ad2ba9cc6be",
+        "workprogramme": "91f45e509621ca598f7da6b4ba39d091"
+      },
+      "automaton_hours": 4.0,
+      "incidents": [
+        {
+          "campaign": 1,
+          "title": "A Worksite Accident",
+          "response_days": 1.5,
+          "description": "A structural failure has injured a construction crew. The district needs a response, not another output target.",
+          "options": [
+            {
+              "title": "Reassign the medical teams",
+              "description": "Two days: healthcare +100%, industry -35%.",
+              "bonus": "quarantine",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Fund an emergency ward",
+              "description": "Spend 400 steel and 200 rations; avoid a production disruption.",
+              "bonus": null,
+              "cost": {
+                "Steel": 400,
+                "Food Rations": 200
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 1
+            },
+            {
+              "title": "Suspend unsafe work",
+              "description": "Two days: all workplace efficiency -35%, cold-related illness -50%.",
+              "bonus": "restcity",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 1
+            }
+          ],
+          "index": 0,
+          "response_quest": "4ec6889eb8be6050a2255b82848c8fb9",
+          "dilemma": "0b0a26dbcd584f5d9b6b55806dbf5022",
+          "timeout_bonus": "restcity"
+        },
+        {
+          "campaign": 1,
+          "title": "The Foundry Needs Retooling",
+          "response_days": 3,
+          "description": "Worn assemblies threaten the production district. Buy time, buy parts, or manufacture a replacement machine.",
+          "options": [
+            {
+              "title": "Commission a repair automaton",
+              "description": "Manufacture one new automaton within 4 game days. Factory -25% until resolved; success grants Factory +75% for two days. The machine remains yours. If unfinished: workplace efficiency -35% and emergency recovery shifts for two days; Discontent rises moderately.",
+              "bonus": null,
+              "cost": {},
+              "repair": 1,
+              "work_days": 4,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Purchase new assemblies",
+              "description": "Spend four cores and 600 steel for Factory +75% efficiency for two days.",
+              "bonus": "retool",
+              "cost": {
+                "Steam Cores": 4,
+                "Steel": 600
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Divert the engineers",
+              "description": "Two days: Factory +100%, Workshop -50% efficiency.",
+              "bonus": "engineers",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            }
+          ],
+          "index": 1,
+          "response_quest": "67a3dc2e8c95b35e9688485d59b9d5a8",
+          "dilemma": "27b59120efbc8a5682dcbc197dee0ea9",
+          "timeout_bonus": "restcity"
+        },
+        {
+          "campaign": 1,
+          "title": "The District Petition",
+          "response_days": 4,
+          "description": "The expanding city wants more than factories. Choose which group gets your support.",
+          "options": [
+            {
+              "title": "Equip community services",
+              "description": "Spend 1,500 wood and 600 steel. Two days: homes/civic services +1 insulation, healthcare +50% efficiency.",
+              "bonus": "community",
+              "cost": {
+                "Wood": 1500,
+                "Steel": 600
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Hold a civic assembly",
+              "description": "Two days: food and healthcare +75% efficiency, industry -25%.",
+              "bonus": "council",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 1
+            },
+            {
+              "title": "Offer trained industrial crews",
+              "description": "Two days: industrial/extraction human efficiency +100%, automaton efficiency -25%.",
+              "bonus": "human",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            }
+          ],
+          "index": 2,
+          "response_quest": "fa3e9bc1ff7c9050a3aa44509c0e5001",
+          "dilemma": "b14f8ea559cd115b9633341cace8080f",
+          "timeout_bonus": "restcity"
+        },
+        {
+          "campaign": 1,
+          "title": "Competing Fuel Bids",
+          "response_days": 2,
+          "description": "Heating crews and the foundry want the same reserve. There is enough capacity for one extraordinary programme.",
+          "options": [
+            {
+              "title": "Release the coal reserve",
+              "description": "Spend 3,000 coal. Citywide insulation +3 for two days.",
+              "bonus": "burn",
+              "cost": {
+                "Coal": 3000
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Issue thermal repair kits",
+              "description": "Spend 1,500 wood and 800 steel. Homes, healthcare and civic services gain +3 insulation for two days.",
+              "bonus": "thermal_kits",
+              "cost": {
+                "Wood": 1500,
+                "Steel": 800
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Seal the work districts",
+              "description": "Two days: citywide insulation +2; food and industry efficiency -25%.",
+              "bonus": "seal",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            }
+          ],
+          "index": 3,
+          "response_quest": "a98856a4042ab65eb442ed314a45210d",
+          "dilemma": "03c8cc317d0e015a8579456c66ef9dd6",
+          "timeout_bonus": "restcity"
+        },
+        {
+          "campaign": 1,
+          "title": "The Survey Column Is Missing",
+          "response_days": 3,
+          "description": "A regional survey has missed its report. Fund a rescue, divert specialists or accept a loss of confidence.",
+          "options": [
+            {
+              "title": "Supply a rescue column",
+              "description": "Spend 2,500 coal and 1,000 rations. Receive 5,000 wood and 1,500 steel after one day.",
+              "bonus": null,
+              "cost": {
+                "Coal": 2500,
+                "Food Rations": 1000
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {
+                "Wood": 5000,
+                "Steel": 1500
+              },
+              "duration": 2,
+              "morale": 1
+            },
+            {
+              "title": "Divert medical specialists",
+              "description": "Two days: industrial efficiency +50%, healthcare efficiency -35%.",
+              "bonus": "survey",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Abandon the operation",
+              "description": "Hope falls moderately. No resources are spent.",
+              "bonus": null,
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": -1
+            }
+          ],
+          "index": 4,
+          "response_quest": "3c42451c95eada588db8150bf9b2798f",
+          "dilemma": "ee80104421566956b09e3bea6cae881c",
+          "timeout_bonus": "restcity"
+        },
+        {
+          "campaign": 1,
+          "title": "The Charter Congress",
+          "response_days": 5,
+          "description": "The capital must decide what its next period of growth will serve.",
+          "options": [
+            {
+              "title": "Authorise a fabrication drive",
+              "description": "Two days: industry +125%, food efficiency -25%.",
+              "bonus": "overclock",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Distribute winter equipment",
+              "description": "Spend 1,500 steel and 1,500 coal. All workplaces +25% efficiency and all insulated buildings +1 insulation for two days.",
+              "bonus": "equipment",
+              "cost": {
+                "Steel": 1500,
+                "Coal": 1500
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Put public welfare first",
+              "description": "Two days: food/healthcare +75%, industry -25%.",
+              "bonus": "council",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 1
+            }
+          ],
+          "index": 5,
+          "response_quest": "7cb24c8fb8c18c588dc67ea3a5e1914b",
+          "dilemma": "a12d17a96919fa55936d5cf8ec9cc4a9",
+          "timeout_bonus": "restcity"
+        },
+        {
+          "campaign": 2,
+          "title": "A Frozen Heat Main",
+          "response_days": 1.5,
+          "description": "A district heat main is losing pressure. Protect warmth, spend fuel or keep production exposed.",
+          "options": [
+            {
+              "title": "Seal the workplaces",
+              "description": "Two days: citywide insulation +2, food/industry efficiency -25%.",
+              "bonus": "seal",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Burn the emergency reserve",
+              "description": "Spend 2,000 coal for citywide +3 insulation for two days.",
+              "bonus": "burn",
+              "cost": {
+                "Coal": 2000
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Keep production moving",
+              "description": "Two days: workplace efficiency +50%, citywide insulation -1.",
+              "bonus": "push",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            }
+          ],
+          "index": 0,
+          "response_quest": "3e8e9d04b5df9751b49033838948c2ca",
+          "dilemma": "a878371c7abb6b58abf0979ba16d5e98",
+          "timeout_bonus": "neglect"
+        },
+        {
+          "campaign": 2,
+          "title": "The Surgery Ward Is Freezing",
+          "response_days": 2,
+          "description": "Medical staff cannot keep every ward productive and warm. Decide which constraint to relieve.",
+          "options": [
+            {
+              "title": "Reassign industrial crews",
+              "description": "Two days: healthcare +100%, industry -35%.",
+              "bonus": "quarantine",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Install thermal kits",
+              "description": "Spend 1,500 wood and 700 steel. Homes, healthcare and civic services +3 insulation for two days.",
+              "bonus": "thermal_kits",
+              "cost": {
+                "Wood": 1500,
+                "Steel": 700
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Consolidate patients near the kitchens",
+              "description": "Two days: healthcare +2 insulation but -25% efficiency; food workplaces +50% efficiency.",
+              "bonus": "care",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            }
+          ],
+          "index": 1,
+          "response_quest": "5877cb63e1bc5e5dbb9461b0088077cc",
+          "dilemma": "19925e5bfb84dc54ab9a6a765feeedc5",
+          "timeout_bonus": "neglect"
+        },
+        {
+          "campaign": 2,
+          "title": "The Coal Convoy Is Overdue",
+          "response_days": 3,
+          "description": "The next fuel shipment will not arrive on schedule. You can buy a replacement, build a repair machine or force local extraction.",
+          "options": [
+            {
+              "title": "Trade provisions for fuel",
+              "description": "Spend 2,000 rations. Receive 8,000 coal after one day.",
+              "bonus": null,
+              "cost": {
+                "Food Rations": 2000
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {
+                "Coal": 8000
+              },
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Build a repair automaton",
+              "description": "Manufacture one new automaton within 4 game days. Factory -25% until resolved; success delivers 10,000 coal and a two-day coal-production boost. The machine remains yours. If unfinished: citywide insulation -1 and industry efficiency -25% for two days; Discontent rises moderately.",
+              "bonus": null,
+              "cost": {},
+              "repair": 1,
+              "work_days": 4,
+              "reward": "coalshift",
+              "cargo": {
+                "Coal": 10000
+              },
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Force local extraction",
+              "description": "Two days: coal mines/thumpers +75% efficiency, citywide insulation -1.",
+              "bonus": "coalshift",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            }
+          ],
+          "index": 2,
+          "response_quest": "4ee8bdcf51a39a58b9e9e044eb6d252b",
+          "dilemma": "4a3e2b1ae8e1c953be30aff4cd1fb5e2",
+          "timeout_bonus": "neglect"
+        },
+        {
+          "campaign": 2,
+          "title": "Frost in the Housing Blocks",
+          "response_days": 4,
+          "description": "Families are crowding into the warmest buildings. Choose a housing, food or civic response.",
+          "options": [
+            {
+              "title": "Expand food and medical relief",
+              "description": "Two days: healthcare +100%, food +75%, industry -25%.",
+              "bonus": "relief",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Issue city repair kits",
+              "description": "Spend 2,000 wood, 1,500 steel and 500 rations. Homes, healthcare and civic services +3 insulation for two days.",
+              "bonus": "thermal_kits",
+              "cost": {
+                "Wood": 2000,
+                "Steel": 1500,
+                "Food Rations": 500
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Shelter the housing blocks",
+              "description": "Two days: homes +3 insulation, industry -25% efficiency.",
+              "bonus": "housing",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            }
+          ],
+          "index": 3,
+          "response_quest": "2fc3a965f07d3c5093b03cddd99df307",
+          "dilemma": "976729ca7179d65d9e6cbee04f8c4e09",
+          "timeout_bonus": "neglect"
+        },
+        {
+          "campaign": 2,
+          "title": "An Icebound Workforce",
+          "response_days": 2,
+          "description": "The cold is taking its toll on working crews. Rest, pressure and equipment produce very different cities.",
+          "options": [
+            {
+              "title": "Demand a production drive",
+              "description": "Two days: all workplaces +75% efficiency, cold-related illness +50%.",
+              "bonus": "driven",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": -1
+            },
+            {
+              "title": "Equip protected shifts",
+              "description": "Spend three cores and 1,000 steel. Two days: all workplaces +25% efficiency, citywide insulation +1.",
+              "bonus": "equipment",
+              "cost": {
+                "Steam Cores": 3,
+                "Steel": 1000
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Order recovery shifts",
+              "description": "Two days: all workplaces -35% efficiency, cold-related illness -50%.",
+              "bonus": "restcity",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 1
+            }
+          ],
+          "index": 4,
+          "response_quest": "9b25c0107cc13e5ea86eb6f152963625",
+          "dilemma": "8877f471d122145a9a4eac90b81f1cfb",
+          "timeout_bonus": "neglect"
+        },
+        {
+          "campaign": 2,
+          "title": "The Next Storm Plan",
+          "response_days": 5,
+          "description": "The council has a planning window. A reserve burn, industrial mobilisation and public relief all prepare for different risks.",
+          "options": [
+            {
+              "title": "Commit the deep fuel reserve",
+              "description": "Spend 12,000 coal for citywide +3 insulation for four days.",
+              "bonus": "burn",
+              "cost": {
+                "Coal": 12000
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 4,
+              "morale": 0
+            },
+            {
+              "title": "Mobilise the industrial district",
+              "description": "Three days: industry +125%, food efficiency -25%.",
+              "bonus": "overclock",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 3,
+              "morale": 0
+            },
+            {
+              "title": "Mobilise relief services",
+              "description": "Three days: healthcare +100%, food +75%, industry -25%.",
+              "bonus": "relief",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 3,
+              "morale": 1
+            }
+          ],
+          "index": 5,
+          "response_quest": "672b31e76eb8e25ea87db786ce63444d",
+          "dilemma": "d6596c937fea8f51be5521cc3b92eacc",
+          "timeout_bonus": "neglect"
+        },
+        {
+          "campaign": 3,
+          "title": "A Servo Cascade",
+          "response_days": 1.5,
+          "description": "Failure in one machine threatens the Factory queue. There are three ways to contain it.",
+          "options": [
+            {
+              "title": "Divert engineers to repairs",
+              "description": "Two days: Factory +100%, Workshop -50%.",
+              "bonus": "engineers",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Fit spare assemblies",
+              "description": "Spend four cores and 600 steel for Factory +75% for two days.",
+              "bonus": "retool",
+              "cost": {
+                "Steam Cores": 4,
+                "Steel": 600
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Shut down for maintenance",
+              "description": "Two days: Factory efficiency -40%; Discontent falls greatly.",
+              "bonus": "rest",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 1
+            }
+          ],
+          "index": 0,
+          "response_quest": "b77104c4c6f8ee5da3fa0118e56a17c9",
+          "dilemma": "8ffc64223093e05a982fc4d9899ebeee",
+          "timeout_bonus": "rest"
+        },
+        {
+          "campaign": 3,
+          "title": "New Clockwork Standards",
+          "response_days": 3,
+          "description": "The network needs a standard machine design. Build a demonstrator, pay for shared training or fall back on human expertise.",
+          "options": [
+            {
+              "title": "Commission demonstrator machines",
+              "description": "Manufacture two new automatons within 6 game days. Factory -25% until resolved; success grants three days of industrial/extraction automaton +100%, human -35%. Machines remain yours. If unfinished: Factory efficiency -40% for two days; Discontent rises moderately.",
+              "bonus": null,
+              "cost": {},
+              "repair": 2,
+              "work_days": 6,
+              "reward": "servo",
+              "cargo": {},
+              "duration": 3,
+              "morale": 0
+            },
+            {
+              "title": "Pay for shared training",
+              "description": "Spend 1,000 steel and 500 coal. Two days: industrial/extraction human and automaton efficiency +50%.",
+              "bonus": "shared",
+              "cost": {
+                "Steel": 1000,
+                "Coal": 500
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Give human crews the lead",
+              "description": "Two days: industrial/extraction human +100%, automaton -25%.",
+              "bonus": "human",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            }
+          ],
+          "index": 1,
+          "response_quest": "46511b159ad0de5fa61681a239f54912",
+          "dilemma": "85ef6763e153295ca4c7aaaa64eacf5b",
+          "timeout_bonus": "rest"
+        },
+        {
+          "campaign": 3,
+          "title": "The Engineers Protest",
+          "response_days": 4,
+          "description": "The engineering corps wants a say in the machine economy. Your answer changes who benefits from production.",
+          "options": [
+            {
+              "title": "Put automation first",
+              "description": "Two days: industrial/extraction automaton +100%, human -35%; Hope falls moderately.",
+              "bonus": "servo",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": -1
+            },
+            {
+              "title": "Fund joint training",
+              "description": "Spend 1,500 steel and 1,000 rations. Two days: industrial/extraction human and automaton +50%.",
+              "bonus": "shared",
+              "cost": {
+                "Steel": 1500,
+                "Food Rations": 1000
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Support the human crews",
+              "description": "Two days: industrial/extraction human +100%, automaton -25%; Discontent falls greatly.",
+              "bonus": "human",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 1
+            }
+          ],
+          "index": 2,
+          "response_quest": "65ddf1992c83b45aa79d39ed85820e31",
+          "dilemma": "9ec02de58f73585b93dd693f1fda1590",
+          "timeout_bonus": "rest"
+        },
+        {
+          "campaign": 3,
+          "title": "A Steam Core Quality Recall",
+          "response_days": 2,
+          "description": "A batch of assemblies needs replacement. Paying now, manufacturing replacements and restricting output carry different costs.",
+          "options": [
+            {
+              "title": "Replace the suspect assemblies",
+              "description": "Spend eight cores and 2,000 steel. Factory +75% for four days.",
+              "bonus": "retool",
+              "cost": {
+                "Steam Cores": 8,
+                "Steel": 2000
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 4,
+              "morale": 0
+            },
+            {
+              "title": "Manufacture replacement machines",
+              "description": "Manufacture two new automatons within 6 game days. Factory -25% until resolved; success grants industry +150% and healthcare +25% for four days. Machines remain yours. If unfinished: Factory efficiency -40% for two days; Discontent rises moderately.",
+              "bonus": null,
+              "cost": {},
+              "repair": 2,
+              "work_days": 6,
+              "reward": "masterwork",
+              "cargo": {},
+              "duration": 4,
+              "morale": 0
+            },
+            {
+              "title": "Restrict the Factory queue",
+              "description": "Two days: Factory efficiency -40%.",
+              "bonus": "rest",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            }
+          ],
+          "index": 3,
+          "response_quest": "36d3b707cec16d51b8e0a9b71ea135bd",
+          "dilemma": "8dd47eda379dc15b9c723fb365b1d7ea",
+          "timeout_bonus": "rest"
+        },
+        {
+          "campaign": 3,
+          "title": "The Factory Queue Is Gridlocked",
+          "response_days": 3,
+          "description": "Medical orders, fabrication and maintenance all demand priority. A single queue cannot serve every programme at once.",
+          "options": [
+            {
+              "title": "Prioritise bulk fabrication",
+              "description": "Two days: industry +125%, food efficiency -25%.",
+              "bonus": "overclock",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Cross-train production crews",
+              "description": "Spend 2,000 steel and 700 rations. Two days: industrial/extraction human and automaton +50%.",
+              "bonus": "shared",
+              "cost": {
+                "Steel": 2000,
+                "Food Rations": 700
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            },
+            {
+              "title": "Put medical orders first",
+              "description": "Two days: healthcare +100%, industry -35%.",
+              "bonus": "quarantine",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 2,
+              "morale": 0
+            }
+          ],
+          "index": 4,
+          "response_quest": "38ca97a8d469f35bacb8fbc201daf01d",
+          "dilemma": "82d41fdf99b698539d15ce75b8fe5901",
+          "timeout_bonus": "rest"
+        },
+        {
+          "campaign": 3,
+          "title": "The Assembly Compact",
+          "response_days": 5,
+          "description": "The commonwealth can attempt a masterwork, distribute equipment or settle on shared standards.",
+          "options": [
+            {
+              "title": "Commission a masterwork",
+              "description": "Manufacture two new automatons within 8 game days. Factory -25% until resolved; success grants industry +150% and healthcare +25% for four days. Machines remain yours. If unfinished: Factory efficiency -40% for two days; Discontent rises moderately.",
+              "bonus": null,
+              "cost": {},
+              "repair": 2,
+              "work_days": 8,
+              "reward": "masterwork",
+              "cargo": {},
+              "duration": 4,
+              "morale": 0
+            },
+            {
+              "title": "Equip the whole city",
+              "description": "Spend eight cores and 3,000 steel. Four days: all workplaces +25% efficiency, citywide insulation +1.",
+              "bonus": "equipment",
+              "cost": {
+                "Steam Cores": 8,
+                "Steel": 3000
+              },
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 4,
+              "morale": 0
+            },
+            {
+              "title": "Adopt shared standards",
+              "description": "Three days: industrial/extraction human and automaton efficiency +50%.",
+              "bonus": "shared",
+              "cost": {},
+              "repair": 0,
+              "work_days": 6,
+              "reward": "retool",
+              "cargo": {},
+              "duration": 3,
+              "morale": 0
+            }
+          ],
+          "index": 5,
+          "response_quest": "dc2ceb21f3ebae5483b225af00ef125a",
+          "dilemma": "2ba6c524900f5353806a0c9dc7a8be20",
+          "timeout_bonus": "rest"
+        }
+      ],
+      "work_orders": [
+        {
+          "guid": "d773e0f17720655fac6d8b5010fa0d2a",
+          "campaign": 1,
+          "incident": 1,
+          "choice": 0,
+          "quantity": 1,
+          "deadline": 4
+        },
+        {
+          "guid": "22ab7a0a9933a5578841260c1c09abe3",
+          "campaign": 2,
+          "incident": 2,
+          "choice": 1,
+          "quantity": 1,
+          "deadline": 4
+        },
+        {
+          "guid": "0ac1eb153d2b3c5d9368a63382a8a935",
+          "campaign": 3,
+          "incident": 1,
+          "choice": 0,
+          "quantity": 2,
+          "deadline": 6
+        },
+        {
+          "guid": "bdc517f8cbab9552bc25d28e2ef4d3c8",
+          "campaign": 3,
+          "incident": 3,
+          "choice": 1,
+          "quantity": 2,
+          "deadline": 6
+        },
+        {
+          "guid": "e81478ff7b853c54a6ceb2ddf2a2a611",
+          "campaign": 3,
+          "incident": 5,
+          "choice": 0,
+          "quantity": 2,
+          "deadline": 8
+        }
+      ],
+      "incident_cooldown_days": 2,
+      "owned_temporary_effects": true,
+      "selector": "3dd1f4906a78bf5292ad6480130b09d1"
+    },
+    "campaign_parameter": "3027ecdc658b0b568c2853932d1b3eb8",
+    "campaign_values": {
+      "1": "2495a8978c99ce578111bb6a994ff975",
+      "2": "8cd2413ea8e73957a0c54409e4946b41",
+      "3": "22d448c360c5f85e8614c41ddad56ea6"
+    },
+    "modes": [
+      {
+        "name": "Reconstruction",
+        "title": "Restoration",
+        "subtitle": "Rebuild",
+        "description": "Build a capital. Choose its future.",
+        "value": "2495a8978c99ce578111bb6a994ff975"
+      },
+      {
+        "name": "Whiteout",
+        "title": "Whiteout",
+        "subtitle": "Endure",
+        "description": "Survive the front. Protect the city.",
+        "value": "8cd2413ea8e73957a0c54409e4946b41"
+      },
+      {
+        "name": "MachineAge",
+        "title": "Machine Age",
+        "subtitle": "Automate",
+        "description": "Build a working machine commonwealth.",
+        "value": "22d448c360c5f85e8614c41ddad56ea6"
+      }
+    ],
+    "ui": {
+      "mode_columns": 6,
+      "mode_width": 160,
+      "mode_gap": 34,
+      "mode_extent": 1130,
+      "ornament_extent": 1157.68,
+      "native_orientation": 1,
+      "native_alignment": 3,
+      "research_tabs": 9,
+      "tab_width": 110,
+      "tab_extent": 1168
+    }
   },
   "modifier_tooltips": {
     "records": [
@@ -23139,6 +25604,17 @@
           "AutumnStarterTimber"
         ],
         "effects_before_sha256": "138e894d4725013680f1d8eec68e6961d0316c25bca07ed896543dc208e7cf65"
+      },
+      {
+        "guid": "02921b9eaf497654a6784a88dadb9c3c",
+        "title": "Specialists on Rescue Duty",
+        "description": "Industry efficiency +50%; healthcare efficiency -35%.",
+        "name_key": "Mods/NewIndustry/Modifier/02921b9eaf497654a6784a88dadb9c3c/Name",
+        "description_key": "Mods/NewIndustry/Modifier/02921b9eaf497654a6784a88dadb9c3c/Description",
+        "source_ids": [
+          "Frontiers/survey"
+        ],
+        "effects_before_sha256": "0786208bee58cfb8da477b1f32222c095822eae3db69d5ce15bb436fe76560fc"
       },
       {
         "guid": "02a2f2741d14fd5f91df0c8ec70bdfa1",
@@ -23212,6 +25688,50 @@
         "effects_before_sha256": "3347b3ae9880b47ad40445ed36a8e110424e0415da6a2b50cdb5fd88080fc9c9"
       },
       {
+        "guid": "07cae8734cbf4352a7f8d4fcba526f0e",
+        "title": "Industrial League",
+        "description": "Factories and Steelworks +100% efficiency; Workshops +75%. Requires 150 coal and 10 steel every six hours.",
+        "name_key": "Mods/NewIndustry/Modifier/07cae8734cbf4352a7f8d4fcba526f0e/Name",
+        "description_key": "Mods/NewIndustry/Modifier/07cae8734cbf4352a7f8d4fcba526f0e/Description",
+        "source_ids": [
+          "Frontiers/league"
+        ],
+        "effects_before_sha256": "07d37bd252fe9fa74b8e6dc2a9e1516088bcb59963f3afdf5ca209b2ff336774"
+      },
+      {
+        "guid": "083a989cb9d9705f9239c2b37b12fafa",
+        "title": "Exposed Production Drive",
+        "description": "For two days: workplaces +50% efficiency; citywide insulation -1.",
+        "name_key": "Mods/NewIndustry/Modifier/083a989cb9d9705f9239c2b37b12fafa/Name",
+        "description_key": "Mods/NewIndustry/Modifier/083a989cb9d9705f9239c2b37b12fafa/Description",
+        "source_ids": [
+          "Frontiers/push"
+        ],
+        "effects_before_sha256": "97cdcd6d941ca749bc622456ec4e4c6a5ac745a200073514c7c65c8fb091fbdc"
+      },
+      {
+        "guid": "0b63640a9dba6458a2ad462df1d9a0f6",
+        "title": "Protected Work Shifts",
+        "description": "All workplace efficiency +25%; citywide insulation +1.",
+        "name_key": "Mods/NewIndustry/Modifier/0b63640a9dba6458a2ad462df1d9a0f6/Name",
+        "description_key": "Mods/NewIndustry/Modifier/0b63640a9dba6458a2ad462df1d9a0f6/Description",
+        "source_ids": [
+          "Frontiers/equipment"
+        ],
+        "effects_before_sha256": "807dac5882f70f1277f5d2b232aa31ed5b068b4bbecb70c6da25bc1889620e6b"
+      },
+      {
+        "guid": "0bdf06b84e0cd45eb48d8524ae3df7fc",
+        "title": "Engineers on Repair Duty",
+        "description": "For two days: Factory efficiency +100%; Workshop efficiency -50%.",
+        "name_key": "Mods/NewIndustry/Modifier/0bdf06b84e0cd45eb48d8524ae3df7fc/Name",
+        "description_key": "Mods/NewIndustry/Modifier/0bdf06b84e0cd45eb48d8524ae3df7fc/Description",
+        "source_ids": [
+          "Frontiers/engineers"
+        ],
+        "effects_before_sha256": "e46bb3c38a73f0752954715bfe169de8d4236eb844d89c69b59db32489ec5605"
+      },
+      {
         "guid": "0be146e5b27f9b52847c411052396387",
         "title": "Compact Heating Grids",
         "description": "Braziers use 40% less coal. Trade-off: all heat-zone radii shrink by 20%. Heater power is unaffected. Optional permanent specialisation for compact districts rather than wide heat coverage.",
@@ -23233,6 +25753,17 @@
           "StarterGeneratorGrates"
         ],
         "effects_before_sha256": "094594ad64a9472d1a6c098eb2207b2798181b0937601dd7471ff0594535dd3e"
+      },
+      {
+        "guid": "0c845cdb30a6355697d30435682eb4e4",
+        "title": "Emergency Heat Restrictions",
+        "description": "Citywide insulation -1; industry efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/0c845cdb30a6355697d30435682eb4e4/Name",
+        "description_key": "Mods/NewIndustry/Modifier/0c845cdb30a6355697d30435682eb4e4/Description",
+        "source_ids": [
+          "Frontiers/neglect"
+        ],
+        "effects_before_sha256": "02d48b86255c4dcd7512c3ed19311adadc94ab5346bac72d17b87b2db0610799"
       },
       {
         "guid": "0d6e216ce9fac153ba427a245b3f7f88",
@@ -23258,6 +25789,17 @@
         "effects_before_sha256": "8cb6592ec31882ee299a886c61ff1eb1f0e175b4ce7d97bb813f373d8df2ea4c"
       },
       {
+        "guid": "10b329d226b7b251a29ea03953c75085",
+        "title": "Fabrication Drive",
+        "description": "Industry efficiency +125%; food workplace efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/10b329d226b7b251a29ea03953c75085/Name",
+        "description_key": "Mods/NewIndustry/Modifier/10b329d226b7b251a29ea03953c75085/Description",
+        "source_ids": [
+          "Frontiers/overclock"
+        ],
+        "effects_before_sha256": "477a9c4c340267d94b34e6e90910f220462e2f00057dfdbf62f42873b92828c3"
+      },
+      {
         "guid": "11a14feeafdb9554a8aad18cc5326dab",
         "title": "District Fuel Processing",
         "description": "Coal Mines and Charcoal Kilns gain a 75% workplace efficiency bonus.",
@@ -23278,6 +25820,17 @@
           "SeedSelection2"
         ],
         "effects_before_sha256": "dd7e1fef13c6292bee6cea1d8d79be00b48725c7c8591925b9345352bebeab0b"
+      },
+      {
+        "guid": "127e18e6112b695b9ccea1fee7bc45d4",
+        "title": "Engineers on Repair Duty",
+        "description": "For two days: Factory efficiency +100%; Workshop efficiency -50%.",
+        "name_key": "Mods/NewIndustry/Modifier/127e18e6112b695b9ccea1fee7bc45d4/Name",
+        "description_key": "Mods/NewIndustry/Modifier/127e18e6112b695b9ccea1fee7bc45d4/Description",
+        "source_ids": [
+          "Frontiers/engineers"
+        ],
+        "effects_before_sha256": "07d37bd252fe9fa74b8e6dc2a9e1516088bcb59963f3afdf5ca209b2ff336774"
       },
       {
         "guid": "128843ab75d07b5f853c8c43a7a2100a",
@@ -23448,6 +26001,17 @@
         "effects_before_sha256": "62a4bfc377da8df3a8e5083646bf5eb07dedeeafd295ce806a04c2cb9c888cbc"
       },
       {
+        "guid": "1d9fbe40af210c5594e406e9dcd216e2",
+        "title": "Civic Commonwealth",
+        "description": "Homes and civic services gain +1 insulation; healthcare +100% efficiency; industry -15%.",
+        "name_key": "Mods/NewIndustry/Modifier/1d9fbe40af210c5594e406e9dcd216e2/Name",
+        "description_key": "Mods/NewIndustry/Modifier/1d9fbe40af210c5594e406e9dcd216e2/Description",
+        "source_ids": [
+          "Frontiers/civic"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
         "guid": "1e2c4e9be9c4af5fb2f640caa5174a18",
         "title": "Fabrication Building Kits",
         "description": "Profiles Manufacture, Machine Shop, and Foundry buildings each cost 8 less wood and 5 less steel to build.",
@@ -23526,6 +26090,28 @@
         "effects_before_sha256": "3ba564cdec09e8508c992024d32dd137b5a8e1222f373c2abbce7fd44730410b"
       },
       {
+        "guid": "2042b87dbf85d952a480c465a056336e",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 4 insulation levels from every insulated building.",
+        "name_key": "Mods/NewIndustry/Modifier/2042b87dbf85d952a480c465a056336e/Name",
+        "description_key": "Mods/NewIndustry/Modifier/2042b87dbf85d952a480c465a056336e/Description",
+        "source_ids": [
+          "Frontiers/front4"
+        ],
+        "effects_before_sha256": "7e81c9b5a07cbde221f31dafbc0c13fa520d6d8b9c97bdb971d234fdd04e0d05"
+      },
+      {
+        "guid": "2089c33a47b35d5898b1cfaac0790284",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 2 insulation levels from every insulated building.",
+        "name_key": "Mods/NewIndustry/Modifier/2089c33a47b35d5898b1cfaac0790284/Name",
+        "description_key": "Mods/NewIndustry/Modifier/2089c33a47b35d5898b1cfaac0790284/Description",
+        "source_ids": [
+          "Frontiers/front2"
+        ],
+        "effects_before_sha256": "4e79bb915d05433f6d98e79ea287077114b5f62204216ec1e9aa8da44ef10c69"
+      },
+      {
         "guid": "2256a223c3196653bf7e1f3f5ddcc259",
         "title": "Consolidated Port Handling",
         "description": "Docks and Reloading Stations gain a further 75% workplace efficiency bonus.",
@@ -23581,6 +26167,39 @@
         "effects_before_sha256": "b59400836f8995d50991882dc9dad61d4825342f7a2414aec348f826a667be0f"
       },
       {
+        "guid": "2692ad888a606f55b3c5dd714ea67ba2",
+        "title": "Distributed Thermal Kits",
+        "description": "Homes, healthcare and civic services gain +3 insulation.",
+        "name_key": "Mods/NewIndustry/Modifier/2692ad888a606f55b3c5dd714ea67ba2/Name",
+        "description_key": "Mods/NewIndustry/Modifier/2692ad888a606f55b3c5dd714ea67ba2/Description",
+        "source_ids": [
+          "Frontiers/thermal_kits"
+        ],
+        "effects_before_sha256": "883e74203d3afea48d83b33e14b2a038fef49984a74d8aced5b1ad96bebf1564"
+      },
+      {
+        "guid": "2695894eec3b225a9ceaee044be3aea4",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 1 insulation levels from every insulated building.",
+        "name_key": "Mods/NewIndustry/Modifier/2695894eec3b225a9ceaee044be3aea4/Name",
+        "description_key": "Mods/NewIndustry/Modifier/2695894eec3b225a9ceaee044be3aea4/Description",
+        "source_ids": [
+          "Frontiers/front1"
+        ],
+        "effects_before_sha256": "847a18fa6c38f9ed3053de874128d622c748a43f2912ab9b96ce15fc96171743"
+      },
+      {
+        "guid": "28a8b181b679975e936cfa28fb254879",
+        "title": "Emergency Heat Grid",
+        "description": "Citywide +2 insulation while its 250-coal six-hour upkeep is funded.",
+        "name_key": "Mods/NewIndustry/Modifier/28a8b181b679975e936cfa28fb254879/Name",
+        "description_key": "Mods/NewIndustry/Modifier/28a8b181b679975e936cfa28fb254879/Description",
+        "source_ids": [
+          "Frontiers/grid"
+        ],
+        "effects_before_sha256": "50d7c9e99c0682b3ae49b3ef66eb0348f54ce15761dd51280cf221a9300cad66"
+      },
+      {
         "guid": "28efa2442068b750b2779b836d67377d",
         "title": "Coal Circuit Planning",
         "description": "Both Coal Thumper grades produce coal piles 75% faster. Gathering Posts gain 25% collection radius, easing the collection bottleneck around thumpers.",
@@ -23592,6 +26211,17 @@
         "effects_before_sha256": "831d25d96bf7926889712afb308ddb669ca96c60948fded79398190c440da85b"
       },
       {
+        "guid": "29ec5c0bed8db953be50daa7a82b3f28",
+        "title": "Human-machine Partnership",
+        "description": "Industry and extraction: human efficiency +50%, automaton efficiency +75%. Medical efficiency -15%.",
+        "name_key": "Mods/NewIndustry/Modifier/29ec5c0bed8db953be50daa7a82b3f28/Name",
+        "description_key": "Mods/NewIndustry/Modifier/29ec5c0bed8db953be50daa7a82b3f28/Description",
+        "source_ids": [
+          "Frontiers/partnership"
+        ],
+        "effects_before_sha256": "cd744b51eb05f3a0b964993e0fb6cdd3c6115a7c114a56cec3b0c3fe7ad23a9b"
+      },
+      {
         "guid": "2a2bed440731f4588d24bef09da447e1",
         "title": "Frostland Relay Workshops",
         "description": "Scouts travel 150% faster and Factories gain 75% workplace efficiency for both work roles. Supports repeated Frostland exploration and processing recovered resources after Endless storms. Adds no expedition teams.",
@@ -23601,6 +26231,28 @@
           "EndlessRelayWorkshops"
         ],
         "effects_before_sha256": "9348e344c3f5207ec046139703fce78842d9b9295c26fe01caf019a6e114ad27"
+      },
+      {
+        "guid": "2a4a801766dced50a0aed9b5a0a1b3a0",
+        "title": "Specialists on Rescue Duty",
+        "description": "Industry efficiency +50%; healthcare efficiency -35%.",
+        "name_key": "Mods/NewIndustry/Modifier/2a4a801766dced50a0aed9b5a0a1b3a0/Name",
+        "description_key": "Mods/NewIndustry/Modifier/2a4a801766dced50a0aed9b5a0a1b3a0/Description",
+        "source_ids": [
+          "Frontiers/survey"
+        ],
+        "effects_before_sha256": "9db64832e939257d89a2c03336ecb3a13953826becc4759f3f77c4149e1a0eb8"
+      },
+      {
+        "guid": "2cc6293bbc6107589dad40e648c0492e",
+        "title": "Sheltered Housing Blocks",
+        "description": "Homes +3 insulation; industry efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/2cc6293bbc6107589dad40e648c0492e/Name",
+        "description_key": "Mods/NewIndustry/Modifier/2cc6293bbc6107589dad40e648c0492e/Description",
+        "source_ids": [
+          "Frontiers/housing"
+        ],
+        "effects_before_sha256": "70a2a9d15be3f14bb58475e4d3839cf7479dba3f3134d514cff6dce616f72280"
       },
       {
         "guid": "2d6594f0c18292589bcb79ea9ae0c792",
@@ -23725,6 +26377,17 @@
         "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
       },
       {
+        "guid": "3430a9916169f45d910fd8821779d6af",
+        "title": "Civic Assembly",
+        "description": "Food and healthcare efficiency +75%; industry efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/3430a9916169f45d910fd8821779d6af/Name",
+        "description_key": "Mods/NewIndustry/Modifier/3430a9916169f45d910fd8821779d6af/Description",
+        "source_ids": [
+          "Frontiers/council"
+        ],
+        "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
+      },
+      {
         "guid": "344b43ed9528fa53a9be5fbd03478b27",
         "title": "Crane Arrestor Brakes",
         "description": "All three grades of Reloading Station gain one safety level, offsetting the extra danger of upgraded machinery.",
@@ -23804,6 +26467,17 @@
         "effects_before_sha256": "654b4971d82367d74443676a73c5e7e42186150379b15338b80a5d6748b96cf4"
       },
       {
+        "guid": "3908090e43be945bace42742f5c52099",
+        "title": "Expanded Relief Services",
+        "description": "Healthcare +100%, food +75%, industry -25% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/3908090e43be945bace42742f5c52099/Name",
+        "description_key": "Mods/NewIndustry/Modifier/3908090e43be945bace42742f5c52099/Description",
+        "source_ids": [
+          "Frontiers/relief"
+        ],
+        "effects_before_sha256": "c0e6ab55f4ddc0a86566aee2f3741e706aa7979440b7bd0e4d55bfa7bb4f1fb7"
+      },
+      {
         "guid": "3914ff238f1d8a54bc90c8bdf4fd944e",
         "title": "Workshop Reference Library",
         "description": "Workshops gain 100% workplace efficiency for human researchers and automatons. Normal citywide Workshop research scaling still applies.",
@@ -23848,6 +26522,17 @@
         "effects_before_sha256": "9c17f0db4a7adb6996ee427e3a62adbdc55067c2f1b6b9ba0a4cefe3b13ae94a"
       },
       {
+        "guid": "3dd12267642a3b53804edb2c174d7b11",
+        "title": "Forced Coal Extraction",
+        "description": "Coal mine/thumper efficiency +75%; citywide insulation -1.",
+        "name_key": "Mods/NewIndustry/Modifier/3dd12267642a3b53804edb2c174d7b11/Name",
+        "description_key": "Mods/NewIndustry/Modifier/3dd12267642a3b53804edb2c174d7b11/Description",
+        "source_ids": [
+          "Frontiers/coalshift"
+        ],
+        "effects_before_sha256": "1c75a9245d4c0f72e9857bb900002bec92bb317ed1e4bb484fcf9505185dd409"
+      },
+      {
         "guid": "3de4f3ea9b5c5650a7e863f211025e4b",
         "title": "Port Coal Compactors",
         "description": "Both sizes of Resource Depot gain a 65% capacity bonus for coal.",
@@ -23857,6 +26542,17 @@
           "AutumnCoalCompactors"
         ],
         "effects_before_sha256": "809488b093ca65092dd9ab954bce71d60e5d24bfba4c00d12afcca74902a0071"
+      },
+      {
+        "guid": "3e5d6863d651e85488ff9474bf4fb572",
+        "title": "Human-machine Partnership",
+        "description": "Industry and extraction: human efficiency +50%, automaton efficiency +75%. Medical efficiency -15%.",
+        "name_key": "Mods/NewIndustry/Modifier/3e5d6863d651e85488ff9474bf4fb572/Name",
+        "description_key": "Mods/NewIndustry/Modifier/3e5d6863d651e85488ff9474bf4fb572/Description",
+        "source_ids": [
+          "Frontiers/partnership"
+        ],
+        "effects_before_sha256": "ad77e60755927e72f8f3a6ad7ed86510674ac31407058cb71fe396747f913b22"
       },
       {
         "guid": "3ee6aa8c2d851a57b523aa920483f4b4",
@@ -23913,6 +26609,17 @@
           "StarterHuntingKits"
         ],
         "effects_before_sha256": "c642e781aab7780de836a6499267ed88ae0b6751bd216d46af56c1408e4bbd81"
+      },
+      {
+        "guid": "409647574875785a91e889fd17516be7",
+        "title": "Exposed Production Drive",
+        "description": "For two days: workplaces +50% efficiency; citywide insulation -1.",
+        "name_key": "Mods/NewIndustry/Modifier/409647574875785a91e889fd17516be7/Name",
+        "description_key": "Mods/NewIndustry/Modifier/409647574875785a91e889fd17516be7/Description",
+        "source_ids": [
+          "Frontiers/push"
+        ],
+        "effects_before_sha256": "e7c197ee0407125ceb60ce613f332b6322b3bd5240fbbe9f80a9e658483c9567"
       },
       {
         "guid": "41a5c44c4e0c2355a51434270f2f8af7",
@@ -23993,6 +26700,28 @@
         "effects_before_sha256": "8031bcc4738ae261e1552563ae12906f99786348541d55ad25fe8750835f61a5"
       },
       {
+        "guid": "44ea094247b6a45d90e72bb44ed77793",
+        "title": "Fabrication Drive",
+        "description": "Industry efficiency +125%; food workplace efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/44ea094247b6a45d90e72bb44ed77793/Name",
+        "description_key": "Mods/NewIndustry/Modifier/44ea094247b6a45d90e72bb44ed77793/Description",
+        "source_ids": [
+          "Frontiers/overclock"
+        ],
+        "effects_before_sha256": "dd7e1fef13c6292bee6cea1d8d79be00b48725c7c8591925b9345352bebeab0b"
+      },
+      {
+        "guid": "459faf222a7e7555abdb149fd08d5e28",
+        "title": "Civic Commonwealth",
+        "description": "Homes and civic services gain +1 insulation; healthcare +100% efficiency; industry -15%.",
+        "name_key": "Mods/NewIndustry/Modifier/459faf222a7e7555abdb149fd08d5e28/Name",
+        "description_key": "Mods/NewIndustry/Modifier/459faf222a7e7555abdb149fd08d5e28/Description",
+        "source_ids": [
+          "Frontiers/civic"
+        ],
+        "effects_before_sha256": "5ee0005a7d991798f3ba1fd790427a8267573cd7b0f995e4e7091d6c46ecd401"
+      },
+      {
         "guid": "468bb90df923245891bb90f35f3d2afe",
         "title": "Trade Guild Charter",
         "description": "Hope rises slightly. Human crews gain 75% workplace efficiency at industrial workplaces, including Workshops and the Army Warehouse where present. Automaton efficiency is unchanged.",
@@ -24070,6 +26799,17 @@
         "effects_before_sha256": "831d25d96bf7926889712afb308ddb669ca96c60948fded79398190c440da85b"
       },
       {
+        "guid": "493db2272daf14589a533b38c8b8a3a8",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 1 insulation levels from every insulated building.",
+        "name_key": "Mods/NewIndustry/Modifier/493db2272daf14589a533b38c8b8a3a8/Name",
+        "description_key": "Mods/NewIndustry/Modifier/493db2272daf14589a533b38c8b8a3a8/Description",
+        "source_ids": [
+          "Frontiers/front1"
+        ],
+        "effects_before_sha256": "905144c801dc8e611145871e4f35433a492b93ee5475598f4890f5821460943d"
+      },
+      {
         "guid": "49d5bddb1b1e88539bcb162b8d17d2f3",
         "title": "Harbour Food Line Insulation",
         "description": "Cookhouses and both grades of Fishing Harbour gain one insulation level.",
@@ -24093,6 +26833,17 @@
         "effects_before_sha256": "2724ab1e69f88984eba69f58c80f00923f3333d5100f52346b13fc0b6e5aee75"
       },
       {
+        "guid": "4b4400eb07a2c55188f4609a1d7eff14",
+        "title": "Forced Coal Extraction",
+        "description": "Coal mine/thumper efficiency +75%; citywide insulation -1.",
+        "name_key": "Mods/NewIndustry/Modifier/4b4400eb07a2c55188f4609a1d7eff14/Name",
+        "description_key": "Mods/NewIndustry/Modifier/4b4400eb07a2c55188f4609a1d7eff14/Description",
+        "source_ids": [
+          "Frontiers/coalshift"
+        ],
+        "effects_before_sha256": "847a18fa6c38f9ed3053de874128d622c748a43f2912ab9b96ce15fc96171743"
+      },
+      {
         "guid": "4b6bfd88cccdef5a9e14b77fa466a2c7",
         "title": "Neighbourhood Cache Networks",
         "description": "Small Resource Depots gain 300% capacity for coal, wood, steel, raw food and food rations. Large Resource Depots are unaffected. Gives compact, distributed depots a distinct role instead of forcing every stockyard to use large warehouses.",
@@ -24102,6 +26853,17 @@
           "DistributedCaches"
         ],
         "effects_before_sha256": "7b781232d438d76d7676dd2c7ca6690711a172cbacafbc6e1d975eb07776e4fb"
+      },
+      {
+        "guid": "4bbc190a5330c350ab77763790eebb28",
+        "title": "New Machine Assemblies",
+        "description": "For two days: Factory efficiency +75%.",
+        "name_key": "Mods/NewIndustry/Modifier/4bbc190a5330c350ab77763790eebb28/Name",
+        "description_key": "Mods/NewIndustry/Modifier/4bbc190a5330c350ab77763790eebb28/Description",
+        "source_ids": [
+          "Frontiers/retool"
+        ],
+        "effects_before_sha256": "fe8bafa45e6ca43c689d1e9105435c8026265a4c5498f080b8a33fe946f36129"
       },
       {
         "guid": "4de7f610a4d8d952b684a21adcd81a60",
@@ -24218,6 +26980,17 @@
         "effects_before_sha256": "23c3474cc985aad2faabdad50c454231a871b334407767848a8c7f34739a3775"
       },
       {
+        "guid": "55880de63653da5c97d1db6b11cb5d55",
+        "title": "Factory Repair Programme",
+        "description": "Factory efficiency -25% while the repair programme is active.",
+        "name_key": "Mods/NewIndustry/Modifier/55880de63653da5c97d1db6b11cb5d55/Name",
+        "description_key": "Mods/NewIndustry/Modifier/55880de63653da5c97d1db6b11cb5d55/Description",
+        "source_ids": [
+          "Frontiers/workprogramme"
+        ],
+        "effects_before_sha256": "c0e6ab55f4ddc0a86566aee2f3741e706aa7979440b7bd0e4d55bfa7bb4f1fb7"
+      },
+      {
         "guid": "55c32030f30c5f55ab15fb057d1faebb",
         "title": "Kiln Stoking Crews",
         "description": "Charcoal Kilns gain a 75% workplace efficiency bonus.",
@@ -24273,6 +27046,17 @@
         "effects_before_sha256": "f2e1ae3c890b28fa882a87c278be6f6f2aa6ed9735edf97fd59963f9843def0e"
       },
       {
+        "guid": "58f9bebb63830d58a2f311a7dccd2be9",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 3 insulation levels from every insulated building.",
+        "name_key": "Mods/NewIndustry/Modifier/58f9bebb63830d58a2f311a7dccd2be9/Name",
+        "description_key": "Mods/NewIndustry/Modifier/58f9bebb63830d58a2f311a7dccd2be9/Description",
+        "source_ids": [
+          "Frontiers/front3"
+        ],
+        "effects_before_sha256": "f0dcc17bc16966126d094e4f47106614932d8146782e4d238a2a4184c1859dc4"
+      },
+      {
         "guid": "59385c4297369f5e8821ca2ef8286332",
         "title": "Steam Hub Pipe Lagging",
         "description": "Steam Hubs gain a 15% reduction in coal use.",
@@ -24282,6 +27066,17 @@
           "HubPipeLagging"
         ],
         "effects_before_sha256": "69a5bd3935e7065b9ed8935cc2d722f1947a2af3ca08b4a82ea6b4394bea1e93"
+      },
+      {
+        "guid": "59e3a693712c9c59bf647dbc7e5ccf9c",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 4 insulation levels from every insulated building.",
+        "name_key": "Mods/NewIndustry/Modifier/59e3a693712c9c59bf647dbc7e5ccf9c/Name",
+        "description_key": "Mods/NewIndustry/Modifier/59e3a693712c9c59bf647dbc7e5ccf9c/Description",
+        "source_ids": [
+          "Frontiers/front4"
+        ],
+        "effects_before_sha256": "336c92e1bb43e202a4b3bc28100ebd97a02df1abaaeaee8701583b48845c0bac"
       },
       {
         "guid": "5a44ccf8e2f86b56bb7d681a72728cd2",
@@ -24405,6 +27200,17 @@
         "effects_before_sha256": "3ba564cdec09e8508c992024d32dd137b5a8e1222f373c2abbce7fd44730410b"
       },
       {
+        "guid": "5d2e776663f92b5da1ac02676c7b2166",
+        "title": "Sheltered Housing Blocks",
+        "description": "Homes +3 insulation; industry efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/5d2e776663f92b5da1ac02676c7b2166/Name",
+        "description_key": "Mods/NewIndustry/Modifier/5d2e776663f92b5da1ac02676c7b2166/Description",
+        "source_ids": [
+          "Frontiers/housing"
+        ],
+        "effects_before_sha256": "c0e6ab55f4ddc0a86566aee2f3741e706aa7979440b7bd0e4d55bfa7bb4f1fb7"
+      },
+      {
         "guid": "5db1c3b1c5c62b548f318741bafd90e7",
         "title": "Workshop Drafting Stations",
         "description": "Workshops gain a 75% efficiency bonus. Citywide research speed still uses the normal Workshop scaling.\n\nWorkshops gain +1 heat level.",
@@ -24462,6 +27268,17 @@
         "effects_before_sha256": "7b89c0d42f42b47f856446dfd205cc973c0655326edfa8448a29a978be2cb1cb"
       },
       {
+        "guid": "5e7750043cfe755e9899cd8e1994b94a",
+        "title": "Distributed Thermal Kits",
+        "description": "Homes, healthcare and civic services gain +3 insulation.",
+        "name_key": "Mods/NewIndustry/Modifier/5e7750043cfe755e9899cd8e1994b94a/Name",
+        "description_key": "Mods/NewIndustry/Modifier/5e7750043cfe755e9899cd8e1994b94a/Description",
+        "source_ids": [
+          "Frontiers/thermal_kits"
+        ],
+        "effects_before_sha256": "284223ed69ea1410e852e98cddbf36c84c6b24f086f18e586401b6e352cc9f18"
+      },
+      {
         "guid": "5eae563546e458528bb407e30a3ce8c0",
         "title": "Storm Mutual Aid Charter",
         "description": "Hope rises greatly and discontent falls greatly when signed. Civic and healthcare buildings gain +2 insulation.",
@@ -24484,6 +27301,17 @@
           "WorksiteWarmBreaks"
         ],
         "effects_before_sha256": "ea506dcec8f999eed9a2379568c66b47106d96803b15f1d9f4ddfccc77e3e830"
+      },
+      {
+        "guid": "5fd37e64026ffb5cab66f51e90678979",
+        "title": "Sealed Districts",
+        "description": "For two days: citywide +2 insulation; industry and food workplace efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/5fd37e64026ffb5cab66f51e90678979/Name",
+        "description_key": "Mods/NewIndustry/Modifier/5fd37e64026ffb5cab66f51e90678979/Description",
+        "source_ids": [
+          "Frontiers/seal"
+        ],
+        "effects_before_sha256": "1c4c545311218912ff581478a3527d60ae8287d214de144606cbc252a282c761"
       },
       {
         "guid": "5ff8a7419f35f858a63aec13bbfa0c58",
@@ -24575,6 +27403,28 @@
         "effects_before_sha256": "1ed9c31cd7332ee94d719f3c8d77cb8bd6f4138db2f43d10217014e1fefb5cb5"
       },
       {
+        "guid": "64dec1f7c8d0a35bb744050ba60d0926",
+        "title": "Expanded Relief Services",
+        "description": "Healthcare +100%, food +75%, industry -25% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/64dec1f7c8d0a35bb744050ba60d0926/Name",
+        "description_key": "Mods/NewIndustry/Modifier/64dec1f7c8d0a35bb744050ba60d0926/Description",
+        "source_ids": [
+          "Frontiers/relief"
+        ],
+        "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
+      },
+      {
+        "guid": "652ff64162247e5d8550c958784d1323",
+        "title": "Civic Commonwealth",
+        "description": "Homes and civic services gain +1 insulation; healthcare +100% efficiency; industry -15%.",
+        "name_key": "Mods/NewIndustry/Modifier/652ff64162247e5d8550c958784d1323/Name",
+        "description_key": "Mods/NewIndustry/Modifier/652ff64162247e5d8550c958784d1323/Description",
+        "source_ids": [
+          "Frontiers/civic"
+        ],
+        "effects_before_sha256": "ad83b34cdb579f2245270dc3785d55004c8e53b4e4dc30513cf5a7da7c1e4e21"
+      },
+      {
         "guid": "669fae86edcb1153b44b9bba2f625414",
         "title": "Infirmary Recovery Suites",
         "description": "Infirmaries gain 100% healing efficiency for human crews and automatons, plus +1 insulation. Faster recovery frees beds sooner.\n\nInfirmaries gain a 75% healing speed bonus.\n\nMedical Posts and Infirmaries gain one insulation level.\n\nInfirmaries and Houses of Healing gain a 75% healing speed bonus.",
@@ -24585,6 +27435,17 @@
           "WardProtocols"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "66e0359c79c8685f9b045c5fcaf3b3db",
+        "title": "Consolidated Warm Wards",
+        "description": "Healthcare +2 insulation but -25% efficiency; food efficiency +50%.",
+        "name_key": "Mods/NewIndustry/Modifier/66e0359c79c8685f9b045c5fcaf3b3db/Name",
+        "description_key": "Mods/NewIndustry/Modifier/66e0359c79c8685f9b045c5fcaf3b3db/Description",
+        "source_ids": [
+          "Frontiers/care"
+        ],
+        "effects_before_sha256": "0786208bee58cfb8da477b1f32222c095822eae3db69d5ce15bb436fe76560fc"
       },
       {
         "guid": "66e0bb0bd5799d5c9006680fb5572d97",
@@ -24618,6 +27479,17 @@
           "CoalCircuit"
         ],
         "effects_before_sha256": "f2e1ae3c890b28fa882a87c278be6f6f2aa6ed9735edf97fd59963f9843def0e"
+      },
+      {
+        "guid": "67d50eac05dadf54806a682b9f3dcd3d",
+        "title": "Civic Assembly",
+        "description": "Food and healthcare efficiency +75%; industry efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/67d50eac05dadf54806a682b9f3dcd3d/Name",
+        "description_key": "Mods/NewIndustry/Modifier/67d50eac05dadf54806a682b9f3dcd3d/Description",
+        "source_ids": [
+          "Frontiers/council"
+        ],
+        "effects_before_sha256": "a0bc87c126d94f18fb22078bf43d4b0f5a60d03c8771f6a145bab69e5c5bb8cf"
       },
       {
         "guid": "67e424a0fb898254bb7f5cec1407cdf3",
@@ -24755,6 +27627,17 @@
         "effects_before_sha256": "a2a205cc2d8298f3f34bf19f68b18ec3c5be3c51352f9d05e767f477272c69ab"
       },
       {
+        "guid": "6fbdd7e13065695785651f3871910b05",
+        "title": "Recovery Shifts",
+        "description": "All workplace efficiency -35%; cold-related illness -50%.",
+        "name_key": "Mods/NewIndustry/Modifier/6fbdd7e13065695785651f3871910b05/Name",
+        "description_key": "Mods/NewIndustry/Modifier/6fbdd7e13065695785651f3871910b05/Description",
+        "source_ids": [
+          "Frontiers/restcity"
+        ],
+        "effects_before_sha256": "606b2327e07b85f3e5c337ebcce97ce3cce2ad104316d4bc329e298e9a152fa3"
+      },
+      {
         "guid": "71343de75396325e9a99c1d0a3aa4998",
         "title": "Steelworks Rolling Jigs",
         "description": "All three grades of Steelworks gain a 30% steel production bonus.\n\nAll three grades of Steelworks gain one insulation level.",
@@ -24833,6 +27716,17 @@
           "AutumnDefaultLawMasterCraftsmen"
         ],
         "effects_before_sha256": "555f3335cddcc162a432cd47b1d9c204accd2460b27ba78ba39e5826ef0f8566"
+      },
+      {
+        "guid": "77b1880e1a48db51b1a47e5dbc18e2d7",
+        "title": "Emergency Quarantine",
+        "description": "For two days: healthcare +100% efficiency; industrial efficiency -35%.",
+        "name_key": "Mods/NewIndustry/Modifier/77b1880e1a48db51b1a47e5dbc18e2d7/Name",
+        "description_key": "Mods/NewIndustry/Modifier/77b1880e1a48db51b1a47e5dbc18e2d7/Description",
+        "source_ids": [
+          "Frontiers/quarantine"
+        ],
+        "effects_before_sha256": "a94022dfad4f5661fcdf6603ebf04105843e408d3e543ed0c7b8b602480e6bfd"
       },
       {
         "guid": "7910e25ede289058871b1605d65e9474",
@@ -24914,6 +27808,17 @@
         "effects_before_sha256": "3f7e8ea7390a6a703fec64882201174fd408ef49e7114dc9357decb3125c88cd"
       },
       {
+        "guid": "7d14934432aee45cacd722fa8c76d646",
+        "title": "Sheltered Housing Blocks",
+        "description": "Homes +3 insulation; industry efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/7d14934432aee45cacd722fa8c76d646/Name",
+        "description_key": "Mods/NewIndustry/Modifier/7d14934432aee45cacd722fa8c76d646/Description",
+        "source_ids": [
+          "Frontiers/housing"
+        ],
+        "effects_before_sha256": "883e74203d3afea48d83b33e14b2a038fef49984a74d8aced5b1ad96bebf1564"
+      },
+      {
         "guid": "7db98ad23539235c8a144c4b8e5c5511",
         "title": "Industrial Automaton Actuators",
         "description": "Automatons gain a 75% workplace efficiency bonus in Sawmills and Steam Sawmills.\n\nAutomatons gain a 75% workplace efficiency bonus in all three grades of Steelworks.\n\nAutomatons gain a 75% workplace efficiency bonus in all three grades of Wall Drill.",
@@ -24923,6 +27828,17 @@
           "AutomatonSawmillServos"
         ],
         "effects_before_sha256": "07920fd60102ae2cbef219bf78dcd37946da51da5aaef95d28a0353e41f60011"
+      },
+      {
+        "guid": "7dc184c23e370353a7e403c993ef37c7",
+        "title": "Consolidated Warm Wards",
+        "description": "Healthcare +2 insulation but -25% efficiency; food efficiency +50%.",
+        "name_key": "Mods/NewIndustry/Modifier/7dc184c23e370353a7e403c993ef37c7/Name",
+        "description_key": "Mods/NewIndustry/Modifier/7dc184c23e370353a7e403c993ef37c7/Description",
+        "source_ids": [
+          "Frontiers/care"
+        ],
+        "effects_before_sha256": "1c4c545311218912ff581478a3527d60ae8287d214de144606cbc252a282c761"
       },
       {
         "guid": "7e9a92b66905fe52a183d4af699c21d1",
@@ -24969,6 +27885,28 @@
           "EdgeFieldTeams"
         ],
         "effects_before_sha256": "caa1681253c20310ad8d229c0b1b2b4b95576cc21a5f51de8e407ad0f884bc01"
+      },
+      {
+        "guid": "830ad06f475ae3599a70774b2ae2050e",
+        "title": "Expanded Relief Services",
+        "description": "Healthcare +100%, food +75%, industry -25% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/830ad06f475ae3599a70774b2ae2050e/Name",
+        "description_key": "Mods/NewIndustry/Modifier/830ad06f475ae3599a70774b2ae2050e/Description",
+        "source_ids": [
+          "Frontiers/relief"
+        ],
+        "effects_before_sha256": "53175bd9ac6a238ff107e41dfa4d5a35d085d233f9fb344e699e1ad36a1f1eca"
+      },
+      {
+        "guid": "831ad21c41089354bc4e2f052d30fee3",
+        "title": "Human-machine Partnership",
+        "description": "Industry and extraction: human efficiency +50%, automaton efficiency +75%. Medical efficiency -15%.",
+        "name_key": "Mods/NewIndustry/Modifier/831ad21c41089354bc4e2f052d30fee3/Name",
+        "description_key": "Mods/NewIndustry/Modifier/831ad21c41089354bc4e2f052d30fee3/Description",
+        "source_ids": [
+          "Frontiers/partnership"
+        ],
+        "effects_before_sha256": "bece5d85a99246ce0d19a961fd5a5665489e840d5b47d53b7bd0f6ff5e6a9818"
       },
       {
         "guid": "8571f2b88fd12657bce87727a82ffc76",
@@ -25028,6 +27966,17 @@
         "effects_before_sha256": "67a10349fd98100297cc314baef07e7b5c205412637415c0b11cc5a029c7b728"
       },
       {
+        "guid": "871fba059ee888569a6dbb43e940fe55",
+        "title": "Fabrication Drive",
+        "description": "Industry efficiency +125%; food workplace efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/871fba059ee888569a6dbb43e940fe55/Name",
+        "description_key": "Mods/NewIndustry/Modifier/871fba059ee888569a6dbb43e940fe55/Description",
+        "source_ids": [
+          "Frontiers/overclock"
+        ],
+        "effects_before_sha256": "c0e6ab55f4ddc0a86566aee2f3741e706aa7979440b7bd0e4d55bfa7bb4f1fb7"
+      },
+      {
         "guid": "8734e89f5eb20d5487bb442caf3d35e9",
         "title": "Workers' Grievance Hearings",
         "description": "Discontent falls greatly when signed. Medical Posts and Infirmaries gain 75% healing efficiency for human crews and automatons.",
@@ -25038,6 +27987,17 @@
           "CivicGrievances"
         ],
         "effects_before_sha256": "dbca5fe46bf51d6bcc656c61bfff4f2ef76efb40f137022b544ce8a83bb7b248"
+      },
+      {
+        "guid": "878b4993e1877d5db4b5e03b8383595a",
+        "title": "Human Industrial Expertise",
+        "description": "Industry/extraction: human efficiency +100%, automaton efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/878b4993e1877d5db4b5e03b8383595a/Name",
+        "description_key": "Mods/NewIndustry/Modifier/878b4993e1877d5db4b5e03b8383595a/Description",
+        "source_ids": [
+          "Frontiers/human"
+        ],
+        "effects_before_sha256": "a54a337e918ff3f6c7cbfc92a05f1d494acd888cfad357b0c8cf5c2e0b801d44"
       },
       {
         "guid": "878f57627a6c9e5882f01e889700bcc6",
@@ -25071,6 +28031,17 @@
           "ProvisionCells"
         ],
         "effects_before_sha256": "1e674d26d54df79ccecf7767953314bcaf24ff9a7761f63075a6c09331a25150"
+      },
+      {
+        "guid": "889291afeb661a5d828daadce677d68a",
+        "title": "The Factory Masterwork",
+        "description": "Industry efficiency +150%; healthcare efficiency +25%.",
+        "name_key": "Mods/NewIndustry/Modifier/889291afeb661a5d828daadce677d68a/Name",
+        "description_key": "Mods/NewIndustry/Modifier/889291afeb661a5d828daadce677d68a/Description",
+        "source_ids": [
+          "Frontiers/masterwork"
+        ],
+        "effects_before_sha256": "5a840c68b2f42fe1faa72d96bcc00b8cf96a9486a1bb8ac97ed9beb5d3fc98e8"
       },
       {
         "guid": "89131c29edc267568f53795b7afca238",
@@ -25218,6 +28189,17 @@
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
+        "guid": "90826794acc0365a8af91563f4bda08a",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 3 insulation levels from every insulated building.",
+        "name_key": "Mods/NewIndustry/Modifier/90826794acc0365a8af91563f4bda08a/Name",
+        "description_key": "Mods/NewIndustry/Modifier/90826794acc0365a8af91563f4bda08a/Description",
+        "source_ids": [
+          "Frontiers/front3"
+        ],
+        "effects_before_sha256": "2f6a4ea7e878d3eb3e282dc4d823d64d6f80cc85b5cf6ca5e52f0db81f31747f"
+      },
+      {
         "guid": "908cc3394f22ae52a19176a6d7bafdf2",
         "title": "Generator Pressure Seals",
         "description": "The Generator uses 40% less coal at every power and range setting. Stress builds 25% more slowly, supporting sustained high-power heating and longer overdrive use.\n\nGenerator stress builds 50% more slowly and recovers 50% faster, making overdrive a practical storm-management tool.",
@@ -25250,6 +28232,39 @@
           "WardProtocols"
         ],
         "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
+      },
+      {
+        "guid": "91f087e533bde053adf1c8ead86f151b",
+        "title": "Community Service Programme",
+        "description": "Homes/civic services +1 insulation; healthcare +50% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/91f087e533bde053adf1c8ead86f151b/Name",
+        "description_key": "Mods/NewIndustry/Modifier/91f087e533bde053adf1c8ead86f151b/Description",
+        "source_ids": [
+          "Frontiers/community"
+        ],
+        "effects_before_sha256": "7c17895611787d41d6402d2c4f835e62c81af557e382c55569dfb3ae2047347d"
+      },
+      {
+        "guid": "91f45e509621ca598f7da6b4ba39d091",
+        "title": "Factory Repair Programme",
+        "description": "Factory efficiency -25% while the repair programme is active.",
+        "name_key": "Mods/NewIndustry/Modifier/91f45e509621ca598f7da6b4ba39d091/Name",
+        "description_key": "Mods/NewIndustry/Modifier/91f45e509621ca598f7da6b4ba39d091/Description",
+        "source_ids": [
+          "Frontiers/workprogramme"
+        ],
+        "effects_before_sha256": "217eb55d10e153599ddc1408f0e9e13d78656e13cd2719a8e4b689900100f3ec"
+      },
+      {
+        "guid": "92354a68480bdb588d5679f122eec015",
+        "title": "Emergency Quarantine",
+        "description": "For two days: healthcare +100% efficiency; industrial efficiency -35%.",
+        "name_key": "Mods/NewIndustry/Modifier/92354a68480bdb588d5679f122eec015/Name",
+        "description_key": "Mods/NewIndustry/Modifier/92354a68480bdb588d5679f122eec015/Description",
+        "source_ids": [
+          "Frontiers/quarantine"
+        ],
+        "effects_before_sha256": "07d37bd252fe9fa74b8e6dc2a9e1516088bcb59963f3afdf5ca209b2ff336774"
       },
       {
         "guid": "92982eb0deacc751ba4c7bd16682cbee",
@@ -25296,6 +28311,17 @@
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
+        "guid": "9595240a5195fe5f9dd7e3fafb3de56d",
+        "title": "Emergency Heat Grid",
+        "description": "Citywide +2 insulation while its 250-coal six-hour upkeep is funded.",
+        "name_key": "Mods/NewIndustry/Modifier/9595240a5195fe5f9dd7e3fafb3de56d/Name",
+        "description_key": "Mods/NewIndustry/Modifier/9595240a5195fe5f9dd7e3fafb3de56d/Description",
+        "source_ids": [
+          "Frontiers/grid"
+        ],
+        "effects_before_sha256": "19550c3734527a139b21222a4b5d5655476b06856542baf4d6911a451b0b5c88"
+      },
+      {
         "guid": "95f1936f52edef529dcb3bc03295ddeb",
         "title": "Citywide Thermal Envelope",
         "description": "Researched stages of Citywide Thermal Envelope provide +2 insulation at this building.",
@@ -25305,6 +28331,17 @@
           "CitywideLagging2"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "96a2a85fd6cccf5da9531e9dc613a53e",
+        "title": "Stretched Provisions",
+        "description": "For two days: food workplace efficiency +100%, cold-related illness +30%.",
+        "name_key": "Mods/NewIndustry/Modifier/96a2a85fd6cccf5da9531e9dc613a53e/Name",
+        "description_key": "Mods/NewIndustry/Modifier/96a2a85fd6cccf5da9531e9dc613a53e/Description",
+        "source_ids": [
+          "Frontiers/stretch"
+        ],
+        "effects_before_sha256": "403672226710bffec6749c52fa2f1afcf1dc4d269fe9b6402aa36e250f19da7c"
       },
       {
         "guid": "974358785d49445cab46d6b3770a58c9",
@@ -25338,6 +28375,17 @@
           "MasteryFactoryLines"
         ],
         "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
+      },
+      {
+        "guid": "99dfd03883d486549dd9c07f065c1de3",
+        "title": "Industrial League",
+        "description": "Factories and Steelworks +100% efficiency; Workshops +75%. Requires 150 coal and 10 steel every six hours.",
+        "name_key": "Mods/NewIndustry/Modifier/99dfd03883d486549dd9c07f065c1de3/Name",
+        "description_key": "Mods/NewIndustry/Modifier/99dfd03883d486549dd9c07f065c1de3/Description",
+        "source_ids": [
+          "Frontiers/league"
+        ],
+        "effects_before_sha256": "196d003fd759711bd20e885464850061ab5d5846fa8dd6d61812f40bf0a172dc"
       },
       {
         "guid": "9af42f42994c3e58917f28d207c53010",
@@ -25474,6 +28522,28 @@
         "effects_before_sha256": "2d8e8ce5ffdba156cf5c6b28e22bc084c2493e72c84a0123f05a642fb2a1e905"
       },
       {
+        "guid": "a1a96d228f7fd958b63a3ad2ba9cc6be",
+        "title": "Emergency Heat Restrictions",
+        "description": "Citywide insulation -1; industry efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/a1a96d228f7fd958b63a3ad2ba9cc6be/Name",
+        "description_key": "Mods/NewIndustry/Modifier/a1a96d228f7fd958b63a3ad2ba9cc6be/Description",
+        "source_ids": [
+          "Frontiers/neglect"
+        ],
+        "effects_before_sha256": "62ebf956588775fa675e7c58d5ddff786a60001a3b97204ec63c5fe12d105053"
+      },
+      {
+        "guid": "a1a9c12c1ef1c85eb09506750d252310",
+        "title": "Engineers on Repair Duty",
+        "description": "For two days: Factory efficiency +100%; Workshop efficiency -50%.",
+        "name_key": "Mods/NewIndustry/Modifier/a1a9c12c1ef1c85eb09506750d252310/Name",
+        "description_key": "Mods/NewIndustry/Modifier/a1a9c12c1ef1c85eb09506750d252310/Description",
+        "source_ids": [
+          "Frontiers/engineers"
+        ],
+        "effects_before_sha256": "74e06b4049c0568bd4fe434481c6175f23a521c9e53cc987067b2eeb9ca5c457"
+      },
+      {
         "guid": "a2724790180d5d5a9361903074c177cb",
         "title": "Dockside Collection Routes",
         "description": "All Dock grades gain 75% unloading efficiency. Gathering Posts gain 25% collection radius to collect dockside piles more easily before Reloading Stations are available.",
@@ -25483,6 +28553,17 @@
           "AutumnPortClearing"
         ],
         "effects_before_sha256": "3ba564cdec09e8508c992024d32dd137b5a8e1222f373c2abbce7fd44730410b"
+      },
+      {
+        "guid": "a32f50ae14626d54bcfd3e4339245762",
+        "title": "Whiteout Thermal Front",
+        "description": "The advancing front removes 2 insulation levels from every insulated building.",
+        "name_key": "Mods/NewIndustry/Modifier/a32f50ae14626d54bcfd3e4339245762/Name",
+        "description_key": "Mods/NewIndustry/Modifier/a32f50ae14626d54bcfd3e4339245762/Description",
+        "source_ids": [
+          "Frontiers/front2"
+        ],
+        "effects_before_sha256": "a90519d70d784c2719123c410fe0d790d27154a0ec3300f537f59a8db1868783"
       },
       {
         "guid": "a342c514fb191d5fb5e9b06bc6e96488",
@@ -25516,6 +28597,28 @@
           "GeneratorSeal"
         ],
         "effects_before_sha256": "323c77365764ad5ea4e1163f9b30ba71b4b42b99857039930a78b421b4cecbd1"
+      },
+      {
+        "guid": "a528b14ab4c6d65ca3409a35321f77b2",
+        "title": "Sealed Districts",
+        "description": "For two days: citywide +2 insulation; industry and food workplace efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/a528b14ab4c6d65ca3409a35321f77b2/Name",
+        "description_key": "Mods/NewIndustry/Modifier/a528b14ab4c6d65ca3409a35321f77b2/Description",
+        "source_ids": [
+          "Frontiers/seal"
+        ],
+        "effects_before_sha256": "1e15040da4c6c1449ab97cfb9d94fe73516452b084759b8fc93414c3ca2f3a82"
+      },
+      {
+        "guid": "a55699a9d85dc951b1808c17ec68ead7",
+        "title": "Standardised Automation",
+        "description": "Industry/extraction: automaton efficiency +100%, human efficiency -35%.",
+        "name_key": "Mods/NewIndustry/Modifier/a55699a9d85dc951b1808c17ec68ead7/Name",
+        "description_key": "Mods/NewIndustry/Modifier/a55699a9d85dc951b1808c17ec68ead7/Description",
+        "source_ids": [
+          "Frontiers/servo"
+        ],
+        "effects_before_sha256": "4d2550054272da148d3e770abb5b423693f9f5c486a010ba4887eef8669cdd60"
       },
       {
         "guid": "a6919534be755151af5ba2215e305bf8",
@@ -25585,6 +28688,17 @@
         "effects_before_sha256": "8602f446af28eff2e0b333c7bd5dcf19785fa276b5892e047f26862820088e95"
       },
       {
+        "guid": "a91cb965f37a5a5ba5f9596bd5e2e69c",
+        "title": "Recovery Shifts",
+        "description": "All workplace efficiency -35%; cold-related illness -50%.",
+        "name_key": "Mods/NewIndustry/Modifier/a91cb965f37a5a5ba5f9596bd5e2e69c/Name",
+        "description_key": "Mods/NewIndustry/Modifier/a91cb965f37a5a5ba5f9596bd5e2e69c/Description",
+        "source_ids": [
+          "Frontiers/restcity"
+        ],
+        "effects_before_sha256": "a94022dfad4f5661fcdf6603ebf04105843e408d3e543ed0c7b8b602480e6bfd"
+      },
+      {
         "guid": "aa2ecd23749c575197f74265b6ed6cea",
         "title": "Clinic Supply Rotas",
         "description": "Medical Posts and Infirmaries gain a 75% healing speed bonus.\n\nMedical Posts reduce the amputation risk of Radical Treatment by 75%. This gives Radical Treatment a safer long-term role in cities with few Infirmaries. The Radical Treatment law must be active for this effect to matter.",
@@ -25630,6 +28744,17 @@
         "effects_before_sha256": "de122cec1a1b028187b16aca6fdd92a73071b1e599879c3e846f9c6ea46e84d3"
       },
       {
+        "guid": "aaa5ccf7e7f25552809d8e5334e6b1f3",
+        "title": "Protected Work Shifts",
+        "description": "All workplace efficiency +25%; citywide insulation +1.",
+        "name_key": "Mods/NewIndustry/Modifier/aaa5ccf7e7f25552809d8e5334e6b1f3/Name",
+        "description_key": "Mods/NewIndustry/Modifier/aaa5ccf7e7f25552809d8e5334e6b1f3/Description",
+        "source_ids": [
+          "Frontiers/equipment"
+        ],
+        "effects_before_sha256": "a1a02e977517f343681a29826184bff38833cbdcb0775c9ab6b80d6438a4f000"
+      },
+      {
         "guid": "ab2d991db362d951bdc29838ffdccb63",
         "title": "Fabrication Shift Boards",
         "description": "Profiles Manufacture, Machine Shop, and Foundry buildings gain a 75% workplace efficiency bonus.",
@@ -25650,6 +28775,17 @@
           "ThumperScreens"
         ],
         "effects_before_sha256": "23c3474cc985aad2faabdad50c454231a871b334407767848a8c7f34739a3775"
+      },
+      {
+        "guid": "ad46490a2d946e57855df847334ba498",
+        "title": "The Factory Masterwork",
+        "description": "Industry efficiency +150%; healthcare efficiency +25%.",
+        "name_key": "Mods/NewIndustry/Modifier/ad46490a2d946e57855df847334ba498/Name",
+        "description_key": "Mods/NewIndustry/Modifier/ad46490a2d946e57855df847334ba498/Description",
+        "source_ids": [
+          "Frontiers/masterwork"
+        ],
+        "effects_before_sha256": "b8a64c4276a90417f6df62d0931de1d0c550510fb2468f075710202097ef6193"
       },
       {
         "guid": "ad62c4d6f9bbeb5f9ca50f4f03066add",
@@ -25798,6 +28934,39 @@
         "effects_before_sha256": "ea506dcec8f999eed9a2379568c66b47106d96803b15f1d9f4ddfccc77e3e830"
       },
       {
+        "guid": "b28a9a2bf545fa5b8b31251dd3199395",
+        "title": "Emergency Heat Restrictions",
+        "description": "Citywide insulation -1; industry efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/b28a9a2bf545fa5b8b31251dd3199395/Name",
+        "description_key": "Mods/NewIndustry/Modifier/b28a9a2bf545fa5b8b31251dd3199395/Description",
+        "source_ids": [
+          "Frontiers/neglect"
+        ],
+        "effects_before_sha256": "847a18fa6c38f9ed3053de874128d622c748a43f2912ab9b96ce15fc96171743"
+      },
+      {
+        "guid": "b487eac33da1805b8f17e465996aa5f6",
+        "title": "Emergency Fuel Burn",
+        "description": "For two days: citywide +3 insulation.",
+        "name_key": "Mods/NewIndustry/Modifier/b487eac33da1805b8f17e465996aa5f6/Name",
+        "description_key": "Mods/NewIndustry/Modifier/b487eac33da1805b8f17e465996aa5f6/Description",
+        "source_ids": [
+          "Frontiers/burn"
+        ],
+        "effects_before_sha256": "883e74203d3afea48d83b33e14b2a038fef49984a74d8aced5b1ad96bebf1564"
+      },
+      {
+        "guid": "b4c5ed77fddbb4579b42040c21c5366c",
+        "title": "New Machine Assemblies",
+        "description": "For two days: Factory efficiency +75%.",
+        "name_key": "Mods/NewIndustry/Modifier/b4c5ed77fddbb4579b42040c21c5366c/Name",
+        "description_key": "Mods/NewIndustry/Modifier/b4c5ed77fddbb4579b42040c21c5366c/Description",
+        "source_ids": [
+          "Frontiers/retool"
+        ],
+        "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
+      },
+      {
         "guid": "b4fa3babbbf5e45ab7161e14ad96e71d",
         "title": "Mechanical Maintenance Charter",
         "description": "Discontent falls slightly. Industrial human crews gain 75% workplace efficiency and automatons gain 175%; their workplaces gain +2 insulation. Normal automaton workplace permissions still apply.",
@@ -25876,6 +29045,39 @@
         "effects_before_sha256": "6b9cf8a9e9e1a592022108652801febcec8145962ec6442d00e093abbcd958b4"
       },
       {
+        "guid": "b8e0b621b7b04a5ebaf84466085890a3",
+        "title": "Specialists on Rescue Duty",
+        "description": "Industry efficiency +50%; healthcare efficiency -35%.",
+        "name_key": "Mods/NewIndustry/Modifier/b8e0b621b7b04a5ebaf84466085890a3/Name",
+        "description_key": "Mods/NewIndustry/Modifier/b8e0b621b7b04a5ebaf84466085890a3/Description",
+        "source_ids": [
+          "Frontiers/survey"
+        ],
+        "effects_before_sha256": "a94022dfad4f5661fcdf6603ebf04105843e408d3e543ed0c7b8b602480e6bfd"
+      },
+      {
+        "guid": "b993272948bc475c9e64c4e94aee2e06",
+        "title": "Shelter Network",
+        "description": "Homes, healthcare and civic buildings +3 insulation; Workshop efficiency -20%.",
+        "name_key": "Mods/NewIndustry/Modifier/b993272948bc475c9e64c4e94aee2e06/Name",
+        "description_key": "Mods/NewIndustry/Modifier/b993272948bc475c9e64c4e94aee2e06/Description",
+        "source_ids": [
+          "Frontiers/shelter"
+        ],
+        "effects_before_sha256": "83565316ebf8c55b172c11e7e8dfa8f41a29c8d7c1ba5281a187452f2c09d4a6"
+      },
+      {
+        "guid": "bad107071f961352802a8aa7df864b6f",
+        "title": "Community Service Programme",
+        "description": "Homes/civic services +1 insulation; healthcare +50% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/bad107071f961352802a8aa7df864b6f/Name",
+        "description_key": "Mods/NewIndustry/Modifier/bad107071f961352802a8aa7df864b6f/Description",
+        "source_ids": [
+          "Frontiers/community"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
         "guid": "bc1dceca610cad5eb59eaac2bc2e1322",
         "title": "Engineers Exchange",
         "description": "Found a technical exchange. Workshops gain 75% workplace efficiency.",
@@ -25941,6 +29143,17 @@
           "AutumnDefaultLawDistrictHearths"
         ],
         "effects_before_sha256": "7f96496bff14e01ebd483623e2987d9c8985d97253ae38d2e498571373a5d7b1"
+      },
+      {
+        "guid": "c0598c2033f70858ba6c52d9d0d044be",
+        "title": "Closed-loop Industry",
+        "description": "Industrial and extraction automaton efficiency +150%; human efficiency -25%. Requires one Steam Core per day.",
+        "name_key": "Mods/NewIndustry/Modifier/c0598c2033f70858ba6c52d9d0d044be/Name",
+        "description_key": "Mods/NewIndustry/Modifier/c0598c2033f70858ba6c52d9d0d044be/Description",
+        "source_ids": [
+          "Frontiers/closed"
+        ],
+        "effects_before_sha256": "8752f0447ff7a5c26347e81340d2c02daa422e75412c2c56faf0e2c853120fd8"
       },
       {
         "guid": "c0b79520395e0b5ca02d3231a0e3bc4b",
@@ -26020,6 +29233,17 @@
         "effects_before_sha256": "f2e1ae3c890b28fa882a87c278be6f6f2aa6ed9735edf97fd59963f9843def0e"
       },
       {
+        "guid": "c6f7aac6a0fee55d850e7e82d18f3cf4",
+        "title": "Stretched Provisions",
+        "description": "For two days: food workplace efficiency +100%, cold-related illness +30%.",
+        "name_key": "Mods/NewIndustry/Modifier/c6f7aac6a0fee55d850e7e82d18f3cf4/Name",
+        "description_key": "Mods/NewIndustry/Modifier/c6f7aac6a0fee55d850e7e82d18f3cf4/Description",
+        "source_ids": [
+          "Frontiers/stretch"
+        ],
+        "effects_before_sha256": "07d37bd252fe9fa74b8e6dc2a9e1516088bcb59963f3afdf5ca209b2ff336774"
+      },
+      {
         "guid": "c757120701583e5a8ab23e57e22056f9",
         "title": "Compact Heating Grids",
         "description": "Braziers use 40% less coal. Trade-off: all heat-zone radii shrink by 20%. Heater power is unaffected. Optional permanent specialisation for compact districts rather than wide heat coverage.",
@@ -26042,6 +29266,17 @@
         "effects_before_sha256": "62316487d71d96444f7cdb263f435ba9a31b0581c8fcc96f5d5451c829b8abce"
       },
       {
+        "guid": "c982f3ea152f635987e157c7ec20d0fa",
+        "title": "Forced Coal Extraction",
+        "description": "Coal mine/thumper efficiency +75%; citywide insulation -1.",
+        "name_key": "Mods/NewIndustry/Modifier/c982f3ea152f635987e157c7ec20d0fa/Name",
+        "description_key": "Mods/NewIndustry/Modifier/c982f3ea152f635987e157c7ec20d0fa/Description",
+        "source_ids": [
+          "Frontiers/coalshift"
+        ],
+        "effects_before_sha256": "36d6956b907e6ff10d9d39d8116cc5d6035dbb28c814663320cca673f8bd19e6"
+      },
+      {
         "guid": "c9c7f497c86bf550a1e30ffdd9581477",
         "title": "Army Warehouse Insulation",
         "description": "Researched stages of Army Warehouse Insulation provide +1 insulation at this building.",
@@ -26051,6 +29286,17 @@
           "EdgeWarehouseBaffles"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "ca390238d147b156b6203b3f9946bdd6",
+        "title": "Demanded Production Drive",
+        "description": "All workplace efficiency +75%; cold-related illness +50%.",
+        "name_key": "Mods/NewIndustry/Modifier/ca390238d147b156b6203b3f9946bdd6/Name",
+        "description_key": "Mods/NewIndustry/Modifier/ca390238d147b156b6203b3f9946bdd6/Description",
+        "source_ids": [
+          "Frontiers/driven"
+        ],
+        "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
       },
       {
         "guid": "cd445764311e8b5f9a9d23d4152563b2",
@@ -26073,6 +29319,17 @@
           "AutumnVentilationKits"
         ],
         "effects_before_sha256": "499dfa6d362b4a3c948831eb1c61d887128a1992d1c5c201879ea824e0e962e7"
+      },
+      {
+        "guid": "ceb02fb027baab5898a9f32717b05f57",
+        "title": "Industrial League",
+        "description": "Factories and Steelworks +100% efficiency; Workshops +75%. Requires 150 coal and 10 steel every six hours.",
+        "name_key": "Mods/NewIndustry/Modifier/ceb02fb027baab5898a9f32717b05f57/Name",
+        "description_key": "Mods/NewIndustry/Modifier/ceb02fb027baab5898a9f32717b05f57/Description",
+        "source_ids": [
+          "Frontiers/league"
+        ],
+        "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
       },
       {
         "guid": "cefc969c4fd1e755b0ed8442d04bf676",
@@ -26130,6 +29387,17 @@
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
+        "guid": "d05925bd560e7e56b9e0cbcecbf70fe3",
+        "title": "Joint Production Standards",
+        "description": "Industry/extraction human and automaton efficiency +50%.",
+        "name_key": "Mods/NewIndustry/Modifier/d05925bd560e7e56b9e0cbcecbf70fe3/Name",
+        "description_key": "Mods/NewIndustry/Modifier/d05925bd560e7e56b9e0cbcecbf70fe3/Description",
+        "source_ids": [
+          "Frontiers/shared"
+        ],
+        "effects_before_sha256": "a77e96366f0270db12018cad12cdc7b66791b843e3aa7979a3900251025049d0"
+      },
+      {
         "guid": "d0c3506528d05f558f574323b9ef34d7",
         "title": "Industrial Automaton Actuators",
         "description": "Automatons gain a 75% workplace efficiency bonus in Sawmills and Steam Sawmills.\n\nAutomatons gain a 75% workplace efficiency bonus in all three grades of Steelworks.\n\nAutomatons gain a 75% workplace efficiency bonus in all three grades of Wall Drill.",
@@ -26151,6 +29419,28 @@
           "WardProtocols"
         ],
         "effects_before_sha256": "ad83b34cdb579f2245270dc3785d55004c8e53b4e4dc30513cf5a7da7c1e4e21"
+      },
+      {
+        "guid": "d0f3ee330543565eba0f307c6f6930c2",
+        "title": "The Factory Masterwork",
+        "description": "Industry efficiency +150%; healthcare efficiency +25%.",
+        "name_key": "Mods/NewIndustry/Modifier/d0f3ee330543565eba0f307c6f6930c2/Name",
+        "description_key": "Mods/NewIndustry/Modifier/d0f3ee330543565eba0f307c6f6930c2/Description",
+        "source_ids": [
+          "Frontiers/masterwork"
+        ],
+        "effects_before_sha256": "7d3cbd4a2d67d4bd954b4652782c7b8fe898dbb38461a87e986aed5b16ce33b2"
+      },
+      {
+        "guid": "d158020602b2625ba7f81ea162280aa1",
+        "title": "Civic Commonwealth",
+        "description": "Homes and civic services gain +1 insulation; healthcare +100% efficiency; industry -15%.",
+        "name_key": "Mods/NewIndustry/Modifier/d158020602b2625ba7f81ea162280aa1/Name",
+        "description_key": "Mods/NewIndustry/Modifier/d158020602b2625ba7f81ea162280aa1/Description",
+        "source_ids": [
+          "Frontiers/civic"
+        ],
+        "effects_before_sha256": "ad77e60755927e72f8f3a6ad7ed86510674ac31407058cb71fe396747f913b22"
       },
       {
         "guid": "d1896226890b7d569354f5b1676704be",
@@ -26221,6 +29511,28 @@
         "effects_before_sha256": "a2a205cc2d8298f3f34bf19f68b18ec3c5be3c51352f9d05e767f477272c69ab"
       },
       {
+        "guid": "d42d48ede786a059a34595376d917235",
+        "title": "Joint Production Standards",
+        "description": "Industry/extraction human and automaton efficiency +50%.",
+        "name_key": "Mods/NewIndustry/Modifier/d42d48ede786a059a34595376d917235/Name",
+        "description_key": "Mods/NewIndustry/Modifier/d42d48ede786a059a34595376d917235/Description",
+        "source_ids": [
+          "Frontiers/shared"
+        ],
+        "effects_before_sha256": "0786208bee58cfb8da477b1f32222c095822eae3db69d5ce15bb436fe76560fc"
+      },
+      {
+        "guid": "d4459bd5a126905d8e44266aeb40079f",
+        "title": "Shelter Network",
+        "description": "Homes, healthcare and civic buildings +3 insulation; Workshop efficiency -20%.",
+        "name_key": "Mods/NewIndustry/Modifier/d4459bd5a126905d8e44266aeb40079f/Name",
+        "description_key": "Mods/NewIndustry/Modifier/d4459bd5a126905d8e44266aeb40079f/Description",
+        "source_ids": [
+          "Frontiers/shelter"
+        ],
+        "effects_before_sha256": "883e74203d3afea48d83b33e14b2a038fef49984a74d8aced5b1ad96bebf1564"
+      },
+      {
         "guid": "d45650163ecd3f5ab476daec81fd7e92",
         "title": "Stormproof Industrial Districts",
         "description": "All grades of Coal Mine, Steelworks and Wall Drill gain +3 insulation and 100% workplace efficiency for human crews and automatons. A major retrofit for sustained production in extreme cold.",
@@ -26266,6 +29578,17 @@
         "effects_before_sha256": "c5d4ef4eba7037e8e138ef3cdd1a02f7ffcf5b14e8f9e293c992cdf9fd35f9df"
       },
       {
+        "guid": "d90c8081e39ff057a666bad6fc4c294d",
+        "title": "Maintenance Shutdown",
+        "description": "For two days: Factory efficiency -40%.",
+        "name_key": "Mods/NewIndustry/Modifier/d90c8081e39ff057a666bad6fc4c294d/Name",
+        "description_key": "Mods/NewIndustry/Modifier/d90c8081e39ff057a666bad6fc4c294d/Description",
+        "source_ids": [
+          "Frontiers/rest"
+        ],
+        "effects_before_sha256": "d340306b90fb09190405fd2cc8d068bacf3244289687580c10d8a2eb1fc05228"
+      },
+      {
         "guid": "d97fa7fbe78d43578527b682975d33cf",
         "title": "Gang Saw Blades",
         "description": "Both grades of Sawmill gain a 75% wood production bonus.\n\nBoth grades of Sawmill gain one insulation level.\n\nBoth Sawmill grades gain 50% cutting radius and +1 insulation. Reach more trees from each site during the opening days.\n\nBoth grades of Sawmill gain a 30% cutting radius bonus.\n\nBoth grades of Sawmill gain a 30% wood production bonus.",
@@ -26276,6 +29599,17 @@
           "StarterTimberTools"
         ],
         "effects_before_sha256": "e3584e8826717451e50afbf0d89082989b2cc77564eeb7e660ce6045a01853dd"
+      },
+      {
+        "guid": "d9935a702d23795498ce43199f2a1ed3",
+        "title": "Emergency Quarantine",
+        "description": "For two days: healthcare +100% efficiency; industrial efficiency -35%.",
+        "name_key": "Mods/NewIndustry/Modifier/d9935a702d23795498ce43199f2a1ed3/Name",
+        "description_key": "Mods/NewIndustry/Modifier/d9935a702d23795498ce43199f2a1ed3/Description",
+        "source_ids": [
+          "Frontiers/quarantine"
+        ],
+        "effects_before_sha256": "88f27bb3738dcf8410214237ba1c9d2fafd244e0346aafee2bd9e4b03bf3c9af"
       },
       {
         "guid": "daa22867ebf7d85ca25b69908149bf16",
@@ -26298,6 +29632,17 @@
           "Reconstruction/warmth"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "db65b20d960d0459a2272ba4271e1e4b",
+        "title": "Human Industrial Expertise",
+        "description": "Industry/extraction: human efficiency +100%, automaton efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/db65b20d960d0459a2272ba4271e1e4b/Name",
+        "description_key": "Mods/NewIndustry/Modifier/db65b20d960d0459a2272ba4271e1e4b/Description",
+        "source_ids": [
+          "Frontiers/human"
+        ],
+        "effects_before_sha256": "88ccf5b08724e4e03ad572d4f675d654bf7678c7edd797541a0369d86e377d11"
       },
       {
         "guid": "dca2005f5ee4ab5c830d68f6a5116889",
@@ -26333,6 +29678,28 @@
         "effects_before_sha256": "abd57efe0173ca25bb6ba640bc92b91c85a58b40ef8334b64998b8c1b6e1b9fa"
       },
       {
+        "guid": "de6b7227d33c1558b7e536cfe8110b93",
+        "title": "Closed-loop Industry",
+        "description": "Industrial and extraction automaton efficiency +150%; human efficiency -25%. Requires one Steam Core per day.",
+        "name_key": "Mods/NewIndustry/Modifier/de6b7227d33c1558b7e536cfe8110b93/Name",
+        "description_key": "Mods/NewIndustry/Modifier/de6b7227d33c1558b7e536cfe8110b93/Description",
+        "source_ids": [
+          "Frontiers/closed"
+        ],
+        "effects_before_sha256": "b0dee11ea28dd38cc28b2c58936647e3202ee250d6ab71e71916cb4275f0cbd1"
+      },
+      {
+        "guid": "df54eb564e7a705aa20a8217afc7d10d",
+        "title": "Demanded Production Drive",
+        "description": "All workplace efficiency +75%; cold-related illness +50%.",
+        "name_key": "Mods/NewIndustry/Modifier/df54eb564e7a705aa20a8217afc7d10d/Name",
+        "description_key": "Mods/NewIndustry/Modifier/df54eb564e7a705aa20a8217afc7d10d/Description",
+        "source_ids": [
+          "Frontiers/driven"
+        ],
+        "effects_before_sha256": "a8d101a0e60a5c5a35cee293b1476ebb86ad1138e6187a7ec7daa5c4088b1d8a"
+      },
+      {
         "guid": "dfee1b906d83505897d0ded63fc4f0a0",
         "title": "Heated Break Shelters",
         "description": "Gathering Posts and both grades of Sawmill gain one insulation level.\n\nCitizens have a 50% lower chance of illness caused by low temperatures. This helps sustain outdoor and dispersed workplaces during cold weather.",
@@ -26342,6 +29709,17 @@
           "WorksiteWarmBreaks"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "e000f926e36c435a907c7641104b139a",
+        "title": "Sealed Districts",
+        "description": "For two days: citywide +2 insulation; industry and food workplace efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/e000f926e36c435a907c7641104b139a/Name",
+        "description_key": "Mods/NewIndustry/Modifier/e000f926e36c435a907c7641104b139a/Description",
+        "source_ids": [
+          "Frontiers/seal"
+        ],
+        "effects_before_sha256": "19550c3734527a139b21222a4b5d5655476b06856542baf4d6911a451b0b5c88"
       },
       {
         "guid": "e02ec06f55579057a10feae0f899c016",
@@ -26364,6 +29742,17 @@
           "AutumnRedeploymentKits"
         ],
         "effects_before_sha256": "b4c634e122e35aa279a4b76fdefcc2930efa638e906b784cb82fd77d0f38f957"
+      },
+      {
+        "guid": "e18e7b8bd174d7578f9caf43753736f8",
+        "title": "Consolidated Warm Wards",
+        "description": "Healthcare +2 insulation but -25% efficiency; food efficiency +50%.",
+        "name_key": "Mods/NewIndustry/Modifier/e18e7b8bd174d7578f9caf43753736f8/Name",
+        "description_key": "Mods/NewIndustry/Modifier/e18e7b8bd174d7578f9caf43753736f8/Description",
+        "source_ids": [
+          "Frontiers/care"
+        ],
+        "effects_before_sha256": "fdf7d7b872d7a8ba09e7cb2001cceec4c378f2a4ee527e1b93e5a55f37e191ba"
       },
       {
         "guid": "e24b5fbb5744eb52add8529b8639e933",
@@ -26452,6 +29841,17 @@
           "BeaconDispatch"
         ],
         "effects_before_sha256": "caa1681253c20310ad8d229c0b1b2b4b95576cc21a5f51de8e407ad0f884bc01"
+      },
+      {
+        "guid": "e5415c0bd55bc851bd62534eced9e77e",
+        "title": "Expanded Relief Services",
+        "description": "Healthcare +100%, food +75%, industry -25% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/e5415c0bd55bc851bd62534eced9e77e/Name",
+        "description_key": "Mods/NewIndustry/Modifier/e5415c0bd55bc851bd62534eced9e77e/Description",
+        "source_ids": [
+          "Frontiers/relief"
+        ],
+        "effects_before_sha256": "07d37bd252fe9fa74b8e6dc2a9e1516088bcb59963f3afdf5ca209b2ff336774"
       },
       {
         "guid": "e544eada25daf151a03322472c1039f6",
@@ -26546,6 +29946,17 @@
         "effects_before_sha256": "61a32805fa277dfd4b48f4e662ac1823a9fd425b751cac6bf65a8ebfeacdbf4b"
       },
       {
+        "guid": "ea007265f48e2453acfdaa220418c13e",
+        "title": "Maintenance Shutdown",
+        "description": "For two days: Factory efficiency -40%.",
+        "name_key": "Mods/NewIndustry/Modifier/ea007265f48e2453acfdaa220418c13e/Name",
+        "description_key": "Mods/NewIndustry/Modifier/ea007265f48e2453acfdaa220418c13e/Description",
+        "source_ids": [
+          "Frontiers/rest"
+        ],
+        "effects_before_sha256": "d0799cd9f8ca3ed02364e5d3399d8994c953a5dedab3e4f876d755fbda3cd198"
+      },
+      {
         "guid": "ea0c98a8e45dfe53821c6b7226c9d41f",
         "title": "Frostland Game Logistics",
         "description": "Hunters' Huts and Hunters' Hangars bring home 6 additional raw food per hunt at full staffing. The logistics upgrade follows hunters into either building grade.",
@@ -26613,6 +30024,17 @@
         "effects_before_sha256": "5a840c68b2f42fe1faa72d96bcc00b8cf96a9486a1bb8ac97ed9beb5d3fc98e8"
       },
       {
+        "guid": "ee18a487a3a4105d9acd9c9b8b851cc5",
+        "title": "Emergency Fuel Burn",
+        "description": "For two days: citywide +3 insulation.",
+        "name_key": "Mods/NewIndustry/Modifier/ee18a487a3a4105d9acd9c9b8b851cc5/Name",
+        "description_key": "Mods/NewIndustry/Modifier/ee18a487a3a4105d9acd9c9b8b851cc5/Description",
+        "source_ids": [
+          "Frontiers/burn"
+        ],
+        "effects_before_sha256": "6e7864ba03f14b5ad828dbecdfd2812953cd46a4e8bb5dd74157fe3facf63c2d"
+      },
+      {
         "guid": "eea19841a648495fa936b6b1792b9dd4",
         "title": "Collection Relay Depots",
         "description": "Gathering Posts collect resources 75% faster and gain 25% collection radius. Available early enough to help clear starting piles and later supply Coal Thumpers.\n\nGathering Posts collect resources 25% faster.\n\nGathering Posts gain a 50% collection radius bonus, letting each post reach more resource piles.",
@@ -26634,6 +30056,17 @@
           "AutumnDefaultLawMechanicalMaintenance"
         ],
         "effects_before_sha256": "b6f41477db65d32365a5ed7fd4dcaa398238e275a95abec1cdc0002ff7b39b8a"
+      },
+      {
+        "guid": "f132649a294b2a5c8281b0ed452a2d75",
+        "title": "Shelter Network",
+        "description": "Homes, healthcare and civic buildings +3 insulation; Workshop efficiency -20%.",
+        "name_key": "Mods/NewIndustry/Modifier/f132649a294b2a5c8281b0ed452a2d75/Name",
+        "description_key": "Mods/NewIndustry/Modifier/f132649a294b2a5c8281b0ed452a2d75/Description",
+        "source_ids": [
+          "Frontiers/shelter"
+        ],
+        "effects_before_sha256": "6ec2eecc70201c3297af7bd0fe7fab30bc5433adea1674eb7e7431a0fbb0e03f"
       },
       {
         "guid": "f189cf1d7d223b5c97f76849a923bdc7",
@@ -26722,6 +30155,17 @@
           "AutumnProfileJigs"
         ],
         "effects_before_sha256": "3ba564cdec09e8508c992024d32dd137b5a8e1222f373c2abbce7fd44730410b"
+      },
+      {
+        "guid": "f42ccbd895ee8d5c97d623b32ea72061",
+        "title": "Standardised Automation",
+        "description": "Industry/extraction: automaton efficiency +100%, human efficiency -35%.",
+        "name_key": "Mods/NewIndustry/Modifier/f42ccbd895ee8d5c97d623b32ea72061/Name",
+        "description_key": "Mods/NewIndustry/Modifier/f42ccbd895ee8d5c97d623b32ea72061/Description",
+        "source_ids": [
+          "Frontiers/servo"
+        ],
+        "effects_before_sha256": "5c9a14da472e14cb0ae81aeecd8dd1497d99bb2c0afa8804c342a3bca9e6fe16"
       },
       {
         "guid": "f45b6dcf70516c508f2a72a0c95fe4fc",
@@ -26980,6 +30424,17 @@
         "effects_before_sha256": "c5ce493def8731b4679f03ea6e5daa48ebaba3e3707d29ff3e31daf829664095"
       },
       {
+        "guid": "fed674d6710a095889884e48936fd45a",
+        "title": "Community Service Programme",
+        "description": "Homes/civic services +1 insulation; healthcare +50% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/fed674d6710a095889884e48936fd45a/Name",
+        "description_key": "Mods/NewIndustry/Modifier/fed674d6710a095889884e48936fd45a/Description",
+        "source_ids": [
+          "Frontiers/community"
+        ],
+        "effects_before_sha256": "fe74d4e0fcb5d54ed0603611a5d06c7766aeffca16359e20620613da87064b2a"
+      },
+      {
         "guid": "fed9809e7821b654b445d901bbde0779",
         "title": "Gang Saw Blades",
         "description": "Both grades of Sawmill gain a 75% wood production bonus.\n\nBoth grades of Sawmill gain one insulation level.\n\nBoth Sawmill grades gain 50% cutting radius and +1 insulation. Reach more trees from each site during the opening days.\n\nBoth grades of Sawmill gain a 30% cutting radius bonus.\n\nBoth grades of Sawmill gain a 30% wood production bonus.",
@@ -26989,6 +30444,17 @@
           "StarterTimberTools"
         ],
         "effects_before_sha256": "f2e1ae3c890b28fa882a87c278be6f6f2aa6ed9735edf97fd59963f9843def0e"
+      },
+      {
+        "guid": "ffc9d87bc080245b8f3905162c68597a",
+        "title": "Civic Assembly",
+        "description": "Food and healthcare efficiency +75%; industry efficiency -25%.",
+        "name_key": "Mods/NewIndustry/Modifier/ffc9d87bc080245b8f3905162c68597a/Name",
+        "description_key": "Mods/NewIndustry/Modifier/ffc9d87bc080245b8f3905162c68597a/Description",
+        "source_ids": [
+          "Frontiers/council"
+        ],
+        "effects_before_sha256": "c0e6ab55f4ddc0a86566aee2f3741e706aa7979440b7bd0e4d55bfa7bb4f1fb7"
       },
       {
         "guid": "ffffa65cc8086a569c269d6e685d1276",
