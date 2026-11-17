@@ -10,7 +10,8 @@ PREFIX="NI/Lifeline/"
 
 def audit(records,meta,ids):
     story=meta["story"];content=story["lifeline"]
-    events=records["gameevents"];dialogs={d["guid"]:d for d in records["dilemmas"]}
+    events=[e for e in records["gameevents"] if not e["name"].startswith("NI Winter Road ")]
+    dialogs={d["guid"]:d for d in records["dilemmas"]}
     quests={q["guid"]:q for q in records["quests"]};names={d["name"]:guid for guid,d in dialogs.items()}
     missions={(row["chapter"],row["plan"]):row for row in content["missions"]}
     stock={gid:600 for gid in ids.values()}

@@ -16,15 +16,18 @@ FROST = (
     "0a82a1ebbbbd34ada44408a19a38159f",
 )
 FORECAST = ((1,0),(4,1),(7,2),(10,1),(13,3),(17,2),(20,1))
+WINTER = ((1,0),(4,1),(8,2),(11,1),(15,2),(19,3),(23,2),(26,3),(30,2),(33,1))
 
 
-def forecast_record(identity):
+def forecast_record(identity, winter=False):
+    forecast = WINTER if winter else FORECAST
+    title = "NI Winter Road Forecast" if winter else "NI Lifeline Forecast"
     timeline = b"".join(pack("<HH",day,0 if day==1 else 7)+bytes.fromhex(FROST[tier])+b"\0"
-                        for day,tier in FORECAST)
-    return SIMPLE_WEATHER+string("NI Lifeline Forecast")+bytes.fromhex(identity)+b"\0\0"+u32(len(FORECAST))+timeline
+                        for day,tier in forecast)
+    return SIMPLE_WEATHER+string(title)+bytes.fromhex(identity)+b"\0\0"+u32(len(forecast))+timeline
 
 
-def register(data, identity, event_directory, localize):
+def register(data, identity, event_directory, localize, winter):
     count = Cursor(data, 16).count(32)
     begin = 20
     end = data.index(b"\1" + string("Endless Canyon"), begin)
@@ -54,11 +57,11 @@ def register(data, identity, event_directory, localize):
         (Span(95, 163), u32(0)),
         (Span(intro, intro+16), bytes(16)),
         (Span(intro+16, intro+36), u32(1)+bytes.fromhex(identity("event-setup"))),
-        (Span(0x102,0x112),bytes.fromhex(identity("forecast"))),
+        (Span(0x102,0x112),bytes.fromhex(winter)),
     ]
     for suffix, label in (
-        ("DisplayName", "The Last Signal: Lifeline"),
-        ("Description", "Two refugee convoys share one guide rope. Who gets across before the pass closes? Build a city that can take them in."),
+        ("DisplayName", "The Last Signal: Winter Road"),
+        ("Description", "Save the stranded convoys, build a city for their people, and hold its streets through the Long Night."),
     ):
         old = string("@Generated/ScenariosConfig/Scenarios/DEFAULT/"+suffix)
         at = body.index(old)
@@ -81,5 +84,5 @@ def register(data, identity, event_directory, localize):
         (Span(setup_count, setup_count+4), u32(9)),
         (Span(setup_count, setup_count), scenario),
         (Span(old_setup.position, old_setup.position), new_setup),
-        (Span(forecast-4,forecast),u32(weather_count+1)+forecast_record(identity("forecast"))),
+        (Span(forecast-4,forecast),u32(weather_count+2)+forecast_record(identity("forecast"))+forecast_record(winter,True)),
     ])

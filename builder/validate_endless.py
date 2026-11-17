@@ -70,9 +70,9 @@ def audit(records,meta,resource_ids):
     events=records['gameevents'];dilemmas={r['guid']:r for r in records['dilemmas']};quests={r['guid']:r for r in records['quests']}
     flag=('mode',meta['enabled'],False)
     story_flag=('scenario',meta['story']['scenario'],False)
-    assert all(e['conditions'][0]==(story_flag if e['name'].startswith(('NI Last Signal ','NI Lifeline ')) else flag)
+    assert all(e['conditions'][0]==(story_flag if e['name'].startswith(('NI Last Signal ','NI Lifeline ','NI Winter Road ')) else flag)
                and e['enabled'] and e['weight']==1 for e in events)
-    assert all(t[0] in ('start','quest') or t[2] in (0.25,0.5,1,2) for e in events for t in e['triggers'])
+    assert all(t[0] in ('start','quest','scout_return','construction') or t[2] in (0.25,0.5,1,2) for e in events for t in e['triggers'])
     for row in dilemmas.values():
         for c in row['choices']:
             assert c['text'] and c['description'] and c['disabled']
@@ -169,6 +169,8 @@ def main():
     result['last_signal']=audit_story(decoded,meta,manifest['configuration']['resource_ids'])
     from validate_lifeline import audit as audit_lifeline
     result['lifeline']=audit_lifeline(decoded,meta,manifest['configuration']['resource_ids'])
+    from validate_winter_road import audit as audit_winter
+    result['winter_road']=audit_winter(decoded,meta,manifest['configuration']['resource_ids'])
     technology_data=payload['configs/frostpunktechnologiesconfig.bin']
     token=b'\1\1Default_Endless\0';at=technology_data.index(token)+len(token)+16
     count=struct.unpack_from('<I',technology_data,at)[0]
@@ -178,6 +180,10 @@ def main():
     count=struct.unpack_from('<I',technology_data,at)[0]
     members={technology_data[p:p+16].hex() for p in range(at+4,at+4+16*count,16)}
     assert all(g['target'] in members for q in meta['story']['acts'] for g in q['goals'] if g['kind']=='research')
+    winter=meta['story']['winter_road']
+    assert all(g['target'] in members for q in winter['missions']+winter['projects'] for g in q['goals'] if g['kind']=='research')
+    blueprint_data=payload['configs/frostpunkblueprintsconfig.bin']
+    assert all(bytes.fromhex(uid) in blueprint_data for ids in winter['recipes'].values() for uid in ids)
     result['frontiers']['research_targets_available']=True
     (ROOT/'build/endless-validation.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result))

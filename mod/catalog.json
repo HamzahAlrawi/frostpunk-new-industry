@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.18.0",
+  "version": "3.19.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -23388,11 +23388,53 @@
         "title": "Factory Repair Programme",
         "description": "Factory efficiency -25% while the repair programme is active.",
         "modifier": "91f45e509621ca598f7da6b4ba39d091"
+      },
+      {
+        "id": "Frontiers/road/public",
+        "title": "Public Ward Charter",
+        "description": "Homes and medical buildings gain one insulation level.",
+        "modifier": "c2b9a94076583b569d65e5f7e0dd6c88"
+      },
+      {
+        "id": "Frontiers/road/works",
+        "title": "Works Council Charter",
+        "description": "Coal works and Steelworks gain 35% workplace efficiency.",
+        "modifier": "c90d80f72e3f0b569394ea9861999dd0"
+      },
+      {
+        "id": "Frontiers/road/school",
+        "title": "School House Repairs",
+        "description": "Bunkhouses and Houses gain one insulation level.",
+        "modifier": "73446d115dd078568be778036b520abc"
+      },
+      {
+        "id": "Frontiers/road/embargo",
+        "title": "Coal Bins Locked",
+        "description": "Coal mine and thumper workplace efficiency falls by 35% until the coal dispute ends.",
+        "modifier": "d6946993439a42559732c0b3bae26e54"
+      },
+      {
+        "id": "Frontiers/road/exposed",
+        "title": "Loose Steam Joint",
+        "description": "All insulated buildings lose two insulation levels during the Long Night.",
+        "modifier": "48ca1b4bee9bdd54a3a9ba41f0e094d8"
+      },
+      {
+        "id": "Frontiers/road/braced",
+        "title": "Braced Steam Joint",
+        "description": "Emergency fittings limit the Long Night\u2019s heat loss to one insulation level citywide.",
+        "modifier": "d4f9722cec42f1538505f6557281530b"
+      },
+      {
+        "id": "Frontiers/road/home",
+        "title": "Home Heating Charter",
+        "description": "Homes and medical buildings permanently gain one insulation level.",
+        "modifier": "29146dd29a92565ba331f629b05c1e19"
       }
     ],
-    "events": 279,
-    "dilemmas": 146,
-    "quests": 126,
+    "events": 361,
+    "dilemmas": 210,
+    "quests": 149,
     "poll_days": 0.25,
     "description": "Three separate Endless modes with automatic chapters and timed incidents.",
     "frontiers": {
@@ -25200,7 +25242,14 @@
         "shared": "d05925bd560e7e56b9e0cbcecbf70fe3",
         "masterwork": "ad46490a2d946e57855df847334ba498",
         "neglect": "a1a96d228f7fd958b63a3ad2ba9cc6be",
-        "workprogramme": "91f45e509621ca598f7da6b4ba39d091"
+        "workprogramme": "91f45e509621ca598f7da6b4ba39d091",
+        "road/public": "c2b9a94076583b569d65e5f7e0dd6c88",
+        "road/works": "c90d80f72e3f0b569394ea9861999dd0",
+        "road/school": "73446d115dd078568be778036b520abc",
+        "road/embargo": "d6946993439a42559732c0b3bae26e54",
+        "road/exposed": "48ca1b4bee9bdd54a3a9ba41f0e094d8",
+        "road/braced": "d4f9722cec42f1538505f6557281530b",
+        "road/home": "29146dd29a92565ba331f629b05c1e19"
       },
       "automaton_hours": 4.0,
       "incidents": [
@@ -26889,6 +26938,1167 @@
         "rope_price": {
           "Wood": 20
         }
+      },
+      "winter_road": {
+        "chapters": 8,
+        "missions": [
+          {
+            "chapter": 1,
+            "key": "first-sled",
+            "plan": 1,
+            "quest": "9959d9782a423e57b7d7bea2f62cbffe",
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Medical Post",
+                "quantity": 1,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 20 food rations",
+                "description": "Set aside 20 food rations. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Food Rations": 20
+            },
+            "deadline": 3,
+            "flag": null,
+            "requires": [],
+            "arrival": {
+              "workers": 10,
+              "children": 10
+            },
+            "loss": {
+              "workers": 3,
+              "children": 1
+            },
+            "cargo": {
+              "Raw Food": 35
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 1,
+            "key": "first-sled",
+            "plan": 2,
+            "quest": "d86429b4b7ceee589b77e4a89861e1d4",
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Gathering Post",
+                "quantity": 1,
+                "target": [
+                  "b3ddd6b2ab8342a76949f39f8efb0c07"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 85 coal",
+                "description": "Set aside 85 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Coal": 85
+            },
+            "deadline": 3,
+            "flag": null,
+            "requires": [],
+            "arrival": {
+              "workers": 10,
+              "engineers": 8
+            },
+            "loss": {
+              "workers": 3,
+              "children": 1
+            },
+            "cargo": {
+              "Coal": 140
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 2,
+            "key": "winch",
+            "plan": 1,
+            "quest": "5c22fbffb58609588414f4b2805a8a6e",
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate two medical buildings",
+                "quantity": 2,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 45 food rations, 80 coal",
+                "description": "Set aside 45 food rations, 80 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Food Rations": 45,
+              "Coal": 80
+            },
+            "deadline": 5,
+            "flag": null,
+            "requires": [],
+            "arrival": {
+              "workers": 12,
+              "engineers": 4,
+              "children": 8
+            },
+            "loss": {
+              "workers": 4,
+              "engineers": 1
+            },
+            "cargo": {
+              "Food Rations": 45
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 2,
+            "key": "winch",
+            "plan": 2,
+            "quest": "e812efe1babcbf5d93ce30f2762cd748",
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Steelworks",
+                "quantity": 1,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Build a Steam Hub",
+                "quantity": 1,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 70 steel, 100 coal",
+                "description": "Set aside 70 steel, 100 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Steel": 70,
+              "Coal": 100
+            },
+            "deadline": 5,
+            "flag": null,
+            "requires": [],
+            "arrival": {
+              "workers": 12,
+              "engineers": 6
+            },
+            "loss": {
+              "workers": 4,
+              "engineers": 1
+            },
+            "cargo": {
+              "Steam Cores": 2
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 3,
+            "key": "charter",
+            "plan": 1,
+            "quest": "93443fc60c448258bcd21e4f8affa594",
+            "goals": [
+              {
+                "kind": "warm",
+                "text": "Keep 6 homes Liveable or warmer",
+                "quantity": 6,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count.",
+                "target": [
+                  "e8a15ad518cc5bbb134437db2359a858",
+                  "7190dbae6f70a6a7c54481b4e09d1889"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a Cookhouse",
+                "quantity": 1,
+                "target": [
+                  "59b3ef3d8505aea51a45828da82a1c3d"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two medical buildings",
+                "quantity": 2,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 60 wood, 40 food rations",
+                "description": "Set aside 60 wood, 40 food rations. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Wood": 60,
+              "Food Rations": 40
+            },
+            "deadline": 5,
+            "flag": null,
+            "requires": [],
+            "arrival": {},
+            "loss": {},
+            "cargo": {
+              "Raw Food": 100
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 3,
+            "key": "charter",
+            "plan": 2,
+            "quest": "67aafdfccafc875588fbbcf4e5114130",
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate a Steelworks",
+                "quantity": 1,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a coal mine or thumper",
+                "quantity": 1,
+                "target": [
+                  "7f5d92438ed6d18e994473ff2014dc3d",
+                  "7226772eb77bc49f9c4c520f3df2c7dc",
+                  "06cdc0a0e6d288a8d2435294d142c9b5",
+                  "145e292916c2d6826b4c1b7cd624f1ce",
+                  "c4a1ac4584d524a749436429f81880a3"
+                ]
+              },
+              {
+                "kind": "research",
+                "text": "Research Steam Hubs",
+                "target": "6a330b7d72d2e0a06a454943cf2980a1"
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 65 steel, 120 coal",
+                "description": "Set aside 65 steel, 120 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Steel": 65,
+              "Coal": 120
+            },
+            "deadline": 5,
+            "flag": null,
+            "requires": [],
+            "arrival": {},
+            "loss": {},
+            "cargo": {
+              "Coal": 300
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 4,
+            "key": "survey",
+            "plan": 1,
+            "quest": "cf22530898b07a51b5b101e3c7f2bbd1",
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Beacon",
+                "quantity": 1,
+                "target": [
+                  "99c50bbc0ec952ace541f69166fab316"
+                ]
+              },
+              {
+                "kind": "checks",
+                "text": "Bring a scout expedition back to the city",
+                "quantity": 1,
+                "label": "Scout",
+                "input": "scout"
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 40 food rations",
+                "description": "Set aside 40 food rations. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Food Rations": 40
+            },
+            "deadline": 5,
+            "flag": "mapped",
+            "requires": [],
+            "arrival": {},
+            "loss": {},
+            "cargo": {
+              "Steel": 80,
+              "Steam Cores": 2
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 4,
+            "key": "survey",
+            "plan": 2,
+            "quest": "557b1f5e2ab3b15089cf3c1f742cac2d",
+            "goals": [
+              {
+                "kind": "research",
+                "text": "Research Steam Hubs",
+                "target": "6a330b7d72d2e0a06a454943cf2980a1"
+              },
+              {
+                "kind": "build",
+                "text": "Build three Steam Hubs",
+                "quantity": 3,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a Gathering Post",
+                "quantity": 1,
+                "target": [
+                  "b3ddd6b2ab8342a76949f39f8efb0c07"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 90 steel, 100 coal",
+                "description": "Set aside 90 steel, 100 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Steel": 90,
+              "Coal": 100
+            },
+            "deadline": 5,
+            "flag": "mapped",
+            "requires": [],
+            "arrival": {},
+            "loss": {},
+            "cargo": {
+              "Wood": 140,
+              "Coal": 160
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 5,
+            "key": "embargo",
+            "plan": 1,
+            "quest": "a0d207656ec91056910707561f74285a",
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build three Resource Depots",
+                "quantity": 3,
+                "target": [
+                  "5fed86e519e68f92f140c0bd1de72a7c",
+                  "d17fb879d88864a9444ee0283802c4cd"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a Cookhouse",
+                "quantity": 1,
+                "target": [
+                  "59b3ef3d8505aea51a45828da82a1c3d"
+                ]
+              },
+              {
+                "kind": "warm",
+                "text": "Keep 8 homes Liveable or warmer",
+                "quantity": 8,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count.",
+                "target": [
+                  "e8a15ad518cc5bbb134437db2359a858",
+                  "7190dbae6f70a6a7c54481b4e09d1889"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 350 coal, 120 food rations",
+                "description": "Set aside 350 coal, 120 food rations. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Coal": 350,
+              "Food Rations": 120
+            },
+            "deadline": 5,
+            "flag": "reserve",
+            "requires": [],
+            "arrival": {},
+            "loss": {},
+            "cargo": {
+              "Wood": 160,
+              "Food Rations": 80
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 5,
+            "key": "embargo",
+            "plan": 2,
+            "quest": "d79be1499b562158be87433dab67f5d5",
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate two coal mines or thumpers",
+                "quantity": 2,
+                "target": [
+                  "7f5d92438ed6d18e994473ff2014dc3d",
+                  "7226772eb77bc49f9c4c520f3df2c7dc",
+                  "06cdc0a0e6d288a8d2435294d142c9b5",
+                  "145e292916c2d6826b4c1b7cd624f1ce",
+                  "c4a1ac4584d524a749436429f81880a3"
+                ]
+              },
+              {
+                "kind": "research",
+                "text": "Research Generator Efficiency Upgrade",
+                "target": "f1258b8a9b7ae3aa2d4175d995bb11a3"
+              },
+              {
+                "kind": "build",
+                "text": "Build a Large Resource Depot",
+                "quantity": 1,
+                "target": [
+                  "d17fb879d88864a9444ee0283802c4cd"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 110 steel, 275 coal",
+                "description": "Set aside 110 steel, 275 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Steel": 110,
+              "Coal": 275
+            },
+            "deadline": 5,
+            "flag": "reserve",
+            "requires": [],
+            "arrival": {},
+            "loss": {},
+            "cargo": {
+              "Coal": 440,
+              "Steam Cores": 2
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 6,
+            "key": "crossing",
+            "plan": 1,
+            "quest": "f01124dbd60b3758a5146680ace96ac4",
+            "goals": [
+              {
+                "kind": "warm",
+                "text": "Keep 12 homes Liveable or warmer",
+                "quantity": 12,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count.",
+                "target": [
+                  "e8a15ad518cc5bbb134437db2359a858",
+                  "7190dbae6f70a6a7c54481b4e09d1889"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two medical buildings",
+                "quantity": 2,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a Cookhouse",
+                "quantity": 1,
+                "target": [
+                  "59b3ef3d8505aea51a45828da82a1c3d"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 125 food rations, 200 coal",
+                "description": "Set aside 125 food rations, 200 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Food Rations": 125,
+              "Coal": 200
+            },
+            "deadline": 6,
+            "flag": "crossed",
+            "requires": [],
+            "arrival": {
+              "workers": 18,
+              "engineers": 6,
+              "children": 22
+            },
+            "loss": {
+              "workers": 5,
+              "engineers": 2,
+              "children": 1
+            },
+            "cargo": {
+              "Raw Food": 110
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 6,
+            "key": "crossing",
+            "plan": 2,
+            "quest": "6418063368d9b45994739bc2e1652d49",
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build two Steam Hubs",
+                "quantity": 2,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two Steelworks",
+                "quantity": 2,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "warm",
+                "text": "Keep 9 homes Liveable or warmer",
+                "quantity": 9,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count.",
+                "target": [
+                  "e8a15ad518cc5bbb134437db2359a858",
+                  "7190dbae6f70a6a7c54481b4e09d1889"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 110 steel, 240 coal",
+                "description": "Set aside 110 steel, 240 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Steel": 110,
+              "Coal": 240
+            },
+            "deadline": 6,
+            "flag": "crossed",
+            "requires": [],
+            "arrival": {
+              "workers": 18,
+              "engineers": 16,
+              "children": 2
+            },
+            "loss": {
+              "workers": 5,
+              "engineers": 2,
+              "children": 1
+            },
+            "cargo": {
+              "Steam Cores": 3,
+              "Steel": 80
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 6,
+            "key": "crossing",
+            "plan": 3,
+            "quest": "581cba47924f1e53acce6b9716af9076",
+            "goals": [
+              {
+                "kind": "warm",
+                "text": "Keep 14 homes Liveable or warmer",
+                "quantity": 14,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count.",
+                "target": [
+                  "e8a15ad518cc5bbb134437db2359a858",
+                  "7190dbae6f70a6a7c54481b4e09d1889"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Build three Steam Hubs",
+                "quantity": 3,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate three medical buildings",
+                "quantity": 3,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 155 food rations, 90 steel, 300 coal",
+                "description": "Set aside 155 food rations, 90 steel, 300 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Food Rations": 155,
+              "Steel": 90,
+              "Coal": 300
+            },
+            "deadline": 6,
+            "flag": "crossed",
+            "requires": [
+              "mapped",
+              "rope"
+            ],
+            "arrival": {
+              "workers": 24,
+              "engineers": 16,
+              "children": 24
+            },
+            "loss": {
+              "workers": 5,
+              "engineers": 2,
+              "children": 1
+            },
+            "cargo": {
+              "Steam Cores": 3,
+              "Food Rations": 100
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 7,
+            "key": "rebuild",
+            "plan": 1,
+            "quest": "734d4db3f8c7e75f95815f5596684c28",
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate a Hothouse",
+                "quantity": 1,
+                "target": [
+                  "20e9be8106e19f838b4bb73be86d04de",
+                  "20e9be8106e19f838b4bb73ae86d04de"
+                ]
+              },
+              {
+                "kind": "produce",
+                "text": "Cook 10 new batches of rations",
+                "quantity": 10,
+                "target": [
+                  "925cc17cc4c067ae0248aaef7ff14ed5",
+                  "b5f5c91e6c4db683424007ee9051463c",
+                  "238787e45f7b239f3c406cebb73f45b4",
+                  "0a7f2306c063ce83694a59f99b24e5c8",
+                  "dbfeb8bf4e60439add46e25c118fed85",
+                  "8f65ab452f00c757af98b654f3a8bbbc",
+                  "bef3c24de41f965d9053efbd9abcf4d2",
+                  "38df762e6b934a599f993770039f6b26"
+                ]
+              },
+              {
+                "kind": "warm",
+                "text": "Keep 14 homes Liveable or warmer",
+                "quantity": 14,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count.",
+                "target": [
+                  "e8a15ad518cc5bbb134437db2359a858",
+                  "7190dbae6f70a6a7c54481b4e09d1889"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 110 wood, 80 food rations",
+                "description": "Set aside 110 wood, 80 food rations. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Wood": 110,
+              "Food Rations": 80
+            },
+            "deadline": 6,
+            "flag": "provisioned",
+            "requires": [],
+            "arrival": {},
+            "loss": {},
+            "cargo": {
+              "Food Rations": 140,
+              "Raw Food": 140
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 7,
+            "key": "rebuild",
+            "plan": 2,
+            "quest": "2b9e8f64dd5ad853a5a69c4097b30828",
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Factory",
+                "quantity": 1,
+                "target": [
+                  "20e819887723898b4b46612b11d272f6"
+                ]
+              },
+              {
+                "kind": "produce",
+                "text": "Manufacture two new automatons",
+                "quantity": 2,
+                "target": [
+                  "cc33ac0c093846b56040ff68fee8e948",
+                  "3aa98fd2adb62d8e8d4ecd95f54f2a11",
+                  "061c4e12f375c4a75b42f32d97bc2d1e",
+                  "779e0650acc4a99da24b53fe21be23e5",
+                  "b21a11b15c4a53803b418396e9e7b82c",
+                  "ce273b022251a6904842e7fd0e6999b4"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a Steelworks",
+                "quantity": 1,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 260 coal, 115 steel",
+                "description": "Set aside 260 coal, 115 steel. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Coal": 260,
+              "Steel": 115
+            },
+            "deadline": 6,
+            "flag": "provisioned",
+            "requires": [],
+            "arrival": {},
+            "loss": {},
+            "cargo": {
+              "Steam Cores": 3,
+              "Coal": 280
+            },
+            "watch": 0
+          },
+          {
+            "chapter": 8,
+            "key": "long-night",
+            "plan": 1,
+            "quest": "b7210d8592855d56af68da313e292867",
+            "goals": [
+              {
+                "kind": "warm",
+                "text": "Keep 16 homes Liveable or warmer",
+                "quantity": 16,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count.",
+                "target": [
+                  "e8a15ad518cc5bbb134437db2359a858",
+                  "7190dbae6f70a6a7c54481b4e09d1889"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate three medical buildings",
+                "quantity": 3,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Watch",
+                "quantity": 1,
+                "text": "Pass the 36-hour heat watch",
+                "description": "Pass six inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 360 coal, 135 food rations. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Coal": 360,
+              "Food Rations": 135
+            },
+            "deadline": 5,
+            "flag": "held",
+            "requires": [],
+            "arrival": {},
+            "loss": {},
+            "cargo": {},
+            "watch": 6
+          },
+          {
+            "chapter": 8,
+            "key": "long-night",
+            "plan": 2,
+            "quest": "999123959f7bfb5c8729ee67dc553207",
+            "goals": [
+              {
+                "kind": "warm",
+                "text": "Keep 12 homes Liveable or warmer",
+                "quantity": 12,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count.",
+                "target": [
+                  "e8a15ad518cc5bbb134437db2359a858",
+                  "7190dbae6f70a6a7c54481b4e09d1889"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two coal mines or thumpers",
+                "quantity": 2,
+                "target": [
+                  "7f5d92438ed6d18e994473ff2014dc3d",
+                  "7226772eb77bc49f9c4c520f3df2c7dc",
+                  "06cdc0a0e6d288a8d2435294d142c9b5",
+                  "145e292916c2d6826b4c1b7cd624f1ce",
+                  "c4a1ac4584d524a749436429f81880a3"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Build four Steam Hubs",
+                "quantity": 4,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Watch",
+                "quantity": 1,
+                "text": "Pass the 36-hour heat watch",
+                "description": "Pass six inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 360 coal, 140 steel. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Coal": 360,
+              "Steel": 140
+            },
+            "deadline": 5,
+            "flag": "held",
+            "requires": [],
+            "arrival": {},
+            "loss": {},
+            "cargo": {},
+            "watch": 6
+          }
+        ],
+        "projects": [
+          {
+            "key": "rope",
+            "chapter": 2,
+            "quest": "d2edcdd10afef95bbd54befb8008da67",
+            "deadline": 4,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Steam Hub",
+                "quantity": 1,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 45 wood",
+                "description": "Set aside 45 wood. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Wood": 45
+            },
+            "reward": {
+              "Wood": 90
+            },
+            "index": 1
+          },
+          {
+            "key": "school",
+            "chapter": 3,
+            "quest": "9b7c0a393be3ef58ba1910096d572ae2",
+            "deadline": 4,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build two Bunkhouses or Houses",
+                "quantity": 2,
+                "target": [
+                  "16cf34d7b28d649c874e25c03692b52a",
+                  "a7377de655c61d9b3745e66c0f2ec651"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 40 wood",
+                "description": "Set aside 40 wood. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Wood": 40
+            },
+            "reward": {
+              "Raw Food": 120,
+              "Wood": 60
+            },
+            "index": 2
+          },
+          {
+            "key": "clinic",
+            "chapter": 4,
+            "quest": "0e6a34af7df4d054969dfc773d61b0ec",
+            "deadline": 4,
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate three medical buildings",
+                "quantity": 3,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 40 food rations",
+                "description": "Set aside 40 food rations. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Food Rations": 40
+            },
+            "reward": {
+              "Raw Food": 75
+            },
+            "index": 3
+          },
+          {
+            "key": "lamp",
+            "chapter": 5,
+            "quest": "f3a56ee8773edb51823275b57e4a041e",
+            "deadline": 4,
+            "goals": [
+              {
+                "kind": "research",
+                "text": "Research Heaters",
+                "target": "3b4f9e5f2de4bc851146bc5b97815876"
+              },
+              {
+                "kind": "build",
+                "text": "Build three Steam Hubs",
+                "quantity": 3,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 60 steel",
+                "description": "Set aside 60 steel. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Steel": 60
+            },
+            "reward": {
+              "Coal": 300
+            },
+            "index": 4
+          },
+          {
+            "key": "bread",
+            "chapter": 6,
+            "quest": "52f7852895a9df5296b4e661676f800c",
+            "deadline": 4,
+            "goals": [
+              {
+                "kind": "produce",
+                "text": "Cook 10 new batches of rations",
+                "quantity": 10,
+                "target": [
+                  "925cc17cc4c067ae0248aaef7ff14ed5",
+                  "b5f5c91e6c4db683424007ee9051463c",
+                  "238787e45f7b239f3c406cebb73f45b4",
+                  "0a7f2306c063ce83694a59f99b24e5c8",
+                  "dbfeb8bf4e60439add46e25c118fed85",
+                  "8f65ab452f00c757af98b654f3a8bbbc",
+                  "bef3c24de41f965d9053efbd9abcf4d2",
+                  "38df762e6b934a599f993770039f6b26"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 65 food rations",
+                "description": "Set aside 65 food rations. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Food Rations": 65
+            },
+            "reward": {
+              "Raw Food": 180,
+              "Wood": 110
+            },
+            "index": 5
+          },
+          {
+            "key": "repair",
+            "chapter": 7,
+            "quest": "2e3d8b2b5cc25e53b813d62bfa31c046",
+            "deadline": 5,
+            "goals": [
+              {
+                "kind": "produce",
+                "text": "Manufacture one new automaton",
+                "quantity": 1,
+                "target": [
+                  "cc33ac0c093846b56040ff68fee8e948",
+                  "3aa98fd2adb62d8e8d4ecd95f54f2a11",
+                  "061c4e12f375c4a75b42f32d97bc2d1e",
+                  "779e0650acc4a99da24b53fe21be23e5",
+                  "b21a11b15c4a53803b418396e9e7b82c",
+                  "ce273b022251a6904842e7fd0e6999b4"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Supplies",
+                "quantity": 1,
+                "text": "Ready 100 steel",
+                "description": "Set aside 100 steel. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Steel": 100
+            },
+            "reward": {
+              "Steam Cores": 2,
+              "Coal": 220
+            },
+            "index": 6
+          }
+        ],
+        "finale": "8c7cc594b244535e9e08878734b9a984",
+        "forecast": "7052680adfb8325f926fa96d5427f1e3",
+        "treaty": {
+          "Coal": 210,
+          "Food Rations": 90
+        },
+        "recipes": {
+          "meals": [
+            "925cc17cc4c067ae0248aaef7ff14ed5",
+            "b5f5c91e6c4db683424007ee9051463c",
+            "238787e45f7b239f3c406cebb73f45b4",
+            "0a7f2306c063ce83694a59f99b24e5c8",
+            "dbfeb8bf4e60439add46e25c118fed85",
+            "8f65ab452f00c757af98b654f3a8bbbc",
+            "bef3c24de41f965d9053efbd9abcf4d2",
+            "38df762e6b934a599f993770039f6b26"
+          ],
+          "automatons": [
+            "cc33ac0c093846b56040ff68fee8e948",
+            "3aa98fd2adb62d8e8d4ecd95f54f2a11",
+            "061c4e12f375c4a75b42f32d97bc2d1e",
+            "779e0650acc4a99da24b53fe21be23e5",
+            "b21a11b15c4a53803b418396e9e7b82c",
+            "ce273b022251a6904842e7fd0e6999b4"
+          ]
+        },
+        "bonuses": {
+          "public": "c2b9a94076583b569d65e5f7e0dd6c88",
+          "works": "c90d80f72e3f0b569394ea9861999dd0",
+          "school": "73446d115dd078568be778036b520abc",
+          "embargo": "d6946993439a42559732c0b3bae26e54",
+          "exposed": "48ca1b4bee9bdd54a3a9ba41f0e094d8",
+          "braced": "d4f9722cec42f1538505f6557281530b",
+          "home": "29146dd29a92565ba331f629b05c1e19"
+        }
       }
     },
     "ui": {
@@ -27513,6 +28723,17 @@
         "effects_before_sha256": "138e894d4725013680f1d8eec68e6961d0316c25bca07ed896543dc208e7cf65"
       },
       {
+        "guid": "2527cd1c5187f850ab582c4414c3d440",
+        "title": "Loose Steam Joint",
+        "description": "All insulated buildings lose two insulation levels during the Long Night.",
+        "name_key": "Mods/NewIndustry/Modifier/2527cd1c5187f850ab582c4414c3d440/Name",
+        "description_key": "Mods/NewIndustry/Modifier/2527cd1c5187f850ab582c4414c3d440/Description",
+        "source_ids": [
+          "Frontiers/road/exposed"
+        ],
+        "effects_before_sha256": "4e79bb915d05433f6d98e79ea287077114b5f62204216ec1e9aa8da44ef10c69"
+      },
+      {
         "guid": "25f98b619d46115bab56a5ba3594ea95",
         "title": "Industrial Capital Charter",
         "description": "Hope rises moderately. Both Resource Depot sizes gain 400% additional wood and steel capacity. Factories gain 100% workplace efficiency for humans and automatons.",
@@ -27566,6 +28787,17 @@
           "CoalCircuit"
         ],
         "effects_before_sha256": "831d25d96bf7926889712afb308ddb669ca96c60948fded79398190c440da85b"
+      },
+      {
+        "guid": "29146dd29a92565ba331f629b05c1e19",
+        "title": "Home Heating Charter",
+        "description": "Homes and medical buildings permanently gain one insulation level.",
+        "name_key": "Mods/NewIndustry/Modifier/29146dd29a92565ba331f629b05c1e19/Name",
+        "description_key": "Mods/NewIndustry/Modifier/29146dd29a92565ba331f629b05c1e19/Description",
+        "source_ids": [
+          "Frontiers/road/home"
+        ],
+        "effects_before_sha256": "2ee87e1e3966de566025967a10bfc3babcdd329d8dfb276944a37c6600135a1c"
       },
       {
         "guid": "29ec5c0bed8db953be50daa7a82b3f28",
@@ -28187,6 +29419,17 @@
           "AutumnProvisionLockers"
         ],
         "effects_before_sha256": "716540ea85996bedca30c7ce0240b0a7ef155965bf8f314e051b41fd0459a29a"
+      },
+      {
+        "guid": "48ca1b4bee9bdd54a3a9ba41f0e094d8",
+        "title": "Loose Steam Joint",
+        "description": "All insulated buildings lose two insulation levels during the Long Night.",
+        "name_key": "Mods/NewIndustry/Modifier/48ca1b4bee9bdd54a3a9ba41f0e094d8/Name",
+        "description_key": "Mods/NewIndustry/Modifier/48ca1b4bee9bdd54a3a9ba41f0e094d8/Description",
+        "source_ids": [
+          "Frontiers/road/exposed"
+        ],
+        "effects_before_sha256": "aac2875dbd31d51fc440df888fecaf685c4d6d102c95ae5f7242694c033934cd"
       },
       {
         "guid": "48dcd9a70440755994061dfd17870328",
@@ -29085,6 +30328,17 @@
         "effects_before_sha256": "4b3cc0e22b10d10a8ce30bf100a7ce20402d9a83626120b1f29c552c5fe8fc50"
       },
       {
+        "guid": "73446d115dd078568be778036b520abc",
+        "title": "School House Repairs",
+        "description": "Bunkhouses and Houses gain one insulation level.",
+        "name_key": "Mods/NewIndustry/Modifier/73446d115dd078568be778036b520abc/Name",
+        "description_key": "Mods/NewIndustry/Modifier/73446d115dd078568be778036b520abc/Description",
+        "source_ids": [
+          "Frontiers/road/school"
+        ],
+        "effects_before_sha256": "f3acc8c986d270f0cfd473321eabd6260c1b6b80ce88a2a8301ee1bec35fb510"
+      },
+      {
         "guid": "74923ce172dc6e5faa217dcffec43b26",
         "title": "Field Dressings",
         "description": "Medical Posts gain a 75% healing speed bonus.\n\nCitizens have a 25% lower chance of illness caused by cold. Medical Posts also gain 75% healing efficiency for human staff and automatons. Available before Drawing Boards, helping prevent and treat the opening wave of sickness.",
@@ -29944,6 +31198,17 @@
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
+        "guid": "9bfbd0f752dbcc5fa966508ec9bf93aa",
+        "title": "Braced Steam Joint",
+        "description": "Emergency fittings limit the Long Night\u2019s heat loss to one insulation level citywide.",
+        "name_key": "Mods/NewIndustry/Modifier/9bfbd0f752dbcc5fa966508ec9bf93aa/Name",
+        "description_key": "Mods/NewIndustry/Modifier/9bfbd0f752dbcc5fa966508ec9bf93aa/Description",
+        "source_ids": [
+          "Frontiers/road/braced"
+        ],
+        "effects_before_sha256": "847a18fa6c38f9ed3053de874128d622c748a43f2912ab9b96ce15fc96171743"
+      },
+      {
         "guid": "9ca1a4c03a71d057a0b2a3d12faa1eba",
         "title": "The Northern Railway",
         "description": "Lay the final railway across the Frostland. All heat zones gain 25% radius.",
@@ -30622,6 +31887,17 @@
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
+        "guid": "bb07ba1435ecac57bf856aec8f56056c",
+        "title": "Coal Bins Locked",
+        "description": "Coal mine and thumper workplace efficiency falls by 35% until the coal dispute ends.",
+        "name_key": "Mods/NewIndustry/Modifier/bb07ba1435ecac57bf856aec8f56056c/Name",
+        "description_key": "Mods/NewIndustry/Modifier/bb07ba1435ecac57bf856aec8f56056c/Description",
+        "source_ids": [
+          "Frontiers/road/embargo"
+        ],
+        "effects_before_sha256": "a94022dfad4f5661fcdf6603ebf04105843e408d3e543ed0c7b8b602480e6bfd"
+      },
+      {
         "guid": "bbc06528506d4c539f9149ebf928dd14",
         "title": "Signal: Relay Circuit",
         "description": "Workshops and extraction gain 25% efficiency. Homes lose one insulation level.",
@@ -30755,6 +32031,17 @@
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
+        "guid": "c2b9a94076583b569d65e5f7e0dd6c88",
+        "title": "Public Ward Charter",
+        "description": "Homes and medical buildings gain one insulation level.",
+        "name_key": "Mods/NewIndustry/Modifier/c2b9a94076583b569d65e5f7e0dd6c88/Name",
+        "description_key": "Mods/NewIndustry/Modifier/c2b9a94076583b569d65e5f7e0dd6c88/Description",
+        "source_ids": [
+          "Frontiers/road/public"
+        ],
+        "effects_before_sha256": "51d1c044b2be88a86d3fd5e5f3969ddcec6a98984c20bdf05b3036226492fb2d"
+      },
+      {
         "guid": "c480b3c2d1f8905ca773d1d6e242056c",
         "title": "Steam Hub Draught Controls",
         "description": "Steam Hubs gain a 10% reduction in coal use.",
@@ -30832,6 +32119,17 @@
         "effects_before_sha256": "62316487d71d96444f7cdb263f435ba9a31b0581c8fcc96f5d5451c829b8abce"
       },
       {
+        "guid": "c90d80f72e3f0b569394ea9861999dd0",
+        "title": "Works Council Charter",
+        "description": "Coal works and Steelworks gain 35% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/c90d80f72e3f0b569394ea9861999dd0/Name",
+        "description_key": "Mods/NewIndustry/Modifier/c90d80f72e3f0b569394ea9861999dd0/Description",
+        "source_ids": [
+          "Frontiers/road/works"
+        ],
+        "effects_before_sha256": "7ce706a536f34aa41dc58a810461c9614cbc01f00b82331d39a6bc4927597bc6"
+      },
+      {
         "guid": "c982f3ea152f635987e157c7ec20d0fa",
         "title": "Forced Coal Extraction",
         "description": "Coal mine/thumper efficiency +75%; citywide insulation -1.",
@@ -30841,6 +32139,17 @@
           "Frontiers/coalshift"
         ],
         "effects_before_sha256": "36d6956b907e6ff10d9d39d8116cc5d6035dbb28c814663320cca673f8bd19e6"
+      },
+      {
+        "guid": "c9bda4c488e8ff5491b09ae8e861ad1d",
+        "title": "School House Repairs",
+        "description": "Bunkhouses and Houses gain one insulation level.",
+        "name_key": "Mods/NewIndustry/Modifier/c9bda4c488e8ff5491b09ae8e861ad1d/Name",
+        "description_key": "Mods/NewIndustry/Modifier/c9bda4c488e8ff5491b09ae8e861ad1d/Description",
+        "source_ids": [
+          "Frontiers/road/school"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
         "guid": "c9c7f497c86bf550a1e30ffdd9581477",
@@ -31110,6 +32419,17 @@
         "effects_before_sha256": "f1a3303ef2fa8f7e5b2cd2368621f0ea6227e1e73ba8e563609849a4c3f54227"
       },
       {
+        "guid": "d4f9722cec42f1538505f6557281530b",
+        "title": "Braced Steam Joint",
+        "description": "Emergency fittings limit the Long Night\u2019s heat loss to one insulation level citywide.",
+        "name_key": "Mods/NewIndustry/Modifier/d4f9722cec42f1538505f6557281530b/Name",
+        "description_key": "Mods/NewIndustry/Modifier/d4f9722cec42f1538505f6557281530b/Description",
+        "source_ids": [
+          "Frontiers/road/braced"
+        ],
+        "effects_before_sha256": "dbc09994dbb21bb787503df1bbaf7b91e1f77d597bb11a1f6ea5dc69781d4030"
+      },
+      {
         "guid": "d57f187cc8defe558ed876e39beb5990",
         "title": "Forager Relay Markers",
         "description": "Foragers gain another 30% travel speed bonus.",
@@ -31131,6 +32451,17 @@
           "DefaultLawStormReserves"
         ],
         "effects_before_sha256": "c3257d3f43032b71617f52288fae1858c95c8f8fb8e230edc36af346d927cc66"
+      },
+      {
+        "guid": "d6946993439a42559732c0b3bae26e54",
+        "title": "Coal Bins Locked",
+        "description": "Coal mine and thumper workplace efficiency falls by 35% until the coal dispute ends.",
+        "name_key": "Mods/NewIndustry/Modifier/d6946993439a42559732c0b3bae26e54/Name",
+        "description_key": "Mods/NewIndustry/Modifier/d6946993439a42559732c0b3bae26e54/Description",
+        "source_ids": [
+          "Frontiers/road/embargo"
+        ],
+        "effects_before_sha256": "c9cd5f02e2a668ea80f520b2468ce8a4decea9e0273517d58b9b29072a6e8f12"
       },
       {
         "guid": "d8216c999c2d7658a1ab27d5065adfdf",
@@ -31176,6 +32507,17 @@
           "Frontiers/quarantine"
         ],
         "effects_before_sha256": "88f27bb3738dcf8410214237ba1c9d2fafd244e0346aafee2bd9e4b03bf3c9af"
+      },
+      {
+        "guid": "d9c2585715186b58a9f1a1dcc9a6b471",
+        "title": "Works Council Charter",
+        "description": "Coal works and Steelworks gain 35% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/d9c2585715186b58a9f1a1dcc9a6b471/Name",
+        "description_key": "Mods/NewIndustry/Modifier/d9c2585715186b58a9f1a1dcc9a6b471/Description",
+        "source_ids": [
+          "Frontiers/road/works"
+        ],
+        "effects_before_sha256": "d54587ab64fa9b85696c8fcc522e92baa9de6922c1d30e611d27d8b860d6138f"
       },
       {
         "guid": "daa22867ebf7d85ca25b69908149bf16",
@@ -31778,6 +33120,17 @@
         "effects_before_sha256": "3ba564cdec09e8508c992024d32dd137b5a8e1222f373c2abbce7fd44730410b"
       },
       {
+        "guid": "f608c60f1469ab5cb8eb7590e909364b",
+        "title": "Public Ward Charter",
+        "description": "Homes and medical buildings gain one insulation level.",
+        "name_key": "Mods/NewIndustry/Modifier/f608c60f1469ab5cb8eb7590e909364b/Name",
+        "description_key": "Mods/NewIndustry/Modifier/f608c60f1469ab5cb8eb7590e909364b/Description",
+        "source_ids": [
+          "Frontiers/road/public"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
         "guid": "f62fc9c7fe9f8a5d86050ff99b620277",
         "title": "Generator Reheat Economiser",
         "description": "The Generator uses 35% less coal at every power and range setting. Generator stress also recovers 30% faster, improving recovery between overdrive periods.\n\nGenerator stress recovers 100% faster and the Generator uses 15% less coal. Develops Pressure-Buffer Boiler Drums into a system for recovering between overdrive periods; the earlier research and other fuel modifiers remain active.",
@@ -31866,6 +33219,17 @@
           "DefaultLawLocalAid"
         ],
         "effects_before_sha256": "baeea66599a70f56605029896eea921ad51eec52222f64ad416ae845063bd8f5"
+      },
+      {
+        "guid": "f8bde0b14ee7125788fcbd20416e1727",
+        "title": "Home Heating Charter",
+        "description": "Homes and medical buildings permanently gain one insulation level.",
+        "name_key": "Mods/NewIndustry/Modifier/f8bde0b14ee7125788fcbd20416e1727/Name",
+        "description_key": "Mods/NewIndustry/Modifier/f8bde0b14ee7125788fcbd20416e1727/Description",
+        "source_ids": [
+          "Frontiers/road/home"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
         "guid": "faa16c8254a9d356866f3ad046f2bee1",

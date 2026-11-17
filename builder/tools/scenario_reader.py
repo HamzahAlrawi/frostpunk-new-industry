@@ -47,6 +47,9 @@ def effect(c):
         quantity,appearance,role=c.i32(),c.guid(),c.guid()
         if not 0<quantity<=60 or c.count()!=0:raise SchemaError('Unexpected arrival payload')
         return ('arrival',quantity,appearance,role)
+    if name=='FrostpunkModifyWorldMapEffect':
+        if c.take(11)!=bytes.fromhex("01ffffffff000000000000"):raise SchemaError('Unexpected world map effect')
+        return ('open_map',)
     if name=='FrostpunkProgressCustomQuestObjectiveEffect':return ('progress',c.guid(),c.string(),c.i32())
     if name=='FrostpunkTimedEffect':
         guid=c.guid();days=c.f32();unit=c.u32();random=c.f32();random_unit=c.u32()
@@ -69,6 +72,13 @@ def event(c):
         kind=c.string();identity=c.guid()
         if kind=='FrostpunkGameStartedEventTrigger':triggers.append(('start',identity))
         elif kind=='FrostpunkQuestFinishedEventTrigger':triggers.append(('quest',identity,c.guid(),c.u32()))
+        elif kind=='FrostpunkExpeditionReturnedEventTrigger':
+            if c.take(2)!=b'\0\0':raise SchemaError('Unexpected expedition return flags')
+            triggers.append(('scout_return',identity))
+        elif kind=='FrostpunkBuildingActivationEventTrigger':
+            building=c.guid()
+            if c.u32()!=0:raise SchemaError('Unexpected building activation type')
+            triggers.append(('construction',identity,building))
         elif kind=='FrostpunkPeriodicEventTrigger':
             period,unit,initial,initial_unit=c.f32(),c.u32(),c.f32(),c.u32()
             if unit!=1 or initial!=0 or initial_unit!=0:raise SchemaError('Unsupported periodic clock')
@@ -120,6 +130,11 @@ def quest(c):
         elif kind=='FrostpunkEmployAutomatonsQuestObjective':goal.update(kind='automate',quantity=c.f32())
         elif kind=='FrostpunkGatherResourceQuestObjective':
             goal.update(kind='stock',target=c.guid(),quantity=expression(c,True),flags=[c.boolean(),c.boolean()])
+        elif kind=='FrostpunkHeatBuildingOfCategoryQuestObjective':
+            category,threshold=c.guid(),c.guid()
+            amount=expression(c,True)
+            if amount[0]!='constant' or c.take(2)!=b'\1\0':raise SchemaError('Unexpected warmth objective')
+            goal.update(kind='warm',target=[category,threshold],quantity=amount[1])
         else:raise SchemaError('Unsupported quest objective '+str(kind))
         goals.append(goal)
     if c.take(44)!=bytes(44):raise SchemaError('Unexpected quest callbacks/social problem')

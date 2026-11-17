@@ -189,7 +189,7 @@ def build(source, buildings, resources, identity, scenario, localize, dt, qt):
         briefing=scene("Briefing/"+str(chapter),act["title"],details,options)
         if chapter==1:
             events.append(event("NI Lifeline start",identity("event/start"),identity("trigger/start"),
-                [scoped,state("chapter",0),equals(OLD+"act",0)],
+                [scoped,state("chapter",0),equals(OLD+"act",0),equals("NI/WinterRoad/chapter",0)],
                 [put("chapter",1),timer("opening",0.01,[guarded(gate(1,0),[briefing])])]))
         else:
             poll("Briefing/"+str(chapter),gate(chapter,0)+[state("offered",chapter-2)],

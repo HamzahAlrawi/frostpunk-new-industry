@@ -19,16 +19,16 @@ def validate_registration(before, after, story):
     assert NATIVE_INTRO not in clone and bytes.fromhex(DEFAULT_EVENTS) not in clone
     assert clone.count(bytes.fromhex(story["event_setup"]))==1
     assert string("@Mods/NewIndustry/LastSignal/Menu/DisplayName") in clone
-    forecast=story["lifeline"]["forecast"]
+    forecast=story["winter_road"]["forecast"]
     assert clone.count(bytes.fromhex(forecast))==1
     old=before.index(entry("Default",DEFAULT_EVENTS))
     assert after[offset-4:offset]==u32(9) and before[old-4:old]==u32(8)
-    record=forecast_record(forecast)
-    assert after[offset:].replace(setup,b"",1).replace(u32(67)+record+WEATHER_DONOR,u32(66)+WEATHER_DONOR,1)==before[old:]
+    record=forecast_record(story["lifeline"]["forecast"])+forecast_record(forecast,True)
+    assert after[offset:].replace(setup,b"",1).replace(u32(68)+record+WEATHER_DONOR,u32(66)+WEATHER_DONOR,1)==before[old:]
 
 
 def audit(records,meta,resource_ids):
-    events=[e for e in records["gameevents"] if not e["name"].startswith("NI Lifeline ")]
+    events=[e for e in records["gameevents"] if not e["name"].startswith(("NI Lifeline ","NI Winter Road "))]
     dialogs={item["guid"]:item for item in records["dilemmas"]}
     quests={item["guid"]:item for item in records["quests"]}
     story=meta["story"];identity=story["scenario"];prefix="NI/LastSignal/"

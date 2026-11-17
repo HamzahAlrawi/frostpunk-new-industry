@@ -152,6 +152,20 @@ def bonus_library(data,buildings,guid):
     add('masterwork','The Factory Masterwork','Industry efficiency +150%; healthcare efficiency +25%.',[(g['industry'],2.5,2.5,0),(g['medical'],1.25,1.25,0)])
     add('neglect','Emergency Heat Restrictions','Citywide insulation -1; industry efficiency -25%.',[(all_names,1,1,-1),(g['industry'],0.75,0.75,0)])
     add('workprogramme','Factory Repair Programme','Factory efficiency -25% while the repair programme is active.', [(['Factory'],0.75,0.75,0)])
+    add('road/public','Public Ward Charter','Homes and medical buildings gain one insulation level.',
+        [(g['homes']+g['medical'],1,1,1)])
+    add('road/works','Works Council Charter','Coal works and Steelworks gain 35% workplace efficiency.',
+        [(coal+['Iron Ore Mine','SteamIronOreMine','AdvancedOreMine'],1.35,1.35,0)])
+    add('road/school','School House Repairs','Bunkhouses and Houses gain one insulation level.',
+        [(['Bunkhouse','House'],1,1,1)])
+    add('road/embargo','Coal Bins Locked','Coal mine and thumper workplace efficiency falls by 35% until the coal dispute ends.',
+        [(coal,0.65,0.65,0)])
+    add('road/exposed','Loose Steam Joint','All insulated buildings lose two insulation levels during the Long Night.',
+        [(all_names,1,1,-2)])
+    add('road/braced','Braced Steam Joint','Emergency fittings limit the Long Night’s heat loss to one insulation level citywide.',
+        [(all_names,1,1,-1)])
+    add('road/home','Home Heating Charter','Homes and medical buildings permanently gain one insulation level.',
+        [(g['homes']+g['medical'],1,1,1)])
     return pack_modifiers(records),ids,owners
 
 

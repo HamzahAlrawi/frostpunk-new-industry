@@ -15,7 +15,8 @@ class ReconstructionTests(unittest.TestCase):
     def test_five_tracks_and_unique_mode_parameter(self):
         self.assertEqual([t['id'] for t in self.mode['tracks']],['Projects','Foundry','Gardens','Salvage','Contracts'])
         self.assertEqual(len({self.mode[k] for k in ('parameter','enabled','disabled')}),3)
-        self.assertEqual(self.mode['quests'],60+len(self.mode['frontiers']['missions'])+len(self.mode['frontiers']['incidents'])+len(self.mode['frontiers']['work_orders'])+len(self.mode['story']['acts'])+len(self.mode['story']['lifeline']['missions']))
+        road=self.mode['story']['winter_road']
+        self.assertEqual(self.mode['quests'],60+len(self.mode['frontiers']['missions'])+len(self.mode['frontiers']['incidents'])+len(self.mode['frontiers']['work_orders'])+len(self.mode['story']['acts'])+len(self.mode['story']['lifeline']['missions'])+len(road['missions'])+len(road['projects']))
         self.assertGreater(self.mode['events'],121)
 
     def test_projects_have_permanent_rewards_and_no_deadlines(self):

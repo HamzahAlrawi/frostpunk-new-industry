@@ -11,7 +11,7 @@ class World:
         self.open=[];self.active={};self.completed=[];self.modifiers=set();self.predefined=[];self.paid=[]
         self.buildings={};self.researched=set();self.produced={};self.production_start={};self.progress={}
         self.automation=0;self.generator=True;self.scenario=scenario
-        self.arrivals={};self.operating={}
+        self.arrivals={};self.operating={};self.warm_homes=0;self.world_map=False
 
     def value(self,value):
         kind=value[0]
@@ -61,6 +61,7 @@ class World:
             elif kind=='arrival':
                 key=action[2:]
                 self.arrivals[key]=self.arrivals.get(key,0)+action[1]
+            elif kind=='open_map':self.world_map=True
             elif kind=='remove_modifier':self.modifiers.discard(action[1])
             elif kind=='predefined':self.predefined.append(action[1])
             else:raise AssertionError(action)
@@ -69,11 +70,22 @@ class World:
         for event in self.events:
             if event['triggers'][0][0]=='start' and self.all(event['conditions']):self.execute(event['effects'])
 
+    def return_scouts(self):
+        for event in self.events:
+            if event['triggers'][0][0]=='scout_return' and self.all(event['conditions']):self.execute(event['effects'])
+
+    def activate_building(self,building):
+        for event in self.events:
+            kind,_,*target=event['triggers'][0]
+            if kind=='construction' and target==[building] and self.all(event['conditions']):
+                self.execute(event['effects'])
+
     def goal_met(self,guid,goal):
         kind=goal['kind'];quantity=goal['quantity']
         if kind=='checks':return self.progress.get(guid,{}).get(goal['label'],0)>=quantity
         if kind=='build':return sum(self.buildings.get(g,0) for g in goal['target'])>=quantity
         if kind=='operate':return sum(self.operating.get(g,0) for g in goal['target'])>=quantity
+        if kind=='warm':return self.warm_homes>=quantity
         if kind=='research':return goal['target'] in self.researched
         if kind=='produce':return sum(self.produced.get(g,0)-self.production_start[guid].get(g,0) for g in goal['target'])>=quantity
         if kind=='automate':return self.automation>quantity

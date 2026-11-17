@@ -1,11 +1,12 @@
 """Native automatic mission objectives and successful-quest event triggers."""
 from .native_binary import Cursor,SchemaError,string,u32,i32,f32,entry
 from .native_scenario import typed,integer,compact
+from .housing_schema import warm_homes
 
 
 KINDS={'build':'ConstructBuildingOfType','research':'ResearchTechnology',
        'produce':'Produce','automate':'EmployAutomatons','stock':'GatherResource','checks':'Custom',
-       'operate':'ActivateBuildingOfType'}
+       'operate':'ActivateBuildingOfType','warm':'HeatBuildingOfCategory'}
 
 
 def completed_event(name,identity,trigger_id,quest,conditions,effects):
@@ -48,6 +49,7 @@ class MissionWriter:
         elif kind=='produce':body+=u32(quantity)+u32(len(target))+b''.join(bytes.fromhex(v) for v in target)
         elif kind=='automate':body+=f32(quantity)
         elif kind=='stock':body+=bytes.fromhex(target)+integer(quantity)+b'\1\1'
+        elif kind=='warm':body+=warm_homes(quantity)
         elif kind=='checks':body+=string(goal.get('label','Stability'))+u32(quantity)+b'\0'
         else:raise SchemaError('Unsupported objective '+kind)
         return body

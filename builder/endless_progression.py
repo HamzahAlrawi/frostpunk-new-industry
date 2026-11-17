@@ -249,16 +249,19 @@ def build(source,modifier_data,buildings,techinfo,guid,localize,resources):
     fe,fd,fq,modifier_data,fo,frontiers=build_campaigns(source,modifier_data,buildings,techinfo,guid,localize,resources,dt,qt,enabled,tracks,campaign_values)
     from last_signal import build as build_story
     from lifeline import build as build_lifeline
+    from winter_road import build as build_winter_road
     from tools.story_schema import register
     story_id=lambda key:guid('last-signal/'+key).hex()
     se,sd,sq,story=build_story(source,buildings,techinfo,resources,story_id,frontiers['bonuses'],localize,dt,qt)
     lifeline_id=lambda key:story_id(key) if key=='forecast' else guid('lifeline/'+key).hex()
     le,ld,lq,lifeline=build_lifeline(source,buildings,resources,lifeline_id,story['scenario'],localize,dt,qt)
     story['lifeline']=lifeline
-    events=fe+le+se+events;dilemmas+=fd+ld+sd;quests+=fq+lq+sq;owners+=fo
+    we,wd,wq,winter=build_winter_road(source,buildings,techinfo,resources,guid,story['scenario'],frontiers['bonuses'],localize,dt,qt)
+    story['winter_road']=winter
+    events=fe+we+le+se+events;dilemmas+=fd+wd+ld+sd;quests+=fq+wq+lq+sq;owners+=fo
     story_directory='09e8fe41e1464e8d284bec7c9373e8f5'
     assert b'\1\1CustomScenarioEvents\0'+bytes.fromhex(story_directory) in originals['gameevents']
-    scenarios=register(originals['scenarios'],story_id,story_directory,localize)
+    scenarios=register(originals['scenarios'],story_id,story_directory,localize,winter['forecast'])
     revised={paths['endlessmode']:append_modes(originals['endlessmode'],mode_definitions,enabled,localize),
         paths['scenarios']:append_parameter(append_parameter(scenarios,parameter),campaign_parameter),
         paths['gameevents']:append_directory(originals['gameevents'],'CustomScenarioEvents','Scenario Builders Quest',events),
