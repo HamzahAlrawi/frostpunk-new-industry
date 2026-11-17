@@ -4,13 +4,13 @@ import heapq
 
 
 class World:
-    def __init__(self,enabled,events,dilemmas,quests,stock=None):
+    def __init__(self,enabled,events,dilemmas,quests,stock=None,scenario=None):
         self.enabled=enabled;self.events=events;self.dilemmas=dilemmas;self.quests=quests
         self.selected=set(enabled) if isinstance(enabled,(list,tuple,set)) else {enabled}
         self.time=0;self.variables={};self.stock=dict(stock or {});self.queue=[];self.serial=0
         self.open=[];self.active={};self.completed=[];self.modifiers=set();self.predefined=[];self.paid=[]
         self.buildings={};self.researched=set();self.produced={};self.production_start={};self.progress={}
-        self.automation=0;self.generator=True
+        self.automation=0;self.generator=True;self.scenario=scenario
 
     def value(self,value):
         kind=value[0]
@@ -18,6 +18,7 @@ class World:
         if kind=='variable':return self.variables.get(value[1],0)
         if kind=='resource':return self.stock.get(value[1],0)
         if kind=='mode':return (value[1] in self.selected)!=value[2]
+        if kind=='scenario':return (value[1]==self.scenario)!=value[2]
         if kind=='generator':return self.generator!=value[1]
         if kind=='compare':
             left,right=self.value(value[2]),self.value(value[3])

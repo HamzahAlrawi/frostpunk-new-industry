@@ -21,6 +21,8 @@ def expression(c,compact=False):
         return ('compare',op,left,right)
     if name=='FrostpunkCustomScenarioParameterCheckExpression':
         return ('mode',c.guid(),c.boolean())
+    if name=='FrostpunkCurrentScenarioCheckExpression':
+        return ('scenario',c.guid(),c.boolean())
     if name=='FrostpunkGeneratorIsActiveExpression':return ('generator',c.boolean())
     raise SchemaError('Unsupported expression '+str(name))
 

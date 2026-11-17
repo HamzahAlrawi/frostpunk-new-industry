@@ -27,7 +27,7 @@ def main():
         output = {name: configure_entry(name, original[name], revised[name], metadata, settings) for name in original}
         rows = starting_profiles(output[SCENARIOS])
         assert len(rows) == 17
-        assert original[SCENARIOS][:profiles[0]["start"]] == output[SCENARIOS][:rows[0]["start"]]
+        assert revised[SCENARIOS][:baseline_profiles[0]["start"]] == output[SCENARIOS][:rows[0]["start"]]
         assert revised[SCENARIOS][baseline_profiles[-1]["end"]:] == output[SCENARIOS][rows[-1]["end"]:]
         extras = {bytes.fromhex(metadata["resource_ids"][name]): amount
                   for name, amount in settings["starting_resources_bonus"].items()}

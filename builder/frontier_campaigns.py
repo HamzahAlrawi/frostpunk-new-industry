@@ -8,6 +8,7 @@ from tools.native_scenario import (typed,event,equals,compare,variable,integer,a
     set_variable,change_resource,apply_modifier,predefined,delayed,guarded,dilemma,
     start_quest,progress_quest,amount)
 from tools.mission_schema import MissionWriter,completed_event
+from frontier_expansion import DOCTRINES,FRONT_DAYS,FRONT_HEAT,extend
 
 PREFIX='NI/Frontiers/'
 GROUPS={
@@ -33,7 +34,7 @@ def automate_goal(fraction):return dict(kind='automate',text=f'Assign automatons
 def campaigns():
     saw=['Sawmill','SteamSawmill'];steel=['Iron Ore Mine','SteamIronOreMine','AdvancedOreMine']
     med=GROUPS['medical'];coal=['Coal Mine','SteamCoalMine','AdvancedCoalMine','CoalThumper','CoalThumperSteam']
-    return [
+    return extend([
       dict(id=1,key='Restoration',title='The Restoration',
         description='Build a regional capital. Choose civic self-sufficiency or industrial expansion, develop real districts and prove the city can sustain them.',
         branches=[dict(title='Civic Commonwealth',description='Homes and civic buildings gain +1 insulation; healthcare gains 100% efficiency. Industry loses 15% efficiency. No upkeep.',bonus='civic'),
@@ -68,7 +69,8 @@ def campaigns():
           dict(phase=3,title='Build the machine workforce',goals=[produce_goal(4),tech_goal('Research Automaton Integration','E 4_Automaton Efficiency')]),
           dict(phase=4,title='Put the machines to work',goals=[automate_goal(0.30),produce_goal(4),build_goal('Build a second Factory',['Factory'],2)]),
           dict(phase=5,title='An autonomous production network',goals=[tech_goal('Research Engineer Automatons','E 5_Automaton Engineers'),automate_goal(0.50),produce_goal(6)]),
-          dict(phase=6,title='Sustain the machine commonwealth',checks=12,reserves={'Coal':18000,'Steel':4000,'Food Rations':5000,'Steam Cores':12},goals=[automate_goal(0.50)])])]
+          dict(phase=6,title='Sustain the machine commonwealth',checks=8,reserves={},goals=[automate_goal(0.50)])])],
+        build_goal,tech_goal,produce_goal,automate_goal)
 
 
 def bonus_library(data,buildings,guid):
@@ -93,20 +95,43 @@ def bonus_library(data,buildings,guid):
         identity=guid('frontiers/bonus/'+key).hex();records[identity]=['Global',('NI Frontiers/'+key).encode(),bytes(body)]
         ids[key]=identity;owners.append(dict(id='Frontiers/'+key,title=title,description=description,modifier=identity))
     g=GROUPS;all_names=list(places);warm=list(dict.fromkeys(g['homes']+g['medical']+g['civic']))
-    add('civic','Civic Commonwealth','Homes and civic services gain +1 insulation; healthcare +100% efficiency; industry -15%.',[(warm,1,1,1),(g['medical'],2,2,0),(g['industry'],0.85,0.85,0)])
-    add('league','Industrial League','Factories and Steelworks +100% efficiency; Workshops +75%. Requires 150 coal and 10 steel every six hours.',[(g['industry'],2,2,0),(g['workshops'],1.75,1.75,0)])
-    add('grid','Emergency Heat Grid','Citywide +2 insulation while its 250-coal six-hour upkeep is funded.',[(all_names,1,1,2)])
-    add('shelter','Shelter Network','Homes, healthcare and civic buildings +3 insulation; Workshop efficiency -20%.',[(warm,1,1,3),(g['workshops'],0.8,0.8,0)])
-    add('closed','Closed-loop Industry','Industrial and extraction automaton efficiency +150%; human efficiency -25%. Requires one Steam Core per day.',[(g['industry']+g['extraction'],0.75,2.5,0)])
-    add('partnership','Human-machine Partnership','Industry and extraction: human efficiency +50%, automaton efficiency +75%. Medical efficiency -15%.',[(g['industry']+g['extraction'],1.5,1.75,0),(g['medical'],0.85,0.85,0)])
-    for level in range(1,5):add('front'+str(level),'Whiteout Thermal Front',f'The advancing front removes {level} insulation levels from every insulated building.',[(all_names,1,1,-level)])
+    coefficients=(
+        [(g['homes']+g['civic'],1,1,1),(g['medical'],1.6,1.6,0),(g['industry'],0.9,0.9,0)],
+        [(g['industry'],1.65,1.65,0),(g['workshops'],1.3,1.3,0)],
+        [(all_names,1,1,2)],
+        [(warm,1,1,2),(g['workshops'],0.85,0.85,0)],
+        [(g['industry']+g['extraction'],0.8,1.9,0)],
+        [(g['industry']+g['extraction'],1.3,1.4,0),(g['medical'],0.9,0.9,0)],
+    )
+    for (key,title,description,_),bindings in zip(DOCTRINES,coefficients):
+        add(key,title,description,bindings)
+    for level,heat in enumerate(FRONT_HEAT,1):
+        add('front'+str(level),'Whiteout Thermal Front',f'The current front costs {heat} insulation levels citywide.',[(all_names,1,1,-heat)])
+    add('works','Regional Public Works','Wall Drills, Steelworks and healthcare gain 30% efficiency.',
+        [(['WallDrill','WallDrillSteam','WallDrillAdvanced','Iron Ore Mine','SteamIronOreMine','AdvancedOreMine']+g['medical'],1.3,1.3,0)])
+    add('reservegrid','Reserve Heat Grid','Homes and healthcare gain one insulation level.',
+        [(g['homes']+g['medical'],1,1,1)])
+    add('machineworks','Independent Machine Works','Extraction and industrial automatons gain 30% efficiency.',
+        [(g['industry']+g['extraction'],1,1.3,0)])
+    add('signal_homes','Signal: Residential Circuit','Homes and medical wards gain one insulation level. Workshops lose 15% efficiency.',
+        [(g['homes']+g['medical'],1,1,1),(g['workshops'],0.85,0.85,0)])
+    add('signal_relay','Signal: Relay Circuit','Workshops and extraction gain 25% efficiency. Homes lose one insulation level.',
+        [(g['workshops']+g['extraction'],1.25,1.25,0),(g['homes'],1,1,-1)])
+    add('signal_ward','Signal: Ward Circuit','Medical wards gain 50% efficiency and two insulation levels. Industry loses 20% efficiency.',
+        [(g['medical'],1.5,1.5,2),(g['industry'],0.8,0.8,0)])
+    add('signal_heat','Signal: Steam Circuit','Coal extraction gains 40% efficiency. Medical wards lose one insulation level.',
+        [(['Coal Mine','SteamCoalMine','AdvancedCoalMine','CoalThumper','CoalThumperSteam'],1.4,1.4,0),(g['medical'],1,1,-1)])
+    add('signal_open','Signal: Open Frequency','Hothouses and Cookhouses gain 35% efficiency; industrial workplaces lose 20%.',
+        [(g['food'],1.35,1.35,0),(g['industry'],0.8,0.8,0)])
+    add('signal_archive','Signal: Archive Frequency','Workshops and Steelworks gain 35% efficiency; Cookhouses lose 20%.',
+        [(g['workshops']+['Iron Ore Mine','SteamIronOreMine','AdvancedOreMine'],1.35,1.35,0),(['Food Processing'],0.8,0.8,0)])
     add('quarantine','Emergency Quarantine','For two days: healthcare +100% efficiency; industrial efficiency -35%.',[(g['medical'],2,2,0),(g['industry'],0.65,0.65,0)])
     add('stretch','Stretched Provisions','For two days: food workplace efficiency +100%, cold-related illness +30%.',[(g['food'],2,2,0)],1.3)
     add('engineers','Engineers on Repair Duty','For two days: Factory efficiency +100%; Workshop efficiency -50%.', [(['Factory'],2,2,0),(g['workshops'],0.5,0.5,0)])
-    add('retool','New Machine Assemblies','For two days: Factory efficiency +75%.',[(['Factory'],1.75,1.75,0)])
+    add('retool','New Machine Assemblies','Factory efficiency +75% while the programme runs.',[(['Factory'],1.75,1.75,0)])
     add('rest','Maintenance Shutdown','For two days: Factory efficiency -40%.',[(['Factory'],0.6,0.6,0)])
     add('seal','Sealed Districts','For two days: citywide +2 insulation; industry and food workplace efficiency -25%.',[(all_names,1,1,2),(g['industry']+g['food'],0.75,0.75,0)])
-    add('burn','Emergency Fuel Burn','For two days: citywide +3 insulation.',[(all_names,1,1,3)])
+    add('burn','Emergency Fuel Burn','Citywide +3 insulation while the reserve burn lasts.',[(all_names,1,1,3)])
     add('push','Exposed Production Drive','For two days: workplaces +50% efficiency; citywide insulation -1.',[(all_names,1.5,1.5,-1)])
     add('community','Community Service Programme','Homes/civic services +1 insulation; healthcare +50% efficiency.',[(warm,1,1,1),(g['medical'],1.5,1.5,0)])
     add('council','Civic Assembly','Food and healthcare efficiency +75%; industry efficiency -25%.',[(g['food']+g['medical'],1.75,1.75,0),(g['industry'],0.75,0.75,0)])
@@ -207,11 +232,29 @@ def build(source,data,buildings,techinfo,guid,localize,resources,dt,qt,enabled,l
         branch_offer=dialog('Branch/'+key,'Choose the city you will build',story['description']+'\n\nThis choice changes your city rules and the next objectives. Upkeep is automatic; unfunded bonuses pause and resume when twice the next payment is available.',opts,False)
         events.append(event('NI Frontiers branch '+key,identity('event/branch/'+key),identity('trigger/branch/'+key),
             conditions(cid,3)+[eq('path',0),eq('status',0)],[setv('status',4),branch_offer],0.25))
-        victory_options=[]
-        for continuing,title in ((1,'Keep the frontier active'),(0,'Let the city breathe')):
-            victory_options.append((title,'Continue in Endless. '+('New incidents and charter upkeep stop; existing deadlines still apply and earned charter bonuses remain.' if not continuing else 'New incidents and automatic charter upkeep continue.'),[],[setv('active',continuing)]))
-        victory=dialog('Victory/'+key,story['title']+' - achieved',
-            'Your city has completed the six founding chapters. The mode continues with its own incidents, deadlines and upkeep. The Whiteout front clears; unresolved incidents and work orders retain their deadlines. You can keep the frontier active or quiet the director.',victory_options,False)
+        quiet=[setv('active',0)]
+        for path_number,branch in enumerate(story['branches'],1):
+            if branch.get('upkeep'):
+                quiet.append(guarded([eq('path',path_number)],[remove(branch['bonus']),setv('funded',0)]))
+        extension_gate=conditions(cid,99)+[eq('won',1),eq('expansion',0)]
+        dialog('Victory/'+key,story['title']+' - achieved','The founding is complete. A new district proposal is available.',
+            [('Keep the frontier active','Continue with incidents and upkeep.',[],[guarded(extension_gate,[setv('active',1)])]),
+             ('Let the city breathe','Suspend incidents and paid doctrines.',[],[guarded(extension_gate,quiet)])],False)
+        offer=dialog('SecondArc/'+key,'Beyond the founding',
+            'The founding chapters are complete. Three new projects build a specialised district and prove it can pay its operating costs. There is no overall deadline; recurring incidents continue.',
+            [('Develop the district','Start the next three chapters and keep incidents and doctrine upkeep active.',extension_gate,
+              [setv('expansion',1),setv('active',1),setv('phase',7),setv('status',1),setv('checks',0),start_quest(identity('quest/'+key+'/7'))]),
+             ('Keep playing without projects','Incidents and any active doctrine upkeep continue if already enabled.',[],[guarded(extension_gate,[setv('expansion',2)])]),
+             ('Let the city breathe','Stop new incidents and suspend any doctrine that charges upkeep. Existing deadlines still apply.',[],
+              [guarded(extension_gate,[setv('expansion',2)]+quiet)])],False)
+        events.append(event('NI Frontiers expansion '+key,identity('event/expansion/'+key),identity('trigger/expansion/'+key),
+            extension_gate+[eq('expansion_offered',0)],[setv('expansion_offered',1),offer],0.25))
+        ending_gate=conditions(cid,100)+[eq('expansion',3)]
+        ending=dialog('DistrictComplete/'+key,'The frontier is here to stay',
+            'The district is fully operational. Its permanent reward stays with the city; you can continue with incidents or suspend them.',
+            [('Keep the frontier active','Incidents and doctrine upkeep continue.',[],[guarded(ending_gate,[setv('expansion',4)])]),
+             ('Let the city breathe','Suspend paid doctrines and new incidents. The district reward remains.',[],
+              [guarded(ending_gate,[setv('expansion',4)]+quiet)])],False)
         for mission in story['missions']:
             phase=mission['phase'];path=mission.get('path');mkey=key+'/'+str(phase)+(('/'+str(path)) if path else '')
             qid=identity('quest/'+mkey);goals=[]
@@ -224,8 +267,12 @@ def build(source,data,buildings,techinfo,guid,localize,resources,dt,qt,enabled,l
                 goals.append(goal)
             if mission.get('checks'):
                 reserve=', '.join(f'{v:,} {n.lower()}' for n,v in mission['reserves'].items())
+                bill=', '.join(f'{v:,} {n.lower()}' for n,v in mission.get('payment',{}).items())
+                goes_cold='Wait for all four fronts. ' if cid==2 and phase==6 else ''
                 goals.append(dict(kind='checks',quantity=mission['checks'],text=f"Complete {mission['checks']} operating checks",
-                    description=('After the fourth front arrives, 13 days into this campaign. ' if cid==2 else '')+f'Every six game hours: keep the Generator on and retain {reserve}. Checks pause while conditions fail. Supplies are retained; charter upkeep still applies.'))
+                    description=goes_cold+f'Every six game hours: keep the Generator on and retain {reserve}. '
+                    +(f'Each successful check spends {bill} above those reserves. ' if bill else 'These reserves are retained. ')
+                    +'Checks pause while conditions fail. Doctrine upkeep is separate.'))
             quests.append(writer.build('NI Frontiers '+mkey,qid,story['title']+': '+mission['title'],goals,identity,localize,'Frontiers/Mission/'+mkey))
             gate=conditions(cid,phase)+([eq('path',path)] if path else [])
             if phase>=3:gate.append(compare(variable(PREFIX+'path'),4,integer(1)))
@@ -233,7 +280,7 @@ def build(source,data,buildings,techinfo,guid,localize,resources,dt,qt,enabled,l
                 [setv('status',1),start_quest(qid)],0.25))
             actions=[setv('phase',phase+1),setv('status',1),hope]
             if phase==2:actions += [setv('status',4),branch_offer]
-            elif phase<6:
+            elif phase not in (6,9):
                 next_missions=[m for m in story['missions'] if m['phase']==phase+1]
                 for target in next_missions:
                     next_key=key+'/'+str(phase+1)+('/'+str(target['path']) if target.get('path') else '')
@@ -242,17 +289,20 @@ def build(source,data,buildings,techinfo,guid,localize,resources,dt,qt,enabled,l
             if phase==6:
                 actions=[setv('phase',99),setv('status',2),setv('won',1),hope,calm]
                 actions.extend(remove('front'+str(i)) for i in range(1,5))
-                for path_number,branch in enumerate(story['branches'],1):actions.append(guarded([eq('path',path_number),eq('funded',0)],[apply_modifier(bonuses[branch['bonus']]),setv('funded',1)]))
-                actions.append(victory)
+            elif phase==9:
+                actions=[setv('phase',100),setv('status',2),setv('expansion',3),apply_modifier(bonuses[mission['reward']]),hope,calm,ending]
             events.append(completed_event('NI Frontiers complete '+mkey,identity('event/complete/'+mkey),identity('trigger/complete/'+mkey),qid,gate+[eq('status',1)],actions))
             if mission.get('checks'):
-                check=gate+[eq('status',1),typed('FrostpunkGeneratorIsActiveExpression')+b'\0']+paid(mission['reserves'])
-                if cid==2:check.append(eq('front',4))
+                payment=mission.get('payment',{});floor=dict(mission['reserves'])
+                for resource,quantity in payment.items():floor[resource]=floor.get(resource,0)+quantity
+                check=gate+[eq('status',1),typed('FrostpunkGeneratorIsActiveExpression')+b'\0']+paid(floor)
+                if cid==2 and phase==6:check.append(eq('front',4))
                 check.append(compare(integer(mission['checks']-1),4,variable(PREFIX+'checks')))
                 events.append(event('NI Frontiers operating check '+mkey,identity('event/check/'+mkey),identity('trigger/check/'+mkey),check,
-                    [setv('checks',1,1),progress_quest(qid,'Stability')],0.25))
-            mission_meta.append(dict(campaign=cid,phase=phase,path=path,guid=qid,title=mission['title'],goals=goals))
-    for level,days in enumerate((2,5,9,13),1):
+                    spend(payment)+[setv('checks',1,1),progress_quest(qid,'Stability')],0.25))
+            mission_meta.append(dict(campaign=cid,phase=phase,path=path,guid=qid,title=mission['title'],goals=goals,
+                reserves=mission.get('reserves',{}),payment=mission.get('payment',{}),reward=mission.get('reward')))
+    for level,days in enumerate(FRONT_DAYS,1):
         actions=([remove('front'+str(level-1))] if level>1 else [])+[apply_modifier(bonuses['front'+str(level)]),setv('front',level)]
         # Scheduled only by choosing Whiteout; choosing another campaign cannot
         # receive the front. Victory guards reject late callbacks.
@@ -334,4 +384,5 @@ def build(source,data,buildings,techinfo,guid,localize,resources,dt,qt,enabled,l
     events.append(event('NI Frontiers existing city',identity('event/migrate'),identity('trigger/migrate'),
         [flag,eq('version',0),equals('NI/Reconstruction/initialized',1)],[setv('version',-1),migration],0.25))
     return events,dilemmas,quests,records,owners,dict(campaigns=stories,missions=mission_meta,bonuses=bonuses,automaton_hours=automaton_hours,
-        incidents=incidents,work_orders=work_orders,incident_cooldown_days=2,owned_temporary_effects=True,selector=identity('dilemma/Selection'))
+        incidents=incidents,work_orders=work_orders,incident_cooldown_days=2,owned_temporary_effects=True,
+        front_days=FRONT_DAYS,front_heat=FRONT_HEAT,selector=identity('dilemma/Selection'))

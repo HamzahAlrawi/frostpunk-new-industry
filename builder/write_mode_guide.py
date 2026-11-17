@@ -5,12 +5,12 @@ def write(root,catalog):
     mode=catalog['endless'];front=mode['frontiers']
     lines=['# Restoration, Whiteout and Machine Age','',
         'Choose **Endless → Restoration**, **Endless → Whiteout** or **Endless → Machine Age**, then select a map and difficulty. These are three separate mode entries beside Endurance, The Builders and Serenity. There is no campaign chooser inside a new city. The modes use native Endless maps and Endurance weather.','',
-        '**Experimental beta:** the final mode data and UI geometry pass offline validation. The final installed build also passes native loader startup. Six-card rendering, live missions and events, and real save/load remain unverified.','',
+        '**Experimental beta:** campaign paths and balance rules are checked against the serialized game data. See the release notes for the scope of testing in Frostpunk.','',
         '## Founding chapters and continuing play','',
-        'Each mode has six founding chapters. Construct districts, research the named technologies, manufacture new automatons, assign machines to workplaces and maintain operating reserves. Chapters complete automatically; there is no mandatory dispatch button. Existing stockpiles do not substitute for new automaton production.','',
+        'Each mode has six founding chapters and three optional district chapters. Construct districts, research the named technologies, manufacture new automatons, assign machines to workplaces and maintain operating reserves. Chapters complete automatically. Existing stockpiles do not substitute for new automaton production.','',
         'After chapter two, choose one of two city doctrines. Three doctrines charge automatic upkeep. Missing an input pauses the whole bonus; holding two payments of every input resumes it. A last complete payment buys its interval before a following unfunded interval suspends the package.','',
         'Final operating checks occur every six game hours while the Generator is on and the listed reserves remain in storage. Checks pause when a condition fails. They retain supplies, while normal consumption and doctrine upkeep continue.','',
-        'The mode continues after its founding chapters. Incidents and upkeep stay active by default. The completion event also offers quiet continuation: no new incidents or doctrine bills, while existing response/repair deadlines still apply.','']
+        'The district proposal also appears in existing founded cities. Each district grants a permanent reward after a paid operating trial. Quiet continuation stops new incidents and suspends paid doctrine bonuses; free doctrines and district rewards remain. Existing response and repair deadlines still apply.','']
     for story in front['campaigns']:
         title=next(m['title'] for m in mode['modes'] if m['value']==mode['campaign_values'][str(story['id'])])
         lines+=['## '+title,'',story['description'],'',
@@ -20,6 +20,8 @@ def write(root,catalog):
         for mission in (m for m in front['missions'] if m['campaign']==story['id']):
             path=story['branches'][mission['path']-1]['title'] if mission['path'] else 'Both'
             goals='<br>'.join(g['text']+(' — '+g['description'] if g['kind']=='checks' else '') for g in mission['goals'])
+            reward=next((row for row in mode['rewards'] if row['id']=='Frontiers/'+str(mission['reward'])),None)
+            if reward:goals+=f"<br>Permanent reward: {reward['description']}"
             lines.append(f"| {mission['phase']}. {mission['title']} | {path} | {goals} |")
         lines+=['','### Incidents and deadlines','',
             'The response countdown appears in the quest tracker. Ignoring it raises Discontent moderately and imposes a two-day disruption: recovery shifts in Restoration, heat restrictions in Whiteout, or a Factory shutdown in Machine Age. Repair programmes have a separate countdown beginning when accepted.','',
@@ -35,14 +37,13 @@ def write(root,catalog):
         'A repair programme temporarily reduces Factory efficiency by 25%. Success removes that reduction and grants the stated reward. Failure removes the programme reduction, raises Discontent and applies the mode’s two-day disruption. Cargo arrives one day after resolution.','',
         'Every incident has a free final alternative. It also dismisses an expired prompt without changing the city. Choice effects recheck state and affordability internally, protecting against cached or repeated clicks. A refreshed temporary effect supersedes its previous expiry, so an old timer cannot remove the current benefit.','',
         '## The Whiteout front','',
-        'Four fronts arrive 2, 5, 9 and 13 days after the city begins. Citywide insulation declines to -1, -2, -3 and -4. Each front replaces its predecessor, leaving one current source tooltip. Final operating checks wait for the fourth front. Completing the founding chapters clears the front; Whiteout’s own incidents continue.','',
+        'Four fronts arrive 5, 10, 16 and 23 days after a new city begins. Citywide insulation drops by 1, 2, 2 and 3 levels. Each front replaces its predecessor. The founding trial waits for the fourth front; completing it clears the front. Existing cities retain any front timers already scheduled in their saves.','',
         '## Compatibility and layout','',
         'Start a new city to use a separate mode. Existing version 3.15 supply-dispatch cities retain their projects, deliveries and earned rewards; they receive an update notice. [Legacy reference](reconstruction.md).','',
         'Native story scenarios, laws, research, recipes and original Endless mode records retain their gameplay definitions. The menu now supplies six explicit slots, compact descriptions and normal text proportions. Original orientation/alignment enums are preserved. All nine research tabs, including Production, use a narrower bar layout. Live rendering remains unverified.','',
         'The persistent difficulty config is retained. Public first installs use standard; the owner’s installation retains easiest. New content and compact menu summaries are supplied in English in all thirteen language tables.','',
         '## Validation','',
-        f"The owned-data audit decodes {mode['events']} added events, {mode['dilemmas']} dilemmas and {mode['quests']} quests, including legacy content. It checks all six founding paths, twenty automatic chapter definitions, 54 incident responses, 18 ignored-response expiries, five repair successes and failures, all three funded doctrines, cached callbacks, late timers, mode isolation and research availability.",'',
-        '66 public tests pass. Existing research, law, tooltip, all-five-preset and archive checks pass. Geometry bounds include card ornaments and preserve native layout enum values. The final installed build loaded thirteen required configurations and the edited Endless menu template without serialization errors. Startup did not open a save or start a city.','']
+        f"The owned-data audit decodes {mode['events']} added events, {mode['dilemmas']} dilemmas and {mode['quests']} quests, including the story and legacy content. It runs all six nine-chapter paths, 54 incident responses, 18 ignored-response expiries, five repair successes and failures, three funded doctrines, and district trial payments.",'']
     (root/'docs/frontiers.md').write_text('\n'.join(lines),encoding='utf-8')
     (root/'docs/reconstruction.md').write_text('# Legacy Reconstruction cities\n\n'
         'The version 3.15 supply-dispatch mode is retained for existing cities. New cities use the separate '

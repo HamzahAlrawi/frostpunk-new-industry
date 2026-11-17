@@ -53,7 +53,8 @@ def decode(original,payload,meta):
         records[key]=rows
     span,before=parameters(original['scenarios']);after_span,after=parameters(payload['scenarios'])
     assert before==after[:-2] and len(after)==9 and after[-2].guid==meta['parameter'] and after[-1].guid==meta['campaign_parameter']
-    assert payload['scenarios'][:span.start]==original['scenarios'][:span.start]
+    from validate_last_signal import validate_registration
+    validate_registration(original['scenarios'][:span.start],payload['scenarios'][:after_span.start],meta['story'])
     assert payload['scenarios'][after_span.end:]==original['scenarios'][span.end:]
     original_modes=modes(original['endlessmode'])
     assert payload['endlessmode'][:4]==(6).to_bytes(4,'little')
@@ -68,8 +69,10 @@ def decode(original,payload,meta):
 def audit(records,meta,resource_ids):
     events=records['gameevents'];dilemmas={r['guid']:r for r in records['dilemmas']};quests={r['guid']:r for r in records['quests']}
     flag=('mode',meta['enabled'],False)
-    assert all(e['conditions'][0]==flag and e['enabled'] and e['weight']==1 for e in events)
-    assert all(t[0] in ('start','quest') or t[2] in (0.25,1) for e in events for t in e['triggers'])
+    story_flag=('scenario',meta['story']['scenario'],False)
+    assert all(e['conditions'][0]==(story_flag if e['name'].startswith('NI Last Signal ') else flag)
+               and e['enabled'] and e['weight']==1 for e in events)
+    assert all(t[0] in ('start','quest') or t[2] in (0.25,0.5,1,2) for e in events for t in e['triggers'])
     for row in dilemmas.values():
         for c in row['choices']:
             assert c['text'] and c['description'] and c['disabled']
@@ -152,7 +155,7 @@ def main():
     from validate_tooltips import language_table
     references=set()
     for data in current.values():
-        references.update(match[1:].decode() for match in re.findall(rb'\x01(@Mods/NewIndustry/(?:Endless|Frontiers)/[^\0]+)\0',data))
+        references.update(match[1:].decode() for match in re.findall(rb'\x01(@Mods/NewIndustry/(?:Endless|Frontiers|LastSignal)/[^\0]+)\0',data))
     languages=0
     for item in manifest['archives']['localizations']['entries']:
         table=language_table(gzip.decompress((ROOT/'build/native/payload'/item['payload']).read_bytes()))
@@ -162,11 +165,17 @@ def main():
     result.update(localized_references=len(references),language_tables=languages)
     from validate_frontiers import audit as audit_frontiers
     result['frontiers']=audit_frontiers(decoded,meta,manifest['configuration']['resource_ids'])
+    from validate_last_signal import audit as audit_story
+    result['last_signal']=audit_story(decoded,meta,manifest['configuration']['resource_ids'])
     technology_data=payload['configs/frostpunktechnologiesconfig.bin']
     token=b'\1\1Default_Endless\0';at=technology_data.index(token)+len(token)+16
     count=struct.unpack_from('<I',technology_data,at)[0]
     members={technology_data[p:p+16].hex() for p in range(at+4,at+4+16*count,16)}
     assert all(g['target'] in members for q in meta['frontiers']['missions'] for g in q['goals'] if g['kind']=='research')
+    token=b'\1\1Default\0';at=technology_data.rindex(token)+len(token)+16
+    count=struct.unpack_from('<I',technology_data,at)[0]
+    members={technology_data[p:p+16].hex() for p in range(at+4,at+4+16*count,16)}
+    assert all(g['target'] in members for q in meta['story']['acts'] for g in q['goals'] if g['kind']=='research')
     result['frontiers']['research_targets_available']=True
     (ROOT/'build/endless-validation.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result))

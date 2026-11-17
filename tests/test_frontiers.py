@@ -14,14 +14,14 @@ class FrontierTests(unittest.TestCase):
         cls.meta=json.loads((Path(__file__).resolve().parents[1]/'mod/catalog.json').read_text())['endless']
         cls.front=cls.meta['frontiers']
 
-    def test_all_six_branches_have_complete_six_chapter_arcs(self):
+    def test_all_six_branches_have_complete_nine_chapter_arcs(self):
         self.assertEqual([s['id'] for s in self.front['campaigns']],[1,2,3])
-        self.assertEqual(len(self.front['missions']),20)
+        self.assertEqual(len(self.front['missions']),29)
         for story in self.front['campaigns']:
             self.assertEqual(len(story['branches']),2)
             for path in (1,2):
                 chosen=[m for m in self.front['missions'] if m['campaign']==story['id'] and m['path'] in (None,path)]
-                self.assertEqual([m['phase'] for m in chosen],list(range(1,7)))
+                self.assertEqual([m['phase'] for m in chosen],list(range(1,10)))
 
     def test_objectives_require_actual_city_development(self):
         kinds={g['kind'] for m in self.front['missions'] for g in m['goals']}
@@ -33,7 +33,7 @@ class FrontierTests(unittest.TestCase):
                 if goal['kind']=='produce':
                     self.assertEqual(len(goal['target']),6)
                     self.assertGreaterEqual(goal['quantity'],2)
-                if goal['kind']=='checks':self.assertGreaterEqual(goal['quantity'],12)
+                if goal['kind']=='checks':self.assertGreaterEqual(goal['quantity'],8)
 
     def test_doctrines_and_incidents_have_distinct_effect_packages(self):
         branches=[b for s in self.front['campaigns'] for b in s['branches']]

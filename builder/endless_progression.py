@@ -247,14 +247,21 @@ def build(source,modifier_data,buildings,techinfo,guid,localize,resources):
         [flag,equals('NI/Reconstruction/initialized',0),equals('NI/Frontiers/version',-1)],effects))
     from frontier_campaigns import build as build_campaigns
     fe,fd,fq,modifier_data,fo,frontiers=build_campaigns(source,modifier_data,buildings,techinfo,guid,localize,resources,dt,qt,enabled,tracks,campaign_values)
-    events=fe+events;dilemmas+=fd;quests+=fq;owners+=fo
+    from last_signal import build as build_story
+    from tools.story_schema import register
+    story_id=lambda key:guid('last-signal/'+key).hex()
+    se,sd,sq,story=build_story(source,buildings,techinfo,resources,story_id,frontiers['bonuses'],localize,dt,qt)
+    events=fe+se+events;dilemmas+=fd+sd;quests+=fq+sq;owners+=fo
+    story_directory='09e8fe41e1464e8d284bec7c9373e8f5'
+    assert b'\1\1CustomScenarioEvents\0'+bytes.fromhex(story_directory) in originals['gameevents']
+    scenarios=register(originals['scenarios'],story_id,story_directory,localize)
     revised={paths['endlessmode']:append_modes(originals['endlessmode'],mode_definitions,enabled,localize),
-        paths['scenarios']:append_parameter(append_parameter(originals['scenarios'],parameter),campaign_parameter),
+        paths['scenarios']:append_parameter(append_parameter(scenarios,parameter),campaign_parameter),
         paths['gameevents']:append_directory(originals['gameevents'],'CustomScenarioEvents','Scenario Builders Quest',events),
         paths['dilemmas']:append_directory(originals['dilemmas'],'CustomScenario','Winterhome Scenario',dilemmas),
         paths['quests']:append_directory(originals['quests'],'CustomScenarios','Scenario Builders',quests)}
     metadata=dict(id='Reconstruction',parameter=parameter.guid,enabled=enabled,disabled=identity('disabled'),
         tracks=tracks,rewards=owners,events=len(events),dilemmas=len(dilemmas),quests=len(quests),
         poll_days=0.25,description='Three separate Endless modes with automatic chapters and timed incidents.',frontiers=frontiers,
-        campaign_parameter=campaign_parameter.guid,campaign_values=campaign_values,modes=mode_definitions)
+        campaign_parameter=campaign_parameter.guid,campaign_values=campaign_values,modes=mode_definitions,story=story)
     return revised,modifier_data,owners,metadata
