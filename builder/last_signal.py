@@ -164,6 +164,6 @@ def build(source, buildings, techinfo, resources, identity, bonuses, localize, d
                                  [("Keep the light on","Return to the city.",[scoped],[])])
             add_event("ending/"+key,[scoped,state("act",5),state("successes",count),state("final_route",route)],
                 [put("act",99),ending_plot],0.25)
-    add_event("start",[scoped,state("act",0)],[put("act",1)])
+    add_event("start",[scoped,state("act",0),equals("NI/Lifeline/chapter",0)],[put("act",1)])
     return events,dialogs,quests,dict(scenario=identity("scenario"),event_setup=identity("event-setup"),
         acts=metadata,response_days=2,ending_thresholds=[0,1,3])

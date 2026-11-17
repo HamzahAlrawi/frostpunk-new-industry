@@ -1,14 +1,27 @@
-# The Last Signal
+# The Last Signal: Lifeline
 
-Start a fresh city under **Scenarios → The Last Signal**. This story uses the original crater and city systems with its own events. It does not need a DLC or require an Endless city.
+From the main menu, choose **Select Scenario → The Last Signal: Lifeline → Start**. Start a fresh city for the rescue campaign. Existing Last Signal saves keep their original campaign and can still be loaded.
 
-Edith Vale hears three settlements answering an old distress call. The city has one working boiler junction. Which district gets the steam when the wards, relay and fuel crews need it at the same time?
+Edith Vale finds two clearance orders with the same call sign. Mara's school and Ivo's pump crew are on opposite sides of the pass. You have one guide rope and both groups are following it.
 
-1. **Someone is still listening.** Get a Beacon, Workshop and Medical Post running within seven days.
-2. **A voice in the dark.** Give scarce heat to the homes or to Ivo's relay. Build the facilities, then fund four service shifts within six days.
-3. **Two calls, one boiler.** Hold the ward open or keep Kiln Nine firing. Six shifts and a practical building or research goal, within seven days.
-4. **The final transmission.** Choose whether to broadcast an open route or support the crew carrying the archive. Keep that circuit running for eight shifts within eight days.
+### The First Sled — three days
 
-The route changes warmth and workplace efficiency for the duration of its act. A shift runs automatically every twelve game hours if the Generator is active and the listed supplies are available above a **120-coal reserve**. A missed shift costs nothing. You have two days to choose a circuit before Edith selects the first option.
+Either choice immediately adds **8 workers and 4 engineers** to the city. The school route brings **40 wood and 20 coal**; build a Medical Post and reserve 20 rations to bring down 20 people. The pump route brings **25 steel and one Steam Core**; build a Gathering Post and reserve 85 coal to bring down 18 people.
 
-Missed promises raise Discontent and move the story forward. The epilogue reflects how many promises were kept and which frequency you chose. Your city remains playable afterward.
+When the first convoy arrives, you can spend 20 wood to mark a second rope. Marking it and completing the next rescue unlocks an extra option for the finale.
+
+### The Second Sled — five days
+
+Take in six gravely ill workers immediately and put two medical buildings into operation, or admit six engineers and build a Steelworks and Steam Hub to repair the winch. The ward plan requires 45 rations and 80 coal; the winch plan requires 70 steel and 100 coal. Each route brings a different convoy and cargo.
+
+### Crossing Night — six days
+
+After the truth about the clearance orders comes out, choose how to run the last crossing:
+
+- **Open road:** ten homes, two operating wards, 100 rations and 250 coal. Bring in 46 people, including 22 children.
+- **Rope ferry:** two Steam Hubs, an operating Steelworks, 100 steel and 250 coal. Bring in 36 people and recovered machinery.
+- **Both lines:** available after marking the second rope and completing both earlier rescues. Twelve homes, two hubs and three operating wards; 140 rations, 110 steel and 320 coal. Bring in 64 people.
+
+Keep the Generator on and the listed supplies in storage when the rescue is ready. The supplies are charged once, at the crossing. Housing, meals, shifts and medical care work as they do in the rest of Frostpunk. Incoming convoys provide labour as well as people who need shelter. The forecast has its own cold fronts; check it while building.
+
+If you miss a deadline, a smaller group reaches the gate and tells you what was lost. The story moves on, and the city remains playable after the final scene.

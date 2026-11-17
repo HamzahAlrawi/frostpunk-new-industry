@@ -43,6 +43,10 @@ def effect(c):
     if name in ('FrostpunkPredefinedEffect','FrostpunkApplyModifierEffect','FrostpunkRemoveModifierEffect','FrostpunkCreateDilemmaEffect','FrostpunkStartQuestEffect'):
         return ({'FrostpunkPredefinedEffect':'predefined','FrostpunkApplyModifierEffect':'modifier',
                  'FrostpunkRemoveModifierEffect':'remove_modifier','FrostpunkCreateDilemmaEffect':'dilemma','FrostpunkStartQuestEffect':'quest'}[name],c.guid())
+    if name=='FrostpunkCreateAgentEffect':
+        quantity,appearance,role=c.i32(),c.guid(),c.guid()
+        if not 0<quantity<=60 or c.count()!=0:raise SchemaError('Unexpected arrival payload')
+        return ('arrival',quantity,appearance,role)
     if name=='FrostpunkProgressCustomQuestObjectiveEffect':return ('progress',c.guid(),c.string(),c.i32())
     if name=='FrostpunkTimedEffect':
         guid=c.guid();days=c.f32();unit=c.u32();random=c.f32();random_unit=c.u32()
@@ -107,6 +111,9 @@ def quest(c):
             goal.update(kind='checks',label=c.string(),quantity=c.u32(),bound=c.boolean())
         elif kind=='FrostpunkConstructBuildingOfTypeQuestObjective':
             goal.update(kind='build',target=[c.guid() for _ in range(c.count(112))],quantity=c.u32(),existing=c.boolean())
+        elif kind=='FrostpunkActivateBuildingOfTypeQuestObjective':
+            goal.update(kind='operate',target=[c.guid() for _ in range(c.count(112))],quantity=c.u32())
+            if c.take(3)!=b'\1\1\0':raise SchemaError('Unexpected operating objective flags')
         elif kind=='FrostpunkResearchTechnologyQuestObjective':goal.update(kind='research',target=c.guid(),quantity=1)
         elif kind=='FrostpunkProduceQuestObjective':
             goal.update(kind='produce',quantity=c.u32(),target=[c.guid() for _ in range(c.count(32))])

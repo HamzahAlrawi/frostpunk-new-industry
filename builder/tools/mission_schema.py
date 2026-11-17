@@ -4,7 +4,8 @@ from .native_scenario import typed,integer,compact
 
 
 KINDS={'build':'ConstructBuildingOfType','research':'ResearchTechnology',
-       'produce':'Produce','automate':'EmployAutomatons','stock':'GatherResource','checks':'Custom'}
+       'produce':'Produce','automate':'EmployAutomatons','stock':'GatherResource','checks':'Custom',
+       'operate':'ActivateBuildingOfType'}
 
 
 def completed_event(name,identity,trigger_id,quest,conditions,effects):
@@ -32,6 +33,9 @@ class MissionWriter:
         marker=typed('FrostpunkResearchTechnologyQuestObjective')
         at=data.index(marker,50000);c=Cursor(data,at+len(marker));c.guid();c.count();c.boolean();c.string();c.string();c.take(24);c.guid()
         if data[c.position:c.position+len(marker)]!=marker:raise SchemaError('Research objective boundary differs')
+        native_boundary=(u32(1)+bytes.fromhex('99c50bbc0ec952ace541f69166fab316')+u32(1)+b'\1\1\0'
+            +typed('FrostpunkRescueSurvivorsQuestObjective')+bytes.fromhex('da8485fad05f07b31444575bf9f7ae52'))
+        if native_boundary not in data:raise SchemaError('Native activation objective boundary differs')
 
     def objective(self,goal,identity,localize,key):
         kind=goal['kind'];target=goal.get('target');quantity=goal.get('quantity',1)
@@ -39,6 +43,7 @@ class MissionWriter:
             +localize(key+'/Text',goal['text'])+localize(key+'/Description',goal.get('description',goal['text']))
             +self.template.objective_metadata)
         if kind=='build':body+=u32(len(target))+b''.join(bytes.fromhex(v) for v in target)+u32(quantity)+b'\1'
+        elif kind=='operate':body+=u32(len(target))+b''.join(bytes.fromhex(v) for v in target)+u32(quantity)+b'\1\1\0'
         elif kind=='research':body+=bytes.fromhex(target)
         elif kind=='produce':body+=u32(quantity)+u32(len(target))+b''.join(bytes.fromhex(v) for v in target)
         elif kind=='automate':body+=f32(quantity)

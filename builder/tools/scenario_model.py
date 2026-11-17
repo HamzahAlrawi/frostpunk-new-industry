@@ -11,6 +11,7 @@ class World:
         self.open=[];self.active={};self.completed=[];self.modifiers=set();self.predefined=[];self.paid=[]
         self.buildings={};self.researched=set();self.produced={};self.production_start={};self.progress={}
         self.automation=0;self.generator=True;self.scenario=scenario
+        self.arrivals={};self.operating={}
 
     def value(self,value):
         kind=value[0]
@@ -57,6 +58,9 @@ class World:
                 self.progress.setdefault(guid,{})[label]=self.progress.get(guid,{}).get(label,0)+quantity
                 self.update_quests()
             elif kind=='modifier':self.modifiers.add(action[1])
+            elif kind=='arrival':
+                key=action[2:]
+                self.arrivals[key]=self.arrivals.get(key,0)+action[1]
             elif kind=='remove_modifier':self.modifiers.discard(action[1])
             elif kind=='predefined':self.predefined.append(action[1])
             else:raise AssertionError(action)
@@ -69,6 +73,7 @@ class World:
         kind=goal['kind'];quantity=goal['quantity']
         if kind=='checks':return self.progress.get(guid,{}).get(goal['label'],0)>=quantity
         if kind=='build':return sum(self.buildings.get(g,0) for g in goal['target'])>=quantity
+        if kind=='operate':return sum(self.operating.get(g,0) for g in goal['target'])>=quantity
         if kind=='research':return goal['target'] in self.researched
         if kind=='produce':return sum(self.produced.get(g,0)-self.production_start[guid].get(g,0) for g in goal['target'])>=quantity
         if kind=='automate':return self.automation>quantity

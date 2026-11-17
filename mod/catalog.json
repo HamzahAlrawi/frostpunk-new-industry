@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.17.0",
+  "version": "3.18.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -23390,9 +23390,9 @@
         "modifier": "91f45e509621ca598f7da6b4ba39d091"
       }
     ],
-    "events": 255,
-    "dilemmas": 129,
-    "quests": 119,
+    "events": 279,
+    "dilemmas": 146,
+    "quests": 126,
     "poll_days": 0.25,
     "description": "Three separate Endless modes with automatic chapters and timed incidents.",
     "frontiers": {
@@ -26477,7 +26477,419 @@
         0,
         1,
         3
-      ]
+      ],
+      "lifeline": {
+        "missions": [
+          {
+            "chapter": 1,
+            "plan": 1,
+            "title": "A ward for the school",
+            "deadline": 3,
+            "quest": "46c4f0fd601f19539771716efda12800",
+            "arrival": {
+              "workers": 10,
+              "children": 10
+            },
+            "fallback": {
+              "workers": 3,
+              "children": 1
+            },
+            "price": {
+              "Food Rations": 20
+            },
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Medical Post",
+                "names": [
+                  "Medical Post"
+                ],
+                "quantity": 1,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Ready",
+                "quantity": 1,
+                "text": "Keep the Generator on and ready supplies",
+                "description": "Keep the Generator on and set aside 20 food rations. The rescue spends these supplies once, after all objectives are complete."
+              }
+            ],
+            "entry_supplies": {
+              "Wood": 40,
+              "Coal": 20
+            },
+            "salvage": {
+              "Raw Food": 35
+            }
+          },
+          {
+            "chapter": 1,
+            "plan": 2,
+            "title": "A landing for the pump crew",
+            "deadline": 3,
+            "quest": "a61898c81469af568b8979b592489028",
+            "arrival": {
+              "workers": 10,
+              "engineers": 8
+            },
+            "fallback": {
+              "workers": 3,
+              "children": 1
+            },
+            "price": {
+              "Coal": 85
+            },
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Gathering Post",
+                "names": [
+                  "GatheringPost"
+                ],
+                "quantity": 1,
+                "target": [
+                  "b3ddd6b2ab8342a76949f39f8efb0c07"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Ready",
+                "quantity": 1,
+                "text": "Keep the Generator on and ready supplies",
+                "description": "Keep the Generator on and set aside 85 coal. The rescue spends these supplies once, after all objectives are complete."
+              }
+            ],
+            "entry_supplies": {
+              "Steel": 25,
+              "Steam Cores": 1
+            },
+            "salvage": {
+              "Coal": 140
+            }
+          },
+          {
+            "chapter": 2,
+            "plan": 1,
+            "title": "A ward under steam",
+            "deadline": 5,
+            "quest": "13fdc8d7546723509a74897f12dd0839",
+            "arrival": {
+              "workers": 12,
+              "engineers": 4,
+              "children": 8
+            },
+            "fallback": {
+              "workers": 4,
+              "engineers": 1
+            },
+            "price": {
+              "Food Rations": 45,
+              "Coal": 80
+            },
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate two medical buildings",
+                "names": [
+                  "Medical Post",
+                  "Ambulatorium",
+                  "HospitalOfMercy"
+                ],
+                "quantity": 2,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Ready",
+                "quantity": 1,
+                "text": "Keep the Generator on and ready supplies",
+                "description": "Keep the Generator on and set aside 45 food rations, 80 coal. The rescue spends these supplies once, after all objectives are complete."
+              }
+            ],
+            "entry_supplies": {},
+            "salvage": {
+              "Food Rations": 45
+            }
+          },
+          {
+            "chapter": 2,
+            "plan": 2,
+            "title": "The broken winch",
+            "deadline": 5,
+            "quest": "dcd67b97da86b85fa832d7d1b7279cdd",
+            "arrival": {
+              "workers": 12,
+              "engineers": 6
+            },
+            "fallback": {
+              "workers": 4,
+              "engineers": 1
+            },
+            "price": {
+              "Steel": 70,
+              "Coal": 100
+            },
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Steelworks",
+                "names": [
+                  "Iron Ore Mine",
+                  "SteamIronOreMine",
+                  "AdvancedOreMine"
+                ],
+                "quantity": 1,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Build a Steam Hub",
+                "names": [
+                  "Steam Hub"
+                ],
+                "quantity": 1,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Ready",
+                "quantity": 1,
+                "text": "Keep the Generator on and ready supplies",
+                "description": "Keep the Generator on and set aside 70 steel, 100 coal. The rescue spends these supplies once, after all objectives are complete."
+              }
+            ],
+            "entry_supplies": {},
+            "salvage": {
+              "Steam Cores": 2
+            }
+          },
+          {
+            "chapter": 3,
+            "plan": 1,
+            "title": "Crossing Night: The open road",
+            "deadline": 6,
+            "quest": "fd2944addfab7b51860f8b494ea6e791",
+            "arrival": {
+              "workers": 18,
+              "engineers": 6,
+              "children": 22
+            },
+            "fallback": {
+              "workers": 5,
+              "engineers": 2,
+              "children": 1
+            },
+            "price": {
+              "Food Rations": 100,
+              "Coal": 250
+            },
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build ten homes",
+                "names": [
+                  "Tent",
+                  "Bunkhouse",
+                  "House"
+                ],
+                "quantity": 10,
+                "target": [
+                  "6373a47b5aae7aad2d40767fbe2a88e2",
+                  "16cf34d7b28d649c874e25c03692b52a",
+                  "a7377de655c61d9b3745e66c0f2ec651"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two medical buildings",
+                "names": [
+                  "Medical Post",
+                  "Ambulatorium",
+                  "HospitalOfMercy"
+                ],
+                "quantity": 2,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Ready",
+                "quantity": 1,
+                "text": "Keep the Generator on and ready supplies",
+                "description": "Keep the Generator on and set aside 100 food rations, 250 coal. The rescue spends these supplies once, after all objectives are complete."
+              }
+            ],
+            "entry_supplies": {},
+            "salvage": {
+              "Food Rations": 80
+            }
+          },
+          {
+            "chapter": 3,
+            "plan": 2,
+            "title": "Crossing Night: The rope ferry",
+            "deadline": 6,
+            "quest": "0de0ad3c50b93955bb0a0beaae485540",
+            "arrival": {
+              "workers": 18,
+              "engineers": 16,
+              "children": 2
+            },
+            "fallback": {
+              "workers": 5,
+              "engineers": 2,
+              "children": 1
+            },
+            "price": {
+              "Steel": 100,
+              "Coal": 250
+            },
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build two Steam Hubs",
+                "names": [
+                  "Steam Hub"
+                ],
+                "quantity": 2,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a Steelworks",
+                "names": [
+                  "Iron Ore Mine",
+                  "SteamIronOreMine",
+                  "AdvancedOreMine"
+                ],
+                "quantity": 1,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Ready",
+                "quantity": 1,
+                "text": "Keep the Generator on and ready supplies",
+                "description": "Keep the Generator on and set aside 100 steel, 250 coal. The rescue spends these supplies once, after all objectives are complete."
+              }
+            ],
+            "entry_supplies": {},
+            "salvage": {
+              "Steam Cores": 3,
+              "Steel": 80
+            }
+          },
+          {
+            "chapter": 3,
+            "plan": 3,
+            "title": "Crossing Night: Both lines",
+            "deadline": 6,
+            "quest": "45554e283a6379538df03ada109b7496",
+            "arrival": {
+              "workers": 24,
+              "engineers": 16,
+              "children": 24
+            },
+            "fallback": {
+              "workers": 5,
+              "engineers": 2,
+              "children": 1
+            },
+            "price": {
+              "Food Rations": 140,
+              "Steel": 110,
+              "Coal": 320
+            },
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build twelve homes",
+                "names": [
+                  "Tent",
+                  "Bunkhouse",
+                  "House"
+                ],
+                "quantity": 12,
+                "target": [
+                  "6373a47b5aae7aad2d40767fbe2a88e2",
+                  "16cf34d7b28d649c874e25c03692b52a",
+                  "a7377de655c61d9b3745e66c0f2ec651"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Build two Steam Hubs",
+                "names": [
+                  "Steam Hub"
+                ],
+                "quantity": 2,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate three medical buildings",
+                "names": [
+                  "Medical Post",
+                  "Ambulatorium",
+                  "HospitalOfMercy"
+                ],
+                "quantity": 3,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Ready",
+                "quantity": 1,
+                "text": "Keep the Generator on and ready supplies",
+                "description": "Keep the Generator on and set aside 140 food rations, 110 steel, 320 coal. The rescue spends these supplies once, after all objectives are complete."
+              }
+            ],
+            "entry_supplies": {},
+            "salvage": {
+              "Steam Cores": 3,
+              "Food Rations": 100
+            }
+          }
+        ],
+        "chapters": 3,
+        "forecast": "ae5e7c257e9d2c58877f1bbcf0a0f906",
+        "first_outriders": {
+          "workers": 8,
+          "engineers": 4
+        },
+        "start_scene": "3c4b0b98092bf25bb702a92a7c29b64d",
+        "rope_price": {
+          "Wood": 20
+        }
+      }
     },
     "ui": {
       "mode_columns": 6,

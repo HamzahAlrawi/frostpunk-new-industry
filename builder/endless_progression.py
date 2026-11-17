@@ -248,10 +248,14 @@ def build(source,modifier_data,buildings,techinfo,guid,localize,resources):
     from frontier_campaigns import build as build_campaigns
     fe,fd,fq,modifier_data,fo,frontiers=build_campaigns(source,modifier_data,buildings,techinfo,guid,localize,resources,dt,qt,enabled,tracks,campaign_values)
     from last_signal import build as build_story
+    from lifeline import build as build_lifeline
     from tools.story_schema import register
     story_id=lambda key:guid('last-signal/'+key).hex()
     se,sd,sq,story=build_story(source,buildings,techinfo,resources,story_id,frontiers['bonuses'],localize,dt,qt)
-    events=fe+se+events;dilemmas+=fd+sd;quests+=fq+sq;owners+=fo
+    lifeline_id=lambda key:story_id(key) if key=='forecast' else guid('lifeline/'+key).hex()
+    le,ld,lq,lifeline=build_lifeline(source,buildings,resources,lifeline_id,story['scenario'],localize,dt,qt)
+    story['lifeline']=lifeline
+    events=fe+le+se+events;dilemmas+=fd+ld+sd;quests+=fq+lq+sq;owners+=fo
     story_directory='09e8fe41e1464e8d284bec7c9373e8f5'
     assert b'\1\1CustomScenarioEvents\0'+bytes.fromhex(story_directory) in originals['gameevents']
     scenarios=register(originals['scenarios'],story_id,story_directory,localize)

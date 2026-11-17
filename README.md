@@ -2,9 +2,9 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.17.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.18.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.17.0/Frostpunk-New-Industry-3.17.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [New Endless modes](docs/frontiers.md) · [The Last Signal](docs/last-signal.md) · [Configuration](docs/configuration.md) · [Changes in 3.17.0](docs/releases/3.17.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.18.0/Frostpunk-New-Industry-3.18.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [New Endless modes](docs/frontiers.md) · [Lifeline player guide](docs/last-signal.md) · [Configuration](docs/configuration.md) · [Changes in 3.18.0](docs/releases/3.18.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
 
@@ -16,7 +16,7 @@ A progression overhaul for the original **Frostpunk**, built around renewable St
 - **12 research-free laws in four choice trees.** Community Care, Workforce, Winter Preparedness and Public Reserves each start with an immediately available root, followed by two mutually exclusive policies. Choose preventive or critical care, human or mechanical specialisation, district heating or food protection, and storm reserves or industrial capital. These trees share the native Adaptation/Administration book without changing its original branches.
 - **Six citywide thermal envelopes.** Three additional stages provide expensive late-game insulation, illness protection and larger heat zones.
 - **Readable building modifier sources.** Mod-added modifiers have names and descriptions. Six insulation families use one cumulative heat-tooltip source per building; Thermal Envelope grows from +1 to +7 instead of displaying six separate rows. [Tooltip scope](docs/tooltips.md).
-- **The Last Signal.** Choose which districts receive power and keep their services running under deadlines. Four acts and multiple endings in a standalone story. [Player guide](docs/last-signal.md).
+- **The Last Signal: Lifeline.** Rescue rival convoys under deadlines. Your choices bring workers, engineers and families into the city and change which final crossing is possible. [Player guide](docs/last-signal.md).
 - **Faster progression.** All mod-added perks have half their authored base research duration. Workshop base research output is 25% higher than version 3.9, or 56.25% above vanilla, with normal multiple-Workshop scaling. Research before Drawing Boards and additional starting supplies ease the opening.
 - **Configurable difficulty and bigger starting stockpiles.** Five presets and per-resource/category overrides cover all native starting profiles. Edit the persistent JSON, then apply it while the game is closed. Research pacing is configurable too; public defaults retain the current boosts.
 - **Stronger workplaces.** The permanent workplace-efficiency research bonuses grant at least 75% per upgrade where applicable.
@@ -64,10 +64,10 @@ and difficulty. See [all settings and presets](docs/configuration.md).
 
 ## Testing status
 
-- The default copy/insert patches reconstruct the local 3.17.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
+- The default copy/insert patches reconstruct the local 3.18.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
 - Research tests cover scenario membership, earlier unlocks, unique effect packages, icon/prerequisite-line geometry, and recipe-selector limits. The local binary validator also checks actual serialized recipe prices, outputs, requirements, attachments and effect vectors, and preserves native technology and modifier records.
-- Automated tests and owned-data audits cover six Endless paths through nine chapters, 54 incident responses, 18 response expiries, five repair successes/failures, all eight story routes and an unattended story ending. See the [release notes](docs/releases/3.17.0.md) for the scope of live testing.
+- Automated tests and owned-data audits cover six Endless paths through nine chapters, 54 incident responses, 18 response expiries, five repair successes/failures and all 12 Lifeline routes. See the [release notes](docs/releases/3.18.0.md) for the scope of live testing.
 
 When reporting a problem, include the mod version, scenario, game version, and the installer error or crash description. Installer logs are saved locally in the backup folder's parent directory.
 

@@ -70,7 +70,7 @@ def audit(records,meta,resource_ids):
     events=records['gameevents'];dilemmas={r['guid']:r for r in records['dilemmas']};quests={r['guid']:r for r in records['quests']}
     flag=('mode',meta['enabled'],False)
     story_flag=('scenario',meta['story']['scenario'],False)
-    assert all(e['conditions'][0]==(story_flag if e['name'].startswith('NI Last Signal ') else flag)
+    assert all(e['conditions'][0]==(story_flag if e['name'].startswith(('NI Last Signal ','NI Lifeline ')) else flag)
                and e['enabled'] and e['weight']==1 for e in events)
     assert all(t[0] in ('start','quest') or t[2] in (0.25,0.5,1,2) for e in events for t in e['triggers'])
     for row in dilemmas.values():
@@ -167,6 +167,8 @@ def main():
     result['frontiers']=audit_frontiers(decoded,meta,manifest['configuration']['resource_ids'])
     from validate_last_signal import audit as audit_story
     result['last_signal']=audit_story(decoded,meta,manifest['configuration']['resource_ids'])
+    from validate_lifeline import audit as audit_lifeline
+    result['lifeline']=audit_lifeline(decoded,meta,manifest['configuration']['resource_ids'])
     technology_data=payload['configs/frostpunktechnologiesconfig.bin']
     token=b'\1\1Default_Endless\0';at=technology_data.index(token)+len(token)+16
     count=struct.unpack_from('<I',technology_data,at)[0]
