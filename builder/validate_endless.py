@@ -186,7 +186,9 @@ def main():
     result['winter_road']=audit_winter(decoded,meta,manifest['configuration']['resource_ids'])
     from validate_faultline import audit as audit_faultline, audit_assets, audit_films
     from faultline_cinematics import ARCHIVE_KEY
+    from faultline_models import DESIGNS
     from template_catalog import CATALOG_ASSET, CATALOG_KEY, read_catalog
+    from tools.native_mesh import audit_mesh, bounds
     from winter_road_maps import CITY, WORLD, WORLD_DONOR
     from tools import archive
     result['faultline']=audit_faultline(decoded,meta,manifest['configuration']['resource_ids'])
@@ -196,9 +198,11 @@ def main():
     result['faultline'].update(audit_assets((ROOT/'builder/cache/extracted/common'/BUILDINGS_PATH).read_bytes(),
         payload[BUILDINGS_PATH],stock_messages,payload[TUTORIAL_PATH],templates,meta['story']['faultline'],
         manifest['configuration']['resource_ids']))
-    original_catalog, = (e for e in archive.entries('templates') if e[1] == CATALOG_KEY)
+    original_templates = {entry[1]:entry for entry in archive.entries('templates')}
     with (archive.GAME/'templates.dat').open('rb') as source:
-        _, stock_records, stock_folders, stock_paths = read_catalog(archive.read(source, original_catalog))
+        _, stock_records, stock_folders, stock_paths = read_catalog(archive.read(source, original_templates[CATALOG_KEY]))
+        plot_bounds = {name:bounds(archive.read(source, original_templates[archive.murmur(
+            (design[2].lower()+'.binarytemplate').encode())])) for name,design in DESIGNS.items()}
     template_entries = {e['name']:e for e in manifest['archives']['templates']['entries']}
     catalog = template_entries[CATALOG_ASSET]
     assert catalog['hash'] == CATALOG_KEY and 'original_hash' not in catalog
@@ -211,6 +215,7 @@ def main():
     campaign = meta['story']['faultline']
     required = campaign['buildings']+campaign['models']
     assert new_uids == {bytes.fromhex(row['guid']) for row in required}
+    mesh_triangles = {}
     for row in required:
         uid = bytes.fromhex(row['guid'])
         path = paths[uid].relative_to('templates').as_posix()
@@ -218,11 +223,17 @@ def main():
         assert path == row['path'] and data.startswith(uid + records[uid][1])
         assert template_entries[path]['hash'] == archive.murmur(path.encode())
         if 'triangles' in row:
-            from tools.native_mesh import audit_mesh
-            audit_mesh(data,row['triangles'])
+            low, high = audit_mesh(data,row['triangles'])
+            name = row['name']
+            stock_low, stock_high = plot_bounds[name]
+            assert all(a<=b<=c<=d for a,b,c,d in zip(stock_low,low,high,stock_high,strict=True)), name
+            assert all(high[i]-low[i] >= .72*(stock_high[i]-stock_low[i]) for i in (0,2)), name
+            assert row['triangles'] <= 9000, name
+            mesh_triangles[name] = row['triangles']
             prefab=next(building for building in campaign['buildings'] if building['name']==row['name'])
             assert templates[prefab['path']].count(string(path.removesuffix('.binarytemplate')))>=2
     result['faultline']['registered_template_guids'] = len(required)
+    result['faultline']['model_triangles'] = mesh_triangles
     entry, = archive.entries('sequences')
     assert entry[1]==ARCHIVE_KEY
     with (archive.GAME/'sequences.dat').open('rb') as source:

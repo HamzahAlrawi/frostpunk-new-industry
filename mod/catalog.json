@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.28.0",
+  "version": "3.28.1",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -29665,28 +29665,28 @@
             "path": "graphics/primitives/faultline_signal_relay.binarytemplate",
             "guid": "dbd4686182fc1e5ba190971d3c53bb31",
             "donor": "graphics/primitives/cube.binarytemplate",
-            "triangles": 512
+            "triangles": 3204
           },
           {
             "name": "Coal Magazine",
             "path": "graphics/primitives/faultline_coal_magazine.binarytemplate",
             "guid": "096123de1f35095f86fae5062c89e4cc",
             "donor": "graphics/primitives/cube.binarytemplate",
-            "triangles": 348
+            "triangles": 4570
           },
           {
             "name": "Valve Works",
             "path": "graphics/primitives/faultline_valve_works.binarytemplate",
             "guid": "28b06786d231005c8fc9efaccc2b2609",
             "donor": "graphics/primitives/cube.binarytemplate",
-            "triangles": 1200
+            "triangles": 6808
           },
           {
             "name": "Relief Dispatch",
             "path": "graphics/primitives/faultline_relief_dispatch.binarytemplate",
             "guid": "b8eb68ec9c8e2a5f8f507e92720a98dc",
             "donor": "graphics/primitives/cube.binarytemplate",
-            "triangles": 914
+            "triangles": 4128
           }
         ]
       }

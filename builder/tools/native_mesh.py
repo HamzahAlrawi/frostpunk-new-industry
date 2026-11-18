@@ -88,11 +88,16 @@ def compile_mesh(donor, uid, faces):
     return bytes(prefix)+buffer+u32(faces_count)+bytes(12)+u32(len(indices))+indices+tail
 
 
+def bounds(data):
+    lo = unpack_from('<3f',data,BOUNDS[0])
+    hi = unpack_from('<3f',data,BOUNDS[0]+16)
+    return lo, hi
+
+
 def audit_mesh(data, expected_faces):
     vertices, faces, start, end = layout(data)
     assert faces == expected_faces and vertices == 3*faces
-    lo = unpack_from('<3f',data,BOUNDS[0])
-    hi = unpack_from('<3f',data,BOUNDS[0]+16)
+    lo, hi = bounds(data)
     assert lo[1]>=0 and all(a<b for a,b in zip(lo,hi))
     for indices in iter_unpack('<3H',data[start+20:end]):
         assert max(indices)<vertices and len(set(indices))==3
@@ -102,3 +107,4 @@ def audit_mesh(data, expected_faces):
         assert sum(x*y for x,y in zip(direction,a[3:6]))>0, 'Winding disagrees with the stored normal'
     assert all(unpack_from('<I',data,end+i)[0]==faces for i in DRAW_RANGES)
     assert unpack_from('<H',data,end+936)[0]==vertices-1
+    return lo, hi

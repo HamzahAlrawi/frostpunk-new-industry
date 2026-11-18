@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk New Industry",
-  "version": "3.28.0",
+  "version": "3.28.1",
   "format": "nind-copy-insert-v1",
   "game": "Frostpunk",
   "supported_build": "Windows Steam 1.6.2, exact original archive hashes required",
@@ -207,41 +207,41 @@
           "name": "graphics/primitives/faultline_signal_relay.binarytemplate",
           "hash": 2190405574,
           "original_sha256": "09540142a994c3d91c90e69f2678ec636e98adeecc8bc000cd8028dae57300fe",
-          "new_sha256": "0fc1a1aaa0257799c38927787af0dec87c6a6bc4413ff403f46018999a0ed167",
-          "size": 60260,
+          "new_sha256": "eeca35fb952c8da4f2ce1d6efec8b298988535f4cd9f75d909d6e7f811337c67",
+          "size": 367148,
           "original_hash": 1855622658,
           "patch": "templates-828eefc6.nid",
-          "patch_sha256": "d42d12ed042097425507844e158edf42ce8120891b9c82e0612f6afc0f05c466"
+          "patch_sha256": "8ec29e0db46daf5276384e44557b27c91f73bba62721c5626de32b724afbe4e4"
         },
         {
           "name": "graphics/primitives/faultline_coal_magazine.binarytemplate",
           "hash": 2487628927,
           "original_sha256": "09540142a994c3d91c90e69f2678ec636e98adeecc8bc000cd8028dae57300fe",
-          "new_sha256": "f76e3421b880d0d67a1000fd3e4fadeeab7013bbf2f362f3e4fcf73f7cbbe2de",
-          "size": 41564,
+          "new_sha256": "3a09b29635b42a7edf422b835d9bb3e3288ae2a21780f4dce81b3c2e75a15309",
+          "size": 522872,
           "original_hash": 1855622658,
           "patch": "templates-9446347f.nid",
-          "patch_sha256": "047cb380ba9ab1095baea23e329329be5bb88063a7d649c45cebf43a005948e2"
+          "patch_sha256": "3a0d87dbbb458bbe32587a271cfc2a338b52c5d9cdf0bcbe3063ab3ed08e6266"
         },
         {
           "name": "graphics/primitives/faultline_valve_works.binarytemplate",
           "hash": 835685419,
           "original_sha256": "09540142a994c3d91c90e69f2678ec636e98adeecc8bc000cd8028dae57300fe",
-          "new_sha256": "6474d1a4485fea728ba87bef26dd4ce6174bb5a907fc056999cac772f2efa42d",
-          "size": 138692,
+          "new_sha256": "c3117202c0c0e1dcf49a2731443e1f855cbef1c899fcd64fd7d8be329547fd77",
+          "size": 778004,
           "original_hash": 1855622658,
           "patch": "templates-31cf8c2b.nid",
-          "patch_sha256": "02ebf000e1e59203fc81ab2db6bc5b54d630cf0155aa30e53bd711bf36e85adc"
+          "patch_sha256": "861062a30cd42ce1ed7b9addeb1c91ff58efdf337c93375b0d8455f57f18f7d2"
         },
         {
           "name": "graphics/primitives/faultline_relief_dispatch.binarytemplate",
           "hash": 2662434573,
           "original_sha256": "09540142a994c3d91c90e69f2678ec636e98adeecc8bc000cd8028dae57300fe",
-          "new_sha256": "6c4324c6378768803ecd7c994aca94a756457f43a06f423c891342fb38bb47ec",
-          "size": 106088,
+          "new_sha256": "a7174f644fb205ba7b466ebaaec0be2d80b9548501def14f50b7256f3cb11901",
+          "size": 472484,
           "original_hash": 1855622658,
           "patch": "templates-9eb1870d.nid",
-          "patch_sha256": "c8907355f8181d98e51b89acf2da7f23337dab167471b424712303df0fd95b74"
+          "patch_sha256": "ff3f024a410ba97282c02961899bbf30be26d09c7aea12244e06895a461d3974"
         },
         {
           "name": "templateinfo.bin",
