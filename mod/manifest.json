@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk New Industry",
-  "version": "3.27.1",
+  "version": "3.27.2",
   "format": "nind-copy-insert-v1",
   "game": "Frostpunk",
   "supported_build": "Windows Steam 1.6.2, exact original archive hashes required",
@@ -202,6 +202,15 @@
           "original_hash": 3404312145,
           "patch": "templates-d491948f.nid",
           "patch_sha256": "a85561df03bb4aa7dfa2529b5e65381f4f3fe12c8c7bef4183c036f35b4d6fce"
+        },
+        {
+          "name": "templateinfo.bin",
+          "hash": 4260525859,
+          "original_sha256": "e8beb14a32bb2c87f23ca75ce4fb478052bae70979450526f9e069f16522295e",
+          "new_sha256": "a7bb095cbf474adcee7a2db7e1d8fe1c5b49dc721dcace3f22f11277335ecddb",
+          "size": 383564,
+          "patch": "templates-fdf27723.nid",
+          "patch_sha256": "9d91aef0b91c77e7d57fc35c37e9356de7325423e2cb3083b4ffd6be0b742164"
         },
         {
           "name": "ui/menu/mainmenuendlessmodeselection.binarytemplate",

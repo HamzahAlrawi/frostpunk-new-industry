@@ -185,6 +185,7 @@ def main():
     result['winter_road']=audit_winter(decoded,meta,manifest['configuration']['resource_ids'])
     from validate_faultline import audit as audit_faultline, audit_assets, audit_films
     from faultline_cinematics import ARCHIVE_KEY
+    from template_catalog import CATALOG_ASSET, CATALOG_KEY, read_catalog
     from winter_road_maps import CITY, WORLD, WORLD_DONOR
     from tools import archive
     result['faultline']=audit_faultline(decoded,meta,manifest['configuration']['resource_ids'])
@@ -194,6 +195,26 @@ def main():
     result['faultline'].update(audit_assets((ROOT/'builder/cache/extracted/common'/BUILDINGS_PATH).read_bytes(),
         payload[BUILDINGS_PATH],stock_messages,payload[TUTORIAL_PATH],templates,meta['story']['faultline'],
         manifest['configuration']['resource_ids']))
+    original_catalog, = (e for e in archive.entries('templates') if e[1] == CATALOG_KEY)
+    with (archive.GAME/'templates.dat').open('rb') as source:
+        _, stock_records, stock_folders, stock_paths = read_catalog(archive.read(source, original_catalog))
+    template_entries = {e['name']:e for e in manifest['archives']['templates']['entries']}
+    catalog = template_entries[CATALOG_ASSET]
+    assert catalog['hash'] == CATALOG_KEY and 'original_hash' not in catalog
+    _, records, folders, paths = read_catalog(gzip.decompress((ROOT/'build/native/payload'/catalog['payload']).read_bytes()))
+    assert stock_folders.keys() == folders.keys()
+    assert all(path == paths[uid] and stock_records[uid] == records[uid] for uid, path in stock_paths.items())
+    new_uids = set(paths) - set(stock_paths)
+    assert all([uid for uid in new_members if uid not in new_uids] == members
+               for folder, (_, members) in stock_folders.items() for _, new_members in [folders[folder]])
+    required = meta['story']['faultline']['buildings']
+    assert new_uids == {bytes.fromhex(row['guid']) for row in required}
+    for row in required:
+        uid = bytes.fromhex(row['guid'])
+        path = paths[uid].relative_to('templates').as_posix()
+        assert path == row['path'] and templates[path].startswith(uid + records[uid][1])
+        assert template_entries[path]['hash'] == archive.murmur(path.encode())
+    result['faultline']['registered_template_guids'] = len(required)
     entry, = archive.entries('sequences')
     assert entry[1]==ARCHIVE_KEY
     with (archive.GAME/'sequences.dat').open('rb') as source:

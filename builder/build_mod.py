@@ -390,6 +390,11 @@ patches['common'].update(endless_patches)
 patches['common'][BUILDINGS_PATH]=revised_buildings
 patches['common'][TUTORIAL_PATH]=messages
 patches['templates'].update({name:data for name,(_,data) in new_templates.items()})
+from template_catalog import CATALOG_ASSET, CATALOG_KEY, register_buildings
+
+assert archive.murmur(CATALOG_ASSET.encode()) == CATALOG_KEY
+native_catalog = read_owned('templates', CATALOG_ASSET)
+patches['templates'][CATALOG_ASSET] = register_buildings(native_catalog, faultline_buildings, new_templates)
 patches['common'][scenarios_path]=starting_supplies(endless_patches[scenarios_path],RES)
 # The public menu preset is an identity patch. Installation can replace only its
 # native difficulty effect vectors without changing scenario assets or scripts.
@@ -457,6 +462,8 @@ for base,files in patches.items():
     byhash={e[1]:e for e in records}
     if base=='sequences':
         byname[ASSET]=byhash[ARCHIVE_KEY]
+    if base=='templates':
+        byname[CATALOG_ASSET]=byhash[CATALOG_KEY]
     with (GAME/(base+'.dat')).open('rb') as src:
         for name,newdata in files.items():
             added=name in new_assets
