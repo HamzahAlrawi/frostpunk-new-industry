@@ -166,7 +166,7 @@ def add_civic(technology, specs, techinfo, data, buildings, guid, localize, cate
     return pack_modifiers(records), laws
 
 
-def build_laws(data, effects, laws, guid, localize, technology_requirement):
+def build_laws(data, effects, laws, guid, localize, technology_requirement, law_attitudes):
     count_pos, end, native = law_records(data)
     assert len(native) == 112
     source = native['[Adaptation- level 1] Burial Ceremony']
@@ -214,6 +214,8 @@ def build_laws(data, effects, laws, guid, localize, technology_requirement):
     first = data.index(b'\1\1Purpose\0')
     assert struct.unpack_from('<I', data, first - 4)[0] == 4
     predefined = {m[1].decode(): m[2] for m in re.finditer(rb'\x01\x01([ -~]+)\0(.{16})', effects, re.S)}
+    assert law_attitudes.keys()<=predefined.keys()
+    predefined.update(law_attitudes)
     switch_start = data.index(b'\1FrostpunkSwitchEffect\0')
     branch_start = data.index(b'\1FrostpunkCreateDilemmaEffect\0', switch_start)
     switch_prefix = data[switch_start:branch_start]

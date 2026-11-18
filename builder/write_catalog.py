@@ -15,7 +15,7 @@ def main():
     active={g for ids in membership.values() for g in ids}
     lines=['# Research catalog','',
            f"Version {catalog['version']}: {len(active)} active research definitions across the supported modes. Legacy and retired entries are omitted.",'',
-           'Tier 0 is available before Drawing Boards. Listed hours include the default 50% reduction to mod-added research durations. Workshop base research output remains 1.5625 times vanilla. Every non-tier research prerequisite is visible in the same column; no added research depends on a hidden native or cross-tab prerequisite.','',
+           'Tier 0 is available before Drawing Boards. Listed hours and bonuses use the Standard preset. Standard applies half the authored time to added research and sets base Workshop output to 1.5625 times vanilla. Other presets adjust these values. Every non-tier research prerequisite is visible in the same column.','',
            'Engineering, Industry, City Life, Logistics and Production use fixed themed columns. Steam Core manufacturing is in the FIRST column of the added Industry tab, beginning with Steam Core Fabrication at tier II. The four researched charter policies and four research-free law trees are in Adaptation, or Administration in The Last Autumn. Native books and their scenario unlock rules are preserved.','']
     for title,category in catalog['research_tabs']:
         lines += ['## '+title,'','| Upgrade | Column | Tier | Research cost | Base hours | Effect and prerequisites | Modes |',

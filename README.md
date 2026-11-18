@@ -2,9 +2,9 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.25.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.26.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.25.0/Frostpunk-New-Industry-3.25.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [New Endless modes](docs/frontiers.md) · [Faultline player guide](docs/faultline.md) · [Configuration](docs/configuration.md) · [Changes in 3.25.0](docs/releases/3.25.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.26.0/Frostpunk-New-Industry-3.26.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [New Endless modes](docs/frontiers.md) · [Faultline player guide](docs/faultline.md) · [Configuration](docs/configuration.md) · [Changes in 3.26.0](docs/releases/3.26.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
 
@@ -17,8 +17,8 @@ A progression overhaul for the original **Frostpunk**, built around renewable St
 - **Six citywide thermal envelopes.** Three additional stages provide expensive late-game insulation, illness protection and larger heat zones.
 - **Readable building modifier sources.** Mod-added modifiers have names and descriptions. Six insulation families use one cumulative heat-tooltip source per building; Thermal Envelope grows from +1 to +7 instead of displaying six separate rows. [Tooltip scope](docs/tooltips.md).
 - **The Last Signal: Faultline.** Send signals through a buried steam main, keep the line supplied under pressure, and settle the future of the ridge shelters. Seven acts provide fifteen plans, four in-engine cinematics and three endings. In-game tutorials explain the pressure system and how to build and use the new Signal Relay and Coal Magazine. [Player guide](docs/faultline.md).
-- **Faster progression.** All mod-added perks have half their authored base research duration. Workshop base research output is 25% higher than version 3.9, or 56.25% above vanilla, with normal multiple-Workshop scaling. Research before Drawing Boards and additional starting supplies ease the opening.
-- **Configurable difficulty and bigger starting stockpiles.** Five presets and per-resource/category overrides cover all native starting profiles. Edit the persistent JSON, then apply it while the game is closed. Research pacing is configurable too; public defaults retain the current boosts.
+- **Faster progression.** On Standard, mod-added perks take half their authored research time. Base Workshop output is 56.25% above vanilla, with normal multiple-Workshop scaling. Research before Drawing Boards and additional starting supplies ease the opening.
+- **Configurable difficulty.** Five presets change research pacing, production rates, eligible upgrade and law bonuses, native difficulty effects, and starting stockpiles. Edit the persistent JSON, then apply it while the game is closed. [Settings and preset values](docs/configuration.md).
 - **Stronger workplaces.** The permanent workplace-efficiency research bonuses grant at least 75% per upgrade where applicable.
 - **Alternate production.** Fuelled Stockpots, coal-heated and fermentation Hothouses, retort and rapid-coking kiln batches, baited fishing, dockside ration production, alternate generator-component recipes, and Warehouse salvage.
 - **New city strategies.** Safer Radical Treatment, cold protection, wider heat zones, faster construction, linked production-chain improvements, and large storm reserves. Added team-capacity perks have been removed; vanilla team research remains.
@@ -64,10 +64,10 @@ and difficulty. See [all settings and presets](docs/configuration.md).
 
 ## Testing status
 
-- The default copy/insert patches reconstruct the local 3.25.0 build. Configured installs verify the baseline first, then transform only the supply, difficulty and research vectors.
+- The default copy/insert patches reconstruct the local 3.26.0 build. Configured installs verify the baseline first, then apply the selected difficulty, balance and supply settings.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
 - Research tests cover scenario membership, earlier unlocks, unique effect packages, icon/prerequisite-line geometry, and recipe-selector limits. The local binary validator also checks actual serialized recipe prices, outputs, requirements, attachments and effect vectors, and preserves native technology and modifier records.
-- Automated tests and owned-data audits cover six Endless paths, 54 incident responses, and all fifteen Faultline plans and three endings. See the [release notes](docs/releases/3.25.0.md) for the scope of live testing.
+- Automated tests and owned-data audits cover six Endless paths, 54 incident responses, and all fifteen Faultline plans and three endings. See the [release notes](docs/releases/3.26.0.md) for the scope of live testing.
 
 When reporting a problem, include the mod version, scenario, game version, and the installer error or crash description. Installer logs are saved locally in the backup folder's parent directory.
 

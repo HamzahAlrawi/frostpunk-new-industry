@@ -3,8 +3,8 @@ import copy
 import struct
 import unittest
 
-from configuration import (CATEGORIES, DEFAULT, LEVELS, PRESETS, PROFILE_ANCHOR, RESOURCES,
-                           difficulty_categories, difficulty_settings, resolve,
+from configuration import (BALANCE_KEYS, CATEGORIES, DEFAULT, ECONOMY, LEVELS, PRESETS, PROFILE_ANCHOR, RESOURCES,
+                           difficulty_categories, difficulty_settings, resolve, scaled_values,
                            starting_profiles, starting_supplies)
 
 
@@ -13,8 +13,12 @@ def difficulty_fixture():
     for number, name in enumerate(CATEGORIES):
         chunks.append(b"\1\1" + name.encode() + b"\0" + bytes([number + 1]) * 16 + struct.pack("<I", 4))
         for level, title in enumerate(LEVELS):
+            body = bytes([level + 41]) * 17
+            if name in ECONOMY:
+                body = (b"\1FrostpunkExtractionBlueprintDifficultyModification\0" + bytes(36)
+                        + bytes([level + 61])*16 + struct.pack("<IIf",0,2,1.15))
             chunks += [b"\1\1" + title.encode() + b"\0" + bytes([level + 21]) * 16,
-                       bytes([int(level == 1)]) + struct.pack("<I", 1) + bytes([level + 41]) * 17]
+                       bytes([int(level == 1)]) + struct.pack("<I", 1) + body]
         chunks.append(b"\1" + name.encode() + b"\0" if number < 12 else b"\0")
     return b"".join(chunks)
 
@@ -30,6 +34,29 @@ class ConfigurationTests(unittest.TestCase):
             for name, before in {"Wood": 40, "Steel": 25, "Coal": 50, "Raw Food": 30}.items():
                 self.assertGreater(bonuses[name], before)
 
+    def test_presets_order_and_explicit_balance_overrides(self):
+        resolved = [resolve(DEFAULT | {"preset": name}) for name in PRESETS]
+        duration,*gains=BALANCE_KEYS
+        self.assertEqual([r[duration] for r in resolved],sorted({r[duration] for r in resolved}))
+        for key in gains:
+            self.assertEqual([r[key] for r in resolved],sorted({r[key] for r in resolved},reverse=True))
+        explicit=DEFAULT | dict(preset="extreme",production_rate_multiplier=1,law_power_multiplier=1.4)
+        custom = resolve(explicit)
+        self.assertEqual(custom["production_rate_multiplier"],1)
+        self.assertEqual(custom["law_power_multiplier"],1.4)
+
+    def test_balance_scales_bonuses_not_the_neutral_value(self):
+        base=struct.pack("<fffi",1.75,0.5,0.04,2)
+        rules=[(0,"f","upgrade",1,0.05,12),(4,"f","law",1,0.05,12),
+               (8,"f","law",0,-1,1),(12,"i","law",0,1,3)]
+        self.assertEqual(scaled_values(base,rules,resolve(DEFAULT)),base)
+        easy=resolve(DEFAULT | {"preset":"easiest"})
+        gained,illness,hope,heat=struct.unpack("<fffi",scaled_values(base,rules,easy))
+        self.assertAlmostEqual(gained,1.9375)
+        self.assertAlmostEqual(illness,0.35)
+        self.assertAlmostEqual(hope,0.052)
+        self.assertEqual(heat,3)
+
     def test_rejects_typoes_and_unsafe_values(self):
         for override in ({"preset": "typo"}, {"schema_version": True}, {"unknown": 1},
                          {"starting_resources_bonus": {"Wood": -1}},
@@ -39,7 +66,9 @@ class ConfigurationTests(unittest.TestCase):
                          {"difficulty_categories": {"Weather": "typo"}},
                          {"difficulty_categories": {"Whether": "easy"}},
                          {"workshop_output_multiplier": float("nan")},
-                         {"perk_research_duration_multiplier": 0}):
+                         {"perk_research_duration_multiplier": 0},
+                         {"production_rate_multiplier": 0}, {"upgrade_power_multiplier": True},
+                         {"law_power_multiplier": float("inf")}):
             with self.subTest(override=override), self.assertRaises(ValueError):
                 resolve(DEFAULT | override)
 

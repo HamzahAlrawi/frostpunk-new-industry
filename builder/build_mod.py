@@ -284,8 +284,11 @@ from icon_curation import curate_icons
 curate_icons(specs,techinfo)
 rebuild_entries(specs,newtechs,techinfo,loc,req,costs)
 society_path='configs/frostpunksocietyconfig.bin'
-new_society=build_laws((SRC/'common'/society_path).read_bytes(),
-    (SRC/'common/configs/frostpunkeffectsconfig.bin').read_bytes(),civic_laws,gid,loc,req)
+from configuration import EFFECTS, MODIFIERS
+from difficulty_balance import clone_attitudes, field_locations
+base_effects=(SRC/'common'/EFFECTS).read_bytes()
+new_effects,law_attitudes,attitude_fields=clone_attitudes(base_effects,gid)
+new_society=build_laws((SRC/'common'/society_path).read_bytes(),base_effects,civic_laws,gid,loc,req,law_attitudes)
 from endless_progression import build as build_endless
 from faultline_buildings import BUILDINGS_PATH, build as build_faultline_buildings
 from faultline_tutorial import PATH as TUTORIAL_PATH, build as build_faultline_tutorial
@@ -387,6 +390,7 @@ patches['common'][scenarios_path]=starting_supplies(endless_patches[scenarios_pa
 # native difficulty effect vectors without changing scenario assets or scripts.
 patches['common'][difficulty_path]=(SRC/'common'/difficulty_path).read_bytes()
 patches['common'][society_path]=new_society
+patches['common'][EFFECTS]=new_effects
 from winter_road_maps import build_scenes
 
 new_scenes, map_metadata = build_scenes(read_owned)
@@ -431,6 +435,10 @@ for spec,entry in zip(specs,newtechs):
     duration_offsets.append([newTC.index(entry)+duration,spec['unscaled_hours']])
 manifest['configuration']={'schema_version':1,'resource_ids':{name:RES[name].hex() for name in OPENING_STOCK},
                            'research_durations':duration_offsets,'workshop_curve_offset':len(newTC)-len(sets)}
+modifier_fields,balance_text=field_locations(new_modifiers,(SRC/'common'/MODIFIERS).read_bytes(),specs,
+    scenario_additions,civic_laws,modifier_tooltips['records'],RES,texts)
+manifest['configuration'].update(balance_fields={MODIFIERS:modifier_fields,EFFECTS:attitude_fields},
+    balance_text=balance_text,production_recipes=[row[0].hex() for row in recipes])
 manifest['laws']=civic_laws
 manifest['endless']=endless_metadata
 manifest['endless']['ui']=ui_metadata

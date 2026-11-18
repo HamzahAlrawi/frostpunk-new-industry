@@ -61,7 +61,9 @@ def main():
     records = modifiers(payload['configs/frostpunkmodifiersconfig.bin'])
     technologies = {t['guid']:t for t in manifest['technologies']}
     native_techs = {t['name']:t for t in json.loads((ROOT/'builder/cache/tech.json').read_text())}
-    source_effects = (SOURCE/'frostpunkeffectsconfig.bin').read_bytes()
+    native_effects = (SOURCE/'frostpunkeffectsconfig.bin').read_bytes()
+    source_effects = payload['configs/frostpunkeffectsconfig.bin']
+    assert source_effects.endswith(native_effects[4:])
     places=building_ids((SOURCE/'frostpunkbuildingsconfig.bin').read_bytes())
     places['Army Warehouse']=bytes.fromhex(next(t for t in manifest['technologies'] if t['id']=='EdgeWarehouseSorting')['effects'][0][0])
     economy=(SOURCE/'frostpunkeconomyconfig.bin').read_bytes()

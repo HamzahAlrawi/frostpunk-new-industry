@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.25.0",
+  "version": "3.26.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -19529,7 +19529,7 @@
         13
       ],
       "native_effects": [
-        "ebe294e8521ca38e3f4be6db75b8ebc5"
+        "1b5fab5afde91558a760f55620170ee8"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -19567,7 +19567,7 @@
         13
       ],
       "native_effects": [
-        "0eb7aa1abdd80bb9e842ee04ba6009ba"
+        "27b1cab55fe46f59b3b047a4641da349"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -19606,8 +19606,8 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361",
-        "96c111ec23556c89e247709d264c0831"
+        "1aa13b5b2fd3cd578c620deeba24c290",
+        "f1f4732c7f4fa554b2ff2e3b10f48b94"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -19646,8 +19646,8 @@
         13
       ],
       "native_effects": [
-        "ebe294e8521ca38e3f4be6db75b8ebc5",
-        "0eb7aa1abdd80bb9e842ee04ba6009ba"
+        "1b5fab5afde91558a760f55620170ee8",
+        "27b1cab55fe46f59b3b047a4641da349"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -19680,7 +19680,7 @@
         13
       ],
       "native_effects": [
-        "ebe294e8521ca38e3f4be6db75b8ebc5"
+        "1b5fab5afde91558a760f55620170ee8"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -19713,7 +19713,7 @@
         13
       ],
       "native_effects": [
-        "0eb7aa1abdd80bb9e842ee04ba6009ba"
+        "27b1cab55fe46f59b3b047a4641da349"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -19747,8 +19747,8 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361",
-        "96c111ec23556c89e247709d264c0831"
+        "1aa13b5b2fd3cd578c620deeba24c290",
+        "f1f4732c7f4fa554b2ff2e3b10f48b94"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -19782,8 +19782,8 @@
         13
       ],
       "native_effects": [
-        "ebe294e8521ca38e3f4be6db75b8ebc5",
-        "0eb7aa1abdd80bb9e842ee04ba6009ba"
+        "1b5fab5afde91558a760f55620170ee8",
+        "27b1cab55fe46f59b3b047a4641da349"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -19856,7 +19856,7 @@
         13
       ],
       "native_effects": [
-        "dc5940497d945d84e5470c22304690a0"
+        "ea7a6c7b82b4905ebcaf21fc90f41b8d"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -19937,7 +19937,7 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361"
+        "1aa13b5b2fd3cd578c620deeba24c290"
       ],
       "required_law_guids": [
         "d3478871ceee6a5fb41dea511fb7d130"
@@ -20030,7 +20030,7 @@
         13
       ],
       "native_effects": [
-        "96c111ec23556c89e247709d264c0831"
+        "f1f4732c7f4fa554b2ff2e3b10f48b94"
       ],
       "required_law_guids": [
         "d3478871ceee6a5fb41dea511fb7d130"
@@ -20145,7 +20145,7 @@
         13
       ],
       "native_effects": [
-        "dc5940497d945d84e5470c22304690a0"
+        "ea7a6c7b82b4905ebcaf21fc90f41b8d"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -20268,7 +20268,7 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361"
+        "1aa13b5b2fd3cd578c620deeba24c290"
       ],
       "required_law_guids": [
         "a4d3b9cfa5553353b965f24cbecd1152"
@@ -20375,7 +20375,7 @@
         13
       ],
       "native_effects": [
-        "1abbc58b48d368b3664797883cde10d7"
+        "61a6801060192250808c918c0a8aad97"
       ],
       "required_law_guids": [
         "a4d3b9cfa5553353b965f24cbecd1152"
@@ -20452,7 +20452,7 @@
         13
       ],
       "native_effects": [
-        "96c111ec23556c89e247709d264c0831"
+        "f1f4732c7f4fa554b2ff2e3b10f48b94"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -20550,7 +20550,7 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361"
+        "1aa13b5b2fd3cd578c620deeba24c290"
       ],
       "required_law_guids": [
         "5f723fcbd8fc6850bfa3ff2b61988f54"
@@ -20635,7 +20635,7 @@
         13
       ],
       "native_effects": [
-        "96c111ec23556c89e247709d264c0831"
+        "f1f4732c7f4fa554b2ff2e3b10f48b94"
       ],
       "required_law_guids": [
         "5f723fcbd8fc6850bfa3ff2b61988f54"
@@ -20718,7 +20718,7 @@
         13
       ],
       "native_effects": [
-        "dc5940497d945d84e5470c22304690a0"
+        "ea7a6c7b82b4905ebcaf21fc90f41b8d"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -20801,7 +20801,7 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361"
+        "1aa13b5b2fd3cd578c620deeba24c290"
       ],
       "required_law_guids": [
         "cce291bc7cc00750b344166310b352b6"
@@ -20902,7 +20902,7 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361"
+        "1aa13b5b2fd3cd578c620deeba24c290"
       ],
       "required_law_guids": [
         "cce291bc7cc00750b344166310b352b6"
@@ -20973,7 +20973,7 @@
         13
       ],
       "native_effects": [
-        "dc5940497d945d84e5470c22304690a0"
+        "ea7a6c7b82b4905ebcaf21fc90f41b8d"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -21048,7 +21048,7 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361"
+        "1aa13b5b2fd3cd578c620deeba24c290"
       ],
       "required_law_guids": [
         "628560493271e250bd9240be7c35f1f6"
@@ -21135,7 +21135,7 @@
         13
       ],
       "native_effects": [
-        "96c111ec23556c89e247709d264c0831"
+        "f1f4732c7f4fa554b2ff2e3b10f48b94"
       ],
       "required_law_guids": [
         "628560493271e250bd9240be7c35f1f6"
@@ -21252,7 +21252,7 @@
         13
       ],
       "native_effects": [
-        "dc5940497d945d84e5470c22304690a0"
+        "ea7a6c7b82b4905ebcaf21fc90f41b8d"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -21383,7 +21383,7 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361"
+        "1aa13b5b2fd3cd578c620deeba24c290"
       ],
       "required_law_guids": [
         "1bfb6f391652325bb8eed028cf4c1e33"
@@ -21476,7 +21476,7 @@
         13
       ],
       "native_effects": [
-        "1abbc58b48d368b3664797883cde10d7"
+        "61a6801060192250808c918c0a8aad97"
       ],
       "required_law_guids": [
         "1bfb6f391652325bb8eed028cf4c1e33"
@@ -21547,7 +21547,7 @@
         13
       ],
       "native_effects": [
-        "96c111ec23556c89e247709d264c0831"
+        "f1f4732c7f4fa554b2ff2e3b10f48b94"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -21634,7 +21634,7 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361"
+        "1aa13b5b2fd3cd578c620deeba24c290"
       ],
       "required_law_guids": [
         "9b55a34f29cd0e55a8b617b581f48258"
@@ -21713,7 +21713,7 @@
         13
       ],
       "native_effects": [
-        "96c111ec23556c89e247709d264c0831"
+        "f1f4732c7f4fa554b2ff2e3b10f48b94"
       ],
       "required_law_guids": [
         "9b55a34f29cd0e55a8b617b581f48258"
@@ -21790,7 +21790,7 @@
         13
       ],
       "native_effects": [
-        "dc5940497d945d84e5470c22304690a0"
+        "ea7a6c7b82b4905ebcaf21fc90f41b8d"
       ],
       "required_law_guids": [],
       "excluded_law_guids": []
@@ -21867,7 +21867,7 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361"
+        "1aa13b5b2fd3cd578c620deeba24c290"
       ],
       "required_law_guids": [
         "a8e68b76b412b357ba27710801443679"
@@ -21964,7 +21964,7 @@
         13
       ],
       "native_effects": [
-        "395985b5acccdf943e464192bd73a361"
+        "1aa13b5b2fd3cd578c620deeba24c290"
       ],
       "required_law_guids": [
         "a8e68b76b412b357ba27710801443679"
