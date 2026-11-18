@@ -174,9 +174,11 @@ def audit(records,metadata,ids):
     chart.buildings[BEACON] = 1
     chart.run(0.5,False)
     assert chart.world_map
+    assert chart.placed_sites == {s["point"]:s["template"] for s in road["map"]["sites"]}
     assert chart.revealed_sites == {("site",s["template"]) for s in road["map"]["sites"]}
     saved = chart.checkpoint()
     saved.start();saved.run(1,False)
+    assert saved.placed_sites == chart.placed_sites
     assert saved.revealed_sites == chart.revealed_sites
     existing = new(story["scenario"])
     existing.variables.update({PREFIX+"chapter":4, PREFIX+"map_open":1})

@@ -11,7 +11,7 @@ from tools.native_scenario import (affordable, apply_modifier, change_resource, 
     dilemma, equals, event, first_match, floating, guarded, integer, predefined, progress_quest, set_variable, start_quest,
     typed, variable)
 from tools.convoy_schema import arrive
-from winter_road_maps import SITES, beacon_exists, constructed, reveal_site, validate_native_map_effects
+from winter_road_maps import SITES, beacon_exists, constructed, place_site, reveal_site, validate_native_map_effects
 
 
 PREFIX = "NI/Faultline/"
@@ -156,7 +156,8 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     add("open",[eq("phase",0)],[put("phase",1)]+[put(key,0) for key in (*fields, *flags)], None)
 
     add("open Frostland", [at_least("phase",1), eq("map_open",0), beacon_exists()],
-        [put("map_open",1), OPEN_MAP, *(reveal_site(uid) for _,uid,_,_ in SITES)], 0.25)
+        [put("map_open",1), OPEN_MAP, *(place_site(point,uid) for point,uid,_,_ in SITES),
+         after("survey markers",0.05,[guarded([scope],[reveal_site(uid) for _,uid,_,_ in SITES])])], 0.25)
     trip_notice = report("trip", "The main circuit tripped",
         "The valve has closed and all insulated buildings lose two heat levels. Switch off Overdrive and let stress "
         f"drop to {RESET}%, or {RELAY_RESET}% if you have built a Signal Relay. Keep the Generator running. "

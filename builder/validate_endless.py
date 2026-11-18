@@ -185,7 +185,7 @@ def main():
     result['winter_road']=audit_winter(decoded,meta,manifest['configuration']['resource_ids'])
     from validate_faultline import audit as audit_faultline, audit_assets, audit_films
     from faultline_cinematics import ARCHIVE_KEY
-    from winter_road_maps import CITY
+    from winter_road_maps import CITY, WORLD, WORLD_DONOR
     from tools import archive
     result['faultline']=audit_faultline(decoded,meta,manifest['configuration']['resource_ids'])
     messages, = (e for e in archive.entries('common') if e[1]==archive.murmur(TUTORIAL_PATH.encode()))
@@ -203,6 +203,14 @@ def main():
     revised_shots, revised_city=(gzip.decompress((ROOT/'build/native/payload'/e['payload']).read_bytes())
                                  for e in (shots,scene))
     result['faultline']['cinematic_timelines']=audit_films(stock_shots,revised_shots,revised_city,meta['story']['faultline'])
+    world=next(e for e in manifest['archives']['scenes']['entries'] if e['name']==WORLD.lower()+'.binaryscene')
+    donor, = (e for e in archive.entries('scenes') if e[1]==archive.murmur((WORLD_DONOR.lower()+'.binaryscene').encode()))
+    assert world['original_hash']==donor[1]
+    with (archive.GAME/'scenes.dat').open('rb') as source:
+        stock_world=archive.read(source,donor)
+    revised_world=gzip.decompress((ROOT/'build/native/payload'/world['payload']).read_bytes())
+    assert revised_world.replace(WORLD.encode()+b'\0',WORLD_DONOR.encode()+b'\0',1)==stock_world, 'Frostland object stream changed'
+    result['winter_road']['native_world_layout_preserved']=True
     technology_data=payload['configs/frostpunktechnologiesconfig.bin']
     token=b'\1\1Default_Endless\0';at=technology_data.index(token)+len(token)+16
     count=struct.unpack_from('<I',technology_data,at)[0]

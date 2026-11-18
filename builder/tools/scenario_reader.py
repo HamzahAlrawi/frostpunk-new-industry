@@ -82,11 +82,17 @@ def effect(c):
             raise SchemaError('Unsupported world map selector '+selector)
         if c.take(7)!=bytes(7):raise SchemaError('Unexpected world map selector flags')
         operations=effects(c)
+        if target[0]=='marker' and len(operations)==1 and operations[0][0]=='map_create':
+            return ('map_create',target[1],operations[0][1])
         if operations!=[('map_reveal',)]:
             raise SchemaError('Unexpected world map selector action')
         return ('map_reveal',target)
     if name=='FrostpunkRevealWorldMapEntityEffect':
         return ('map_reveal',)
+    if name=='FrostpunkCreateWorldMapEntityEffect':
+        template=c.guid()
+        if c.u32()!=0:raise SchemaError('Unexpected world map creation options')
+        return ('map_create',template)
     if name=='FrostpunkModifyGeneratorEffect':
         delta=c.f32()
         if not -0.35<=delta<0 or c.u32()!=0:raise SchemaError('Unexpected Generator effect')

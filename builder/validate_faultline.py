@@ -5,6 +5,7 @@ from tools.native_binary import Cursor, string
 from tools.scenario_model import World
 from tools.housing_schema import BEACON
 from tools.story_schema import DEFAULT
+from winter_road_maps import SITES
 
 
 PREFIX = "NI/Faultline/"
@@ -146,11 +147,15 @@ def audit(decoded, metadata, resource_ids):
                 target = goal["target"][0]
                 w.produced[target] = w.produced.get(target,0)+count
             elif goal["label"] == "Scout":
+                tick(w,9)
+                assert w.world_map and w.placed_sites=={marker:uid for marker,uid,_,_ in SITES}
+                assert w.revealed_sites=={("site",uid) for _,uid,_,_ in SITES}
+                w=w.checkpoint()
                 tick(w,6)
-                assert w.world_map and len(w.revealed_sites)==3
                 w.return_scouts()
                 w.return_scouts()
                 assert w.progress[row["quest"]]["Scout"]==1
+        return w
 
     played=set()
     for route in ((1,1,1,1,2,1,1,1,1), (2,2,2,2,3,2,2,2,2), (1,2,1,2,1,1,2,2,1)):
@@ -208,7 +213,7 @@ def audit(decoded, metadata, resource_ids):
             # Pre-existing stock and completed city goals still cannot skip
             # the pressure sequence, and a shut-off Generator cannot pulse.
             w.generator=False
-            fulfill_city(w,row)
+            w=fulfill_city(w,row)
             pledge=row["pledge"]
             if pledge:
                 short=resource_ids[next(iter(pledge))]

@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk New Industry",
-  "version": "3.27.0",
+  "version": "3.27.1",
   "format": "nind-copy-insert-v1",
   "game": "Frostpunk",
   "supported_build": "Windows Steam 1.6.2, exact original archive hashes required",
@@ -69,10 +69,10 @@
           "name": "configs/frostpunkgameeventsconfig.bin",
           "hash": 1362127853,
           "original_sha256": "dc8cd870619a8eafed33224ee3854eaa8ea46041f2d575d4d8e96665b873f97e",
-          "new_sha256": "27212fd45bcaf079c2e32d274856494e0b7f3ec83e2202f56dea6f842cfa881b",
-          "size": 1837555,
+          "new_sha256": "bd344b0125422454ccd6cb335fca7a4876ac3bd3c6e486c3fbded07d04001362",
+          "size": 1838803,
           "patch": "common-51306bed.nid",
-          "patch_sha256": "a09cf16c7471b692403aa155dd86d12167df360d642bf961b6d469eb1eefacc6"
+          "patch_sha256": "dd188b28171075a82f0c18d92fba7b9c6260f8b82bcabe1f3104a6f8415d4a98"
         },
         {
           "name": "configs/frostpunkdilemmasconfig.bin",
@@ -467,11 +467,11 @@
           "name": "worldmaps/winterroadswitchbackbasinroutes.binaryscene",
           "hash": 3357946013,
           "original_sha256": "34c7c5b2e07d7b1e876652e05464104f0a910a44fe3a73fa6ce9b0e5e1aaae19",
-          "new_sha256": "7dccf9c1977bdb1fbbb2a16dc380dc0b4a7e7ec0862fc5a1b65568c260011778",
-          "size": 67872,
+          "new_sha256": "27b98629236bc1825b8eee1dfd581a0f158866c9d27f58e8c652f71239c3b71c",
+          "size": 68280,
           "original_hash": 173137017,
           "patch": "scenes-c826309d.nid",
-          "patch_sha256": "08e9df03130ddec658d26d6a6508721784ea1a969951426ec89598b7566b2a7d"
+          "patch_sha256": "54f06e3752f4eef6ca73db12b1ce63aeba14dbd0326095dc1be35959b2f43e51"
         },
         {
           "name": "citymaps/winter_road/switchbackbasin.gi",

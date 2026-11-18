@@ -1,6 +1,6 @@
 # The Last Signal: Faultline
 
-Start from **Select Scenario → The Last Signal: Faultline**. A weather station with a dead telegraph taps its call sign through a buried steam main. Answering it means deciding which parts of your city can spare heat and keeping the Generator within reach of the next signal. The campaign uses Switchback Basin and its three Frostland salvage sites.
+Start from **Select Scenario → The Last Signal: Faultline**. A weather station with a dead telegraph taps its call sign through a buried steam main. Answering it means deciding which parts of your city can spare heat and keeping the Generator within reach of the next signal. The campaign uses Switchback Basin. Build a Beacon to chart the three nearby Frostland salvage sites.
 
 ## Sending a signal
 

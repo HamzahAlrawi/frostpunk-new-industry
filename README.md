@@ -2,9 +2,9 @@
 
 A progression overhaul for the original **Frostpunk**, built around renewable Steam Cores, expanded research, alternate station recipes, and new city strategies.
 
-**Current release — 3.27.0 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
+**Current release — 3.27.1 beta.** The public installer is tested with Windows Steam Frostpunk 1.6.2. It checks the original archive hashes before making changes.
 
-[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.27.0/Frostpunk-New-Industry-3.27.0-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [New Endless modes](docs/frontiers.md) · [Faultline player guide](docs/faultline.md) · [Configuration](docs/configuration.md) · [Changes in 3.27.0](docs/releases/3.27.0.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
+[Download the Windows installer ZIP](https://github.com/HamzahAlrawi/frostpunk-new-industry/releases/download/v3.27.1/Frostpunk-New-Industry-3.27.1-Windows.zip) · [Research catalog](docs/research.md) · [Civic laws](docs/laws.md) · [Building tooltips](docs/tooltips.md) · [New Endless modes](docs/frontiers.md) · [Faultline player guide](docs/faultline.md) · [Configuration](docs/configuration.md) · [Changes in 3.27.1](docs/releases/3.27.1.md) · [Report an issue](https://github.com/HamzahAlrawi/frostpunk-new-industry/issues)
 
 ## Features
 
@@ -64,10 +64,10 @@ and difficulty. See [all settings and presets](docs/configuration.md).
 
 ## Testing status
 
-- The default copy/insert patches reconstruct the local 3.27.0 build. Configured installs verify the baseline first, then apply the selected difficulty, balance and supply settings.
+- The default copy/insert patches reconstruct the local 3.27.1 build. Configured installs verify the baseline first, then apply the selected difficulty, balance and supply settings.
 - Installer tests cover installation, restoration, repeated installation, damaged patches, external modifications, interrupted operations, and rollback after a failed replacement.
 - Research tests cover scenario membership, earlier unlocks, unique effect packages, icon/prerequisite-line geometry, and recipe-selector limits. The local binary validator also checks actual serialized recipe prices, outputs, requirements, attachments and effect vectors, and preserves native technology and modifier records.
-- Automated tests and owned-data audits cover six Endless paths, 54 incident responses, and all 19 Faultline plans and three endings. See the [release notes](docs/releases/3.27.0.md) for the scope of live testing.
+- Automated tests and owned-data audits cover six Endless paths, 54 incident responses, and all 19 Faultline plans and three endings. See the [release notes](docs/releases/3.27.1.md) for the scope of live testing.
 
 When reporting a problem, include the mod version, scenario, game version, and the installer error or crash description. Installer logs are saved locally in the backup folder's parent directory.
 
