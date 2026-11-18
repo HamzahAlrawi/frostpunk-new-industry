@@ -1,6 +1,6 @@
 # The Last Signal: Winter Road
 
-Start a fresh city from **Select Scenario → The Last Signal: Winter Road** to play on **Switchback Basin**. Its terrain comes from the Endless Points map, with a fixed starting position and a custom arrangement of wood, coal, and steel piles. Existing cities keep the map they started on.
+Load an existing **The Last Signal: Winter Road** save through **Load Game**. To start a new campaign, choose [The Last Signal: Faultline](faultline.md) from **Select Scenario**. Both campaigns use **Switchback Basin**, whose terrain comes from the Endless Points map with a fixed starting position and a custom arrangement of wood, coal, and steel piles.
 
 Two convoys are following the same guide rope into the crater. Their survivors need a settlement that can house them, a winter reserve, and a way to bring down the people still on the ridge. Once the city decides the future of the road, three more chapters deal with people and shelters beyond the gate.
 

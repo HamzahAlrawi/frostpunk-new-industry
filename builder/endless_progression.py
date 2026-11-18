@@ -250,6 +250,7 @@ def build(source,modifier_data,buildings,techinfo,guid,localize,resources):
     from last_signal import build as build_story
     from lifeline import build as build_lifeline
     from winter_road import build as build_winter_road
+    from faultline import build as build_faultline
     from tools.story_schema import register
     story_id=lambda key:guid('last-signal/'+key).hex()
     se,sd,sq,story=build_story(source,buildings,techinfo,resources,story_id,frontiers['bonuses'],localize,dt,qt)
@@ -259,7 +260,11 @@ def build(source,modifier_data,buildings,techinfo,guid,localize,resources):
     we,wd,wq,winter=build_winter_road(source,buildings,techinfo,resources,guid,story['scenario'],story_id('switchback-scenario'),
                                     frontiers['bonuses'],localize,dt,qt)
     story['winter_road']=winter
-    events=fe+we+le+se+events;dilemmas+=fd+wd+ld+sd;quests+=fq+wq+lq+sq;owners+=fo
+    pe,pd,pq,faultline=build_faultline(source,buildings,techinfo,resources,guid,story_id('faultline-scenario'),
+                                      frontiers['bonuses'],localize,dt,qt,winter['recipes'])
+    faultline['forecast']=story_id('faultline-forecast')
+    story['faultline']=faultline
+    events=fe+pe+we+le+se+events;dilemmas+=fd+pd+wd+ld+sd;quests+=fq+pq+wq+lq+sq;owners+=fo
     story_directory='09e8fe41e1464e8d284bec7c9373e8f5'
     assert b'\1\1CustomScenarioEvents\0'+bytes.fromhex(story_directory) in originals['gameevents']
     scenarios=register(originals['scenarios'],story_id,story_directory,localize,winter['forecast'])

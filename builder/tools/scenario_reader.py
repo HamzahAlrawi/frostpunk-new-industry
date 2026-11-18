@@ -19,6 +19,13 @@ def expression(c,compact=False):
         left=expression(c,True);op=c.u32();right=expression(c,True)
         if op not in (0,4):raise SchemaError('Unsupported comparison')
         return ('compare',op,left,right)
+    if name=='FloatComparisonExpression':
+        left=expression(c,True);op=c.u32();right=expression(c,True)
+        if left!=('stress',) or op not in (4,5) or right[0]!='constant' or not 0<=right[1]<=1:
+            raise SchemaError('Unsupported Generator stress comparison')
+        return ('stress_compare',op,right[1])
+    if name=='FrostpunkGeneratorStressExpression':
+        return ('stress',)
     if name=='FrostpunkCustomScenarioParameterCheckExpression':
         return ('mode',c.guid(),c.boolean())
     if name=='FrostpunkCurrentScenarioCheckExpression':
@@ -61,6 +68,12 @@ def effect(c):
         return ('open_map',)
     if name=='FrostpunkSelectEffect':
         selector=c.take(c.u8()).decode()
+        if selector=='FrostpunkGeneratorSelector':
+            if c.take(7)!=bytes(7):raise SchemaError('Unexpected Generator selector flags')
+            operations=effects(c)
+            if len(operations)!=1 or operations[0][0]!='vent':
+                raise SchemaError('Unexpected selected Generator operation')
+            return operations[0]
         if selector=='FrostpunkEntitiesByNameSelector':
             target=('marker',c.string())
         elif selector=='FrostpunkExpeditionSitesSelector':
@@ -74,6 +87,10 @@ def effect(c):
         return ('map_reveal',target)
     if name=='FrostpunkRevealWorldMapEntityEffect':
         return ('map_reveal',)
+    if name=='FrostpunkModifyGeneratorEffect':
+        delta=c.f32()
+        if not -0.35<=delta<0 or c.u32()!=0:raise SchemaError('Unexpected Generator effect')
+        return ('vent',delta)
     if name=='FrostpunkProgressCustomQuestObjectiveEffect':return ('progress',c.guid(),c.string(),c.i32())
     if name=='FrostpunkTimedEffect':
         guid=c.guid();days=c.f32();unit=c.u32();random=c.f32();random_unit=c.u32()

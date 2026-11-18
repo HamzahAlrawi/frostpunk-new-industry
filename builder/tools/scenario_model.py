@@ -10,7 +10,7 @@ class World:
         self.time=0;self.variables={};self.stock=dict(stock or {});self.queue=[];self.serial=0
         self.open=[];self.active={};self.completed=[];self.modifiers=set();self.predefined=[];self.paid=[]
         self.buildings={};self.researched=set();self.produced={};self.production_start={};self.progress={}
-        self.automation=0;self.generator=True;self.scenario=scenario
+        self.automation=0;self.generator=True;self.stress=0;self.scenario=scenario
         self.arrivals={};self.operating={};self.warm_homes=0;self.world_map=False
         self.revealed_sites=set()
 
@@ -24,6 +24,8 @@ class World:
         if kind=='any':return any(self.value(item) for item in value[1])
         if kind=='building_count':return self.buildings.get(value[1],0)
         if kind=='generator':return self.generator!=value[1]
+        if kind=='stress_compare':
+            return self.stress>=value[2] if value[1]==4 else self.stress<=value[2]
         if kind=='compare':
             left,right=self.value(value[2]),self.value(value[3])
             return left==right if value[1]==0 else left>=right
@@ -65,6 +67,7 @@ class World:
                 key=action[2:]
                 self.arrivals[key]=self.arrivals.get(key,0)+action[1]
             elif kind=='open_map':self.world_map=True
+            elif kind=='vent':self.stress=max(0,self.stress+action[1])
             elif kind=='map_reveal':
                 assert self.world_map
                 self.revealed_sites.add(action[1])

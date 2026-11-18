@@ -77,7 +77,7 @@ def bonus_library(data,buildings,guid):
     records=modifiers(data);places=building_ids(buildings);owners=[];ids={}
     neutral=bytearray(normalized(records['d87b131d3367ed86d04efc1f7c1f7a5a'][2]));struct.pack_into('<f',neutral,150,0)
     site=bytearray(normalized(records['30aa2c27e02dce83494392ae5c1f2261'][2]));struct.pack_into('<f',site,173,1)
-    def add(key,title,description,groups=(),illness=1):
+    def add(key,title,description,groups=(),illness=1,recovery=1):
         body=bytearray(neutral);pairs=[];bindings={}
         for names,human,automaton,heat in groups:
             assert set(names)<=places.keys()
@@ -91,6 +91,8 @@ def bonus_library(data,buildings,guid):
             records[identity]=['Place',('NI Frontiers/'+key+'/'+str(index)).encode(),bytes(value)]
             pairs.extend(places[n]+bytes.fromhex(identity) for n in names)
         struct.pack_into('<f',body,166,illness)
+        assert body[126:130]==f32(1)
+        struct.pack_into('<f',body,126,recovery)
         body=body[:77]+u32(len(pairs))+b''.join(pairs)+body[81:]
         identity=guid('frontiers/bonus/'+key).hex();records[identity]=['Global',('NI Frontiers/'+key).encode(),bytes(body)]
         ids[key]=identity;owners.append(dict(id='Frontiers/'+key,title=title,description=description,modifier=identity))
@@ -165,6 +167,26 @@ def bonus_library(data,buildings,guid):
     add('road/braced','Braced Steam Joint','Emergency fittings limit the Long Night’s heat loss to one insulation level citywide.',
         [(all_names,1,1,-1)])
     add('road/home','Home Heating Charter','Homes and medical buildings permanently gain one insulation level.',
+        [(g['homes']+g['medical'],1,1,1)])
+    add('faultline/ward','Ward Circuit','Homes and medical buildings gain +1 insulation. Coal works, Steelworks and Factories lose 25% efficiency.',
+        [(g['homes']+g['medical'],1,1,1),(coal+g['industry'],0.75,0.75,0)])
+    add('faultline/works','Works Circuit','Coal works, Steelworks and Factories gain 40% efficiency. Homes lose one insulation level.',
+        [(coal+g['industry'],1.4,1.4,0),(g['homes'],1,1,-1)])
+    add('faultline/bypass','Shelter Bypass','Cookhouses and medical buildings gain +1 insulation. Workshops lose 30% efficiency.',
+        [(['Food Processing']+g['medical'],1,1,1),(g['workshops'],0.7,0.7,0)])
+    add('faultline/trip','Main Circuit Tripped','All insulated buildings lose two insulation levels until Generator stress drops to 15%.',
+        [(all_names,1,1,-2)])
+    add('faultline/accumulator','Pressure Accumulator','Generator stress recovers 35% faster with overdrive off.',
+        recovery=1.35)
+    add('faultline/isolation','Isolated Return Line','Medical buildings permanently gain one insulation level. Unlocks the surveyed bypass when scouts bring home its route.',
+        [(g['medical'],1,1,1)])
+    add('faultline/shelters','Relief Kitchens','Cookhouses gain 30% workplace efficiency for the remainder of Faultline.',
+        [(['Food Processing'],1.3,1.3,0)])
+    add('faultline/ward_crew','Station Medics','Medical buildings gain 25% healing efficiency.',
+        [(g['medical'],1.25,1.25,0)])
+    add('faultline/works_crew','Station Fitters','Steelworks and Factories gain 25% workplace efficiency.',
+        [(g['industry'],1.25,1.25,0)])
+    add('faultline/accord','Interdistrict Heating Accord','Homes and medical buildings gain +1 insulation after the shelters join the heating network.',
         [(g['homes']+g['medical'],1,1,1)])
     return pack_modifiers(records),ids,owners
 

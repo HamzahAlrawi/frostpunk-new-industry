@@ -3,12 +3,12 @@ from itertools import product
 
 from tools.native_binary import Cursor, entry, string, u32
 from tools.scenario_model import World
-from tools.story_schema import DEFAULT, DEFAULT_EVENTS, NAME, ROAD_NAME, NATIVE_INTRO, WEATHER_DONOR, forecast_record
+from tools.story_schema import DEFAULT, DEFAULT_EVENTS, NAME, ROAD_NAME, FAULTLINE_NAME, NATIVE_INTRO, WEATHER_DONOR, forecast_record
 from winter_road_maps import CITY, NATIVE_CITY, NATIVE_WORLD, WORLD
 
 
 def validate_registration(before, after, story):
-    assert after[:20]==before[:16]+u32(16)
+    assert after[:20]==before[:16]+u32(17)
     assert after[20:].startswith(before[20:before.index(entry("Default",DEFAULT_EVENTS))-4])
     start=after.index(entry(NAME,story["scenario"]))
     cursor=Cursor(after,start)
@@ -18,18 +18,25 @@ def validate_registration(before, after, story):
     offset=after.index(entry("Default",DEFAULT_EVENTS))
     mapped=after.index(entry(ROAD_NAME,story["winter_road"]["scenario"]))
     legacy=after[start:mapped]
-    clone=after[mapped:offset-4]
-    assert NATIVE_INTRO not in legacy+clone and bytes.fromhex(DEFAULT_EVENTS) not in legacy+clone
-    assert clone.count(bytes.fromhex(story["event_setup"]))==legacy.count(bytes.fromhex(story["event_setup"]))==1
-    assert clone.startswith(entry(ROAD_NAME,story["winter_road"]["scenario"])+b"\1\0")
-    assert string("@Mods/NewIndustry/LastSignal/Menu/DisplayName") in clone
+    faultline_entry=entry(FAULTLINE_NAME,story["faultline"]["scenario"])
+    modern=after.index(faultline_entry)
+    clone=after[mapped:modern]
+    faultline=after[modern:offset-4]
+    for row in (legacy,clone,faultline):
+        assert NATIVE_INTRO not in row and bytes.fromhex(DEFAULT_EVENTS) not in row
+        assert row.count(bytes.fromhex(story["event_setup"]))==1
+    assert clone.startswith(entry(ROAD_NAME,story["winter_road"]["scenario"])+b"\0\0")
+    assert faultline.startswith(faultline_entry+b"\1\0")
+    assert string("@Mods/NewIndustry/Faultline/Menu/DisplayName") in faultline
     for native in (NATIVE_CITY,NATIVE_WORLD):
         assert bytes.fromhex(native) in legacy and bytes.fromhex(native) not in clone
     forecast=story["winter_road"]["forecast"]
     assert clone.count(bytes.fromhex(forecast))==1
     old=before.index(entry("Default",DEFAULT_EVENTS))
     assert after[offset-4:offset]==u32(9) and before[old-4:old]==u32(8)
-    record=forecast_record(story["lifeline"]["forecast"])+forecast_record(forecast,True)
+    assert faultline.count(bytes.fromhex(story["faultline"]["forecast"]))==1
+    record=(forecast_record(story["lifeline"]["forecast"])+forecast_record(forecast,"Winter Road")+
+            forecast_record(story["faultline"]["forecast"],"Faultline"))
     for prefix,path,old_next,count in (
         ("NI Switchback Basin",CITY,entry("Default",NATIVE_CITY),30),
         ("NI Switchback Frostland",WORLD,entry("Refugees","e56253859755dc8b364092403628c7ef"),19),
@@ -37,7 +44,7 @@ def validate_registration(before, after, story):
         cursor=Cursor(after,after.index(b"\1"+string(prefix)))
         at=cursor.position
         _,uid=cursor.entry()
-        assert bytes.fromhex(uid) in clone
+        assert bytes.fromhex(uid) in clone and bytes.fromhex(uid) in faultline
         assert cursor.string()==path and cursor.count(8)==1
         if path==CITY:
             assert cursor.string()=="Var1"
@@ -53,7 +60,7 @@ def validate_registration(before, after, story):
         assert after[cursor.position:].startswith(old_next)
         assert after[at-4:at]==u32(count+1)
         after=after[:at-4]+u32(count)+after[cursor.position:]
-    assert after[offset:].replace(setup,b"",1).replace(u32(68)+record+WEATHER_DONOR,u32(66)+WEATHER_DONOR,1)==before[old:]
+    assert after[offset:].replace(setup,b"",1).replace(u32(69)+record+WEATHER_DONOR,u32(66)+WEATHER_DONOR,1)==before[old:]
 
 
 def audit(records,meta,resource_ids):

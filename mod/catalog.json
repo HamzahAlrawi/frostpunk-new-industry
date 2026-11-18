@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.22.0",
+  "version": "3.23.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -23414,11 +23414,71 @@
         "title": "Home Heating Charter",
         "description": "Homes and medical buildings permanently gain one insulation level.",
         "modifier": "29146dd29a92565ba331f629b05c1e19"
+      },
+      {
+        "id": "Frontiers/faultline/ward",
+        "title": "Ward Circuit",
+        "description": "Homes and medical buildings gain +1 insulation. Coal works, Steelworks and Factories lose 25% efficiency.",
+        "modifier": "8dd38a84d63f72568123b1da65ca7464"
+      },
+      {
+        "id": "Frontiers/faultline/works",
+        "title": "Works Circuit",
+        "description": "Coal works, Steelworks and Factories gain 40% efficiency. Homes lose one insulation level.",
+        "modifier": "dc7a4685b0b8fb52bf2433e305bb8257"
+      },
+      {
+        "id": "Frontiers/faultline/bypass",
+        "title": "Shelter Bypass",
+        "description": "Cookhouses and medical buildings gain +1 insulation. Workshops lose 30% efficiency.",
+        "modifier": "268aac32b403825cbb911a525eac591b"
+      },
+      {
+        "id": "Frontiers/faultline/trip",
+        "title": "Main Circuit Tripped",
+        "description": "All insulated buildings lose two insulation levels until Generator stress drops to 15%.",
+        "modifier": "7c3c1da2edeeb25d80db8803a84309b6"
+      },
+      {
+        "id": "Frontiers/faultline/accumulator",
+        "title": "Pressure Accumulator",
+        "description": "Generator stress recovers 35% faster with overdrive off.",
+        "modifier": "9c40ff299420345eb98e85c13b50c143"
+      },
+      {
+        "id": "Frontiers/faultline/isolation",
+        "title": "Isolated Return Line",
+        "description": "Medical buildings permanently gain one insulation level. Unlocks the surveyed bypass when scouts bring home its route.",
+        "modifier": "d2e14c0b38d36d5a9449fd1826ca2217"
+      },
+      {
+        "id": "Frontiers/faultline/shelters",
+        "title": "Relief Kitchens",
+        "description": "Cookhouses gain 30% workplace efficiency for the remainder of Faultline.",
+        "modifier": "786988fc2e474755a6a609e30fd5deb4"
+      },
+      {
+        "id": "Frontiers/faultline/ward_crew",
+        "title": "Station Medics",
+        "description": "Medical buildings gain 25% healing efficiency.",
+        "modifier": "be2f16fb796b9a5bb4ad6e4c2e0e4f83"
+      },
+      {
+        "id": "Frontiers/faultline/works_crew",
+        "title": "Station Fitters",
+        "description": "Steelworks and Factories gain 25% workplace efficiency.",
+        "modifier": "4fed9b3db2a59e5ba27d7d2ebc769830"
+      },
+      {
+        "id": "Frontiers/faultline/accord",
+        "title": "Interdistrict Heating Accord",
+        "description": "Homes and medical buildings gain +1 insulation after the shelters join the heating network.",
+        "modifier": "e8bddd1c9711ac5293ea8387bd60653b"
       }
     ],
-    "events": 394,
-    "dilemmas": 229,
-    "quests": 155,
+    "events": 471,
+    "dilemmas": 271,
+    "quests": 166,
     "poll_days": 0.25,
     "description": "Three separate Endless modes with automatic chapters and timed incidents.",
     "frontiers": {
@@ -25233,7 +25293,17 @@
         "road/embargo": "d6946993439a42559732c0b3bae26e54",
         "road/exposed": "48ca1b4bee9bdd54a3a9ba41f0e094d8",
         "road/braced": "d4f9722cec42f1538505f6557281530b",
-        "road/home": "29146dd29a92565ba331f629b05c1e19"
+        "road/home": "29146dd29a92565ba331f629b05c1e19",
+        "faultline/ward": "8dd38a84d63f72568123b1da65ca7464",
+        "faultline/works": "dc7a4685b0b8fb52bf2433e305bb8257",
+        "faultline/bypass": "268aac32b403825cbb911a525eac591b",
+        "faultline/trip": "7c3c1da2edeeb25d80db8803a84309b6",
+        "faultline/accumulator": "9c40ff299420345eb98e85c13b50c143",
+        "faultline/isolation": "d2e14c0b38d36d5a9449fd1826ca2217",
+        "faultline/shelters": "786988fc2e474755a6a609e30fd5deb4",
+        "faultline/ward_crew": "be2f16fb796b9a5bb4ad6e4c2e0e4f83",
+        "faultline/works_crew": "4fed9b3db2a59e5ba27d7d2ebc769830",
+        "faultline/accord": "e8bddd1c9711ac5293ea8387bd60653b"
       },
       "automaton_hours": 4.0,
       "incidents": [
@@ -28496,6 +28566,890 @@
             }
           ]
         }
+      },
+      "faultline": {
+        "scenario": "67d31284fd86e3529ad77ee110c4010e",
+        "missions": [
+          {
+            "phase": 1,
+            "plan": 1,
+            "quest": "adea0276d9511859b016847f8f723d49",
+            "deadline": 5,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Medical Post",
+                "quantity": 1,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Build a Workshop",
+                "quantity": 1,
+                "target": [
+                  "ef89bf3e0a1a40bfa149355bdc4e83b5"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Pulse at 20\u201355% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Cool to 8% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Pulse at 26\u201357% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points. Complete the listed construction first."
+              }
+            ],
+            "title": "Give the wards priority",
+            "profile": "ward",
+            "strokes": [
+              {
+                "low": 20,
+                "high": 55,
+                "draw": 10
+              },
+              {
+                "low": 0,
+                "high": 8,
+                "draw": 0
+              },
+              {
+                "low": 26,
+                "high": 57,
+                "draw": 10
+              }
+            ],
+            "requires": [],
+            "flag": null
+          },
+          {
+            "phase": 1,
+            "plan": 2,
+            "quest": "960fb808710ec254944a292daafa141a",
+            "deadline": 5,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Gathering Post",
+                "quantity": 1,
+                "target": [
+                  "b3ddd6b2ab8342a76949f39f8efb0c07"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Build a Workshop",
+                "quantity": 1,
+                "target": [
+                  "ef89bf3e0a1a40bfa149355bdc4e83b5"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Pulse at 24\u201360% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Cool to 9% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Pulse at 29\u201360% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points. Complete the listed construction first."
+              }
+            ],
+            "title": "Give the works priority",
+            "profile": "works",
+            "strokes": [
+              {
+                "low": 24,
+                "high": 60,
+                "draw": 10
+              },
+              {
+                "low": 0,
+                "high": 9,
+                "draw": 0
+              },
+              {
+                "low": 29,
+                "high": 60,
+                "draw": 10
+              }
+            ],
+            "requires": [],
+            "flag": null
+          },
+          {
+            "phase": 2,
+            "plan": 1,
+            "quest": "d42d725957360859893b142c16fabdae",
+            "deadline": 6,
+            "goals": [
+              {
+                "kind": "research",
+                "text": "Research Steam Hubs",
+                "target": "6a330b7d72d2e0a06a454943cf2980a1"
+              },
+              {
+                "kind": "build",
+                "text": "Build two Steam Hubs",
+                "quantity": 2,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a Steelworks",
+                "quantity": 1,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Pulse at 34\u201361% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Cool to 12% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Pulse at 39\u201363% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 13 stress points. Complete the listed construction first."
+              }
+            ],
+            "title": "Fit the pressure accumulator",
+            "profile": "works",
+            "strokes": [
+              {
+                "low": 34,
+                "high": 61,
+                "draw": 12
+              },
+              {
+                "low": 0,
+                "high": 12,
+                "draw": 0
+              },
+              {
+                "low": 39,
+                "high": 63,
+                "draw": 13
+              }
+            ],
+            "requires": [],
+            "flag": "accumulator"
+          },
+          {
+            "phase": 2,
+            "plan": 2,
+            "quest": "8f66f1a2b2645d55be91fa30b5c6bca0",
+            "deadline": 6,
+            "goals": [
+              {
+                "kind": "research",
+                "text": "Research Heaters",
+                "target": "3b4f9e5f2de4bc851146bc5b97815876"
+              },
+              {
+                "kind": "build",
+                "text": "Build two Steam Hubs",
+                "quantity": 2,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two medical buildings",
+                "quantity": 2,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Cool to 12% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Pulse at 22\u201354% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 8 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Cool to 10% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke4",
+                "text": "4. Pulse at 27\u201357% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 9 stress points. Complete the listed construction first."
+              }
+            ],
+            "title": "Fit an isolated bypass",
+            "profile": "bypass",
+            "strokes": [
+              {
+                "low": 0,
+                "high": 12,
+                "draw": 0
+              },
+              {
+                "low": 22,
+                "high": 54,
+                "draw": 8
+              },
+              {
+                "low": 0,
+                "high": 10,
+                "draw": 0
+              },
+              {
+                "low": 27,
+                "high": 57,
+                "draw": 9
+              }
+            ],
+            "requires": [],
+            "flag": "bypass"
+          },
+          {
+            "phase": 3,
+            "plan": 1,
+            "quest": "35de3a08c0528e53b565c9b78bee80e5",
+            "deadline": 7,
+            "goals": [
+              {
+                "kind": "warm",
+                "text": "Keep 12 homes Liveable or warmer",
+                "quantity": 12,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a Cookhouse",
+                "quantity": 1,
+                "target": [
+                  "59b3ef3d8505aea51a45828da82a1c3d"
+                ]
+              },
+              {
+                "kind": "produce",
+                "text": "Cook eight new batches for the shelter",
+                "quantity": 8,
+                "target": [
+                  "925cc17cc4c067ae0248aaef7ff14ed5",
+                  "b5f5c91e6c4db683424007ee9051463c",
+                  "238787e45f7b239f3c406cebb73f45b4",
+                  "0a7f2306c063ce83694a59f99b24e5c8",
+                  "dbfeb8bf4e60439add46e25c118fed85",
+                  "8f65ab452f00c757af98b654f3a8bbbc",
+                  "bef3c24de41f965d9053efbd9abcf4d2",
+                  "38df762e6b934a599f993770039f6b26"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Pulse at 28\u201358% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Cool to 11% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Pulse at 34\u201359% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 11 stress points."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke4",
+                "text": "4. Cool to 11% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              }
+            ],
+            "title": "Guide the lower shelter",
+            "profile": "ward",
+            "strokes": [
+              {
+                "low": 28,
+                "high": 58,
+                "draw": 10
+              },
+              {
+                "low": 0,
+                "high": 11,
+                "draw": 0
+              },
+              {
+                "low": 34,
+                "high": 59,
+                "draw": 11
+              },
+              {
+                "low": 0,
+                "high": 11,
+                "draw": 0
+              }
+            ],
+            "requires": [],
+            "flag": null
+          },
+          {
+            "phase": 3,
+            "plan": 2,
+            "quest": "9358f977b103df51b507960e9bf6a416",
+            "deadline": 7,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Beacon",
+                "quantity": 1,
+                "target": [
+                  "99c50bbc0ec952ace541f69166fab316"
+                ]
+              },
+              {
+                "kind": "checks",
+                "text": "Send Scouts out and return them to the city",
+                "label": "Scout"
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a coal mine or thumper",
+                "quantity": 1,
+                "target": [
+                  "7f5d92438ed6d18e994473ff2014dc3d",
+                  "7226772eb77bc49f9c4c520f3df2c7dc",
+                  "06cdc0a0e6d288a8d2435294d142c9b5",
+                  "145e292916c2d6826b4c1b7cd624f1ce",
+                  "c4a1ac4584d524a749436429f81880a3"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Pulse at 35\u201364% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Cool to 12% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Pulse at 40\u201365% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 14 stress points. Complete the listed construction first."
+              }
+            ],
+            "title": "Survey the upper shelf",
+            "profile": "works",
+            "strokes": [
+              {
+                "low": 35,
+                "high": 64,
+                "draw": 12
+              },
+              {
+                "low": 0,
+                "high": 12,
+                "draw": 0
+              },
+              {
+                "low": 40,
+                "high": 65,
+                "draw": 14
+              }
+            ],
+            "requires": [],
+            "flag": "surveyed"
+          },
+          {
+            "phase": 4,
+            "plan": 1,
+            "quest": "c41190fe289a9d55b69b6993d13a2e0e",
+            "deadline": 7,
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate a Hothouse",
+                "quantity": 1,
+                "target": [
+                  "20e9be8106e19f838b4bb73be86d04de",
+                  "20e9be8106e19f838b4bb73ae86d04de"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two Cookhouses",
+                "quantity": 2,
+                "target": [
+                  "59b3ef3d8505aea51a45828da82a1c3d"
+                ]
+              },
+              {
+                "kind": "produce",
+                "text": "Cook twelve new batches for the relief sleds",
+                "quantity": 12,
+                "target": [
+                  "925cc17cc4c067ae0248aaef7ff14ed5",
+                  "b5f5c91e6c4db683424007ee9051463c",
+                  "238787e45f7b239f3c406cebb73f45b4",
+                  "0a7f2306c063ce83694a59f99b24e5c8",
+                  "dbfeb8bf4e60439add46e25c118fed85",
+                  "8f65ab452f00c757af98b654f3a8bbbc",
+                  "bef3c24de41f965d9053efbd9abcf4d2",
+                  "38df762e6b934a599f993770039f6b26"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Cool to 10% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Pulse at 27\u201356% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 9 stress points."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Cool to 10% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke4",
+                "text": "4. Pulse at 34\u201360% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points."
+              }
+            ],
+            "title": "Feed the shelters from the basin",
+            "profile": "bypass",
+            "strokes": [
+              {
+                "low": 0,
+                "high": 10,
+                "draw": 0
+              },
+              {
+                "low": 27,
+                "high": 56,
+                "draw": 9
+              },
+              {
+                "low": 0,
+                "high": 10,
+                "draw": 0
+              },
+              {
+                "low": 34,
+                "high": 60,
+                "draw": 10
+              }
+            ],
+            "requires": [],
+            "flag": null
+          },
+          {
+            "phase": 4,
+            "plan": 2,
+            "quest": "76a2ebd9a90b1d5eb4ae5ef944337e56",
+            "deadline": 7,
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate two Steelworks",
+                "quantity": 2,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Build a Large Resource Depot for the repair crew",
+                "quantity": 1,
+                "target": [
+                  "d17fb879d88864a9444ee0283802c4cd"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Pulse at 39\u201363% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Cool to 13% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Pulse at 44\u201367% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 15 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke4",
+                "text": "4. Cool to 13% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              }
+            ],
+            "title": "Hold pressure for the welders",
+            "profile": "works",
+            "strokes": [
+              {
+                "low": 39,
+                "high": 63,
+                "draw": 12
+              },
+              {
+                "low": 0,
+                "high": 13,
+                "draw": 0
+              },
+              {
+                "low": 44,
+                "high": 67,
+                "draw": 15
+              },
+              {
+                "low": 0,
+                "high": 13,
+                "draw": 0
+              }
+            ],
+            "requires": [],
+            "flag": "welded"
+          },
+          {
+            "phase": 5,
+            "plan": 1,
+            "quest": "8a3e2845dbc1225f96becab221ad8b69",
+            "deadline": 8,
+            "goals": [
+              {
+                "kind": "warm",
+                "text": "Keep 18 homes Liveable or warmer",
+                "quantity": 18,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
+              },
+              {
+                "kind": "operate",
+                "text": "Operate three medical buildings",
+                "quantity": 3,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Build three Steam Hubs",
+                "quantity": 3,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Pulse at 35\u201362% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Cool to 12% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Pulse at 41\u201364% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 13 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke4",
+                "text": "4. Cool to 11% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke5",
+                "text": "5. Pulse at 46\u201367% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 15 stress points. Complete the listed construction first."
+              }
+            ],
+            "title": "Call the shelters in order",
+            "profile": "ward",
+            "strokes": [
+              {
+                "low": 35,
+                "high": 62,
+                "draw": 12
+              },
+              {
+                "low": 0,
+                "high": 12,
+                "draw": 0
+              },
+              {
+                "low": 41,
+                "high": 64,
+                "draw": 13
+              },
+              {
+                "low": 0,
+                "high": 11,
+                "draw": 0
+              },
+              {
+                "low": 46,
+                "high": 67,
+                "draw": 15
+              }
+            ],
+            "requires": [],
+            "flag": "final"
+          },
+          {
+            "phase": 5,
+            "plan": 2,
+            "quest": "3b39c9337672085cade765113b04abab",
+            "deadline": 8,
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate two coal mines or thumpers",
+                "quantity": 2,
+                "target": [
+                  "7f5d92438ed6d18e994473ff2014dc3d",
+                  "7226772eb77bc49f9c4c520f3df2c7dc",
+                  "06cdc0a0e6d288a8d2435294d142c9b5",
+                  "145e292916c2d6826b4c1b7cd624f1ce",
+                  "c4a1ac4584d524a749436429f81880a3"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Build two Resource Depots",
+                "quantity": 2,
+                "target": [
+                  "5fed86e519e68f92f140c0bd1de72a7c",
+                  "d17fb879d88864a9444ee0283802c4cd"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Pulse at 42\u201364% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 15 stress points."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Cool to 15% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Pulse at 51\u201369% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 18 stress points."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke4",
+                "text": "4. Cool to 12% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              }
+            ],
+            "title": "Send one heavy signal through the accumulator",
+            "profile": "works",
+            "strokes": [
+              {
+                "low": 42,
+                "high": 64,
+                "draw": 15
+              },
+              {
+                "low": 0,
+                "high": 15,
+                "draw": 0
+              },
+              {
+                "low": 51,
+                "high": 69,
+                "draw": 18
+              },
+              {
+                "low": 0,
+                "high": 12,
+                "draw": 0
+              }
+            ],
+            "requires": [
+              "accumulator"
+            ],
+            "flag": "final"
+          },
+          {
+            "phase": 5,
+            "plan": 3,
+            "quest": "f6282fadb39f125786b455094dbe956c",
+            "deadline": 8,
+            "goals": [
+              {
+                "kind": "warm",
+                "text": "Keep 14 homes Liveable or warmer",
+                "quantity": 14,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two medical buildings",
+                "quantity": 2,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a Hothouse",
+                "quantity": 1,
+                "target": [
+                  "20e9be8106e19f838b4bb73be86d04de",
+                  "20e9be8106e19f838b4bb73ae86d04de"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Cool to 10% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Pulse at 30\u201357% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Cool to 12% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke4",
+                "text": "4. Pulse at 36\u201362% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points."
+              }
+            ],
+            "title": "Send paired pulses down the surveyed bypass",
+            "profile": "bypass",
+            "strokes": [
+              {
+                "low": 0,
+                "high": 10,
+                "draw": 0
+              },
+              {
+                "low": 30,
+                "high": 57,
+                "draw": 10
+              },
+              {
+                "low": 0,
+                "high": 12,
+                "draw": 0
+              },
+              {
+                "low": 36,
+                "high": 62,
+                "draw": 12
+              }
+            ],
+            "requires": [
+              "bypass",
+              "surveyed"
+            ],
+            "flag": "final"
+          }
+        ],
+        "scan_hours": 1,
+        "trip": 76,
+        "welded_trip": 84,
+        "reset": 15,
+        "modifiers": {
+          "faultline/ward": "8dd38a84d63f72568123b1da65ca7464",
+          "faultline/works": "dc7a4685b0b8fb52bf2433e305bb8257",
+          "faultline/bypass": "268aac32b403825cbb911a525eac591b",
+          "faultline/trip": "7c3c1da2edeeb25d80db8803a84309b6",
+          "faultline/accumulator": "9c40ff299420345eb98e85c13b50c143",
+          "faultline/isolation": "d2e14c0b38d36d5a9449fd1826ca2217",
+          "faultline/shelters": "786988fc2e474755a6a609e30fd5deb4",
+          "faultline/ward_crew": "be2f16fb796b9a5bb4ad6e4c2e0e4f83",
+          "faultline/works_crew": "4fed9b3db2a59e5ba27d7d2ebc769830",
+          "faultline/accord": "e8bddd1c9711ac5293ea8387bd60653b"
+        },
+        "forecast": "b5b11cd7a264c4579395c43e9031cf7b"
       }
     },
     "ui": {
@@ -28875,6 +29829,17 @@
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
+        "guid": "16c6853237eed85c93cf5657a7894367",
+        "title": "Works Circuit",
+        "description": "Coal works, Steelworks and Factories gain 40% efficiency. Homes lose one insulation level.",
+        "name_key": "Mods/NewIndustry/Modifier/16c6853237eed85c93cf5657a7894367/Name",
+        "description_key": "Mods/NewIndustry/Modifier/16c6853237eed85c93cf5657a7894367/Description",
+        "source_ids": [
+          "Frontiers/faultline/works"
+        ],
+        "effects_before_sha256": "a72d7d6d7b397055cb5b99e7c2626e2374a39cd47d3332d6a7a6474285ae6c48"
+      },
+      {
         "guid": "17139b3bb8c93f54bf94bcf6619aa7ff",
         "title": "Site Shelter Liners",
         "description": "Tents gain one insulation level.\n\nMedical Posts and Cookhouses gain one insulation level.",
@@ -29140,6 +30105,17 @@
           "DefaultLawIndustrialCapital"
         ],
         "effects_before_sha256": "b59400836f8995d50991882dc9dad61d4825342f7a2414aec348f826a667be0f"
+      },
+      {
+        "guid": "268aac32b403825cbb911a525eac591b",
+        "title": "Shelter Bypass",
+        "description": "Cookhouses and medical buildings gain +1 insulation. Workshops lose 30% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/268aac32b403825cbb911a525eac591b/Name",
+        "description_key": "Mods/NewIndustry/Modifier/268aac32b403825cbb911a525eac591b/Description",
+        "source_ids": [
+          "Frontiers/faultline/bypass"
+        ],
+        "effects_before_sha256": "bdfbaa60de64ef6ee7a9f29a9ae62bc81e5c1ce04cefa17dc2ed1e50b5b3ff13"
       },
       {
         "guid": "2692ad888a606f55b3c5dd714ea67ba2",
@@ -29941,6 +30917,17 @@
         "effects_before_sha256": "ea506dcec8f999eed9a2379568c66b47106d96803b15f1d9f4ddfccc77e3e830"
       },
       {
+        "guid": "4fed9b3db2a59e5ba27d7d2ebc769830",
+        "title": "Station Fitters",
+        "description": "Steelworks and Factories gain 25% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/4fed9b3db2a59e5ba27d7d2ebc769830/Name",
+        "description_key": "Mods/NewIndustry/Modifier/4fed9b3db2a59e5ba27d7d2ebc769830/Description",
+        "source_ids": [
+          "Frontiers/faultline/works_crew"
+        ],
+        "effects_before_sha256": "99cafcb74e26acaf1ef2ea26f3a4d24cb9e88be06c8cb6d82e551cc3290c69b7"
+      },
+      {
         "guid": "503fef61b852385693b1af72975ce0f1",
         "title": "Balanced Coal Production Lines",
         "description": "Both Coal Thumper grades produce piles 100% faster. Gathering Posts also collect resources 100% faster, expanding both sides of the coal supply chain.",
@@ -30432,6 +31419,17 @@
         "effects_before_sha256": "19550c3734527a139b21222a4b5d5655476b06856542baf4d6911a451b0b5c88"
       },
       {
+        "guid": "63504e9ecb552158b28e24871ca28bf7",
+        "title": "Station Medics",
+        "description": "Medical buildings gain 25% healing efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/63504e9ecb552158b28e24871ca28bf7/Name",
+        "description_key": "Mods/NewIndustry/Modifier/63504e9ecb552158b28e24871ca28bf7/Description",
+        "source_ids": [
+          "Frontiers/faultline/ward_crew"
+        ],
+        "effects_before_sha256": "7d3cbd4a2d67d4bd954b4652782c7b8fe898dbb38461a87e986aed5b16ce33b2"
+      },
+      {
         "guid": "637806c484f96a598147d5226e1d794d",
         "title": "Generator Draft Grates",
         "description": "The Generator burns 12% less coal and overdrive stress builds 10% more slowly.",
@@ -30564,6 +31562,17 @@
           "AutumnBulkStockyards"
         ],
         "effects_before_sha256": "81c669a969e3dba21388ce3ec6e8b784634ef175f4e3ea1dfdfccee6e398b163"
+      },
+      {
+        "guid": "68e6059573ecfd5a80d7dd6a8dd2ad41",
+        "title": "Isolated Return Line",
+        "description": "Medical buildings permanently gain one insulation level. Unlocks the surveyed bypass when scouts bring home its route.",
+        "name_key": "Mods/NewIndustry/Modifier/68e6059573ecfd5a80d7dd6a8dd2ad41/Name",
+        "description_key": "Mods/NewIndustry/Modifier/68e6059573ecfd5a80d7dd6a8dd2ad41/Description",
+        "source_ids": [
+          "Frontiers/faultline/isolation"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
         "guid": "69cff7c48b3b705da60a7e45a0842e49",
@@ -30748,6 +31757,17 @@
         "effects_before_sha256": "ecaa711955c0123db5d99f88b053709e909594afd222280ebc8e068cce7cf4c3"
       },
       {
+        "guid": "74b307cbb0eb545aa967973716af61ba",
+        "title": "Main Circuit Tripped",
+        "description": "All insulated buildings lose two insulation levels until Generator stress drops to 15%.",
+        "name_key": "Mods/NewIndustry/Modifier/74b307cbb0eb545aa967973716af61ba/Name",
+        "description_key": "Mods/NewIndustry/Modifier/74b307cbb0eb545aa967973716af61ba/Description",
+        "source_ids": [
+          "Frontiers/faultline/trip"
+        ],
+        "effects_before_sha256": "4e79bb915d05433f6d98e79ea287077114b5f62204216ec1e9aa8da44ef10c69"
+      },
+      {
         "guid": "751d0fcd5e680259a24ba6c74856272a",
         "title": "Polar Sanctuary",
         "description": "Complete an inhabited refuge beyond the city. Cold-related illness is reduced by 25%.",
@@ -30801,6 +31821,17 @@
           "Frontiers/quarantine"
         ],
         "effects_before_sha256": "a94022dfad4f5661fcdf6603ebf04105843e408d3e543ed0c7b8b602480e6bfd"
+      },
+      {
+        "guid": "786988fc2e474755a6a609e30fd5deb4",
+        "title": "Relief Kitchens",
+        "description": "Cookhouses gain 30% workplace efficiency for the remainder of Faultline.",
+        "name_key": "Mods/NewIndustry/Modifier/786988fc2e474755a6a609e30fd5deb4/Name",
+        "description_key": "Mods/NewIndustry/Modifier/786988fc2e474755a6a609e30fd5deb4/Description",
+        "source_ids": [
+          "Frontiers/faultline/shelters"
+        ],
+        "effects_before_sha256": "9a2cd14a8886ab04d270a245746579832ed052ee846e0bf29f6a127e1778dec4"
       },
       {
         "guid": "7910e25ede289058871b1605d65e9474",
@@ -30880,6 +31911,28 @@
           "MasteryAutomatonCalibration"
         ],
         "effects_before_sha256": "3f7e8ea7390a6a703fec64882201174fd408ef49e7114dc9357decb3125c88cd"
+      },
+      {
+        "guid": "7c2b03253f56a756842f40dd50425870",
+        "title": "Ward Circuit",
+        "description": "Homes and medical buildings gain +1 insulation. Coal works, Steelworks and Factories lose 25% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/7c2b03253f56a756842f40dd50425870/Name",
+        "description_key": "Mods/NewIndustry/Modifier/7c2b03253f56a756842f40dd50425870/Description",
+        "source_ids": [
+          "Frontiers/faultline/ward"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "7c3c1da2edeeb25d80db8803a84309b6",
+        "title": "Main Circuit Tripped",
+        "description": "All insulated buildings lose two insulation levels until Generator stress drops to 15%.",
+        "name_key": "Mods/NewIndustry/Modifier/7c3c1da2edeeb25d80db8803a84309b6/Name",
+        "description_key": "Mods/NewIndustry/Modifier/7c3c1da2edeeb25d80db8803a84309b6/Description",
+        "source_ids": [
+          "Frontiers/faultline/trip"
+        ],
+        "effects_before_sha256": "8202d28daf97d0d02474a80831afe559a279a3f73644bfada541e924d4fa05f4"
       },
       {
         "guid": "7d14934432aee45cacd722fa8c76d646",
@@ -31060,6 +32113,17 @@
           "EdgeCompactHeatingGrid"
         ],
         "effects_before_sha256": "20640ae1b7920bfa40feb354bc6e7d23a3212d2f6886a65abc2297aff3975375"
+      },
+      {
+        "guid": "865ea6186717de5397a564877ac72589",
+        "title": "Relief Kitchens",
+        "description": "Cookhouses gain 30% workplace efficiency for the remainder of Faultline.",
+        "name_key": "Mods/NewIndustry/Modifier/865ea6186717de5397a564877ac72589/Name",
+        "description_key": "Mods/NewIndustry/Modifier/865ea6186717de5397a564877ac72589/Description",
+        "source_ids": [
+          "Frontiers/faultline/shelters"
+        ],
+        "effects_before_sha256": "8992ac92cd15b60cac2dc734a053918005c38ebdaf20d62ea3f557dfc86c60f8"
       },
       {
         "guid": "866ab4a4cc650f5eb210124f5ebb59aa",
@@ -31283,6 +32347,17 @@
           "AutumnForagerMealRoutes"
         ],
         "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
+      },
+      {
+        "guid": "8dd38a84d63f72568123b1da65ca7464",
+        "title": "Ward Circuit",
+        "description": "Homes and medical buildings gain +1 insulation. Coal works, Steelworks and Factories lose 25% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/8dd38a84d63f72568123b1da65ca7464/Name",
+        "description_key": "Mods/NewIndustry/Modifier/8dd38a84d63f72568123b1da65ca7464/Description",
+        "source_ids": [
+          "Frontiers/faultline/ward"
+        ],
+        "effects_before_sha256": "9b647ce90bbba006327cbc08f4fb2a9faf2a0e5046c9fe26b5a81090d3f11274"
       },
       {
         "guid": "8edd041f96b1a156b715ac4b04b113a5",
@@ -31604,6 +32679,17 @@
           "Frontiers/road/braced"
         ],
         "effects_before_sha256": "847a18fa6c38f9ed3053de874128d622c748a43f2912ab9b96ce15fc96171743"
+      },
+      {
+        "guid": "9c40ff299420345eb98e85c13b50c143",
+        "title": "Pressure Accumulator",
+        "description": "Generator stress recovers 35% faster with overdrive off.",
+        "name_key": "Mods/NewIndustry/Modifier/9c40ff299420345eb98e85c13b50c143/Name",
+        "description_key": "Mods/NewIndustry/Modifier/9c40ff299420345eb98e85c13b50c143/Description",
+        "source_ids": [
+          "Frontiers/faultline/accumulator"
+        ],
+        "effects_before_sha256": "08fcaff916e73237fea5029a9bd2f4848d77d1a50977d0f289f8c8ff7aa8ae39"
       },
       {
         "guid": "9ca1a4c03a71d057a0b2a3d12faa1eba",
@@ -31939,6 +33025,17 @@
         "effects_before_sha256": "3ba564cdec09e8508c992024d32dd137b5a8e1222f373c2abbce7fd44730410b"
       },
       {
+        "guid": "ab68581323f931588e9ebfe3b8d5ad03",
+        "title": "Interdistrict Heating Accord",
+        "description": "Homes and medical buildings gain +1 insulation after the shelters join the heating network.",
+        "name_key": "Mods/NewIndustry/Modifier/ab68581323f931588e9ebfe3b8d5ad03/Name",
+        "description_key": "Mods/NewIndustry/Modifier/ab68581323f931588e9ebfe3b8d5ad03/Description",
+        "source_ids": [
+          "Frontiers/faultline/accord"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
         "guid": "ac455d006d718c57966ca2d33b1a184d",
         "title": "Coal Thumper Screens",
         "description": "Both grades of Coal Thumper pile up coal 25% faster. Gathering Posts collect the piles.",
@@ -32061,6 +33158,17 @@
           "CitywideLagging5"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "b14a400f370a225eae9708ad44e80acc",
+        "title": "Station Fitters",
+        "description": "Steelworks and Factories gain 25% workplace efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/b14a400f370a225eae9708ad44e80acc/Name",
+        "description_key": "Mods/NewIndustry/Modifier/b14a400f370a225eae9708ad44e80acc/Description",
+        "source_ids": [
+          "Frontiers/faultline/works_crew"
+        ],
+        "effects_before_sha256": "7d3cbd4a2d67d4bd954b4652782c7b8fe898dbb38461a87e986aed5b16ce33b2"
       },
       {
         "guid": "b15ac87732502c5d88d7c7d555ff7ebf",
@@ -32362,6 +33470,17 @@
         "effects_before_sha256": "2469822e7d690fb6e9c3fa0add4cfbecef1682734c8649b3c4f68d3dd8415328"
       },
       {
+        "guid": "be2f16fb796b9a5bb4ad6e4c2e0e4f83",
+        "title": "Station Medics",
+        "description": "Medical buildings gain 25% healing efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/be2f16fb796b9a5bb4ad6e4c2e0e4f83/Name",
+        "description_key": "Mods/NewIndustry/Modifier/be2f16fb796b9a5bb4ad6e4c2e0e4f83/Description",
+        "source_ids": [
+          "Frontiers/faultline/ward_crew"
+        ],
+        "effects_before_sha256": "6f89d4d610af73bff35b034195ecbc789abb5a45f32e49815477c00391266b47"
+      },
+      {
         "guid": "be628023b5d4355099095294666ac7dd",
         "title": "Coal Thumper Winterization",
         "description": "Both grades of Coal Thumper gain one insulation level.",
@@ -32582,6 +33701,28 @@
         "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
       },
       {
+        "guid": "cad4d7002238e65c8f7de8596816fd50",
+        "title": "Works Circuit",
+        "description": "Coal works, Steelworks and Factories gain 40% efficiency. Homes lose one insulation level.",
+        "name_key": "Mods/NewIndustry/Modifier/cad4d7002238e65c8f7de8596816fd50/Name",
+        "description_key": "Mods/NewIndustry/Modifier/cad4d7002238e65c8f7de8596816fd50/Description",
+        "source_ids": [
+          "Frontiers/faultline/works"
+        ],
+        "effects_before_sha256": "847a18fa6c38f9ed3053de874128d622c748a43f2912ab9b96ce15fc96171743"
+      },
+      {
+        "guid": "cc6725e1102764538f0e83c66964f648",
+        "title": "Shelter Bypass",
+        "description": "Cookhouses and medical buildings gain +1 insulation. Workshops lose 30% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/cc6725e1102764538f0e83c66964f648/Name",
+        "description_key": "Mods/NewIndustry/Modifier/cc6725e1102764538f0e83c66964f648/Description",
+        "source_ids": [
+          "Frontiers/faultline/bypass"
+        ],
+        "effects_before_sha256": "9cde51a2ea115311c81c26f584653f02915561f45e9d54ad2a5c44c664f947ee"
+      },
+      {
         "guid": "cd445764311e8b5f9a9d23d4152563b2",
         "title": "Stress Recovery Governors",
         "description": "The Generator gains a further 20% stress recovery speed bonus.",
@@ -32646,6 +33787,17 @@
           "MedicalEfficiency2"
         ],
         "effects_before_sha256": "0786208bee58cfb8da477b1f32222c095822eae3db69d5ce15bb436fe76560fc"
+      },
+      {
+        "guid": "cfe92a1d87d4ea5c951218228177bf5f",
+        "title": "Shelter Bypass",
+        "description": "Cookhouses and medical buildings gain +1 insulation. Workshops lose 30% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/cfe92a1d87d4ea5c951218228177bf5f/Name",
+        "description_key": "Mods/NewIndustry/Modifier/cfe92a1d87d4ea5c951218228177bf5f/Description",
+        "source_ids": [
+          "Frontiers/faultline/bypass"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
         "guid": "d0032e53ce95e35286e5aca53fc27012",
@@ -32769,6 +33921,17 @@
           "DepotShelving"
         ],
         "effects_before_sha256": "76812af35e1279d6e1d6940c955f5affb7521e9fbf56870cf9ad875bb440db08"
+      },
+      {
+        "guid": "d2e14c0b38d36d5a9449fd1826ca2217",
+        "title": "Isolated Return Line",
+        "description": "Medical buildings permanently gain one insulation level. Unlocks the surveyed bypass when scouts bring home its route.",
+        "name_key": "Mods/NewIndustry/Modifier/d2e14c0b38d36d5a9449fd1826ca2217/Name",
+        "description_key": "Mods/NewIndustry/Modifier/d2e14c0b38d36d5a9449fd1826ca2217/Description",
+        "source_ids": [
+          "Frontiers/faultline/isolation"
+        ],
+        "effects_before_sha256": "c751cfc055c061033d4e269d858ea68f3ae0e5484f88dce6518023e5b11b2351"
       },
       {
         "guid": "d3d3b43d76ca7957aa5947ee526374d1",
@@ -32961,6 +34124,17 @@
         "effects_before_sha256": "88ccf5b08724e4e03ad572d4f675d654bf7678c7edd797541a0369d86e377d11"
       },
       {
+        "guid": "dc7a4685b0b8fb52bf2433e305bb8257",
+        "title": "Works Circuit",
+        "description": "Coal works, Steelworks and Factories gain 40% efficiency. Homes lose one insulation level.",
+        "name_key": "Mods/NewIndustry/Modifier/dc7a4685b0b8fb52bf2433e305bb8257/Name",
+        "description_key": "Mods/NewIndustry/Modifier/dc7a4685b0b8fb52bf2433e305bb8257/Description",
+        "source_ids": [
+          "Frontiers/faultline/works"
+        ],
+        "effects_before_sha256": "75e85f27e7a59336e642f8bd4bd6bf2cb3a255bf06b92a36ebb0a1c6857f5dfa"
+      },
+      {
         "guid": "dca2005f5ee4ab5c830d68f6a5116889",
         "title": "Thermal Vestibules",
         "description": "Bunkhouses and Houses gain another heat level from sealed entrance chambers.",
@@ -33080,6 +34254,17 @@
           "Frontiers/care"
         ],
         "effects_before_sha256": "fdf7d7b872d7a8ba09e7cb2001cceec4c378f2a4ee527e1b93e5a55f37e191ba"
+      },
+      {
+        "guid": "e235cad614e9045fbe6cd4d369611af0",
+        "title": "Ward Circuit",
+        "description": "Homes and medical buildings gain +1 insulation. Coal works, Steelworks and Factories lose 25% efficiency.",
+        "name_key": "Mods/NewIndustry/Modifier/e235cad614e9045fbe6cd4d369611af0/Name",
+        "description_key": "Mods/NewIndustry/Modifier/e235cad614e9045fbe6cd4d369611af0/Description",
+        "source_ids": [
+          "Frontiers/faultline/ward"
+        ],
+        "effects_before_sha256": "c0e6ab55f4ddc0a86566aee2f3741e706aa7979440b7bd0e4d55bfa7bb4f1fb7"
       },
       {
         "guid": "e24b5fbb5744eb52add8529b8639e933",
@@ -33282,6 +34467,17 @@
           "StarterHuntingKits"
         ],
         "effects_before_sha256": "61a32805fa277dfd4b48f4e662ac1823a9fd425b751cac6bf65a8ebfeacdbf4b"
+      },
+      {
+        "guid": "e8bddd1c9711ac5293ea8387bd60653b",
+        "title": "Interdistrict Heating Accord",
+        "description": "Homes and medical buildings gain +1 insulation after the shelters join the heating network.",
+        "name_key": "Mods/NewIndustry/Modifier/e8bddd1c9711ac5293ea8387bd60653b/Name",
+        "description_key": "Mods/NewIndustry/Modifier/e8bddd1c9711ac5293ea8387bd60653b/Description",
+        "source_ids": [
+          "Frontiers/faultline/accord"
+        ],
+        "effects_before_sha256": "aa4cf35a7a9f242e72d551e0243cd829686eeb6c01d48b5ee23e67e1de204390"
       },
       {
         "guid": "ea007265f48e2453acfdaa220418c13e",

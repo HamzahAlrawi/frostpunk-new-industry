@@ -142,4 +142,4 @@ The persistent difficulty config is retained. Public first installs use standard
 
 ## Validation
 
-The owned-data audit decodes 394 added events, 229 dilemmas and 155 quests, including the story and legacy content. It runs all six nine-chapter paths, 54 incident responses, 18 ignored-response expiries, five repair successes and failures, three funded doctrines, and district trial payments.
+The owned-data audit decodes 471 added events, 271 dilemmas and 166 quests, including the story and legacy content. It runs all six nine-chapter paths, 54 incident responses, 18 ignored-response expiries, five repair successes and failures, three funded doctrines, and district trial payments.

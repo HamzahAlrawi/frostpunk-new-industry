@@ -4,6 +4,7 @@ from .native_binary import Cursor, SchemaError, Span, entry, replace_spans, stri
 
 NAME = "NI The Last Signal"
 ROAD_NAME = "NI Winter Road at Switchback Basin"
+FAULTLINE_NAME = "NI The Last Signal Faultline"
 DEFAULT = "eab266e3fb82e2b1334c7cc1e953e30f"
 DEFAULT_EVENTS = "129eb2986c3cda9fc24f187d61026e53"
 NATIVE_INTRO = bytes.fromhex("d29f819b0694f9b81141e8c70117bd28")
@@ -18,11 +19,12 @@ FROST = (
 )
 FORECAST = ((1,0),(4,1),(7,2),(10,1),(13,3),(17,2),(20,1))
 WINTER = ((1,0),(4,1),(8,2),(11,1),(15,2),(19,3),(23,2),(26,3),(30,2),(33,1))
+FAULTLINE = ((1,0),(4,1),(7,2),(10,1),(13,2),(16,3),(20,2),(23,3),(27,2),(30,3),(34,1))
 
 
-def forecast_record(identity, winter=False):
-    forecast = WINTER if winter else FORECAST
-    title = "NI Winter Road Forecast" if winter else "NI Lifeline Forecast"
+def forecast_record(identity, timeline="Lifeline"):
+    forecast = {"Lifeline": FORECAST, "Winter Road": WINTER, "Faultline": FAULTLINE}[timeline]
+    title = f"NI {timeline} Forecast"
     timeline = b"".join(pack("<HH",day,0 if day==1 else 7)+bytes.fromhex(FROST[tier])+b"\0"
                         for day,tier in forecast)
     return SIMPLE_WEATHER+string(title)+bytes.fromhex(identity)+b"\0\0"+u32(len(forecast))+timeline
@@ -59,25 +61,33 @@ def register(data, identity, event_directory, localize, winter):
         (Span(95, 163), u32(0)),
         (Span(intro, intro+16), bytes(16)),
         (Span(intro+16, intro+36), u32(1)+bytes.fromhex(identity("event-setup"))),
-        (Span(0x102,0x112),bytes.fromhex(winter)),
     ]
-    for suffix, label in (
-        ("DisplayName", "The Last Signal: Winter Road"),
-        ("Description", "Save the stranded convoys, build a city for their people, and hold its streets through the Long Night."),
-    ):
-        old = string("@Generated/ScenariosConfig/Scenarios/DEFAULT/"+suffix)
-        at = body.index(old)
-        edits.append((Span(at, at+len(old)), localize("LastSignal/Menu/"+suffix, label)))
+
+    def campaign_text(prefix, name, description, weather):
+        labels = [(Span(0x102,0x112),bytes.fromhex(weather))]
+        for suffix,label in (("DisplayName",name),("Description",description)):
+            old = string("@Generated/ScenariosConfig/Scenarios/DEFAULT/"+suffix)
+            at = body.index(old)
+            labels.append((Span(at,at+len(old)),localize(prefix+"/Menu/"+suffix,label)))
+        return labels
+
+    road_text = campaign_text("LastSignal","The Last Signal: Winter Road",
+        "Save the stranded convoys, build a city for their people, and hold its streets through the Long Night.",winter)
     name = entry(NAME, identity("scenario"))
     if body[399:415] != bytes.fromhex(NATIVE_CITY) or body[422:438] != bytes.fromhex(NATIVE_WORLD):
         raise SchemaError("Unsupported Default city or Frostland binding")
     # Keep both original map bindings for existing saves while exposing the
     # separate city and world setup only to newly started Winter Road games.
-    legacy = name + replace_spans(body, edits + [(Span(0, 1), b"\0")])
-    scenario = entry(ROAD_NAME, identity("switchback-scenario")) + replace_spans(body, edits + [
+    legacy = name + replace_spans(body, edits + road_text + [(Span(0, 1), b"\0")])
+    map_edits = [
         (Span(399, 415), bytes.fromhex(identity("city-setup"))),
         (Span(422, 438), bytes.fromhex(identity("world-setup"))),
-    ])
+    ]
+    scenario = entry(ROAD_NAME, identity("switchback-scenario")) + replace_spans(body, edits + road_text + map_edits + [(Span(0,1),b"\0")])
+    faultline = identity("faultline-forecast")
+    faultline_text = campaign_text("Faultline","The Last Signal: Faultline",
+        "Race the frost. Route the city's steam, operate the Generator in pressure cycles, and keep the remote shelters on the line.",faultline)
+    new_scenario = entry(FAULTLINE_NAME,identity("faultline-scenario"))+replace_spans(body,edits+faultline_text+map_edits)
     population_count = data.index(entry("Default", "abffde98fc17e8921d495b49e5928974"))
     footer_token = entry("Default", DEFAULT_EVENTS)
     pos = data.index(footer_token, end, population_count)
@@ -90,10 +100,11 @@ def register(data, identity, event_directory, localize, winter):
     new_setup = entry(NAME, identity("event-setup")) + u32(1) + bytes.fromhex(event_directory)
     # The stock story's first slot and all native entries stay byte-identical.
     revised = replace_spans(data, [
-        (Span(16, 20), u32(count+2)),
+        (Span(16, 20), u32(count+3)),
         (Span(setup_count, setup_count+4), u32(9)),
-        (Span(setup_count, setup_count), legacy+scenario),
+        (Span(setup_count, setup_count), legacy+scenario+new_scenario),
         (Span(old_setup.position, old_setup.position), new_setup),
-        (Span(forecast-4,forecast),u32(weather_count+2)+forecast_record(identity("forecast"))+forecast_record(winter,True)),
+        (Span(forecast-4,forecast),u32(weather_count+3)+forecast_record(identity("forecast"))+
+            forecast_record(winter,"Winter Road")+forecast_record(faultline,"Faultline")),
     ])
     return insert_map_setups(revised, identity, localize)

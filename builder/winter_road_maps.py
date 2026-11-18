@@ -50,9 +50,13 @@ def reveal_site(identity):
     return SELECT + compact(BY_SITE, bytes.fromhex(identity) + bytes(7) + u32(1) + REVEAL)
 
 
+def constructed(building, count=1):
+    buildings = compact("FrostpunkBuildingsSelector", bytes.fromhex(building) + b"\1" + bytes(11))
+    return compare(compact("CountExpression", buildings), 4, integer(count))
+
+
 def beacon_exists():
-    buildings = compact("FrostpunkBuildingsSelector", bytes.fromhex(BEACON) + b"\1" + bytes(11))
-    return compare(compact("CountExpression", buildings), 4, integer(1))
+    return constructed(BEACON)
 
 
 def validate_native_map_effects(events):
