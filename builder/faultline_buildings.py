@@ -161,9 +161,9 @@ def customize(name, native, spec, uid, scenario, resources, loc, orders):
         if (native[begin:begin+4]!=u32(1) or native[building+39:building+43]!=u32(1)
                 or not native[begin+4+len(donation):].startswith(f32(1.5))):
             raise SchemaError("Unsupported Steam Hub construction requirements")
-        # Drop the donor's Last Autumn construction restriction. Keep the
-        # building available only in Faultline via the native scenario gate.
-        edits.append((Span(building+39,begin+4+len(donation)),u32(0)+u32(1)+gate))
+        # Drop the donor restrictions while retaining the three vector headers
+        # that precede the availability requirements in the native layout.
+        edits.append((Span(building+39,begin+4+len(donation)),u32(0)*3+u32(1)+gate))
         title=string("@Buildings/SteamHub/Name")
         description=string("@Buildings/SteamHub/Description")
         short=string("@Buildings/SteamHub/Tech2")

@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk New Industry",
-  "version": "3.27.2",
+  "version": "3.27.3",
   "format": "nind-copy-insert-v1",
   "game": "Frostpunk",
   "supported_build": "Windows Steam 1.6.2, exact original archive hashes required",
@@ -167,11 +167,11 @@
           "name": "gameentities/buildings/faultline_signal_relay.binarytemplate",
           "hash": 1690765923,
           "original_sha256": "016da58d82ce0447f6668b11cc54f9a1adaa030380dcdebfde3d9c8423656b7b",
-          "new_sha256": "0665202875dd1b123161e8989cc71020d33dded034e0e403513165f3442488a7",
-          "size": 4798,
+          "new_sha256": "c2ddb1a5c69bdc7c905e827fcbc1e2436ccfdd74ef3fcab0e8c8d6f7522fe9d3",
+          "size": 4806,
           "original_hash": 4285711797,
           "patch": "templates-64c70a63.nid",
-          "patch_sha256": "21f357c77d1e91bfa643d0d3dbf5d13f2704d0b5e5733f40e47c359bcc2cf789"
+          "patch_sha256": "cccf85e0f69f68bc48405432786f4a5af5360680966a6f6d99b0861741d93787"
         },
         {
           "name": "gameentities/buildings/faultline_coal_magazine.binarytemplate",

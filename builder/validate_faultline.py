@@ -12,6 +12,20 @@ PREFIX = "NI/Faultline/"
 HOUR = 1/24
 
 
+def audit_construction_gate(prefab, scenario):
+    from faultline_buildings import component
+    cursor=Cursor(prefab,component(prefab,"Building"))
+    cursor.take(16*cursor.count(8))
+    # The Building component has a placement vector, 35 fixed bytes, three
+    # preceding vectors and the availability vector. Reading the latter at
+    # its actual boundary catches shifts even when its bytes occur intact.
+    cursor.take(35)
+    assert cursor.take(12)==bytes(12), 'Missing empty vectors before construction availability'
+    assert cursor.u32()==1 and cursor.string()=="FrostpunkScenarioRequirement"
+    assert cursor.take(17)==bytes(17) and cursor.guid()==scenario and not cursor.boolean()
+    assert cursor.f32()==1.5, 'Construction requirements overrun the native footer'
+
+
 def audit_assets(stock_catalog, catalog, stock_messages, messages, templates, campaign, resources):
     from faultline_buildings import building_table, component
     from faultline_tutorial import MESSAGE, donor
@@ -27,8 +41,7 @@ def audit_assets(stock_catalog, catalog, stock_messages, messages, templates, ca
         category=old_rows[spec["native"]][0]
         assert rows[spec["name"]]==(category,spec["guid"],True)
         assert prefab[:16].hex()==spec["guid"]
-        requirement=string("FrostpunkScenarioRequirement")+bytes(17)+bytes.fromhex(campaign["scenario"])+b"\0"
-        assert prefab.count(requirement)==1
+        audit_construction_gate(prefab,campaign["scenario"])
         price=Cursor(prefab,component(prefab,"BuildingEconomics"))
         actual={price.guid():price.u32() for _ in range(price.count(4))}
         assert actual=={resources[key]:n for key,n in spec["price"].items()}

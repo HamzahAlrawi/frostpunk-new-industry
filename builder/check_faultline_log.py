@@ -1,5 +1,6 @@
 """Check a Frostpunk console log for Switchback Basin map and prefab loading."""
 import argparse
+import re
 from pathlib import Path
 from time import monotonic, sleep
 
@@ -9,6 +10,7 @@ from winter_road_maps import CITY, WORLD
 
 DEFAULT_LOG = Path(r"C:\Program Files (x86)\Steam\steamapps\common\Frostpunk\ConsoleOutput.html")
 SUCCESS = "resource loaded successfully ("
+LOADING = "loading template resource: "
 ERRORS = ("class factory cannot create", "serializationflag_versiontolerant", "inflate() failed",
           "missing building template for", "unable to find building template for entry")
 PREFABS = {"templates/" + spec["path"].removesuffix(".binarytemplate") for spec in DEFINITIONS.values()}
@@ -17,7 +19,7 @@ PREFABS = {"templates/" + spec["path"].removesuffix(".binarytemplate") for spec 
 def inspect(log):
     city_loaded = world_loaded = False
     found = set()
-    first_errors = []
+    loading = error = None
     for number, line in enumerate(log, 1):
         line = line.lower()
         if f"[{CITY.lower()}] scene loading time:" in line:
@@ -26,20 +28,24 @@ def inspect(log):
             found.clear()
         if f"[{WORLD.lower()}] scene loading time:" in line:
             world_loaded = True
+        if LOADING in line:
+            loading = re.sub(r"<[^>]*>", "", line.split(LOADING, 1)[1]).strip()
         if SUCCESS in line:
             path = line.split(SUCCESS, 1)[1].split(")", 1)[0]
             if path in PREFABS:
                 found.add(path)
-        for error in ERRORS:
-            if error in line and len(first_errors) < 6:
-                first_errors.append(f"line {number}: {error}")
+        if failure := next((message for message in ERRORS if message in line), None):
+            error = f"line {number}: {failure}"
+            break
     checks = [(city_loaded, "Switchback Basin city load"), (world_loaded, "Switchback Frostland load"),
               (found == PREFABS, f"Faultline building loads ({len(found)}/{len(PREFABS)})")]
     for passed, label in checks:
         print(f"{'PASS' if passed else 'MISSING'}  {label}")
-    for error in first_errors:
+    if error:
         print(error)
-    return all(passed for passed, _ in checks) and not first_errors
+        if loading:
+            print(f"Last requested template: {loading}")
+    return all(passed for passed, _ in checks) and error is None
 
 
 def main():
