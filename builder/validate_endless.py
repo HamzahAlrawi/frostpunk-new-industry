@@ -78,7 +78,8 @@ def audit(records,meta,resource_ids):
                                    else story_flag if e['name'].startswith(('NI Last Signal ','NI Lifeline ')) else flag)
                and e['enabled'] and e['weight']==1 for e in events)
     assert all(t[0] in ('start','quest','scout_return','construction','signal') or t[2] in (0.25,0.5,1,2)
-               or e['name'].startswith('NI Faultline ') and math.isclose(t[2],1/24,rel_tol=1e-6)
+               or e['name'].startswith('NI Faultline ') and any(math.isclose(t[2],period,rel_tol=1e-6)
+                                                              for period in (1/24,1/96))
                for e in events for t in e['triggers'])
     for row in dilemmas.values():
         for c in row['choices']:
@@ -207,13 +208,20 @@ def main():
     new_uids = set(paths) - set(stock_paths)
     assert all([uid for uid in new_members if uid not in new_uids] == members
                for folder, (_, members) in stock_folders.items() for _, new_members in [folders[folder]])
-    required = meta['story']['faultline']['buildings']
+    campaign = meta['story']['faultline']
+    required = campaign['buildings']+campaign['models']
     assert new_uids == {bytes.fromhex(row['guid']) for row in required}
     for row in required:
         uid = bytes.fromhex(row['guid'])
         path = paths[uid].relative_to('templates').as_posix()
-        assert path == row['path'] and templates[path].startswith(uid + records[uid][1])
+        data=gzip.decompress((ROOT/'build/native/payload'/template_entries[path]['payload']).read_bytes())
+        assert path == row['path'] and data.startswith(uid + records[uid][1])
         assert template_entries[path]['hash'] == archive.murmur(path.encode())
+        if 'triangles' in row:
+            from tools.native_mesh import audit_mesh
+            audit_mesh(data,row['triangles'])
+            prefab=next(building for building in campaign['buildings'] if building['name']==row['name'])
+            assert templates[prefab['path']].count(string(path.removesuffix('.binarytemplate')))>=2
     result['faultline']['registered_template_guids'] = len(required)
     entry, = archive.entries('sequences')
     assert entry[1]==ARCHIVE_KEY

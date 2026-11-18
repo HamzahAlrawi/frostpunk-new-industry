@@ -90,7 +90,7 @@ def recipe(key,title,output,amount,inputs,hours,unlock,next_unlock=None,native_c
            building='Factory',targets=None,purpose=None):
     g=gid('recipe/'+key); conditions=[req(unlock)] if unlock else []
     if next_unlock: conditions.append(neg(next_unlock))
-    result=('Recover ' if purpose else 'Produce ')+str(amount)+' '+DISPLAY.get(output,output)
+    result='Produces '+str(amount)+' '+DISPLAY.get(output,output)
     cost=', '.join(str(v)+' '+DISPLAY.get(k,k) for k,v in inputs.items())
     desc=f'{result}. Requires {cost}. Base cycle: {hours:g} working hours at full efficiency.'
     if purpose: desc=purpose+'\n\n'+desc
@@ -301,6 +301,8 @@ faultline_scenario=gid('last-signal/faultline-scenario').hex()
 faultline_orders=build_orders(recipe,gid,RESOURCE_ICONS)
 revised_buildings,new_templates,faultline_buildings=build_faultline_buildings(
     native_buildings,lambda name:read_owned('templates',name),gid,faultline_scenario,RES,loc)
+from faultline_models import build_models
+faultline_models=build_models(faultline_buildings,new_templates,lambda name:read_owned('templates',name),gid)
 messages=build_faultline_tutorial(read_owned('common',TUTORIAL_PATH),
     (SRC/'common/configs/frostpunkgameeventsconfig.bin').read_bytes(),gid,loc)
 endless_patches,new_modifiers,endless_owners,endless_metadata=build_endless(SRC/'common',new_modifiers,
@@ -394,7 +396,8 @@ from template_catalog import CATALOG_ASSET, CATALOG_KEY, register_buildings
 
 assert archive.murmur(CATALOG_ASSET.encode()) == CATALOG_KEY
 native_catalog = read_owned('templates', CATALOG_ASSET)
-patches['templates'][CATALOG_ASSET] = register_buildings(native_catalog, faultline_buildings, new_templates)
+endless_metadata['story']['faultline']['models']=faultline_models
+patches['templates'][CATALOG_ASSET] = register_buildings(native_catalog, faultline_buildings+faultline_models, new_templates)
 patches['common'][scenarios_path]=starting_supplies(endless_patches[scenarios_path],RES)
 # The public menu preset is an identity patch. Installation can replace only its
 # native difficulty effect vectors without changing scenario assets or scripts.
@@ -413,7 +416,7 @@ assert sequence_entry[1] == ARCHIVE_KEY
 with (GAME/'sequences.dat').open('rb') as stream:
     native_shots = read(stream,sequence_entry)
 patches['sequences'] = {ASSET:build_shots(native_shots,patches['scenes'][CITY.lower()+'.binaryscene'],
-                                        (SRC/'common/configs/frostpunkgameeventsconfig.bin').read_bytes(),gid)}
+                                        (SRC/'common/configs/frostpunkgameeventsconfig.bin').read_bytes(),gid,loc)}
 from menu_layout import build as build_menu_layout,native_mode_labels
 ui_patches,ui_metadata=build_menu_layout(SRC/'templates')
 patches['templates'].update(ui_patches)
@@ -443,7 +446,7 @@ for spec,entry in zip(specs,newtechs):
     duration=pos+36+count*20
     assert struct.unpack_from('<f',entry,duration)[0]==spec['hours']
     duration_offsets.append([newTC.index(entry)+duration,spec['unscaled_hours']])
-manifest['configuration']={'schema_version':1,'resource_ids':{name:RES[name].hex() for name in OPENING_STOCK},
+manifest['configuration']={'schema_version':1,'resource_ids':{name:value.hex() for name,value in RES.items()},
                            'research_durations':duration_offsets,'workshop_curve_offset':len(newTC)-len(sets)}
 modifier_fields,balance_text=field_locations(new_modifiers,(SRC/'common'/MODIFIERS).read_bytes(),specs,
     scenario_additions,civic_laws,modifier_tooltips['records'],RES,texts)

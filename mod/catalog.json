@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.27.3",
+  "version": "3.28.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -19246,7 +19246,7 @@
     {
       "id": "FaultlineIsolationValve",
       "title": "Machine Isolation Valve",
-      "output": "Steel",
+      "output": "Steam Tools",
       "amount": 1,
       "inputs": {
         "Steel": 22,
@@ -19264,7 +19264,7 @@
     {
       "id": "FaultlineBypassSection",
       "title": "Rivet Bypass Section",
-      "output": "Wood",
+      "output": "Steel Plates",
       "amount": 1,
       "inputs": {
         "Steel": 30,
@@ -19283,7 +19283,7 @@
     {
       "id": "FaultlineClinicSledge",
       "title": "Pack Clinic Sledge",
-      "output": "Wood",
+      "output": "Wooden Materials",
       "amount": 1,
       "inputs": {
         "Food Rations": 35,
@@ -19301,7 +19301,7 @@
     {
       "id": "FaultlineLiftSledge",
       "title": "Pack Lift Sledge",
-      "output": "Coal",
+      "output": "Steel Plates",
       "amount": 1,
       "inputs": {
         "Coal": 55,
@@ -23573,8 +23573,8 @@
         "modifier": "eeda23f91b981a50b83beb9537566b38"
       }
     ],
-    "events": 510,
-    "dilemmas": 302,
+    "events": 480,
+    "dilemmas": 319,
     "quests": 174,
     "poll_days": 0.25,
     "description": "Three separate Endless modes with automatic chapters and timed incidents.",
@@ -28679,57 +28679,32 @@
             "goals": [
               {
                 "kind": "build",
-                "text": "Build a Medical Post",
+                "text": "Build a Signal Relay",
+                "quantity": 1,
+                "target": [
+                  "8b89a749624c9b518261539d8997086c"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Have a Medical Post",
                 "quantity": 1,
                 "target": [
                   "f6a831d9683c3d9b904cd09ded358f8a"
                 ]
               },
               {
-                "kind": "build",
-                "text": "Build a Workshop",
-                "quantity": 1,
-                "target": [
-                  "ef89bf3e0a1a40bfa149355bdc4e83b5"
-                ]
-              },
-              {
                 "kind": "checks",
                 "label": "Stroke1",
-                "text": "1. Pulse at 20\u201355% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Cool to 8% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Pulse at 26\u201357% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points. Complete the listed construction first."
+                "text": "Send a signal at 18\u00e2\u20ac\u201c58% stress",
+                "description": "Complete construction. Select the Generator, leave it running and use Overdrive to raise the stress gauge to 18\u00e2\u20ac\u201c58%. The relay sends the signal within 15 game minutes. Switch off Overdrive when the objective ticks."
               }
             ],
-            "title": "Give the wards priority",
+            "title": "Keep the wards warm",
             "profile": "ward",
-            "strokes": [
-              {
-                "low": 20,
-                "high": 55,
-                "draw": 10
-              },
-              {
-                "low": 0,
-                "high": 8,
-                "draw": 0
-              },
-              {
-                "low": 26,
-                "high": 57,
-                "draw": 10
-              }
+            "signal": [
+              18,
+              58
             ],
             "requires": [],
             "flag": null,
@@ -28745,15 +28720,15 @@
             "goals": [
               {
                 "kind": "build",
-                "text": "Build a Gathering Post",
+                "text": "Build a Signal Relay",
                 "quantity": 1,
                 "target": [
-                  "b3ddd6b2ab8342a76949f39f8efb0c07"
+                  "8b89a749624c9b518261539d8997086c"
                 ]
               },
               {
                 "kind": "build",
-                "text": "Build a Workshop",
+                "text": "Have a Workshop",
                 "quantity": 1,
                 "target": [
                   "ef89bf3e0a1a40bfa149355bdc4e83b5"
@@ -28762,40 +28737,15 @@
               {
                 "kind": "checks",
                 "label": "Stroke1",
-                "text": "1. Pulse at 24\u201360% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Cool to 9% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Pulse at 29\u201360% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points. Complete the listed construction first."
+                "text": "Send a signal at 23\u00e2\u20ac\u201c63% stress",
+                "description": "Complete construction. Select the Generator, leave it running and use Overdrive to raise the stress gauge to 23\u00e2\u20ac\u201c63%. The relay sends the signal within 15 game minutes. Switch off Overdrive when the objective ticks."
               }
             ],
-            "title": "Give the works priority",
+            "title": "Give the workshops steam",
             "profile": "works",
-            "strokes": [
-              {
-                "low": 24,
-                "high": 60,
-                "draw": 10
-              },
-              {
-                "low": 0,
-                "high": 9,
-                "draw": 0
-              },
-              {
-                "low": 29,
-                "high": 60,
-                "draw": 10
-              }
+            "signal": [
+              23,
+              63
             ],
             "requires": [],
             "flag": null,
@@ -28816,15 +28766,7 @@
               },
               {
                 "kind": "build",
-                "text": "Build two Steam Hubs",
-                "quantity": 2,
-                "target": [
-                  "d3aee53d931e86bd204dab5ab7d320d1"
-                ]
-              },
-              {
-                "kind": "operate",
-                "text": "Operate a Steelworks",
+                "text": "Have a Steelworks",
                 "quantity": 1,
                 "target": [
                   "a18dbc3c1439ba9c04447717e2610bfd",
@@ -28834,46 +28776,20 @@
               },
               {
                 "kind": "checks",
-                "label": "Stroke1",
-                "text": "1. Pulse at 34\u201361% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Cool to 12% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Pulse at 39\u201363% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 13 stress points. Complete the listed construction first."
+                "label": "Pledge",
+                "text": "Complete the dispatch",
+                "description": "Set aside 85 steel. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Fit the pressure accumulator",
+            "title": "Fit the accumulator",
             "profile": "works",
-            "strokes": [
-              {
-                "low": 34,
-                "high": 61,
-                "draw": 12
-              },
-              {
-                "low": 0,
-                "high": 12,
-                "draw": 0
-              },
-              {
-                "low": 39,
-                "high": 63,
-                "draw": 13
-              }
-            ],
+            "signal": null,
             "requires": [],
             "flag": "accumulator",
             "watch": null,
-            "pledge": null,
+            "pledge": {
+              "Steel": 85
+            },
             "hold": null
           },
           {
@@ -28889,15 +28805,7 @@
               },
               {
                 "kind": "build",
-                "text": "Build two Steam Hubs",
-                "quantity": 2,
-                "target": [
-                  "d3aee53d931e86bd204dab5ab7d320d1"
-                ]
-              },
-              {
-                "kind": "operate",
-                "text": "Operate two medical buildings",
+                "text": "Have two medical buildings",
                 "quantity": 2,
                 "target": [
                   "f6a831d9683c3d9b904cd09ded358f8a",
@@ -28907,57 +28815,21 @@
               },
               {
                 "kind": "checks",
-                "label": "Stroke1",
-                "text": "1. Cool to 12% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Pulse at 22\u201354% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 8 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Cool to 10% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke4",
-                "text": "4. Pulse at 27\u201357% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 9 stress points. Complete the listed construction first."
+                "label": "Pledge",
+                "text": "Complete the dispatch",
+                "description": "Set aside 55 wood, 35 steel. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Fit an isolated bypass",
+            "title": "Isolate the ward line",
             "profile": "bypass",
-            "strokes": [
-              {
-                "low": 0,
-                "high": 12,
-                "draw": 0
-              },
-              {
-                "low": 22,
-                "high": 54,
-                "draw": 8
-              },
-              {
-                "low": 0,
-                "high": 10,
-                "draw": 0
-              },
-              {
-                "low": 27,
-                "high": 57,
-                "draw": 9
-              }
-            ],
+            "signal": null,
             "requires": [],
             "flag": "bypass",
             "watch": null,
-            "pledge": null,
+            "pledge": {
+              "Wood": 55,
+              "Steel": 35
+            },
             "hold": null
           },
           {
@@ -28973,81 +28845,29 @@
                 "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
               },
               {
-                "kind": "operate",
-                "text": "Operate a Cookhouse",
+                "kind": "build",
+                "text": "Have a Cookhouse",
                 "quantity": 1,
                 "target": [
                   "59b3ef3d8505aea51a45828da82a1c3d"
                 ]
               },
               {
-                "kind": "produce",
-                "text": "Cook eight new batches for the shelter",
-                "quantity": 8,
-                "target": [
-                  "925cc17cc4c067ae0248aaef7ff14ed5",
-                  "b5f5c91e6c4db683424007ee9051463c",
-                  "238787e45f7b239f3c406cebb73f45b4",
-                  "0a7f2306c063ce83694a59f99b24e5c8",
-                  "dbfeb8bf4e60439add46e25c118fed85",
-                  "8f65ab452f00c757af98b654f3a8bbbc",
-                  "bef3c24de41f965d9053efbd9abcf4d2",
-                  "38df762e6b934a599f993770039f6b26"
-                ]
-              },
-              {
                 "kind": "checks",
-                "label": "Stroke1",
-                "text": "1. Pulse at 28\u201358% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Cool to 11% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Pulse at 34\u201359% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 11 stress points."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke4",
-                "text": "4. Cool to 11% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+                "label": "Pledge",
+                "text": "Complete the dispatch",
+                "description": "Set aside 60 food rations. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Guide the lower shelter",
+            "title": "Guide the families down",
             "profile": "ward",
-            "strokes": [
-              {
-                "low": 28,
-                "high": 58,
-                "draw": 10
-              },
-              {
-                "low": 0,
-                "high": 11,
-                "draw": 0
-              },
-              {
-                "low": 34,
-                "high": 59,
-                "draw": 11
-              },
-              {
-                "low": 0,
-                "high": 11,
-                "draw": 0
-              }
-            ],
+            "signal": null,
             "requires": [],
             "flag": null,
             "watch": null,
-            "pledge": null,
+            "pledge": {
+              "Food Rations": 60
+            },
             "hold": null
           },
           {
@@ -29068,57 +28888,11 @@
                 "kind": "checks",
                 "text": "Send Scouts out and return them to the city",
                 "label": "Scout"
-              },
-              {
-                "kind": "operate",
-                "text": "Operate a coal mine or thumper",
-                "quantity": 1,
-                "target": [
-                  "7f5d92438ed6d18e994473ff2014dc3d",
-                  "7226772eb77bc49f9c4c520f3df2c7dc",
-                  "06cdc0a0e6d288a8d2435294d142c9b5",
-                  "145e292916c2d6826b4c1b7cd624f1ce",
-                  "c4a1ac4584d524a749436429f81880a3"
-                ]
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke1",
-                "text": "1. Pulse at 35\u201364% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Cool to 12% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Pulse at 40\u201365% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 14 stress points. Complete the listed construction first."
               }
             ],
             "title": "Survey the upper shelf",
             "profile": "works",
-            "strokes": [
-              {
-                "low": 35,
-                "high": 64,
-                "draw": 12
-              },
-              {
-                "low": 0,
-                "high": 12,
-                "draw": 0
-              },
-              {
-                "low": 40,
-                "high": 65,
-                "draw": 14
-              }
-            ],
+            "signal": null,
             "requires": [],
             "flag": "surveyed",
             "watch": null,
@@ -29132,8 +28906,8 @@
             "deadline": 7,
             "goals": [
               {
-                "kind": "operate",
-                "text": "Operate a Hothouse",
+                "kind": "build",
+                "text": "Have a Hothouse",
                 "quantity": 1,
                 "target": [
                   "20e9be8106e19f838b4bb73be86d04de",
@@ -29141,81 +28915,30 @@
                 ]
               },
               {
-                "kind": "operate",
-                "text": "Operate two Cookhouses",
+                "kind": "build",
+                "text": "Have two Cookhouses",
                 "quantity": 2,
                 "target": [
                   "59b3ef3d8505aea51a45828da82a1c3d"
                 ]
               },
               {
-                "kind": "produce",
-                "text": "Cook twelve new batches for the relief sleds",
-                "quantity": 12,
-                "target": [
-                  "925cc17cc4c067ae0248aaef7ff14ed5",
-                  "b5f5c91e6c4db683424007ee9051463c",
-                  "238787e45f7b239f3c406cebb73f45b4",
-                  "0a7f2306c063ce83694a59f99b24e5c8",
-                  "dbfeb8bf4e60439add46e25c118fed85",
-                  "8f65ab452f00c757af98b654f3a8bbbc",
-                  "bef3c24de41f965d9053efbd9abcf4d2",
-                  "38df762e6b934a599f993770039f6b26"
-                ]
-              },
-              {
                 "kind": "checks",
-                "label": "Stroke1",
-                "text": "1. Cool to 10% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Pulse at 27\u201356% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 9 stress points."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Cool to 10% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke4",
-                "text": "4. Pulse at 34\u201360% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points."
+                "label": "Pledge",
+                "text": "Complete the dispatch",
+                "description": "Set aside 100 food rations, 30 coal. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Feed the shelters from the basin",
+            "title": "Send a food convoy",
             "profile": "bypass",
-            "strokes": [
-              {
-                "low": 0,
-                "high": 10,
-                "draw": 0
-              },
-              {
-                "low": 27,
-                "high": 56,
-                "draw": 9
-              },
-              {
-                "low": 0,
-                "high": 10,
-                "draw": 0
-              },
-              {
-                "low": 34,
-                "high": 60,
-                "draw": 10
-              }
-            ],
+            "signal": null,
             "requires": [],
             "flag": null,
             "watch": null,
-            "pledge": null,
+            "pledge": {
+              "Food Rations": 100,
+              "Coal": 30
+            },
             "hold": null
           },
           {
@@ -29225,8 +28948,8 @@
             "deadline": 7,
             "goals": [
               {
-                "kind": "operate",
-                "text": "Operate two Steelworks",
+                "kind": "build",
+                "text": "Have two Steelworks",
                 "quantity": 2,
                 "target": [
                   "a18dbc3c1439ba9c04447717e2610bfd",
@@ -29236,7 +28959,7 @@
               },
               {
                 "kind": "build",
-                "text": "Build a Large Resource Depot for the repair crew",
+                "text": "Have a Large Resource Depot",
                 "quantity": 1,
                 "target": [
                   "d17fb879d88864a9444ee0283802c4cd"
@@ -29244,57 +28967,21 @@
               },
               {
                 "kind": "checks",
-                "label": "Stroke1",
-                "text": "1. Pulse at 39\u201363% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Cool to 13% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Pulse at 44\u201367% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 15 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke4",
-                "text": "4. Cool to 13% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+                "label": "Pledge",
+                "text": "Complete the dispatch",
+                "description": "Set aside 100 steel, 60 coal. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Hold pressure for the welders",
+            "title": "Send the welding crew",
             "profile": "works",
-            "strokes": [
-              {
-                "low": 39,
-                "high": 63,
-                "draw": 12
-              },
-              {
-                "low": 0,
-                "high": 13,
-                "draw": 0
-              },
-              {
-                "low": 44,
-                "high": 67,
-                "draw": 15
-              },
-              {
-                "low": 0,
-                "high": 13,
-                "draw": 0
-              }
-            ],
+            "signal": null,
             "requires": [],
             "flag": "welded",
             "watch": null,
-            "pledge": null,
+            "pledge": {
+              "Steel": 100,
+              "Coal": 60
+            },
             "hold": null
           },
           {
@@ -29310,8 +28997,8 @@
                 "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
               },
               {
-                "kind": "operate",
-                "text": "Operate three medical buildings",
+                "kind": "build",
+                "text": "Have three medical buildings",
                 "quantity": 3,
                 "target": [
                   "f6a831d9683c3d9b904cd09ded358f8a",
@@ -29320,77 +29007,22 @@
                 ]
               },
               {
-                "kind": "build",
-                "text": "Build three Steam Hubs",
-                "quantity": 3,
-                "target": [
-                  "d3aee53d931e86bd204dab5ab7d320d1"
-                ]
-              },
-              {
                 "kind": "checks",
-                "label": "Stroke1",
-                "text": "1. Pulse at 35\u201362% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Cool to 12% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Pulse at 41\u201364% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 13 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke4",
-                "text": "4. Cool to 11% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke5",
-                "text": "5. Pulse at 46\u201367% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 15 stress points. Complete the listed construction first."
+                "label": "Pledge",
+                "text": "Complete the dispatch",
+                "description": "Set aside 155 coal, 50 food rations. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
             "title": "Call the shelters in order",
             "profile": "ward",
-            "strokes": [
-              {
-                "low": 35,
-                "high": 62,
-                "draw": 12
-              },
-              {
-                "low": 0,
-                "high": 12,
-                "draw": 0
-              },
-              {
-                "low": 41,
-                "high": 64,
-                "draw": 13
-              },
-              {
-                "low": 0,
-                "high": 11,
-                "draw": 0
-              },
-              {
-                "low": 46,
-                "high": 67,
-                "draw": 15
-              }
-            ],
+            "signal": null,
             "requires": [],
             "flag": "final",
             "watch": null,
-            "pledge": null,
+            "pledge": {
+              "Coal": 155,
+              "Food Rations": 50
+            },
             "hold": null
           },
           {
@@ -29400,20 +29032,8 @@
             "deadline": 8,
             "goals": [
               {
-                "kind": "operate",
-                "text": "Operate two coal mines or thumpers",
-                "quantity": 2,
-                "target": [
-                  "7f5d92438ed6d18e994473ff2014dc3d",
-                  "7226772eb77bc49f9c4c520f3df2c7dc",
-                  "06cdc0a0e6d288a8d2435294d142c9b5",
-                  "145e292916c2d6826b4c1b7cd624f1ce",
-                  "c4a1ac4584d524a749436429f81880a3"
-                ]
-              },
-              {
                 "kind": "build",
-                "text": "Build two Resource Depots",
+                "text": "Have two Resource Depots",
                 "quantity": 2,
                 "target": [
                   "5fed86e519e68f92f140c0bd1de72a7c",
@@ -29423,51 +29043,15 @@
               {
                 "kind": "checks",
                 "label": "Stroke1",
-                "text": "1. Pulse at 42\u201364% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 15 stress points."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Cool to 15% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Pulse at 51\u201369% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 18 stress points."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke4",
-                "text": "4. Cool to 12% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+                "text": "Send a signal at 35\u00e2\u20ac\u201c68% stress",
+                "description": "Complete construction. Select the Generator, leave it running and use Overdrive to raise the stress gauge to 35\u00e2\u20ac\u201c68%. The relay sends the signal within 15 game minutes. Switch off Overdrive when the objective ticks."
               }
             ],
-            "title": "Send one heavy signal through the accumulator",
+            "title": "Use the accumulator",
             "profile": "works",
-            "strokes": [
-              {
-                "low": 42,
-                "high": 64,
-                "draw": 15
-              },
-              {
-                "low": 0,
-                "high": 15,
-                "draw": 0
-              },
-              {
-                "low": 51,
-                "high": 69,
-                "draw": 18
-              },
-              {
-                "low": 0,
-                "high": 12,
-                "draw": 0
-              }
+            "signal": [
+              35,
+              68
             ],
             "requires": [
               "accumulator"
@@ -29490,8 +29074,8 @@
                 "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
               },
               {
-                "kind": "operate",
-                "text": "Operate two medical buildings",
+                "kind": "build",
+                "text": "Have two medical buildings",
                 "quantity": 2,
                 "target": [
                   "f6a831d9683c3d9b904cd09ded358f8a",
@@ -29500,70 +29084,25 @@
                 ]
               },
               {
-                "kind": "operate",
-                "text": "Operate a Hothouse",
-                "quantity": 1,
-                "target": [
-                  "20e9be8106e19f838b4bb73be86d04de",
-                  "20e9be8106e19f838b4bb73ae86d04de"
-                ]
-              },
-              {
                 "kind": "checks",
-                "label": "Stroke1",
-                "text": "1. Cool to 10% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Pulse at 30\u201357% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 10 stress points."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Cool to 12% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke4",
-                "text": "4. Pulse at 36\u201362% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points."
+                "label": "Pledge",
+                "text": "Complete the dispatch",
+                "description": "Set aside 85 coal, 30 steel. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Send paired pulses down the surveyed bypass",
+            "title": "Use the surveyed bypass",
             "profile": "bypass",
-            "strokes": [
-              {
-                "low": 0,
-                "high": 10,
-                "draw": 0
-              },
-              {
-                "low": 30,
-                "high": 57,
-                "draw": 10
-              },
-              {
-                "low": 0,
-                "high": 12,
-                "draw": 0
-              },
-              {
-                "low": 36,
-                "high": 62,
-                "draw": 12
-              }
-            ],
+            "signal": null,
             "requires": [
               "bypass",
               "surveyed"
             ],
             "flag": "final",
             "watch": null,
-            "pledge": null,
+            "pledge": {
+              "Coal": 85,
+              "Steel": 30
+            },
             "hold": null
           },
           {
@@ -29573,23 +29112,15 @@
             "deadline": 5,
             "goals": [
               {
-                "kind": "build",
-                "text": "Build two Steam Hubs",
-                "quantity": 2,
-                "target": [
-                  "d3aee53d931e86bd204dab5ab7d320d1"
-                ]
-              },
-              {
                 "kind": "warm",
                 "text": "Keep 14 homes Liveable or warmer",
                 "quantity": 14,
                 "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
               },
               {
-                "kind": "operate",
-                "text": "Operate three medical buildings",
-                "quantity": 3,
+                "kind": "build",
+                "text": "Have two medical buildings",
+                "quantity": 2,
                 "target": [
                   "f6a831d9683c3d9b904cd09ded358f8a",
                   "98c676299c50c1841a4568ff11d61bde",
@@ -29600,21 +29131,19 @@
                 "kind": "checks",
                 "label": "Watch",
                 "quantity": 3,
-                "text": "Complete 3 watches and send fuel to Broken Mile",
-                "description": "Each watch takes 8 consecutive hourly checks at 0\u201334% stress with the Generator running. Keep 230 coal ready. Each completed watch sends 50 coal and leaves 180 in reserve. A Coal Magazine reduces both the required stock and the shipment by 20. A lapse restarts only the current watch."
+                "text": "Deliver three coal loads to Broken Mile",
+                "description": "A watch is one relief crew's shift. Send a load on the dispatch panel that appears when at least 230 coal is in storage. Each delivery takes 12 hours. A Coal Magazine cuts each load by 20 coal. The tracker counts arrivals. The Generator gauge is separate from this delivery."
               }
             ],
-            "title": "Run a low-pressure watch",
+            "title": "Use the sheltered road",
             "profile": "ward",
-            "strokes": [],
+            "signal": null,
             "requires": [],
             "flag": "watch_kept",
             "watch": {
-              "hours": 8,
-              "low": 0,
-              "high": 34,
               "reserve": 180,
-              "coal": 50
+              "coal": 50,
+              "travel": 12
             },
             "pledge": null,
             "hold": null
@@ -29627,15 +29156,7 @@
             "goals": [
               {
                 "kind": "build",
-                "text": "Build two Steam Hubs",
-                "quantity": 2,
-                "target": [
-                  "d3aee53d931e86bd204dab5ab7d320d1"
-                ]
-              },
-              {
-                "kind": "operate",
-                "text": "Operate two coal mines or thumpers",
+                "text": "Have two coal mines or thumpers",
                 "quantity": 2,
                 "target": [
                   "7f5d92438ed6d18e994473ff2014dc3d",
@@ -29646,8 +29167,8 @@
                 ]
               },
               {
-                "kind": "operate",
-                "text": "Operate two Steelworks",
+                "kind": "build",
+                "text": "Have two Steelworks",
                 "quantity": 2,
                 "target": [
                   "a18dbc3c1439ba9c04447717e2610bfd",
@@ -29659,21 +29180,19 @@
                 "kind": "checks",
                 "label": "Watch",
                 "quantity": 3,
-                "text": "Complete 3 watches and send fuel to Broken Mile",
-                "description": "Each watch takes 6 consecutive hourly checks at 14\u201355% stress with the Generator running. Keep 230 coal ready. Each completed watch sends 65 coal and leaves 165 in reserve. A Coal Magazine reduces both the required stock and the shipment by 20. A lapse restarts only the current watch."
+                "text": "Deliver three coal loads to Broken Mile",
+                "description": "A watch is one relief crew's shift. Send a load on the dispatch panel that appears when at least 230 coal is in storage. Each delivery takes 7 hours. A Coal Magazine cuts each load by 20 coal. The tracker counts arrivals. The Generator gauge is separate from this delivery."
               }
             ],
-            "title": "Run a hot transfer",
+            "title": "Use the ridge tramway",
             "profile": "works",
-            "strokes": [],
+            "signal": null,
             "requires": [],
             "flag": "watch_kept",
             "watch": {
-              "hours": 6,
-              "low": 14,
-              "high": 55,
               "reserve": 165,
-              "coal": 65
+              "coal": 65,
+              "travel": 7
             },
             "pledge": null,
             "hold": null
@@ -29686,10 +29205,10 @@
             "goals": [
               {
                 "kind": "build",
-                "text": "Build four Steam Hubs",
-                "quantity": 4,
+                "text": "Have two Signal Relays",
+                "quantity": 2,
                 "target": [
-                  "d3aee53d931e86bd204dab5ab7d320d1"
+                  "8b89a749624c9b518261539d8997086c"
                 ]
               },
               {
@@ -29699,53 +29218,15 @@
                 "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
               },
               {
-                "kind": "produce",
-                "text": "Cook sixteen new batches for the ridge",
-                "quantity": 16,
-                "target": [
-                  "925cc17cc4c067ae0248aaef7ff14ed5",
-                  "b5f5c91e6c4db683424007ee9051463c",
-                  "238787e45f7b239f3c406cebb73f45b4",
-                  "0a7f2306c063ce83694a59f99b24e5c8",
-                  "dbfeb8bf4e60439add46e25c118fed85",
-                  "8f65ab452f00c757af98b654f3a8bbbc",
-                  "bef3c24de41f965d9053efbd9abcf4d2",
-                  "38df762e6b934a599f993770039f6b26"
-                ]
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke1",
-                "text": "1. Pulse at 34\u201361% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Cool to 13% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
                 "kind": "checks",
                 "label": "Pledge",
-                "text": "Dispatch the charter supplies",
-                "description": "The supplies depart automatically once the stock is ready and the signal sequence is complete. Set aside 250 coal, 80 food rations. This shipment is paid once."
+                "text": "Complete the dispatch",
+                "description": "Set aside 250 coal, 80 food rations. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Offer the shelters a permanent supply",
+            "title": "Sign a supply charter",
             "profile": "bypass",
-            "strokes": [
-              {
-                "low": 34,
-                "high": 61,
-                "draw": 12
-              },
-              {
-                "low": 0,
-                "high": 13,
-                "draw": 0
-              }
-            ],
+            "signal": null,
             "requires": [
               "watch_kept"
             ],
@@ -29770,38 +29251,23 @@
                 "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
               },
               {
-                "kind": "operate",
-                "text": "Operate two Cookhouses",
+                "kind": "build",
+                "text": "Have two Cookhouses",
                 "quantity": 2,
                 "target": [
                   "59b3ef3d8505aea51a45828da82a1c3d"
                 ]
               },
               {
-                "kind": "produce",
-                "text": "Cook fourteen new batches for the arrivals",
-                "quantity": 14,
-                "target": [
-                  "925cc17cc4c067ae0248aaef7ff14ed5",
-                  "b5f5c91e6c4db683424007ee9051463c",
-                  "238787e45f7b239f3c406cebb73f45b4",
-                  "0a7f2306c063ce83694a59f99b24e5c8",
-                  "dbfeb8bf4e60439add46e25c118fed85",
-                  "8f65ab452f00c757af98b654f3a8bbbc",
-                  "bef3c24de41f965d9053efbd9abcf4d2",
-                  "38df762e6b934a599f993770039f6b26"
-                ]
-              },
-              {
                 "kind": "checks",
                 "label": "Pledge",
-                "text": "Dispatch the charter supplies",
-                "description": "The supplies depart automatically once the stock is ready and the signal sequence is complete. Set aside 100 wood, 65 food rations. This shipment is paid once."
+                "text": "Complete the dispatch",
+                "description": "Set aside 100 wood, 65 food rations. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Move the remaining families into the basin",
+            "title": "Bring the families inside",
             "profile": "ward",
-            "strokes": [],
+            "signal": null,
             "requires": [],
             "flag": "charter",
             "watch": null,
@@ -29829,8 +29295,8 @@
                 "kind": "produce",
                 "station": "Valve Works",
                 "quantity": 4,
-                "text": "Valve Works: complete 4 \u00d7 Machine Isolation Valve",
-                "description": "Select Valve Works, staff it with engineers and add Machine Isolation Valve to the queue under General. Finish 4 orders during this job. Orders finished earlier do not count.",
+                "text": "Finish 4 \u00d7 Machine Isolation Valve",
+                "description": "Queue this work order in Valve Works under General. Assign engineers. Finish 4 orders after accepting this job. Keep the finished supplies for departure.",
                 "target": [
                   "9cde900edf0faa53bb6937edc41ffbfc"
                 ]
@@ -29838,21 +29304,30 @@
               {
                 "kind": "checks",
                 "label": "PressureTest",
-                "text": "Hold 12\u201336% stress for 6 hours",
-                "description": "Build the Valve Works first. Keep the Generator running at 12\u201336% stress and keep 225 coal in reserve for 6 consecutive hourly checks. An interruption restarts the test. You can run the test while the engineers fabricate the parts."
+                "quantity": 4,
+                "text": "Record 4 test hours at 0\u00e2\u20ac\u201c38% stress",
+                "description": "Build the Valve Works first. Keep the Generator running at 0\u00e2\u20ac\u201c38% stress and hold 225 coal in stock. Check the counter each game hour. Build parts while the test runs. Recorded hours carry forward if stress leaves the band."
+              },
+              {
+                "kind": "checks",
+                "label": "Pledge",
+                "text": "Commission the parts",
+                "description": "Set aside 4 steam tools. Confirm the dispatch order when it opens. It opens after the pressure test."
               }
             ],
-            "title": "Isolate the lake branch",
+            "title": "Seal the lake branch",
             "profile": "ward",
-            "strokes": [],
+            "signal": null,
             "requires": [],
             "flag": null,
             "watch": null,
-            "pledge": null,
+            "pledge": {
+              "Steam Tools": 4
+            },
             "hold": {
-              "hours": 6,
-              "low": 12,
-              "high": 36,
+              "hours": 4,
+              "low": 0,
+              "high": 38,
               "reserve": 225
             }
           },
@@ -29874,8 +29349,8 @@
                 "kind": "produce",
                 "station": "Valve Works",
                 "quantity": 3,
-                "text": "Valve Works: complete 3 \u00d7 Rivet Bypass Section",
-                "description": "Select Valve Works, staff it with engineers and add Rivet Bypass Section to the queue under General. Finish 3 orders during this job. Orders finished earlier do not count.",
+                "text": "Finish 3 \u00d7 Rivet Bypass Section",
+                "description": "Queue this work order in Valve Works under General. Assign engineers. Finish 3 orders after accepting this job. Keep the finished supplies for departure.",
                 "target": [
                   "f39d2f72678740519e5b12e9d1eec4ce"
                 ]
@@ -29883,21 +29358,30 @@
               {
                 "kind": "checks",
                 "label": "PressureTest",
-                "text": "Hold 37\u201359% stress for 4 hours",
-                "description": "Build the Valve Works first. Keep the Generator running at 37\u201359% stress and keep 300 coal in reserve for 4 consecutive hourly checks. An interruption restarts the test. You can run the test while the engineers fabricate the parts."
+                "quantity": 3,
+                "text": "Record 3 test hours at 25\u00e2\u20ac\u201c63% stress",
+                "description": "Build the Valve Works first. Keep the Generator running at 25\u00e2\u20ac\u201c63% stress and hold 300 coal in stock. Check the counter each game hour. Build parts while the test runs. Recorded hours carry forward if stress leaves the band."
+              },
+              {
+                "kind": "checks",
+                "label": "Pledge",
+                "text": "Commission the parts",
+                "description": "Set aside 3 steel plates. Confirm the dispatch order when it opens. It opens after the pressure test."
               }
             ],
-            "title": "Power the ridge lift with a bypass",
+            "title": "Restore the ridge lift",
             "profile": "works",
-            "strokes": [],
+            "signal": null,
             "requires": [],
             "flag": "ridge_lift",
             "watch": null,
-            "pledge": null,
+            "pledge": {
+              "Steel Plates": 3
+            },
             "hold": {
-              "hours": 4,
-              "low": 37,
-              "high": 59,
+              "hours": 3,
+              "low": 25,
+              "high": 63,
               "reserve": 300
             }
           },
@@ -29922,56 +29406,31 @@
                 "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
               },
               {
-                "kind": "operate",
-                "text": "Operate two medical buildings",
-                "quantity": 2,
-                "target": [
-                  "f6a831d9683c3d9b904cd09ded358f8a",
-                  "98c676299c50c1841a4568ff11d61bde",
-                  "8914dc6cfe447894474dd2f0d9ee527e"
-                ]
-              },
-              {
                 "kind": "produce",
                 "station": "Relief Dispatch",
                 "quantity": 4,
-                "text": "Relief Dispatch: complete 4 \u00d7 Pack Clinic Sledge",
-                "description": "Select Relief Dispatch, staff it with engineers and add Pack Clinic Sledge to the queue under General. Finish 4 orders during this job. Orders finished earlier do not count.",
+                "text": "Finish 4 \u00d7 Pack Clinic Sledge",
+                "description": "Queue this work order in Relief Dispatch under General. Assign engineers. Finish 4 orders after accepting this job. Keep the finished supplies for departure.",
                 "target": [
                   "cdccef755956185a9501a01135fc2420"
                 ]
               },
               {
                 "kind": "checks",
-                "label": "Stroke1",
-                "text": "1. Pulse at 24\u201349% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 8 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Cool to 12% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+                "label": "Pledge",
+                "text": "Complete the dispatch",
+                "description": "Set aside 4 wooden materials. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Bring the clinic down the footpath",
+            "title": "Bring the clinic down",
             "profile": "ward",
-            "strokes": [
-              {
-                "low": 24,
-                "high": 49,
-                "draw": 8
-              },
-              {
-                "low": 0,
-                "high": 12,
-                "draw": 0
-              }
-            ],
+            "signal": null,
             "requires": [],
             "flag": "convoy_returned",
             "watch": null,
-            "pledge": null,
+            "pledge": {
+              "Wooden Materials": 4
+            },
             "hold": null
           },
           {
@@ -29989,8 +29448,8 @@
                 ]
               },
               {
-                "kind": "operate",
-                "text": "Operate two Steelworks",
+                "kind": "build",
+                "text": "Have two Steelworks",
                 "quantity": 2,
                 "target": [
                   "a18dbc3c1439ba9c04447717e2610bfd",
@@ -30002,56 +29461,30 @@
                 "kind": "produce",
                 "station": "Relief Dispatch",
                 "quantity": 3,
-                "text": "Relief Dispatch: complete 3 \u00d7 Pack Lift Sledge",
-                "description": "Select Relief Dispatch, staff it with engineers and add Pack Lift Sledge to the queue under General. Finish 3 orders during this job. Orders finished earlier do not count.",
+                "text": "Finish 3 \u00d7 Pack Lift Sledge",
+                "description": "Queue this work order in Relief Dispatch under General. Assign engineers. Finish 3 orders after accepting this job. Keep the finished supplies for departure.",
                 "target": [
                   "2193d2dc6ac4995d8d3f939a4567b74b"
                 ]
               },
               {
                 "kind": "checks",
-                "label": "Stroke1",
-                "text": "1. Pulse at 38\u201358% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke2",
-                "text": "2. Cool to 13% Generator stress",
-                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
-              },
-              {
-                "kind": "checks",
-                "label": "Stroke3",
-                "text": "3. Pulse at 42\u201361% Generator stress",
-                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 13 stress points. Complete the listed construction first."
+                "label": "Pledge",
+                "text": "Complete the dispatch",
+                "description": "Set aside 3 steel plates. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Bring the lift crew down with its tools",
+            "title": "Bring the lift crew down",
             "profile": "works",
-            "strokes": [
-              {
-                "low": 38,
-                "high": 58,
-                "draw": 12
-              },
-              {
-                "low": 0,
-                "high": 13,
-                "draw": 0
-              },
-              {
-                "low": 42,
-                "high": 61,
-                "draw": 13
-              }
-            ],
+            "signal": null,
             "requires": [
               "ridge_lift"
             ],
             "flag": "convoy_returned",
             "watch": null,
-            "pledge": null,
+            "pledge": {
+              "Steel Plates": 3
+            },
             "hold": null
           }
         ],
@@ -30072,9 +29505,17 @@
             "shot": "NightWatch",
             "signal": "fbdcfe5785ba925a988870f29f88a057"
           },
-          "dawn": {
-            "shot": "Dawn",
-            "signal": "ab7cd998c43c5c57b3b441e4ecaba9f4"
+          "dawn/1": {
+            "shot": "DawnBasin",
+            "signal": "613ae17f0570535596682f7bd8482edb"
+          },
+          "dawn/2": {
+            "shot": "DawnSignal",
+            "signal": "681a3c71caedfd50a60fae999747c85b"
+          },
+          "dawn/3": {
+            "shot": "DawnAccord",
+            "signal": "b112dafedd522d50bc8976d0a203c66a"
           }
         },
         "watch_legs": 3,
@@ -30094,8 +29535,8 @@
               "Steel": 16,
               "Wood": 12
             },
-            "radius": 18,
-            "coal_per_hour": 2
+            "reconnect_at": 25,
+            "model": "graphics/primitives/faultline_signal_relay.binarytemplate"
           },
           {
             "name": "Coal Magazine",
@@ -30108,7 +29549,8 @@
               "Wood": 30,
               "Steel": 25
             },
-            "coal_capacity": 1500
+            "coal_capacity": 1500,
+            "model": "graphics/primitives/faultline_coal_magazine.binarytemplate"
           },
           {
             "name": "Valve Works",
@@ -30126,26 +29568,27 @@
             "orders": {
               "FaultlineIsolationValve": {
                 "title": "Machine Isolation Valve",
-                "output": "Steel",
+                "output": "Steam Tools",
                 "inputs": {
                   "Steel": 22,
                   "Coal": 15
                 },
                 "hours": 5,
-                "purpose": "Fabricate a shut-off valve for The Line Under the Lake. Requirements for installed valves are tracked in the mission."
+                "purpose": "Machine a shut-off valve for the lake branch. The Works uses Steam Tools as its inventory for finished fittings."
               },
               "FaultlineBypassSection": {
                 "title": "Rivet Bypass Section",
-                "output": "Wood",
+                "output": "Steel Plates",
                 "inputs": {
                   "Steel": 30,
                   "Wood": 12,
                   "Coal": 12
                 },
                 "hours": 6,
-                "purpose": "Prepare a bypass section strong enough to run steam to the ridge lift. Requirements for installed pipe are tracked in the mission."
+                "purpose": "Rivet a pressure-rated branch for the ridge lift. Its Steel Plates are spent when you commission the bypass."
               }
-            }
+            },
+            "model": "graphics/primitives/faultline_valve_works.binarytemplate"
           },
           {
             "name": "Relief Dispatch",
@@ -30163,28 +29606,29 @@
             "orders": {
               "FaultlineClinicSledge": {
                 "title": "Pack Clinic Sledge",
-                "output": "Wood",
+                "output": "Wooden Materials",
                 "inputs": {
                   "Food Rations": 35,
                   "Wood": 16
                 },
                 "hours": 4,
-                "purpose": "Pack one clinic sledge with meals, bedding and splints for the shelter evacuation."
+                "purpose": "Pack a clinic sledge with meals, bedding and splints. The manifest reserves its Wooden Materials for the convoy."
               },
               "FaultlineLiftSledge": {
                 "title": "Pack Lift Sledge",
-                "output": "Coal",
+                "output": "Steel Plates",
                 "inputs": {
                   "Coal": 55,
                   "Wood": 15
                 },
                 "hours": 5,
-                "purpose": "Pack one heavy sledge with fuel and rigging for the ridge lift and its passengers."
+                "purpose": "Pack a heavy sledge with fuel and rigging. The lift convoy spends its Steel Plates at departure."
               }
-            }
+            },
+            "model": "graphics/primitives/faultline_relief_dispatch.binarytemplate"
           }
         ],
-        "relay_reset": 20,
+        "relay_reset": 25,
         "magazine_saving": 20,
         "lessons": {
           "gauge": "9976389dcd4ce7599edb014e2e3792dd",
@@ -30214,7 +29658,37 @@
           "faultline/ridge_fitters": "eeda23f91b981a50b83beb9537566b38"
         },
         "forecast": "b5b11cd7a264c4579395c43e9031cf7b",
-        "construction_set": "0c9e971b5657275984839f946d400250"
+        "construction_set": "0c9e971b5657275984839f946d400250",
+        "models": [
+          {
+            "name": "Signal Relay",
+            "path": "graphics/primitives/faultline_signal_relay.binarytemplate",
+            "guid": "dbd4686182fc1e5ba190971d3c53bb31",
+            "donor": "graphics/primitives/cube.binarytemplate",
+            "triangles": 512
+          },
+          {
+            "name": "Coal Magazine",
+            "path": "graphics/primitives/faultline_coal_magazine.binarytemplate",
+            "guid": "096123de1f35095f86fae5062c89e4cc",
+            "donor": "graphics/primitives/cube.binarytemplate",
+            "triangles": 348
+          },
+          {
+            "name": "Valve Works",
+            "path": "graphics/primitives/faultline_valve_works.binarytemplate",
+            "guid": "28b06786d231005c8fc9efaccc2b2609",
+            "donor": "graphics/primitives/cube.binarytemplate",
+            "triangles": 1200
+          },
+          {
+            "name": "Relief Dispatch",
+            "path": "graphics/primitives/faultline_relief_dispatch.binarytemplate",
+            "guid": "b8eb68ec9c8e2a5f8f507e92720a98dc",
+            "donor": "graphics/primitives/cube.binarytemplate",
+            "triangles": 914
+          }
+        ]
       }
     },
     "ui": {

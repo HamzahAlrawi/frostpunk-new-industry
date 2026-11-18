@@ -25,7 +25,6 @@ def inspect(log):
         if f"[{CITY.lower()}] scene loading time:" in line:
             city_loaded = True
             world_loaded = False
-            found.clear()
         if f"[{WORLD.lower()}] scene loading time:" in line:
             world_loaded = True
         if LOADING in line:

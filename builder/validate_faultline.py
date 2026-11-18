@@ -5,7 +5,7 @@ from tools.native_binary import Cursor, string
 from tools.scenario_model import World
 from tools.housing_schema import BEACON
 from tools.story_schema import DEFAULT
-from winter_road_maps import SITES
+from winter_road_maps import LEGACY_POINTS, LEGACY_TEMPLATES
 
 
 PREFIX = "NI/Faultline/"
@@ -45,11 +45,9 @@ def audit_assets(stock_catalog, catalog, stock_messages, messages, templates, ca
         price=Cursor(prefab,component(prefab,"BuildingEconomics"))
         actual={price.guid():price.u32() for _ in range(price.count(4))}
         assert actual=={resources[key]:n for key,n in spec["price"].items()}
-        if "radius" in spec:
-            heat=Cursor(prefab,component(prefab,"Heater"))
-            assert heat.boolean() and heat.count(2)==1 and heat.string()=="Level range0"
-            assert heat.take(4)==bytes(4) and heat.f32()==spec["radius"] and heat.u32()==0
-            assert heat.count(2)==1 and heat.guid()==resources["Coal"] and heat.f32()==spec["coal_per_hour"]
+        if "reconnect_at" in spec:
+            assert string("FrostpunkHeaterComponentTemplate") not in prefab
+            assert string("FrostpunkAbilitiesComponentTemplate") not in prefab
         elif "coal_capacity" in spec:
             depot=Cursor(prefab,component(prefab,"UndesignatedResourceDepot"))
             assert depot.count(5)==1 and depot.guid()==resources["Coal"] and depot.u32()==spec["coal_capacity"]
@@ -74,13 +72,15 @@ def audit_assets(stock_catalog, catalog, stock_messages, messages, templates, ca
 
 def audit_films(native, revised, city, campaign):
     tracks = ("Fade", "StoreCameraLocation", "RestoreCameraLocation", "SetCameraPosition",
-              "EaseCameraPosition", "SetCameraLookAt", "SetVisibleGameHUD", "PlaySound", "EmitSignal")
-    sizes = dict(zip(tracks,(12,0,2,43,38,21,2,34,16)))
+              "EaseCameraPosition", "SetCameraLookAt", "SetVisibleGameHUD", "PlaySound", "EmitSignal",
+              "ShowSequenceMessage", "SetVisibleSequenceHUD")
+    sizes = dict(zip(tracks,(12,0,2,43,38,21,2,34,16,None,4)))
     native_count=Cursor(native).u32()
     reader=Cursor(revised)
     films={f["shot"]:f["signal"] for f in campaign["films"].values()}
     assert reader.u32()==native_count+len(films)
-    for shot in films:
+    for shot in ("FirstCall","Fracture","NightWatch","DawnBasin","DawnSignal","DawnAccord"):
+        assert shot in films
         assert reader.u8()==1 and reader.string()=="NI_Faultline_"+shot
         actions={}
         for _ in range(reader.count(16)):
@@ -89,10 +89,17 @@ def audit_films(native, revised, city, campaign):
                 name=reader.string().removeprefix("SequenceAction")
                 duration,start,extent=(reader.f32() for _ in range(3))
                 assert duration>=0 and 0<=start<=extent<=10
-                if name not in ("StoreCameraLocation","EmitSignal","SetCameraPosition","SetCameraLookAt"):
+                if name not in ("StoreCameraLocation","EmitSignal","SetCameraPosition","SetCameraLookAt",
+                                "ShowSequenceMessage","SetVisibleSequenceHUD"):
                     assert isclose(start+duration,extent,abs_tol=1e-5)
                 assert reader.take(5)==bytes(5)
-                actions.setdefault(name,[]).append((start,extent,reader.take(sizes[name])))
+                if name == "ShowSequenceMessage":
+                    assert not reader.boolean()
+                    payload = reader.string()
+                    assert payload == "Mods/NewIndustry/Faultline/Cinematic/" + shot
+                else:
+                    payload = reader.take(sizes[name])
+                actions.setdefault(name,[]).append((start,extent,payload))
         assert set(actions)==set(tracks)
         assert reader.u8()==1 and reader.string()=="GENRAL"
         assert reader.u32()==0 and reader.boolean() and not reader.boolean()
@@ -100,6 +107,8 @@ def audit_films(native, revised, city, campaign):
         assert [row[2][0] for row in actions["Fade"]]==[0,1,0,1]
         assert [row[2] for row in actions["SetVisibleGameHUD"]]==[b"\1\0",b"\0\1"]
         target=actions["SetCameraPosition"][0][2][-16:]
+        from faultline_cinematics import scene_anchor
+        assert target==scene_anchor(city,"Generator_000")
         assert city.count(target)==2 and actions["SetCameraLookAt"][0][2][1:17]==target
         assert actions["EaseCameraPosition"][0][2][-16:]==target
         assert actions["EaseCameraPosition"][0][2][4:16]!=actions["SetCameraPosition"][0][2][4:16]
@@ -116,237 +125,204 @@ def audit(decoded, metadata, resource_ids):
     campaign = story["faultline"]
     events = decoded["gameevents"]
     dialogs = {d["guid"]:d for d in decoded["dilemmas"]}
-    names = {d["name"].removeprefix("NI Faultline "): d["guid"] for d in dialogs.values()
+    names = {d["name"].removeprefix("NI Faultline "):d["guid"] for d in dialogs.values()
              if d["name"].startswith("NI Faultline ")}
     quests = {q["guid"]:q for q in decoded["quests"]}
     missions = {(q["phase"],q["plan"]):q for q in campaign["missions"]}
     effects = campaign["modifiers"]
-    trip = effects["faultline/trip"]
     leak = effects["faultline/leak"]
     coal = resource_ids["Coal"]
-    structures={row["name"]:row["guid"] for row in campaign["buildings"]}
-    lessons=campaign["lessons"]
+    structures = {row["name"]:row["guid"] for row in campaign["buildings"]}
+    revealed = ({("marker","DefaultRandomizationPoint_"+point) for point in LEGACY_POINTS} |
+                {("site",uid) for uid in LEGACY_TEMPLATES})
     assert len(missions)==19
+    assert all(g["kind"]!="operate" for row in missions.values() for g in row["goals"])
 
     def world(scenario=None):
-        return World(None,events,dialogs,quests,{guid:20000 for guid in resource_ids.values()},
+        return World(None,events,dialogs,quests,{guid:10000 for guid in resource_ids.values()},
                      campaign["scenario"] if scenario is None else scenario)
 
     def state(w, name):
         return w.variables.get(PREFIX+name,0)
 
     def tick(w, hours):
-        for _ in range(hours):
-            w.step(HOUR)
+        for _ in range(hours*4):
+            w.step(HOUR/4)
 
-    def shot_callback(w, key):
-        filmed=campaign["films"][key]
-        assert w.sequences.count("NI_Faultline_"+filmed["shot"])==1
-        w.sequence_signal(filmed["signal"])
-        w.sequence_signal(filmed["signal"])
+    def film(w, key):
+        shot=campaign["films"][key]
+        assert w.sequences.count("NI_Faultline_"+shot["shot"])==1
+        w.sequence_signal(shot["signal"])
+        w.sequence_signal(shot["signal"])
 
     def fulfill_city(w, row):
         for goal in quests[row["quest"]]["objectives"]:
-            kind, count = goal["kind"], goal["quantity"]
-            if kind == "build":
-                w.buildings[goal["target"][0]] = count
-            elif kind == "operate":
-                w.operating[goal["target"][0]] = count
-            elif kind == "research":
+            kind,count=goal["kind"],goal["quantity"]
+            if kind=="build":
+                w.buildings[goal["target"][0]]=count
+            elif kind=="research":
                 w.researched.add(goal["target"])
-            elif kind == "warm":
-                w.warm_homes = count
-            elif kind == "produce":
-                target = goal["target"][0]
-                w.produced[target] = w.produced.get(target,0)+count
-            elif goal["label"] == "Scout":
-                tick(w,9)
-                assert w.world_map and w.placed_sites=={marker:uid for marker,uid,_,_ in SITES}
-                assert w.revealed_sites=={("site",uid) for _,uid,_,_ in SITES}
-                w=w.checkpoint()
-                tick(w,6)
+            elif kind=="warm":
+                w.warm_homes=count
+            elif kind=="produce":
+                # No legacy stock or orders from the other panel slot qualify.
+                assert not w.goal_met(row["quest"],goal)
+                target,=goal["target"]
+                w.produced[target]=w.produced.get(target,0)+count
+            elif goal["label"]=="Scout":
+                tick(w,7)
+                assert w.world_map and w.revealed_sites==revealed and not w.placed_sites
                 w.return_scouts()
                 w.return_scouts()
                 assert w.progress[row["quest"]]["Scout"]==1
-        return w
+
+    def send(w, key, cost, hours):
+        order=names[key+"/dispatch"]
+        assert order in w.open
+        before={resource_ids[name]:w.stock[resource_ids[name]] for name in cost}
+        assert w.click(order,0)
+        assert not w.click(order,0)
+        assert state(w,"shipment")==2
+        for name,n in cost.items():
+            account=resource_ids[name]
+            assert w.stock[account]==before[account]-n
+        tick(w,hours+1)
 
     played=set()
     for route in ((1,1,1,1,2,1,1,1,1), (2,2,2,2,3,2,2,2,2), (1,2,1,2,1,1,2,2,1)):
         w=world()
         w.start()
-        for phase, plan in enumerate(route,1):
-            w.stress=0.18
-            tick(w,6)
+        assert len(w.recorded_city)==1
+        for phase, number in enumerate(route,1):
+            w.stress=0
             key=f"briefing/{phase}"
-            briefing=names[key]
+            tick(w,6)
             if key in campaign["films"]:
-                assert briefing not in w.open
                 if phase==6:
-                    # Reload partway through a presentation; the timer still
-                    # opens the briefing if the native callback is lost.
                     w=w.checkpoint()
                     w.start()
+                    assert len(w.recorded_city)==1
                     tick(w,10)
-                shot_callback(w,key)
-                assert w.open.count(briefing)==1
-            assert briefing in w.open, (phase, state(w,"phase"))
+                film(w,key)
+            briefing=names[key]
+            assert w.open.count(briefing)==1,(key,state(w,"phase"))
             if phase==5:
-                selected=dialogs[briefing]["choices"]
-                assert w.all(selected[1]["conditions"])==(route[1]==1)
-                assert w.all(selected[2]["conditions"])==(route[1:3]==(2,2))
-            elif phase==9:
+                choices=dialogs[briefing]["choices"]
+                assert w.all(choices[1]["conditions"])==(route[1]==1)
+                assert w.all(choices[2]["conditions"])==(route[1:3]==(2,2))
+            if phase==9:
                 assert w.all(dialogs[briefing]["choices"][1]["conditions"])==(route[7]==2)
+            row=missions[phase,number]
+            quest=row["quest"]
+            task=f"act/{phase}/{number}"
             if phase>=8:
-                order,= (goal for goal in missions[phase,plan]["goals"] if goal["kind"]=="produce")
-                w.produced[order["target"][0]]=order["quantity"]*5
-            assert w.click(briefing, plan-1)
-            lesson = {1:"gauge",2:"refit",6:"watch",7:"charter",8:"valve_orders",9:"dispatch_orders"}.get(phase)
+                order,= (goal for goal in row["goals"] if goal["kind"]=="produce")
+                other,= (goal for goal in missions[phase,3-number]["goals"] if goal["kind"]=="produce")
+                w.produced[order["target"][0]]=100
+                w.produced[other["target"][0]]=100
+            assert w.click(briefing,number-1)
+            if phase>=8:
+                w.produced[other["target"][0]]+=100
+            lesson={1:"gauge",2:"refit",6:"watch",7:"charter",8:"valve_orders",9:"dispatch_orders"}.get(phase)
             if lesson:
-                assert w.lessons.count(lessons[lesson])==1
-            if phase==3:
-                assert w.lessons.count(lessons["survey"])==(plan==2)
-            row=missions[phase,plan]
+                assert w.lessons.count(campaign["lessons"][lesson])==1
             profile=effects["faultline/"+row["profile"]]
-            assert profile in w.modifiers and row["quest"] in w.active
-            if phase>=8:
-                order_id=order["target"][0]
-                station=VALVE_WORKS if phase==8 else RELIEF_DISPATCH
-                assert any(goal["kind"]=="build" and goal["target"]==[structures[station]] for goal in row["goals"])
-                assert order["station"]==station
-                wrong_order,= (goal["target"][0] for goal in missions[phase,3-plan]["goals"] if goal["kind"]=="produce")
-                w.produced[wrong_order]=100
-                w.step(HOUR)
-                assert order_id in w.production_start[row["quest"]]
-                assert not w.goal_met(row["quest"],next(g for g in quests[row["quest"]]["objectives"] if g["kind"]=="produce"))
-            # Structural readiness alone cannot supply an opening pulse.
-            if phase==1:
-                w.stress=0.35
-                w.step(HOUR)
-                assert state(w,"stroke")==0
-            # Pre-existing stock and completed city goals still cannot skip
-            # the pressure sequence, and a shut-off Generator cannot pulse.
+            assert quest in w.active and profile in w.modifiers
             w.generator=False
-            w=fulfill_city(w,row)
-            pledge=row["pledge"]
-            if pledge:
-                short=resource_ids[next(iter(pledge))]
-                stored=w.stock[short]
-                w.stock[short]=0
-            w.step(HOUR)
-            assert state(w,"stroke")==0 and row["quest"] in w.active
-            w.generator=True
-            if phase in (1,5):
-                limit=campaign["welded_trip"] if state(w,"welded") else campaign["trip"]
-                w.stress=(limit+1)/100
-                w.step(HOUR)
-                assert trip in w.modifiers and state(w,"tripped")==1 and state(w,"stroke")==0
-                w.stress=0.19
-                w.step(HOUR)
-                assert trip in w.modifiers
-                w=w.checkpoint()
-                w.start()
-                if phase==5:
-                    w.buildings[structures["Signal Relay"]]=1
-                    w.stress=(campaign["relay_reset"]-0.4)/100
-                else:
-                    w.stress=(campaign["reset"]-0.4)/100
-                w.step(HOUR)
-                assert trip not in w.modifiers and state(w,"tripped")==0
-            for index,stroke in enumerate(row["strokes"],1):
-                # Outside the current step's band, time alone has no effect.
-                w.stress=(stroke["low"]-3)/100 if stroke["draw"] else (stroke["high"]+8)/100
-                w.step(HOUR)
-                assert state(w,"stroke")==index-1
-                w.stress=(stroke["low"]+stroke["high"])/200
-                expected=w.stress-stroke["draw"]/100
-                w.step(HOUR)
-                assert state(w,"stroke")==index and isclose(w.stress,expected,abs_tol=1e-6)
-                if phase==1 and index<=2:
-                    assert w.lessons.count(lessons["cool" if index==1 else "relay"])==1
-            if watch:=row["watch"]:
-                w.stress=(watch["low"]+watch["high"])/200
-                if plan==2:
-                    # Building two magazines still applies exactly one saving.
-                    w.buildings[structures["Coal Magazine"]]=2
-                shipment=watch["coal"]-(campaign["magazine_saving"] if plan==2 else 0)
-                supply=w.stock[coal]
-                tick(w,watch["hours"]-1)
-                assert state(w,"hours")==watch["hours"]-1 and state(w,"leg")==0
-                w.stock[coal]=watch["reserve"]+shipment-1
+            fulfill_city(w,row)
+            if band:=row["signal"]:
+                low,high=band
+                w.stress=(low+high)/200
                 tick(w,1)
-                assert state(w,"hours")==0 and state(w,"leg")==0
-                w.stock[coal]=supply
-                tick(w,watch["hours"])
-                assert state(w,"leg")==1 and state(w,"leak")==1 and leak in w.modifiers
-                assert w.stock[coal]==supply-shipment
-                outage=names[f"act/{phase}/{plan}/leak"]
-                assert outage in w.open
-                if route[0]==2:
-                    tick(w,18)
-                    assert state(w,"leak")==2 and not w.click(outage,1)
+                assert state(w,"stroke")==0
+                w.generator=True
+                w.stress=(low-4)/100
+                tick(w,1)
+                assert state(w,"stroke")==0
+                if phase==1 and route[0]==2:
+                    w.stress=0.82
+                    tick(w,1)
+                    assert effects["faultline/trip"] in w.modifiers and state(w,"stroke")==0
+                    w.stress=(campaign["relay_reset"]-.5)/100
+                    tick(w,1)
+                    assert effects["faultline/trip"] not in w.modifiers
+                w.stress=(low+high)/200
+                expected=w.stress
+                w.step(HOUR/4)
+                assert state(w,"stroke")==1 and w.stress==expected
+            w.generator=True
+            if watch:=row["watch"]:
+                mag=number==2
+                if mag:
+                    w.buildings[structures["Coal Magazine"]]=2
+                cost=watch["coal"]-(campaign["magazine_saving"] if mag else 0)
+                dispatch=task+("/covered" if mag else "/open")
+                reserve=watch["reserve"]
+                before=w.stock[coal]
+                w.stock[coal]=reserve+cost-1
+                tick(w,1)
+                assert names[dispatch+"/dispatch"] not in w.open
+                w.stock[coal]=before
+                tick(w,1)
+                assert w.click(names[dispatch+"/dispatch"],1)
+                assert w.stock[coal]==before
+                tick(w,7)
+                send(w,dispatch,{"Coal":cost},watch["travel"])
+                assert state(w,"leg")==1 and leak in w.modifiers
+                outage=names[task+"/leak"]
+                if mag:
+                    tick(w,31)
                 else:
-                    material=resource_ids["Steel"]
-                    before=w.stock[material]
-                    assert w.click(outage,0) and not w.click(outage,0)
-                    assert w.stock[material]==before-campaign["leak_repair"]["Steel"]
-                    supply-=campaign["leak_repair"]["Coal"]
-                tick(w,2*(watch["hours"]+1)+13)
-                assert state(w,"leg")==campaign["watch_legs"] and leak not in w.modifiers
-                assert w.stock[coal]==supply-campaign["watch_legs"]*shipment
+                    w.stress=0.30
+                    assert w.click(outage,0)
+                    tick(w,3)
+                assert leak not in w.modifiers
+                for _ in range(2):
+                    tick(w,1)
+                    send(w,dispatch,{"Coal":cost},watch["travel"])
+                assert state(w,"leg")==campaign["watch_legs"]
             if hold:=row["hold"]:
                 w.stress=(hold["low"]+hold["high"])/200
-                supply=w.stock[coal]
-                tick(w,hold["hours"]-1)
-                assert state(w,"hold_hours")==hold["hours"]-1 and row["quest"] in w.active
-                w.stock[coal]=hold["reserve"]-1
                 tick(w,1)
-                assert state(w,"hold_hours")==0
-                w.stock[coal]=supply
-                tick(w,hold["hours"])
-                assert state(w,"hold_hours")==hold["hours"] and w.stock[coal]==supply
-            if pledge:
-                assert row["quest"] in w.active, "Charter completed without supplies"
-                w.stock[short]=stored
-                before={name:w.stock[resource_ids[name]] for name in pledge}
+                assert state(w,"hold_hours")==1
+                stock=w.stock[coal]
+                w.stock[coal]=hold["reserve"]-1
                 tick(w,2)
-                assert all(w.stock[resource_ids[name]]==before[name]-quantity for name,quantity in pledge.items())
-            assert state(w,"phase")==phase+1 and profile not in w.modifiers
-            assert row["quest"] in w.completed
-            played.add((phase,plan))
+                assert state(w,"hold_hours")==1 and w.progress[quest]["PressureTest"]==1
+                assert names[task+"/dispatch"] not in w.open
+                w.stock[coal]=stock
+                tick(w,hold["hours"]-1)
+                assert state(w,"hold_hours")==hold["hours"]
+            if pledge:=row["pledge"]:
+                tick(w,2)
+                send(w,task,pledge,2 if row["hold"] else 8)
+            assert state(w,"phase")==phase+1 and profile not in w.modifiers,(task,state(w,"phase"))
+            assert quest in w.completed
+            played.add((phase,number))
         tick(w,6)
-        shot_callback(w,"dawn")
-        tick(w,12)
-        assert state(w,"ending")==2 and state(w,"kept")==9 and state(w,"convoy_returned")==1
-        assert w.open.count(names["end/1/9"])==1
-        assert effects['faultline/'+('ridge_fitters' if route[-1]==2 else 'ridge_medics')] in w.modifiers
+        ending=state(w,"ending")
+        assert ending==3 and state(w,"kept")==9 and state(w,"convoy_returned")==1, (route,w.variables)
+        film(w,"dawn/3")
+        epilogue=names["accord/9"]
+        assert w.open.count(epilogue)==1 and w.click(epilogue)
+        tick(w,25)
+        assert len(w.city_endings)==1 and not w.click(epilogue)
     assert played==set(missions)
 
-    # A city that misses every deadline can still finish, including when the
-    # player leaves the briefing alone. Unsettled plans cannot replay rewards.
-    failed=world()
-    failed.start()
-    failed.generator=False
-    failed.run(80,False)
-    assert state(failed,"ending")==1 and state(failed,"kept")==0
-    assert not failed.active and not failed.modifiers
-    assert names["end/0/0"] in failed.open
-    accord=world()
-    accord.start()
-    accord.variables.update({PREFIX+"phase":10,PREFIX+"offered":9,PREFIX+"kept":7,PREFIX+"final":1,
-                            PREFIX+"charter":1,PREFIX+"convoy_returned":1})
-    accord.run(1,False)
-    assert state(accord,"ending")==3 and names["accord/7"] in accord.open
-    assert accord.modifiers=={effects["faultline/accord"]}
-    settled=world()
-    settled.variables.update({PREFIX+"phase":8,PREFIX+"offered":7,PREFIX+"ending":3})
-    settled.start()
-    settled.run(5,False)
-    assert not settled.active and not settled.open and not settled.sequences
-    unfinished=world()
-    unfinished.variables.update({PREFIX+"phase":8,PREFIX+"offered":7,PREFIX+"ending":0})
-    unfinished.start()
-    unfinished.run(2,False)
-    assert state(unfinished,"plan")==1 and names["briefing/8"] in unfinished.open
+    expired=world()
+    expired.start()
+    expired.generator=False
+    expired.run(80,False)
+    assert state(expired,"ending")==1 and state(expired,"kept")==0
+    assert not expired.active and not expired.modifiers and len(expired.city_endings)==1
+    assert names["end/0/0"] in expired.open
+
+    middle=world()
+    middle.start()
+    middle.variables.update({PREFIX+"phase":10,PREFIX+"offered":9,PREFIX+"kept":6,PREFIX+"final":1})
+    middle.run(2,False)
+    assert state(middle,"ending")==2 and names["end/1/6"] in middle.open and len(middle.city_endings)==1
+
     for scenario in (DEFAULT,story["scenario"],story["winter_road"]["scenario"]):
         other=world(scenario)
         other.start()
@@ -354,8 +330,8 @@ def audit(decoded, metadata, resource_ids):
         other.run(2,False)
         assert not any(key.startswith(PREFIX) for key in other.variables)
         assert not any(uid in other.open for uid in names.values()) and not other.lessons
-    return dict(plans=len(played),endings=3,trip_recovery=True,stress_is_spent=True,deadlines_continue=True,
-                route_unlocks_verified=True,old_saves_isolated=True,watch_resets=True,leak_repairs=True,
-                pledge_paid_once=True,cinematic_signal_and_fallback=True,lesson_timing=True,
-                relay_recovery=True,nonstacking_fuel_saving=True,order_baselines=True,
-                pressure_hold_resets=True,convoy_route_guards=True)
+        assert not other.recorded_city and not other.city_endings
+    return dict(plans=len(played),endings=3,trip_recovery=True,deadlines_continue=True,
+                production_baselines=True,pressure_hours_persist=True,dispatch_paid_once=True,
+                dispatch_arrivals=True,stockpile_independent_buildings=True,frostland_reveals=True,
+                city_replay_once=True,cinematic_signal_and_fallback=True)

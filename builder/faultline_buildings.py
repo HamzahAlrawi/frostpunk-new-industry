@@ -9,7 +9,7 @@ RELAY = "Signal Relay"
 MAGAZINE = "Coal Magazine"
 VALVE_WORKS = "Valve Works"
 RELIEF_DISPATCH = "Relief Dispatch"
-RELAY_RESET = 20
+RELAY_RESET = 25
 MAGAZINE_SAVING = 20
 EXCLUSIONS = "4d5455165b7e149569489bd856c02b84"
 TEMPLATE_FOLDER = "gameentities/buildings/"
@@ -17,7 +17,7 @@ FACTORY = TEMPLATE_FOLDER+"resourceprocessing/prefabfactory.binarytemplate"
 DEFINITIONS = {
     RELAY: dict(path=TEMPLATE_FOLDER+"faultline_signal_relay.binarytemplate",
                 donor=TEMPLATE_FOLDER+"steamhub.binarytemplate", native="Steam Hub", tab="Tech",
-                price={"Steel":16,"Wood":12}, radius=18, coal_per_hour=2),
+                price={"Steel":16,"Wood":12}, reconnect_at=RELAY_RESET),
     MAGAZINE: dict(path=TEMPLATE_FOLDER+"faultline_coal_magazine.binarytemplate",
                    donor=TEMPLATE_FOLDER+"resourcedepot.binarytemplate", native="Resource Depot", tab="Resources",
                    price={"Wood":30,"Steel":25}, coal_capacity=1500),
@@ -25,22 +25,22 @@ DEFINITIONS = {
                      native="Factory", tab="Tech", price={"Wood":65,"Steel":55},
                      interior="UI/BuildingInteriors/EngeneersLab.dds",
                      description="Staff with engineers. Under General, queue Isolation Valve or Bypass Section orders for the buried main.",
-                     orders={"FaultlineIsolationValve": dict(title="Machine Isolation Valve", output="Steel",
+                     orders={"FaultlineIsolationValve": dict(title="Machine Isolation Valve", output="Steam Tools",
                          inputs={"Steel":22,"Coal":15}, hours=5,
-                         purpose="Fabricate a shut-off valve for The Line Under the Lake. Requirements for installed valves are tracked in the mission."),
-                             "FaultlineBypassSection": dict(title="Rivet Bypass Section", output="Wood",
+                         purpose="Machine a shut-off valve for the lake branch. The Works uses Steam Tools as its inventory for finished fittings."),
+                             "FaultlineBypassSection": dict(title="Rivet Bypass Section", output="Steel Plates",
                          inputs={"Steel":30,"Wood":12,"Coal":12}, hours=6,
-                         purpose="Prepare a bypass section strong enough to run steam to the ridge lift. Requirements for installed pipe are tracked in the mission.")}),
+                         purpose="Rivet a pressure-rated branch for the ridge lift. Its Steel Plates are spent when you commission the bypass.")}),
     RELIEF_DISPATCH: dict(path=TEMPLATE_FOLDER+"faultline_relief_dispatch.binarytemplate", donor=FACTORY,
                           native="Factory", tab="Tech", price={"Wood":75,"Steel":40},
                           interior="UI/BuildingInteriors/Expedition/ExpeditionCenter.dds",
                           description="Staff with engineers. Under General, pack Clinic Sledges or Lift Sledges for the final evacuation.",
-                          orders={"FaultlineClinicSledge": dict(title="Pack Clinic Sledge", output="Wood",
+                          orders={"FaultlineClinicSledge": dict(title="Pack Clinic Sledge", output="Wooden Materials",
                               inputs={"Food Rations":35,"Wood":16}, hours=4,
-                              purpose="Pack one clinic sledge with meals, bedding and splints for the shelter evacuation."),
-                                  "FaultlineLiftSledge": dict(title="Pack Lift Sledge", output="Coal",
+                              purpose="Pack a clinic sledge with meals, bedding and splints. The manifest reserves its Wooden Materials for the convoy."),
+                                  "FaultlineLiftSledge": dict(title="Pack Lift Sledge", output="Steel Plates",
                               inputs={"Coal":55,"Wood":15}, hours=5,
-                              purpose="Pack one heavy sledge with fuel and rigging for the ridge lift and its passengers.")}),
+                              purpose="Pack a heavy sledge with fuel and rigging. The lift convoy spends its Steel Plates at departure.")}),
 }
 
 
@@ -134,7 +134,7 @@ def build(buildings, source, guid, scenario, resources, loc):
         order_ids=[guid("recipe/"+key) for key in spec.get("orders", {})]
         revised=customize(name,native,spec,uid,scenario,resources,loc,order_ids)
         components=list(re.finditer(rb"\x01[A-Za-z]+ComponentTemplate\0",revised))
-        if len(components)!=Cursor(native,26).count(32):
+        if len(components)!=Cursor(revised,26).count(32):
             raise SchemaError(f"Unsupported template component directory: {name}")
         # Independent component keys leave the source prefab and saved copies
         # of it untouched. Any internal links move with their components.
@@ -167,22 +167,22 @@ def customize(name, native, spec, uid, scenario, resources, loc, orders):
         title=string("@Buildings/SteamHub/Name")
         description=string("@Buildings/SteamHub/Description")
         short=string("@Buildings/SteamHub/Tech2")
-        text="A small heat zone. One completed Signal Relay lets the main reconnect at 20% stress after a trip."
+        text="Sends signals through the buried main. A completed relay lets the line reconnect at 25% stress after a trip."
         pos=native.index(short)
         edits.append((Span(pos,pos+len(short)),loc("Faultline/Buildings/Relay/Short",text)))
-        heater=component(native,"Heater")
-        base=native.index(string("Level range0"),heater)+len(string("Level range0"))
-        second=native.index(string("Level range1"),base)
-        if native[base:second]!=bytes(4)+f32(24)+u32(0)+u32(1)+resources["Coal"]+f32(3):
-            raise SchemaError("Unsupported Steam Hub heat range or fuel rate")
-        # One heat level/range, with no factory tech dependency for range.
-        limit=native.index(string("~HeatLight"),second)
-        footer=native[limit-8:limit]
-        if footer!=f32(100)+u32(2):
-            raise SchemaError("Unsupported Steam Hub heater footer")
-        edits.append((Span(heater,base),b"\1"+u32(1)+string("Level range0")))
-        edits.append((Span(base,limit-8),bytes(4)+f32(spec["radius"])+u32(0)+u32(1)
-                      +resources["Coal"]+f32(spec["coal_per_hour"])))
+        # A relay uses the main to signal, without making a heat zone. Drop the
+        # complete heater component and its local controls from the cloned asset.
+        components=list(re.finditer(rb"\x01[A-Za-z]+ComponentTemplate\0",native))
+        removed=0
+        for current, following in zip(components,components[1:]):
+            if current[0] in (string("FrostpunkHeaterComponentTemplate"),string("FrostpunkAbilitiesComponentTemplate")):
+                if native.count(native[current.end():current.end()+16])!=1:
+                    raise SchemaError("Relay would orphan a component link")
+                edits.append((Span(current.start(),following.start()),b""))
+                removed+=1
+        if not removed:
+            raise SchemaError("Relay's heater component has no native boundary")
+        edits.append((Span(26,30),u32(Cursor(native,26).count(32)-removed)))
         original=u32(1)+resources["Steel"]+u32(20)
     elif name==MAGAZINE:
         at=building+67

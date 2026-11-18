@@ -13,6 +13,7 @@ class World:
         self.automation=0;self.generator=True;self.stress=0;self.scenario=scenario
         self.arrivals={};self.operating={};self.warm_homes=0;self.world_map=False
         self.placed_sites={};self.revealed_sites=set();self.sequences=[];self.lessons=[]
+        self.recorded_city=[];self.city_endings=[]
 
     def value(self,value):
         kind=value[0]
@@ -70,6 +71,8 @@ class World:
             elif kind=='vent':self.stress=max(0,self.stress+action[1])
             elif kind=='sequence':self.sequences.append(action[1])
             elif kind=='tutorial':self.lessons.append(action[1])
+            elif kind=='record_city':self.recorded_city.append(action[1])
+            elif kind=='end_city':self.city_endings.append(action[1:])
             elif kind=='map_create':
                 _,marker,template=action
                 assert self.world_map and marker not in self.placed_sites

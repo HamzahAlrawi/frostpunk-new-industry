@@ -7,8 +7,7 @@ from tools.native_binary import entry, f32, u32
 from tools.native_scenario import (affordable, amount, apply_modifier, change_resource, compare, delayed,
     dilemma, equals, event, guarded, integer, predefined, progress_quest, set_variable, start_quest, typed, variable)
 from winter_road_story import AFTERMATH, CHAPTERS, PROJECTS
-from winter_road_maps import (LEGACY_POINTS, LEGACY_TEMPLATES, REVEAL, SITES, beacon_exists,
-    place_site, reveal_site, select_name, validate_native_map_effects)
+from winter_road_maps import beacon_exists, survey_routes, validate_native_map_effects
 
 PREFIX="NI/WinterRoad/"
 LEGACY=("NI/Lifeline/chapter","NI/LastSignal/act")
@@ -103,15 +102,8 @@ def build(source, buildings, techinfo, resources, guid, scenario, switchback, bo
     events.append(beacon+u32(len(beacon_checks))+b"".join(beacon_checks)+u32(len(beacon_actions))+b"".join(beacon_actions))
     # A finished Beacon can predate the patch. The periodic fallback observes
     # it directly instead of relying on a construction notification replay.
-    placements = [place_site(point,uid) for point,uid,_,_ in SITES]
-    discover = [reveal_site(uid) for _,uid,_,_ in SITES]
-    legacy = [select_name("DefaultRandomizationPoint_"+point, REVEAL) for point in LEGACY_POINTS]
-    legacy.extend(reveal_site(uid) for uid in LEGACY_TEMPLATES)
     fire("chart Frostland",[scoped,beacon_exists(),eq("frostland_charted",0)],[
-        put("frostland_charted",1),put("map_open",1),OPEN_MAP,
-        guarded([scenario_is(switchback)], placements+[after("survey markers",0.05,
-            [guarded([scenario_is(switchback)],discover)])]),
-        guarded([scenario_is(scenario)], legacy),
+        put("frostland_charted",1),put("map_open",1),OPEN_MAP,*survey_routes(),
     ])
 
     def resolution(key,check,quest,days,goals,cost,success,miss,watch=0,slot="main"):

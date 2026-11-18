@@ -86,8 +86,8 @@ def register(data, identity, event_directory, localize, winter, buildings):
     ]
     scenario = entry(ROAD_NAME, identity("switchback-scenario")) + replace_spans(body, edits + road_text + map_edits + [(Span(0,1),b"\0")])
     faultline = identity("faultline-forecast")
-    faultline_text = campaign_text("Faultline","The Last Signal: Faultline",
-        "Race the frost. Route the city's steam, operate the Generator in pressure cycles, and keep the remote shelters on the line.",faultline)
+    faultline_text = campaign_text("Faultline","Faultline",
+        "A signal rises from beneath the ice. Reopen the winter road before the ridge shelters are cut off.",faultline)
     if body[0x153:0x163]!=bytes.fromhex(EXCLUSIONS) or body[0x14f:0x153]!=u32(1):
         raise SchemaError("Unsupported Default building exclusions link")
     faultline_restrictions=(Span(0x153,0x163),bytes.fromhex(identity("faultline-construction")))

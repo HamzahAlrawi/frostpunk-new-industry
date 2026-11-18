@@ -24,7 +24,9 @@ def main():
     args=parser.parse_args()
     manifest=json.loads((ROOT/'mod/manifest.json').read_text())
     catalog=json.loads((ROOT/'mod/catalog.json').read_text())
-    buildings=catalog['endless']['story']['faultline']['buildings']
+    faultline=catalog['endless']['story']['faultline']
+    buildings=faultline['buildings']
+    models=faultline.get('models',[])
     folder=(ROOT/'build/distribution-qa').resolve()
     assert folder.is_relative_to(ROOT.resolve()/'build'), 'QA folder resolves outside the workspace build directory'
     game=folder/'Frostpunk';state=folder/'state'
@@ -72,20 +74,21 @@ def main():
                     checked+=1
                     if expected['name']==CATALOG_ASSET:
                         _,metadata,_,paths=read_catalog(data)
-                        for building in buildings:
-                            uid=bytes.fromhex(building['guid'])
+                        for asset in buildings+models:
+                            uid=bytes.fromhex(asset['guid'])
                             path=paths[uid].relative_to('templates').as_posix()
-                            assert path==building['path']
+                            assert path==asset['path']
                             assert installed_entry(murmur(path.encode())).startswith(uid+metadata[uid][1])
                             registered+=1
-        assert registered==len(buildings), 'Installed template catalog was not verified'
+        assert registered==len(buildings)+len(models), 'Installed template catalog was not verified'
         setup.uninstall();setup.verify(game,setup.originals)
-    report=dict(version=manifest['version'],preset=args.preset,checked_entries=checked,registered_buildings=registered,
+    report=dict(version=manifest['version'],preset=args.preset,checked_entries=checked,
+                registered_buildings=len(buildings),registered_models=len(models),
                 installed_archives=receipt['files'],
                 restored_archives=setup.originals,status='passed')
     (folder/'verification.json').write_text(json.dumps(report,indent=2)+'\n')
     print(f'Public distribution QA passed: {checked} patched entries and {len(setup.archives)} archive hashes; restored exact originals.')
-    print(f'Resolved {registered} installed Faultline GUIDs through the native template catalog and archive index.')
+    print(f'Resolved {len(buildings)} buildings and {len(models)} models through the native template catalog and archive index.')
 
 
 if __name__=='__main__':

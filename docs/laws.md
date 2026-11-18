@@ -1,6 +1,6 @@
 # Civic laws
 
-Version 3.27.3 includes 12 research-free laws arranged in four choice trees, alongside the four existing researched charters. Open Adaptation in the Book of Laws, or Administration in The Last Autumn. Pan or zoom outward to see the new trees around the native branches. No new book replaces a native category.
+Version 3.28.0 includes 12 research-free laws arranged in four choice trees, alongside the four existing researched charters. Open Adaptation in the Book of Laws, or Administration in The Last Autumn. Pan or zoom outward to see the new trees around the native branches. No new book replaces a native category.
 
 The first law in each new tree is available as soon as the scenario allows law signing, without research or any previous law. It has a 12-hour cooldown. Then choose ONE of its two follow-ups, each with a 24-hour cooldown and no research requirement. Signing one permanently excludes its sibling using the native law exclusion-group system. These choices are independent of Order/Faith and the existing charters. Morale changes happen once when signed; passive benefits remain.
 

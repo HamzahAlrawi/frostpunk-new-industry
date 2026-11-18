@@ -10,11 +10,14 @@ ARCHIVE_KEY = 0x13bf7038
 ASSET = "faultline-sequences"
 SIGNAL = "FrostpunkSequenceSignalEventTrigger"
 SHOTS = {
-    # Seconds, subject, opening (distance, azimuth, height), closing shot.
-    "FirstCall": (8.5, "Camera1_000", (206, 144, 89), (104, 168, 39)),
-    "Fracture": (6.5, "Camera2_000", (80, -34, 30), (58, -12, 22)),
-    "NightWatch": (8.0, "Camera1_000", (145, 60, 51), (82, 93, 32)),
-    "Dawn": (9.0, "Camera1_000", (78, -105, 38), (214, -126, 92)),
+    # Use the stock aerial framing around the Generator rather than the
+    # authoring-only Camera1/Camera2 markers buried in the Points terrain.
+    "FirstCall": (7.5,(233,135,60),(131,151,56),"FAULTLINE\nThree knocks beneath the ice"),
+    "Fracture": (6.0,(155,124,62),(209,112,59),"THE MAIN HAS SPLIT\nThe ridge shelters are cut off"),
+    "NightWatch": (6.5,(182,149,67),(128,134,57),"BROKEN MILE\nThree relief crews await fuel"),
+    "DawnBasin": (7.5,(141,136,60),(223,155,68),"A LIGHT IN THE BASIN\nSomewhere to come home to"),
+    "DawnSignal": (7.5,(137,152,57),(231,135,64),"THE SIGNAL HOLDS\nThe shelters answer across the ridge"),
+    "DawnAccord": (8.0,(129,134,58),(233,146,71),"THE BASIN ACCORD\nOne line, kept open together"),
 }
 
 
@@ -57,7 +60,7 @@ def scene_anchor(scene, name):
     return target
 
 
-def build(native, city, events, guid):
+def build(native, city, events, guid, localize):
     intro = b"\1"+string("ENDLESS_Intro")
     start = native.index(intro)
     donor = native[start:native.index(b"\1"+string("ENDLESS_Monument"),start)]
@@ -83,12 +86,15 @@ def build(native, city, events, guid):
         "directory count": native[:4]==u32(152),
         "signal trigger": any(events[p+16:p+32]==native_signal for p in signal_offsets(events)),
         "signal action": action("EmitSignal",native_signal,1,0,3) in native,
+        "caption": action("ShowSequenceMessage",b"\0"+string("UI/EndMessages/TechHavenEnd"),1,5,5) in native,
+        "cinematic HUD": action("SetVisibleSequenceHUD",b"\1\0\1\0",1,0,3) in native,
     }
     if missing:=[name for name,match in checks.items() if not match]:
         raise SchemaError("Unsupported native cinematic layout: "+", ".join(missing))
     records = []
-    for key,(seconds,subject,opening,closing) in SHOTS.items():
-        target = scene_anchor(city,subject)
+    target = scene_anchor(city,"Generator_000")
+    for key,(seconds,opening,closing,caption) in SHOTS.items():
+        caption_key = localize("Faultline/Cinematic/"+key,caption).replace(b"\1@",b"\1",1)
         fade_out = seconds-1.45
         reveal = seconds-0.8
         tracks = (
@@ -101,6 +107,9 @@ def build(native, city, events, guid):
             track(action("SetCameraLookAt", b"\0"+target+f32(0),0.25,0,0.65)),
             track(action("SetVisibleGameHUD",b"\1\0",0.2,0.3),
                   action("SetVisibleGameHUD",b"\0\1",reveal,0.35)),
+            track(action("SetVisibleSequenceHUD",b"\1\0\1\0",0.45,0,3),
+                  action("SetVisibleSequenceHUD",b"\0\0\0\0",reveal,0,seconds)),
+            track(action("ShowSequenceMessage",b"\0"+caption_key,1.0,4,4)),
             track(action("PlaySound",sound,0.32,seconds-0.4)),
             track(action("EmitSignal",bytes.fromhex(signal(key,guid)),seconds-0.1,0,seconds)),
         )

@@ -4,7 +4,7 @@ from itertools import product
 from tools.native_binary import Cursor, entry, string, u32
 from tools.scenario_model import World
 from tools.story_schema import DEFAULT, DEFAULT_EVENTS, NAME, ROAD_NAME, FAULTLINE_NAME, NATIVE_INTRO, WEATHER_DONOR, forecast_record
-from winter_road_maps import CITY, NATIVE_CITY, NATIVE_WORLD, WORLD
+from winter_road_maps import CITY, NATIVE_CITY, NATIVE_WORLD, WORLD, WORLD_GROUP
 
 
 def validate_registration(before, after, story):
@@ -56,7 +56,7 @@ def validate_registration(before, after, story):
         else:
             assert cursor.string()=="Random A"
             cursor.guid()
-            assert cursor.count()==0 and cursor.count()==0
+            assert cursor.count()==1 and cursor.guid()==WORLD_GROUP and cursor.count()==0
             assert cursor.string() and cursor.string() is None
         assert cursor.string() and cursor.string()
         if path==WORLD:assert cursor.take(1)==b"\0"

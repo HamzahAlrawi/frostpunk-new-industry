@@ -11,7 +11,7 @@ from tools.native_scenario import (affordable, apply_modifier, change_resource, 
     dilemma, equals, event, first_match, floating, guarded, integer, predefined, progress_quest, set_variable, start_quest,
     typed, variable)
 from tools.convoy_schema import arrive
-from winter_road_maps import SITES, beacon_exists, constructed, place_site, reveal_site, validate_native_map_effects
+from winter_road_maps import beacon_exists, constructed, survey_routes, validate_native_map_effects
 
 
 PREFIX = "NI/Faultline/"
@@ -22,24 +22,8 @@ RESET = 14
 STRESS = compact("FrostpunkGeneratorStressExpression")
 CHANGE_STRESS = typed("FrostpunkModifyGeneratorEffect")
 SELECT_GENERATOR = typed("FrostpunkSelectEffect")+compact("FrostpunkGeneratorSelector",bytes(7)+u32(1))
-PROFILES = {
-    "ward": "Homes and medical buildings gain +1 insulation. Coal works, Steelworks and Factories lose 25% efficiency.",
-    "works": "Coal works, Steelworks and Factories gain 40% efficiency. Homes lose one insulation level.",
-    "bypass": "Cookhouses and medical buildings gain +1 insulation. Workshops lose 30% efficiency.",
-}
-REFITS = {"accumulator": "the pressure accumulator", "bypass": "the isolated bypass",
-          "surveyed": "the returned shelf survey", "watch_kept": "the three completed watches at Broken Mile",
-          "ridge_lift": "the completed ridge lift bypass from The Line Under the Lake"}
-REWARDS = {
-    "ward_crew": "The station medics improve healing by 25% if you finish.",
-    "works_crew": "The station fitters improve Steelworks and Factory efficiency by 25% if you finish.",
-    "accumulator": "A completed accumulator improves stress recovery by 35% and opens a final route.",
-    "isolation": "A completed bypass adds +1 insulation to clinics and can open a final route after a scout survey.",
-    "shelters": "Completing the route gives Cookhouses 30% more efficiency.",
-    "resettled": "Reclaimed pipe adds one insulation level to Steelworks and Factories.",
-    "ridge_medics": "The arriving medics improve healing by 25%.",
-    "ridge_fitters": "The arriving fitters improve timber production by 35% at Sawmills and Wall Drills.",
-}
+RECORD_CITY = typed("FrostpunkTimelapseSegmentStartEffect")+bytes.fromhex("5ae0f465a1091287a34c952ac1765dc8")
+END_CITY = typed("FrostpunkEndGameEffect")+bytes.fromhex("a9de3813fff72fb15743819f6887629b61e149c3164a1ea62146a5a85d5af1d4")
 
 
 def either(conditions):
@@ -62,6 +46,8 @@ def verify_native_stress(events, dilemmas):
         raise SchemaError("Unsupported native Generator stress read or adjustment")
     if SELECT_GENERATOR + typed("FrostpunkApplyModifierEffect") not in events:
         raise SchemaError("Unsupported Generator selection")
+    if RECORD_CITY+typed("FrostpunkConsolePrintEffect") not in events or END_CITY not in events:
+        raise SchemaError("Unsupported native city recording or victory action")
 
 
 def build(source, buildings, techinfo, resources, guid, scenario, modifiers, localize, dt, qt, recipes, structures):
@@ -131,7 +117,7 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                    name, detail, visible, actions, localize, loc+"/"+str(i))
                    for i,(name,detail,visible,actions) in enumerate(options)]
         dialogs.append(dt.build("NI Faultline "+key, uid, title, text, choices, localize, loc, small,
-                                subtitle="The Last Signal: Faultline"))
+                                subtitle="Faultline"))
         return dilemma(uid)
 
     def report(key, title, text):
@@ -149,15 +135,37 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     def can_pay(cost):
         return [affordable(resources[name].hex(),quantity) for name,quantity in cost.items()]
 
+    def shipment(key, active, checks, title, cost, hours, arrival, *, reserve=0, go="Depart"):
+        ready = active+[eq("shipment",0)]+checks
+        choice = [scope]+active+[eq("shipment",1)]
+        stock = dict(cost)
+        if reserve:
+            stock["Coal"] += reserve
+        available = can_pay(stock)
+        arrived = [put("shipment",0)]+arrival
+        order = [put("shipment",2)]+pay(cost)+[
+            after(key+"/transit",hours*SCAN,[guarded([scope]+active+[eq("shipment",2)],arrived)])]
+        defer = [put("shipment",3),after(key+"/defer",6*SCAN,
+            [guarded([scope]+active+[eq("shipment",3)],[put("shipment",0)])])]
+        terms = f"Load: {budget(cost)}. Arrival in {hours} hours."
+        if reserve:
+            terms += f" Keep {reserve} coal in the city."
+        dialog = scene(key+"/dispatch",title,terms,
+            [(go,"Commit this load and track its arrival.",choice+available,
+              [guarded(choice+available,order)]),
+             ("Wait six hours","Hold the load. No supplies are spent.",choice,[guarded(choice,defer)])],True)
+        return ready+available,[put("shipment",1),dialog,
+            after(key+"/dismissed",12*SCAN,[guarded(choice,[put("shipment",0)])])]
+
     # Every mode-specific global is initialized in the new scenario only.
     # This also keeps the native diagnostic log free of missing-variable spam.
     flags = sorted({p["flag"] for act in ACTS for p in act["plans"] if "flag" in p})
-    fields = ("plan", "stroke", "tripped", "trips", "kept", "offered", "scout_returned", "map_open", "ending", "hold_hours")
-    add("open",[eq("phase",0)],[put("phase",1)]+[put(key,0) for key in (*fields, *flags)], None)
+    fields = ("plan", "stroke", "tripped", "trips", "kept", "offered", "scout_returned", "map_open",
+              "ending", "hold_hours", "shipment", "replay_started")
+    add("open",[eq("phase",0)],[put("phase",1),RECORD_CITY]+[put(key,0) for key in (*fields, *flags)], None)
 
     add("open Frostland", [at_least("phase",1), eq("map_open",0), beacon_exists()],
-        [put("map_open",1), OPEN_MAP, *(place_site(point,uid) for point,uid,_,_ in SITES),
-         after("survey markers",0.05,[guarded([scope],[reveal_site(uid) for _,uid,_,_ in SITES])])], 0.25)
+        [put("map_open",1), OPEN_MAP, *survey_routes()], 0.25)
     trip_notice = report("trip", "The main circuit tripped",
         "The valve has closed and all insulated buildings lose two heat levels. Switch off Overdrive and let stress "
         f"drop to {RESET}%, or {RELAY_RESET}% if you have built a Signal Relay. Keep the Generator running. "
@@ -196,39 +204,24 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                 goals.append(goal)
             hardware = [constructed(goal["target"][0],goal.get("quantity",1))
                         for goal in goals if goal["kind"] == "build" and len(goal["target"])==1]
-            sequence = []
-            for step, stroke in enumerate(plan["strokes"],1):
-                low, high, draw = (stroke[name] for name in ("low","high","draw"))
-                label = f"Stroke{step}"
-                if draw:
-                    title=f"{step}. Pulse at {low}–{high}% Generator stress"
-                    detail=f"Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents {draw} stress points."
-                    if hardware:
-                        detail+=" Complete the listed construction first."
-                    checks=[stress_check(4,low),stress_check(5,high)]
-                    actions=[SELECT_GENERATOR+vent(draw)]
-                    sequence.append(f"pulse at {low}–{high}%")
-                else:
-                    title=f"{step}. Cool to {high}% Generator stress"
-                    detail="Turn off Overdrive. Keep the Generator running while stress drops."
-                    checks=[stress_check(5,high)]
-                    actions=[]
-                    sequence.append(f"cool to {high}%")
-                if phase==1 and step<=2:
-                    actions.append(teach(guid,"cool" if step==1 else "relay"))
-                goals.append(dict(kind="checks",label=label,text=title,description=detail))
-                add(key+f"/stroke/{step}", active+[eq("tripped",0), eq("stroke",step-1), running]+hardware+checks,
-                    [put("stroke",step)]+actions+[progress_quest(uid,label)])
+            calibration=plan.get("signal")
+            if calibration:
+                low,high=calibration
+                goals.append(dict(kind="checks",label="Stroke1",text=f"Send a signal at {low}â€“{high}% stress",
+                    description="Complete construction. Select the Generator, leave it running and use Overdrive to raise "
+                                f"the stress gauge to {low}â€“{high}%. The relay sends the signal within 15 game minutes. "
+                                "Switch off Overdrive when the objective ticks."))
+                add(key+"/calibrate",active+[eq("tripped",0),eq("stroke",0),running]+hardware+
+                    [stress_check(4,low),stress_check(5,high)],
+                    [put("stroke",1),progress_quest(uid,"Stroke1")],SCAN/4)
             watch = plan.get("watch")
             if watch:
-                low, high, hours = (watch[name] for name in ("low","high","hours"))
-                threshold = watch["reserve"]+watch["coal"]
                 goals.append(dict(kind="checks",label="Watch",quantity=WATCH_LEGS,
-                    text=f"Complete {WATCH_LEGS} watches and send fuel to Broken Mile",
-                    description=f"Each watch takes {hours} consecutive hourly checks at {low}–{high}% stress with the "
-                                f"Generator running. Keep {threshold} coal ready. Each completed watch sends {watch['coal']} "
-                                f"coal and leaves {watch['reserve']} in reserve. A Coal Magazine reduces both the required stock "
-                                f"and the shipment by {MAGAZINE_SAVING}. A lapse restarts only the current watch."))
+                    text="Deliver three coal loads to Broken Mile",
+                    description=f"A watch is one relief crew's shift. Send a load on the dispatch panel that appears when "
+                                f"at least {watch['reserve']+watch['coal']} coal is in storage. Each delivery takes "
+                                f"{watch['travel']} hours. A Coal Magazine cuts each load by {MAGAZINE_SAVING} coal. "
+                                "The tracker counts arrivals. The Generator gauge is separate from this delivery."))
                 waiting = active+[at_most("leg",WATCH_LEGS-1)]
                 clear = either([eq("leak",0),eq("leak",3)])
                 response = active+[eq("leak",1)]
@@ -250,38 +243,36 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                       [guarded([scope]+response,seal)])])
                 outage = [put("leak",1),change("leak"),leak,
                           after(key+"/auto-isolate",0.75,[guarded([scope]+response,seal)])]
-                readiness = [running,eq("tripped",0),stress_check(4,low),stress_check(5,high)]
-
-                def fuel_tick(cost):
-                    return [put("hours",1,1),guarded([eq("hours",hours)], [
-                        put("hours",0), put("leg",1,1), change_resource(coal,-cost),
-                        guarded([eq("leg",1)],outage), progress_quest(uid,"Watch")])]
-
-                add(key+"/watch", waiting+[clear], [first_match(
-                    ("Covered coal", readiness+[constructed(places[MAGAZINE]),affordable(coal,threshold-MAGAZINE_SAVING)],
-                     fuel_tick(watch["coal"]-MAGAZINE_SAVING)),
-                    ("Fuel watch",readiness+[affordable(coal,threshold)],fuel_tick(watch["coal"])),
-                    ("Interrupted watch",[at_least("hours",1)],[put("hours",0)]))])
+                arrived = [put("leg",1,1),guarded([eq("leg",1)],outage),progress_quest(uid,"Watch")]
+                full = shipment(key+"/open",active,[clear],"Broken Mile coal dispatch",{"Coal":watch["coal"]},
+                                watch["travel"],arrived,reserve=watch["reserve"],go="Send coal")
+                covered = shipment(key+"/covered",active,[clear,constructed(places[MAGAZINE])],"Covered coal dispatch",
+                                   {"Coal":watch["coal"]-MAGAZINE_SAVING},watch["travel"],arrived,
+                                   reserve=watch["reserve"],go="Send coal")
+                add(key+"/watch",waiting+[clear],[first_match(("Covered coal",*covered),("Open road",*full))])
             hold=plan.get("hold")
             if hold:
                 hours,low,high,reserve=(hold[field] for field in ("hours","low","high","reserve"))
-                goals.append(dict(kind="checks",label="PressureTest",text=f"Hold {low}–{high}% stress for {hours} hours",
-                    description=f"Build the Valve Works first. Keep the Generator running at {low}–{high}% stress and "
-                                f"keep {reserve} coal in reserve for {hours} consecutive hourly checks. An interruption "
-                                "restarts the test. You can run the test while the engineers fabricate the parts."))
+                goals.append(dict(kind="checks",label="PressureTest",quantity=hours,
+                    text=f"Record {hours} test hours at {low}â€“{high}% stress",
+                    description=f"Build the Valve Works first. Keep the Generator running at {low}â€“{high}% stress and "
+                                f"hold {reserve} coal in stock. Check the counter each game hour. Build parts while the test runs. "
+                                "Recorded hours carry forward if stress leaves the band."))
                 readiness=[running,eq("tripped",0),stress_check(4,low),stress_check(5,high),affordable(coal,reserve)]+hardware
-                add(key+"/pressure-test",active+[at_most("hold_hours",hours-1)], [first_match(
-                    ("Pressure held",readiness,[put("hold_hours",1,1),
-                        guarded([eq("hold_hours",hours)],[progress_quest(uid,"PressureTest")])]),
-                    ("Pressure interrupted",[at_least("hold_hours",1)],[put("hold_hours",0)]))])
+                add(key+"/pressure-test",active+[at_most("hold_hours",hours-1)]+readiness,
+                    [put("hold_hours",1,1),progress_quest(uid,"PressureTest")])
             pledge = plan.get("pledge")
             if pledge:
-                goals.append(dict(kind="checks",label="Pledge",text="Dispatch the charter supplies",
-                    description="The supplies depart automatically once the stock is ready and the signal sequence is complete. "
-                                "Set aside "+budget(pledge)+". This shipment is paid once."))
-                add(key+"/pledge", active+[eq("pledged",0),eq("stroke",len(plan["strokes"]))]+can_pay(pledge),
-                    [put("pledged",1)]+pay(pledge)+[progress_quest(uid,"Pledge")])
-            quests.append(writer.build("NI Faultline "+key,uid,act["title"]+" — "+plan["title"],goals,
+                goals.append(dict(kind="checks",label="Pledge",text="Commission the parts" if hold else "Complete the dispatch",
+                    description="Set aside "+budget(pledge)+". Confirm the dispatch order when it opens."+
+                                (" It opens after the pressure test." if hold else " The tracker updates when the load arrives.")))
+                checks = [eq("pledged",0)] + hardware
+                if hold:
+                    checks.append(eq("hold_hours",hours))
+                checks, actions = shipment(key,active,checks,"Works commissioning" if hold else "Dispatch order",pledge,
+                    2 if hold else 8,[put("pledged",1),progress_quest(uid,"Pledge")],go="Install parts" if hold else "Send supplies")
+                add(key+"/pledge",checks,actions)
+            quests.append(writer.build("NI Faultline "+key,uid,act["title"]+" â€” "+plan["title"],goals,
                                        identity,localize,"Faultline/Quest/"+key,act["days"]))
             advance = [put("phase",phase+1), put("plan",0), change(plan["profile"],True),
                        guarded([eq("tripped",1)],[put("tripped",0),change("trip",True)])]
@@ -298,7 +289,7 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
             failure = advance+[mood("Discontent rise - moderately"),report(key+"/miss","The line went quiet",act["failure"])]
             events.append(completed_event("NI Faultline Cleared "+key,identity("event/clear/"+key),
                           identity("trigger/clear/"+key),uid,[scope]+active,success))
-            start = [put("plan",number), put("stroke",0), put("scout_returned",0), change(plan["profile"]),
+            start = [put("plan",number), put("stroke",0), put("shipment",0), put("scout_returned",0), change(plan["profile"]),
                      start_quest(uid), after(key+"/deadline",act["days"],[guarded([scope]+active,failure)])]
             lesson = {(1,1):"gauge", (1,2):"gauge", (2,1):"refit", (2,2):"refit", (3,2):"survey",
                       (6,1):"watch", (6,2):"watch", (7,1):"charter", (7,2):"charter"}.get((phase,number))
@@ -311,40 +302,16 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
             if watch:
                 start[:0]=[put("leg",0),put("hours",0),put("leak",0),put("watch_kept",0)]
             if pledge:
-                start[:0]=[put("pledged",0),put("charter",0)]
-            # Both impact and timing are visible before any circuit is selected.
-            detail = PROFILES[plan["profile"]]
-            if sequence:
-                detail += " Sequence: "+" → ".join(sequence)+"."
-            if watch:
-                detail += (f" Hold {WATCH_LEGS} × {watch['hours']} hours at {watch['low']}–{watch['high']}% stress. "
-                           f"Send {watch['coal']} coal each watch and keep {watch['reserve']} in reserve.")
-            if pledge:
-                detail += " Dispatch "+budget(pledge)+"."
-            if hold:
-                detail += f" Hold {low}–{high}% stress for {hours} hours with {reserve} coal in reserve."
-            for goal in goals:
-                if "station" in goal:
-                    detail += " "+goal["text"]+"."
-            if plan.get("persistent"):
-                detail += " "+REWARDS[plan["persistent"]]
-            if plan.get("requires"):
-                detail += " Requires "+" and ".join(REFITS[flag] for flag in plan["requires"])+"."
-            if phase == 4 and plan.get("flag") == "welded":
-                detail += f" The finished weld raises the trip threshold from {TRIP}% to {WELDED_TRIP}%."
+                start[:0]=[put("pledged",0)]
             choose = [scope]+phase_at(phase,0)+[eq("ending",0)]
-            options.append((plan["title"],detail,choose+visible,[guarded(choose+visible,start)]))
+            options.append((plan["title"],plan["preview"],choose+visible,[guarded(choose+visible,start)]))
             missions.append(dict(phase=phase,plan=number,quest=uid,deadline=act["days"],goals=goals,
-                                 title=plan["title"],profile=plan["profile"],strokes=plan["strokes"],
+                                 title=plan["title"],profile=plan["profile"],signal=calibration,
                                  requires=plan.get("requires",()),flag=plan.get("flag"),watch=watch,pledge=pledge,hold=hold))
 
-        intro = ("\n\nWe'll show you how to use the pressure gauge when you choose a route. A Signal Relay under Tech "
-                 "can warm an outlying district and help the main recover if it trips."
-                 if phase == 1 else "")
         fallback=next(option for option,plan in zip(options,act["plans"]) if not plan.get("requires"))
-        offer = scene(f"briefing/{phase}",act["title"],act["story"]+intro+
-                      f"\n\n{act['days']} days after you choose. If you leave this unanswered for one day, "
-                      f"the dispatcher uses “{fallback[0]}”.",options)
+        offer = scene(f"briefing/{phase}",act["title"],act["story"]+
+                      f"\n\n{act['days']} days to complete the job. Default after one day: {fallback[0]}.",options)
         delivery = [offer,after(f"default/{phase}",1,fallback[3])]
         if shot:=("FirstCall" if phase==1 else act.get("shot")):
             delivery = with_shot(f"briefing/{phase}",shot,phase_at(phase,0)+[eq("ending",0)],delivery)
@@ -352,30 +319,42 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
             [put("offered",phase)]+delivery,0.25)
 
     finish = phase_at(len(ACTS)+1,0)+[eq("ending",0)]
+    replay_ready = [scope,at_least("ending",1),eq("replay_started",0)]
+    replay = guarded(replay_ready,[put("replay_started",1),END_CITY])
+
+    def epilogue(key, title, text):
+        return scene(key,title,text,[("See how the city grew","Finish Faultline and play the city replay.",
+                                     replay_ready,[replay])],True)
+
     endings=[]
+    accord_ready = [eq("final",1),eq("charter",1),eq("convoy_returned",1),at_most("trips",1)]
+    ordinary_ending = either([eq("final",0),eq("charter",0),eq("convoy_returned",0),
+                              at_most("kept",len(ACTS)-3),at_least("trips",2)])
     for kept in range(len(ACTS)-2,len(ACTS)+1):
         title = "The Basin Accord"
         text = ("The shelter crews signed their names to the charter. Households and wards gain one insulation level as "
                 "the new fittings go in. You brought the final convoy home and saw the main through the winter with at most one trip."
-                f"\n\nJobs completed: {kept} of {len(ACTS)}. The campaign is complete. You can continue playing your city.")
-        add(f"accord/{kept}",finish+[eq("final",1),eq("charter",1),eq("convoy_returned",1),eq("kept",kept),
-            compare(integer(1),4,variable(PREFIX+"trips"))],
+                f"\n\nJobs completed: {kept} of {len(ACTS)}.")
+        add(f"accord/{kept}",finish+accord_ready+[eq("kept",kept)],
             [put("ending",3),put("ending/kept",kept),change("accord")],0.25)
-        endings.append(([eq("ending",3),eq("ending/kept",kept)],report(f"accord/{kept}",title,text)))
+        endings.append(([eq("ending",3),eq("ending/kept",kept)],epilogue(f"accord/{kept}",title,text)))
     outcomes = (
         (0, "A Light in the Basin", "The local shelters have a place to come home to. The distant line never answered."),
         (1, "The Signal Holds", "Edith reads the answers into the record. There is a winter line now, and people on both ends intend to keep it."),
     )
     for final,title,story in outcomes:
         for kept in range(len(ACTS)+1):
-            text = f"{story}\n\nJobs completed: {kept} of {len(ACTS)}. Faultline is complete. You can continue playing your city."
-            add(f"end/{final}/{kept}",finish+[eq("final",final),eq("kept",kept)],
+            text = f"{story}\n\nJobs completed: {kept} of {len(ACTS)}."
+            add(f"end/{final}/{kept}",finish+[ordinary_ending,eq("final",final),eq("kept",kept)],
                 [put("ending",1+final),put("ending/kept",kept)],0.25)
-            endings.append(([eq("ending",1+final),eq("ending/kept",kept)],report(f"end/{final}/{kept}",title,text)))
+            endings.append(([eq("ending",1+final),eq("ending/kept",kept)],epilogue(f"end/{final}/{kept}",title,text)))
     done=phase_at(len(ACTS)+1,0)+[at_least("ending",1)]
-    final_report = [guarded(checks,[dialog]) for checks,dialog in endings]
-    add("dawn",done+[eq("offered",len(ACTS))],
-        [put("offered",len(ACTS)+1)]+with_shot("dawn","Dawn",done,final_report),0.25)
+    final_report = [guarded(checks,[dialog]) for checks,dialog in endings]+[after("end-replay",1,[replay])]
+    for ending,shot in ((1,"DawnBasin"),(2,"DawnSignal"),(3,"DawnAccord")):
+        key=f"dawn/{ending}"
+        ready=done+[eq("ending",ending)]
+        add(key,ready+[eq("offered",len(ACTS))],
+            [put("offered",len(ACTS)+1)]+with_shot(key,shot,ready,final_report),0.25)
     assert {v["shot"] for v in filmed.values()}==SHOTS.keys()
     return events, dialogs, quests, dict(scenario=scenario,missions=missions,scan_hours=1,trip=TRIP,
         welded_trip=WELDED_TRIP,reset=RESET,films=filmed,watch_legs=WATCH_LEGS,leak_repair=LEAK_REPAIR,

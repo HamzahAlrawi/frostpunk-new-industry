@@ -8,49 +8,26 @@ MESSAGE = "FrostpunkTutorialMessageEntry"
 SHOW = "FrostpunkCreateTutorialMessageEffect"
 SHOW_FLAGS = u32(0)+b"\1"
 LESSONS = {
-    "gauge": ("Pressure and Overdrive",
-        "Select the Generator to see its stress gauge. The main switch supplies heat. Overdrive is a separate switch "
-        "that makes stress climb. Switch Overdrive off to lower stress while keeping the Generator itself running.\n\n"
-        "A circuit is the route you send steam through. Read your chosen route's heat and workplace effects. "
-        "Follow the numbered steps in the objective tracker, and slow the game down while adjusting the gauge."),
-    "cool": ("A pulse has gone through",
-        "A pulse is a short burst of steam. When the hourly check sees stress inside the specified band, "
-        "the line sends it automatically and the gauge drops by the listed amount. A band is a range, not an exact number.\n\n"
-        "Turn Overdrive off now. Wait for the cooling step in the tracker to finish. Then turn it back on for the next pulse."),
-    "relay": ("Commission a Signal Relay",
-        "Find Signal Relay under Tech in the construction menu. It is available as soon as the city starts. "
-        "It warms a small area while the Generator runs. Once built, it also lets a tripped main reconnect at 20% stress instead of 14%.\n\n"
-        "A trip is a safety shutdown of the main at 72% stress. Buildings lose two heat levels until the circuit reconnects. "
-        "Turn off Overdrive and let the gauge fall. The current pressure job keeps its progress."),
-    "refit": ("Refits, the accumulator and the bypass",
-        "A refit is a permanent change to the pipework. The pressure accumulator lets stress fall faster with Overdrive off "
-        "and opens a shorter route for the second signal. The isolated bypass keeps clinics warmer. Its route for the second "
-        "signal also needs a survey brought home by scouts."),
+    "gauge": ("Send the first signal",
+        "Build a Signal Relay under Tech. Select the Generator and leave its main switch on. Turn on Overdrive to raise the stress gauge into the range in the objective. The relay checks every 15 game minutes. When the objective ticks, switch Overdrive off."),
+    "cool": ("Cool the main",
+        "Switch Overdrive off and leave the Generator running. Stress falls while it cools."),
+    "relay": ("Reconnect the relay",
+        "The main trips at 72% stress. Switch Overdrive off until the gauge drops to 25% with a Signal Relay or 14% without one. Loss of heat ends when the line reconnects."),
+    "refit": ("Choose a refit",
+        "The accumulator recovers stress faster and can transmit to all stations. The isolated return line keeps wards warmer and opens another route with a scout survey."),
     "survey": ("Bring the survey back",
-        "Build a Beacon to open Frostland. Form a scout team, send it to a revealed site, then order the team back to the city. "
-        "The survey counts when scouts return during this job. Explore nearby salvage sites to make the trip pay for itself."),
-    "watch": ("Keep a fuel watch",
-        "A watch is a series of hourly checks. Keep the Generator on, stress inside the band in the tracker, and enough coal "
-        "in storage to fund the shipment and leave the city's reserve. Losing any of these resets the current watch. "
-        "Coal already delivered still counts.\n\n"
-        "Under Resources, build a Coal Magazine and assign it to coal for storage. A completed Magazine cuts the cost of each "
-        "dispatch by 20 coal. When the leak interrupts the watch, choose a repair and wait for the heat penalty to lift."),
-    "charter": ("Send the charter supplies",
-        "A charter is an agreement with the shelters. Its listed supplies are sent once, automatically, once stock "
-        "and any required pressure steps are ready. The job still needs its other city objectives. "
-        "Completing the watches opens the permanent supply plan. Resettlement remains available after a missed watch."),
-    "valve_orders": ("Working the Valve Works",
-        "Build a Valve Works under Tech. Select it, assign engineers and open General. Hover over the two order icons "
-        "to see their names and material costs. Use + to queue the order named in the mission tracker. Each completed "
-        "order counts once and recovers one unit of scrap. Orders finished before this job do not count.\n\n"
-        "While the engineers work, you can start the pressure test. Keep the Generator on and the required coal in reserve. "
-        "Manage Overdrive to keep stress inside the band. An interruption resets the test, while finished orders still count."),
-    "dispatch_orders": ("Packing the last convoy",
-        "Build a Relief Dispatch under Tech and staff it with engineers. In General, queue Clinic Sledges for the footpath "
-        "or Lift Sledges for the ridge lift, as named in your objectives. They need different supplies. Only finished loads "
-        "for your chosen route count. Each order returns a spare unit of wood or coal.\n\n"
-        "Continue your pressure signals and prepare the city for arrivals while the crews load. The convoy rolls out when "
-        "all mission objectives are complete. There is no separate departure button."),
+        "Build a Beacon to open Frostland. Form a scout team, visit one of the revealed sites and order the team back to the city. The tracker credits a return during this mission."),
+    "watch": ("Send fuel to Broken Mile",
+        "A watch is one relief crew's shift at the bend. Keep enough coal for the listed load and the city reserve. Select Send coal on the dispatch order. The goal counts the delivery when it arrives. Send three loads in total.\n\n"
+        "A Coal Magazine cuts each load by 20 coal. Repair the leak after the first delivery before sending the next load."),
+    "charter": ("Dispatch supplies",
+        "Set aside the listed cargo, then approve departure in the dispatch order. The tracker credits the arrival. A brief delay is available whenever you need the stock for the city."),
+    "valve_orders": ("Commission the new line",
+        "Staff the Valve Works and queue the listed parts in General. The gauges count one test hour whenever the Generator is running in the specified stress band with enough coal. The counter pauses outside the band and keeps its progress. Once the parts and test are ready, choose Install parts."),
+    "dispatch_orders": ("Load the last convoy",
+        "Staff the Relief Dispatch and queue the orders named in your tracker. Clinic sledges use Wooden Materials as finished cargo. Heavy sledges use Steel Plates. Keep the finished cargo and choose Send supplies when the dispatch order opens."),
+
 }
 
 

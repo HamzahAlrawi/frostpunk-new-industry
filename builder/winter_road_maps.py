@@ -53,6 +53,12 @@ def place_site(point, identity):
     return select_name(point, CREATE + bytes.fromhex(identity) + u32(0))
 
 
+def survey_routes():
+    # The native randomization pass places the sites before the first quest.
+    return [*(select_name("DefaultRandomizationPoint_"+point, REVEAL) for point in LEGACY_POINTS),
+            *(reveal_site(uid) for uid in LEGACY_TEMPLATES)]
+
+
 def constructed(building, count=1):
     buildings = compact("FrostpunkBuildingsSelector", bytes.fromhex(building) + b"\1" + bytes(11))
     return compare(compact("CountExpression", buildings), 4, integer(count))
@@ -132,8 +138,7 @@ def build_scenes(read_owned):
         raise SchemaError("Opening scout sites must be within range of the city")
     scenes = {
         CITY.lower()+".binaryscene": (CITY_DONOR.lower()+".binaryscene", bytes(revised)),
-        # Keep the entire Frostland object stream intact. Scenario events place
-        # the sites after load using the same effect as the native campaigns.
+        # The native site group fills the intact map's randomization points.
         WORLD.lower()+".binaryscene": (WORLD_DONOR.lower()+".binaryscene",
                                         renamed(world, WORLD_DONOR, WORLD)),
     }
@@ -170,10 +175,10 @@ def insert_map_setups(data, identity, localize):
     if rand.string() is not None:
         raise SchemaError("Unexpected native world variation description")
     world = (entry("NI Switchback Frostland", identity("world-setup")) + string(WORLD) + u32(1) + string("Random A")
-             + bytes.fromhex(identity("world-variant")) + u32(0)*2
+             + bytes.fromhex(identity("world-variant")) + u32(1) + bytes.fromhex(WORLD_GROUP) + u32(0)
              + localize("LastSignal/Map/Route", "Winter Road scouting routes") + string(None)
              + localize("LastSignal/Map/World", "Switchback Frostland")
-             + localize("LastSignal/Map/WorldDescription", "Three salvage routes lead out from the city.")
+             + localize("LastSignal/Map/WorldDescription", "Scout the abandoned stations and shelters beyond Switchback Basin.")
              + b"\0")
     world_start = data.index(entry("Refugees", "e56253859755dc8b364092403628c7ef") + string("WorldMaps/WorldMapRefugees"))
     if Cursor(data, start-4).count(64) != 30 or Cursor(data, world_start-4).count(64) != 19:
