@@ -2,7 +2,7 @@
 
 Start a fresh city from **Select Scenario → The Last Signal: Winter Road** to play on **Switchback Basin**. Its terrain comes from the Endless Points map, with a fixed starting position and a custom arrangement of wood, coal, and steel piles. Existing cities keep the map they started on.
 
-Two convoys are following the same guide rope into the crater. The first rescues are just the beginning: their survivors need a settlement that can house them, a winter reserve, and a way to bring down the people still on the ridge. The story ends with a decision about what the city will do with the road it built.
+Two convoys are following the same guide rope into the crater. Their survivors need a settlement that can house them, a winter reserve, and a way to bring down the people still on the ridge. Once the city decides the future of the road, three more chapters deal with people and shelters beyond the gate.
 
 | Chapter | Deadline | What you do |
 | --- | ---: | --- |
@@ -21,4 +21,14 @@ The quest tracker shows the work each plan needs. **Operate** means open and sta
 
 The six optional projects are **The Spare Rope**, **A Room for the School**, **The Night Clinic**, **Keep the Signal Lit**, **Bread for the Landing**, and **The Apprentice’s Machine**. Each offers a specific job and reward alongside one of the main chapters. You can have one side project active at a time. The spare rope opens the twin crossing, school repairs insulate Bunkhouses and Houses, and the apprentice braces the steam joint. Other projects bring supplies or working families.
 
-Opening the winter road at the end requires a successful crossing and a successful heat watch. It buys three shipments over eight days, including six engineers in the last convoy. You can also invest in permanent insulation for homes and clinics, or close the road and end the story without paying another bill. The city stays playable after every ending.
+Opening the winter road requires a successful crossing and heat watch. It buys shipments two, five, and eight days after the treaty, including six engineers in the last convoy. You can instead invest in permanent insulation for homes and clinics, or decline the treaty.
+
+Every treaty choice leads to the final three chapters. An existing save that already decided the treaty can pick up here. Treaty shipments arrive alongside these objectives.
+
+| Chapter | Deadline | What you decide |
+| --- | ---: | --- |
+| The People Beyond the Gate | 6 days | Receive the station families or run a loading base for isolated repair crews. |
+| The Ice Under the Road | 7 days | Shore up the heated road or run a reserve kitchen for shelters cut off by the ice. |
+| A Place on the Winter Map | 8 days | Keep a permanent refuge or manufacture new automatons to maintain outlying shelters. |
+
+If a briefing goes unanswered for two game days, the city starts its first plan. The **Winter Road Complete** report marks the end and records how many of the final promises the city kept. The city stays playable afterward.

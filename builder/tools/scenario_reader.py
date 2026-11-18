@@ -69,13 +69,9 @@ def effect(c):
             raise SchemaError('Unsupported world map selector '+selector)
         if c.take(7)!=bytes(7):raise SchemaError('Unexpected world map selector flags')
         operations=effects(c)
-        if len(operations)!=1 or operations[0][0] not in ('map_create','map_reveal'):
+        if operations!=[('map_reveal',)]:
             raise SchemaError('Unexpected world map selector action')
-        return ('map_select',target,operations[0])
-    if name=='FrostpunkCreateWorldMapEntityEffect':
-        guid=c.guid()
-        if c.u32()!=0:raise SchemaError('Unsupported map entity creation flags')
-        return ('map_create',guid)
+        return ('map_reveal',target)
     if name=='FrostpunkRevealWorldMapEntityEffect':
         return ('map_reveal',)
     if name=='FrostpunkProgressCustomQuestObjectiveEffect':return ('progress',c.guid(),c.string(),c.i32())

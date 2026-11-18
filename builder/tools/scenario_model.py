@@ -12,7 +12,7 @@ class World:
         self.buildings={};self.researched=set();self.produced={};self.production_start={};self.progress={}
         self.automation=0;self.generator=True;self.scenario=scenario
         self.arrivals={};self.operating={};self.warm_homes=0;self.world_map=False
-        self.frostland_sites={};self.revealed_sites=set()
+        self.revealed_sites=set()
 
     def value(self,value):
         kind=value[0]
@@ -65,14 +65,9 @@ class World:
                 key=action[2:]
                 self.arrivals[key]=self.arrivals.get(key,0)+action[1]
             elif kind=='open_map':self.world_map=True
-            elif kind=='map_select':
+            elif kind=='map_reveal':
                 assert self.world_map
-                _,target,operation=action
-                if operation[0]=='map_create':
-                    assert target[0]=='marker' and operation[1] not in self.frostland_sites
-                    self.frostland_sites[operation[1]]=target[1]
-                else:
-                    self.revealed_sites.add(target)
+                self.revealed_sites.add(action[1])
             elif kind=='remove_modifier':self.modifiers.discard(action[1])
             elif kind=='predefined':self.predefined.append(action[1])
             else:raise AssertionError(action)

@@ -156,6 +156,60 @@ CHAPTERS=(
 )
 
 
+AFTERMATH=(
+    dict(title="The People Beyond the Gate", days=6, story=(
+        "A runner brings the names of people who never made it onto a convoy. They are sheltering in the disused rope station. "
+        "Mara wants to bring the families down. Ivo says the station is also the last dry shelter for the crews repairing the pass. "
+        "The city can prepare either a reception district or a supply base for the road crews."),
+        plans=(
+            plan("Make room for the station families","Run three wards and cook ten new batches of rations. Keep sixteen homes warm during the reception watch.",
+                 [warm(16),operate("Operate three medical buildings",*WARDS,quantity=3),
+                  produce("Cook ten new batches of rations","meals",10)],
+                 {"Wood":110,"Food Rations":120,"Coal":180},people={"workers":14,"children":8},
+                 cargo={"Raw Food":120},watch=4,
+                 report="The children arrive first. The station keeper waits at the gate until every name is read back to her."),
+            plan("Supply the isolated road crews","Staff two Steelworks and a coal works. A large depot stages the payload through the loading watch.",
+                 [operate("Operate two Steelworks",*STEEL,quantity=2),
+                  operate("Operate a coal mine or thumper",*COAL),build("Build a Large Resource Depot","Resource Depot Big")],
+                 {"Steel":150,"Wood":100,"Coal":230},people={"workers":8,"engineers":4},
+                 cargo={"Steam Cores":2},watch=4,
+                 report="The last wagon brings back the road crew's spare cores. They leave one person at the station to keep the bell working."),
+        ), failure="The station shuts down as the ridge freezes over. Its keeper sends the city the list of shelters they will try next."),
+    dict(title="The Ice Under the Road", days=7, story=(
+        "The thaw has opened cracks below the old signal line. Then the wind turns and freezes each crack into a blade. "
+        "The crews can save the heated roadbed or abandon it and build a kitchen reserve for people cut off by the ice."),
+        plans=(
+            plan("Shore up the heated road","Keep four Steam Hubs standing and two coal works operating through six inspections.",
+                 [build("Build four Steam Hubs","Steam Hub",quantity=4),
+                  operate("Operate two coal mines or thumpers",*COAL,quantity=2)],
+                 {"Steel":160,"Coal":380},cargo={"Wood":150,"Steel":80},watch=6,
+                 report="Ivo marks the safe side of the embankment with furnace ash. The sledge drivers follow it in single file."),
+            plan("Build a reserve kitchen","Grow food in two Hothouses and run two Cookhouses. Cook eighteen new batches while holding the reserve.",
+                 [operate("Operate two Hothouses",*FOOD,quantity=2),
+                  operate("Operate two Cookhouses","Food Processing",quantity=2),
+                  produce("Cook eighteen new batches of rations","meals",18)],
+                 {"Wood":160,"Coal":220,"Food Rations":160},cargo={"Food Rations":200,"Raw Food":100},watch=6,
+                 report="The kitchen wheels its first hot cauldron to the shelter before the lanterns go out. The people there send back the empty bowls."),
+        ), failure="The ice cuts the line. Edith records the last call and gives the crews a route back to the city."),
+    dict(title="A Place on the Winter Map", days=8, story=(
+        "The regional surveyors ask what they should mark here. We can keep a refuge staffed and heated through the next bad winter, "
+        "or send machines out to maintain the shelters scattered across the pass. Whichever promise we make, someone will rely on it."),
+        plans=(
+            plan("Keep a permanent refuge","Run an Infirmary and two Cookhouses. Hold twenty-four homes warm through the final two-day watch.",
+                 [warm(24),operate("Operate an Infirmary","Ambulatorium"),
+                  operate("Operate two Cookhouses","Food Processing",quantity=2)],
+                 {"Coal":450,"Food Rations":240,"Wood":140},people={"engineers":6},
+                 cargo={"Food Rations":210},watch=8,
+                 report="The surveyors mark the basin with an open door. Mara pins a copy beside the names of the first outriders."),
+            plan("Send the winter machines","Operate a Factory and two Steelworks. Manufacture two new automatons during the final two-day watch.",
+                 [operate("Operate a Factory","Factory"),operate("Operate two Steelworks",*STEEL,quantity=2),
+                  produce("Manufacture two new automatons","automatons",2)],
+                 {"Coal":450,"Steel":220},cargo={"Steam Cores":4},watch=8,
+                 report="The last two machines leave with spare parts and engraved route plates. Edith hears their leads check in from the first shelter."),
+        ), failure="The surveyors mark the city as a winter refuge when its own stores permit. The work has reached the limit of what we can promise."),
+)
+
+
 PROJECTS=(
     dict(at=2,key="rope",title="The Spare Rope",story="Ivo can rig a second crossing if we make a heated stop and find enough timber.",
          days=4,cost={"Wood":45},goals=[build("Build a Steam Hub","Steam Hub")],reward={"Wood":90},flag="rope",

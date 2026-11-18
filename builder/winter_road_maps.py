@@ -32,12 +32,14 @@ SITES = (
 LEGACY_POINTS = ('000', '001', '002', '004', '005', '006')
 LEGACY_TEMPLATES = ('5260c3c49e6b05a7704be91e9b516d37', '2a6e69ebb22864b46f435297358d5e0f')
 SELECT = typed("FrostpunkSelectEffect")
-CREATE = typed("FrostpunkCreateWorldMapEntityEffect")
 REVEAL = typed("FrostpunkRevealWorldMapEntityEffect")
 BY_NAME = "FrostpunkEntitiesByNameSelector"
 BY_SITE = "FrostpunkExpeditionSitesSelector"
 OBJECT_HEADER = bytes.fromhex("14ebe45c65000000ffffffff0100000001000000")
 TRANSFORM_FIELD = struct.Struct("<4f")
+WORLD_COMPONENT = "a3b0c0fadf0565a260424b45b5db5823"
+RANDOM_POINT = bytes.fromhex("a1b1cb73255cf599224f9df06ba9632a")
+RANDOMIZATION = typed("FrostpunkWorldMapRandomizationComponentTemplate")
 
 
 def select_name(name, effect):
@@ -57,7 +59,6 @@ def validate_native_map_effects(events):
     samples = (
         beacon_exists(),
         select_name("DefaultRandomizationPoint_016", REVEAL),
-        select_name("FirstRefugeesSpawnPoint", CREATE + bytes.fromhex("e0b0beffbe522299c34d9723d7079e2b") + bytes(4)),
         SELECT + compact(BY_SITE, bytes.fromhex("c4c959314313c585be451c2b775a206a") + bytes(7) + u32(2) + REVEAL),
     )
     if not all(sample in events for sample in samples):
@@ -91,11 +92,34 @@ def renamed(data, original, name):
     return data[:start] + string(name) + data[start+len(string(original)):]
 
 
+def fixed_site(data, point, template_id, transform):
+    """Use a scene-placed site, with no native randomization override."""
+    name = data.index(point.encode()+b"\0")
+    begin = name-19
+    if data[begin-16:begin] != bytes.fromhex(WORLD_COMPONENT) or data[begin:begin+16] != RANDOM_POINT:
+        raise SchemaError(f"Unsupported random point template: {point}")
+    start = data.index(RANDOMIZATION, transform+TRANSFORM_FIELD.size)-4
+    if start-transform != 93 or data[start:start+4] != u32(1):
+        raise SchemaError(f"Unexpected random point override location: {point}")
+    cursor = Cursor(data, start+4+len(RANDOMIZATION))
+    cursor.guid()
+    if cursor.count(8) != 1:
+        raise SchemaError(f"Unsupported random point group: {point}")
+    cursor.guid()
+    if cursor.u32() != 0:
+        raise SchemaError(f"Unexpected extra random point groups: {point}")
+    for _ in range(cursor.count(8)):
+        if not cursor.string().startswith("DefaultRandomizationPoint_"):
+            raise SchemaError(f"Unexpected random point connection: {point}")
+    if cursor.take(12) != struct.pack("<3f",1,1,1):
+        raise SchemaError(f"Unexpected random point override footer: {point}")
+    return ((Span(begin,begin+16),bytes.fromhex(template_id)), (Span(start,cursor.position),u32(0)))
+
+
 def build_scenes(read_owned):
     city = read_owned("scenes", CITY_DONOR.lower()+".binaryscene")
     world = read_owned("scenes", WORLD_DONOR.lower()+".binaryscene")
     city_component = "0293725008399bab68477356f99c43b9"
-    world_component = "a3b0c0fadf0565a260424b45b5db5823"
     _, generator = translation(city, "Generator_000", city_component)
     revised = bytearray(renamed(city, CITY_DONOR, CITY))
     piles = {}
@@ -111,20 +135,23 @@ def build_scenes(read_owned):
            for material in ("Coal", "Steel", "Wood")):
         raise SchemaError("Generator has no nearby source of an opening resource")
     sites = []
-    _, home = translation(world, "City_000", world_component)
+    _, home = translation(world, "City_000", WORLD_COMPONENT)
+    site_edits = []
     for point, template_id, label, donor_id in SITES:
-        _, position = translation(world, point, world_component)
+        offset, position = translation(world, point, WORLD_COMPONENT)
         path = f"gameentities/worldmap/expeditionsites/_shared/[t-plain]resources{donor_id}.binarytemplate"
         donor = read_owned("templates", path)
         if not donor.startswith(bytes.fromhex(template_id)) or string("FrostpunkExpeditionSiteComponentTemplate") not in donor:
             raise SchemaError(f"Unsupported salvage site donor: {path}")
+        site_edits.extend(fixed_site(world, point, template_id, offset))
         sites.append(dict(point=point, template=template_id, name=label, position=list(position[:3]),
                           distance=round(dist(home[:3], position[:3]))))
     if not all(600 < s["distance"] < 3000 for s in sites):
         raise SchemaError("Opening scout sites must be within range of the city")
     scenes = {
         CITY.lower()+".binaryscene": (CITY_DONOR.lower()+".binaryscene", bytes(revised)),
-        WORLD.lower()+".binaryscene": (WORLD_DONOR.lower()+".binaryscene", renamed(world, WORLD_DONOR, WORLD)),
+        WORLD.lower()+".binaryscene": (WORLD_DONOR.lower()+".binaryscene",
+                                        renamed(replace_spans(world,site_edits), WORLD_DONOR, WORLD)),
     }
     for target, donor in ((CITY, CITY_DONOR), (WORLD, WORLD_DONOR)):
         original = donor.lower()+".gi"

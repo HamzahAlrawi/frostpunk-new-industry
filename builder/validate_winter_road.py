@@ -170,20 +170,59 @@ def audit(records,metadata,ids):
     chart = new()
     chart.start()
     chart.run(1,False)
-    assert not chart.world_map and not chart.frostland_sites
+    assert not chart.world_map and not chart.revealed_sites
     chart.buildings[BEACON] = 1
     chart.run(0.5,False)
     assert chart.world_map
-    assert chart.frostland_sites == {s["template"]:s["point"] for s in road["map"]["sites"]}
     assert chart.revealed_sites == {("site",s["template"]) for s in road["map"]["sites"]}
     saved = chart.checkpoint()
     saved.start();saved.run(1,False)
-    assert saved.frostland_sites == chart.frostland_sites and saved.revealed_sites == chart.revealed_sites
+    assert saved.revealed_sites == chart.revealed_sites
     existing = new(story["scenario"])
     existing.variables.update({PREFIX+"chapter":4, PREFIX+"map_open":1})
     existing.buildings[BEACON] = 1
     existing.run(0.5,False)
-    assert existing.world_map and not existing.frostland_sites and existing.revealed_sites
+    assert existing.world_map and existing.revealed_sites
+    aftermath={(row["chapter"],row["plan"]):row for row in road["aftermath"]}
+    assert len(aftermath)==6
+    for treaty in (1,2,3):
+        # Reproduce a previously negotiated treaty, including testgame's
+        # already-delivered first shipment. The new work begins on load.
+        resumed=new()
+        resumed.time=16.5
+        resumed.variables={PREFIX+"chapter":99,PREFIX+"ending":treaty,PREFIX+"offered":8}
+        if treaty==1:
+            resumed.variables[PREFIX+"cargo/1"]=1
+        resumed.start()
+        for phase in (1,2,3):
+            resumed.run(0.5,False)
+            decision=name(f"aftermath/briefing/{phase}")
+            assert decision in resumed.open and not resumed.active
+            plan=1 if treaty!=2 else 2
+            row=aftermath[phase,plan]
+            if treaty==3:
+                resumed.generator=False
+                resumed.run(2,False)
+                assert get(resumed,"aftermath/plan")==1
+                balance=dict(resumed.stock)
+                resumed.run(row["deadline"]+0.25,False)
+                assert resumed.stock==balance
+            else:
+                assert resumed.click(decision,plan-1)
+                complete(resumed,row)
+                assert row["quest"] in resumed.active
+                resumed=resumed.checkpoint()
+                resumed.start()
+                resumed.run(row["watch"]*0.25+0.25,False)
+                assert get(resumed,"aftermath/kept")==phase
+            expected_phase = (phase+1,) if phase<3 else (4,99)
+            assert not resumed.active and get(resumed,"aftermath") in expected_phase, (treaty,phase,get(resumed,"aftermath"))
+        resumed.run(0.5,False)
+        assert name(f"aftermath/end/{0 if treaty==3 else 3}") in resumed.open
+        assert get(resumed,"aftermath")==99 and get(resumed,"ending")==treaty
+        if treaty==1:
+            assert get(resumed,"cargo/1")==1, "A delivered shipment was replayed"
     return dict(full_paths=len(branches),mission_variants=len(missions),side_projects=len(side_runs),
         missed_chapters=count,ending_paths=3,heating_watch_resets=True,legacy_isolation=True,
-        revealed_scout_sites=len(chart.frostland_sites),legacy_beacon_repaired=True)
+        revealed_scout_sites=len(chart.revealed_sites),legacy_beacon_repaired=True,aftermath_plans=len(aftermath),
+        legacy_treaties_resumed=3)

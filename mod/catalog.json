@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.21.0",
+  "version": "3.22.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -23416,9 +23416,9 @@
         "modifier": "29146dd29a92565ba331f629b05c1e19"
       }
     ],
-    "events": 362,
-    "dilemmas": 210,
-    "quests": 149,
+    "events": 394,
+    "dilemmas": 229,
+    "quests": 155,
     "poll_days": 0.25,
     "description": "Three separate Endless modes with automatic chapters and timed incidents.",
     "frontiers": {
@@ -27771,8 +27771,8 @@
                 "kind": "checks",
                 "label": "Watch",
                 "quantity": 1,
-                "text": "Pass the 36-hour heat watch",
-                "description": "Pass six inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 360 coal, 135 food rations. Payment is charged once, at completion."
+                "text": "Pass 6 reserve inspections",
+                "description": "Pass 6 inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 360 coal, 135 food rations. Payment is charged once, at completion."
               }
             ],
             "cost": {
@@ -27827,8 +27827,8 @@
                 "kind": "checks",
                 "label": "Watch",
                 "quantity": 1,
-                "text": "Pass the 36-hour heat watch",
-                "description": "Pass six inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 360 coal, 140 steel. Payment is charged once, at completion."
+                "text": "Pass 6 reserve inspections",
+                "description": "Pass 6 inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 360 coal, 140 steel. Payment is charged once, at completion."
               }
             ],
             "cost": {
@@ -28047,6 +28047,326 @@
               "Coal": 220
             },
             "index": 6
+          }
+        ],
+        "aftermath": [
+          {
+            "chapter": 1,
+            "plan": 1,
+            "quest": "c7a25d28796f4252b1785a947a5ba3b0",
+            "goals": [
+              {
+                "kind": "warm",
+                "text": "Keep 16 homes Liveable or warmer",
+                "quantity": 16,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count.",
+                "target": [
+                  "e8a15ad518cc5bbb134437db2359a858",
+                  "7190dbae6f70a6a7c54481b4e09d1889"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate three medical buildings",
+                "quantity": 3,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "produce",
+                "text": "Cook ten new batches of rations",
+                "quantity": 10,
+                "target": [
+                  "925cc17cc4c067ae0248aaef7ff14ed5",
+                  "b5f5c91e6c4db683424007ee9051463c",
+                  "238787e45f7b239f3c406cebb73f45b4",
+                  "0a7f2306c063ce83694a59f99b24e5c8",
+                  "dbfeb8bf4e60439add46e25c118fed85",
+                  "8f65ab452f00c757af98b654f3a8bbbc",
+                  "bef3c24de41f965d9053efbd9abcf4d2",
+                  "38df762e6b934a599f993770039f6b26"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Watch",
+                "quantity": 1,
+                "text": "Pass 4 reserve inspections",
+                "description": "Pass 4 inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 110 wood, 120 food rations, 180 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Wood": 110,
+              "Food Rations": 120,
+              "Coal": 180
+            },
+            "deadline": 6,
+            "watch": 4,
+            "cargo": {
+              "Raw Food": 120
+            }
+          },
+          {
+            "chapter": 1,
+            "plan": 2,
+            "quest": "a6ae0b32951f5d58b789826eb8c45151",
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate two Steelworks",
+                "quantity": 2,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate a coal mine or thumper",
+                "quantity": 1,
+                "target": [
+                  "7f5d92438ed6d18e994473ff2014dc3d",
+                  "7226772eb77bc49f9c4c520f3df2c7dc",
+                  "06cdc0a0e6d288a8d2435294d142c9b5",
+                  "145e292916c2d6826b4c1b7cd624f1ce",
+                  "c4a1ac4584d524a749436429f81880a3"
+                ]
+              },
+              {
+                "kind": "build",
+                "text": "Build a Large Resource Depot",
+                "quantity": 1,
+                "target": [
+                  "d17fb879d88864a9444ee0283802c4cd"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Watch",
+                "quantity": 1,
+                "text": "Pass 4 reserve inspections",
+                "description": "Pass 4 inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 150 steel, 100 wood, 230 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Steel": 150,
+              "Wood": 100,
+              "Coal": 230
+            },
+            "deadline": 6,
+            "watch": 4,
+            "cargo": {
+              "Steam Cores": 2
+            }
+          },
+          {
+            "chapter": 2,
+            "plan": 1,
+            "quest": "638a96031dc22553bea27e407de139eb",
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build four Steam Hubs",
+                "quantity": 4,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two coal mines or thumpers",
+                "quantity": 2,
+                "target": [
+                  "7f5d92438ed6d18e994473ff2014dc3d",
+                  "7226772eb77bc49f9c4c520f3df2c7dc",
+                  "06cdc0a0e6d288a8d2435294d142c9b5",
+                  "145e292916c2d6826b4c1b7cd624f1ce",
+                  "c4a1ac4584d524a749436429f81880a3"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Watch",
+                "quantity": 1,
+                "text": "Pass 6 reserve inspections",
+                "description": "Pass 6 inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 160 steel, 380 coal. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Steel": 160,
+              "Coal": 380
+            },
+            "deadline": 7,
+            "watch": 6,
+            "cargo": {
+              "Wood": 150,
+              "Steel": 80
+            }
+          },
+          {
+            "chapter": 2,
+            "plan": 2,
+            "quest": "4bbc058810f5e853b6336056d3d3eedc",
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate two Hothouses",
+                "quantity": 2,
+                "target": [
+                  "20e9be8106e19f838b4bb73be86d04de",
+                  "20e9be8106e19f838b4bb73ae86d04de"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two Cookhouses",
+                "quantity": 2,
+                "target": [
+                  "59b3ef3d8505aea51a45828da82a1c3d"
+                ]
+              },
+              {
+                "kind": "produce",
+                "text": "Cook eighteen new batches of rations",
+                "quantity": 18,
+                "target": [
+                  "925cc17cc4c067ae0248aaef7ff14ed5",
+                  "b5f5c91e6c4db683424007ee9051463c",
+                  "238787e45f7b239f3c406cebb73f45b4",
+                  "0a7f2306c063ce83694a59f99b24e5c8",
+                  "dbfeb8bf4e60439add46e25c118fed85",
+                  "8f65ab452f00c757af98b654f3a8bbbc",
+                  "bef3c24de41f965d9053efbd9abcf4d2",
+                  "38df762e6b934a599f993770039f6b26"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Watch",
+                "quantity": 1,
+                "text": "Pass 6 reserve inspections",
+                "description": "Pass 6 inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 160 wood, 220 coal, 160 food rations. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Wood": 160,
+              "Coal": 220,
+              "Food Rations": 160
+            },
+            "deadline": 7,
+            "watch": 6,
+            "cargo": {
+              "Food Rations": 200,
+              "Raw Food": 100
+            }
+          },
+          {
+            "chapter": 3,
+            "plan": 1,
+            "quest": "7989f531848ff95dbd884e76d31d1f44",
+            "goals": [
+              {
+                "kind": "warm",
+                "text": "Keep 24 homes Liveable or warmer",
+                "quantity": 24,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count.",
+                "target": [
+                  "e8a15ad518cc5bbb134437db2359a858",
+                  "7190dbae6f70a6a7c54481b4e09d1889"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate an Infirmary",
+                "quantity": 1,
+                "target": [
+                  "98c676299c50c1841a4568ff11d61bde"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two Cookhouses",
+                "quantity": 2,
+                "target": [
+                  "59b3ef3d8505aea51a45828da82a1c3d"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Watch",
+                "quantity": 1,
+                "text": "Pass 8 reserve inspections",
+                "description": "Pass 8 inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 450 coal, 240 food rations, 140 wood. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Coal": 450,
+              "Food Rations": 240,
+              "Wood": 140
+            },
+            "deadline": 8,
+            "watch": 8,
+            "cargo": {
+              "Food Rations": 210
+            }
+          },
+          {
+            "chapter": 3,
+            "plan": 2,
+            "quest": "6198a29cd409c553b12298092514acc1",
+            "goals": [
+              {
+                "kind": "operate",
+                "text": "Operate a Factory",
+                "quantity": 1,
+                "target": [
+                  "20e819887723898b4b46612b11d272f6"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two Steelworks",
+                "quantity": 2,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "produce",
+                "text": "Manufacture two new automatons",
+                "quantity": 2,
+                "target": [
+                  "cc33ac0c093846b56040ff68fee8e948",
+                  "3aa98fd2adb62d8e8d4ecd95f54f2a11",
+                  "061c4e12f375c4a75b42f32d97bc2d1e",
+                  "779e0650acc4a99da24b53fe21be23e5",
+                  "b21a11b15c4a53803b418396e9e7b82c",
+                  "ce273b022251a6904842e7fd0e6999b4"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Watch",
+                "quantity": 1,
+                "text": "Pass 8 reserve inspections",
+                "description": "Pass 8 inspections in a row. Every six game hours the Generator must be on and the listed reserves must be intact. A missed inspection restarts the count. Set aside 450 coal, 220 steel. Payment is charged once, at completion."
+              }
+            ],
+            "cost": {
+              "Coal": 450,
+              "Steel": 220
+            },
+            "deadline": 8,
+            "watch": 8,
+            "cargo": {
+              "Steam Cores": 4
+            }
           }
         ],
         "finale": "8c7cc594b244535e9e08878734b9a984",
