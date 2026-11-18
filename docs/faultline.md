@@ -1,6 +1,8 @@
 # Faultline
 
-Choose **Faultline** under **Select Scenario**. Start a new city to use the revised campaign and Frostland setup. Frostland uses the game's native site placement. Build a Beacon under Tech, form a scout team and select one of the revealed sites. Order the team home to complete a survey.
+Choose **Faultline** under **Select Scenario** and start a new city for the 3.29 campaign. The ridge shelters depend on two routes. Decide which one to connect to the city's heating network, then try to bring both crews home before the final whiteout closes the pass.
+
+Build a Beacon under Tech to reveal the nearby Frostland sites. Form a scout team, visit a revealed site and bring the team home if you accept the survey.
 
 ## Generator stress
 
@@ -10,11 +12,20 @@ At 72% stress, the main trips and affected buildings lose two heat levels. Turn 
 
 The Valve Works pressure test counts eligible game hours in the displayed range, with the Generator running and enough coal held in reserve. It pauses when conditions are outside the range. The objective shows how many hours have already been recorded.
 
-## Deliveries
+## Build a district heat loop
 
-A watch is a relief crew's shift at Broken Mile. Choose a route and keep enough coal for the load and the listed city reserve. Click **Send coal** when the dispatch order opens. The supplies leave storage on departure and the tracker credits the delivery on arrival. You can defer a load for six game hours. Dispatches use a timed mission order panel.
+In **When the Ice Lets Go**, choose the clinic road or works spur. Use Heat view and keep the route's buildings **Liveable** or warmer while the Generator runs. The clinic road needs a medical building and a Cookhouse. The works spur needs a Steelworks and a Coal Mine or Coal Thumper. Steam and advanced variants count. Three qualifying hourly readings commission the loop. The chosen district gains one insulation level. The works spur also raises the trip threshold to 82%.
 
-Send three loads to complete the watches. After the first load, patch the leak with 35 steel and 60 coal for a two-hour repair, or isolate it for twelve hours. The remaining shipments wait for the line to reopen. A built Coal Magazine lowers the coal spent on each load by 20, without reducing the reserve.
+## Broken Mile
+
+A watch is a relief crew's shift. The dispatchers send three loads automatically. Each load needs both buildings along its route Liveable or warmer, the Generator running, and enough coal to make the delivery above the city reserve. Cargo is spent once on departure. A convoy waits at a stop if the district goes cold before arrival. Restore the heat to credit the delivery.
+
+| Route | Coal per load | City reserve | Travel | Travel after district refit |
+| --- | ---: | ---: | ---: | ---: |
+| Clinic road | 50 | 180 | 12 hours | 8 hours |
+| Ridge tramway | 65 | 165 | 8 hours | 5 hours |
+
+A built Coal Magazine saves 20 coal per load. After the first arrival, either spend 35 steel and 60 coal on a two-hour repair with the Generator running at or below 38% stress, or isolate the bend for twelve hours. Dispatch resumes after the repair when the district is warm.
 
 ## Campaign buildings
 
@@ -27,8 +38,12 @@ Send three loads to complete the watches. After the first load, patch the leak w
 
 The game exposes the finished supplies under its existing resource names. Isolation valves use Steam Tools, bypass sections and heavy sledges use Steel Plates, and clinic sledges use Wooden Materials. Each order counts only if it finishes during the mission. Building-count objectives care about completed buildings. A shift ending or a full stockpile does not undo them.
 
-## Finale
+## Two crews in the whiteout
 
-An isolated ward line and a successful scout survey open a shortcut for the second signal. A successful lake bypass opens the lift rescue route. Bring the clinic down for a lasting healing bonus, or bring the lift crew and its tools down for better timber production.
+An isolated ward line and a successful scout survey open a shortcut for the second signal. A successful lake bypass opens the lift rescue route. Rescuing the clinic brings a lasting healing bonus. The lift crew brings tools that improve timber production.
 
-Complete the second signal, sign a charter, bring back the last convoy and finish at least seven of the nine jobs with at most one trip to earn **The Basin Accord**. The final caption identifies your outcome. **See how the city grew** hands the campaign over to Frostpunk's native city replay.
+Pack the lead convoy in Relief Dispatch and commit the cargo. The whiteout takes two heat levels from the city for up to 18 hours. The lead route opens first and needs six qualifying hourly readings. The second opens two hours later and needs eight. Cold hours pause progress. Each rescued crew arrives as soon as its own objective clears, even if the lead crew has yet to make it down.
+
+The reserve boiler can add one heat level to a single route until the storm clears. Fire the clinic boiler for 75 coal and 25 rations, fire the works boiler for 100 coal and 25 steel, or keep the reserves. Earlier heat loop insulation also applies during the front.
+
+Complete the second signal, sign a charter, rescue **both crews**, and finish at least seven of the nine jobs with at most one trip to earn **The Basin Accord**. If one crew is lost, the report records who came home. **See how the city grew** hands the campaign over to Frostpunk's native city replay.

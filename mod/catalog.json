@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.28.1",
+  "version": "3.29.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -23571,11 +23571,41 @@
         "title": "Ridge Lift Couplings",
         "description": "Sawmills and Wall Drills gain 35% workplace efficiency from the lift crew\u2019s refit.",
         "modifier": "eeda23f91b981a50b83beb9537566b38"
+      },
+      {
+        "id": "Frontiers/faultline/clinic_pact",
+        "title": "Clinic Road Heat Loop",
+        "description": "Medical buildings and Cookhouses gain one insulation level. Broken Mile clinic road deliveries travel four hours faster.",
+        "modifier": "3f258716530393579624d7a9679ad229"
+      },
+      {
+        "id": "Frontiers/faultline/lift_pact",
+        "title": "Works Spur Heat Loop",
+        "description": "Steelworks and coal mines and thumpers gain one insulation level. Broken Mile tram deliveries travel three hours faster.",
+        "modifier": "b9724ac7e13a59528927852240815011"
+      },
+      {
+        "id": "Frontiers/faultline/whiteout",
+        "title": "Faultline Whiteout",
+        "description": "Insulated buildings lose two heat levels as the two rescue convoys try to reach the city.",
+        "modifier": "25197062c4608352a1b499234f54782a"
+      },
+      {
+        "id": "Frontiers/faultline/boost_clinic",
+        "title": "Clinic Reserve Boiler",
+        "description": "Medical buildings and Cookhouses gain one heat level until the storm clears.",
+        "modifier": "181c72f003f7595f9b143527e65f3277"
+      },
+      {
+        "id": "Frontiers/faultline/boost_lift",
+        "title": "Works Reserve Boiler",
+        "description": "Steelworks, coal mines and thumpers gain one heat level until the storm clears.",
+        "modifier": "2f5c1bbf007fa358abc28252ce307ca6"
       }
     ],
-    "events": 480,
-    "dilemmas": 319,
-    "quests": 174,
+    "events": 492,
+    "dilemmas": 323,
+    "quests": 178,
     "poll_days": 0.25,
     "description": "Three separate Endless modes with automatic chapters and timed incidents.",
     "frontiers": {
@@ -25404,7 +25434,12 @@
         "faultline/leak": "89b5b8c5948aa55481c6ebac6077862b",
         "faultline/resettled": "8c003f0783fa3d50b5ef1e2859691734",
         "faultline/ridge_medics": "737deff818f94b5bb66ca2a761b18e03",
-        "faultline/ridge_fitters": "eeda23f91b981a50b83beb9537566b38"
+        "faultline/ridge_fitters": "eeda23f91b981a50b83beb9537566b38",
+        "faultline/clinic_pact": "3f258716530393579624d7a9679ad229",
+        "faultline/lift_pact": "b9724ac7e13a59528927852240815011",
+        "faultline/whiteout": "25197062c4608352a1b499234f54782a",
+        "faultline/boost_clinic": "181c72f003f7595f9b143527e65f3277",
+        "faultline/boost_lift": "2f5c1bbf007fa358abc28252ce307ca6"
       },
       "automaton_hours": 4.0,
       "incidents": [
@@ -28710,7 +28745,9 @@
             "flag": null,
             "watch": null,
             "pledge": null,
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 1,
@@ -28751,7 +28788,9 @@
             "flag": null,
             "watch": null,
             "pledge": null,
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 2,
@@ -28790,7 +28829,9 @@
             "pledge": {
               "Steel": 85
             },
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 2,
@@ -28830,7 +28871,9 @@
               "Wood": 55,
               "Steel": 35
             },
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 3,
@@ -28868,7 +28911,9 @@
             "pledge": {
               "Food Rations": 60
             },
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 3,
@@ -28897,7 +28942,9 @@
             "flag": "surveyed",
             "watch": null,
             "pledge": null,
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 4,
@@ -28907,39 +28954,40 @@
             "goals": [
               {
                 "kind": "build",
-                "text": "Have a Hothouse",
+                "text": "Have one medical building",
                 "quantity": 1,
                 "target": [
-                  "20e9be8106e19f838b4bb73be86d04de",
-                  "20e9be8106e19f838b4bb73ae86d04de"
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
                 ]
               },
               {
                 "kind": "build",
-                "text": "Have two Cookhouses",
-                "quantity": 2,
+                "text": "Have a Cookhouse",
+                "quantity": 1,
                 "target": [
                   "59b3ef3d8505aea51a45828da82a1c3d"
                 ]
               },
               {
                 "kind": "checks",
-                "label": "Pledge",
-                "text": "Complete the dispatch",
-                "description": "Set aside 100 food rations, 30 coal. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
+                "label": "Inspections",
+                "quantity": 3,
+                "text": "Pass 3 hourly heat inspections",
+                "description": "Liveable or warmer: one medical building and one Cookhouse. Keep the Generator running. Use Heat view and add Steam Hubs, Heaters or insulation. Cold readings don't count."
               }
             ],
-            "title": "Send a food convoy",
+            "title": "Connect the clinic road",
             "profile": "bypass",
             "signal": null,
             "requires": [],
             "flag": null,
             "watch": null,
-            "pledge": {
-              "Food Rations": 100,
-              "Coal": 30
-            },
-            "hold": null
+            "pledge": null,
+            "hold": null,
+            "district": "clinic",
+            "lead": null
           },
           {
             "phase": 4,
@@ -28949,8 +28997,8 @@
             "goals": [
               {
                 "kind": "build",
-                "text": "Have two Steelworks",
-                "quantity": 2,
+                "text": "Have a Steelworks",
+                "quantity": 1,
                 "target": [
                   "a18dbc3c1439ba9c04447717e2610bfd",
                   "44b57d5b4469cca01141048637022110",
@@ -28959,30 +29007,34 @@
               },
               {
                 "kind": "build",
-                "text": "Have a Large Resource Depot",
+                "text": "Have a coal mine or thumper",
                 "quantity": 1,
                 "target": [
-                  "d17fb879d88864a9444ee0283802c4cd"
+                  "7f5d92438ed6d18e994473ff2014dc3d",
+                  "7226772eb77bc49f9c4c520f3df2c7dc",
+                  "06cdc0a0e6d288a8d2435294d142c9b5",
+                  "145e292916c2d6826b4c1b7cd624f1ce",
+                  "c4a1ac4584d524a749436429f81880a3"
                 ]
               },
               {
                 "kind": "checks",
-                "label": "Pledge",
-                "text": "Complete the dispatch",
-                "description": "Set aside 100 steel, 60 coal. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
+                "label": "Inspections",
+                "quantity": 3,
+                "text": "Pass 3 hourly heat inspections",
+                "description": "Liveable or warmer: one Steelworks and one Coal Mine or Coal Thumper. Keep the Generator running. Use Heat view and add Steam Hubs, Heaters or insulation. Cold readings don't count."
               }
             ],
-            "title": "Send the welding crew",
+            "title": "Connect the works spur",
             "profile": "works",
             "signal": null,
             "requires": [],
             "flag": "welded",
             "watch": null,
-            "pledge": {
-              "Steel": 100,
-              "Coal": 60
-            },
-            "hold": null
+            "pledge": null,
+            "hold": null,
+            "district": "lift",
+            "lead": null
           },
           {
             "phase": 5,
@@ -29023,7 +29075,9 @@
               "Coal": 155,
               "Food Rations": 50
             },
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 5,
@@ -29059,7 +29113,9 @@
             "flag": "final",
             "watch": null,
             "pledge": null,
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 5,
@@ -29103,7 +29159,9 @@
               "Coal": 85,
               "Steel": 30
             },
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 6,
@@ -29112,15 +29170,9 @@
             "deadline": 5,
             "goals": [
               {
-                "kind": "warm",
-                "text": "Keep 14 homes Liveable or warmer",
-                "quantity": 14,
-                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
-              },
-              {
                 "kind": "build",
-                "text": "Have two medical buildings",
-                "quantity": 2,
+                "text": "Have a medical building",
+                "quantity": 1,
                 "target": [
                   "f6a831d9683c3d9b904cd09ded358f8a",
                   "98c676299c50c1841a4568ff11d61bde",
@@ -29128,14 +29180,22 @@
                 ]
               },
               {
+                "kind": "build",
+                "text": "Have a Cookhouse",
+                "quantity": 1,
+                "target": [
+                  "59b3ef3d8505aea51a45828da82a1c3d"
+                ]
+              },
+              {
                 "kind": "checks",
                 "label": "Watch",
                 "quantity": 3,
                 "text": "Deliver three coal loads to Broken Mile",
-                "description": "A watch is one relief crew's shift. Send a load on the dispatch panel that appears when at least 230 coal is in storage. Each delivery takes 12 hours. A Coal Magazine cuts each load by 20 coal. The tracker counts arrivals. The Generator gauge is separate from this delivery."
+                "description": "Liveable or warmer: one medical building and one Cookhouse. Keep 230 coal available. Convoys leave and arrive automatically when the stops are heated. A Coal Magazine saves 20 coal per load. The district pact cuts the 12-hour journey by 4 hours."
               }
             ],
-            "title": "Use the sheltered road",
+            "title": "Use the clinic road",
             "profile": "ward",
             "signal": null,
             "requires": [],
@@ -29143,10 +29203,13 @@
             "watch": {
               "reserve": 180,
               "coal": 50,
-              "travel": 12
+              "travel": 12,
+              "district": "clinic"
             },
             "pledge": null,
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 6,
@@ -29156,8 +29219,8 @@
             "goals": [
               {
                 "kind": "build",
-                "text": "Have two coal mines or thumpers",
-                "quantity": 2,
+                "text": "Have a coal mine or thumper",
+                "quantity": 1,
                 "target": [
                   "7f5d92438ed6d18e994473ff2014dc3d",
                   "7226772eb77bc49f9c4c520f3df2c7dc",
@@ -29168,8 +29231,8 @@
               },
               {
                 "kind": "build",
-                "text": "Have two Steelworks",
-                "quantity": 2,
+                "text": "Have a Steelworks",
+                "quantity": 1,
                 "target": [
                   "a18dbc3c1439ba9c04447717e2610bfd",
                   "44b57d5b4469cca01141048637022110",
@@ -29181,7 +29244,7 @@
                 "label": "Watch",
                 "quantity": 3,
                 "text": "Deliver three coal loads to Broken Mile",
-                "description": "A watch is one relief crew's shift. Send a load on the dispatch panel that appears when at least 230 coal is in storage. Each delivery takes 7 hours. A Coal Magazine cuts each load by 20 coal. The tracker counts arrivals. The Generator gauge is separate from this delivery."
+                "description": "Liveable or warmer: one Steelworks and one Coal Mine or Coal Thumper. Keep 230 coal available. Convoys leave and arrive automatically when the stops are heated. A Coal Magazine saves 20 coal per load. The district pact cuts the 8-hour journey by 3 hours."
               }
             ],
             "title": "Use the ridge tramway",
@@ -29192,10 +29255,13 @@
             "watch": {
               "reserve": 165,
               "coal": 65,
-              "travel": 7
+              "travel": 8,
+              "district": "lift"
             },
             "pledge": null,
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 7,
@@ -29236,7 +29302,9 @@
               "Coal": 250,
               "Food Rations": 80
             },
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 7,
@@ -29275,7 +29343,9 @@
               "Wood": 100,
               "Food Rations": 65
             },
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": null
           },
           {
             "phase": 8,
@@ -29329,7 +29399,9 @@
               "low": 0,
               "high": 38,
               "reserve": 225
-            }
+            },
+            "district": null,
+            "lead": null
           },
           {
             "phase": 8,
@@ -29383,7 +29455,9 @@
               "low": 25,
               "high": 63,
               "reserve": 300
-            }
+            },
+            "district": null,
+            "lead": null
           },
           {
             "phase": 9,
@@ -29401,8 +29475,8 @@
               },
               {
                 "kind": "warm",
-                "text": "Keep 22 homes Liveable or warmer",
-                "quantity": 22,
+                "text": "Keep 12 homes Liveable or warmer",
+                "quantity": 12,
                 "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
               },
               {
@@ -29422,16 +29496,18 @@
                 "description": "Set aside 4 wooden materials. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Bring the clinic down",
+            "title": "Lead with the clinic sledges",
             "profile": "ward",
             "signal": null,
             "requires": [],
-            "flag": "convoy_returned",
+            "flag": null,
             "watch": null,
             "pledge": {
               "Wooden Materials": 4
             },
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": "clinic"
           },
           {
             "phase": 9,
@@ -29474,18 +29550,20 @@
                 "description": "Set aside 3 steel plates. Confirm the dispatch order when it opens. The tracker updates when the load arrives."
               }
             ],
-            "title": "Bring the lift crew down",
+            "title": "Lead with the lift crew",
             "profile": "works",
             "signal": null,
             "requires": [
               "ridge_lift"
             ],
-            "flag": "convoy_returned",
+            "flag": null,
             "watch": null,
             "pledge": {
               "Steel Plates": 3
             },
-            "hold": null
+            "hold": null,
+            "district": null,
+            "lead": "lift"
           }
         ],
         "scan_hours": 1,
@@ -29630,6 +29708,34 @@
         ],
         "relay_reset": 25,
         "magazine_saving": 20,
+        "rescue_quests": {
+          "clinic": {
+            "clinic": {
+              "quest": "cc1e9f3d2641d3568ff5ded093657628",
+              "hours": 6,
+              "delay": 0
+            },
+            "lift": {
+              "quest": "29e5e985aa06115bb700545f183f3992",
+              "hours": 8,
+              "delay": 2
+            }
+          },
+          "lift": {
+            "clinic": {
+              "quest": "532da8a849d7d05ba7411b52325be4cf",
+              "hours": 8,
+              "delay": 2
+            },
+            "lift": {
+              "quest": "d37de47d4765e95ba05db5e0bd71e6a8",
+              "hours": 6,
+              "delay": 0
+            }
+          }
+        },
+        "whiteout_hours": 18,
+        "line_inspections": 3,
         "lessons": {
           "gauge": "9976389dcd4ce7599edb014e2e3792dd",
           "cool": "1fb2a1e944df0e53a2e315a0aed1e420",
@@ -29637,9 +29743,11 @@
           "refit": "49541f807f1258518410dd38420528e5",
           "survey": "88f921592598e35dba6cc66d5bf77309",
           "watch": "d617dc51c7fc98579e2f08d0bd21fd81",
+          "districts": "271dbc15c4ee5750b16119d8efc4fdc3",
           "charter": "2c0e2495c516325b82fd2de63d219793",
           "valve_orders": "1c59ecbc5040de5084b57caca89e7dba",
-          "dispatch_orders": "bc56d9d5a05cd05fb8a1d7c8b8d525b1"
+          "dispatch_orders": "bc56d9d5a05cd05fb8a1d7c8b8d525b1",
+          "whiteout": "ec64635c0878bd5fa67fd7bc8bc8abd0"
         },
         "modifiers": {
           "faultline/ward": "8dd38a84d63f72568123b1da65ca7464",
@@ -29655,7 +29763,12 @@
           "faultline/leak": "89b5b8c5948aa55481c6ebac6077862b",
           "faultline/resettled": "8c003f0783fa3d50b5ef1e2859691734",
           "faultline/ridge_medics": "737deff818f94b5bb66ca2a761b18e03",
-          "faultline/ridge_fitters": "eeda23f91b981a50b83beb9537566b38"
+          "faultline/ridge_fitters": "eeda23f91b981a50b83beb9537566b38",
+          "faultline/clinic_pact": "3f258716530393579624d7a9679ad229",
+          "faultline/lift_pact": "b9724ac7e13a59528927852240815011",
+          "faultline/whiteout": "25197062c4608352a1b499234f54782a",
+          "faultline/boost_clinic": "181c72f003f7595f9b143527e65f3277",
+          "faultline/boost_lift": "2f5c1bbf007fa358abc28252ce307ca6"
         },
         "forecast": "b5b11cd7a264c4579395c43e9031cf7b",
         "construction_set": "0c9e971b5657275984839f946d400250",
@@ -29912,6 +30025,17 @@
         "effects_before_sha256": "02d48b86255c4dcd7512c3ed19311adadc94ab5346bac72d17b87b2db0610799"
       },
       {
+        "guid": "0cf7fa7f609c3754b564d896f98a9ddd",
+        "title": "Faultline Whiteout",
+        "description": "Insulated buildings lose two heat levels as the two rescue convoys try to reach the city.",
+        "name_key": "Mods/NewIndustry/Modifier/0cf7fa7f609c3754b564d896f98a9ddd/Name",
+        "description_key": "Mods/NewIndustry/Modifier/0cf7fa7f609c3754b564d896f98a9ddd/Description",
+        "source_ids": [
+          "Frontiers/faultline/whiteout"
+        ],
+        "effects_before_sha256": "4e79bb915d05433f6d98e79ea287077114b5f62204216ec1e9aa8da44ef10c69"
+      },
+      {
         "guid": "0d6e216ce9fac153ba427a245b3f7f88",
         "title": "The Great Foundry",
         "description": "Connect the city to a new foundry complex. Steelworks and Factories gain 75% workplace efficiency.",
@@ -30088,6 +30212,17 @@
           "AutumnShelterLiners"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "181c72f003f7595f9b143527e65f3277",
+        "title": "Clinic Reserve Boiler",
+        "description": "Medical buildings and Cookhouses gain one heat level until the storm clears.",
+        "name_key": "Mods/NewIndustry/Modifier/181c72f003f7595f9b143527e65f3277/Name",
+        "description_key": "Mods/NewIndustry/Modifier/181c72f003f7595f9b143527e65f3277/Description",
+        "source_ids": [
+          "Frontiers/faultline/boost_clinic"
+        ],
+        "effects_before_sha256": "986b13efe876964298a061a4c9b33a3e67ffbb2473158e801d42b15d4fa3586b"
       },
       {
         "guid": "1901444785e1905eb578e703fce5c5d9",
@@ -30335,6 +30470,17 @@
         "effects_before_sha256": "138e894d4725013680f1d8eec68e6961d0316c25bca07ed896543dc208e7cf65"
       },
       {
+        "guid": "25197062c4608352a1b499234f54782a",
+        "title": "Faultline Whiteout",
+        "description": "Insulated buildings lose two heat levels as the two rescue convoys try to reach the city.",
+        "name_key": "Mods/NewIndustry/Modifier/25197062c4608352a1b499234f54782a/Name",
+        "description_key": "Mods/NewIndustry/Modifier/25197062c4608352a1b499234f54782a/Description",
+        "source_ids": [
+          "Frontiers/faultline/whiteout"
+        ],
+        "effects_before_sha256": "2d76a80e538b4d231161d28024bcccd3bcdb5dec3b8eb7e1bf36fae34e672a82"
+      },
+      {
         "guid": "2527cd1c5187f850ab582c4414c3d440",
         "title": "Loose Steam Joint",
         "description": "All insulated buildings lose two insulation levels during the Long Night.",
@@ -30509,6 +30655,17 @@
           "AutumnSafetyInfirmary"
         ],
         "effects_before_sha256": "07d37bd252fe9fa74b8e6dc2a9e1516088bcb59963f3afdf5ca209b2ff336774"
+      },
+      {
+        "guid": "2f5c1bbf007fa358abc28252ce307ca6",
+        "title": "Works Reserve Boiler",
+        "description": "Steelworks, coal mines and thumpers gain one heat level until the storm clears.",
+        "name_key": "Mods/NewIndustry/Modifier/2f5c1bbf007fa358abc28252ce307ca6/Name",
+        "description_key": "Mods/NewIndustry/Modifier/2f5c1bbf007fa358abc28252ce307ca6/Description",
+        "source_ids": [
+          "Frontiers/faultline/boost_lift"
+        ],
+        "effects_before_sha256": "18c14143268386babb7afb5ccd1771e007f28547f9654570041f16d03b1655c8"
       },
       {
         "guid": "302051bd21a554559446fd7e81ec0617",
@@ -30833,6 +30990,17 @@
         "effects_before_sha256": "d54587ab64fa9b85696c8fcc522e92baa9de6922c1d30e611d27d8b860d6138f"
       },
       {
+        "guid": "3f258716530393579624d7a9679ad229",
+        "title": "Clinic Road Heat Loop",
+        "description": "Medical buildings and Cookhouses gain one insulation level. Broken Mile clinic road deliveries travel four hours faster.",
+        "name_key": "Mods/NewIndustry/Modifier/3f258716530393579624d7a9679ad229/Name",
+        "description_key": "Mods/NewIndustry/Modifier/3f258716530393579624d7a9679ad229/Description",
+        "source_ids": [
+          "Frontiers/faultline/clinic_pact"
+        ],
+        "effects_before_sha256": "c3bc230c35cfec84f2606f0957637d02b82e11e99d006abe94b1a142abc10597"
+      },
+      {
         "guid": "3f4ee744ba23c156ba634ddb8f9de65f",
         "title": "Preventive Field Medicine",
         "description": "Citizens have a 20% lower chance of illness caused by cold. Available before Drawing Boards, to reduce sickness before it reaches the wards.",
@@ -30965,6 +31133,17 @@
           "AutumnColdwaterNets"
         ],
         "effects_before_sha256": "5acf220022d0fabf7ce819b90b7ffedaf94764346c5d68a71a61db93c1b34267"
+      },
+      {
+        "guid": "4482a14ded0318579f8f88fa892d1f30",
+        "title": "Works Spur Heat Loop",
+        "description": "Steelworks and coal mines and thumpers gain one insulation level. Broken Mile tram deliveries travel three hours faster.",
+        "name_key": "Mods/NewIndustry/Modifier/4482a14ded0318579f8f88fa892d1f30/Name",
+        "description_key": "Mods/NewIndustry/Modifier/4482a14ded0318579f8f88fa892d1f30/Description",
+        "source_ids": [
+          "Frontiers/faultline/lift_pact"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
         "guid": "44ea094247b6a45d90e72bb44ed77793",
@@ -31355,6 +31534,17 @@
           "Frontiers/front3"
         ],
         "effects_before_sha256": "f0dcc17bc16966126d094e4f47106614932d8146782e4d238a2a4184c1859dc4"
+      },
+      {
+        "guid": "592a26ff93cbfc53accdefa1d416321b",
+        "title": "Works Reserve Boiler",
+        "description": "Steelworks, coal mines and thumpers gain one heat level until the storm clears.",
+        "name_key": "Mods/NewIndustry/Modifier/592a26ff93cbfc53accdefa1d416321b/Name",
+        "description_key": "Mods/NewIndustry/Modifier/592a26ff93cbfc53accdefa1d416321b/Description",
+        "source_ids": [
+          "Frontiers/faultline/boost_lift"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
         "guid": "59385c4297369f5e8821ca2ef8286332",
@@ -31979,6 +32169,17 @@
         "source_ids": [
           "SteelworksRefractoryLining",
           "SteelworksRolling"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "719c59d556244c5b8502f986a58dc562",
+        "title": "Clinic Road Heat Loop",
+        "description": "Medical buildings and Cookhouses gain one insulation level. Broken Mile clinic road deliveries travel four hours faster.",
+        "name_key": "Mods/NewIndustry/Modifier/719c59d556244c5b8502f986a58dc562/Name",
+        "description_key": "Mods/NewIndustry/Modifier/719c59d556244c5b8502f986a58dc562/Description",
+        "source_ids": [
+          "Frontiers/faultline/clinic_pact"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
@@ -33697,6 +33898,17 @@
         "effects_before_sha256": "a94022dfad4f5661fcdf6603ebf04105843e408d3e543ed0c7b8b602480e6bfd"
       },
       {
+        "guid": "b9724ac7e13a59528927852240815011",
+        "title": "Works Spur Heat Loop",
+        "description": "Steelworks and coal mines and thumpers gain one insulation level. Broken Mile tram deliveries travel three hours faster.",
+        "name_key": "Mods/NewIndustry/Modifier/b9724ac7e13a59528927852240815011/Name",
+        "description_key": "Mods/NewIndustry/Modifier/b9724ac7e13a59528927852240815011/Description",
+        "source_ids": [
+          "Frontiers/faultline/lift_pact"
+        ],
+        "effects_before_sha256": "04bd75823407cd7184e17754255bb78f152a176b6b1330960bb64b7e051accf0"
+      },
+      {
         "guid": "b993272948bc475c9e64c4e94aee2e06",
         "title": "Shelter Network",
         "description": "Homes, healthcare and civic buildings gain +2 insulation. Workshop efficiency falls by 15%. No upkeep.",
@@ -34669,6 +34881,17 @@
           "BeaconDispatch"
         ],
         "effects_before_sha256": "caa1681253c20310ad8d229c0b1b2b4b95576cc21a5f51de8e407ad0f884bc01"
+      },
+      {
+        "guid": "e4a1f35bf988585f88973fc5d8824c76",
+        "title": "Clinic Reserve Boiler",
+        "description": "Medical buildings and Cookhouses gain one heat level until the storm clears.",
+        "name_key": "Mods/NewIndustry/Modifier/e4a1f35bf988585f88973fc5d8824c76/Name",
+        "description_key": "Mods/NewIndustry/Modifier/e4a1f35bf988585f88973fc5d8824c76/Description",
+        "source_ids": [
+          "Frontiers/faultline/boost_clinic"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
         "guid": "e5415c0bd55bc851bd62534eced9e77e",

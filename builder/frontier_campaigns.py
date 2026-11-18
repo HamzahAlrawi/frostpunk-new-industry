@@ -196,6 +196,18 @@ def bonus_library(data,buildings,guid):
         [(g['medical'],1.25,1.25,0)])
     add('faultline/ridge_fitters','Ridge Lift Couplings','Sawmills and Wall Drills gain 35% workplace efficiency from the lift crew’s refit.',
         [(['Sawmill','SteamSawmill','WallDrill','WallDrillSteam','WallDrillAdvanced'],1.35,1.35,0)])
+    clinic = g['medical']+['Food Processing']
+    foundries = coal+['Iron Ore Mine','SteamIronOreMine','AdvancedOreMine']
+    add('faultline/clinic_pact','Clinic Road Heat Loop','Medical buildings and Cookhouses gain one insulation level. Broken Mile clinic road deliveries travel four hours faster.',
+        [(clinic,1,1,1)])
+    add('faultline/lift_pact','Works Spur Heat Loop','Steelworks and coal mines and thumpers gain one insulation level. Broken Mile tram deliveries travel three hours faster.',
+        [(foundries,1,1,1)])
+    add('faultline/whiteout','Faultline Whiteout','Insulated buildings lose two heat levels as the two rescue convoys try to reach the city.',
+        [(all_names,1,1,-2)])
+    add('faultline/boost_clinic','Clinic Reserve Boiler','Medical buildings and Cookhouses gain one heat level until the storm clears.',
+        [(clinic,1,1,1)])
+    add('faultline/boost_lift','Works Reserve Boiler','Steelworks, coal mines and thumpers gain one heat level until the storm clears.',
+        [(foundries,1,1,1)])
     return pack_modifiers(records),ids,owners
 
 

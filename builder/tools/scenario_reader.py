@@ -5,6 +5,8 @@ serialized effects rather than an optimistic second implementation of gameplay.
 Unsupported classes, trailing bytes and malformed vectors are hard failures.
 """
 from .native_binary import Cursor,SchemaError
+from .housing_schema import LIVEABLE
+from .thermal_schema import FILTER_FLAGS, TEMPERATURE
 
 
 def expression(c,compact=False):
@@ -37,8 +39,12 @@ def expression(c,compact=False):
         if not compact or c.take(c.u8())!=b'FrostpunkBuildingsSelector':
             raise SchemaError('Unsupported count selector')
         identity=c.guid()
-        if c.take(12)!=b'\1'+bytes(11):raise SchemaError('Unexpected building selector flags')
-        return ('building_count',identity)
+        flags=c.take(12)
+        if flags==b'\1'+bytes(11):
+            return ('building_count',identity)
+        if flags==FILTER_FLAGS and c.string()==TEMPERATURE and c.u32()==4 and c.guid()==LIVEABLE:
+            return ('liveable_building_count',identity)
+        raise SchemaError('Unexpected building count filter')
     if name=='FrostpunkGeneratorIsActiveExpression':return ('generator',c.boolean())
     raise SchemaError('Unsupported expression '+str(name))
 

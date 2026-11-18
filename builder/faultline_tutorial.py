@@ -19,14 +19,20 @@ LESSONS = {
     "survey": ("Bring the survey back",
         "Build a Beacon to open Frostland. Form a scout team, visit one of the revealed sites and order the team back to the city. The tracker credits a return during this mission."),
     "watch": ("Send fuel to Broken Mile",
-        "A watch is one relief crew's shift at the bend. Keep enough coal for the listed load and the city reserve. Select Send coal on the dispatch order. The goal counts the delivery when it arrives. Send three loads in total.\n\n"
-        "A Coal Magazine cuts each load by 20 coal. Repair the leak after the first delivery before sending the next load."),
+        "Each watch is a relief crew's shift. Keep both buildings named in your objective Liveable or warmer. Convoys load and depart automatically when there is fuel above the city reserve. A convoy waits at a stop if a route goes cold.\n\n"
+        "Deliver three loads. A Coal Magazine cuts each load by 20 coal. Repair the leak after the first arrival."),
+    "districts": ("Prove a district heat loop",
+        "Open the Heat view. Keep one of each named building Liveable or warmer. Steam Hubs and Heaters can cover workplaces outside the Generator zone. Three qualifying hourly readings commission the loop.\n\n"
+        "The loop warms its buildings and shortens Broken Mile trips along that route. It will also help in the final rescue."),
     "charter": ("Dispatch supplies",
         "Set aside the listed cargo, then approve departure in the dispatch order. The tracker credits the arrival. A brief delay is available whenever you need the stock for the city."),
     "valve_orders": ("Commission the new line",
         "Staff the Valve Works and queue the listed parts in General. The gauges count one test hour whenever the Generator is running in the specified stress band with enough coal. The counter pauses outside the band and keeps its progress. Once the parts and test are ready, choose Install parts."),
     "dispatch_orders": ("Load the last convoy",
-        "Staff the Relief Dispatch and queue the orders named in your tracker. Clinic sledges use Wooden Materials as finished cargo. Heavy sledges use Steel Plates. Keep the finished cargo and choose Send supplies when the dispatch order opens."),
+        "Staff Relief Dispatch and queue the orders in your tracker. Clinic sledges use Wooden Materials as cargo. Heavy sledges use Steel Plates. Finish the preparations and send the cargo. The lead route opens first during the whiteout."),
+    "whiteout": ("Two rescue routes",
+        "Keep the named buildings on each route Liveable or warmer. Six warm hours bring the lead crew in. The second route opens two hours later and needs eight warm hours. Heat loss pauses either counter.\n\n"
+        "The storm lasts eighteen hours. If you repaired the lift, you can save both crews. Only one route can draw on the reserve boiler. Check Heat view before committing it."),
 
 }
 

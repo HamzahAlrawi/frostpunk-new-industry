@@ -1,10 +1,22 @@
 """Faultline routes, deadlines and the field work each route requires."""
-from faultline_buildings import MAGAZINE, RELAY, RELIEF_DISPATCH, VALVE_WORKS
-from winter_road_story import COAL, DEPOTS, FOOD, STEEL, WARDS, build, research, warm
+from faultline_buildings import RELAY, RELIEF_DISPATCH, VALVE_WORKS
+from winter_road_story import COAL, DEPOTS, STEEL, WARDS, build, research, warm
 
 
 WATCH_LEGS = 3
 LEAK_REPAIR = {"Steel": 35, "Coal": 60}
+LINE_INSPECTIONS = 3
+WHITEOUT_HOURS = 18
+RELIEF_LINES = {
+    "clinic": dict(name="Clinic", pact="clinic_pact", groups=(WARDS, ("Food Processing",)),
+                   services="one medical building and one Cookhouse",
+                   households={"workers":12,"children":6},
+                   relief={"Coal":75,"Food Rations":25}, reward="ridge_medics"),
+    "lift": dict(name="Lift", pact="lift_pact", groups=(STEEL, COAL),
+                 services="one Steelworks and one Coal Mine or Coal Thumper",
+                 households={"workers":6,"engineers":8}, cargo={"Steam Cores":2},
+                 relief={"Coal":100,"Steel":25}, reward="ridge_fitters"),
+}
 
 
 def plan(title, preview, profile, goals, report, **terms):
@@ -54,17 +66,17 @@ ACTS = (
                  "The surveyors mark out a route for a second line.",
                  flag="surveyed", people={"engineers":8},cargo={"Steam Cores":2}),
          ), failure="Edith hangs two lamps by the gate. Nobody has answered yet."),
-    dict(title="When the Ice Lets Go", days=7, shot="Fracture",
-         story="The outer main splits. Send provisions along the ridge footpath or bring a load of steel to the break so the welders can reopen it.",
+    dict(title="When the Ice Lets Go", days=7, shot="Fracture", lesson="districts",
+         story="The rupture has cut both ridge stations off. The city has fittings for one branch. Repair it, then prove your district can keep the far end warm.",
          plans=(
-            plan("Send a food convoy", "100 rations and 30 coal. Cookhouses gain efficiency.", "bypass",
-                 [build("Have a Hothouse",*FOOD),build("Have two Cookhouses","Food Processing",quantity=2)],
-                 "The first sledge breaks. Its partner brings both loads to the shelters.",
-                 pledge={"Food Rations":100,"Coal":30}, persistent="shelters"),
-            plan("Send the welding crew", "100 steel and 60 coal. Raises the safe stress limit.", "works",
-                 [build("Have two Steelworks",*STEEL,quantity=2),build("Have a Large Resource Depot","Resource Depot Big")],
-                 "The welders close the seam and install a testing port on the far branch.",
-                 pledge={"Steel":100,"Coal":60}, flag="welded"),
+            plan("Connect the clinic road", "Heat healthcare and kitchens. The road carries coal faster.", "bypass",
+                 [build("Have one medical building",*WARDS),build("Have a Cookhouse","Food Processing")],
+                 "Mara clears a ward for road crews. The clinic and kitchens keep an extra heat level, and coal convoys can shelter on this road.",
+                 district="clinic", persistent="clinic_pact"),
+            plan("Connect the works spur", "Heat steel and coal works. The tram runs faster.", "works",
+                 [build("Have a Steelworks",*STEEL),build("Have a coal mine or thumper",*COAL)],
+                 "Ivo’s crew fixes the main and opens the siding. The works keep an extra heat level and the Generator trips at 82% stress instead of 72%.",
+                 district="lift", flag="welded", persistent="lift_pact"),
          ), failure="The split freezes solid. The surviving shelters have to share the old pipe."),
     dict(title="The Second Signal", days=8,
          story="The ridge stations have seen a front gathering. Your refit and scout survey determine which routes are still open.",
@@ -83,17 +95,16 @@ ACTS = (
                  pledge={"Coal":85,"Steel":30},flag="final",requires=("bypass","surveyed")),
          ), failure="The nearest shelter ties its call sign to the pipe. The rest stay silent."),
     dict(title="A Watch at Broken Mile", days=5, shot="NightWatch",
-         story="The lamp at Broken Mile has gone out. Each watch is a coal delivery to one relief crew. Send three loads from the dispatch orders.",
+         story="Three crews are trying to keep Broken Mile open. Dispatchers will load the sledges themselves. Your job is to keep their heated stops open and leave coal for the city.",
          plans=(
-            plan("Use the sheltered road", "50 coal per load. A longer journey through safer ground.", "ward",
-                 [warm(14),build("Have two medical buildings",*WARDS,quantity=2)],
+            plan("Use the clinic road", "50 coal per load. Keep a medical building and Cookhouse warm.", "ward",
+                 [build("Have a medical building",*WARDS),build("Have a Cookhouse","Food Processing")],
                  "The third crew comes back with ice on their coats. The lamp stays on.",
-                 watch=dict(reserve=180,coal=50,travel=12),flag="watch_kept"),
-            plan("Use the ridge tramway", "65 coal per load. A quicker route with a higher fuel bill.", "works",
-                 [build("Have two coal mines or thumpers",*COAL,quantity=2),
-                  build("Have two Steelworks",*STEEL,quantity=2)],
+                 watch=dict(reserve=180,coal=50,travel=12, district="clinic"),flag="watch_kept"),
+            plan("Use the ridge tramway", "65 coal per load. Keep a Steelworks and coal works warm.", "works",
+                 [build("Have a coal mine or thumper",*COAL),build("Have a Steelworks",*STEEL)],
                  "The pump crew pulls the last cart off the bend. The main holds.",
-                 watch=dict(reserve=165,coal=65,travel=7),flag="watch_kept"),
+                 watch=dict(reserve=165,coal=65,travel=8, district="lift"),flag="watch_kept"),
          ), failure="The lamp goes out for good. The remaining families will need a different bargain."),
     dict(title="What We Owe the Shelters", days=6, clears=("charter",),
          story="The ridge sends a list of names. Promise a share of the city's heat, or prepare warm homes and bring the remaining families inside.",
@@ -122,20 +133,18 @@ ACTS = (
                  "The lift keeper answers with three blows of a hammer. The cage can run again.",
                  hold=dict(hours=3,low=25,high=63,reserve=300),pledge={"Steel Plates":3},flag="ridge_lift"),
          ), failure="The lake freezes over the break. The footpath remains open to the clinic."),
-    dict(title="The Last Convoy", days=7, lesson="dispatch_orders",clears=("convoy_returned",),
-         story="Mara counts beds. Edith listens for the lift keeper. There is time for one convoy before the road closes.",
+    dict(title="Two Crews in the Whiteout", days=7, lesson="dispatch_orders",clears=("convoy_returned",),
+         story="The last front is eighteen hours wide. Pack the lead convoy. Its crew gets a head start. With two heated routes, both crews can make it down.",
          plans=(
-            plan("Bring the clinic down", "Send 4 clinic sledges. Prepare beds for families and medics.", "ward",
-                 [build("Build a Relief Dispatch",RELIEF_DISPATCH),warm(22),
+            plan("Lead with the clinic sledges", "Pack 4 clinic sledges. The clinic gets a two-hour head start.", "ward",
+                 [build("Build a Relief Dispatch",RELIEF_DISPATCH),warm(12),
                   order(RELIEF_DISPATCH,"Pack Clinic Sledge","FaultlineClinicSledge",4)],
-                 "Six children arrive asleep. The medics put them straight into warm beds.",
-                 pledge={"Wooden Materials":4}, flag="convoy_returned",
-                 people={"workers":12,"children":6},persistent="ridge_medics"),
-            plan("Bring the lift crew down", "Send 3 heavy sledges. Requires the repaired ridge lift.", "works",
+                 "The clinic convoy takes the road first.",
+                 pledge={"Wooden Materials":4}, lead="clinic"),
+            plan("Lead with the lift crew", "Pack 3 heavy sledges. Requires the repaired ridge lift.", "works",
                  [build("Build a Relief Dispatch",RELIEF_DISPATCH),build("Have two Steelworks",*STEEL,quantity=2),
                   order(RELIEF_DISPATCH,"Pack Lift Sledge","FaultlineLiftSledge",3)],
-                 "The lift keeper sits on a crate of drill parts in the last cage. His crew puts them to work in the timber yards.",
-                 pledge={"Steel Plates":3},flag="convoy_returned",requires=("ridge_lift",),
-                 people={"workers":6,"engineers":8},cargo={"Steam Cores":2},persistent="ridge_fitters"),
+                 "The lift crew takes the cable first.",
+                 pledge={"Steel Plates":3},lead="lift",requires=("ridge_lift",)),
          ), failure="The road closes while the convoy is still on the ridge. The city listens for their lamp all winter."),
 )

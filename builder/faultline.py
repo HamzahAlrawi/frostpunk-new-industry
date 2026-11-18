@@ -1,6 +1,6 @@
 """Write Faultline's timed pressure jobs, district routing and consequences."""
 from city_mastery import building_ids
-from faultline_story import ACTS, LEAK_REPAIR, WATCH_LEGS
+from faultline_story import ACTS, LEAK_REPAIR, LINE_INSPECTIONS, RELIEF_LINES, WATCH_LEGS, WHITEOUT_HOURS
 from faultline_cinematics import SIGNAL, SHOTS, play, signal
 from faultline_buildings import MAGAZINE, MAGAZINE_SAVING, RELAY, RELAY_RESET
 from faultline_tutorial import LESSONS, lesson_id, show as teach
@@ -11,6 +11,7 @@ from tools.native_scenario import (affordable, apply_modifier, change_resource, 
     dilemma, equals, event, first_match, floating, guarded, integer, predefined, progress_quest, set_variable, start_quest,
     typed, variable)
 from tools.convoy_schema import arrive
+from tools.thermal_schema import liveable, verify_native_thermal_checks
 from winter_road_maps import beacon_exists, constructed, survey_routes, validate_native_map_effects
 
 
@@ -56,6 +57,7 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     native = (configs/"frostpunkgameeventsconfig.bin").read_bytes()
     verify_native_stress(native, (configs/"frostpunkdilemmasconfig.bin").read_bytes())
     validate_native_map_effects(native)
+    verify_native_thermal_checks(native)
     values = (configs/"frostpunkeffectsconfig.bin").read_bytes()
     writer = MissionWriter((configs/"frostpunkquestsconfig.bin").read_bytes(), qt)
     places = {key: value.hex() for key,value in building_ids(buildings).items()}
@@ -65,6 +67,7 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     running = typed("FrostpunkGeneratorIsActiveExpression")+b"\0"
     coal = resources["Coal"].hex()
     filmed = {}
+    rescue_quests = {}
 
     def identity(key):
         return guid("faultline/"+key).hex()
@@ -135,6 +138,11 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     def can_pay(cost):
         return [affordable(resources[name].hex(),quantity) for name,quantity in cost.items()]
 
+    def district_ready(line):
+        return [running,eq("tripped",0)]+[
+            either([liveable(places[name]) for name in group])
+            for group in RELIEF_LINES[line]["groups"]]
+
     def shipment(key, active, checks, title, cost, hours, arrival, *, reserve=0, go="Depart"):
         ready = active+[eq("shipment",0)]+checks
         choice = [scope]+active+[eq("shipment",1)]
@@ -159,9 +167,12 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
 
     # Every mode-specific global is initialized in the new scenario only.
     # This also keeps the native diagnostic log free of missing-variable spam.
-    flags = sorted({p["flag"] for act in ACTS for p in act["plans"] if "flag" in p})
+    flags = sorted({p["flag"] for act in ACTS for p in act["plans"] if "flag" in p}
+                   | {spec["pact"] for spec in RELIEF_LINES.values()})
     fields = ("plan", "stroke", "tripped", "trips", "kept", "offered", "scout_returned", "map_open",
-              "ending", "hold_hours", "shipment", "replay_started")
+              "ending", "hold_hours", "shipment", "replay_started", "inspections",
+              "whiteout", "reserve_used", "clinic_saved", "lift_saved", "clinic_hours", "lift_hours",
+              "clinic_open", "lift_open")
     add("open",[eq("phase",0)],[put("phase",1),RECORD_CITY]+[put(key,0) for key in (*fields, *flags)], None)
 
     add("open Frostland", [at_least("phase",1), eq("map_open",0), beacon_exists()],
@@ -177,6 +188,65 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     add("reconnect", [eq("tripped",1)],
         [first_match(("Signal Relay", [constructed(places[RELAY]),stress_check(5,RELAY_RESET)], restore),
                      ("Main Valve", [stress_check(5,RESET)], restore))])
+
+    def whiteout(key, active, lead, advance):
+        live = active+[eq("whiteout",1)]
+        launch = [put("whiteout",1),change("whiteout")]
+        rescue_quests[lead] = {}
+        for line,spec in RELIEF_LINES.items():
+            route = key+"/rescue/"+line
+            uid = identity("quest/"+route)
+            hours = 6 if line==lead else 8
+            delay = 0 if line==lead else 2
+            eligible = [eq("ridge_lift",1)] if line=="lift" else []
+            gate = line+"_open"
+            counter = line+"_hours"
+            condition = live+[eq(gate,1),eq(line+"_saved",0)]+eligible
+            rescue_quests[lead][line] = dict(quest=uid,hours=hours,delay=delay)
+            goal = dict(kind="checks",label="WarmHours",quantity=hours,
+                text=f"Keep the {spec['name'].lower()} route heated for {hours} hours",
+                description=f"Liveable or warmer: {spec['services']}. Keep the Generator on. "
+                            "Cold hours pause the counter. The front lasts eighteen hours in total.")
+            quests.append(writer.build("NI Faultline "+route,uid,spec["name"]+" rescue", [goal],
+                                       identity,localize,"Faultline/Quest/"+route,WHITEOUT_HOURS*SCAN-delay*SCAN))
+            starting = guarded([scope]+live+eligible+[eq(gate,0)],[put(gate,1),start_quest(uid)])
+            launch.append(after(route+"/open",delay*SCAN,[starting]) if delay else starting)
+            add(route+"/heat",condition+[at_most(counter,hours-1)]+district_ready(line),
+                [put(counter,1,1),progress_quest(uid,"WarmHours")])
+            arrivals = [arrive(n,role) for role,n in spec["households"].items()]
+            arrivals += [change_resource(resources[name].hex(),n) for name,n in spec.get("cargo",{}).items()]
+            events.append(completed_event("NI Faultline "+route,identity("event/"+route),identity("trigger/"+route),
+                uid,[scope]+live+[eq(line+"_saved",0)],
+                [put(line+"_saved",1),put("convoy_returned",1),change(spec["reward"])]+arrivals))
+
+        choice = [scope]+live+[eq("reserve_used",0)]
+        options=[]
+        for option,(line,spec) in enumerate(RELIEF_LINES.items(),1):
+            checks = choice+can_pay(spec["relief"])
+            if line=="lift":
+                checks += [eq("ridge_lift",1)]
+            options.append((f"Fire the {spec['name'].lower()} boilers",
+                f"{budget(spec['relief'])}. One extra heat level for this route’s buildings until the front clears.",
+                checks,[guarded(checks,[put("reserve_used",option)]+pay(spec["relief"])+[change("boost_"+line)])]))
+        options.append(("Keep the reserve","Rely on the city’s heating network.",choice,[guarded(choice,[put("reserve_used",3)])]))
+        orders = scene(key+"/reserve","Reserve steam", "Only one emergency boiler can take the spare fuel. Use the temperature overlay to see which district needs it.",options,True)
+        launch.append(after(key+"/reserve/prompt",2*SCAN,[guarded(choice,[orders])]))
+
+        accounts = (
+            ("Both crews made it", "The clinic sledges came in under the lift bell. Both crews have a place in the Basin.", [eq("clinic_saved",1),eq("lift_saved",1)]),
+            ("The clinic came through", "The medics and families are warm. The lift crew did not reach the city.", [eq("clinic_saved",1)]),
+            ("The lift crew came through", "The engineers reached shelter. The clinic sledges did not make it down.", [eq("lift_saved",1)]),
+            ("The roads are closed", "Neither crew made it through before the front closed the pass.", []),
+        )
+        outcome = first_match(*[(title,checks,[report(key+"/rescue/outcome/"+str(i),title,body)])
+                                for i,(title,body,checks) in enumerate(accounts)])
+        finish = [put("whiteout",2),change("whiteout",True),
+                  guarded([eq("reserve_used",1)],[change("boost_clinic",True)]),
+                  guarded([eq("reserve_used",2)],[change("boost_lift",True)]),outcome]
+        finish += [guarded([eq("convoy_returned",1)],[put("kept",1,1),mood("Hope rise - moderately")])]+advance
+        add(key+"/rescue/clear",live+[eq("clinic_saved",1),
+            either([eq("ridge_lift",0),eq("lift_saved",1)])],finish)
+        return launch+[after(key+"/whiteout/end",WHITEOUT_HOURS*SCAN,[guarded([scope]+live,finish)])]
 
     for phase, act in enumerate(ACTS,1):
         options=[]
@@ -214,14 +284,26 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                 add(key+"/calibrate",active+[eq("tripped",0),eq("stroke",0),running]+hardware+
                     [stress_check(4,low),stress_check(5,high)],
                     [put("stroke",1),progress_quest(uid,"Stroke1")],SCAN/4)
+            district = plan.get("district")
+            if district:
+                spec = RELIEF_LINES[district]
+                goals.append(dict(kind="checks",label="Inspections",quantity=LINE_INSPECTIONS,
+                    text=f"Pass {LINE_INSPECTIONS} hourly heat inspections",
+                    description=f"Liveable or warmer: {spec['services']}. Keep the Generator running. "
+                                "Use Heat view and add Steam Hubs, Heaters or insulation. Cold readings don't count."))
+                add(key+"/inspect",active+[at_most("inspections",LINE_INSPECTIONS-1)]+district_ready(district),
+                    [put("inspections",1,1),progress_quest(uid,"Inspections")])
             watch = plan.get("watch")
             if watch:
+                spec = RELIEF_LINES[watch["district"]]
+                ready = district_ready(watch["district"])
+                saving = 4 if watch["district"]=="clinic" else 3
                 goals.append(dict(kind="checks",label="Watch",quantity=WATCH_LEGS,
                     text="Deliver three coal loads to Broken Mile",
-                    description=f"A watch is one relief crew's shift. Send a load on the dispatch panel that appears when "
-                                f"at least {watch['reserve']+watch['coal']} coal is in storage. Each delivery takes "
-                                f"{watch['travel']} hours. A Coal Magazine cuts each load by {MAGAZINE_SAVING} coal. "
-                                "The tracker counts arrivals. The Generator gauge is separate from this delivery."))
+                    description=f"Liveable or warmer: {spec['services']}. Keep {watch['reserve']+watch['coal']} coal "
+                                "available. Convoys leave and arrive automatically when the stops are heated. "
+                                f"A Coal Magazine saves {MAGAZINE_SAVING} coal per load. "
+                                f"The district pact cuts the {watch['travel']}-hour journey by {saving} hours."))
                 waiting = active+[at_most("leg",WATCH_LEGS-1)]
                 clear = either([eq("leak",0),eq("leak",3)])
                 response = active+[eq("leak",1)]
@@ -244,12 +326,20 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                 outage = [put("leak",1),change("leak"),leak,
                           after(key+"/auto-isolate",0.75,[guarded([scope]+response,seal)])]
                 arrived = [put("leg",1,1),guarded([eq("leg",1)],outage),progress_quest(uid,"Watch")]
-                full = shipment(key+"/open",active,[clear],"Broken Mile coal dispatch",{"Coal":watch["coal"]},
-                                watch["travel"],arrived,reserve=watch["reserve"],go="Send coal")
-                covered = shipment(key+"/covered",active,[clear,constructed(places[MAGAZINE])],"Covered coal dispatch",
-                                   {"Coal":watch["coal"]-MAGAZINE_SAVING},watch["travel"],arrived,
-                                   reserve=watch["reserve"],go="Send coal")
-                add(key+"/watch",waiting+[clear],[first_match(("Covered coal",*covered),("Open road",*full))])
+                departures = []
+                for has_pact in (1,0):
+                    for covered in (1,0):
+                        cost = watch["coal"]-covered*MAGAZINE_SAVING
+                        trip = watch["travel"]-has_pact*saving
+                        checks = [eq(spec["pact"],has_pact),affordable(coal,cost+watch["reserve"])]
+                        if covered:
+                            checks.append(constructed(places[MAGAZINE]))
+                        actions = [put("shipment",2)]+pay({"Coal":cost})+[
+                            after(f"{key}/travel/{has_pact}/{covered}",trip*SCAN,
+                                [guarded([scope]+active+[eq("shipment",2)],[put("shipment",4)])])]
+                        departures.append((f"Convoy {has_pact}/{covered}",checks,actions))
+                add(key+"/watch",waiting+[clear,eq("shipment",0)]+ready,[first_match(*departures)])
+                add(key+"/arrival",waiting+[clear,eq("shipment",4)]+ready,[put("shipment",0)]+arrived)
             hold=plan.get("hold")
             if hold:
                 hours,low,high,reserve=(hold[field] for field in ("hours","low","high","reserve"))
@@ -270,7 +360,8 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                 if hold:
                     checks.append(eq("hold_hours",hours))
                 checks, actions = shipment(key,active,checks,"Works commissioning" if hold else "Dispatch order",pledge,
-                    2 if hold else 8,[put("pledged",1),progress_quest(uid,"Pledge")],go="Install parts" if hold else "Send supplies")
+                    2 if hold else 4 if plan.get("lead") else 8,
+                    [put("pledged",1),progress_quest(uid,"Pledge")],go="Install parts" if hold else "Send supplies")
                 add(key+"/pledge",checks,actions)
             quests.append(writer.build("NI Faultline "+key,uid,act["title"]+" â€” "+plan["title"],goals,
                                        identity,localize,"Faultline/Quest/"+key,act["days"]))
@@ -281,16 +372,22 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
             success = advance+[put("kept",1,1),mood("Hope rise - moderately")]
             if flag:=plan.get("flag"):
                 success.append(put(flag,1))
+            if district:
+                success.append(put(RELIEF_LINES[district]["pact"],1))
             if profile:=plan.get("persistent"):
                 success.append(change(profile))
             success += [change_resource(resources[k].hex(),n) for k,n in plan.get("cargo",{}).items()]
             success += [arrive(n,role) for role,n in plan.get("people",{}).items()]
             success.append(report(key+"/success",act["title"],plan["report"]))
             failure = advance+[mood("Discontent rise - moderately"),report(key+"/miss","The line went quiet",act["failure"])]
+            timeout = active
+            if lead:=plan.get("lead"):
+                success = [teach(guid,"whiteout"),*whiteout(key,active,lead,advance)]
+                timeout = active+[eq("whiteout",0)]
             events.append(completed_event("NI Faultline Cleared "+key,identity("event/clear/"+key),
                           identity("trigger/clear/"+key),uid,[scope]+active,success))
             start = [put("plan",number), put("stroke",0), put("shipment",0), put("scout_returned",0), change(plan["profile"]),
-                     start_quest(uid), after(key+"/deadline",act["days"],[guarded([scope]+active,failure)])]
+                     start_quest(uid), after(key+"/deadline",act["days"],[guarded([scope]+timeout,failure)])]
             lesson = {(1,1):"gauge", (1,2):"gauge", (2,1):"refit", (2,2):"refit", (3,2):"survey",
                       (6,1):"watch", (6,2):"watch", (7,1):"charter", (7,2):"charter"}.get((phase,number))
             lesson=act.get("lesson",lesson)
@@ -303,11 +400,14 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                 start[:0]=[put("leg",0),put("hours",0),put("leak",0),put("watch_kept",0)]
             if pledge:
                 start[:0]=[put("pledged",0)]
+            if district:
+                start[:0]=[put("inspections",0)]
             choose = [scope]+phase_at(phase,0)+[eq("ending",0)]
             options.append((plan["title"],plan["preview"],choose+visible,[guarded(choose+visible,start)]))
             missions.append(dict(phase=phase,plan=number,quest=uid,deadline=act["days"],goals=goals,
                                  title=plan["title"],profile=plan["profile"],signal=calibration,
-                                 requires=plan.get("requires",()),flag=plan.get("flag"),watch=watch,pledge=pledge,hold=hold))
+                                 requires=plan.get("requires",()),flag=plan.get("flag"),watch=watch,pledge=pledge,
+                                 hold=hold,district=district,lead=lead))
 
         fallback=next(option for option,plan in zip(options,act["plans"]) if not plan.get("requires"))
         offer = scene(f"briefing/{phase}",act["title"],act["story"]+
@@ -327,13 +427,13 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                                      replay_ready,[replay])],True)
 
     endings=[]
-    accord_ready = [eq("final",1),eq("charter",1),eq("convoy_returned",1),at_most("trips",1)]
-    ordinary_ending = either([eq("final",0),eq("charter",0),eq("convoy_returned",0),
+    accord_ready = [eq("final",1),eq("charter",1),eq("clinic_saved",1),eq("lift_saved",1),at_most("trips",1)]
+    ordinary_ending = either([eq("final",0),eq("charter",0),eq("clinic_saved",0),eq("lift_saved",0),
                               at_most("kept",len(ACTS)-3),at_least("trips",2)])
     for kept in range(len(ACTS)-2,len(ACTS)+1):
         title = "The Basin Accord"
         text = ("The shelter crews signed their names to the charter. Households and wards gain one insulation level as "
-                "the new fittings go in. You brought the final convoy home and saw the main through the winter with at most one trip."
+                "the new fittings go in. You brought both crews home and saw the main through the winter with at most one trip."
                 f"\n\nJobs completed: {kept} of {len(ACTS)}.")
         add(f"accord/{kept}",finish+accord_ready+[eq("kept",kept)],
             [put("ending",3),put("ending/kept",kept),change("accord")],0.25)
@@ -359,5 +459,6 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     return events, dialogs, quests, dict(scenario=scenario,missions=missions,scan_hours=1,trip=TRIP,
         welded_trip=WELDED_TRIP,reset=RESET,films=filmed,watch_legs=WATCH_LEGS,leak_repair=LEAK_REPAIR,
         buildings=structures,relay_reset=RELAY_RESET,magazine_saving=MAGAZINE_SAVING,
+        rescue_quests=rescue_quests,whiteout_hours=WHITEOUT_HOURS,line_inspections=LINE_INSPECTIONS,
         lessons={key:lesson_id(guid,key).hex() for key in LESSONS},
         modifiers={key:value for key,value in modifiers.items() if key.startswith("faultline/")})

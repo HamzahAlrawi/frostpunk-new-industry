@@ -16,11 +16,13 @@ class ReconstructionTests(unittest.TestCase):
         self.assertEqual([t['id'] for t in self.mode['tracks']],['Projects','Foundry','Gardens','Salvage','Contracts'])
         self.assertEqual(len({self.mode[k] for k in ('parameter','enabled','disabled')}),3)
         road=self.mode['story']['winter_road']
+        faultline=self.mode['story']['faultline']
+        rescue_quests=sum(len(routes) for routes in faultline['rescue_quests'].values())
         self.assertEqual(self.mode['quests'],60+len(self.mode['frontiers']['missions'])+len(self.mode['frontiers']['incidents'])
                          +len(self.mode['frontiers']['work_orders'])+len(self.mode['story']['acts'])
                          +len(self.mode['story']['lifeline']['missions'])+len(road['missions'])
                          +len(road['projects'])+len(road['aftermath'])
-                         +len(self.mode['story']['faultline']['missions']))
+                         +len(faultline['missions'])+rescue_quests)
         self.assertGreater(self.mode['events'],121)
 
     def test_projects_have_permanent_rewards_and_no_deadlines(self):

@@ -11,7 +11,7 @@ class World:
         self.open=[];self.active={};self.completed=[];self.modifiers=set();self.predefined=[];self.paid=[]
         self.buildings={};self.researched=set();self.produced={};self.production_start={};self.progress={}
         self.automation=0;self.generator=True;self.stress=0;self.scenario=scenario
-        self.arrivals={};self.operating={};self.warm_homes=0;self.world_map=False
+        self.arrivals={};self.operating={};self.warm_homes=0;self.liveable_buildings={};self.world_map=False
         self.placed_sites={};self.revealed_sites=set();self.sequences=[];self.lessons=[]
         self.recorded_city=[];self.city_endings=[]
 
@@ -24,6 +24,8 @@ class World:
         if kind=='scenario':return (value[1]==self.scenario)!=value[2]
         if kind=='any':return any(self.value(item) for item in value[1])
         if kind=='building_count':return self.buildings.get(value[1],0)
+        if kind=='liveable_building_count':
+            return min(self.liveable_buildings.get(value[1],0),self.buildings.get(value[1],0))
         if kind=='generator':return self.generator!=value[1]
         if kind=='stress_compare':
             return self.stress>=value[2] if value[1]==4 else self.stress<=value[2]

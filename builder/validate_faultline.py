@@ -1,6 +1,10 @@
 """Drive decoded Faultline events through each refit and ending."""
 from math import isclose
+from pathlib import Path
+
+from city_mastery import building_ids
 from faultline_buildings import DEFINITIONS, RELIEF_DISPATCH, VALVE_WORKS
+from faultline_story import RELIEF_LINES
 from tools.native_binary import Cursor, string
 from tools.scenario_model import World
 from tools.housing_schema import BEACON
@@ -133,6 +137,8 @@ def audit(decoded, metadata, resource_ids):
     leak = effects["faultline/leak"]
     coal = resource_ids["Coal"]
     structures = {row["name"]:row["guid"] for row in campaign["buildings"]}
+    native_path = Path(__file__).parent/"cache/extracted/common/configs/frostpunkbuildingsconfig.bin"
+    structures.update({key:value.hex() for key,value in building_ids(native_path.read_bytes()).items()})
     revealed = ({("marker","DefaultRandomizationPoint_"+point) for point in LEGACY_POINTS} |
                 {("site",uid) for uid in LEGACY_TEMPLATES})
     assert len(missions)==19
@@ -148,6 +154,12 @@ def audit(decoded, metadata, resource_ids):
     def tick(w, hours):
         for _ in range(hours*4):
             w.step(HOUR/4)
+
+    def heat(w, line):
+        for group in RELIEF_LINES[line]["groups"]:
+            building = structures[group[0]]
+            w.buildings[building] = max(1,w.buildings.get(building,0))
+            w.liveable_buildings[building] = 1
 
     def film(w, key):
         shot=campaign["films"][key]
@@ -223,7 +235,7 @@ def audit(decoded, metadata, resource_ids):
             assert w.click(briefing,number-1)
             if phase>=8:
                 w.produced[other["target"][0]]+=100
-            lesson={1:"gauge",2:"refit",6:"watch",7:"charter",8:"valve_orders",9:"dispatch_orders"}.get(phase)
+            lesson={1:"gauge",2:"refit",4:"districts",6:"watch",7:"charter",8:"valve_orders",9:"dispatch_orders"}.get(phase)
             if lesson:
                 assert w.lessons.count(campaign["lessons"][lesson])==1
             profile=effects["faultline/"+row["profile"]]
@@ -251,23 +263,51 @@ def audit(decoded, metadata, resource_ids):
                 w.step(HOUR/4)
                 assert state(w,"stroke")==1 and w.stress==expected
             w.generator=True
+            if line:=row["district"]:
+                w.liveable_buildings.clear()
+                tick(w,4)
+                assert state(w,"inspections")==0, 'Cold buildings cannot commission a heat loop'
+                heat(w,line)
+                building = structures[RELIEF_LINES[line]["groups"][0][0]]
+                del w.buildings[building]
+                tick(w,2)
+                assert state(w,"inspections")==0, 'A heat reading cannot count a building under construction'
+                heat(w,line)
+                tick(w,1)
+                assert state(w,"inspections")==1
+                w.generator=False
+                tick(w,3)
+                assert state(w,"inspections")==1
+                w.generator=True
+                tick(w,campaign["line_inspections"]-1)
+                assert state(w,RELIEF_LINES[line]["pact"])==1
+                assert effects["faultline/"+RELIEF_LINES[line]["pact"]] in w.modifiers
             if watch:=row["watch"]:
                 mag=number==2
                 if mag:
                     w.buildings[structures["Coal Magazine"]]=2
                 cost=watch["coal"]-(campaign["magazine_saving"] if mag else 0)
-                dispatch=task+("/covered" if mag else "/open")
                 reserve=watch["reserve"]
                 before=w.stock[coal]
+                line=watch["district"]
+                travel=watch["travel"]-(4 if line=="clinic" else 3)*state(w,RELIEF_LINES[line]["pact"])
+                w.liveable_buildings.clear()
+                tick(w,2)
+                assert state(w,"shipment")==0 and w.stock[coal]==before
+                heat(w,line)
                 w.stock[coal]=reserve+cost-1
                 tick(w,1)
-                assert names[dispatch+"/dispatch"] not in w.open
+                assert state(w,"shipment")==0
                 w.stock[coal]=before
                 tick(w,1)
-                assert w.click(names[dispatch+"/dispatch"],1)
-                assert w.stock[coal]==before
-                tick(w,7)
-                send(w,dispatch,{"Coal":cost},watch["travel"])
+                assert state(w,"shipment")==2 and w.stock[coal]==before-cost
+                w.liveable_buildings.clear()
+                tick(w,travel+1)
+                assert state(w,"shipment")==4 and state(w,"leg")==0 and w.stock[coal]==before-cost
+                w=w.checkpoint()
+                w.start()
+                heat(w,line)
+                tick(w,1)
                 assert state(w,"leg")==1 and leak in w.modifiers
                 outage=names[task+"/leak"]
                 if mag:
@@ -277,10 +317,10 @@ def audit(decoded, metadata, resource_ids):
                     assert w.click(outage,0)
                     tick(w,3)
                 assert leak not in w.modifiers
-                for _ in range(2):
-                    tick(w,1)
-                    send(w,dispatch,{"Coal":cost},watch["travel"])
+                tick(w,2*(travel+2))
                 assert state(w,"leg")==campaign["watch_legs"]
+                repair=0 if mag else campaign["leak_repair"]["Coal"]
+                assert w.stock[coal]==before-3*cost-repair
             if hold:=row["hold"]:
                 w.stress=(hold["low"]+hold["high"])/200
                 tick(w,1)
@@ -294,20 +334,88 @@ def audit(decoded, metadata, resource_ids):
                 tick(w,hold["hours"]-1)
                 assert state(w,"hold_hours")==hold["hours"]
             if pledge:=row["pledge"]:
+                if row["lead"]:
+                    w.liveable_buildings.clear()
                 tick(w,2)
-                send(w,task,pledge,2 if row["hold"] else 8)
+                send(w,task,pledge,2 if row["hold"] else 4 if row["lead"] else 8)
+            if lead:=row["lead"]:
+                assert state(w,"whiteout")==1 and effects["faultline/whiteout"] in w.modifiers
+                w=w.checkpoint()
+                w.start()
+                tick(w,2)
+                assert state(w,"clinic_hours")==state(w,"lift_hours")==0
+                if lead=="clinic":
+                    heat(w,"clinic")
+                else:
+                    heat(w,"lift")
+                tick(w,2)
+                assert state(w,lead+"_hours")==2
+                w.liveable_buildings.clear()
+                tick(w,2)
+                assert state(w,lead+"_hours")==2
+                reserve_order=names[task+"/reserve"]
+                assert reserve_order in w.open
+                before=w.stock[coal]
+                option=0 if lead=="clinic" else 1
+                assert w.click(reserve_order,option)
+                assert not w.click(reserve_order,1-option)
+                assert w.stock[coal]==before-RELIEF_LINES[lead]["relief"]["Coal"]
+                heat(w,"clinic")
+                heat(w,"lift")
+                tick(w,9)
+                assert state(w,"clinic_saved")==1 and state(w,"lift_saved")==state(w,"ridge_lift")
+                assert effects["faultline/whiteout"] not in w.modifiers
+                assert effects["faultline/boost_"+lead] not in w.modifiers
             assert state(w,"phase")==phase+1 and profile not in w.modifiers,(task,state(w,"phase"))
             assert quest in w.completed
             played.add((phase,number))
         tick(w,6)
         ending=state(w,"ending")
-        assert ending==3 and state(w,"kept")==9 and state(w,"convoy_returned")==1, (route,w.variables)
-        film(w,"dawn/3")
-        epilogue=names["accord/9"]
+        expected = 3 if route[7]==2 else 2
+        assert ending==expected and state(w,"kept")==9 and state(w,"convoy_returned")==1, (route,w.variables)
+        film(w,f"dawn/{expected}")
+        epilogue=names["accord/9" if ending==3 else "end/1/9"]
         assert w.open.count(epilogue)==1 and w.click(epilogue)
         tick(w,25)
         assert len(w.city_endings)==1 and not w.click(epilogue)
     assert played==set(missions)
+
+    # Launch with the clinic at the front, then save the second crew anyway.
+    # An unheated city must also be able to finish with both routes lost.
+    for surviving,outcome in (({"lift"},2),(set(),3)):
+        w=world()
+        w.start()
+        w.variables.update({PREFIX+"phase":9,PREFIX+"offered":8,PREFIX+"ridge_lift":1,
+                            PREFIX+"final":1,PREFIX+"charter":1,PREFIX+"kept":8})
+        tick(w,6)
+        assert w.click(names["briefing/9"])
+        row=missions[9,1]
+        fulfill_city(w,row)
+        tick(w,2)
+        send(w,"act/9/1",row["pledge"],4)
+        assert state(w,"whiteout")==1
+        lead,second=(campaign["rescue_quests"]["clinic"][line]["quest"] for line in ("clinic","lift"))
+        assert lead in w.active and second not in w.active
+        tick(w,2)
+        assert second in w.active
+        reserve=names["act/9/1/reserve"]
+        w.stock[coal]=0
+        assert not w.click(reserve,0) and not w.click(reserve,1)
+        assert w.click(reserve,2)
+        baseline=dict(w.arrivals)
+        for line in surviving:
+            heat(w,line)
+        tick(w,campaign["whiteout_hours"])
+        assert (state(w,"clinic_saved"),state(w,"lift_saved"))==(0,int(bool(surviving)))
+        assert bool(w.arrivals!=baseline)==bool(surviving)
+        assert state(w,"whiteout")==2 and state(w,"kept")==8+len(surviving)
+        tick(w,6)
+        assert state(w,"ending")==2 and effects["faultline/whiteout"] not in w.modifiers
+        assert names[f"act/9/1/rescue/outcome/{outcome}"] in w.open
+        assert not w.active
+        before=dict(w.arrivals)
+        w.run(2,False)
+        assert w.arrivals==before and len(w.city_endings)==1
 
     expired=world()
     expired.start()
@@ -334,4 +442,6 @@ def audit(decoded, metadata, resource_ids):
     return dict(plans=len(played),endings=3,trip_recovery=True,deadlines_continue=True,
                 production_baselines=True,pressure_hours_persist=True,dispatch_paid_once=True,
                 dispatch_arrivals=True,stockpile_independent_buildings=True,frostland_reveals=True,
-                city_replay_once=True,cinematic_signal_and_fallback=True)
+                city_replay_once=True,cinematic_signal_and_fallback=True,
+                district_commissioning=True,convoy_waits_for_heat=True,split_rescue_outcomes=4,
+                whiteout_reserve_once=True)
