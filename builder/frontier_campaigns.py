@@ -192,6 +192,10 @@ def bonus_library(data,buildings,guid):
         [(all_names,1,1,-1)])
     add('faultline/resettled','Reclaimed Steam Lines','Steelworks and Factories gain one insulation level from the dismantled ridge pipe.',
         [(g['industry'],1,1,1)])
+    add('faultline/ridge_medics','Ridge Clinic Crew','Medical buildings gain 25% healing efficiency from the evacuated clinic crew.',
+        [(g['medical'],1.25,1.25,0)])
+    add('faultline/ridge_fitters','Ridge Lift Couplings','Sawmills and Wall Drills gain 35% workplace efficiency from the lift crew’s refit.',
+        [(['Sawmill','SteamSawmill','WallDrill','WallDrillSteam','WallDrillAdvanced'],1.35,1.35,0)])
     return pack_modifiers(records),ids,owners
 
 

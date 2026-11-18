@@ -147,7 +147,8 @@ class Installer:
         destination = Path(destination)
         destination.mkdir(parents=True, exist_ok=True)
         for base, archive in self.manifest["archives"].items():
-            index = bytearray((Path(source) / (base + ".idx")).read_bytes())
+            original_index = (Path(source) / (base + ".idx")).read_bytes()
+            index = bytearray(original_index)
             count, = struct.unpack_from("<Q", index, 3)
             if index[:3] != b"\0\2\1" or len(index) != 11 + count * ENTRY.size:
                 raise ValueError(f"Invalid {base} archive index")
@@ -161,7 +162,8 @@ class Installer:
                     position = positions[identifier if donor is None else donor]
                     if donor is not None and (base not in ("scenes","templates") or identifier in positions or identifier in added):
                         raise ValueError(f"Invalid additional {base} entry: {patch['name']}")
-                    _, stored, size, offset, packed = ENTRY.unpack_from(index, position)
+                    # A new prefab may use a donor already replaced in the output index.
+                    _, stored, size, offset, packed = ENTRY.unpack_from(original_index, position)
                     reader.seek(offset)
                     original = reader.read(stored)
                     if packed and original.startswith(b"\x1f\x8b"):

@@ -196,7 +196,7 @@ def main():
         atlas=re.search(rb'\x01UI\\[^\0]+\.dds\0',blueprints[start:])
         expected=(0,1) if recipe['output']=='Food Rations' else RESOURCE_ICONS[recipe['output']]
         assert struct.unpack_from('<2i',blueprints,start+atlas.end())==expected,(recipe['id'],'wrong output icon')
-    print(f"Verified eight joined choice circles against 13 native pairs, compact connections, 16 policies per mode, parent/exclusion gates and passive values, native book preservation, Arks cores, {len(active)} research nodes and 43 output icons.")
+    print(f"Verified eight joined choice circles against 13 native pairs, compact connections, 16 policies per mode, parent/exclusion gates and passive values, native book preservation, Arks cores, {len(active)} research nodes and {len(manifest['recipes'])} output icons.")
 
 
 if __name__=='__main__':main()

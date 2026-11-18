@@ -36,9 +36,21 @@ LESSONS = {
         "Under Resources, build a Coal Magazine and assign it to coal for storage. A completed Magazine cuts the cost of each "
         "dispatch by 20 coal. When the leak interrupts the watch, choose a repair and wait for the heat penalty to lift."),
     "charter": ("Send the charter supplies",
-        "A charter is the final agreement with the shelters. Its listed supplies are sent once, automatically, once stock "
+        "A charter is an agreement with the shelters. Its listed supplies are sent once, automatically, once stock "
         "and any required pressure steps are ready. The job still needs its other city objectives. "
         "Completing the watches opens the permanent supply plan. Resettlement remains available after a missed watch."),
+    "valve_orders": ("Working the Valve Works",
+        "Build a Valve Works under Tech. Select it, assign engineers and open General. Hover over the two order icons "
+        "to see their names and material costs. Use + to queue the order named in the mission tracker. Each completed "
+        "order counts once and recovers one unit of scrap. Orders finished before this job do not count.\n\n"
+        "While the engineers work, you can start the pressure test. Keep the Generator on and the required coal in reserve. "
+        "Manage Overdrive to keep stress inside the band. An interruption resets the test, while finished orders still count."),
+    "dispatch_orders": ("Packing the last convoy",
+        "Build a Relief Dispatch under Tech and staff it with engineers. In General, queue Clinic Sledges for the footpath "
+        "or Lift Sledges for the ridge lift, as named in your objectives. They need different supplies. Only finished loads "
+        "for your chosen route count. Each order returns a spare unit of wood or coal.\n\n"
+        "Continue your pressure signals and prepare the city for arrivals while the crews load. The convoy rolls out when "
+        "all mission objectives are complete. There is no separate departure button."),
 }
 
 

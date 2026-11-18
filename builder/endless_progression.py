@@ -142,7 +142,7 @@ def rewards(data,buildings,techinfo,guid):
     return pack_modifiers(records),result,owners
 
 
-def build(source,modifier_data,buildings,techinfo,guid,localize,resources,faultline_buildings):
+def build(source,modifier_data,buildings,techinfo,guid,localize,resources,faultline_buildings,faultline_orders):
     identity=lambda key:guid('endless/'+key).hex()
     enabled=identity('enabled')
     parameter=Parameter('NI Reconstruction',identity('parameter'),[
@@ -261,7 +261,7 @@ def build(source,modifier_data,buildings,techinfo,guid,localize,resources,faultl
                                     frontiers['bonuses'],localize,dt,qt)
     story['winter_road']=winter
     pe,pd,pq,faultline=build_faultline(source,buildings,techinfo,resources,guid,story_id('faultline-scenario'),
-                                      frontiers['bonuses'],localize,dt,qt,winter['recipes'],faultline_buildings)
+                                      frontiers['bonuses'],localize,dt,qt,winter['recipes']|faultline_orders,faultline_buildings)
     faultline['forecast']=story_id('faultline-forecast')
     faultline['construction_set']=story_id('faultline-construction')
     story['faultline']=faultline

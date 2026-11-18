@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.26.0",
+  "version": "3.27.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -19242,6 +19242,79 @@
         0,
         2
       ]
+    },
+    {
+      "id": "FaultlineIsolationValve",
+      "title": "Machine Isolation Valve",
+      "output": "Steel",
+      "amount": 1,
+      "inputs": {
+        "Steel": 22,
+        "Coal": 15
+      },
+      "hours": 5,
+      "building": "Valve Works",
+      "targets": [
+        "faultline_valve_works"
+      ],
+      "unlock": null,
+      "excludes": [],
+      "native_prosthetics_requirements": false
+    },
+    {
+      "id": "FaultlineBypassSection",
+      "title": "Rivet Bypass Section",
+      "output": "Wood",
+      "amount": 1,
+      "inputs": {
+        "Steel": 30,
+        "Wood": 12,
+        "Coal": 12
+      },
+      "hours": 6,
+      "building": "Valve Works",
+      "targets": [
+        "faultline_valve_works"
+      ],
+      "unlock": null,
+      "excludes": [],
+      "native_prosthetics_requirements": false
+    },
+    {
+      "id": "FaultlineClinicSledge",
+      "title": "Pack Clinic Sledge",
+      "output": "Wood",
+      "amount": 1,
+      "inputs": {
+        "Food Rations": 35,
+        "Wood": 16
+      },
+      "hours": 4,
+      "building": "Relief Dispatch",
+      "targets": [
+        "faultline_relief_dispatch"
+      ],
+      "unlock": null,
+      "excludes": [],
+      "native_prosthetics_requirements": false
+    },
+    {
+      "id": "FaultlineLiftSledge",
+      "title": "Pack Lift Sledge",
+      "output": "Coal",
+      "amount": 1,
+      "inputs": {
+        "Coal": 55,
+        "Wood": 15
+      },
+      "hours": 5,
+      "building": "Relief Dispatch",
+      "targets": [
+        "faultline_relief_dispatch"
+      ],
+      "unlock": null,
+      "excludes": [],
+      "native_prosthetics_requirements": false
     }
   ],
   "retired_technologies": [
@@ -23486,11 +23559,23 @@
         "title": "Reclaimed Steam Lines",
         "description": "Steelworks and Factories gain one insulation level from the dismantled ridge pipe.",
         "modifier": "8c003f0783fa3d50b5ef1e2859691734"
+      },
+      {
+        "id": "Frontiers/faultline/ridge_medics",
+        "title": "Ridge Clinic Crew",
+        "description": "Medical buildings gain 25% healing efficiency from the evacuated clinic crew.",
+        "modifier": "737deff818f94b5bb66ca2a761b18e03"
+      },
+      {
+        "id": "Frontiers/faultline/ridge_fitters",
+        "title": "Ridge Lift Couplings",
+        "description": "Sawmills and Wall Drills gain 35% workplace efficiency from the lift crew\u2019s refit.",
+        "modifier": "eeda23f91b981a50b83beb9537566b38"
       }
     ],
-    "events": 493,
-    "dilemmas": 288,
-    "quests": 170,
+    "events": 510,
+    "dilemmas": 302,
+    "quests": 174,
     "poll_days": 0.25,
     "description": "Three separate Endless modes with automatic chapters and timed incidents.",
     "frontiers": {
@@ -25317,7 +25402,9 @@
         "faultline/works_crew": "4fed9b3db2a59e5ba27d7d2ebc769830",
         "faultline/accord": "e8bddd1c9711ac5293ea8387bd60653b",
         "faultline/leak": "89b5b8c5948aa55481c6ebac6077862b",
-        "faultline/resettled": "8c003f0783fa3d50b5ef1e2859691734"
+        "faultline/resettled": "8c003f0783fa3d50b5ef1e2859691734",
+        "faultline/ridge_medics": "737deff818f94b5bb66ca2a761b18e03",
+        "faultline/ridge_fitters": "eeda23f91b981a50b83beb9537566b38"
       },
       "automaton_hours": 4.0,
       "incidents": [
@@ -28647,7 +28734,8 @@
             "requires": [],
             "flag": null,
             "watch": null,
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 1,
@@ -28712,7 +28800,8 @@
             "requires": [],
             "flag": null,
             "watch": null,
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 2,
@@ -28784,7 +28873,8 @@
             "requires": [],
             "flag": "accumulator",
             "watch": null,
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 2,
@@ -28867,7 +28957,8 @@
             "requires": [],
             "flag": "bypass",
             "watch": null,
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 3,
@@ -28956,7 +29047,8 @@
             "requires": [],
             "flag": null,
             "watch": null,
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 3,
@@ -29030,7 +29122,8 @@
             "requires": [],
             "flag": "surveyed",
             "watch": null,
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 4,
@@ -29122,7 +29215,8 @@
             "requires": [],
             "flag": null,
             "watch": null,
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 4,
@@ -29200,7 +29294,8 @@
             "requires": [],
             "flag": "welded",
             "watch": null,
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 5,
@@ -29295,7 +29390,8 @@
             "requires": [],
             "flag": "final",
             "watch": null,
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 5,
@@ -29378,7 +29474,8 @@
             ],
             "flag": "final",
             "watch": null,
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 5,
@@ -29466,7 +29563,8 @@
             ],
             "flag": "final",
             "watch": null,
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 6,
@@ -29518,7 +29616,8 @@
               "reserve": 180,
               "coal": 50
             },
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 6,
@@ -29576,7 +29675,8 @@
               "reserve": 165,
               "coal": 65
             },
-            "pledge": null
+            "pledge": null,
+            "hold": null
           },
           {
             "phase": 7,
@@ -29654,7 +29754,8 @@
             "pledge": {
               "Coal": 250,
               "Food Rations": 80
-            }
+            },
+            "hold": null
           },
           {
             "phase": 7,
@@ -29707,7 +29808,251 @@
             "pledge": {
               "Wood": 100,
               "Food Rations": 65
+            },
+            "hold": null
+          },
+          {
+            "phase": 8,
+            "plan": 1,
+            "quest": "fa2ac7e57a43105687682fd9e55c71af",
+            "deadline": 7,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Valve Works",
+                "quantity": 1,
+                "target": [
+                  "992fda9242b34d56b55fe7285993a320"
+                ]
+              },
+              {
+                "kind": "produce",
+                "station": "Valve Works",
+                "quantity": 4,
+                "text": "Valve Works: complete 4 \u00d7 Machine Isolation Valve",
+                "description": "Select Valve Works, staff it with engineers and add Machine Isolation Valve to the queue under General. Finish 4 orders during this job. Orders finished earlier do not count.",
+                "target": [
+                  "9cde900edf0faa53bb6937edc41ffbfc"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "PressureTest",
+                "text": "Hold 12\u201336% stress for 6 hours",
+                "description": "Build the Valve Works first. Keep the Generator running at 12\u201336% stress and keep 225 coal in reserve for 6 consecutive hourly checks. An interruption restarts the test. You can run the test while the engineers fabricate the parts."
+              }
+            ],
+            "title": "Isolate the lake branch",
+            "profile": "ward",
+            "strokes": [],
+            "requires": [],
+            "flag": null,
+            "watch": null,
+            "pledge": null,
+            "hold": {
+              "hours": 6,
+              "low": 12,
+              "high": 36,
+              "reserve": 225
             }
+          },
+          {
+            "phase": 8,
+            "plan": 2,
+            "quest": "7e5dc6b72b781d51b3302b5e3fdfacec",
+            "deadline": 7,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Valve Works",
+                "quantity": 1,
+                "target": [
+                  "992fda9242b34d56b55fe7285993a320"
+                ]
+              },
+              {
+                "kind": "produce",
+                "station": "Valve Works",
+                "quantity": 3,
+                "text": "Valve Works: complete 3 \u00d7 Rivet Bypass Section",
+                "description": "Select Valve Works, staff it with engineers and add Rivet Bypass Section to the queue under General. Finish 3 orders during this job. Orders finished earlier do not count.",
+                "target": [
+                  "f39d2f72678740519e5b12e9d1eec4ce"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "PressureTest",
+                "text": "Hold 37\u201359% stress for 4 hours",
+                "description": "Build the Valve Works first. Keep the Generator running at 37\u201359% stress and keep 300 coal in reserve for 4 consecutive hourly checks. An interruption restarts the test. You can run the test while the engineers fabricate the parts."
+              }
+            ],
+            "title": "Power the ridge lift with a bypass",
+            "profile": "works",
+            "strokes": [],
+            "requires": [],
+            "flag": "ridge_lift",
+            "watch": null,
+            "pledge": null,
+            "hold": {
+              "hours": 4,
+              "low": 37,
+              "high": 59,
+              "reserve": 300
+            }
+          },
+          {
+            "phase": 9,
+            "plan": 1,
+            "quest": "e141bb56c1790956b1c0bb971d816622",
+            "deadline": 7,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Relief Dispatch",
+                "quantity": 1,
+                "target": [
+                  "22193aa4ce06935086c7673a5fe1182b"
+                ]
+              },
+              {
+                "kind": "warm",
+                "text": "Keep 22 homes Liveable or warmer",
+                "quantity": 22,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two medical buildings",
+                "quantity": 2,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "produce",
+                "station": "Relief Dispatch",
+                "quantity": 4,
+                "text": "Relief Dispatch: complete 4 \u00d7 Pack Clinic Sledge",
+                "description": "Select Relief Dispatch, staff it with engineers and add Pack Clinic Sledge to the queue under General. Finish 4 orders during this job. Orders finished earlier do not count.",
+                "target": [
+                  "cdccef755956185a9501a01135fc2420"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Pulse at 24\u201349% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 8 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Cool to 12% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              }
+            ],
+            "title": "Bring the clinic down the footpath",
+            "profile": "ward",
+            "strokes": [
+              {
+                "low": 24,
+                "high": 49,
+                "draw": 8
+              },
+              {
+                "low": 0,
+                "high": 12,
+                "draw": 0
+              }
+            ],
+            "requires": [],
+            "flag": "convoy_returned",
+            "watch": null,
+            "pledge": null,
+            "hold": null
+          },
+          {
+            "phase": 9,
+            "plan": 2,
+            "quest": "60bd7f99839c3c5db49bebf82b8ccad0",
+            "deadline": 7,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build a Relief Dispatch",
+                "quantity": 1,
+                "target": [
+                  "22193aa4ce06935086c7673a5fe1182b"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two Steelworks",
+                "quantity": 2,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "produce",
+                "station": "Relief Dispatch",
+                "quantity": 3,
+                "text": "Relief Dispatch: complete 3 \u00d7 Pack Lift Sledge",
+                "description": "Select Relief Dispatch, staff it with engineers and add Pack Lift Sledge to the queue under General. Finish 3 orders during this job. Orders finished earlier do not count.",
+                "target": [
+                  "2193d2dc6ac4995d8d3f939a4567b74b"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Pulse at 38\u201358% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Cool to 13% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke3",
+                "text": "3. Pulse at 42\u201361% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 13 stress points. Complete the listed construction first."
+              }
+            ],
+            "title": "Bring the lift crew down with its tools",
+            "profile": "works",
+            "strokes": [
+              {
+                "low": 38,
+                "high": 58,
+                "draw": 12
+              },
+              {
+                "low": 0,
+                "high": 13,
+                "draw": 0
+              },
+              {
+                "low": 42,
+                "high": 61,
+                "draw": 13
+              }
+            ],
+            "requires": [
+              "ridge_lift"
+            ],
+            "flag": "convoy_returned",
+            "watch": null,
+            "pledge": null,
+            "hold": null
           }
         ],
         "scan_hours": 1,
@@ -29764,6 +30109,79 @@
               "Steel": 25
             },
             "coal_capacity": 1500
+          },
+          {
+            "name": "Valve Works",
+            "guid": "992fda9242b34d56b55fe7285993a320",
+            "path": "gameentities/buildings/faultline_valve_works.binarytemplate",
+            "donor": "gameentities/buildings/resourceprocessing/prefabfactory.binarytemplate",
+            "native": "Factory",
+            "tab": "Tech",
+            "price": {
+              "Wood": 65,
+              "Steel": 55
+            },
+            "interior": "UI/BuildingInteriors/EngeneersLab.dds",
+            "description": "Staff with engineers. Under General, queue Isolation Valve or Bypass Section orders for the buried main.",
+            "orders": {
+              "FaultlineIsolationValve": {
+                "title": "Machine Isolation Valve",
+                "output": "Steel",
+                "inputs": {
+                  "Steel": 22,
+                  "Coal": 15
+                },
+                "hours": 5,
+                "purpose": "Fabricate a shut-off valve for The Line Under the Lake. Requirements for installed valves are tracked in the mission."
+              },
+              "FaultlineBypassSection": {
+                "title": "Rivet Bypass Section",
+                "output": "Wood",
+                "inputs": {
+                  "Steel": 30,
+                  "Wood": 12,
+                  "Coal": 12
+                },
+                "hours": 6,
+                "purpose": "Prepare a bypass section strong enough to run steam to the ridge lift. Requirements for installed pipe are tracked in the mission."
+              }
+            }
+          },
+          {
+            "name": "Relief Dispatch",
+            "guid": "22193aa4ce06935086c7673a5fe1182b",
+            "path": "gameentities/buildings/faultline_relief_dispatch.binarytemplate",
+            "donor": "gameentities/buildings/resourceprocessing/prefabfactory.binarytemplate",
+            "native": "Factory",
+            "tab": "Tech",
+            "price": {
+              "Wood": 75,
+              "Steel": 40
+            },
+            "interior": "UI/BuildingInteriors/Expedition/ExpeditionCenter.dds",
+            "description": "Staff with engineers. Under General, pack Clinic Sledges or Lift Sledges for the final evacuation.",
+            "orders": {
+              "FaultlineClinicSledge": {
+                "title": "Pack Clinic Sledge",
+                "output": "Wood",
+                "inputs": {
+                  "Food Rations": 35,
+                  "Wood": 16
+                },
+                "hours": 4,
+                "purpose": "Pack one clinic sledge with meals, bedding and splints for the shelter evacuation."
+              },
+              "FaultlineLiftSledge": {
+                "title": "Pack Lift Sledge",
+                "output": "Coal",
+                "inputs": {
+                  "Coal": 55,
+                  "Wood": 15
+                },
+                "hours": 5,
+                "purpose": "Pack one heavy sledge with fuel and rigging for the ridge lift and its passengers."
+              }
+            }
           }
         ],
         "relay_reset": 20,
@@ -29775,7 +30193,9 @@
           "refit": "49541f807f1258518410dd38420528e5",
           "survey": "88f921592598e35dba6cc66d5bf77309",
           "watch": "d617dc51c7fc98579e2f08d0bd21fd81",
-          "charter": "2c0e2495c516325b82fd2de63d219793"
+          "charter": "2c0e2495c516325b82fd2de63d219793",
+          "valve_orders": "1c59ecbc5040de5084b57caca89e7dba",
+          "dispatch_orders": "bc56d9d5a05cd05fb8a1d7c8b8d525b1"
         },
         "modifiers": {
           "faultline/ward": "8dd38a84d63f72568123b1da65ca7464",
@@ -29789,7 +30209,9 @@
           "faultline/works_crew": "4fed9b3db2a59e5ba27d7d2ebc769830",
           "faultline/accord": "e8bddd1c9711ac5293ea8387bd60653b",
           "faultline/leak": "89b5b8c5948aa55481c6ebac6077862b",
-          "faultline/resettled": "8c003f0783fa3d50b5ef1e2859691734"
+          "faultline/resettled": "8c003f0783fa3d50b5ef1e2859691734",
+          "faultline/ridge_medics": "737deff818f94b5bb66ca2a761b18e03",
+          "faultline/ridge_fitters": "eeda23f91b981a50b83beb9537566b38"
         },
         "forecast": "b5b11cd7a264c4579395c43e9031cf7b",
         "construction_set": "0c9e971b5657275984839f946d400250"
@@ -30858,6 +31280,17 @@
           "Reconstruction/food"
         ],
         "effects_before_sha256": "0ca1608de96278e0acd7741cc26afa14b4196ef362c549187b43f41f5f54be7a"
+      },
+      {
+        "guid": "3af3f6bdffbe78588066f78bef5be6c6",
+        "title": "Ridge Lift Couplings",
+        "description": "Sawmills and Wall Drills gain 35% workplace efficiency from the lift crew\u2019s refit.",
+        "name_key": "Mods/NewIndustry/Modifier/3af3f6bdffbe78588066f78bef5be6c6/Name",
+        "description_key": "Mods/NewIndustry/Modifier/3af3f6bdffbe78588066f78bef5be6c6/Description",
+        "source_ids": [
+          "Frontiers/faultline/ridge_fitters"
+        ],
+        "effects_before_sha256": "d54587ab64fa9b85696c8fcc522e92baa9de6922c1d30e611d27d8b860d6138f"
       },
       {
         "guid": "3b570d195add5b5792f972e062407ecf",
@@ -32099,6 +32532,17 @@
         "effects_before_sha256": "f3acc8c986d270f0cfd473321eabd6260c1b6b80ce88a2a8301ee1bec35fb510"
       },
       {
+        "guid": "737deff818f94b5bb66ca2a761b18e03",
+        "title": "Ridge Clinic Crew",
+        "description": "Medical buildings gain 25% healing efficiency from the evacuated clinic crew.",
+        "name_key": "Mods/NewIndustry/Modifier/737deff818f94b5bb66ca2a761b18e03/Name",
+        "description_key": "Mods/NewIndustry/Modifier/737deff818f94b5bb66ca2a761b18e03/Description",
+        "source_ids": [
+          "Frontiers/faultline/ridge_medics"
+        ],
+        "effects_before_sha256": "b0df3b9e48fc1afe8a062937b31475640e316ea24c43ad0b65005b733a85f44b"
+      },
+      {
         "guid": "74923ce172dc6e5faa217dcffec43b26",
         "title": "Field Dressings",
         "description": "Medical Posts gain a 75% healing speed bonus.\n\nCitizens have a 20% lower chance of illness caused by cold. Available before Drawing Boards, to reduce sickness before it reaches the wards.",
@@ -32679,6 +33123,17 @@
           "StarterGatheringTeams"
         ],
         "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
+      },
+      {
+        "guid": "8c8d42cf8680355b9f655cbc5c88b597",
+        "title": "Ridge Clinic Crew",
+        "description": "Medical buildings gain 25% healing efficiency from the evacuated clinic crew.",
+        "name_key": "Mods/NewIndustry/Modifier/8c8d42cf8680355b9f655cbc5c88b597/Name",
+        "description_key": "Mods/NewIndustry/Modifier/8c8d42cf8680355b9f655cbc5c88b597/Description",
+        "source_ids": [
+          "Frontiers/faultline/ridge_medics"
+        ],
+        "effects_before_sha256": "7d3cbd4a2d67d4bd954b4652782c7b8fe898dbb38461a87e986aed5b16ce33b2"
       },
       {
         "guid": "8ca091cc6897f75e977a51883fe5c00b",
@@ -34977,6 +35432,17 @@
           "AutumnDefaultLawMechanicalMaintenance"
         ],
         "effects_before_sha256": "b6f41477db65d32365a5ed7fd4dcaa398238e275a95abec1cdc0002ff7b39b8a"
+      },
+      {
+        "guid": "eeda23f91b981a50b83beb9537566b38",
+        "title": "Ridge Lift Couplings",
+        "description": "Sawmills and Wall Drills gain 35% workplace efficiency from the lift crew\u2019s refit.",
+        "name_key": "Mods/NewIndustry/Modifier/eeda23f91b981a50b83beb9537566b38/Name",
+        "description_key": "Mods/NewIndustry/Modifier/eeda23f91b981a50b83beb9537566b38/Description",
+        "source_ids": [
+          "Frontiers/faultline/ridge_fitters"
+        ],
+        "effects_before_sha256": "7f089e9a129415e91391c0165cfdcd231c4f926c98489d11ecfd96eac2a91f36"
       },
       {
         "guid": "f132649a294b2a5c8281b0ed452a2d75",

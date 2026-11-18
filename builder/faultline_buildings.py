@@ -7,10 +7,13 @@ from tools.native_binary import Cursor, SchemaError, Span, entry, f32, replace_s
 BUILDINGS_PATH = "configs/frostpunkbuildingsconfig.bin"
 RELAY = "Signal Relay"
 MAGAZINE = "Coal Magazine"
+VALVE_WORKS = "Valve Works"
+RELIEF_DISPATCH = "Relief Dispatch"
 RELAY_RESET = 20
 MAGAZINE_SAVING = 20
 EXCLUSIONS = "4d5455165b7e149569489bd856c02b84"
 TEMPLATE_FOLDER = "gameentities/buildings/"
+FACTORY = TEMPLATE_FOLDER+"resourceprocessing/prefabfactory.binarytemplate"
 DEFINITIONS = {
     RELAY: dict(path=TEMPLATE_FOLDER+"faultline_signal_relay.binarytemplate",
                 donor=TEMPLATE_FOLDER+"steamhub.binarytemplate", native="Steam Hub", tab="Tech",
@@ -18,11 +21,41 @@ DEFINITIONS = {
     MAGAZINE: dict(path=TEMPLATE_FOLDER+"faultline_coal_magazine.binarytemplate",
                    donor=TEMPLATE_FOLDER+"resourcedepot.binarytemplate", native="Resource Depot", tab="Resources",
                    price={"Wood":30,"Steel":25}, coal_capacity=1500),
+    VALVE_WORKS: dict(path=TEMPLATE_FOLDER+"faultline_valve_works.binarytemplate", donor=FACTORY,
+                     native="Factory", tab="Tech", price={"Wood":65,"Steel":55},
+                     interior="UI/BuildingInteriors/EngeneersLab.dds",
+                     description="Staff with engineers. Under General, queue Isolation Valve or Bypass Section orders for the buried main.",
+                     orders={"FaultlineIsolationValve": dict(title="Machine Isolation Valve", output="Steel",
+                         inputs={"Steel":22,"Coal":15}, hours=5,
+                         purpose="Fabricate a shut-off valve for The Line Under the Lake. Requirements for installed valves are tracked in the mission."),
+                             "FaultlineBypassSection": dict(title="Rivet Bypass Section", output="Wood",
+                         inputs={"Steel":30,"Wood":12,"Coal":12}, hours=6,
+                         purpose="Prepare a bypass section strong enough to run steam to the ridge lift. Requirements for installed pipe are tracked in the mission.")}),
+    RELIEF_DISPATCH: dict(path=TEMPLATE_FOLDER+"faultline_relief_dispatch.binarytemplate", donor=FACTORY,
+                          native="Factory", tab="Tech", price={"Wood":75,"Steel":40},
+                          interior="UI/BuildingInteriors/Expedition/ExpeditionCenter.dds",
+                          description="Staff with engineers. Under General, pack Clinic Sledges or Lift Sledges for the final evacuation.",
+                          orders={"FaultlineClinicSledge": dict(title="Pack Clinic Sledge", output="Wood",
+                              inputs={"Food Rations":35,"Wood":16}, hours=4,
+                              purpose="Pack one clinic sledge with meals, bedding and splints for the shelter evacuation."),
+                                  "FaultlineLiftSledge": dict(title="Pack Lift Sledge", output="Coal",
+                              inputs={"Coal":55,"Wood":15}, hours=5,
+                              purpose="Pack one heavy sledge with fuel and rigging for the ridge lift and its passengers.")}),
 }
 
 
 def building_guid(guid, name):
     return guid("faultline/building/"+name)
+
+
+def build_orders(recipe, guid, icons):
+    for name, spec in DEFINITIONS.items():
+        for key, order in spec.get("orders", {}).items():
+            recipe(key,order["title"],order["output"],1,order["inputs"],order["hours"],
+                   None,icon=icons[order["output"]],building=name,
+                   targets=[spec["path"].removeprefix(TEMPLATE_FOLDER).removesuffix(".binarytemplate")],
+                   purpose=order["purpose"])
+    return {key:[guid("recipe/"+key).hex()] for spec in DEFINITIONS.values() for key in spec.get("orders", {})}
 
 
 def component(data, name):
@@ -47,7 +80,7 @@ def building_table(data):
     for _ in range(count):
         name=c.string()
         rows[name]=(c.guid(),c.guid(),c.boolean())
-    if count not in (118,120) or len(rows)!=count or c.count(32)!=25:
+    if count not in (118,118+len(DEFINITIONS)) or len(rows)!=count or c.count(32)!=25:
         raise SchemaError("Unsupported construction directory")
     return count_at,count,c.position-4,rows
 
@@ -98,7 +131,8 @@ def build(buildings, source, guid, scenario, resources, loc):
         if native[:16].hex()!=native_id:
             raise SchemaError(f"Template identity differs: {name}")
         uid=building_guid(guid,name)
-        revised=customize(name,native,spec,uid,scenario,resources,loc)
+        order_ids=[guid("recipe/"+key) for key in spec.get("orders", {})]
+        revised=customize(name,native,spec,uid,scenario,resources,loc,order_ids)
         components=list(re.finditer(rb"\x01[A-Za-z]+ComponentTemplate\0",revised))
         if len(components)!=Cursor(native,26).count(32):
             raise SchemaError(f"Unsupported template component directory: {name}")
@@ -115,7 +149,7 @@ def build(buildings, source, guid, scenario, resources, loc):
     return result,templates,metadata
 
 
-def customize(name, native, spec, uid, scenario, resources, loc):
+def customize(name, native, spec, uid, scenario, resources, loc, orders):
     building=component(native,"Building")
     economics=component(native,"BuildingEconomics")
     gate=string("FrostpunkScenarioRequirement")+bytes(17)+bytes.fromhex(scenario)+b"\0"
@@ -150,7 +184,7 @@ def customize(name, native, spec, uid, scenario, resources, loc):
         edits.append((Span(base,limit-8),bytes(4)+f32(spec["radius"])+u32(0)+u32(1)
                       +resources["Coal"]+f32(spec["coal_per_hour"])))
         original=u32(1)+resources["Steel"]+u32(20)
-    else:
+    elif name==MAGAZINE:
         at=building+67
         if native[at:at+8]!=u32(0)+f32(1.5):
             raise SchemaError("Unsupported Resource Depot construction requirements")
@@ -163,10 +197,32 @@ def customize(name, native, spec, uid, scenario, resources, loc):
         if native[depot:depot+24]!=u32(5)+resources["Coal"]+u32(900):
             raise SchemaError("Unsupported Resource Depot storage")
         edits.append((Span(depot,depot+4+20*5),u32(1)+resources["Coal"]+u32(spec["coal_capacity"])))
+    else:
+        donation=string("FrostpunkTechnologyRequirement")+bytes(17)+bytes.fromhex("7f2b6ceb4c5ce9a3f64a718986a73b7d")
+        start=native.index(donation,building,economics)-4
+        stop=start+4+len(donation)
+        if native[start:start+4]!=u32(1) or native[stop:stop+4]!=f32(1.5):
+            raise SchemaError("Unsupported Factory construction requirements")
+        edits.append((Span(start,stop),u32(1)+gate))
+        production=component(native,"Production")
+        if native[production:production+4]!=u32(9) or len(orders)!=2:
+            raise SchemaError("Unsupported mission production queue")
+        edits.append((Span(production,production+4+9*16),u32(len(orders))+b"".join(orders)))
+        interior=string("UI/BuildingInteriors/ResourceProcessing/Factory.dds")
+        pos=native.index(interior,building,economics)
+        edits.append((Span(pos,pos+len(interior)),string(spec["interior"])))
+        title=string("@Buildings/PrefabFractory/Name")
+        description=string("@Buildings/PrefabFractory/Description")
+        text=spec["description"]
+        short=string("@Buildings/PrefabFractory/Tech2")
+        pos=native.index(short,building,economics)
+        edits.append((Span(pos,pos+len(short)),loc("Faultline/Buildings/"+name+"/Short",text)))
+        original=u32(3)+resources["Wood"]+u32(30)+resources["Steel"]+u32(15)+resources["Steam Cores"]+u32(1)
     if native[economics:economics+len(original)]!=original:
         raise SchemaError(f"Unexpected construction price: {name}")
     edits.append((Span(economics,economics+len(original)),cost))
     for field,source,label in (("Name",title,name),("Description",description,text)):
-        position=native.index(source)
-        edits.append((Span(position,position+len(source)),loc("Faultline/Buildings/"+name+"/"+field,label)))
+        for match in re.finditer(re.escape(source),native[building:economics]):
+            position=building+match.start()
+            edits.append((Span(position,position+len(source)),loc("Faultline/Buildings/"+name+"/"+field,label)))
     return replace_spans(native,edits)

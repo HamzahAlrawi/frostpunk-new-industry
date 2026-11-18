@@ -12,14 +12,23 @@ At **72%** stress, the circuit trips and affected buildings lose two heat levels
 
 ## Lessons and construction
 
-The first job teaches you to read the Generator's stress gauge. New tutorial cards appear after the first pulse and first cooldown, then when you take on relevant refit, scouting, watch and charter jobs.
+The first job teaches you to read the Generator's stress gauge. Tutorial cards appear after the first pulse and first cooldown, then when you take on refit, scouting, watch, charter and mission order jobs.
 
 | Building | Construction tab | Cost | What it does |
 | --- | --- | --- | --- |
 | Signal Relay | Tech | 12 wood and 16 steel | Warms a small area while the Generator runs at 2 coal per hour. A completed relay lets the main recover at 20% stress. |
 | Coal Magazine | Resources | 30 wood and 25 steel | Assign the depot to coal to gain 1,500 storage. A completed magazine cuts each Broken Mile shipment by 20 coal while keeping the same city reserve. |
+| Valve Works | Tech | 65 wood and 55 steel | Assign engineers and use **General** to queue **Machine Isolation Valve** or **Rivet Bypass Section**. |
+| Relief Dispatch | Tech | 75 wood and 40 steel | Assign engineers and use **General** to queue **Pack Clinic Sledge** or **Pack Lift Sledge**. |
 
-Both buildings are available in Faultline from day one and use familiar Steam Hub and Resource Depot models. Building extra copies expands heat coverage or storage. The trip recovery and shipment bonuses apply once.
+All four buildings are available in Faultline from day one. Extra relays and magazines expand heat coverage or storage. The trip recovery and fuel savings apply once. The Valve Works and Relief Dispatch use the Factory model and standard queue controls, with distinct interiors, names, tooltips and order lists. You can build and staff them early. Each mission tracks matching orders completed after you accept its briefing.
+
+| Order | Inputs per order | Working time at 100% efficiency on Standard |
+| --- | --- | --- |
+| Machine Isolation Valve | 22 steel and 15 coal | 5 hours |
+| Rivet Bypass Section | 30 steel, 12 wood and 12 coal | 6 hours |
+| Pack Clinic Sledge | 35 food rations and 16 wood | 4 hours |
+| Pack Lift Sledge | 55 coal and 15 wood | 5 hours |
 
 ## Decisions that carry forward
 
@@ -29,6 +38,8 @@ Both buildings are available in Faultline from day one and use familiar Steam Hu
 - Call shelters one at a time if you lack the refits for the other relay routes.
 - At Broken Mile, hold three consecutive watches. Each watch must pass all its hourly checks, sends coal to the ridge, and leaves a minimum city reserve. During the leak, spend 35 steel and 60 coal on a two-hour repair at 38% stress or lower, or isolate the spur for twelve hours. The finished watches count toward the charter.
 - A completed watch unlocks a permanent supply charter. The other plan moves the remaining families into the city and reuses the old pipe to insulate Steelworks and Factories. Each charter has its own city objectives and one outbound shipment.
-- Complete the relay and sign a charter, finish at least five of the seven jobs, and keep trips to one or fewer to earn the **Basin Accord** and a lasting insulation bonus for homes and wards.
+- In **The Line Under the Lake**, make four isolation valves or three bypass sections. Run a sustained pressure test while the Works fabricates the parts. The test restarts if pressure leaves the band, the Generator shuts off or coal falls below the reserve. The bypass opens the ridge lift route in the next act.
+- In **The Last Convoy**, pack four clinic sledges, prepare warm homes and bring the clinic down on foot for a lasting healing bonus. If you powered the ridge lift, you can instead pack three heavy sledges and bring home the lift team for a permanent timber production bonus.
+- Complete the relay, sign a charter and bring back the convoy. Finish at least seven of the nine jobs with one trip or fewer to earn the **Basin Accord** and a lasting insulation bonus for homes and wards.
 
 The first call, fracture, arrival at Broken Mile and dawn feature short camera sequences over the city. If a cutscene is interrupted, the next briefing can still arrive. Once the ending report appears, the city stays playable. An ongoing Faultline save can reach the new acts. A city that already saw an ending can start the expanded campaign in a new game. Existing [Winter Road saves](last-signal.md) retain their original campaign.

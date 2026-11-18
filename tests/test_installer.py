@@ -102,6 +102,32 @@ class InstallerTests(unittest.TestCase):
         self.assert_originals()
         self.assertEqual((archive.read_bytes(), index.read_bytes()), (original, saved_index))
 
+    def test_new_prefab_reads_original_donor_after_its_replacement(self):
+        archive, index = self.game / "templates.dat", self.game / "templates.idx"
+        original = zlib.decompressobj(31).decompress(archive.read_bytes())
+        donor, = self.manifest["archives"]["templates"]["entries"]
+        clone = original + b"isolated mission production queue"
+        delta, _ = make_delta(original, clone)
+        path = self.package / "mod/patches/clone.nid"
+        path.write_bytes(delta)
+        self.manifest["archives"]["templates"]["entries"].append({
+            "name": "clone.binarytemplate", "hash": 2, "original_hash": donor["hash"], "patch": path.name,
+            "patch_sha256": sha(path), "original_sha256": donor["original_sha256"],
+            "new_sha256": hashlib.sha256(clone).hexdigest(), "size": len(clone),
+        })
+        self.installer.install()
+        data = index.read_bytes()
+        self.assertEqual(struct.unpack_from("<Q", data, 3), (2,))
+        stored = archive.read_bytes()
+        for expected in (donor, self.manifest["archives"]["templates"]["entries"][1]):
+            position = 11 + (expected["hash"] - 1) * ENTRY.size
+            identifier, length, size, offset, compressed = ENTRY.unpack_from(data, position)
+            self.assertEqual((identifier, size, compressed), (expected["hash"], expected["size"], 1))
+            actual = zlib.decompressobj(31).decompress(stored[offset:offset+length])
+            self.assertEqual(hashlib.sha256(actual).hexdigest(), expected["new_sha256"])
+        self.installer.uninstall()
+        self.assert_originals()
+
     def enable_configuration(self):
         original = difficulty_fixture()
         stored = gzip.compress(original, mtime=0)[:-8]

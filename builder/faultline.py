@@ -28,7 +28,8 @@ PROFILES = {
     "bypass": "Cookhouses and medical buildings gain +1 insulation. Workshops lose 30% efficiency.",
 }
 REFITS = {"accumulator": "the pressure accumulator", "bypass": "the isolated bypass",
-          "surveyed": "the returned shelf survey", "watch_kept": "the three completed watches at Broken Mile"}
+          "surveyed": "the returned shelf survey", "watch_kept": "the three completed watches at Broken Mile",
+          "ridge_lift": "the completed ridge lift bypass from The Line Under the Lake"}
 REWARDS = {
     "ward_crew": "The station medics improve healing by 25% if you finish.",
     "works_crew": "The station fitters improve Steelworks and Factory efficiency by 25% if you finish.",
@@ -36,6 +37,8 @@ REWARDS = {
     "isolation": "A completed bypass adds +1 insulation to clinics and can open a final route after a scout survey.",
     "shelters": "Completing the route gives Cookhouses 30% more efficiency.",
     "resettled": "Reclaimed pipe adds one insulation level to Steelworks and Factories.",
+    "ridge_medics": "The arriving medics improve healing by 25%.",
+    "ridge_fitters": "The arriving fitters improve timber production by 35% at Sawmills and Wall Drills.",
 }
 
 
@@ -149,7 +152,7 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     # Every mode-specific global is initialized in the new scenario only.
     # This also keeps the native diagnostic log free of missing-variable spam.
     flags = sorted({p["flag"] for act in ACTS for p in act["plans"] if "flag" in p})
-    fields = ("plan", "stroke", "tripped", "trips", "kept", "offered", "scout_returned", "map_open", "ending")
+    fields = ("plan", "stroke", "tripped", "trips", "kept", "offered", "scout_returned", "map_open", "ending", "hold_hours")
     add("open",[eq("phase",0)],[put("phase",1)]+[put(key,0) for key in (*fields, *flags)], None)
 
     add("open Frostland", [at_least("phase",1), eq("map_open",0), beacon_exists()],
@@ -258,6 +261,18 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                      fuel_tick(watch["coal"]-MAGAZINE_SAVING)),
                     ("Fuel watch",readiness+[affordable(coal,threshold)],fuel_tick(watch["coal"])),
                     ("Interrupted watch",[at_least("hours",1)],[put("hours",0)]))])
+            hold=plan.get("hold")
+            if hold:
+                hours,low,high,reserve=(hold[field] for field in ("hours","low","high","reserve"))
+                goals.append(dict(kind="checks",label="PressureTest",text=f"Hold {low}–{high}% stress for {hours} hours",
+                    description=f"Build the Valve Works first. Keep the Generator running at {low}–{high}% stress and "
+                                f"keep {reserve} coal in reserve for {hours} consecutive hourly checks. An interruption "
+                                "restarts the test. You can run the test while the engineers fabricate the parts."))
+                readiness=[running,eq("tripped",0),stress_check(4,low),stress_check(5,high),affordable(coal,reserve)]+hardware
+                add(key+"/pressure-test",active+[at_most("hold_hours",hours-1)], [first_match(
+                    ("Pressure held",readiness,[put("hold_hours",1,1),
+                        guarded([eq("hold_hours",hours)],[progress_quest(uid,"PressureTest")])]),
+                    ("Pressure interrupted",[at_least("hold_hours",1)],[put("hold_hours",0)]))])
             pledge = plan.get("pledge")
             if pledge:
                 goals.append(dict(kind="checks",label="Pledge",text="Dispatch the charter supplies",
@@ -286,8 +301,12 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                      start_quest(uid), after(key+"/deadline",act["days"],[guarded([scope]+active,failure)])]
             lesson = {(1,1):"gauge", (1,2):"gauge", (2,1):"refit", (2,2):"refit", (3,2):"survey",
                       (6,1):"watch", (6,2):"watch", (7,1):"charter", (7,2):"charter"}.get((phase,number))
+            lesson=act.get("lesson",lesson)
             if lesson:
                 start.append(teach(guid,lesson))
+            start[:0]=[put(flag,0) for flag in act.get("clears",())]
+            if hold:
+                start[:0]=[put("hold_hours",0)]
             if watch:
                 start[:0]=[put("leg",0),put("hours",0),put("leak",0),put("watch_kept",0)]
             if pledge:
@@ -301,6 +320,11 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                            f"Send {watch['coal']} coal each watch and keep {watch['reserve']} in reserve.")
             if pledge:
                 detail += " Dispatch "+budget(pledge)+"."
+            if hold:
+                detail += f" Hold {low}–{high}% stress for {hours} hours with {reserve} coal in reserve."
+            for goal in goals:
+                if "station" in goal:
+                    detail += " "+goal["text"]+"."
             if plan.get("persistent"):
                 detail += " "+REWARDS[plan["persistent"]]
             if plan.get("requires"):
@@ -311,7 +335,7 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
             options.append((plan["title"],detail,choose+visible,[guarded(choose+visible,start)]))
             missions.append(dict(phase=phase,plan=number,quest=uid,deadline=act["days"],goals=goals,
                                  title=plan["title"],profile=plan["profile"],strokes=plan["strokes"],
-                                 requires=plan.get("requires",()),flag=plan.get("flag"),watch=watch,pledge=pledge))
+                                 requires=plan.get("requires",()),flag=plan.get("flag"),watch=watch,pledge=pledge,hold=hold))
 
         intro = ("\n\nWe'll show you how to use the pressure gauge when you choose a route. A Signal Relay under Tech "
                  "can warm an outlying district and help the main recover if it trips."
@@ -328,12 +352,12 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
 
     finish = phase_at(len(ACTS)+1,0)+[eq("ending",0)]
     endings=[]
-    for kept in range(5,8):
+    for kept in range(len(ACTS)-2,len(ACTS)+1):
         title = "The Basin Accord"
         text = ("The shelter crews signed their names to the charter. Households and wards gain one insulation level as "
-                "the new fittings go in. You kept the shelters on the line and brought the main through the winter with at most one trip."
+                "the new fittings go in. You brought the final convoy home and saw the main through the winter with at most one trip."
                 f"\n\nJobs completed: {kept} of {len(ACTS)}. The campaign is complete. You can continue playing your city.")
-        add(f"accord/{kept}",finish+[eq("final",1),eq("charter",1),eq("kept",kept),
+        add(f"accord/{kept}",finish+[eq("final",1),eq("charter",1),eq("convoy_returned",1),eq("kept",kept),
             compare(integer(1),4,variable(PREFIX+"trips"))],
             [put("ending",3),put("ending/kept",kept),change("accord")],0.25)
         endings.append(([eq("ending",3),eq("ending/kept",kept)],report(f"accord/{kept}",title,text)))
@@ -342,7 +366,7 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
         (1, "The Signal Holds", "Edith reads the answers into the record. There is a winter line now, and people on both ends intend to keep it."),
     )
     for final,title,story in outcomes:
-        for kept in range(8):
+        for kept in range(len(ACTS)+1):
             text = f"{story}\n\nJobs completed: {kept} of {len(ACTS)}. Faultline is complete. You can continue playing your city."
             add(f"end/{final}/{kept}",finish+[eq("final",final),eq("kept",kept)],
                 [put("ending",1+final),put("ending/kept",kept)],0.25)

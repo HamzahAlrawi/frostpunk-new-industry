@@ -1,4 +1,5 @@
 """The choices, operating envelopes and consequences of the Faultline campaign."""
+from faultline_buildings import RELIEF_DISPATCH, VALVE_WORKS
 from winter_road_story import COAL, DEPOTS, FOOD, STEEL, WARDS, build, operate, produce, research, warm
 
 # Each completed watch sends fuel down the line. A lapse resets the current
@@ -17,6 +18,12 @@ def cool(ceiling):
 
 def plan(title, profile, strokes, goals, report, **rewards):
     return dict(title=title, profile=profile, strokes=strokes, goals=goals, report=report, **rewards)
+
+
+def order(building, button, key, count):
+    return dict(kind="produce", recipe=key, station=building, quantity=count, text=f"{building}: complete {count} × {button}",
+                description=f"Select {building}, staff it with engineers and add {button} to the queue under General. "
+                            f"Finish {count} orders during this job. Orders finished earlier do not count.")
 
 
 ACTS = (
@@ -148,4 +155,45 @@ ACTS = (
                  cargo={"Steel": 80}, persistent="resettled", flag="charter"),
         ),
         failure="Some sledges will stay on the ridge until spring. Neither shelter writes its name on the charter."),
+    dict(title="The Line Under the Lake", days=7, lesson="valve_orders", clears=("ridge_lift",), story=(
+        "The lake ice has peeled back from the old line. Ivo finds a second branch leading to the ridge lift, where a work crew "
+        "has been stranded above the break since the storm. With the metal we have, we can seal the branch and bring the shelter "
+        "sledges around it, or fit a bypass that gives the lift one more run. Build a Valve Works under Tech and staff it with engineers."),
+        plans=(
+            plan("Isolate the lake branch", "ward", [],
+                 [build("Build a Valve Works", VALVE_WORKS),
+                  order(VALVE_WORKS,"Machine Isolation Valve","FaultlineIsolationValve",4)],
+                 "The fourth valve closes without a whistle. The clinic convoy can get down on foot while the lake branch cools. "
+                 "The ridge lift will have to wait for spring.",
+                 hold=dict(hours=6,low=12,high=36,reserve=225), cargo={"Food Rations":90}),
+            plan("Power the ridge lift with a bypass", "works", [],
+                 [build("Build a Valve Works", VALVE_WORKS),
+                  order(VALVE_WORKS,"Rivet Bypass Section","FaultlineBypassSection",3)],
+                 "Edith hears the lift drum through the new pipe. The lift keeper answers with a hammer: three blows for a loaded cage. "
+                 "The Relief Dispatch can prepare a heavy sled train for those passengers.",
+                 hold=dict(hours=4,low=37,high=59,reserve=300), flag="ridge_lift", cargo={"Steel":65}),
+        ),
+        failure="The lake freezes over the break. The ridge lift is stranded, but the clinic convoy can still descend along the footpath."),
+    dict(title="The Last Convoy", days=7, lesson="dispatch_orders", clears=("convoy_returned",), story=(
+        "Mara has been counting beds. Edith has been counting the pauses between the lift keeper's calls. We have enough crew to "
+        "send one convoy before the road closes. The footpath brings the clinic out on sledges. If the bypass held, we can instead "
+        "use the lift to bring its stranded crew down. Build and staff a Relief Dispatch under Tech to load the chosen convoy."),
+        plans=(
+            plan("Bring the clinic down the footpath", "ward", [pulse(24,49,8),cool(12)],
+                 [build("Build a Relief Dispatch", RELIEF_DISPATCH), warm(22),
+                  operate("Operate two medical buildings", *WARDS, quantity=2),
+                  order(RELIEF_DISPATCH,"Pack Clinic Sledge","FaultlineClinicSledge",4)],
+                 "Mara puts the steepest part of the trail behind her before she sits down. The clinic doors open that evening. "
+                 "Six children arrive asleep and wake up in beds warm enough to go back to sleep.",
+                 flag="convoy_returned", people={"workers":12,"children":6}, persistent="ridge_medics"),
+            plan("Bring the lift crew down with its tools", "works", [pulse(38,58,12),cool(13),pulse(42,61,13)],
+                 [build("Build a Relief Dispatch", RELIEF_DISPATCH),
+                  operate("Operate two Steelworks", *STEEL, quantity=2),
+                  order(RELIEF_DISPATCH,"Pack Lift Sledge","FaultlineLiftSledge",3)],
+                 "The lift keeper rides down in the last cage, sitting on a crate of drill couplings. His crew uses them to refit our timber yards. "
+                 "The next morning the empty cage goes back up carrying coal for the clinic.",
+                 requires=("ridge_lift",), flag="convoy_returned", people={"workers":6,"engineers":8},
+                 cargo={"Steam Cores":2}, persistent="ridge_fitters"),
+        ),
+        failure="The road closes while the convoy is still on the ridge. The crews turn back with their supplies, and the city spends the winter listening for their lamp."),
 )

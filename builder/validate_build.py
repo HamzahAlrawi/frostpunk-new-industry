@@ -43,7 +43,7 @@ def validate_recipes(manifest,payload):
             assert data[position:position+len(technology)]==technology,(recipe['id'],'unexpected requirement type')
             position+=len(technology)
             (negative if negated else positive).append(data[position:position+16].hex());position+=16
-        assert positive==[recipe['unlock']] and negative==recipe.get('excludes',[]),(recipe['id'],'requirements differ from metadata')
+        assert positive==([recipe['unlock']] if recipe['unlock'] else []) and negative==recipe.get('excludes',[]),(recipe['id'],'requirements differ from metadata')
         for _ in range(2):
             assert data[position]==1;position=data.index(0,position+1)+1
         assert data[position:position+2]==bytes(2);position+=2
@@ -75,9 +75,15 @@ def validate_recipes(manifest,payload):
             p=template.index(PRODUCTION)+len(PRODUCTION)+16;n,=struct.unpack_from('<I',template,p)
             ids=[template[i:i+16] for i in range(p+4,p+4+n*16,16)]
             assert ids.count(recipe_guid)==1,(recipe['id'],'missing or duplicated in production panel',path)
-            original=(ROOT/'builder/cache/extracted/templates'/path).read_bytes()
-            q=original.index(PRODUCTION)+len(PRODUCTION)+16;old,=struct.unpack_from('<I',original,q)
-            assert {original[i:i+16] for i in range(q+4,q+4+old*16,16)}<=set(ids),'Lost a native production recipe'
+            original_path=ROOT/'builder/cache/extracted/templates'/path
+            if original_path.exists():
+                original=original_path.read_bytes()
+                q=original.index(PRODUCTION)+len(PRODUCTION)+16;old,=struct.unpack_from('<I',original,q)
+                assert {original[i:i+16] for i in range(q+4,q+4+old*16,16)}<=set(ids),'Lost a native production recipe'
+            else:
+                stations={row['path']:row for row in manifest['endless']['story']['faultline']['buildings']}
+                order_ids=[gid('recipe/'+key) for key in stations[path]['orders']]
+                assert ids==order_ids,('Station queue has unintended entries',path)
     print(f"Verified {len(manifest['recipes'])} serialized recipes, replacement requirements and all production-component attachments.")
 
 

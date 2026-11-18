@@ -86,18 +86,22 @@ assert BP_FLAGS==b'\0\1\1\0\0\0'
 BP_REST=BP[bp_end-11:bp_end]
 assert BP_REST==u32(2)+u32(1)+bytes(3)
 
-def recipe(key,title,output,amount,inputs,hours,unlock,next_unlock=None, native_conditions=(0,b''), icon=(1,0)):
-    g=gid('recipe/'+key); conditions=[req(unlock)]
+def recipe(key,title,output,amount,inputs,hours,unlock,next_unlock=None,native_conditions=(0,b''),icon=(1,0),*,
+           building='Factory',targets=None,purpose=None):
+    g=gid('recipe/'+key); conditions=[req(unlock)] if unlock else []
     if next_unlock: conditions.append(neg(next_unlock))
-    desc='Produce '+str(amount)+' '+DISPLAY.get(output,output)+'. Requires '+', '.join(str(v)+' '+DISPLAY.get(k,k) for k,v in inputs.items())+f'. Base cycle: {hours:g} working hours at full efficiency.'
+    result=('Recover ' if purpose else 'Produce ')+str(amount)+' '+DISPLAY.get(output,output)
+    cost=', '.join(str(v)+' '+DISPLAY.get(k,k) for k,v in inputs.items())
+    desc=f'{result}. Requires {cost}. Base cycle: {hours:g} working hours at full efficiency.'
+    if purpose: desc=purpose+'\n\n'+desc
     extra_count, extra_bytes = native_conditions
     data=b'\1'+string('NI '+key)+g+u32(len(conditions)+extra_count)+b''.join(conditions)+extra_bytes
     data+=loc('Recipe/'+key+'/Name',title)+loc('Recipe/'+key+'/Description',desc)+b'\0\0'
     data+=string('UI\\Elements\\Resources_Icos.dds')+struct.pack('<4i',*icon,4,4)+BP_FLAGS
     data+=b'\1FrostpunkResourceProduct\0'+u32(1)+RES[output]+u32(amount)+u32(0)+costs(inputs)+f32(hours)+BP_REST
     recipes.append((g,data,dict(id=key,title=title,output=output,amount=amount,inputs=inputs,hours=hours,
-                                building='Factory',targets=['resourceprocessing/prefabfactory'],
-                                unlock=unlock.hex(),excludes=[next_unlock.hex()] if next_unlock else [],
+                                building=building,targets=targets or ['resourceprocessing/prefabfactory'],
+                                unlock=unlock.hex() if unlock else None,excludes=[next_unlock.hex()] if next_unlock else [],
                                 native_prosthetics_requirements=bool(extra_count))))
 
 # Keep only one current core recipe in the stock Factory panel.
@@ -280,7 +284,7 @@ for row in techinfo:
     token=re.search(rb'\x01@([^\0]+)\0',TC[row['start']:row['tail']])
     assert token
     row['title']=native_texts[token[1]]
-from icon_curation import curate_icons
+from icon_curation import RESOURCE_ICONS, curate_icons
 curate_icons(specs,techinfo)
 rebuild_entries(specs,newtechs,techinfo,loc,req,costs)
 society_path='configs/frostpunksocietyconfig.bin'
@@ -290,16 +294,17 @@ base_effects=(SRC/'common'/EFFECTS).read_bytes()
 new_effects,law_attitudes,attitude_fields=clone_attitudes(base_effects,gid)
 new_society=build_laws((SRC/'common'/society_path).read_bytes(),base_effects,civic_laws,gid,loc,req,law_attitudes)
 from endless_progression import build as build_endless
-from faultline_buildings import BUILDINGS_PATH, build as build_faultline_buildings
+from faultline_buildings import BUILDINGS_PATH, build as build_faultline_buildings, build_orders
 from faultline_tutorial import PATH as TUTORIAL_PATH, build as build_faultline_tutorial
 native_buildings=(SRC/'common'/BUILDINGS_PATH).read_bytes()
 faultline_scenario=gid('last-signal/faultline-scenario').hex()
+faultline_orders=build_orders(recipe,gid,RESOURCE_ICONS)
 revised_buildings,new_templates,faultline_buildings=build_faultline_buildings(
     native_buildings,lambda name:read_owned('templates',name),gid,faultline_scenario,RES,loc)
 messages=build_faultline_tutorial(read_owned('common',TUTORIAL_PATH),
     (SRC/'common/configs/frostpunkgameeventsconfig.bin').read_bytes(),gid,loc)
 endless_patches,new_modifiers,endless_owners,endless_metadata=build_endless(SRC/'common',new_modifiers,
-    native_buildings,techinfo,gid,loc,RES,faultline_buildings)
+    native_buildings,techinfo,gid,loc,RES,faultline_buildings,faultline_orders)
 from modifier_tooltips import improve_tooltips
 new_modifiers,modifier_tooltips=improve_tooltips(new_modifiers,
     (SRC/'common/configs/frostpunkmodifiersconfig.bin').read_bytes(),specs,civic_laws,scenario_additions,loc,endless_owners)
