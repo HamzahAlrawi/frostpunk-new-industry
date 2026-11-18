@@ -35,6 +35,9 @@ def validate_registration(before, after, story):
     old=before.index(entry("Default",DEFAULT_EVENTS))
     assert after[offset-4:offset]==u32(9) and before[old-4:old]==u32(8)
     assert faultline.count(bytes.fromhex(story["faultline"]["forecast"]))==1
+    construction=story["faultline"]["construction_set"]
+    assert bytes.fromhex(construction) in faultline
+    assert bytes.fromhex(construction) not in clone+legacy
     record=(forecast_record(story["lifeline"]["forecast"])+forecast_record(forecast,"Winter Road")+
             forecast_record(story["faultline"]["forecast"],"Faultline"))
     for prefix,path,old_next,count in (
@@ -60,7 +63,15 @@ def validate_registration(before, after, story):
         assert after[cursor.position:].startswith(old_next)
         assert after[at-4:at]==u32(count+1)
         after=after[:at-4]+u32(count)+after[cursor.position:]
-    assert after[offset:].replace(setup,b"",1).replace(u32(69)+record+WEATHER_DONOR,u32(66)+WEATHER_DONOR,1)==before[old:]
+    from faultline_buildings import exclusion_table,restrict_scenarios
+    _,_,native_exclusions=exclusion_table(before)
+    _,_,active_exclusions=exclusion_table(after)
+    added=b"".join(bytes.fromhex(b["guid"]) for b in story["faultline"]["buildings"])
+    assert len(active_exclusions)==8
+    assert all(a[:2]==b[:2] and a[4]==b[4]+added for a,b in zip(active_exclusions,native_exclusions))
+    assert active_exclusions[-1][1]==construction and active_exclusions[-1][4]==native_exclusions[0][4]
+    expected=restrict_scenarios(before,lambda key:construction,story["faultline"]["buildings"])
+    assert after[offset:].replace(setup,b"",1).replace(u32(69)+record+WEATHER_DONOR,u32(66)+WEATHER_DONOR,1)==expected[old:]
 
 
 def audit(records,meta,resource_ids):

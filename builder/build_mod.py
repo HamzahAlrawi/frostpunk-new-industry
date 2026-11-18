@@ -11,6 +11,13 @@ INSTALL_PATH = archive.GAME
 archive.GAME = Path(os.environ.get('NI_VANILLA', str(INSTALL_PATH)))
 GAME = archive.GAME
 
+
+def read_owned(base, name):
+    identity = archive.murmur(name.encode())
+    record, = (record for record in entries(base) if record[1] == identity)
+    with (GAME/(base+'.dat')).open('rb') as stream:
+        return read(stream, record)
+
 OUT=Path(os.environ.get('NI_PACKAGE', str(Path(__file__).resolve().parents[1]/'build/native'))); OUT.mkdir(parents=True,exist_ok=True)
 PAY=OUT/'payload'; PAY.mkdir(exist_ok=True)
 SRC=Path(__file__).resolve().parent/'cache/extracted'
@@ -280,8 +287,16 @@ society_path='configs/frostpunksocietyconfig.bin'
 new_society=build_laws((SRC/'common'/society_path).read_bytes(),
     (SRC/'common/configs/frostpunkeffectsconfig.bin').read_bytes(),civic_laws,gid,loc,req)
 from endless_progression import build as build_endless
+from faultline_buildings import BUILDINGS_PATH, build as build_faultline_buildings
+from faultline_tutorial import PATH as TUTORIAL_PATH, build as build_faultline_tutorial
+native_buildings=(SRC/'common'/BUILDINGS_PATH).read_bytes()
+faultline_scenario=gid('last-signal/faultline-scenario').hex()
+revised_buildings,new_templates,faultline_buildings=build_faultline_buildings(
+    native_buildings,lambda name:read_owned('templates',name),gid,faultline_scenario,RES,loc)
+messages=build_faultline_tutorial(read_owned('common',TUTORIAL_PATH),
+    (SRC/'common/configs/frostpunkgameeventsconfig.bin').read_bytes(),gid,loc)
 endless_patches,new_modifiers,endless_owners,endless_metadata=build_endless(SRC/'common',new_modifiers,
-    (SRC/'common/configs/frostpunkbuildingsconfig.bin').read_bytes(),techinfo,gid,loc,RES)
+    native_buildings,techinfo,gid,loc,RES,faultline_buildings)
 from modifier_tooltips import improve_tooltips
 new_modifiers,modifier_tooltips=improve_tooltips(new_modifiers,
     (SRC/'common/configs/frostpunkmodifiersconfig.bin').read_bytes(),specs,civic_laws,scenario_additions,loc,endless_owners)
@@ -364,18 +379,15 @@ patches={
  'common':{'configs/frostpunktechnologiesconfig.bin':newTC,'configs/frostpunkblueprintsconfig.bin':newBP,'configs/frostpunkeconomyconfig.bin':newEC,mods_path:new_modifiers},
  'templates':{factory_path:factory,cookhouse_path:cookhouse},'localizations':{}}
 patches['common'].update(endless_patches)
+patches['common'][BUILDINGS_PATH]=revised_buildings
+patches['common'][TUTORIAL_PATH]=messages
+patches['templates'].update({name:data for name,(_,data) in new_templates.items()})
 patches['common'][scenarios_path]=starting_supplies(endless_patches[scenarios_path],RES)
 # The public menu preset is an identity patch. Installation can replace only its
 # native difficulty effect vectors without changing scenario assets or scripts.
 patches['common'][difficulty_path]=(SRC/'common'/difficulty_path).read_bytes()
 patches['common'][society_path]=new_society
 from winter_road_maps import build_scenes
-
-def read_owned(base, name):
-    identity = archive.murmur(name.encode())
-    record, = (record for record in entries(base) if record[1] == identity)
-    with (GAME/(base+'.dat')).open('rb') as stream:
-        return read(stream, record)
 
 new_scenes, map_metadata = build_scenes(read_owned)
 patches['scenes'] = {name: data for name, (_, data) in new_scenes.items()}
@@ -426,6 +438,7 @@ manifest['modifier_tooltips']=modifier_tooltips
 manifest['native_law_book_order']=['Purpose','Adaptation','Labour','ADMINISTRATION']
 manifest['legacy_civic_book']={'guid':gid('civic-law-book').hex(),'compatibility_only':True,'requirement':'P AND NOT(P)'}
 manifest['consolidated_technologies']=consolidated
+new_assets=new_scenes | new_templates
 for base,files in patches.items():
     records=entries(base);byname={NAMES.get(e[1]):e for e in records};items=[]
     byhash={e[1]:e for e in records}
@@ -433,11 +446,11 @@ for base,files in patches.items():
         byname[ASSET]=byhash[ARCHIVE_KEY]
     with (GAME/(base+'.dat')).open('rb') as src:
         for name,newdata in files.items():
-            added=base=='scenes'
+            added=name in new_assets
             if added:
                 target=archive.murmur(name.encode())
                 assert target not in byhash, name
-                donor=new_scenes[name][0]
+                donor=new_assets[name][0]
                 e=byhash[archive.murmur(donor.encode())]
             else:
                 e=byname[name]

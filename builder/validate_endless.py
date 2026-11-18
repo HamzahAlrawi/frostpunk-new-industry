@@ -153,6 +153,11 @@ def main():
     originals={n:(ROOT/'builder/cache/extracted/common/configs'/('frostpunk'+n+'config.bin')).read_bytes() for n in names}
     payload={e['name']:gzip.decompress((ROOT/'build/native/payload'/e['payload']).read_bytes()) for e in manifest['archives']['common']['entries']}
     current={n:payload['configs/frostpunk'+n+'config.bin'] for n in names}
+    from faultline_tutorial import PATH as TUTORIAL_PATH
+    from faultline_buildings import BUILDINGS_PATH
+    structures={row['path'] for row in meta['story']['faultline']['buildings']}
+    templates={e['name']:gzip.decompress((ROOT/'build/native/payload'/e['payload']).read_bytes())
+               for e in manifest['archives']['templates']['entries'] if e['name'] in structures}
     # Starting-stock edits precede the parameter section and are audited separately.
     from opening_progression import starting_supplies
     resources={k:bytes.fromhex(v) for k,v in manifest['configuration']['resource_ids'].items()}
@@ -161,7 +166,7 @@ def main():
     result=audit(decoded,meta,manifest['configuration']['resource_ids'])
     from validate_tooltips import language_table
     references=set()
-    for data in current.values():
+    for data in (*current.values(),payload[TUTORIAL_PATH],*templates.values()):
         references.update(match[1:].decode() for match in re.findall(rb'\x01(@Mods/NewIndustry/(?:Endless|Frontiers|LastSignal|Faultline)/[^\0]+)\0',data))
     languages=0
     for item in manifest['archives']['localizations']['entries']:
@@ -178,11 +183,17 @@ def main():
     result['lifeline']=audit_lifeline(decoded,meta,manifest['configuration']['resource_ids'])
     from validate_winter_road import audit as audit_winter
     result['winter_road']=audit_winter(decoded,meta,manifest['configuration']['resource_ids'])
-    from validate_faultline import audit as audit_faultline, audit_films
+    from validate_faultline import audit as audit_faultline, audit_assets, audit_films
     from faultline_cinematics import ARCHIVE_KEY
     from winter_road_maps import CITY
     from tools import archive
     result['faultline']=audit_faultline(decoded,meta,manifest['configuration']['resource_ids'])
+    messages, = (e for e in archive.entries('common') if e[1]==archive.murmur(TUTORIAL_PATH.encode()))
+    with (archive.GAME/'common.dat').open('rb') as source:
+        stock_messages=archive.read(source,messages)
+    result['faultline'].update(audit_assets((ROOT/'builder/cache/extracted/common'/BUILDINGS_PATH).read_bytes(),
+        payload[BUILDINGS_PATH],stock_messages,payload[TUTORIAL_PATH],templates,meta['story']['faultline'],
+        manifest['configuration']['resource_ids']))
     entry, = archive.entries('sequences')
     assert entry[1]==ARCHIVE_KEY
     with (archive.GAME/'sequences.dat').open('rb') as source:

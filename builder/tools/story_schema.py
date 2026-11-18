@@ -30,8 +30,9 @@ def forecast_record(identity, timeline="Lifeline"):
     return SIMPLE_WEATHER+string(title)+bytes.fromhex(identity)+b"\0\0"+u32(len(forecast))+timeline
 
 
-def register(data, identity, event_directory, localize, winter):
+def register(data, identity, event_directory, localize, winter, buildings):
     from winter_road_maps import NATIVE_CITY, NATIVE_WORLD, insert_map_setups
+    from faultline_buildings import EXCLUSIONS, restrict_scenarios
     count = Cursor(data, 16).count(32)
     begin = 20
     end = data.index(b"\1" + string("Endless Canyon"), begin)
@@ -87,7 +88,11 @@ def register(data, identity, event_directory, localize, winter):
     faultline = identity("faultline-forecast")
     faultline_text = campaign_text("Faultline","The Last Signal: Faultline",
         "Race the frost. Route the city's steam, operate the Generator in pressure cycles, and keep the remote shelters on the line.",faultline)
-    new_scenario = entry(FAULTLINE_NAME,identity("faultline-scenario"))+replace_spans(body,edits+faultline_text+map_edits)
+    if body[0x153:0x163]!=bytes.fromhex(EXCLUSIONS) or body[0x14f:0x153]!=u32(1):
+        raise SchemaError("Unsupported Default building exclusions link")
+    faultline_restrictions=(Span(0x153,0x163),bytes.fromhex(identity("faultline-construction")))
+    new_scenario = entry(FAULTLINE_NAME,identity("faultline-scenario"))+replace_spans(
+        body,edits+faultline_text+map_edits+[faultline_restrictions])
     population_count = data.index(entry("Default", "abffde98fc17e8921d495b49e5928974"))
     footer_token = entry("Default", DEFAULT_EVENTS)
     pos = data.index(footer_token, end, population_count)
@@ -107,4 +112,4 @@ def register(data, identity, event_directory, localize, winter):
         (Span(forecast-4,forecast),u32(weather_count+3)+forecast_record(identity("forecast"))+
             forecast_record(winter,"Winter Road")+forecast_record(faultline,"Faultline")),
     ])
-    return insert_map_setups(revised, identity, localize)
+    return insert_map_setups(restrict_scenarios(revised,identity,buildings), identity, localize)

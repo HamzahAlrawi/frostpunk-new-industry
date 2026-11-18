@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.24.0",
+  "version": "3.25.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -29503,7 +29503,7 @@
                 "label": "Watch",
                 "quantity": 3,
                 "text": "Complete 3 watches and send fuel to Broken Mile",
-                "description": "Each watch takes 8 consecutive hourly checks at 0\u201334% stress with the Generator running. Keep 230 coal ready. Each completed watch sends 50 coal and leaves a reserve of at least 180. A lapse restarts only the current watch."
+                "description": "Each watch takes 8 consecutive hourly checks at 0\u201334% stress with the Generator running. Keep 230 coal ready. Each completed watch sends 50 coal and leaves 180 in reserve. A Coal Magazine reduces both the required stock and the shipment by 20. A lapse restarts only the current watch."
               }
             ],
             "title": "Run a low-pressure watch",
@@ -29561,7 +29561,7 @@
                 "label": "Watch",
                 "quantity": 3,
                 "text": "Complete 3 watches and send fuel to Broken Mile",
-                "description": "Each watch takes 6 consecutive hourly checks at 14\u201355% stress with the Generator running. Keep 230 coal ready. Each completed watch sends 65 coal and leaves a reserve of at least 165. A lapse restarts only the current watch."
+                "description": "Each watch takes 6 consecutive hourly checks at 14\u201355% stress with the Generator running. Keep 230 coal ready. Each completed watch sends 65 coal and leaves 165 in reserve. A Coal Magazine reduces both the required stock and the shipment by 20. A lapse restarts only the current watch."
               }
             ],
             "title": "Run a hot transfer",
@@ -29737,6 +29737,46 @@
           "Steel": 35,
           "Coal": 60
         },
+        "buildings": [
+          {
+            "name": "Signal Relay",
+            "guid": "8b89a749624c9b518261539d8997086c",
+            "path": "gameentities/buildings/faultline_signal_relay.binarytemplate",
+            "donor": "gameentities/buildings/steamhub.binarytemplate",
+            "native": "Steam Hub",
+            "tab": "Tech",
+            "price": {
+              "Steel": 16,
+              "Wood": 12
+            },
+            "radius": 18,
+            "coal_per_hour": 2
+          },
+          {
+            "name": "Coal Magazine",
+            "guid": "cb717d2f2b413054af0d754ada60db80",
+            "path": "gameentities/buildings/faultline_coal_magazine.binarytemplate",
+            "donor": "gameentities/buildings/resourcedepot.binarytemplate",
+            "native": "Resource Depot",
+            "tab": "Resources",
+            "price": {
+              "Wood": 30,
+              "Steel": 25
+            },
+            "coal_capacity": 1500
+          }
+        ],
+        "relay_reset": 20,
+        "magazine_saving": 20,
+        "lessons": {
+          "gauge": "9976389dcd4ce7599edb014e2e3792dd",
+          "cool": "1fb2a1e944df0e53a2e315a0aed1e420",
+          "relay": "91bfb76b99320059a622fb108667495b",
+          "refit": "49541f807f1258518410dd38420528e5",
+          "survey": "88f921592598e35dba6cc66d5bf77309",
+          "watch": "d617dc51c7fc98579e2f08d0bd21fd81",
+          "charter": "2c0e2495c516325b82fd2de63d219793"
+        },
         "modifiers": {
           "faultline/ward": "8dd38a84d63f72568123b1da65ca7464",
           "faultline/works": "dc7a4685b0b8fb52bf2433e305bb8257",
@@ -29751,7 +29791,8 @@
           "faultline/leak": "89b5b8c5948aa55481c6ebac6077862b",
           "faultline/resettled": "8c003f0783fa3d50b5ef1e2859691734"
         },
-        "forecast": "b5b11cd7a264c4579395c43e9031cf7b"
+        "forecast": "b5b11cd7a264c4579395c43e9031cf7b",
+        "construction_set": "0c9e971b5657275984839f946d400250"
       }
     },
     "ui": {

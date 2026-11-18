@@ -142,7 +142,7 @@ def rewards(data,buildings,techinfo,guid):
     return pack_modifiers(records),result,owners
 
 
-def build(source,modifier_data,buildings,techinfo,guid,localize,resources):
+def build(source,modifier_data,buildings,techinfo,guid,localize,resources,faultline_buildings):
     identity=lambda key:guid('endless/'+key).hex()
     enabled=identity('enabled')
     parameter=Parameter('NI Reconstruction',identity('parameter'),[
@@ -261,13 +261,14 @@ def build(source,modifier_data,buildings,techinfo,guid,localize,resources):
                                     frontiers['bonuses'],localize,dt,qt)
     story['winter_road']=winter
     pe,pd,pq,faultline=build_faultline(source,buildings,techinfo,resources,guid,story_id('faultline-scenario'),
-                                      frontiers['bonuses'],localize,dt,qt,winter['recipes'])
+                                      frontiers['bonuses'],localize,dt,qt,winter['recipes'],faultline_buildings)
     faultline['forecast']=story_id('faultline-forecast')
+    faultline['construction_set']=story_id('faultline-construction')
     story['faultline']=faultline
     events=fe+pe+we+le+se+events;dilemmas+=fd+pd+wd+ld+sd;quests+=fq+pq+wq+lq+sq;owners+=fo
     story_directory='09e8fe41e1464e8d284bec7c9373e8f5'
     assert b'\1\1CustomScenarioEvents\0'+bytes.fromhex(story_directory) in originals['gameevents']
-    scenarios=register(originals['scenarios'],story_id,story_directory,localize,winter['forecast'])
+    scenarios=register(originals['scenarios'],story_id,story_directory,localize,winter['forecast'],faultline_buildings)
     revised={paths['endlessmode']:append_modes(originals['endlessmode'],mode_definitions,enabled,localize),
         paths['scenarios']:append_parameter(append_parameter(scenarios,parameter),campaign_parameter),
         paths['gameevents']:append_directory(originals['gameevents'],'CustomScenarioEvents','Scenario Builders Quest',events),

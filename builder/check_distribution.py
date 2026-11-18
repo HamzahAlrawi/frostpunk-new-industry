@@ -41,10 +41,12 @@ def main():
             entries={ENTRY.unpack_from(index,p)[0]:ENTRY.unpack_from(index,p) for p in range(11,len(index),ENTRY.size)}
             pristine=(args.originals/(group+'.idx')).read_bytes()
             originals={ENTRY.unpack_from(pristine,p)[0]:ENTRY.unpack_from(pristine,p) for p in range(11,len(pristine),ENTRY.size)}
-            if group=='scenes':
+            added={e['hash'] for e in settings['entries'] if 'original_hash' in e}
+            replacements={e['hash'] for e in settings['entries'] if 'original_hash' not in e}
+            if added:
                 assert list(entries)==sorted(entries)
-                assert all(entries[key]==record for key,record in originals.items())
-                assert set(entries)-set(originals)=={e['hash'] for e in settings['entries']}
+                assert all(entries[key]==record for key,record in originals.items() if key not in replacements)
+                assert set(entries)-set(originals)==added
             with (game/(group+'.dat')).open('rb') as stream, (args.originals/(group+'.dat')).open('rb') as source:
                 for expected in settings['entries']:
                     _,size,length,offset,packed=entries[expected['hash']]

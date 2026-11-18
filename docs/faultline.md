@@ -8,7 +8,18 @@ Start from **Select Scenario → The Last Signal: Faultline**. A weather station
 2. Keep the Generator running. Turn **Overdrive on** to raise stress. The valve checks every game hour and sends a pulse as soon as the gauge is within the required band. Each pulse vents some stress.
 3. When the tracker calls for cooling, turn **Overdrive off** and leave the Generator running until stress drops below the listed ceiling. Then follow the next step. Completing the other city objectives while you operate the line makes full use of the time.
 
-At **72%** stress, the circuit trips and affected buildings lose two heat levels. Let stress drop to **14%** to reconnect and resume the sequence. Completing the weld raises the trip threshold to **82%**. Jobs allow five to eight game days. Unanswered briefings select the stated plan after one day. A missed deadline carries the campaign into the next act and forfeits that job's reward.
+At **72%** stress, the circuit trips and affected buildings lose two heat levels. Let stress drop to **14%**, or **20%** with a completed Signal Relay, to reconnect and resume the sequence. Completing the weld raises the trip threshold to **82%**. Jobs allow five to eight game days. Unanswered briefings select the stated plan after one day. A missed deadline carries the campaign into the next act and forfeits that job's reward.
+
+## Lessons and construction
+
+The first job teaches you to read the Generator's stress gauge. New tutorial cards appear after the first pulse and first cooldown, then when you take on relevant refit, scouting, watch and charter jobs.
+
+| Building | Construction tab | Cost | What it does |
+| --- | --- | --- | --- |
+| Signal Relay | Tech | 12 wood and 16 steel | Warms a small area while the Generator runs at 2 coal per hour. A completed relay lets the main recover at 20% stress. |
+| Coal Magazine | Resources | 30 wood and 25 steel | Assign the depot to coal to gain 1,500 storage. A completed magazine cuts each Broken Mile shipment by 20 coal while keeping the same city reserve. |
+
+Both buildings are available in Faultline from day one and use familiar Steam Hub and Resource Depot models. Building extra copies expands heat coverage or storage. The trip recovery and shipment bonuses apply once.
 
 ## Decisions that carry forward
 

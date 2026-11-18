@@ -1,6 +1,6 @@
 """Drive decoded Faultline events through each refit and ending."""
 from math import isclose
-from tools.native_binary import Cursor
+from tools.native_binary import Cursor, string
 from tools.scenario_model import World
 from tools.housing_schema import BEACON
 from tools.story_schema import DEFAULT
@@ -8,6 +8,46 @@ from tools.story_schema import DEFAULT
 
 PREFIX = "NI/Faultline/"
 HOUR = 1/24
+
+
+def audit_assets(stock_catalog, catalog, stock_messages, messages, templates, campaign, resources):
+    from faultline_buildings import building_table, component
+    from faultline_tutorial import MESSAGE, donor
+    old_begin,old_count,old_end,old_rows=building_table(stock_catalog)
+    begin,count,end,rows=building_table(catalog)
+    assert count-old_count==len(templates)==len(campaign["buildings"])==2
+    assert begin==old_begin and catalog[:begin]==stock_catalog[:begin]
+    assert catalog[begin+4:old_end]==stock_catalog[begin+4:old_end]
+    assert catalog[end:]==stock_catalog[old_end:]
+    assert {name:rows[name] for name in old_rows}==old_rows
+    for spec in campaign["buildings"]:
+        prefab=templates[spec["path"]]
+        category=old_rows[spec["native"]][0]
+        assert rows[spec["name"]]==(category,spec["guid"],True)
+        assert prefab[:16].hex()==spec["guid"]
+        requirement=string("FrostpunkScenarioRequirement")+bytes(17)+bytes.fromhex(campaign["scenario"])+b"\0"
+        assert prefab.count(requirement)==1
+        price=Cursor(prefab,component(prefab,"BuildingEconomics"))
+        actual={price.guid():price.u32() for _ in range(price.count(4))}
+        assert actual=={resources[key]:n for key,n in spec["price"].items()}
+        if "radius" in spec:
+            heat=Cursor(prefab,component(prefab,"Heater"))
+            assert heat.boolean() and heat.count(2)==1 and heat.string()=="Level range0"
+            assert heat.take(4)==bytes(4) and heat.f32()==spec["radius"] and heat.u32()==0
+            assert heat.count(2)==1 and heat.guid()==resources["Coal"] and heat.f32()==spec["coal_per_hour"]
+        else:
+            depot=Cursor(prefab,component(prefab,"UndesignatedResourceDepot"))
+            assert depot.count(5)==1 and depot.guid()==resources["Coal"] and depot.u32()==spec["coal_capacity"]
+    from validate_endless import appended
+    cards=campaign["lessons"]
+    reader=Cursor(appended(stock_messages,messages,"Tutorial","Main Narrative Line",len(cards)))
+    prefix,description=donor(stock_messages)
+    for key,uid in cards.items():
+        assert reader.string()==MESSAGE and reader.string()=="NI Faultline "+key and reader.guid()==uid
+        assert reader.take(len(prefix))==prefix and reader.string()==f"@Mods/NewIndustry/Faultline/Lessons/{key}/Title"
+        assert reader.take(len(description))==description and reader.string()==f"@Mods/NewIndustry/Faultline/Lessons/{key}/Body"
+    assert reader.position==len(reader.data)
+    return dict(buildings=len(templates),tutorial_cards=len(cards))
 
 
 def audit_films(native, revised, city, campaign):
@@ -62,6 +102,8 @@ def audit(decoded, metadata, resource_ids):
     trip = effects["faultline/trip"]
     leak = effects["faultline/leak"]
     coal = resource_ids["Coal"]
+    structures={row["name"]:row["guid"] for row in campaign["buildings"]}
+    lessons=campaign["lessons"]
     assert len(missions)==15
 
     def world(scenario=None):
@@ -127,6 +169,11 @@ def audit(decoded, metadata, resource_ids):
                 assert w.all(selected[1]["conditions"])==(route[1]==1)
                 assert w.all(selected[2]["conditions"])==(route[1:3]==(2,2))
             assert w.click(briefing, plan-1)
+            lesson = {1:"gauge",2:"refit",6:"watch",7:"charter"}.get(phase)
+            if lesson:
+                assert w.lessons.count(lessons[lesson])==1
+            if phase==3:
+                assert w.lessons.count(lessons["survey"])==(plan==2)
             row=missions[phase,plan]
             profile=effects["faultline/"+row["profile"]]
             assert profile in w.modifiers and row["quest"] in w.active
@@ -157,7 +204,11 @@ def audit(decoded, metadata, resource_ids):
                 assert trip in w.modifiers
                 w=w.checkpoint()
                 w.start()
-                w.stress=(campaign["reset"]-0.4)/100
+                if phase==5:
+                    w.buildings[structures["Signal Relay"]]=1
+                    w.stress=(campaign["relay_reset"]-0.4)/100
+                else:
+                    w.stress=(campaign["reset"]-0.4)/100
                 w.step(HOUR)
                 assert trip not in w.modifiers and state(w,"tripped")==0
             for index,stroke in enumerate(row["strokes"],1):
@@ -169,18 +220,24 @@ def audit(decoded, metadata, resource_ids):
                 expected=w.stress-stroke["draw"]/100
                 w.step(HOUR)
                 assert state(w,"stroke")==index and isclose(w.stress,expected,abs_tol=1e-6)
+                if phase==1 and index<=2:
+                    assert w.lessons.count(lessons["cool" if index==1 else "relay"])==1
             if watch:=row["watch"]:
                 w.stress=(watch["low"]+watch["high"])/200
+                if plan==2:
+                    # Building two magazines still applies exactly one saving.
+                    w.buildings[structures["Coal Magazine"]]=2
+                shipment=watch["coal"]-(campaign["magazine_saving"] if plan==2 else 0)
                 supply=w.stock[coal]
                 tick(w,watch["hours"]-1)
                 assert state(w,"hours")==watch["hours"]-1 and state(w,"leg")==0
-                w.stock[coal]=watch["reserve"]+watch["coal"]-1
+                w.stock[coal]=watch["reserve"]+shipment-1
                 tick(w,1)
                 assert state(w,"hours")==0 and state(w,"leg")==0
                 w.stock[coal]=supply
                 tick(w,watch["hours"])
                 assert state(w,"leg")==1 and state(w,"leak")==1 and leak in w.modifiers
-                assert w.stock[coal]==supply-watch["coal"]
+                assert w.stock[coal]==supply-shipment
                 outage=names[f"act/{phase}/{plan}/leak"]
                 assert outage in w.open
                 if route[0]==2:
@@ -194,7 +251,7 @@ def audit(decoded, metadata, resource_ids):
                     supply-=campaign["leak_repair"]["Coal"]
                 tick(w,2*(watch["hours"]+1)+13)
                 assert state(w,"leg")==campaign["watch_legs"] and leak not in w.modifiers
-                assert w.stock[coal]==supply-campaign["watch_legs"]*watch["coal"]
+                assert w.stock[coal]==supply-campaign["watch_legs"]*shipment
             if pledge:
                 assert row["quest"] in w.active, "Charter completed without supplies"
                 w.stock[short]=stored
@@ -237,7 +294,8 @@ def audit(decoded, metadata, resource_ids):
         other.buildings[BEACON]=1
         other.run(2,False)
         assert not any(key.startswith(PREFIX) for key in other.variables)
-        assert not any(uid in other.open for uid in names.values())
+        assert not any(uid in other.open for uid in names.values()) and not other.lessons
     return dict(plans=len(played),endings=3,trip_recovery=True,stress_is_spent=True,deadlines_continue=True,
                 route_unlocks_verified=True,old_saves_isolated=True,watch_resets=True,leak_repairs=True,
-                pledge_paid_once=True,cinematic_signal_and_fallback=True)
+                pledge_paid_once=True,cinematic_signal_and_fallback=True,lesson_timing=True,
+                relay_recovery=True,nonstacking_fuel_saving=True)

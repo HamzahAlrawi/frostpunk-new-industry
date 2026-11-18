@@ -159,8 +159,8 @@ class Installer:
                     identifier = patch["hash"]
                     donor = patch.get("original_hash")
                     position = positions[identifier if donor is None else donor]
-                    if donor is not None and (base != "scenes" or identifier in positions or identifier in added):
-                        raise ValueError(f"Invalid additional scene entry: {patch['name']}")
+                    if donor is not None and (base not in ("scenes","templates") or identifier in positions or identifier in added):
+                        raise ValueError(f"Invalid additional {base} entry: {patch['name']}")
                     _, stored, size, offset, packed = ENTRY.unpack_from(index, position)
                     reader.seek(offset)
                     original = reader.read(stored)

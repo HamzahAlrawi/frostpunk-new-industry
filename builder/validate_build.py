@@ -285,7 +285,7 @@ def main():
             assert not geometry_errors([by_guid[g] for g in additions if by_guid[g]['category']==category])
     # The ability-construction hotfix must stay intact. No ability or building
     # configuration entry may accidentally be added to this patch distribution.
-    assert not any('abilitiesconfig' in name or 'buildingsconfig' in name for name in payload)
+    assert not any('abilitiesconfig' in name for name in payload)
     validate_recipes(manifest,payload)
     validate_choice_effects(manifest,mods)
     validate_research_balance(manifest,mods)

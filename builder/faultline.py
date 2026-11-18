@@ -2,6 +2,8 @@
 from city_mastery import building_ids
 from faultline_story import ACTS, LEAK_REPAIR, WATCH_LEGS
 from faultline_cinematics import SIGNAL, SHOTS, play, signal
+from faultline_buildings import MAGAZINE, MAGAZINE_SAVING, RELAY, RELAY_RESET
+from faultline_tutorial import LESSONS, lesson_id, show as teach
 from tools.housing_schema import OPEN_MAP, RETURN
 from tools.mission_schema import MissionWriter, completed_event
 from tools.native_binary import SchemaError, entry, f32, u32
@@ -59,7 +61,7 @@ def verify_native_stress(events, dilemmas):
         raise SchemaError("Unsupported Generator selection")
 
 
-def build(source, buildings, techinfo, resources, guid, scenario, modifiers, localize, dt, qt, recipes):
+def build(source, buildings, techinfo, resources, guid, scenario, modifiers, localize, dt, qt, recipes, structures):
     events, dialogs, quests, missions = [], [], [], []
     configs = source/"configs"
     native = (configs/"frostpunkgameeventsconfig.bin").read_bytes()
@@ -68,6 +70,7 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     values = (configs/"frostpunkeffectsconfig.bin").read_bytes()
     writer = MissionWriter((configs/"frostpunkquestsconfig.bin").read_bytes(), qt)
     places = {key: value.hex() for key,value in building_ids(buildings).items()}
+    places.update({row["name"]:row["guid"] for row in structures})
     techs = {row["name"]: row["guid"] for row in techinfo}
     scope = typed("FrostpunkCurrentScenarioCheckExpression")+bytes.fromhex(scenario)+b"\0"
     running = typed("FrostpunkGeneratorIsActiveExpression")+b"\0"
@@ -152,12 +155,16 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     add("open Frostland", [at_least("phase",1), eq("map_open",0), beacon_exists()],
         [put("map_open",1), OPEN_MAP, *(reveal_site(uid) for _,uid,_,_ in SITES)], 0.25)
     trip_notice = report("trip", "The main circuit tripped",
-        "The valve has closed and all insulated buildings lose two heat levels. Switch off Overdrive and let the Generator "
-        f"stress drop to {RESET}%. Keep the Generator itself running. Once it cools, the circuit reconnects and the current job resumes.")
+        "The valve has closed and all insulated buildings lose two heat levels. Switch off Overdrive and let stress "
+        f"drop to {RESET}%, or {RELAY_RESET}% if you have built a Signal Relay. Keep the Generator running. "
+        "Once it cools, the circuit reconnects and your current job resumes.")
     for welded,limit in ((0,TRIP),(1,WELDED_TRIP)):
         add("trip/"+str(limit), [at_least("plan",1), eq("tripped",0), eq("welded",welded), stress_check(4,limit)],
             [put("tripped",1), put("trips",1,1), change("trip"), trip_notice])
-    add("reconnect", [eq("tripped",1), stress_check(5,RESET)], [put("tripped",0), change("trip",True)])
+    restore = [put("tripped",0), change("trip",True)]
+    add("reconnect", [eq("tripped",1)],
+        [first_match(("Signal Relay", [constructed(places[RELAY]),stress_check(5,RELAY_RESET)], restore),
+                     ("Main Valve", [stress_check(5,RESET)], restore))])
 
     for phase, act in enumerate(ACTS,1):
         options=[]
@@ -203,6 +210,8 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                     checks=[stress_check(5,high)]
                     actions=[]
                     sequence.append(f"cool to {high}%")
+                if phase==1 and step<=2:
+                    actions.append(teach(guid,"cool" if step==1 else "relay"))
                 goals.append(dict(kind="checks",label=label,text=title,description=detail))
                 add(key+f"/stroke/{step}", active+[eq("tripped",0), eq("stroke",step-1), running]+hardware+checks,
                     [put("stroke",step)]+actions+[progress_quest(uid,label)])
@@ -214,7 +223,8 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                     text=f"Complete {WATCH_LEGS} watches and send fuel to Broken Mile",
                     description=f"Each watch takes {hours} consecutive hourly checks at {low}–{high}% stress with the "
                                 f"Generator running. Keep {threshold} coal ready. Each completed watch sends {watch['coal']} "
-                                f"coal and leaves a reserve of at least {watch['reserve']}. A lapse restarts only the current watch."))
+                                f"coal and leaves {watch['reserve']} in reserve. A Coal Magazine reduces both the required stock "
+                                f"and the shipment by {MAGAZINE_SAVING}. A lapse restarts only the current watch."))
                 waiting = active+[at_most("leg",WATCH_LEGS-1)]
                 clear = either([eq("leak",0),eq("leak",3)])
                 response = active+[eq("leak",1)]
@@ -236,12 +246,17 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                       [guarded([scope]+response,seal)])])
                 outage = [put("leak",1),change("leak"),leak,
                           after(key+"/auto-isolate",0.75,[guarded([scope]+response,seal)])]
-                readiness = [running,eq("tripped",0),stress_check(4,low),stress_check(5,high),
-                             affordable(coal,threshold)]
-                watch_tick = [put("hours",1,1),guarded([eq("hours",hours)],
-                    [put("hours",0),put("leg",1,1),change_resource(coal,-watch["coal"]),
-                     guarded([eq("leg",1)],outage),progress_quest(uid,"Watch")])]
-                add(key+"/watch", waiting+[clear], [first_match(("Fuel watch",readiness,watch_tick),
+                readiness = [running,eq("tripped",0),stress_check(4,low),stress_check(5,high)]
+
+                def fuel_tick(cost):
+                    return [put("hours",1,1),guarded([eq("hours",hours)], [
+                        put("hours",0), put("leg",1,1), change_resource(coal,-cost),
+                        guarded([eq("leg",1)],outage), progress_quest(uid,"Watch")])]
+
+                add(key+"/watch", waiting+[clear], [first_match(
+                    ("Covered coal", readiness+[constructed(places[MAGAZINE]),affordable(coal,threshold-MAGAZINE_SAVING)],
+                     fuel_tick(watch["coal"]-MAGAZINE_SAVING)),
+                    ("Fuel watch",readiness+[affordable(coal,threshold)],fuel_tick(watch["coal"])),
                     ("Interrupted watch",[at_least("hours",1)],[put("hours",0)]))])
             pledge = plan.get("pledge")
             if pledge:
@@ -269,6 +284,10 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                           identity("trigger/clear/"+key),uid,[scope]+active,success))
             start = [put("plan",number), put("stroke",0), put("scout_returned",0), change(plan["profile"]),
                      start_quest(uid), after(key+"/deadline",act["days"],[guarded([scope]+active,failure)])]
+            lesson = {(1,1):"gauge", (1,2):"gauge", (2,1):"refit", (2,2):"refit", (3,2):"survey",
+                      (6,1):"watch", (6,2):"watch", (7,1):"charter", (7,2):"charter"}.get((phase,number))
+            if lesson:
+                start.append(teach(guid,lesson))
             if watch:
                 start[:0]=[put("leg",0),put("hours",0),put("leak",0),put("watch_kept",0)]
             if pledge:
@@ -294,9 +313,8 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                                  title=plan["title"],profile=plan["profile"],strokes=plan["strokes"],
                                  requires=plan.get("requires",()),flag=plan.get("flag"),watch=watch,pledge=pledge))
 
-        intro = ("\n\nRead the Generator's stress gauge. Turn Overdrive on to raise it and off to cool it. The valve checks "
-                 "hourly. Enter each band in order while the Generator is running. A pulse vents part of the stress. "
-                 f"At {TRIP}% the circuit trips and the city loses two heat levels until stress cools to {RESET}%."
+        intro = ("\n\nWe'll show you how to use the pressure gauge when you choose a route. A Signal Relay under Tech "
+                 "can warm an outlying district and help the main recover if it trips."
                  if phase == 1 else "")
         fallback=next(option for option,plan in zip(options,act["plans"]) if not plan.get("requires"))
         offer = scene(f"briefing/{phase}",act["title"],act["story"]+intro+
@@ -336,4 +354,6 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     assert {v["shot"] for v in filmed.values()}==SHOTS.keys()
     return events, dialogs, quests, dict(scenario=scenario,missions=missions,scan_hours=1,trip=TRIP,
         welded_trip=WELDED_TRIP,reset=RESET,films=filmed,watch_legs=WATCH_LEGS,leak_repair=LEAK_REPAIR,
+        buildings=structures,relay_reset=RELAY_RESET,magazine_saving=MAGAZINE_SAVING,
+        lessons={key:lesson_id(guid,key).hex() for key in LESSONS},
         modifiers={key:value for key,value in modifiers.items() if key.startswith("faultline/")})

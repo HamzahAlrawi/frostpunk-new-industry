@@ -96,6 +96,10 @@ def effect(c):
         sequence=c.string()
         if not sequence.startswith('NI_Faultline_') or c.u32()!=0:raise SchemaError('Unsupported sequence playback')
         return ('sequence',sequence)
+    if name=='FrostpunkCreateTutorialMessageEffect':
+        uid=c.guid()
+        if c.count()!=0 or not c.boolean():raise SchemaError('Unexpected tutorial presentation flags')
+        return ('tutorial',uid)
     if name=='FrostpunkTimedEffect':
         guid=c.guid();days=c.f32();unit=c.u32();random=c.f32();random_unit=c.u32()
         if unit!=1 or random!=0 or random_unit!=0 or days<=0:raise SchemaError('Unsupported timer')
