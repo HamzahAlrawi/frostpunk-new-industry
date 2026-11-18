@@ -174,7 +174,7 @@ def bonus_library(data,buildings,guid):
         [(coal+g['industry'],1.4,1.4,0),(g['homes'],1,1,-1)])
     add('faultline/bypass','Shelter Bypass','Cookhouses and medical buildings gain +1 insulation. Workshops lose 30% efficiency.',
         [(['Food Processing']+g['medical'],1,1,1),(g['workshops'],0.7,0.7,0)])
-    add('faultline/trip','Main Circuit Tripped','All insulated buildings lose two insulation levels until Generator stress drops to 15%.',
+    add('faultline/trip','Main Circuit Tripped','All insulated buildings lose two insulation levels until Generator stress drops to 14%.',
         [(all_names,1,1,-2)])
     add('faultline/accumulator','Pressure Accumulator','Generator stress recovers 35% faster with overdrive off.',
         recovery=1.35)
@@ -188,6 +188,10 @@ def bonus_library(data,buildings,guid):
         [(g['industry'],1.25,1.25,0)])
     add('faultline/accord','Interdistrict Heating Accord','Homes and medical buildings gain +1 insulation after the shelters join the heating network.',
         [(g['homes']+g['medical'],1,1,1)])
+    add('faultline/leak','Broken Mile Leak','All insulated buildings lose one heat level until the emergency repair is complete.',
+        [(all_names,1,1,-1)])
+    add('faultline/resettled','Reclaimed Steam Lines','Steelworks and Factories gain one insulation level from the dismantled ridge pipe.',
+        [(g['industry'],1,1,1)])
     return pack_modifiers(records),ids,owners
 
 

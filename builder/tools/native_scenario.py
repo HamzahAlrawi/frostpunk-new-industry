@@ -43,9 +43,14 @@ def delayed(identity,days,effects):
     return typed('FrostpunkTimedEffect')+bytes.fromhex(identity)+f32(days)+u32(1)+f32(0)+u32(0)+u32(len(effects))+b''.join(effects)
 
 
+def first_match(*cases):
+    return typed('FrostpunkSwitchEffect')+u32(len(cases))+b''.join(
+        b'\1'+string(label)+u32(len(conditions))+b''.join(conditions)+u32(len(effects))+b''.join(effects)
+        for label,conditions,effects in cases)
+
+
 def guarded(conditions,effects):
-    return (typed('FrostpunkSwitchEffect')+u32(1)+b'\1'+string('NI guard')
-            +u32(len(conditions))+b''.join(conditions)+u32(len(effects))+b''.join(effects))
+    return first_match(('NI guard',conditions,effects))
 
 
 def event(name,identity,trigger_identity,conditions,effects,period=None):

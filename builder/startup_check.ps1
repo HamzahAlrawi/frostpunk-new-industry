@@ -40,7 +40,7 @@ foreach ($line in [IO.File]::ReadLines($captured)) {
         if ($firstErrors.Count -lt 6) { $firstErrors.Add(($line -replace '<[^>]*>', '')) }
     }
 }
-$required = @('FrostpunkScenariosConfig', 'FrostpunkDifficultyConfig', 'FrostpunkTechnologiesConfig', 'FrostpunkBlueprintsConfig', 'FrostpunkModifiersConfig', 'FrostpunkAbilitiesConfig', 'FrostpunkGraphicsConfig', 'FrostpunkSocietyConfig', 'FrostpunkEffectsConfig', 'FrostpunkEndlessModeConfig', 'FrostpunkGameEventsConfig', 'FrostpunkDilemmasConfig', 'FrostpunkQuestsConfig')
+$required = @('FrostpunkScenariosConfig', 'FrostpunkDifficultyConfig', 'FrostpunkTechnologiesConfig', 'FrostpunkBlueprintsConfig', 'FrostpunkModifiersConfig', 'FrostpunkAbilitiesConfig', 'FrostpunkGraphicsConfig', 'FrostpunkSocietyConfig', 'FrostpunkEffectsConfig', 'FrostpunkEndlessModeConfig', 'FrostpunkGameEventsConfig', 'FrostpunkDilemmasConfig', 'FrostpunkQuestsConfig', 'FrostpunkSequencesConfig')
 $missing = @($required | Where-Object { -not $loaded.Contains($_) })
 $passed = (-not $exitedEarly) -and $errorsFound -eq 0 -and $missing.Count -eq 0
 @{

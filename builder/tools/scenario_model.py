@@ -12,7 +12,7 @@ class World:
         self.buildings={};self.researched=set();self.produced={};self.production_start={};self.progress={}
         self.automation=0;self.generator=True;self.stress=0;self.scenario=scenario
         self.arrivals={};self.operating={};self.warm_homes=0;self.world_map=False
-        self.revealed_sites=set()
+        self.revealed_sites=set();self.sequences=[]
 
     def value(self,value):
         kind=value[0]
@@ -68,6 +68,7 @@ class World:
                 self.arrivals[key]=self.arrivals.get(key,0)+action[1]
             elif kind=='open_map':self.world_map=True
             elif kind=='vent':self.stress=max(0,self.stress+action[1])
+            elif kind=='sequence':self.sequences.append(action[1])
             elif kind=='map_reveal':
                 assert self.world_map
                 self.revealed_sites.add(action[1])
@@ -87,6 +88,12 @@ class World:
         for event in self.events:
             kind,_,*target=event['triggers'][0]
             if kind=='construction' and target==[building] and self.all(event['conditions']):
+                self.execute(event['effects'])
+
+    def sequence_signal(self,callback):
+        for event in self.events:
+            trigger=event['triggers'][0]
+            if trigger[0]=='signal' and trigger[2]==callback and self.all(event['conditions']):
                 self.execute(event['effects'])
 
     def goal_met(self,guid,goal):

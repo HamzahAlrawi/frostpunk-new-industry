@@ -92,6 +92,10 @@ def effect(c):
         if not -0.35<=delta<0 or c.u32()!=0:raise SchemaError('Unexpected Generator effect')
         return ('vent',delta)
     if name=='FrostpunkProgressCustomQuestObjectiveEffect':return ('progress',c.guid(),c.string(),c.i32())
+    if name=='FrostpunkStartSequenceEffect':
+        sequence=c.string()
+        if not sequence.startswith('NI_Faultline_') or c.u32()!=0:raise SchemaError('Unsupported sequence playback')
+        return ('sequence',sequence)
     if name=='FrostpunkTimedEffect':
         guid=c.guid();days=c.f32();unit=c.u32();random=c.f32();random_unit=c.u32()
         if unit!=1 or random!=0 or random_unit!=0 or days<=0:raise SchemaError('Unsupported timer')
@@ -113,6 +117,7 @@ def event(c):
         kind=c.string();identity=c.guid()
         if kind=='FrostpunkGameStartedEventTrigger':triggers.append(('start',identity))
         elif kind=='FrostpunkQuestFinishedEventTrigger':triggers.append(('quest',identity,c.guid(),c.u32()))
+        elif kind=='FrostpunkSequenceSignalEventTrigger':triggers.append(('signal',identity,c.guid()))
         elif kind=='FrostpunkExpeditionReturnedEventTrigger':
             if c.take(2)!=b'\0\0':raise SchemaError('Unexpected expedition return flags')
             triggers.append(('scout_return',identity))

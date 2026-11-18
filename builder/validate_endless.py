@@ -77,7 +77,7 @@ def audit(records,meta,resource_ids):
                                    else faultline_flag if e['name'].startswith('NI Faultline ')
                                    else story_flag if e['name'].startswith(('NI Last Signal ','NI Lifeline ')) else flag)
                and e['enabled'] and e['weight']==1 for e in events)
-    assert all(t[0] in ('start','quest','scout_return','construction') or t[2] in (0.25,0.5,1,2)
+    assert all(t[0] in ('start','quest','scout_return','construction','signal') or t[2] in (0.25,0.5,1,2)
                or e['name'].startswith('NI Faultline ') and math.isclose(t[2],1/24,rel_tol=1e-6)
                for e in events for t in e['triggers'])
     for row in dilemmas.values():
@@ -162,7 +162,7 @@ def main():
     from validate_tooltips import language_table
     references=set()
     for data in current.values():
-        references.update(match[1:].decode() for match in re.findall(rb'\x01(@Mods/NewIndustry/(?:Endless|Frontiers|LastSignal)/[^\0]+)\0',data))
+        references.update(match[1:].decode() for match in re.findall(rb'\x01(@Mods/NewIndustry/(?:Endless|Frontiers|LastSignal|Faultline)/[^\0]+)\0',data))
     languages=0
     for item in manifest['archives']['localizations']['entries']:
         table=language_table(gzip.decompress((ROOT/'build/native/payload'/item['payload']).read_bytes()))
@@ -178,8 +178,20 @@ def main():
     result['lifeline']=audit_lifeline(decoded,meta,manifest['configuration']['resource_ids'])
     from validate_winter_road import audit as audit_winter
     result['winter_road']=audit_winter(decoded,meta,manifest['configuration']['resource_ids'])
-    from validate_faultline import audit as audit_faultline
+    from validate_faultline import audit as audit_faultline, audit_films
+    from faultline_cinematics import ARCHIVE_KEY
+    from winter_road_maps import CITY
+    from tools import archive
     result['faultline']=audit_faultline(decoded,meta,manifest['configuration']['resource_ids'])
+    entry, = archive.entries('sequences')
+    assert entry[1]==ARCHIVE_KEY
+    with (archive.GAME/'sequences.dat').open('rb') as source:
+        stock_shots=archive.read(source,entry)
+    shots, = manifest['archives']['sequences']['entries']
+    scene=next(e for e in manifest['archives']['scenes']['entries'] if e['name']==CITY.lower()+'.binaryscene')
+    revised_shots, revised_city=(gzip.decompress((ROOT/'build/native/payload'/e['payload']).read_bytes())
+                                 for e in (shots,scene))
+    result['faultline']['cinematic_timelines']=audit_films(stock_shots,revised_shots,revised_city,meta['story']['faultline'])
     technology_data=payload['configs/frostpunktechnologiesconfig.bin']
     token=b'\1\1Default_Endless\0';at=technology_data.index(token)+len(token)+16
     count=struct.unpack_from('<I',technology_data,at)[0]

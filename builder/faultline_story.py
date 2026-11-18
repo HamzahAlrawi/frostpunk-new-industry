@@ -1,6 +1,11 @@
 """The choices, operating envelopes and consequences of the Faultline campaign."""
 from winter_road_story import COAL, DEPOTS, FOOD, STEEL, WARDS, build, operate, produce, research, warm
 
+# Each completed watch sends fuel down the line. A lapse resets the current
+# watch, and a leak interrupts both plans after the first delivery.
+WATCH_LEGS = 3
+LEAK_REPAIR = {"Steel": 35, "Coal": 60}
+
 
 def pulse(low, high, draw=10):
     return dict(low=low, high=high, draw=draw)
@@ -64,7 +69,7 @@ ACTS = (
                  flag="surveyed", people={"engineers": 8}, cargo={"Steam Cores": 2}),
         ),
         failure="Edith hangs two lamps at the gate. Nobody has answered yet. We have enough time to prepare for the front."),
-    dict(title="When the Ice Lets Go", days=7, story=(
+    dict(title="When the Ice Lets Go", days=7, shot="Fracture", story=(
         "An ice shelf shifts and punches a hole in the outer main. Close the branch and supply the stranded shelters from your "
         "own kitchens, or run pressure into the crack long enough for Ivo to weld it. A trip now will chill the entire city."),
         plans=(
@@ -83,7 +88,7 @@ ACTS = (
         ),
         failure="The outer line freezes solid. The remaining signals have to go through the same narrow pipe as before."),
     dict(title="The Night of the Second Signal", days=8, story=(
-        "The last front reaches the basin. A weak signal can reach the nearest shelter. To reach all of them, use the equipment "
+        "The shelters have seen a front gathering beyond the ridge. A weak signal can reach the nearest shelter. To reach all of them, use the equipment "
         "and safe bearings you earned, or take the extra time to call each shelter in turn. Once the line is quiet, "
         "the people on it will decide what they owe each other."),
         plans=(
@@ -107,4 +112,40 @@ ACTS = (
                  flag="final", requires=("bypass", "surveyed")),
         ),
         failure="Some stations are still silent. The nearest shelter writes its own call sign on a flag and ties it to the pipe."),
+    dict(title="A Watch at Broken Mile", days=5, shot="NightWatch", story=(
+        "The lamp at Broken Mile has gone out. It marks a bend where the main runs above ground. "
+        "Edith asks for three watches to keep steam flowing across the bend. Each watch needs coal unloaded while the reserve crew is there. "
+        "Choose whether to send crews from the wards or bring the coal works onto the line."),
+        plans=(
+            plan("Run a low-pressure watch", "ward", [],
+                 [build("Build two Steam Hubs", "Steam Hub", quantity=2), warm(14),
+                  operate("Operate three medical buildings", *WARDS, quantity=3)],
+                 "The third relief crew comes home with ice on their collars. The lamp behind them keeps burning.",
+                 watch=dict(hours=8, low=0, high=34, reserve=180, coal=50), flag="watch_kept"),
+            plan("Run a hot transfer", "works", [],
+                 [build("Build two Steam Hubs", "Steam Hub", quantity=2),
+                  operate("Operate two coal mines or thumpers", *COAL, quantity=2),
+                  operate("Operate two Steelworks", *STEEL, quantity=2)],
+                 "The pump crew pulls the last cart off the bend. One of them leaves a weld mark to show where the pipe held.",
+                 watch=dict(hours=6, low=14, high=55, reserve=165, coal=65), flag="watch_kept"),
+        ),
+        failure="The line freezes at the bend. The last watch crew comes home on foot. The shelters will have to make a different bargain."),
+    dict(title="What We Owe the Shelters", days=6, story=(
+        "At first light, a sled carrying lists of names reaches the basin. The people on the ridge ask for a share of the main. "
+        "The city can commit to supplying that line or dismantle the exposed span and bring the remaining families inside. "
+        "Either decision has to work through the next winter."),
+        plans=(
+            plan("Offer the shelters a permanent supply", "bypass", [pulse(34, 61, 12), cool(13)],
+                 [build("Build four Steam Hubs", "Steam Hub", quantity=4), warm(20),
+                  produce("Cook sixteen new batches for the ridge", "meals", 16)],
+                 "The signed charter travels back with the last coal sledge. The pump crews put up a second gauge so both settlements can read it.",
+                 pledge={"Coal": 250, "Food Rations": 80}, requires=("watch_kept",), flag="charter"),
+            plan("Move the remaining families into the basin", "ward", [],
+                 [warm(18), operate("Operate two Cookhouses", "Food Processing", quantity=2),
+                  produce("Cook fourteen new batches for the arrivals", "meals", 14)],
+                 "The people at the gate carry a coil of pipe between them. They ask if the street behind the first row of houses has a name.",
+                 pledge={"Wood": 100, "Food Rations": 65}, people={"workers": 10, "children": 6},
+                 cargo={"Steel": 80}, persistent="resettled", flag="charter"),
+        ),
+        failure="Some sledges will stay on the ridge until spring. Neither shelter writes its name on the charter."),
 )

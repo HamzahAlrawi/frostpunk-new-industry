@@ -380,6 +380,14 @@ def read_owned(base, name):
 new_scenes, map_metadata = build_scenes(read_owned)
 patches['scenes'] = {name: data for name, (_, data) in new_scenes.items()}
 endless_metadata['story']['winter_road']['map'] = map_metadata
+from faultline_cinematics import ARCHIVE_KEY, ASSET, build as build_shots
+from winter_road_maps import CITY
+sequence_entry, = entries('sequences')
+assert sequence_entry[1] == ARCHIVE_KEY
+with (GAME/'sequences.dat').open('rb') as stream:
+    native_shots = read(stream,sequence_entry)
+patches['sequences'] = {ASSET:build_shots(native_shots,patches['scenes'][CITY.lower()+'.binaryscene'],
+                                        (SRC/'common/configs/frostpunkgameeventsconfig.bin').read_bytes(),gid)}
 from menu_layout import build as build_menu_layout,native_mode_labels
 ui_patches,ui_metadata=build_menu_layout(SRC/'templates')
 patches['templates'].update(ui_patches)
@@ -421,6 +429,8 @@ manifest['consolidated_technologies']=consolidated
 for base,files in patches.items():
     records=entries(base);byname={NAMES.get(e[1]):e for e in records};items=[]
     byhash={e[1]:e for e in records}
+    if base=='sequences':
+        byname[ASSET]=byhash[ARCHIVE_KEY]
     with (GAME/(base+'.dat')).open('rb') as src:
         for name,newdata in files.items():
             added=base=='scenes'

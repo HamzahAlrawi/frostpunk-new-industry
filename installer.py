@@ -22,6 +22,7 @@ ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
 ENTRY = struct.Struct("<IQQQB")
 ARCHIVES = ("common.dat", "common.idx", "templates.dat", "templates.idx", "localizations.dat", "localizations.idx")
 WITH_SCENES = ARCHIVES + ("scenes.dat", "scenes.idx")
+WITH_SEQUENCES = WITH_SCENES + ("sequences.dat", "sequences.idx")
 
 
 def archive_scope(files):
@@ -30,6 +31,8 @@ def archive_scope(files):
         return ARCHIVES
     if names == set(WITH_SCENES):
         return WITH_SCENES
+    if names == set(WITH_SEQUENCES):
+        return WITH_SEQUENCES
     raise ValueError("Unsupported Frostpunk archive set")
 
 
@@ -120,7 +123,7 @@ class Installer:
 
     def verify(self, folder, expected):
         for name, digest in expected.items():
-            if name not in WITH_SCENES:
+            if name not in WITH_SEQUENCES:
                 raise ValueError("Invalid archive name")
             if sha(Path(folder) / name) != digest:
                 raise RuntimeError(f"{name} does not match the expected build. Use an unmodified supported Steam installation.")

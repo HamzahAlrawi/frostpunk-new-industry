@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.23.0",
+  "version": "3.24.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -23436,7 +23436,7 @@
       {
         "id": "Frontiers/faultline/trip",
         "title": "Main Circuit Tripped",
-        "description": "All insulated buildings lose two insulation levels until Generator stress drops to 15%.",
+        "description": "All insulated buildings lose two insulation levels until Generator stress drops to 14%.",
         "modifier": "7c3c1da2edeeb25d80db8803a84309b6"
       },
       {
@@ -23474,11 +23474,23 @@
         "title": "Interdistrict Heating Accord",
         "description": "Homes and medical buildings gain +1 insulation after the shelters join the heating network.",
         "modifier": "e8bddd1c9711ac5293ea8387bd60653b"
+      },
+      {
+        "id": "Frontiers/faultline/leak",
+        "title": "Broken Mile Leak",
+        "description": "All insulated buildings lose one heat level until the emergency repair is complete.",
+        "modifier": "89b5b8c5948aa55481c6ebac6077862b"
+      },
+      {
+        "id": "Frontiers/faultline/resettled",
+        "title": "Reclaimed Steam Lines",
+        "description": "Steelworks and Factories gain one insulation level from the dismantled ridge pipe.",
+        "modifier": "8c003f0783fa3d50b5ef1e2859691734"
       }
     ],
-    "events": 471,
-    "dilemmas": 271,
-    "quests": 166,
+    "events": 493,
+    "dilemmas": 288,
+    "quests": 170,
     "poll_days": 0.25,
     "description": "Three separate Endless modes with automatic chapters and timed incidents.",
     "frontiers": {
@@ -25303,7 +25315,9 @@
         "faultline/shelters": "786988fc2e474755a6a609e30fd5deb4",
         "faultline/ward_crew": "be2f16fb796b9a5bb4ad6e4c2e0e4f83",
         "faultline/works_crew": "4fed9b3db2a59e5ba27d7d2ebc769830",
-        "faultline/accord": "e8bddd1c9711ac5293ea8387bd60653b"
+        "faultline/accord": "e8bddd1c9711ac5293ea8387bd60653b",
+        "faultline/leak": "89b5b8c5948aa55481c6ebac6077862b",
+        "faultline/resettled": "8c003f0783fa3d50b5ef1e2859691734"
       },
       "automaton_hours": 4.0,
       "incidents": [
@@ -28631,7 +28645,9 @@
               }
             ],
             "requires": [],
-            "flag": null
+            "flag": null,
+            "watch": null,
+            "pledge": null
           },
           {
             "phase": 1,
@@ -28694,7 +28710,9 @@
               }
             ],
             "requires": [],
-            "flag": null
+            "flag": null,
+            "watch": null,
+            "pledge": null
           },
           {
             "phase": 2,
@@ -28764,7 +28782,9 @@
               }
             ],
             "requires": [],
-            "flag": "accumulator"
+            "flag": "accumulator",
+            "watch": null,
+            "pledge": null
           },
           {
             "phase": 2,
@@ -28845,7 +28865,9 @@
               }
             ],
             "requires": [],
-            "flag": "bypass"
+            "flag": "bypass",
+            "watch": null,
+            "pledge": null
           },
           {
             "phase": 3,
@@ -28932,7 +28954,9 @@
               }
             ],
             "requires": [],
-            "flag": null
+            "flag": null,
+            "watch": null,
+            "pledge": null
           },
           {
             "phase": 3,
@@ -29004,7 +29028,9 @@
               }
             ],
             "requires": [],
-            "flag": "surveyed"
+            "flag": "surveyed",
+            "watch": null,
+            "pledge": null
           },
           {
             "phase": 4,
@@ -29094,7 +29120,9 @@
               }
             ],
             "requires": [],
-            "flag": null
+            "flag": null,
+            "watch": null,
+            "pledge": null
           },
           {
             "phase": 4,
@@ -29170,7 +29198,9 @@
               }
             ],
             "requires": [],
-            "flag": "welded"
+            "flag": "welded",
+            "watch": null,
+            "pledge": null
           },
           {
             "phase": 5,
@@ -29263,7 +29293,9 @@
               }
             ],
             "requires": [],
-            "flag": "final"
+            "flag": "final",
+            "watch": null,
+            "pledge": null
           },
           {
             "phase": 5,
@@ -29344,7 +29376,9 @@
             "requires": [
               "accumulator"
             ],
-            "flag": "final"
+            "flag": "final",
+            "watch": null,
+            "pledge": null
           },
           {
             "phase": 5,
@@ -29430,13 +29464,279 @@
               "bypass",
               "surveyed"
             ],
-            "flag": "final"
+            "flag": "final",
+            "watch": null,
+            "pledge": null
+          },
+          {
+            "phase": 6,
+            "plan": 1,
+            "quest": "00b07112abc0885b987c724fde7c8575",
+            "deadline": 5,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build two Steam Hubs",
+                "quantity": 2,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "warm",
+                "text": "Keep 14 homes Liveable or warmer",
+                "quantity": 14,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
+              },
+              {
+                "kind": "operate",
+                "text": "Operate three medical buildings",
+                "quantity": 3,
+                "target": [
+                  "f6a831d9683c3d9b904cd09ded358f8a",
+                  "98c676299c50c1841a4568ff11d61bde",
+                  "8914dc6cfe447894474dd2f0d9ee527e"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Watch",
+                "quantity": 3,
+                "text": "Complete 3 watches and send fuel to Broken Mile",
+                "description": "Each watch takes 8 consecutive hourly checks at 0\u201334% stress with the Generator running. Keep 230 coal ready. Each completed watch sends 50 coal and leaves a reserve of at least 180. A lapse restarts only the current watch."
+              }
+            ],
+            "title": "Run a low-pressure watch",
+            "profile": "ward",
+            "strokes": [],
+            "requires": [],
+            "flag": "watch_kept",
+            "watch": {
+              "hours": 8,
+              "low": 0,
+              "high": 34,
+              "reserve": 180,
+              "coal": 50
+            },
+            "pledge": null
+          },
+          {
+            "phase": 6,
+            "plan": 2,
+            "quest": "2c93cdb3c5f00a55bce87069a4bbbbb0",
+            "deadline": 5,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build two Steam Hubs",
+                "quantity": 2,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two coal mines or thumpers",
+                "quantity": 2,
+                "target": [
+                  "7f5d92438ed6d18e994473ff2014dc3d",
+                  "7226772eb77bc49f9c4c520f3df2c7dc",
+                  "06cdc0a0e6d288a8d2435294d142c9b5",
+                  "145e292916c2d6826b4c1b7cd624f1ce",
+                  "c4a1ac4584d524a749436429f81880a3"
+                ]
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two Steelworks",
+                "quantity": 2,
+                "target": [
+                  "a18dbc3c1439ba9c04447717e2610bfd",
+                  "44b57d5b4469cca01141048637022110",
+                  "b632fa1cb69bc086874602c5f4b57a44"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Watch",
+                "quantity": 3,
+                "text": "Complete 3 watches and send fuel to Broken Mile",
+                "description": "Each watch takes 6 consecutive hourly checks at 14\u201355% stress with the Generator running. Keep 230 coal ready. Each completed watch sends 65 coal and leaves a reserve of at least 165. A lapse restarts only the current watch."
+              }
+            ],
+            "title": "Run a hot transfer",
+            "profile": "works",
+            "strokes": [],
+            "requires": [],
+            "flag": "watch_kept",
+            "watch": {
+              "hours": 6,
+              "low": 14,
+              "high": 55,
+              "reserve": 165,
+              "coal": 65
+            },
+            "pledge": null
+          },
+          {
+            "phase": 7,
+            "plan": 1,
+            "quest": "05f71421e8f1ce508fa3a17467cffe67",
+            "deadline": 6,
+            "goals": [
+              {
+                "kind": "build",
+                "text": "Build four Steam Hubs",
+                "quantity": 4,
+                "target": [
+                  "d3aee53d931e86bd204dab5ab7d320d1"
+                ]
+              },
+              {
+                "kind": "warm",
+                "text": "Keep 20 homes Liveable or warmer",
+                "quantity": 20,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
+              },
+              {
+                "kind": "produce",
+                "text": "Cook sixteen new batches for the ridge",
+                "quantity": 16,
+                "target": [
+                  "925cc17cc4c067ae0248aaef7ff14ed5",
+                  "b5f5c91e6c4db683424007ee9051463c",
+                  "238787e45f7b239f3c406cebb73f45b4",
+                  "0a7f2306c063ce83694a59f99b24e5c8",
+                  "dbfeb8bf4e60439add46e25c118fed85",
+                  "8f65ab452f00c757af98b654f3a8bbbc",
+                  "bef3c24de41f965d9053efbd9abcf4d2",
+                  "38df762e6b934a599f993770039f6b26"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke1",
+                "text": "1. Pulse at 34\u201361% Generator stress",
+                "description": "Turn on Overdrive. The next hourly check inside this band sends the pulse automatically and vents 12 stress points. Complete the listed construction first."
+              },
+              {
+                "kind": "checks",
+                "label": "Stroke2",
+                "text": "2. Cool to 13% Generator stress",
+                "description": "Turn off Overdrive. Keep the Generator running while stress drops."
+              },
+              {
+                "kind": "checks",
+                "label": "Pledge",
+                "text": "Dispatch the charter supplies",
+                "description": "The supplies depart automatically once the stock is ready and the signal sequence is complete. Set aside 250 coal, 80 food rations. This shipment is paid once."
+              }
+            ],
+            "title": "Offer the shelters a permanent supply",
+            "profile": "bypass",
+            "strokes": [
+              {
+                "low": 34,
+                "high": 61,
+                "draw": 12
+              },
+              {
+                "low": 0,
+                "high": 13,
+                "draw": 0
+              }
+            ],
+            "requires": [
+              "watch_kept"
+            ],
+            "flag": "charter",
+            "watch": null,
+            "pledge": {
+              "Coal": 250,
+              "Food Rations": 80
+            }
+          },
+          {
+            "phase": 7,
+            "plan": 2,
+            "quest": "726e4598982eb551b960cdcfac9c9884",
+            "deadline": 6,
+            "goals": [
+              {
+                "kind": "warm",
+                "text": "Keep 18 homes Liveable or warmer",
+                "quantity": 18,
+                "description": "Use the temperature overlay to find cold homes. Tents, Bunkhouses and Houses count."
+              },
+              {
+                "kind": "operate",
+                "text": "Operate two Cookhouses",
+                "quantity": 2,
+                "target": [
+                  "59b3ef3d8505aea51a45828da82a1c3d"
+                ]
+              },
+              {
+                "kind": "produce",
+                "text": "Cook fourteen new batches for the arrivals",
+                "quantity": 14,
+                "target": [
+                  "925cc17cc4c067ae0248aaef7ff14ed5",
+                  "b5f5c91e6c4db683424007ee9051463c",
+                  "238787e45f7b239f3c406cebb73f45b4",
+                  "0a7f2306c063ce83694a59f99b24e5c8",
+                  "dbfeb8bf4e60439add46e25c118fed85",
+                  "8f65ab452f00c757af98b654f3a8bbbc",
+                  "bef3c24de41f965d9053efbd9abcf4d2",
+                  "38df762e6b934a599f993770039f6b26"
+                ]
+              },
+              {
+                "kind": "checks",
+                "label": "Pledge",
+                "text": "Dispatch the charter supplies",
+                "description": "The supplies depart automatically once the stock is ready and the signal sequence is complete. Set aside 100 wood, 65 food rations. This shipment is paid once."
+              }
+            ],
+            "title": "Move the remaining families into the basin",
+            "profile": "ward",
+            "strokes": [],
+            "requires": [],
+            "flag": "charter",
+            "watch": null,
+            "pledge": {
+              "Wood": 100,
+              "Food Rations": 65
+            }
           }
         ],
         "scan_hours": 1,
-        "trip": 76,
-        "welded_trip": 84,
-        "reset": 15,
+        "trip": 72,
+        "welded_trip": 82,
+        "reset": 14,
+        "films": {
+          "briefing/1": {
+            "shot": "FirstCall",
+            "signal": "0830f106d3f652529c50cdcc46ff26a5"
+          },
+          "briefing/4": {
+            "shot": "Fracture",
+            "signal": "8245b0f8dc193251b94cc622b52a756f"
+          },
+          "briefing/6": {
+            "shot": "NightWatch",
+            "signal": "fbdcfe5785ba925a988870f29f88a057"
+          },
+          "dawn": {
+            "shot": "Dawn",
+            "signal": "ab7cd998c43c5c57b3b441e4ecaba9f4"
+          }
+        },
+        "watch_legs": 3,
+        "leak_repair": {
+          "Steel": 35,
+          "Coal": 60
+        },
         "modifiers": {
           "faultline/ward": "8dd38a84d63f72568123b1da65ca7464",
           "faultline/works": "dc7a4685b0b8fb52bf2433e305bb8257",
@@ -29447,7 +29747,9 @@
           "faultline/shelters": "786988fc2e474755a6a609e30fd5deb4",
           "faultline/ward_crew": "be2f16fb796b9a5bb4ad6e4c2e0e4f83",
           "faultline/works_crew": "4fed9b3db2a59e5ba27d7d2ebc769830",
-          "faultline/accord": "e8bddd1c9711ac5293ea8387bd60653b"
+          "faultline/accord": "e8bddd1c9711ac5293ea8387bd60653b",
+          "faultline/leak": "89b5b8c5948aa55481c6ebac6077862b",
+          "faultline/resettled": "8c003f0783fa3d50b5ef1e2859691734"
         },
         "forecast": "b5b11cd7a264c4579395c43e9031cf7b"
       }
@@ -29917,6 +30219,17 @@
           "SteamThumperFeed"
         ],
         "effects_before_sha256": "36e4ac9a51055f994b03a39a05ed1c71a68e864b7df7ade3f6923b7c01aca9dd"
+      },
+      {
+        "guid": "1c51b13a988c39528823c1d748233b74",
+        "title": "Reclaimed Steam Lines",
+        "description": "Steelworks and Factories gain one insulation level from the dismantled ridge pipe.",
+        "name_key": "Mods/NewIndustry/Modifier/1c51b13a988c39528823c1d748233b74/Name",
+        "description_key": "Mods/NewIndustry/Modifier/1c51b13a988c39528823c1d748233b74/Description",
+        "source_ids": [
+          "Frontiers/faultline/resettled"
+        ],
+        "effects_before_sha256": "462b2a9a47a1c845a379659a039f463fd431ed65783bc0d4631f870a1868db07"
       },
       {
         "guid": "1ceb1f885769015c8637e583eb37a237",
@@ -31759,7 +32072,7 @@
       {
         "guid": "74b307cbb0eb545aa967973716af61ba",
         "title": "Main Circuit Tripped",
-        "description": "All insulated buildings lose two insulation levels until Generator stress drops to 15%.",
+        "description": "All insulated buildings lose two insulation levels until Generator stress drops to 14%.",
         "name_key": "Mods/NewIndustry/Modifier/74b307cbb0eb545aa967973716af61ba/Name",
         "description_key": "Mods/NewIndustry/Modifier/74b307cbb0eb545aa967973716af61ba/Description",
         "source_ids": [
@@ -31926,7 +32239,7 @@
       {
         "guid": "7c3c1da2edeeb25d80db8803a84309b6",
         "title": "Main Circuit Tripped",
-        "description": "All insulated buildings lose two insulation levels until Generator stress drops to 15%.",
+        "description": "All insulated buildings lose two insulation levels until Generator stress drops to 14%.",
         "name_key": "Mods/NewIndustry/Modifier/7c3c1da2edeeb25d80db8803a84309b6/Name",
         "description_key": "Mods/NewIndustry/Modifier/7c3c1da2edeeb25d80db8803a84309b6/Description",
         "source_ids": [
@@ -32238,6 +32551,17 @@
         "effects_before_sha256": "716540ea85996bedca30c7ce0240b0a7ef155965bf8f314e051b41fd0459a29a"
       },
       {
+        "guid": "89b5b8c5948aa55481c6ebac6077862b",
+        "title": "Broken Mile Leak",
+        "description": "All insulated buildings lose one heat level until the emergency repair is complete.",
+        "name_key": "Mods/NewIndustry/Modifier/89b5b8c5948aa55481c6ebac6077862b/Name",
+        "description_key": "Mods/NewIndustry/Modifier/89b5b8c5948aa55481c6ebac6077862b/Description",
+        "source_ids": [
+          "Frontiers/faultline/leak"
+        ],
+        "effects_before_sha256": "3032e4d3695e23191fc435def765d242cde0f9935e3e91a2d790c4da59610755"
+      },
+      {
         "guid": "89c95ba6608a8558b8b31234cc4925fc",
         "title": "Field Dressings",
         "description": "Medical Posts gain a 75% healing speed bonus.\n\nMedical Posts, Infirmaries, and Care Houses gain one insulation level.",
@@ -32291,6 +32615,17 @@
           "SteelworksIngotRacks"
         ],
         "effects_before_sha256": "34a2a007f4071a9d94527198b1d654383d5dc6c77623b0c154abc966fbfea930"
+      },
+      {
+        "guid": "8c003f0783fa3d50b5ef1e2859691734",
+        "title": "Reclaimed Steam Lines",
+        "description": "Steelworks and Factories gain one insulation level from the dismantled ridge pipe.",
+        "name_key": "Mods/NewIndustry/Modifier/8c003f0783fa3d50b5ef1e2859691734/Name",
+        "description_key": "Mods/NewIndustry/Modifier/8c003f0783fa3d50b5ef1e2859691734/Description",
+        "source_ids": [
+          "Frontiers/faultline/resettled"
+        ],
+        "effects_before_sha256": "4a1c819e9f95c8eb1296a547f8a6bf4ecdb21071506e22103fa8d72dcd2ea703"
       },
       {
         "guid": "8c2c95e82513fc54bae4b877982fee0d",
@@ -32956,6 +33291,17 @@
           "Frontiers/restcity"
         ],
         "effects_before_sha256": "a94022dfad4f5661fcdf6603ebf04105843e408d3e543ed0c7b8b602480e6bfd"
+      },
+      {
+        "guid": "a99d4eccc459dc578c3a9c208e6061e9",
+        "title": "Broken Mile Leak",
+        "description": "All insulated buildings lose one heat level until the emergency repair is complete.",
+        "name_key": "Mods/NewIndustry/Modifier/a99d4eccc459dc578c3a9c208e6061e9/Name",
+        "description_key": "Mods/NewIndustry/Modifier/a99d4eccc459dc578c3a9c208e6061e9/Description",
+        "source_ids": [
+          "Frontiers/faultline/leak"
+        ],
+        "effects_before_sha256": "847a18fa6c38f9ed3053de874128d622c748a43f2912ab9b96ce15fc96171743"
       },
       {
         "guid": "aa2ecd23749c575197f74265b6ed6cea",
