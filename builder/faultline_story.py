@@ -7,6 +7,13 @@ WATCH_LEGS = 3
 LEAK_REPAIR = {"Steel": 35, "Coal": 60}
 LINE_INSPECTIONS = 3
 WHITEOUT_HOURS = 18
+OPENING_HOURS = 48
+ADVANCE_CREWS = {
+    "medics": dict(label="the clinic scouts", warm="Medical Post", description="a Medical Post",
+                   people={"workers":8,"children":4}, cargo={"Raw Food":45}, reward="ward_crew"),
+    "fitters": dict(label="the advance fitters", warm="Engineers Lab", description="a Workshop",
+                    people={"workers":4,"engineers":5}, cargo={"Steel":50}, reward="works_crew"),
+}
 RELIEF_LINES = {
     "clinic": dict(name="Clinic", pact="clinic_pact", groups=(WARDS, ("Food Processing",)),
                    services="one medical building and one Cookhouse",
@@ -31,16 +38,16 @@ def order(building, button, key, count):
 
 ACTS = (
     dict(title="A Signal Through the Pipe", days=5,
-         story="Three knocks rise through the buried main. Somebody is still alive on the ridge. Edith needs a relay and a working line to answer.",
+         story="Two advance parties made it off the ridge. A Signal Relay can guide them the rest of the way. Warm a receiving station and decide who comes in first. Once you answer, there are two days to reach the other party.",
          plans=(
-            plan("Keep the wards warm", "Warmer homes and wards. The station sends medics.", "ward",
+            plan("Bring in the clinic scouts", "Warm a Medical Post. Gain workers, families and field medics.", "ward",
                  [build("Build a Signal Relay",RELAY), build("Have a Medical Post","Medical Post")],
-                 "The relay knocks back. Eight workers follow the flagged pipe to the city.",
-                 signal=(18,58), people={"workers":8}, cargo={"Raw Food":45}, persistent="ward_crew"),
-            plan("Give the workshops steam", "More industrial output. The station sends fitters.", "works",
+                 "The clinic scouts come in with four children and bags of frozen food. The fitters can follow if you make a warm Workshop ready in the next two days.",
+                 first_crew="medics"),
+            plan("Bring in the advance fitters", "Warm a Workshop. Gain engineers, steel and fitter training.", "works",
                  [build("Build a Signal Relay",RELAY), build("Have a Workshop","Engineers Lab")],
-                 "The crew recognises the old pumping station's signal and follows the pipe.",
-                 signal=(23,63), people={"workers":4,"engineers":5}, cargo={"Steel":50}, persistent="works_crew"),
+                 "The fitters go straight to the Workshop. The clinic scouts can follow if you make a warm Medical Post ready in the next two days.",
+                 first_crew="fitters"),
          ), failure="The station will keep signalling. Its first crew could not reach the city."),
     dict(title="The Junction Has Two Doors", days=6,
          story="There is room at the junction for one refit. Ivo wants a pressure accumulator. Mara wants a separate line to keep the clinics warm.",
@@ -66,7 +73,7 @@ ACTS = (
                  "The surveyors mark out a route for a second line.",
                  flag="surveyed", people={"engineers":8},cargo={"Steam Cores":2}),
          ), failure="Edith hangs two lamps by the gate. Nobody has answered yet."),
-    dict(title="When the Ice Lets Go", days=7, shot="Fracture", lesson="districts",
+    dict(title="When the Ice Lets Go", days=7, lesson="districts",
          story="The rupture has cut both ridge stations off. The city has fittings for one branch. Repair it, then prove your district can keep the far end warm.",
          plans=(
             plan("Connect the clinic road", "Heat healthcare and kitchens. The road carries coal faster.", "bypass",
@@ -94,7 +101,7 @@ ACTS = (
                  "Both crews hear the call at lower pressure and answer down separate pipes.",
                  pledge={"Coal":85,"Steel":30},flag="final",requires=("bypass","surveyed")),
          ), failure="The nearest shelter ties its call sign to the pipe. The rest stay silent."),
-    dict(title="A Watch at Broken Mile", days=5, shot="NightWatch",
+    dict(title="A Watch at Broken Mile", days=5,
          story="Three crews are trying to keep Broken Mile open. Dispatchers will load the sledges themselves. Your job is to keep their heated stops open and leave coal for the city.",
          plans=(
             plan("Use the clinic road", "50 coal per load. Keep a medical building and Cookhouse warm.", "ward",

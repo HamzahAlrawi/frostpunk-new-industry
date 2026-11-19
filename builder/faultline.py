@@ -1,7 +1,7 @@
 """Write Faultline's timed pressure jobs, district routing and consequences."""
 from city_mastery import building_ids
-from faultline_story import ACTS, LEAK_REPAIR, LINE_INSPECTIONS, RELIEF_LINES, WATCH_LEGS, WHITEOUT_HOURS
-from faultline_cinematics import SIGNAL, SHOTS, play, signal
+from faultline_story import (ACTS, ADVANCE_CREWS, LEAK_REPAIR, LINE_INSPECTIONS, OPENING_HOURS,
+    RELIEF_LINES, WATCH_LEGS, WHITEOUT_HOURS)
 from faultline_buildings import MAGAZINE, MAGAZINE_SAVING, RELAY, RELAY_RESET
 from faultline_tutorial import LESSONS, lesson_id, show as teach
 from tools.housing_schema import OPEN_MAP, RETURN
@@ -66,8 +66,8 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     scope = typed("FrostpunkCurrentScenarioCheckExpression")+bytes.fromhex(scenario)+b"\0"
     running = typed("FrostpunkGeneratorIsActiveExpression")+b"\0"
     coal = resources["Coal"].hex()
-    filmed = {}
     rescue_quests = {}
+    opening_quests = {}
 
     def identity(key):
         return guid("faultline/"+key).hex()
@@ -90,19 +90,6 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
 
     def after(key, days, actions):
         return delayed(identity("timer/"+key), days, actions)
-
-    def with_shot(key, shot, checks, actions):
-        # The native signal opens the dialogue after camera restoration. A
-        # timed, idempotent delivery covers skipped clips and mid-shot reloads.
-        callback = signal(shot,guid)
-        pending = "shot/"+key
-        ready = [scope,eq(pending,1)]+checks
-        finish = [put(pending,2)]+actions
-        events.append(entry("NI Faultline film "+key,identity("event/film/"+key))+b"\0\1"+f32(1)+u32(1)
-                      +typed(SIGNAL)+bytes.fromhex(identity("trigger/film/"+key)+callback)
-                      +u32(len(ready))+b"".join(ready)+u32(len(finish))+b"".join(finish))
-        filmed[key]=dict(shot=shot,signal=callback)
-        return [put(pending,1),play(shot),after("film/"+key,0.375,[guarded(ready,finish)])]
 
     def change(profile, remove=False):
         name = modifiers["faultline/"+profile]
@@ -138,6 +125,9 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     def can_pay(cost):
         return [affordable(resources[name].hex(),quantity) for name,quantity in cost.items()]
 
+    def warm_station(place):
+        return [running,eq("tripped",0),liveable(places[place])]
+
     def district_ready(line):
         return [running,eq("tripped",0)]+[
             either([liveable(places[name]) for name in group])
@@ -172,7 +162,7 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     fields = ("plan", "stroke", "tripped", "trips", "kept", "offered", "scout_returned", "map_open",
               "ending", "hold_hours", "shipment", "replay_started", "inspections",
               "whiteout", "reserve_used", "clinic_saved", "lift_saved", "clinic_hours", "lift_hours",
-              "clinic_open", "lift_open")
+              "clinic_open", "lift_open", "advance_crew")
     add("open",[eq("phase",0)],[put("phase",1),RECORD_CITY]+[put(key,0) for key in (*fields, *flags)], None)
 
     add("open Frostland", [at_least("phase",1), eq("map_open",0), beacon_exists()],
@@ -188,6 +178,32 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
     add("reconnect", [eq("tripped",1)],
         [first_match(("Signal Relay", [constructed(places[RELAY]),stress_check(5,RELAY_RESET)], restore),
                      ("Main Valve", [stress_check(5,RESET)], restore))])
+
+    def receive_crew(spec):
+        return ([change(spec["reward"])] + [arrive(n,role) for role,n in spec["people"].items()]
+                + [change_resource(resources[name].hex(),n) for name,n in spec["cargo"].items()])
+
+    def second_party(crew, number):
+        other, = (name for name in ADVANCE_CREWS if name!=crew)
+        spec = ADVANCE_CREWS[other]
+        key = "advance/"+other
+        uid = identity("quest/"+key)
+        opening_quests[crew] = dict(quest=uid, crew=other, building=places[spec["warm"]])
+        available = [eq("advance_crew",number)]
+        requirements = [constructed(places[RELAY])]+warm_station(spec["warm"])
+        goal = dict(kind="checks",label="Reception",text=f"Receive {spec['label']}",
+            description=f"Keep the Relay built and make {spec['description']} Liveable or warmer. "
+                        "The Generator must be running. The crew comes in automatically.")
+        quests.append(writer.build("NI Faultline "+key,uid,"The other advance party",[goal],identity,localize,
+                                   "Faultline/Quest/"+key,OPENING_HOURS*SCAN))
+        add(key,available+requirements,[progress_quest(uid,"Reception")])
+        arrived = [put("advance_crew",0),*receive_crew(spec),
+                   report(key+"/arrive","The second party is home",
+                          f"The relay lights brought {spec['label']} into the city.")]
+        events.append(completed_event("NI Faultline Received "+other,identity("event/receive/"+other),
+            identity("trigger/receive/"+other),uid,[scope]+available,arrived))
+        return [put("advance_crew",number),start_quest(uid),
+                after(key+"/timeout",OPENING_HOURS*SCAN,[guarded([scope]+available,[put("advance_crew",0)])])]
 
     def whiteout(key, active, lead, advance):
         live = active+[eq("whiteout",1)]
@@ -274,6 +290,14 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                 goals.append(goal)
             hardware = [constructed(goal["target"][0],goal.get("quantity",1))
                         for goal in goals if goal["kind"] == "build" and len(goal["target"])==1]
+            first_crew = plan.get("first_crew")
+            if first_crew:
+                crew = ADVANCE_CREWS[first_crew]
+                goals.append(dict(kind="checks",label="Reception",text=f"Receive {crew['label']}",
+                    description=f"Make {crew['description']} Liveable or warmer and finish the Signal Relay. "
+                                "Keep the Generator running. The relay guides the party in automatically."))
+                add(key+"/receive",active+[eq("stroke",0)]+hardware+warm_station(crew["warm"]),
+                    [put("stroke",1),progress_quest(uid,"Reception")])
             calibration=plan.get("signal")
             if calibration:
                 low,high=calibration
@@ -376,6 +400,8 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                 success.append(put(RELIEF_LINES[district]["pact"],1))
             if profile:=plan.get("persistent"):
                 success.append(change(profile))
+            if first_crew:
+                success.extend(receive_crew(crew)+second_party(first_crew,number))
             success += [change_resource(resources[k].hex(),n) for k,n in plan.get("cargo",{}).items()]
             success += [arrive(n,role) for role,n in plan.get("people",{}).items()]
             success.append(report(key+"/success",act["title"],plan["report"]))
@@ -388,7 +414,7 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
                           identity("trigger/clear/"+key),uid,[scope]+active,success))
             start = [put("plan",number), put("stroke",0), put("shipment",0), put("scout_returned",0), change(plan["profile"]),
                      start_quest(uid), after(key+"/deadline",act["days"],[guarded([scope]+timeout,failure)])]
-            lesson = {(1,1):"gauge", (1,2):"gauge", (2,1):"refit", (2,2):"refit", (3,2):"survey",
+            lesson = {(1,1):"first_relief", (1,2):"first_relief", (2,1):"refit", (2,2):"refit", (3,2):"survey",
                       (6,1):"watch", (6,2):"watch", (7,1):"charter", (7,2):"charter"}.get((phase,number))
             lesson=act.get("lesson",lesson)
             if lesson:
@@ -407,14 +433,12 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
             missions.append(dict(phase=phase,plan=number,quest=uid,deadline=act["days"],goals=goals,
                                  title=plan["title"],profile=plan["profile"],signal=calibration,
                                  requires=plan.get("requires",()),flag=plan.get("flag"),watch=watch,pledge=pledge,
-                                 hold=hold,district=district,lead=lead))
+                                 hold=hold,district=district,lead=lead,first_crew=first_crew))
 
         fallback=next(option for option,plan in zip(options,act["plans"]) if not plan.get("requires"))
         offer = scene(f"briefing/{phase}",act["title"],act["story"]+
                       f"\n\n{act['days']} days to complete the job. Default after one day: {fallback[0]}.",options)
         delivery = [offer,after(f"default/{phase}",1,fallback[3])]
-        if shot:=("FirstCall" if phase==1 else act.get("shot")):
-            delivery = with_shot(f"briefing/{phase}",shot,phase_at(phase,0)+[eq("ending",0)],delivery)
         add(f"briefing/{phase}",phase_at(phase,0)+[eq("offered",phase-1),eq("ending",0)],
             [put("offered",phase)]+delivery,0.25)
 
@@ -450,15 +474,15 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
             endings.append(([eq("ending",1+final),eq("ending/kept",kept)],epilogue(f"end/{final}/{kept}",title,text)))
     done=phase_at(len(ACTS)+1,0)+[at_least("ending",1)]
     final_report = [guarded(checks,[dialog]) for checks,dialog in endings]+[after("end-replay",1,[replay])]
-    for ending,shot in ((1,"DawnBasin"),(2,"DawnSignal"),(3,"DawnAccord")):
+    for ending in (1,2,3):
         key=f"dawn/{ending}"
         ready=done+[eq("ending",ending)]
         add(key,ready+[eq("offered",len(ACTS))],
-            [put("offered",len(ACTS)+1)]+with_shot(key,shot,ready,final_report),0.25)
-    assert {v["shot"] for v in filmed.values()}==SHOTS.keys()
+            [put("offered",len(ACTS)+1)]+final_report,0.25)
     return events, dialogs, quests, dict(scenario=scenario,missions=missions,scan_hours=1,trip=TRIP,
-        welded_trip=WELDED_TRIP,reset=RESET,films=filmed,watch_legs=WATCH_LEGS,leak_repair=LEAK_REPAIR,
+        welded_trip=WELDED_TRIP,reset=RESET,watch_legs=WATCH_LEGS,leak_repair=LEAK_REPAIR,
         buildings=structures,relay_reset=RELAY_RESET,magazine_saving=MAGAZINE_SAVING,
         rescue_quests=rescue_quests,whiteout_hours=WHITEOUT_HOURS,line_inspections=LINE_INSPECTIONS,
+        opening_quests=opening_quests,opening_hours=OPENING_HOURS,
         lessons={key:lesson_id(guid,key).hex() for key in LESSONS},
         modifiers={key:value for key,value in modifiers.items() if key.startswith("faultline/")})

@@ -8,8 +8,8 @@ MESSAGE = "FrostpunkTutorialMessageEntry"
 SHOW = "FrostpunkCreateTutorialMessageEffect"
 SHOW_FLAGS = u32(0)+b"\1"
 LESSONS = {
-    "gauge": ("Send the first signal",
-        "Build a Signal Relay under Tech. Select the Generator and leave its main switch on. Turn on Overdrive to raise the stress gauge into the range in the objective. The relay checks every 15 game minutes. When the objective ticks, switch Overdrive off."),
+    "first_relief": ("Guide in the advance parties",
+        "Build a Signal Relay under Tech. Switch on the Generator and check Heat view. The clinic scouts need a Liveable Medical Post. The advance fitters need a Liveable Workshop. Your first crew comes in as soon as its building is ready. You then have two days to warm the other building and bring the second crew home."),
     "cool": ("Cool the main",
         "Switch Overdrive off and leave the Generator running. Stress falls while it cools."),
     "relay": ("Reconnect the relay",

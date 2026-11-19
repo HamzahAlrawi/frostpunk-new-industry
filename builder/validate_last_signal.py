@@ -28,6 +28,8 @@ def validate_registration(before, after, story):
     assert clone.startswith(entry(ROAD_NAME,story["winter_road"]["scenario"])+b"\0\0")
     assert faultline.startswith(faultline_entry+b"\1\0")
     assert string("@Mods/NewIndustry/Faultline/Menu/DisplayName") in faultline
+    intro=bytes.fromhex(story["faultline"]["opening_movie"]["guid"])
+    assert after.count(intro)==1 and intro in faultline
     for native in (NATIVE_CITY,NATIVE_WORLD):
         assert bytes.fromhex(native) in legacy and bytes.fromhex(native) not in clone
     forecast=story["winter_road"]["forecast"]

@@ -184,12 +184,12 @@ def main():
     result['lifeline']=audit_lifeline(decoded,meta,manifest['configuration']['resource_ids'])
     from validate_winter_road import audit as audit_winter
     result['winter_road']=audit_winter(decoded,meta,manifest['configuration']['resource_ids'])
-    from validate_faultline import audit as audit_faultline, audit_assets, audit_films
-    from faultline_cinematics import ARCHIVE_KEY
+    from validate_faultline import audit as audit_faultline, audit_assets, audit_movie
+    from faultline_cinematics import CONFIG as CINEMATICS
     from faultline_models import DESIGNS
     from template_catalog import CATALOG_ASSET, CATALOG_KEY, read_catalog
     from tools.native_mesh import audit_mesh, bounds
-    from winter_road_maps import CITY, WORLD, WORLD_DONOR
+    from winter_road_maps import WORLD, WORLD_DONOR
     from tools import archive
     result['faultline']=audit_faultline(decoded,meta,manifest['configuration']['resource_ids'])
     messages, = (e for e in archive.entries('common') if e[1]==archive.murmur(TUTORIAL_PATH.encode()))
@@ -234,15 +234,15 @@ def main():
             assert templates[prefab['path']].count(string(path.removesuffix('.binarytemplate')))>=2
     result['faultline']['registered_template_guids'] = len(required)
     result['faultline']['model_triangles'] = mesh_triangles
-    entry, = archive.entries('sequences')
-    assert entry[1]==ARCHIVE_KEY
-    with (archive.GAME/'sequences.dat').open('rb') as source:
-        stock_shots=archive.read(source,entry)
-    shots, = manifest['archives']['sequences']['entries']
-    scene=next(e for e in manifest['archives']['scenes']['entries'] if e['name']==CITY.lower()+'.binaryscene')
-    revised_shots, revised_city=(gzip.decompress((ROOT/'build/native/payload'/e['payload']).read_bytes())
-                                 for e in (shots,scene))
-    result['faultline']['cinematic_timelines']=audit_films(stock_shots,revised_shots,revised_city,meta['story']['faultline'])
+    movie, = manifest['archives']['videos']['entries']
+    assert movie['name']==campaign['opening_movie']['file']
+    assert movie['hash']==archive.murmur(movie['name'].encode()) and not manifest['archives']['sequences']['entries']
+    intro_record, = (entry for entry in archive.entries('common') if entry[1]==archive.murmur(CINEMATICS.encode()))
+    with (archive.GAME/'common.dat').open('rb') as source:
+        stock_cinematics=archive.read(source,intro_record)
+    video=gzip.decompress((ROOT/'build/native/payload'/movie['payload']).read_bytes())
+    audit_movie(stock_cinematics,payload[CINEMATICS],video,campaign)
+    result['faultline']['native_intro_movie']=True
     world=next(e for e in manifest['archives']['scenes']['entries'] if e['name']==WORLD.lower()+'.binaryscene')
     donor, = (e for e in archive.entries('scenes') if e[1]==archive.murmur((WORLD_DONOR.lower()+'.binaryscene').encode()))
     assert world['original_hash']==donor[1]

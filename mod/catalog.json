@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.29.0",
+  "version": "3.30.0",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -23603,9 +23603,9 @@
         "modifier": "2f5c1bbf007fa358abc28252ce307ca6"
       }
     ],
-    "events": 492,
-    "dilemmas": 323,
-    "quests": 178,
+    "events": 490,
+    "dilemmas": 325,
+    "quests": 180,
     "poll_days": 0.25,
     "description": "Three separate Endless modes with automatic chapters and timed incidents.",
     "frontiers": {
@@ -28730,24 +28730,22 @@
               },
               {
                 "kind": "checks",
-                "label": "Stroke1",
-                "text": "Send a signal at 18\u00e2\u20ac\u201c58% stress",
-                "description": "Complete construction. Select the Generator, leave it running and use Overdrive to raise the stress gauge to 18\u00e2\u20ac\u201c58%. The relay sends the signal within 15 game minutes. Switch off Overdrive when the objective ticks."
+                "label": "Reception",
+                "text": "Receive the clinic scouts",
+                "description": "Make a Medical Post Liveable or warmer and finish the Signal Relay. Keep the Generator running. The relay guides the party in automatically."
               }
             ],
-            "title": "Keep the wards warm",
+            "title": "Bring in the clinic scouts",
             "profile": "ward",
-            "signal": [
-              18,
-              58
-            ],
+            "signal": null,
             "requires": [],
             "flag": null,
             "watch": null,
             "pledge": null,
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": "medics"
           },
           {
             "phase": 1,
@@ -28773,24 +28771,22 @@
               },
               {
                 "kind": "checks",
-                "label": "Stroke1",
-                "text": "Send a signal at 23\u00e2\u20ac\u201c63% stress",
-                "description": "Complete construction. Select the Generator, leave it running and use Overdrive to raise the stress gauge to 23\u00e2\u20ac\u201c63%. The relay sends the signal within 15 game minutes. Switch off Overdrive when the objective ticks."
+                "label": "Reception",
+                "text": "Receive the advance fitters",
+                "description": "Make a Workshop Liveable or warmer and finish the Signal Relay. Keep the Generator running. The relay guides the party in automatically."
               }
             ],
-            "title": "Give the workshops steam",
+            "title": "Bring in the advance fitters",
             "profile": "works",
-            "signal": [
-              23,
-              63
-            ],
+            "signal": null,
             "requires": [],
             "flag": null,
             "watch": null,
             "pledge": null,
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": "fitters"
           },
           {
             "phase": 2,
@@ -28831,7 +28827,8 @@
             },
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 2,
@@ -28873,7 +28870,8 @@
             },
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 3,
@@ -28913,7 +28911,8 @@
             },
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 3,
@@ -28944,7 +28943,8 @@
             "pledge": null,
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 4,
@@ -28987,7 +28987,8 @@
             "pledge": null,
             "hold": null,
             "district": "clinic",
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 4,
@@ -29034,7 +29035,8 @@
             "pledge": null,
             "hold": null,
             "district": "lift",
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 5,
@@ -29077,7 +29079,8 @@
             },
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 5,
@@ -29115,7 +29118,8 @@
             "pledge": null,
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 5,
@@ -29161,7 +29165,8 @@
             },
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 6,
@@ -29209,7 +29214,8 @@
             "pledge": null,
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 6,
@@ -29261,7 +29267,8 @@
             "pledge": null,
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 7,
@@ -29304,7 +29311,8 @@
             },
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 7,
@@ -29345,7 +29353,8 @@
             },
             "hold": null,
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 8,
@@ -29401,7 +29410,8 @@
               "reserve": 225
             },
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 8,
@@ -29457,7 +29467,8 @@
               "reserve": 300
             },
             "district": null,
-            "lead": null
+            "lead": null,
+            "first_crew": null
           },
           {
             "phase": 9,
@@ -29507,7 +29518,8 @@
             },
             "hold": null,
             "district": null,
-            "lead": "clinic"
+            "lead": "clinic",
+            "first_crew": null
           },
           {
             "phase": 9,
@@ -29563,39 +29575,14 @@
             },
             "hold": null,
             "district": null,
-            "lead": "lift"
+            "lead": "lift",
+            "first_crew": null
           }
         ],
         "scan_hours": 1,
         "trip": 72,
         "welded_trip": 82,
         "reset": 14,
-        "films": {
-          "briefing/1": {
-            "shot": "FirstCall",
-            "signal": "0830f106d3f652529c50cdcc46ff26a5"
-          },
-          "briefing/4": {
-            "shot": "Fracture",
-            "signal": "8245b0f8dc193251b94cc622b52a756f"
-          },
-          "briefing/6": {
-            "shot": "NightWatch",
-            "signal": "fbdcfe5785ba925a988870f29f88a057"
-          },
-          "dawn/1": {
-            "shot": "DawnBasin",
-            "signal": "613ae17f0570535596682f7bd8482edb"
-          },
-          "dawn/2": {
-            "shot": "DawnSignal",
-            "signal": "681a3c71caedfd50a60fae999747c85b"
-          },
-          "dawn/3": {
-            "shot": "DawnAccord",
-            "signal": "b112dafedd522d50bc8976d0a203c66a"
-          }
-        },
         "watch_legs": 3,
         "leak_repair": {
           "Steel": 35,
@@ -29736,8 +29723,21 @@
         },
         "whiteout_hours": 18,
         "line_inspections": 3,
+        "opening_quests": {
+          "medics": {
+            "quest": "a922ddbec3606a5cadc700e6926c235b",
+            "crew": "fitters",
+            "building": "ef89bf3e0a1a40bfa149355bdc4e83b5"
+          },
+          "fitters": {
+            "quest": "be58f9577bed9d5a873351e29860011b",
+            "crew": "medics",
+            "building": "f6a831d9683c3d9b904cd09ded358f8a"
+          }
+        },
+        "opening_hours": 48,
         "lessons": {
-          "gauge": "9976389dcd4ce7599edb014e2e3792dd",
+          "first_relief": "ee060f8972b5c0548ae269f9ccda63cd",
           "cool": "1fb2a1e944df0e53a2e315a0aed1e420",
           "relay": "91bfb76b99320059a622fb108667495b",
           "refit": "49541f807f1258518410dd38420528e5",
@@ -29801,7 +29801,12 @@
             "donor": "graphics/primitives/cube.binarytemplate",
             "triangles": 4128
           }
-        ]
+        ],
+        "opening_movie": {
+          "guid": "82880921ffdee95b997795cc2b69cb58",
+          "file": "faultline_opening_wide.ogv",
+          "seconds": 20
+        }
       }
     },
     "ui": {

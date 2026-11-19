@@ -1,12 +1,16 @@
 # Faultline
 
-Choose **Faultline** under **Select Scenario** and start a new city for the 3.29 campaign. The ridge shelters depend on two routes. Decide which one to connect to the city's heating network, then try to bring both crews home before the final whiteout closes the pass.
+Choose **Faultline** under **Select Scenario** and start a new city. The opening film shows where the steam main broke and who is stranded on either side of the pass. You will decide which route to connect to the city's heating network, then try to bring both ridge crews home before the final whiteout.
 
 Build a Beacon under Tech to reveal the nearby Frostland sites. Form a scout team, visit a revealed site and bring the team home if you accept the survey.
 
+## Bring in the advance parties
+
+Build a **Signal Relay** under Tech. Choose which advance party to receive first. The clinic scouts need a Liveable Medical Post and bring workers, children and food. The advance fitters need a Liveable Workshop and bring engineers, workers and steel. Look for the **Liveable** temperature in Heat view and keep the Generator running. Your chosen crew comes in automatically. Its arrival opens a two-day window to warm the other workplace and bring in the second party.
+
 ## Generator stress
 
-Open the Generator panel. Its main switch supplies heat. Overdrive raises its stress gauge. Leave the Generator running and use Overdrive to reach the range in the signal objective. The relay checks every 15 game minutes. Switch Overdrive off when the objective ticks. The opening and accumulator routes each use a single signal.
+Open the Generator panel. Its main switch supplies heat. Overdrive raises its stress gauge. The optional accumulator route uses a single stress signal. Leave the Generator running and use Overdrive to reach the objective's range. The relay checks every 15 game minutes. Switch Overdrive off when the objective ticks.
 
 At 72% stress, the main trips and affected buildings lose two heat levels. Turn Overdrive off and let stress fall to 14%. A completed Signal Relay reconnects the main at 25%. Welding the outer main raises the trip threshold to 82%.
 

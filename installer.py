@@ -23,6 +23,7 @@ ENTRY = struct.Struct("<IQQQB")
 ARCHIVES = ("common.dat", "common.idx", "templates.dat", "templates.idx", "localizations.dat", "localizations.idx")
 WITH_SCENES = ARCHIVES + ("scenes.dat", "scenes.idx")
 WITH_SEQUENCES = WITH_SCENES + ("sequences.dat", "sequences.idx")
+WITH_VIDEOS = WITH_SEQUENCES + ("videos.dat", "videos.idx")
 
 
 def archive_scope(files):
@@ -33,6 +34,8 @@ def archive_scope(files):
         return WITH_SCENES
     if names == set(WITH_SEQUENCES):
         return WITH_SEQUENCES
+    if names == set(WITH_VIDEOS):
+        return WITH_VIDEOS
     raise ValueError("Unsupported Frostpunk archive set")
 
 
@@ -123,7 +126,7 @@ class Installer:
 
     def verify(self, folder, expected):
         for name, digest in expected.items():
-            if name not in WITH_SEQUENCES:
+            if name not in WITH_VIDEOS:
                 raise ValueError("Invalid archive name")
             if sha(Path(folder) / name) != digest:
                 raise RuntimeError(f"{name} does not match the expected build. Use an unmodified supported Steam installation.")
@@ -160,7 +163,7 @@ class Installer:
                     identifier = patch["hash"]
                     donor = patch.get("original_hash")
                     position = positions[identifier if donor is None else donor]
-                    if donor is not None and (base not in ("scenes","templates") or identifier in positions or identifier in added):
+                    if donor is not None and (base not in ("scenes","templates","videos") or identifier in positions or identifier in added):
                         raise ValueError(f"Invalid additional {base} entry: {patch['name']}")
                     # A new prefab may use a donor already replaced in the output index.
                     _, stored, size, offset, packed = ENTRY.unpack_from(original_index, position)
@@ -182,13 +185,14 @@ class Installer:
                         revised = configure_entry(patch["name"], original, revised, self.manifest["configuration"],
                                                   configuration["effective"])
                     logging.info("Staged %s bytes=%s sha256=%s", patch["name"], len(revised), hashlib.sha256(revised).hexdigest())
-                    compressed = gzip.compress(revised, compresslevel=9, mtime=0)[:-8]
-                    record = ENTRY.pack(identifier, len(compressed), len(revised), writer.tell(), 1)
+                    packed = base!="videos"
+                    stored_data = gzip.compress(revised, compresslevel=9, mtime=0)[:-8] if packed else revised
+                    record = ENTRY.pack(identifier, len(stored_data), len(revised), writer.tell(), packed)
                     if donor is None:
                         index[position:position+ENTRY.size] = record
                     else:
                         added[identifier] = record
-                    writer.write(compressed)
+                    writer.write(stored_data)
             if added:
                 if list(positions) != sorted(positions) or len(positions) != count:
                     raise ValueError(f"Invalid {base} archive ordering")

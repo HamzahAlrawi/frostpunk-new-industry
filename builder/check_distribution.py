@@ -41,6 +41,7 @@ def main():
     # Process enumeration is irrelevant for this isolated archive copy.
     # No executable, save, user installation, or original input is modified.
     registered=0
+    movies=0
     with patch('installer.game_running',return_value=False):
         setup.install();receipt=setup.installed();setup.verify(game,receipt['files']);checked=0
         for group,settings in manifest['archives'].items():
@@ -72,6 +73,10 @@ def main():
                     target=configure_entry(expected['name'],original,baseline,manifest['configuration'],resolve(document))
                     assert data==target
                     checked+=1
+                    if group=='videos':
+                        assert not entries[expected['hash']][-1], 'Video decoder requires raw seekable data'
+                        assert expected['name']==faultline['opening_movie']['file'] and data.startswith(b'OggS')
+                        movies+=1
                     if expected['name']==CATALOG_ASSET:
                         _,metadata,_,paths=read_catalog(data)
                         for asset in buildings+models:
@@ -81,9 +86,10 @@ def main():
                             assert installed_entry(murmur(path.encode())).startswith(uid+metadata[uid][1])
                             registered+=1
         assert registered==len(buildings)+len(models), 'Installed template catalog was not verified'
+        assert movies==1, 'Installed Faultline movie was not verified'
         setup.uninstall();setup.verify(game,setup.originals)
     report=dict(version=manifest['version'],preset=args.preset,checked_entries=checked,
-                registered_buildings=len(buildings),registered_models=len(models),
+                registered_buildings=len(buildings),registered_models=len(models),registered_movies=movies,
                 installed_archives=receipt['files'],
                 restored_archives=setup.originals,status='passed')
     (folder/'verification.json').write_text(json.dumps(report,indent=2)+'\n')

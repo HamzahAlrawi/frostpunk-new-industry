@@ -91,8 +91,10 @@ def register(data, identity, event_directory, localize, winter, buildings):
     if body[0x153:0x163]!=bytes.fromhex(EXCLUSIONS) or body[0x14f:0x153]!=u32(1):
         raise SchemaError("Unsupported Default building exclusions link")
     faultline_restrictions=(Span(0x153,0x163),bytes.fromhex(identity("faultline-construction")))
+    faultline_edits = [(span, value if span.start!=intro else bytes.fromhex(identity("faultline-intro-movie")))
+                      for span,value in edits]
     new_scenario = entry(FAULTLINE_NAME,identity("faultline-scenario"))+replace_spans(
-        body,edits+faultline_text+map_edits+[faultline_restrictions])
+        body,faultline_edits+faultline_text+map_edits+[faultline_restrictions])
     population_count = data.index(entry("Default", "abffde98fc17e8921d495b49e5928974"))
     footer_token = entry("Default", DEFAULT_EVENTS)
     pos = data.index(footer_token, end, population_count)

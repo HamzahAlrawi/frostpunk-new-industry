@@ -1,10 +1,9 @@
 """Drive decoded Faultline events through each refit and ending."""
-from math import isclose
 from pathlib import Path
 
 from city_mastery import building_ids
 from faultline_buildings import DEFINITIONS, RELIEF_DISPATCH, VALVE_WORKS
-from faultline_story import RELIEF_LINES
+from faultline_story import ADVANCE_CREWS, RELIEF_LINES
 from tools.native_binary import Cursor, string
 from tools.scenario_model import World
 from tools.housing_schema import BEACON
@@ -74,54 +73,23 @@ def audit_assets(stock_catalog, catalog, stock_messages, messages, templates, ca
     return dict(buildings=len(templates),tutorial_cards=len(cards))
 
 
-def audit_films(native, revised, city, campaign):
-    tracks = ("Fade", "StoreCameraLocation", "RestoreCameraLocation", "SetCameraPosition",
-              "EaseCameraPosition", "SetCameraLookAt", "SetVisibleGameHUD", "PlaySound", "EmitSignal",
-              "ShowSequenceMessage", "SetVisibleSequenceHUD")
-    sizes = dict(zip(tracks,(12,0,2,43,38,21,2,34,16,None,4)))
-    native_count=Cursor(native).u32()
-    reader=Cursor(revised)
-    films={f["shot"]:f["signal"] for f in campaign["films"].values()}
-    assert reader.u32()==native_count+len(films)
-    for shot in ("FirstCall","Fracture","NightWatch","DawnBasin","DawnSignal","DawnAccord"):
-        assert shot in films
-        assert reader.u8()==1 and reader.string()=="NI_Faultline_"+shot
-        actions={}
-        for _ in range(reader.count(16)):
-            assert reader.u32()==1
-            for _ in range(reader.count(8)):
-                name=reader.string().removeprefix("SequenceAction")
-                duration,start,extent=(reader.f32() for _ in range(3))
-                assert duration>=0 and 0<=start<=extent<=10
-                if name not in ("StoreCameraLocation","EmitSignal","SetCameraPosition","SetCameraLookAt",
-                                "ShowSequenceMessage","SetVisibleSequenceHUD"):
-                    assert isclose(start+duration,extent,abs_tol=1e-5)
-                assert reader.take(5)==bytes(5)
-                if name == "ShowSequenceMessage":
-                    assert not reader.boolean()
-                    payload = reader.string()
-                    assert payload == "Mods/NewIndustry/Faultline/Cinematic/" + shot
-                else:
-                    payload = reader.take(sizes[name])
-                actions.setdefault(name,[]).append((start,extent,payload))
-        assert set(actions)==set(tracks)
-        assert reader.u8()==1 and reader.string()=="GENRAL"
-        assert reader.u32()==0 and reader.boolean() and not reader.boolean()
-        assert (reader.f32(),reader.f32())==(5,45000)
-        assert [row[2][0] for row in actions["Fade"]]==[0,1,0,1]
-        assert [row[2] for row in actions["SetVisibleGameHUD"]]==[b"\1\0",b"\0\1"]
-        target=actions["SetCameraPosition"][0][2][-16:]
-        from faultline_cinematics import scene_anchor
-        assert target==scene_anchor(city,"Generator_000")
-        assert city.count(target)==2 and actions["SetCameraLookAt"][0][2][1:17]==target
-        assert actions["EaseCameraPosition"][0][2][-16:]==target
-        assert actions["EaseCameraPosition"][0][2][4:16]!=actions["SetCameraPosition"][0][2][4:16]
-        callback=actions["EmitSignal"][0]
-        assert actions["StoreCameraLocation"][0][0]<actions["SetCameraPosition"][0][0]
-        assert actions["RestoreCameraLocation"][0][1]<callback[0] and actions["Fade"][-1][1]<callback[0]
-        assert callback[2].hex()==films[shot]
-    assert revised[reader.position:]==native[4:],'A native sequence changed'
-    return len(films)
+def audit_movie(original, revised, movie, campaign):
+    from faultline_cinematics import CINEMA, DIRECTORY, INTRO, MOVIE, NEUTRAL
+    from tools.native_binary import u32
+    at=original.index(DIRECTORY)+len(DIRECTORY)
+    assert revised[:at]==original[:at]
+    reader=Cursor(revised,at)
+    assert reader.u32()==13 and Cursor(original,at).u32()==12
+    assert reader.entry()==(CINEMA,campaign["opening_movie"]["guid"])
+    start=original.index(INTRO)+len(INTRO)
+    stop=original.index(NEUTRAL,start)
+    original_end=string("FrostpunkCinematicVideoElement")+bytes(4)+string("intro_wide")
+    prefix=original[start:original.index(original_end,start,stop)]
+    assert reader.take(len(prefix))==prefix and prefix.startswith(u32(3))
+    assert reader.string()=="FrostpunkCinematicVideoElement" and reader.f32()==0
+    assert reader.string()==MOVIE and reader.string() is None
+    assert revised[reader.position:]==original[at+4:]
+    assert movie.startswith(b"OggS") and b"\x80theora" in movie[:512] and b"\x01vorbis" in movie[:512]
 
 
 def audit(decoded, metadata, resource_ids):
@@ -160,12 +128,6 @@ def audit(decoded, metadata, resource_ids):
             building = structures[group[0]]
             w.buildings[building] = max(1,w.buildings.get(building,0))
             w.liveable_buildings[building] = 1
-
-    def film(w, key):
-        shot=campaign["films"][key]
-        assert w.sequences.count("NI_Faultline_"+shot["shot"])==1
-        w.sequence_signal(shot["signal"])
-        w.sequence_signal(shot["signal"])
 
     def fulfill_city(w, row):
         for goal in quests[row["quest"]]["objectives"]:
@@ -209,13 +171,6 @@ def audit(decoded, metadata, resource_ids):
             w.stress=0
             key=f"briefing/{phase}"
             tick(w,6)
-            if key in campaign["films"]:
-                if phase==6:
-                    w=w.checkpoint()
-                    w.start()
-                    assert len(w.recorded_city)==1
-                    tick(w,10)
-                film(w,key)
             briefing=names[key]
             assert w.open.count(briefing)==1,(key,state(w,"phase"))
             if phase==5:
@@ -235,13 +190,42 @@ def audit(decoded, metadata, resource_ids):
             assert w.click(briefing,number-1)
             if phase>=8:
                 w.produced[other["target"][0]]+=100
-            lesson={1:"gauge",2:"refit",4:"districts",6:"watch",7:"charter",8:"valve_orders",9:"dispatch_orders"}.get(phase)
+            lesson={1:"first_relief",2:"refit",4:"districts",6:"watch",7:"charter",8:"valve_orders",9:"dispatch_orders"}.get(phase)
             if lesson:
                 assert w.lessons.count(campaign["lessons"][lesson])==1
             profile=effects["faultline/"+row["profile"]]
             assert quest in w.active and profile in w.modifiers
             w.generator=False
             fulfill_city(w,row)
+            if crew:=row["first_crew"]:
+                primary=structures[ADVANCE_CREWS[crew]["warm"]]
+                side=campaign["opening_quests"][crew]
+                w.liveable_buildings[primary]=1
+                tick(w,1)
+                assert state(w,"stroke")==0 and not w.arrivals
+                w.generator=True
+                if number==2:
+                    w.stress=0.76
+                    tick(w,1)
+                    assert effects["faultline/trip"] in w.modifiers and state(w,"stroke")==0
+                    w.stress=(campaign["relay_reset"]-.5)/100
+                tick(w,2)
+                assert state(w,"phase")==2 and effects["faultline/trip"] not in w.modifiers
+                assert side["quest"] in w.active and state(w,"advance_crew")==number
+                baseline=dict(w.arrivals)
+                tick(w,1)
+                assert w.arrivals==baseline
+                w=w.checkpoint()
+                w.start()
+                w.buildings[side["building"]]=1
+                w.liveable_buildings[side["building"]]=1
+                tick(w,2)
+                assert w.arrivals!=baseline and state(w,"advance_crew")==0
+                assert side["quest"] in w.completed
+                baseline=dict(w.arrivals)
+                tick(w,2)
+                assert w.arrivals==baseline, "The advance party arrived twice"
+                w.variables[PREFIX+"trips"]=0  # Keep the original ending routes comparable.
             if band:=row["signal"]:
                 low,high=band
                 w.stress=(low+high)/200
@@ -251,13 +235,6 @@ def audit(decoded, metadata, resource_ids):
                 w.stress=(low-4)/100
                 tick(w,1)
                 assert state(w,"stroke")==0
-                if phase==1 and route[0]==2:
-                    w.stress=0.82
-                    tick(w,1)
-                    assert effects["faultline/trip"] in w.modifiers and state(w,"stroke")==0
-                    w.stress=(campaign["relay_reset"]-.5)/100
-                    tick(w,1)
-                    assert effects["faultline/trip"] not in w.modifiers
                 w.stress=(low+high)/200
                 expected=w.stress
                 w.step(HOUR/4)
@@ -373,12 +350,28 @@ def audit(decoded, metadata, resource_ids):
         ending=state(w,"ending")
         expected = 3 if route[7]==2 else 2
         assert ending==expected and state(w,"kept")==9 and state(w,"convoy_returned")==1, (route,w.variables)
-        film(w,f"dawn/{expected}")
         epilogue=names["accord/9" if ending==3 else "end/1/9"]
         assert w.open.count(epilogue)==1 and w.click(epilogue)
         tick(w,25)
         assert len(w.city_endings)==1 and not w.click(epilogue)
     assert played==set(missions)
+
+    delayed_party=world()
+    delayed_party.start()
+    tick(delayed_party,6)
+    assert delayed_party.click(names["briefing/1"])
+    fulfill_city(delayed_party,missions[1,1])
+    delayed_party.liveable_buildings[structures["Medical Post"]]=1
+    tick(delayed_party,2)
+    hold=campaign["opening_quests"]["medics"]
+    assert hold["quest"] in delayed_party.active
+    before=dict(delayed_party.arrivals)
+    tick(delayed_party,campaign["opening_hours"]+1)
+    delayed_party.buildings[hold["building"]]=1
+    delayed_party.liveable_buildings[hold["building"]]=1
+    tick(delayed_party,2)
+    assert state(delayed_party,"advance_crew")==0 and delayed_party.arrivals==before
+    assert hold["quest"] not in delayed_party.active and hold["quest"] not in delayed_party.completed
 
     # Launch with the clinic at the front, then save the second crew anyway.
     # An unheated city must also be able to finish with both routes lost.
@@ -442,6 +435,6 @@ def audit(decoded, metadata, resource_ids):
     return dict(plans=len(played),endings=3,trip_recovery=True,deadlines_continue=True,
                 production_baselines=True,pressure_hours_persist=True,dispatch_paid_once=True,
                 dispatch_arrivals=True,stockpile_independent_buildings=True,frostland_reveals=True,
-                city_replay_once=True,cinematic_signal_and_fallback=True,
+                city_replay_once=True,decision_reports=True,
                 district_commissioning=True,convoy_waits_for_heat=True,split_rescue_outcomes=4,
-                whiteout_reserve_once=True)
+                whiteout_reserve_once=True,opening_party_routes=2,opening_timeout=True)

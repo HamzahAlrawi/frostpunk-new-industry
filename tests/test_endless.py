@@ -22,7 +22,7 @@ class ReconstructionTests(unittest.TestCase):
                          +len(self.mode['frontiers']['work_orders'])+len(self.mode['story']['acts'])
                          +len(self.mode['story']['lifeline']['missions'])+len(road['missions'])
                          +len(road['projects'])+len(road['aftermath'])
-                         +len(faultline['missions'])+rescue_quests)
+                         +len(faultline['missions'])+rescue_quests+len(faultline['opening_quests']))
         self.assertGreater(self.mode['events'],121)
 
     def test_projects_have_permanent_rewards_and_no_deadlines(self):
