@@ -50,4 +50,4 @@ Pack the lead convoy in Relief Dispatch and commit the cargo. The whiteout takes
 
 The reserve boiler can add one heat level to a single route until the storm clears. Fire the clinic boiler for 75 coal and 25 rations, fire the works boiler for 100 coal and 25 steel, or keep the reserves. Earlier heat loop insulation also applies during the front.
 
-Complete the second signal, sign a charter, rescue **both crews**, and finish at least seven of the nine jobs with at most one trip to earn **The Basin Accord**. If one crew is lost, the report records who came home. **See how the city grew** hands the campaign over to Frostpunk's native city replay.
+Complete the second signal, sign a charter, rescue **both crews**, and finish at least seven of the nine jobs with at most one trip to earn **The Basin Accord**. If one crew is lost, the report records who came home. **See how the city grew** opens the native replay of your city from the day it was founded.

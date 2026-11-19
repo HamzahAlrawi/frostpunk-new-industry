@@ -184,7 +184,7 @@ def main():
     result['lifeline']=audit_lifeline(decoded,meta,manifest['configuration']['resource_ids'])
     from validate_winter_road import audit as audit_winter
     result['winter_road']=audit_winter(decoded,meta,manifest['configuration']['resource_ids'])
-    from validate_faultline import audit as audit_faultline, audit_assets, audit_movie
+    from validate_faultline import audit as audit_faultline, audit_assets, audit_cinematics
     from faultline_cinematics import CONFIG as CINEMATICS
     from faultline_models import DESIGNS
     from template_catalog import CATALOG_ASSET, CATALOG_KEY, read_catalog
@@ -241,8 +241,9 @@ def main():
     with (archive.GAME/'common.dat').open('rb') as source:
         stock_cinematics=archive.read(source,intro_record)
     video=gzip.decompress((ROOT/'build/native/payload'/movie['payload']).read_bytes())
-    audit_movie(stock_cinematics,payload[CINEMATICS],video,campaign)
+    audit_cinematics(stock_cinematics,payload[CINEMATICS],video,campaign)
     result['faultline']['native_intro_movie']=True
+    result['faultline']['direct_city_replay']=True
     world=next(e for e in manifest['archives']['scenes']['entries'] if e['name']==WORLD.lower()+'.binaryscene')
     donor, = (e for e in archive.entries('scenes') if e[1]==archive.murmur((WORLD_DONOR.lower()+'.binaryscene').encode()))
     assert world['original_hash']==donor[1]

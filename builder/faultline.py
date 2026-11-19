@@ -1,5 +1,6 @@
 """Write Faultline's timed pressure jobs, district routing and consequences."""
 from city_mastery import building_ids
+from faultline_cinematics import RECORDING, STOCK_REPLAY, VICTORY
 from faultline_story import (ACTS, ADVANCE_CREWS, LEAK_REPAIR, LINE_INSPECTIONS, OPENING_HOURS,
     RELIEF_LINES, WATCH_LEGS, WHITEOUT_HOURS)
 from faultline_buildings import MAGAZINE, MAGAZINE_SAVING, RELAY, RELAY_RESET
@@ -23,8 +24,8 @@ RESET = 14
 STRESS = compact("FrostpunkGeneratorStressExpression")
 CHANGE_STRESS = typed("FrostpunkModifyGeneratorEffect")
 SELECT_GENERATOR = typed("FrostpunkSelectEffect")+compact("FrostpunkGeneratorSelector",bytes(7)+u32(1))
-RECORD_CITY = typed("FrostpunkTimelapseSegmentStartEffect")+bytes.fromhex("5ae0f465a1091287a34c952ac1765dc8")
-END_CITY = typed("FrostpunkEndGameEffect")+bytes.fromhex("a9de3813fff72fb15743819f6887629b61e149c3164a1ea62146a5a85d5af1d4")
+RECORD_CITY = typed("FrostpunkTimelapseSegmentStartEffect")+bytes.fromhex(RECORDING)
+END_CITY = typed("FrostpunkEndGameEffect")+bytes.fromhex(VICTORY)
 
 
 def either(conditions):
@@ -47,7 +48,7 @@ def verify_native_stress(events, dilemmas):
         raise SchemaError("Unsupported native Generator stress read or adjustment")
     if SELECT_GENERATOR + typed("FrostpunkApplyModifierEffect") not in events:
         raise SchemaError("Unsupported Generator selection")
-    if RECORD_CITY+typed("FrostpunkConsolePrintEffect") not in events or END_CITY not in events:
+    if RECORD_CITY+typed("FrostpunkConsolePrintEffect") not in events or END_CITY+bytes.fromhex(STOCK_REPLAY) not in events:
         raise SchemaError("Unsupported native city recording or victory action")
 
 
@@ -443,8 +444,9 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
             [put("offered",phase)]+delivery,0.25)
 
     finish = phase_at(len(ACTS)+1,0)+[eq("ending",0)]
+    replay_id = identity("cinematic/city-replay")
     replay_ready = [scope,at_least("ending",1),eq("replay_started",0)]
-    replay = guarded(replay_ready,[put("replay_started",1),END_CITY])
+    replay = guarded(replay_ready,[put("replay_started",1),END_CITY+bytes.fromhex(replay_id)])
 
     def epilogue(key, title, text):
         return scene(key,title,text,[("See how the city grew","Finish Faultline and play the city replay.",
@@ -484,5 +486,6 @@ def build(source, buildings, techinfo, resources, guid, scenario, modifiers, loc
         buildings=structures,relay_reset=RELAY_RESET,magazine_saving=MAGAZINE_SAVING,
         rescue_quests=rescue_quests,whiteout_hours=WHITEOUT_HOURS,line_inspections=LINE_INSPECTIONS,
         opening_quests=opening_quests,opening_hours=OPENING_HOURS,
+        replay=replay_id,
         lessons={key:lesson_id(guid,key).hex() for key in LESSONS},
         modifiers={key:value for key,value in modifiers.items() if key.startswith("faultline/")})

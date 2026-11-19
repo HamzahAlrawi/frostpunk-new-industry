@@ -1,6 +1,6 @@
 # Research catalog
 
-Version 3.30.0: 216 active research definitions across the supported modes. Legacy and retired entries are omitted.
+Version 3.30.1: 216 active research definitions across the supported modes. Legacy and retired entries are omitted.
 
 Tier 0 is available before Drawing Boards. Listed hours and bonuses use the Standard preset. Standard applies half the authored time to added research and sets base Workshop output to 1.5625 times vanilla. Other presets adjust these values. Every non-tier research prerequisite is visible in the same column.
 

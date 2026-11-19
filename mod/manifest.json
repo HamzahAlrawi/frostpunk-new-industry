@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk New Industry",
-  "version": "3.30.0",
+  "version": "3.30.1",
   "format": "nind-copy-insert-v1",
   "game": "Frostpunk",
   "supported_build": "Windows Steam 1.6.2, exact original archive hashes required",
@@ -69,19 +69,19 @@
           "name": "configs/frostpunkgameeventsconfig.bin",
           "hash": 1362127853,
           "original_sha256": "dc8cd870619a8eafed33224ee3854eaa8ea46041f2d575d4d8e96665b873f97e",
-          "new_sha256": "067c36ad2b8348941d4fd0513d6e3515be3260261d32711c2f3d6d2e709ba5fb",
+          "new_sha256": "1a41c8dba0cf267aa76a426349308b8f15522c67621ac862c7f8fa9adee18b37",
           "size": 1864669,
           "patch": "common-51306bed.nid",
-          "patch_sha256": "dd9957f75add01af293af7bf2cf2af515fb0d28b01f10c1270725eaaaa7470e1"
+          "patch_sha256": "d4a03104b84ee17c198f275052a56228557c0087291b036c175625360fc1163e"
         },
         {
           "name": "configs/frostpunkdilemmasconfig.bin",
           "hash": 1592078925,
           "original_sha256": "a21580d4e750f422b3b684ae0ed2c1e3d01e28d3de222b090557ac7d86ae9e7d",
-          "new_sha256": "7b813e621ed3beec6c4fe5ee62b0e9ecbe84952df3676c9f1cab1295d76c534d",
+          "new_sha256": "3b59e4671859784405e5d70cfa05e077fb107b99157dddad872aea1f0229efe1",
           "size": 3865178,
           "patch": "common-5ee5324d.nid",
-          "patch_sha256": "eba73706b562504564d4bc443546dbbe424c6df182866126c2b33b5145c477c9"
+          "patch_sha256": "3777462e8fd653a5d533437c657535a53e908e0cc5a8078b362ea2e3b9c0638b"
         },
         {
           "name": "configs/frostpunkquestsconfig.bin",
@@ -141,10 +141,10 @@
           "name": "configs/frostpunkcinematicsconfig.bin",
           "hash": 1979105816,
           "original_sha256": "75566bc69e41a3168c3a9d9a130463dcca5f0870765034b038eb786cb2a2179f",
-          "new_sha256": "6c440f0038f0d0a16d6ee71dac070f33addf2bb3fc9ffb3d1153a9113dd49b97",
-          "size": 289283,
+          "new_sha256": "9d13e3ee964dbaaca1dbca6a94af5cf3692460e9cc11f0c31ff29cf63900a0e2",
+          "size": 289831,
           "patch": "common-75f6c218.nid",
-          "patch_sha256": "1e39c92599e2826b0744c79aeca49b934bb2785157bafc48fe73f2df86bf3379"
+          "patch_sha256": "7b7d3a1df9fa8497ba21117f0c77c5fd143b6a746500095e242288850deab94c"
         }
       ]
     },

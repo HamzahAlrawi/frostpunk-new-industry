@@ -409,9 +409,11 @@ from winter_road_maps import build_scenes
 new_scenes, map_metadata = build_scenes(read_owned)
 patches['scenes'] = {name: data for name, (_, data) in new_scenes.items()}
 endless_metadata['story']['winter_road']['map'] = map_metadata
-from faultline_cinematics import CONFIG as CINEMATICS, DONOR as VIDEO_DONOR, VIDEO, intro_movie, video_file
+from faultline_cinematics import (CONFIG as CINEMATICS, DONOR as VIDEO_DONOR, TIMELAPSE_CONFIG, VIDEO,
+                                build as build_cinematics, video_file)
 intro_guid=gid('last-signal/faultline-intro-movie').hex()
-patches['common'][CINEMATICS]=intro_movie(read_owned('common',CINEMATICS),intro_guid)
+patches['common'][CINEMATICS]=build_cinematics(read_owned('common',CINEMATICS),read_owned('common',TIMELAPSE_CONFIG),
+                                             intro_guid,endless_metadata['story']['faultline']['replay'])
 video=video_file()
 patches['videos']={VIDEO:video}
 patches['sequences']={}

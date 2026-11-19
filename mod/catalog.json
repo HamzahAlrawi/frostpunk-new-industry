@@ -1,6 +1,6 @@
 {
   "name": "Frostpunk: New Industry",
-  "version": "3.30.0",
+  "version": "3.30.1",
   "technology_sets": [
     "TechHaven",
     "Winterhome",
@@ -29736,6 +29736,7 @@
           }
         },
         "opening_hours": 48,
+        "replay": "533cf32300df6f5ea6d57846425aecdb",
         "lessons": {
           "first_relief": "ee060f8972b5c0548ae269f9ccda63cd",
           "cool": "1fb2a1e944df0e53a2e315a0aed1e420",

@@ -4,7 +4,7 @@ from pathlib import Path
 from city_mastery import building_ids
 from faultline_buildings import DEFINITIONS, RELIEF_DISPATCH, VALVE_WORKS
 from faultline_story import ADVANCE_CREWS, RELIEF_LINES
-from tools.native_binary import Cursor, string
+from tools.native_binary import Cursor, f32, string, u32
 from tools.scenario_model import World
 from tools.housing_schema import BEACON
 from tools.story_schema import DEFAULT
@@ -73,13 +73,13 @@ def audit_assets(stock_catalog, catalog, stock_messages, messages, templates, ca
     return dict(buildings=len(templates),tutorial_cards=len(cards))
 
 
-def audit_movie(original, revised, movie, campaign):
-    from faultline_cinematics import CINEMA, DIRECTORY, INTRO, MOVIE, NEUTRAL
-    from tools.native_binary import u32
+def audit_cinematics(original, revised, movie, campaign):
+    from faultline_cinematics import (CINEMA, DIRECTORY, INTRO, MOVIE, NEUTRAL, PLAYBACK,
+                                      REPLAY_NAME, reference_replay)
     at=original.index(DIRECTORY)+len(DIRECTORY)
     assert revised[:at]==original[:at]
     reader=Cursor(revised,at)
-    assert reader.u32()==13 and Cursor(original,at).u32()==12
+    assert reader.u32()==14 and Cursor(original,at).u32()==12
     assert reader.entry()==(CINEMA,campaign["opening_movie"]["guid"])
     start=original.index(INTRO)+len(INTRO)
     stop=original.index(NEUTRAL,start)
@@ -88,8 +88,47 @@ def audit_movie(original, revised, movie, campaign):
     assert reader.take(len(prefix))==prefix and prefix.startswith(u32(3))
     assert reader.string()=="FrostpunkCinematicVideoElement" and reader.f32()==0
     assert reader.string()==MOVIE and reader.string() is None
+    assert reader.entry()==(REPLAY_NAME,campaign["replay"])
+    elements = (
+        ("FadeInOut",0,18), ("PreloadTimelapse",0,16), ("ToggleTimerMode",0,1),
+        ("PlayPreloadedTimelapse",.05,17), ("PlaySound",1,16), ("FadeInOut",1.1,18),
+        ("StopSound",95,4), ("FadeInOut",99,18), ("ToggleTimerMode",0,1),
+    )
+    assert reader.u32()==len(elements)
+    native=reference_replay(original)
+    for index,(name,time,remaining) in enumerate(elements):
+        label="FrostpunkCinematic"+name+"Element"
+        assert reader.string()==label and reader.take(4)==f32(time)
+        body=reader.take(remaining)
+        donor_time=22 if index<2 else time
+        assert string(label)+f32(donor_time)+body in native
+        if name=="PreloadTimelapse":
+            assert body.hex()==PLAYBACK
+        if name=="ToggleTimerMode":
+            assert body==bytes([int(index==2)])
     assert revised[reader.position:]==original[at+4:]
     assert movie.startswith(b"OggS") and b"\x80theora" in movie[:512] and b"\x01vorbis" in movie[:512]
+
+
+def audit_camera_routes(events, dialogs, campaign):
+    from faultline_cinematics import RECORDING, VICTORY
+
+    def walk(effects):
+        for action in effects:
+            yield action
+            if action[0]=="switch":
+                for _,_,branch in (*action[1],action[2]):
+                    yield from walk(branch)
+            elif action[0]=="timer":
+                yield from walk(action[3])
+
+    events = [event["effects"] for event in events if event["name"].startswith("NI Faultline ")]
+    choices = [choice["effects"] for dialog in dialogs if dialog["name"].startswith("NI Faultline ")
+               for choice in dialog["choices"]]
+    actions = [a for scope in events+choices for a in walk(scope)]
+    assert not any(action[0]=="sequence" for action in actions), "A Faultline action starts a live camera sequence"
+    assert [action for action in actions if action[0]=="record_city"]==[("record_city",RECORDING)]
+    assert {action for action in actions if action[0]=="end_city"}=={("end_city",VICTORY,campaign["replay"])}
 
 
 def audit(decoded, metadata, resource_ids):
@@ -97,6 +136,7 @@ def audit(decoded, metadata, resource_ids):
     campaign = story["faultline"]
     events = decoded["gameevents"]
     dialogs = {d["guid"]:d for d in decoded["dilemmas"]}
+    audit_camera_routes(events,dialogs.values(),campaign)
     names = {d["name"].removeprefix("NI Faultline "):d["guid"] for d in dialogs.values()
              if d["name"].startswith("NI Faultline ")}
     quests = {q["guid"]:q for q in decoded["quests"]}
@@ -435,6 +475,6 @@ def audit(decoded, metadata, resource_ids):
     return dict(plans=len(played),endings=3,trip_recovery=True,deadlines_continue=True,
                 production_baselines=True,pressure_hours_persist=True,dispatch_paid_once=True,
                 dispatch_arrivals=True,stockpile_independent_buildings=True,frostland_reveals=True,
-                city_replay_once=True,decision_reports=True,
+                city_replay_once=True,live_camera_sequences=0,decision_reports=True,
                 district_commissioning=True,convoy_waits_for_heat=True,split_rescue_outcomes=4,
                 whiteout_reserve_once=True,opening_party_routes=2,opening_timeout=True)
